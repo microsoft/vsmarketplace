@@ -6,14 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <Using Include="System.Net" />
+    <Using Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="CsvHelper" Version="12.1.2" />
-    <PackageReference Include="Humanizer.Core" Version="2.8.26">
-    </PackageReference>
-    <PackageReference Include="Microsoft.Azure.Search" Version="9.1.0">
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2">
-    </PackageReference>
-    <PackageReference Include="NuGet.Packaging" Version="5.2.0">
-    </PackageReference>
+    <PackageReference Include="Humanizer.Core" Version="2.8.26"></PackageReference>
+    <PackageReference Include="Microsoft.Azure.Search" Version="9.1.0"></PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2"></PackageReference>
+    <PackageReference Include="NuGet.Packaging" Version="5.2.0"></PackageReference>
   </ItemGroup>
 </Project>
