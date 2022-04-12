@@ -3,11 +3,6 @@ items:
   items:
   - name: Get Started
     href: getstarted/getstarted.md
-    items:
-    - name: Download/Install an extension
-      href: install-extension.md
-    - name: Create Publisher Account
-      href: create-publisher.md
   - name: Extension in the Marketplace
     href: extensions-in-marketplace.md
   - name: Frequently Asked Questions
