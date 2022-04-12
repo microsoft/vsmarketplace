@@ -1,0 +1,17 @@
+### YamlMime:Landing
+
+title: Visual Studio Marketplace Documentation
+summary: Visual Studio Marketplace is extension repository for Visual Studio, Visual Studio Code and Azure DevOps
+brand: visualstudio
+metadata:
+  title: Visual Studio Marketplace Documentation
+  description: Visual Studio Marketplace lets you publish and download extensibility softwares for Visual Studio family of products
+  ms.topic: hub-page
+  author: prashantvc
+  ms.author: prchol
+  ms.date: 04/12/2022
+highlightedContent:
+  items:
+  - title: Get Started
+    itemType: learn
+    url: /getstared/getstarted.md
