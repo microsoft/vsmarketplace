@@ -2,11 +2,29 @@
   "build": {
     "content": [
       {
-        "files": [
-          "**/*.md",
-          "**/*.yml",
-          "**/*.html"
+        "files": ["**/*.md", "**/**.yml", "**/*.svg", "**/*.sh"],
+        "exclude": [
+          "**/obj/**",
+          "**/includes/**",
+          "**/_themes.pdf/**",
+          "README.md",
+          "LICENSE",
+          "LICENSE-CODE",
+          "**/archive/**"
         ]
-        }
+      }
+    ]
+  },
+  "resource": [
+    {
+      "files": ["**/*.png", "**/*.jpg", "**/*.gif", "**/*.pdf", "**/*.pptx"],
+      "exclude": ["**/obj/**", "**/includes/**"]
     }
+  ],
+  "globalMetadata": {
+    "feedback_system": "GitHub",
+    "feedback_github_repo": "microsoft/vsmarketplace",
+    "feedback_product_url": "https://github.com/microsoft/vsmarketplace/issues",
+    "searchScope": ["vsmarketplace", "marketplace"]
+  }
 }

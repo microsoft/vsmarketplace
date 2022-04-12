@@ -1,9 +1,7 @@
 items:
-- name: VS Marketplace and Extensibility
-  items:
-  - name: Get Started
-    href: getstarted/getstarted.md
-  - name: Extension in the Marketplace
-    href: extensions-in-marketplace.md
-  - name: Frequently Asked Questions
-    href: faq.md
+- name: Get Started
+  href: getstarted/getstarted.md
+- name: Extension in the Marketplace
+  href: extensions-in-marketplace.md
+- name: Frequently Asked Questions
+  href: faq.md
