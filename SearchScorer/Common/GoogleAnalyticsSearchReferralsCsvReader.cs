@@ -25,6 +25,7 @@ namespace SearchScorer.Common
                 csvReader.Read(); // comment
                 csvReader.Read(); // comment
                 csvReader.Read(); // empty line
+                csvReader.Read();
                 csvReader.ReadHeader();
 
                 while (csvReader.Read())

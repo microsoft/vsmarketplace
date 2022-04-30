@@ -8,8 +8,16 @@ assemblyDir = Path.Combine(assemblyDir, "files");
 
 var settings = new SearchScorerSettings
 {
-    ControlBaseUrl = "", //TODO: Add marketplace url
-    TreatmentBaseUrl = "",
+    ControlBaseUrl = "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery", //TODO: Add marketplace url
+    TreatmentBaseUrl = "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery",
+    //ControlBaseUrl = "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery?api-version=6.0-preview.1", //TODO: Add marketplace url
+    //TreatmentBaseUrl = "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery?api-version=6.0-preview.1",
+    CuratedSearchQueriesCsvPath = @"C:\data\SearchScorerData\vsm\curatedqueries.csv",
+    TopSearchQueriesCsvPath = @"C:\data\SearchScorerData\vsm\topsearchqueries.csv",
+    TopSearchSelectionsCsvPath = @"C:\data\SearchScorerData\vsm\topsearchselections.csv",
+
+    TopClientSearchQueriesCsvPath = @"C:\data\SearchScorerData\vsm\topsearchqueries.csv",
+    GoogleAnalyticsSearchReferralsCsvPath = @"C:\data\SearchScorerData\vsm\topsearchreferrals.csv",
 
     PackageIdWeights = CreateRange(lower: 1, upper: 10, increments: 3),
     TokenizedPackageIdWeights = CreateRange(lower: 1, upper: 10, increments: 3),
@@ -21,7 +29,10 @@ using (var httpClientHandler = new HttpClientHandler { AutomaticDecompression = 
 using (var httpClient = new HttpClient())
 {
     if (args.Length == 0 || args[0] == "score")
+    {
+        httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
         await RunScoreCommandAsync(settings, httpClient);
+    }
 }
 
 static async Task RunScoreCommandAsync(SearchScorerSettings settings, HttpClient httpClient)
