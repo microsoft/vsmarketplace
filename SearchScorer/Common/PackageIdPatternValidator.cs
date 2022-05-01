@@ -101,7 +101,7 @@ namespace SearchScorer.Common
             int take)
         {
             var response = await _searchClient.SearchAsync(baseUrl, query, take);
-            return response.Data.Any(x => WildcardUtility.Matches(x.Id, packageId));
+            return response.Results[0].Extensions.Any(x => WildcardUtility.Matches(x.ExtensionName, packageId));
         }
     }
 }

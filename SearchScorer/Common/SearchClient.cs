@@ -12,14 +12,14 @@ namespace SearchScorer.Common
     public class SearchClient
     {
         private readonly HttpClient _httpClient;
-        private readonly ConcurrentDictionary<Uri, Lazy<Task<SearchResponse>>> _cache = new ConcurrentDictionary<Uri, Lazy<Task<SearchResponse>>>();
+        private readonly ConcurrentDictionary<Uri, Lazy<Task<ExtensionQueryResult>>> _cache = new ConcurrentDictionary<Uri, Lazy<Task<ExtensionQueryResult>>>();
 
         public SearchClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
 
-        public async Task<SearchResponse> SearchAsync(string baseUrl, string query, int take)
+        public async Task<ExtensionQueryResult> SearchAsync(string baseUrl, string query, int take)
         {
             //var queryString = HttpUtility.ParseQueryString(string.Empty);
             query = "python";
@@ -38,7 +38,7 @@ namespace SearchScorer.Common
 
             var requestUri = uriBuilder.Uri; //baseUrl;//
 
-            var lazyTask = _cache.GetOrAdd(requestUri, _ => new Lazy<Task<SearchResponse>>(
+            var lazyTask = _cache.GetOrAdd(requestUri, _ => new Lazy<Task<ExtensionQueryResult>>(
                 async () =>
                 {
                     var attempt = 0;
@@ -60,7 +60,7 @@ namespace SearchScorer.Common
                                 {
                                     response.EnsureSuccessStatusCode();
                                     var json = await response.Content.ReadAsStringAsync();
-                                    return JsonConvert.DeserializeObject<SearchResponse>(json);
+                                    return JsonConvert.DeserializeObject<ExtensionQueryResult>(json);
                                 }
                             }
                         }

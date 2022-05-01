@@ -48,9 +48,9 @@ namespace SearchScorer.IREvalutation
 
             // Determine the score for each of the returns package IDs.
             var scores = new List<int>();
-            for (var i = 0; i < response.Data.Count; i++)
+            for (var i = 0; i < response.Results[0].Extensions.Count; i++)
             {
-                var packageId = response.Data[i].Id;
+                var packageId = response.Results[0].Extensions[i].ExtensionName;
                 if (query.PackageIdToScore.TryGetValue(packageId, out var score))
                 {
                     scores.Add(score);

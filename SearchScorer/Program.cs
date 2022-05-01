@@ -19,6 +19,9 @@ var settings = new SearchScorerSettings
     TopClientSearchQueriesCsvPath = @"C:\data\SearchScorerData\vsm\topsearchqueries.csv",
     GoogleAnalyticsSearchReferralsCsvPath = @"C:\data\SearchScorerData\vsm\topsearchreferrals.csv",
 
+    ClientCuratedSearchQueriesCsvPath = @"C:\data\SearchScorerData\vsm\curatedqueries.csv",
+    FeedbackSearchQueriesCsvPath = @"C:\data\SearchScorerData\vsm\feedbackcuratedqueries.csv",
+
     PackageIdWeights = CreateRange(lower: 1, upper: 10, increments: 3),
     TokenizedPackageIdWeights = CreateRange(lower: 1, upper: 10, increments: 3),
     TagsWeights = CreateRange(lower: 1, upper: 10, increments: 3),
@@ -28,7 +31,7 @@ var settings = new SearchScorerSettings
 using (var httpClientHandler = new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip })
 using (var httpClient = new HttpClient())
 {
-    if (args.Length == 0 || args[0] == "score")
+    //if (args.Length == 0 || args[0] == "score")
     {
         httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
         await RunScoreCommandAsync(settings, httpClient);

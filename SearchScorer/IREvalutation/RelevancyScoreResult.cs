@@ -4,7 +4,7 @@ namespace SearchScorer.IREvalutation
 {
     public class RelevancyScoreResult
     {
-        public RelevancyScoreResult(double resultScore, SearchQueryRelevancyScores input, SearchResponse response)
+        public RelevancyScoreResult(double resultScore, SearchQueryRelevancyScores input, ExtensionQueryResult response)
         {
             ResultScore = resultScore;
             Input = input;
@@ -13,7 +13,7 @@ namespace SearchScorer.IREvalutation
 
         public double ResultScore { get; }
         public SearchQueryRelevancyScores Input { get; }
-        public SearchResponse Response { get; }
+        public ExtensionQueryResult Response { get; }
     }
 
     public class RelevancyScoreResult<TScoreSource> : RelevancyScoreResult
@@ -21,7 +21,7 @@ namespace SearchScorer.IREvalutation
         public RelevancyScoreResult(
             double resultScore,
             SearchQueryRelevancyScores<TScoreSource> input,
-            SearchResponse response) : base(resultScore, input, response)
+            ExtensionQueryResult response) : base(resultScore, input, response)
         {
             Input = input;
         }
