@@ -9,18 +9,19 @@ assemblyDir = Path.Combine(assemblyDir, "files");
 var settings = new SearchScorerSettings
 {
     ControlBaseUrl = "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery", //TODO: Add marketplace url
-    TreatmentBaseUrl = "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery",
+    TreatmentBaseUrl = "https://marketplace.vsallin.net/_apis/public/gallery/extensionquery",
     //ControlBaseUrl = "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery?api-version=6.0-preview.1", //TODO: Add marketplace url
     //TreatmentBaseUrl = "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery?api-version=6.0-preview.1",
-    CuratedSearchQueriesCsvPath = @"C:\data\SearchScorerData\vsm\curatedqueries.csv",
-    TopSearchQueriesCsvPath = @"C:\data\SearchScorerData\vsm\topsearchqueries.csv",
-    TopSearchSelectionsCsvPath = @"C:\data\SearchScorerData\vsm\topsearchselections.csv",
 
-    TopClientSearchQueriesCsvPath = @"C:\data\SearchScorerData\vsm\topsearchqueries.csv",
-    GoogleAnalyticsSearchReferralsCsvPath = @"C:\data\SearchScorerData\vsm\topsearchreferrals.csv",
+    CuratedSearchQueriesCsvPath = @"curatedsearchqueries.csv",
+    TopSearchQueriesCsvPath = @"topsearchqueries.csv",
+    TopSearchSelectionsCsvPath = @"topsearchselections.csv",
 
-    ClientCuratedSearchQueriesCsvPath = @"C:\data\SearchScorerData\vsm\curatedqueries.csv",
-    FeedbackSearchQueriesCsvPath = @"C:\data\SearchScorerData\vsm\feedbackcuratedqueries.csv",
+    TopClientSearchQueriesCsvPath = @"topclientsearchqueries.csv",
+    GoogleAnalyticsSearchReferralsCsvPath = @"GoogleAnalyticsSearchReferrals.csv",
+
+    ClientCuratedSearchQueriesCsvPath = @"curatedsearchqueries.csv",
+    FeedbackSearchQueriesCsvPath = @"feedbacksearchqueries.csv",
 
     PackageIdWeights = CreateRange(lower: 1, upper: 10, increments: 3),
     TokenizedPackageIdWeights = CreateRange(lower: 1, upper: 10, increments: 3),

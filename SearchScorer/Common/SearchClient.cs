@@ -22,7 +22,6 @@ namespace SearchScorer.Common
         public async Task<ExtensionQueryResult> SearchAsync(string baseUrl, string query, int take)
         {
             //var queryString = HttpUtility.ParseQueryString(string.Empty);
-            query = "python";
 
             var uriBuilder = new UriBuilder(baseUrl)
             {
@@ -34,7 +33,7 @@ namespace SearchScorer.Common
             };
 
             var queryStr = "{\"filters\":[{\"criteria\":[{\"filterType\":10,\"value\":\"" + query + "\"}, {\"filterType\":8,\"value\":\"Microsoft.VisualStudio.Code\"}]," +
-                "\"direction\":0,\"pageSize\":50,\"pageNumber\":1,\"sortBy\":6,\"sortOrder\":0,\"pagingToken\":null}],\"flags\":947, \"assetTypes\":[]}";
+                "\"direction\":2,\"pageSize\":50,\"pageNumber\":1,\"sortBy\":0,\"sortOrder\":0,\"pagingToken\":null}],\"flags\":947, \"assetTypes\":[]}";
 
             var requestUri = uriBuilder.Uri; //baseUrl;//
 

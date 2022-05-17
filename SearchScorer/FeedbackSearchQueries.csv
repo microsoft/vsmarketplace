@@ -1,0 +1,3 @@
+Source,FeedbackDisposition,SearchQuery,Buckets,MostRelevantPackageIds,Result,Control Result Bucket,Treatment Result Bucket,Control Result Index,Treatment Result Index,Result Index Delta
+VSMPartnersInternal,OldIsBetter,java,Tags,vscode-maven,BothFixed,AboveFold,AboveFold,0,0,0
+VSMPartnersInternal,NewIsGreat,mysql,PartialId,vscode-mysql-client2,BothBroken,BelowFold,BelowFold,0,0,0

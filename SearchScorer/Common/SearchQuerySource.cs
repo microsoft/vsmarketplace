@@ -11,5 +11,6 @@
         TopQuery,
         V5External,
         Hats,
+        VSMPartnersInternal
     }
 }
