@@ -21,5 +21,6 @@ The proposed solution is to enable publishers to unpublish any specific version 
 - The unpublish action cannot be undone*. The same extension name and version combination can never be reused to publish*.
 - If all versions of a package are unpublished, the extension becomes unavailable on the Marketplace (not found by search or not accessible via a direct link to the details page).
 - Unpublishing all versions of a package individually results in the same customer experience as unpublishing the entire package at once.
+- To prevent large scale disruption to extension consumers, versions with over 1K installs will only be removeable by emailing Marketplace customer support. 
 
 \* Consistent with [npm-unpublish](https://docs.npmjs.com/cli/v8/commands/npm-unpublish) behavior, which is a consideration given the familiarity of npm registry among Marketplace publishers.
