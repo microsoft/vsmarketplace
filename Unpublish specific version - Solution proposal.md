@@ -6,7 +6,7 @@ Publishers need a way to take back a certain version of their VS Code extension 
 
 ## Top problem scenarios
 
-- **Unable to rollback mistakes**: Published a package accidentally or to learn/test publishing. Examples are accidentally uploading a wrong build, a package not intended to be public, or a package with wrong version number. Usually, the need is to unpublish the latest version. Currently the work around is to roll back by republishing an old version and forcing everyone to update to that new version even though it has no new features/fixes.
+- **Unable to rollback mistakes**: Published a package accidentally or to learn/test publishing. Examples are accidentally uploading a wrong build, a package not intended to be public, or a package with a wrong version number. Usually, the need is to unpublish the latest version. Currently, the workaround is to roll back by republishing an old version and forcing everyone to update to that new version even though it has no new features/fixes.
 - **Partial releases**: Publishing failed during a multi-platform release, resulting in partial release/update which needs to be rolled back. A common scenario of failure reported by customers is that validation or signing randomly errors out and works on reupload.
 - **Recalls**: A critical security or copyright issue has been discovered in a published version, so it needs to be removed immediately to prevent further harm further down the supply chain.
 - **Renaming**: Need to rename an extension (The only way to DIY rename a package is to publish it under a new name)
