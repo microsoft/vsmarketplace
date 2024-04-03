@@ -16,7 +16,7 @@ Publishers need a way to take back a certain version of their VS Code extension 
 The proposed solution is to enable publishers to unpublish any specific version of a VS Code package, using either the vsce command line tool or the Marketplace web UI. The unpublish action would have the following effects and limitations:
 
 - Once a specific version is unpublished, it cannot be downloaded or installed from the Marketplace, but all other published versions remain available.
-- When there are unpublished versions of a package, the highest published version becomes the default for the purpose of installing in VS Code, one-click install and download from the extension details page on the web.
+- When there are unpublished versions of a package, the highest published version becomes the default for the purpose of installing in VS Code, one-click install, and download from the extension details page on the web.
 - Unpublishing a version does not remove any rating, review or Q&A that may have been posted while the version was published.
 - The unpublish action cannot be undone*. The same extension name and version combination can never be reused to publish*.
 - If all versions of a package are unpublished, the extension becomes unavailable on the Marketplace (not found by search or not accessible via a direct link to the details page).
