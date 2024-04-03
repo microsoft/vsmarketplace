@@ -27,4 +27,4 @@ The proposed solution is to enable publishers to unpublish any specific version 
 
 \* Consistent with [npm-unpublish](https://docs.npmjs.com/cli/v8/commands/npm-unpublish) behavior, which is a consideration given the familiarity of npm registry among Marketplace publishers.
 
-Note: After initial feedback intake, in the next step we'll update this spec with details of experential changes to vscevand web UI.
+Note: After initial feedback intake, in the next step we'll update this spec with details of experiential changes to vsce and web UI.
