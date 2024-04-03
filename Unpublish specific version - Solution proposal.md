@@ -11,17 +11,18 @@ Publishers need a way to take back a certain version of their VS Code extension 
 - **Recalls**: A critical security or copyright issue has been discovered in a published version, so it needs to be removed immediately to prevent further harm further down the supply chain.
 - **Renaming**: Need to rename an extension (The only way to DIY rename a package is to publish it under a new name)
 
+
 ## Feature change overview
 
 The proposed solution is to enable publishers to unpublish any specific version of a VS Code package, using either the vsce command line tool or the Marketplace web UI. The unpublish action would have the following effects and limitations:
 
 - Once a specific version is unpublished, it cannot be downloaded or installed from the Marketplace, but all other published versions remain available.
 - When there are unpublished versions of a package, the highest published version becomes the default for the purpose of installing in VS Code, one-click install, and download from the extension details page on the web.
-- Unpublishing a version does not remove any rating, review or Q&A that may have been posted while the version was published.
+- Unpublishing a version does not remove any data including acquistion numbers, ratings, reviews and Q&A that may have been posted while the version was published.
 - The unpublish action cannot be undone*. The same extension name and version combination can never be reused to publish*.
-- If all versions of a package are unpublished, the extension becomes unavailable on the Marketplace (not found by search or not accessible via a direct link to the details page).
-- Unpublishing all versions of a package individually results in the same customer experience as unpublishing the entire package at once.
-- To prevent large-scale disruption to extension consumers, versions with over 1K installs will only be removable by emailing Marketplace customer support. 
+- If all versions of a package have been individually unpublished, the extension becomes unavailable on the Marketplace (not found by search or not accessible via a direct link to the details page).
+- Even after unpublishing all versions of a package individually unpublished, the publisher still retains ownership of the extension name so they can publish a newer version.
+- To prevent large-scale disruption to extension consumers, versions with over 1K installs will only be removable by emailing Marketplace customer support.
 
 \* Consistent with [npm-unpublish](https://docs.npmjs.com/cli/v8/commands/npm-unpublish) behavior, which is a consideration given the familiarity of npm registry among Marketplace publishers.
 
