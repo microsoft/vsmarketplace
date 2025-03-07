@@ -7,4 +7,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-|                                       |              |                               |
+| VKTeam.com| 2/25/2025| Catalog scan |
+| yfdyh000.aar-vscode | 2/25/2025| Catalog scan |
+| ItalangMong.smile-editor | 2/25/2025| Catalog scan |
+|tabnine-dev.tabnine-pro | 2/25/2025| Catalog scan |
+|xuyanfeng.addr2line-assistant| 2/25/2025| Catalog scan |
+| Glenn-marks1990.live-sass-compiler | 2/25/2025| Catalog scan |
+| platformio-dev.platform-io | 2/25/2025| Catalog scan |
+|gitkraken-dev.gitlens-pro | 2/25/2025| Catalog scan |
+| ethanielliu.audit-helper | 2/25/2025| Catalog scan |
+| ceo.sammarco | 2/25/2025| Catalog scan |
+|           |              |     |
