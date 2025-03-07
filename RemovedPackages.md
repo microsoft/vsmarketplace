@@ -20,9 +20,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |           |              |     |
 
 
-Copyright violation - Uses someone else's copyrighted or trademarked material without permission
-Potentially malicious - Highly suspicious code, often rendered to be difficult to analyze, resembles malicious software
-Malware - Designed to infiltrate your system for destructive purposes
-Spam - Designed to deceive, harass, or harm the recipients
-Typo-squatting - Attempts to masquerade as another, usually more popular, extension. Causes search confusion.
-Untrustworthy - Publisher actions that could be damaging to the trustworthiness of VS Marketplace
+Legend:
+- Copyright violation - Uses someone else's copyrighted or trademarked material without permission.
+- Potentially malicious - Highly suspicious code, often rendered to be difficult to analyze, resembles malicious software.
+- Malware - Designed to infiltrate your system for destructive purposes.
+- Spam - Designed to deceive, harass, or harm the recipients.
+- Typo-squatting - Attempts to masquerade as another, usually more popular, extension. Causes search confusion.
+- Untrustworthy - Publisher actions that could be damaging to the trustworthiness of VS Marketplace.
