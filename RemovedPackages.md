@@ -5,6 +5,6 @@ Every package entering VS Marketplace is scanned upfront and regularly rescanned
 Scanning is not perfect. Community partnership is a very valuable part of the overall effort to keep developers safe. We take reports seriously, investigate carefully and prioritize speed of removal of positives to prevent adverse impact to the community. Thanks for your contribution!
 
 
-| Extension Identifier                  | Removal Date | Reason                                                                                       |
-|---------------------------------------|--------------|----------------------------------------------------------------------------------------------|
-| Equinusocio.vsc-material-theme-icons  | 2/26/2025    | A theming extension with heavily obfuscated code and unreasonable dependencies including a utility for running child processes |
+| Extension Identifier                  | Removal Date | Type                          |
+|---------------------------------------|--------------|-------------------------------|
+|                                       |              |                               |
