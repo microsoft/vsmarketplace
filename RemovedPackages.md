@@ -17,7 +17,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |gitkraken-dev.gitlens-pro | 2/25/2025| Malware |
 | ethanielliu.audit-helper | 2/25/2025| Malware |
 | ceo.sammarco | 2/25/2025| Malware |
-|           |              |     |
+|   ahban.cychelloworld        |  3/13/2025            | Malware    |
+|   ahban.shiba       |  3/13/2025            | Malware    |
 
 
 Legend:
