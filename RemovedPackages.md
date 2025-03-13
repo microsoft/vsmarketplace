@@ -7,18 +7,19 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| VKTeam.com| 2/25/2025| Malware |
-| yfdyh000.aar-vscode | 2/25/2025| Malware |
-| ItalangMong.smile-editor | 2/25/2025| Malware |
-|tabnine-dev.tabnine-pro | 2/25/2025| Malware |
-|xuyanfeng.addr2line-assistant| 2/25/2025| Malware |
-| Glenn-marks1990.live-sass-compiler | 2/25/2025| Malware |
-| platformio-dev.platform-io | 2/25/2025| Malware |
-|gitkraken-dev.gitlens-pro | 2/25/2025| Malware |
-| ethanielliu.audit-helper | 2/25/2025| Malware |
-| ceo.sammarco | 2/25/2025| Malware |
-|   ahban.cychelloworld        |  3/13/2025            | Malware    |
-|   ahban.shiba       |  3/13/2025            | Malware    |
+|ahban.cychelloworld        |  3/13/2025            | Malware    |
+|ahban.shiba       |  3/13/2025            | Malware    |
+| VKTeam.com| 2/26/2025| Malware |
+| yfdyh000.aar-vscode | 2/26/2025| Malware |
+| ItalangMong.smile-editor | 2/26/2025| Malware |
+|tabnine-dev.tabnine-pro | 2/26/2025| Malware |
+|xuyanfeng.addr2line-assistant| 2/26/2025| Malware |
+| Glenn-marks1990.live-sass-compiler | 2/26/2025| Malware |
+| platformio-dev.platform-io | 2/26/2025| Malware |
+|gitkraken-dev.gitlens-pro | 2/26/2025| Malware |
+| ethanielliu.audit-helper | 2/26/2025| Malware |
+| ceo.sammarco | 2/26/2025| Malware |
+
 
 
 Legend:
