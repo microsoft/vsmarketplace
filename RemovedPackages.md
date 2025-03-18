@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|0xS1rx58D3V.ChatGPT-B0T        |  3/18/2025            | Malware    |
 |ahban.cychelloworld        |  3/13/2025            | Malware    |
 |ahban.shiba       |  3/13/2025            | Malware    |
 | VKTeam.com| 2/26/2025| Malware |
