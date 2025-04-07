@@ -7,6 +7,15 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|discord-inc.discord-rich-presence-rpc      |  4/7/2025            | Malware    |
+|MarkH.chatgpt-autocoder-vscode |  4/7/2025            | Malware    |
+|MarkH.claude-autocoder-vscode |  4/7/2025            | Malware    |
+|MarkH.discord-rich-presence-vs  |  4/7/2025            | Malware    |
+|MarkH.golang-compiler-vscode |  4/7/2025            | Malware    |
+|MarkH.html-obfuscator-vscode |  4/7/2025            | Malware    |
+|MarkH.python-obfuscator-vscode |  4/7/2025            | Malware    |
+|MarkH.rust-compiler-vs |  4/7/2025            | Malware    |
+|VSCodeDeveloper.sobidity-compiler |  4/7/2025            | Malware    |
 |ErickChandra.socratic-code-hinter       |  3/26/2025            | Malware    |
 |0xS1rx58D3V.ChatGPT-B0T        |  3/18/2025            | Malware    |
 |ahban.cychelloworld        |  3/13/2025            | Malware    |
