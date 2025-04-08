@@ -7,7 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|prettierteam.prettier       |  4/7/2025            | Malware    |
 |discord-inc.discord-rich-presence-rpc      |  4/7/2025            | Malware    |
+|evaera-rbx.vscode-rojo-rbx      |  4/7/2025            | Malware    |
 |MarkH.chatgpt-autocoder-vscode |  4/7/2025            | Malware    |
 |MarkH.claude-autocoder-vscode |  4/7/2025            | Malware    |
 |MarkH.discord-rich-presence-vs  |  4/7/2025            | Malware    |
