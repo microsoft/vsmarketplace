@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|VSDeveloper.universal-intellisense| 4/17/2025| Malware
+|VSDeveloper.theme-library-vs| 4/17/2025| Malware
+|HTMLLanguage.html-css-support| 4/17/2025| Malware
 |blackforest.blackforest-1234| 4/15/2025  | Malware
 |Trustworthy.mevscode      |  4/8/2025            | Malware    |
 |prettierteam.prettier       |  4/7/2025            | Malware    |
