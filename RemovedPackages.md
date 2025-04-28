@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|SoliditFoundation.solidit-language| 4/28/2025| Malware
+|SoliditFoundation.solidits-language| 4/28/2025| Malware
+|SmartContractAI.solaibot| 4/28/2025| Malware
 |JuanFranBlanco.solidit-vscode| 4/21/2025| Malware
 |MarkHutchins.markdown-preview-vs| 4/18/2025| Malware
 |VSDeveloper.universal-intellisense| 4/17/2025| Malware
