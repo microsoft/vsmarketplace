@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|outthaway.sol2-lang| 5/2/2025| Malware
 |johnh.solibit22-lang| 5/2/2025| Malware
 |EHooley.solibity-lang| 5/2/2025| Malware
 |Solid.dolibity-slang| 5/2/2025| Malware
