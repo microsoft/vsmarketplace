@@ -7,6 +7,19 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|lakshits11.fresh-material-theme| 5/5/2025| DMCA
+|jRichardeau.vscode-vsproj| 5/5/2025| DMCA
+|ShayanAhmedKhan.visual-studio-themes| 5/5/2025| DMCA
+|Smartie.hacknet-vscode| 5/5/2025| DMCA
+|abhiagr.livs| 5/5/2025| DMCA
+|azure-dev.azure-cli-helper| 5/5/2025| DMCA
+|v-test-publisher.vscode-azure-functions-remote-web-test| 5/5/2025| DMCA
+|DylanRampage.prettier-optimized| 5/4/2025| Prettier logoCopy
+|duailibe.miniprettier| 5/4/2025| Prettier logoCopy
+|dotatong.wt-prettier-vscode|5/4/2025| Prettier logoCopy
+|nkurasawa.vscode-ignore-prettier| 5/4/2025| Prettier logoCopy
+|hyperproof.vscode-ext-prettier-java| 5/4/2025| Prettier logoCopy
+|publishingsofficial.prettier-plus-vscode| 5/4/2025| Prettier logoCopy
 |johnhtml.dasfasdsadasdf| 5/2/2025| Malware
 |outthaway.sol2-lang| 5/2/2025| Malware
 |johnh.solibit22-lang| 5/2/2025| Malware
