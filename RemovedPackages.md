@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|jishutuan.prettier-vscode| 5/6/2025| Typo-squatting
+|jameszhanga.even-prettier| 5/6/2025| Typo-squatting
+|kaijialin.pvts| 5/6/2025| Typo-squatting
 |lakshits11.fresh-material-theme| 5/5/2025| Copyright violation
 |jRichardeau.vscode-vsproj| 5/5/2025| Copyright violation
 |ShayanAhmedKhan.visual-studio-themes| 5/5/2025| Copyright violation
@@ -18,7 +21,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |duailibe.miniprettier| 5/4/2025| Typo-squatting
 |dotatong.wt-prettier-vscode|5/4/2025| Typo-squatting
 |nkurasawa.vscode-ignore-prettier| 5/4/2025| Typo-squatting
-|hyperproof.vscode-ext-prettier-java| 5/4/2025| Typo-squattingy
+|hyperproof.vscode-ext-prettier-java| 5/4/2025| Typo-squatting
 |publishingsofficial.prettier-plus-vscode| 5/4/2025| Typo-squatting
 |johnhtml.dasfasdsadasdf| 5/2/2025| Malware
 |outthaway.sol2-lang| 5/2/2025| Malware
