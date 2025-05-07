@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|soIidity.cryptoovertheweekend4| 5/7/2025| Malware
+|Onaga08.vibecode| 5/7/2025| Malware
 |jishutuan.prettier-vscode| 5/6/2025| Typo-squatting
 |jameszhanga.even-prettier| 5/6/2025| Typo-squatting
 |kaijialin.pvts| 5/6/2025| Typo-squatting
