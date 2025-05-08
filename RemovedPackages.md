@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|testrl777.Solidity-Ethereum| 5/8/2025| Malware
 |soIidity.cryptoovertheweekend4| 5/7/2025| Malware
 |Onaga08.vibecode| 5/7/2025| Malware
 |jishutuan.prettier-vscode| 5/6/2025| Typo-squatting
