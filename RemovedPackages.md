@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|ethcompiler.among-eth| 5/10/2025| Malware
 |VitalikButerinETH.vitaliketh| 5/10/2025| Malware
 |GavinWoodETH.solid-eth| 5/9/2025| Malware
 |testrl777.Solidity-Ethereum| 5/8/2025| Malware
