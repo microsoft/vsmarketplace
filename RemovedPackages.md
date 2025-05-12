@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|BlockchainWEB3.blankebestxstnion| 5/12/2025| Malware
 |OfekBickel.wpp| 5/12/2025| Malware
 |JohnGaffney.blankebesxstnion | 5/12/2025| Malware
 |bysabi.prettier-vscode-semistandard | 5/12/2025|  Typo-squatting
