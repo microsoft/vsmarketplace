@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|JohnGaffney.blankebesxstnion | 5/12/2025| Malware
 |fnweoifweiofewofwoeifjwefvsjceqk.node-snippets-ai | 5/11/2025| Malware
 |minlabs.quiet-code| 5/11/2025| Malware
 |SFRA-FAKA.sfra-toolkit| 5/11/2025| Malware
