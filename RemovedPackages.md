@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|bysabi.prettier-vscode-semistandard | 5/12/2025|  Typo-squatting
+|bysabi.prettier-vscode-standard| 5/12/2025|  Typo-squatting
+|Shunqian.prettier-plus| 5/12/2025|  Typo-squatting
+|remimarsal.prettier-now| 5/12/2025|  Typo-squatting
+|iSayme.vscode-prettier-standard|5/12/2025|  Typo-squatting
 |fnweoifweiofewofwoeifjwefvsjceqk.node-snippets-ai | 5/11/2025| Malware
 |minlabs.quiet-code| 5/11/2025| Malware
 |SFRA-FAKA.sfra-toolkit| 5/11/2025| Malware
