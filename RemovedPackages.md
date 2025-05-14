@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|AllenBarry.Solid| 5/13/2025| Malware
 |JohnMcafee.JohnMcafeeSolid| 5/13/2025| Malware
 |BlockchainWEB3.blankebestxstnion| 5/12/2025| Malware
 |OfekBickel.wpp| 5/12/2025| Malware
