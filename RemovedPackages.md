@@ -7,6 +7,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|jsayol.firebase-explorer| 5/13/2025| Copyright violation
+|JohnAaronNelson.ForceCode| 5/13/2025| Copyright violation
+|JohnAaronNelson.visualforce| 5/13/2025| Copyright violation
+|kast789.visual-studio-2022-theme|5/13/2025| Copyright violation
+|spmeesseman.vscode-vslauncher| 5/13/2025| Copyright violation
+|vfd.vs2017-light-theme| 5/13/2025| Copyright violation
+|kast789.vs-2019-theme|5/13/2025| Copyright violation
+|jamiewest.theme-light-vs-mac| 5/13/2025| Copyright violation
 |AllenBarry.Solid| 5/13/2025| Malware
 |JohnMcafee.JohnMcafeeSolid| 5/13/2025| Malware
 |BlockchainWEB3.blankebestxstnion| 5/12/2025| Malware
