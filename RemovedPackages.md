@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|FaceCrypto.chocolatesnack|5/17/2025| Malware
+|better-sollidity.sollidity-plus|5/17/2025| Malware
+|Languages.hungarian|5/17/2025| Malware
 |DaveWeb3.choccie|5/16/2025| Malware
 |DanielBlockchain.chocosnack|5/16/2025| Malware
 |JuanBlanking.Solidy|5/15/2025| Malware
