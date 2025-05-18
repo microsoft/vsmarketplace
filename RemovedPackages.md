@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|YogevAvitan.codeivri-vscode|5/18/2025| Malware
 |MediaLLC.solidyy|5/17/2025| Malware
 |FaceCrypto.chocolatesnack|5/17/2025| Malware
 |better-sollidity.sollidity-plus|5/17/2025| Malware
