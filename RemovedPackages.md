@@ -16,6 +16,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |DanielBlockchain.chocosnack|5/16/2025| Malware
 |JuanBlanking.Solidy|5/15/2025| Malware
 |VitalikButt.Solids|5/14/2025| Malware
+|KomaKamaki.vscode-api-client-lite|5/13/2025|Typo-squatting
 |jsayol.firebase-explorer| 5/13/2025| Copyright violation
 |JohnAaronNelson.ForceCode| 5/13/2025| Copyright violation
 |JohnAaronNelson.visualforce| 5/13/2025| Copyright violation
