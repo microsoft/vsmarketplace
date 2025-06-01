@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|takuanporipori.pixelpress|6/01/2025|Untrustworthy
 |JuanFlanco.Soquidity|5/30/2025|Malware
 |YogevAvitan.codeivri-vscode|5/18/2025| Malware
 |MediaLLC.solidyy|5/17/2025| Malware
