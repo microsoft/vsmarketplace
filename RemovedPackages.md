@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|CSF-RED.CSF-RED|6/05/2025| Malware
+|Expressjs.expressjs-session|6/05/2025| Malware
+|Zeron1337.Zeron-CySec|6/05/2025| Malware
+|seHunt-20241016.seHunt-20241016|6/05/2025| Malware
+|NotToTest.NotToTest |6/05/2025| Malware
 |takuanporipori.pixelpress|6/01/2025|Untrustworthy
 |JuanFlanco.Soquidity|5/30/2025|Malware
 |YogevAvitan.codeivri-vscode|5/18/2025| Malware
