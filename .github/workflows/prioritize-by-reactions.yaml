@@ -1,0 +1,65 @@
+name: Prioritize Issues by Reactions
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'   # Runs every 4 hours
+  workflow_dispatch:       # Allows manual runs
+
+jobs:
+  prioritize:
+    permissions:
+      issues: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Prioritize issues by reactions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: microsoft/vsmarketplace
+          HIGH: 10
+          MEDIUM: 5
+        run: |
+          issue_numbers=$(gh issue list -R "$REPO" --state open --json number -q '.[].number')
+
+          for ISSUE in $issue_numbers; do
+            echo "🔍 Checking Issue #$ISSUE"
+
+            reactions=$(curl -s \
+              -H "Accept: application/vnd.github.squirrel-girl-preview+json" \
+              -H "Authorization: token $GH_TOKEN" \
+              https://api.github.com/repos/$REPO/issues/$ISSUE/reactions)
+
+            total=$(echo "$reactions" | jq 'length')
+
+            if [ "$total" -ge "$HIGH" ]; then
+              priority="p/0"
+            elif [ "$total" -ge "$MEDIUM" ]; then
+              priority="p/1"
+            else
+              priority="p/2"
+            fi
+
+            echo "👉 Issue #$ISSUE has $total reactions — Assigning label: $priority"
+
+            # Get current p/* label (if any)
+            current_priority=$(gh issue view $ISSUE -R $REPO --json labels -q '.labels[].name' | grep '^p/' || echo "")
+
+            if [[ "$current_priority" != "$priority" ]]; then
+              if [[ -n "$current_priority" ]]; then
+                echo "   ⏹️  Removing old label: $current_priority"
+                gh issue edit $ISSUE -R $REPO --remove-label "$current_priority"
+              fi
+
+              echo "   ➕ Adding new label: $priority"
+              gh issue edit $ISSUE -R $REPO --add-label "$priority"
+            else
+              echo "   ✅ Priority label already correct: $priority"
+            fi
+            echo ""
+          done
