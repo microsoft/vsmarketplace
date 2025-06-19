@@ -1,0 +1,122 @@
+name: Issue Triage
+description: Assign label to new issues without a label
+resource: repository
+disabled: false
+
+configuration:
+  resourceManagementConfiguration:
+    eventResponderTasks:
+      - description: Check if a Type label is assigned to new issues
+        triggerOnOwnActions: false
+        if:
+          - payloadType: Issues
+          - and:
+              - isOpen
+              - not:
+                  - or: 
+                      - hasLabel:
+                          label: Bug
+                      - hasLabel:
+                          label: Feature
+                      - hasLabel:
+                          label: SupportRequest
+        then:
+          - addReply:
+              reply: "@${issueAuthor}, please add a Bug/Feature/SupportRequest label as applicable."
+          - addLabel:
+              label: waitingForCustomer
+          - addLabel:
+              label: untriaged
+      - description: Update issue if Type label was assigned # removes waitingForCustomer + untriaged if someone assigns a type label
+        triggerOnOwnActions: false
+        if: 
+          - payloadType: Issues
+          - and:
+            - isOpen
+            - or: 
+              - labelAdded:
+                  label: Bug
+              - labelAdded:
+                  label: Feature
+              - labelAdded:
+                  label: SupportRequest
+        then:
+          - if: 
+              - hasLabel:
+                  label: untriaged
+            then:
+              - removeLabel:
+                  label: untriaged
+          - if: 
+              - not:
+                  - hasLabel:
+                      label: triaged
+            then:
+              - addLabel:
+                  label: triaged
+          - if:
+              - hasLabel:
+                label: waitingForCustomer
+            then:
+              - removeLabel:
+                  label: waitingForCustomer
+      - description: Update issues that had recent activity
+        triggerOnOwnActions: false
+        if:
+          - payloadType: Issues
+          - and:
+              - isOpen
+              - isAction::
+                  action: Issue_Comment # create or update (applies to issue description too?)
+        then:
+          - if:
+              - hasLabel:
+                  label: stale
+            then:
+              - removeLabel:
+                  label: stale
+    scheduledSearches:
+      - description: search for issues that are waitingForCustomer and haven't got a response
+        frequencies:
+          - weekday:
+            - day: Monday
+            - time: 06:00
+        filters:
+          - isOpen
+          - hasLabel:
+              label: waitingForCustomer
+          - noActivitySince:
+              days: 7
+        actions:
+          - addLabel:
+              label: stale
+      - description: close issues that are waitingForCustomer + stale for too long
+        frequencies:
+          - weekday:
+            - day: Monday
+            - time: 06:00
+        filters:
+          - isOpen
+          - hasLabel:
+              label: waitingForCustomer
+          - hasLabel:
+              label: stale
+          - noActivitySince:
+              days: 7
+        actions:
+          - closeIssue
+          - addReply:
+              reply: "@${issueAuthor}, this issue has been closed due to inactivity. Please feel free to reopen it if you have further information or questions."
+      - description: close issues that have not received any activity in 18 months
+        frequencies:
+          - weekday:
+            - day: Monday
+            - time: 06:00
+        filters:
+          - isOpen
+          - noActivitySince:
+              days: 540
+        actions:
+          - closeIssue
+          - addReply:
+              reply: "@${issueAuthor}, this issue has been closed due to inactivity. Please feel free to reopen it if you have further information or questions."
