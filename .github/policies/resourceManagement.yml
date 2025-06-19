@@ -1,0 +1,29 @@
+id: 
+name: GitOps.PullRequestIssueManagement
+description: GitOps.PullRequestIssueManagement primitive
+owner: 
+resource: repository
+disabled: false
+where: 
+configuration:
+  resourceManagementConfiguration:
+    eventResponderTasks:
+      - description: Check if a Type label is assigned to new issues
+        triggerOnOwnActions: false
+        if:
+          - payloadType: Issues
+          - isOpen
+          - isAction:
+              action: Opened
+          - hasLabel:
+              label: testing
+        then:
+          - addReply:
+              reply: "@${issueAuthor}, please add a Bug/Feature/SupportRequest label as
+                applicable."
+          - addLabel:
+              label: waitingForCustomer
+          - addLabel:
+              label: untriaged
+onFailure: 
+onSuccess: 
