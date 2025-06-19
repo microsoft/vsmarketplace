@@ -12,18 +12,17 @@ configuration:
         triggerOnOwnActions: false
         if:
           - payloadType: Issues
-          - and:
-              - isOpen
-              - isAction:
-                  action: Opened
-              - not:
-                  - or:
-                      - hasLabel:
-                          label: Bug
-                      - hasLabel:
-                          label: Feature
-                      - hasLabel:
-                          label: SupportRequest
+          - isOpen
+          - isAction:
+              action: Opened
+          - not:
+              - or:
+                  - hasLabel:
+                      label: Bug
+                  - hasLabel:
+                      label: Feature
+                  - hasLabel:
+                      label: SupportRequest
         then:
           - addReply:
               reply: "@${issueAuthor}, please add a Bug/Feature/SupportRequest label as
