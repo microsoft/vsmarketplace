@@ -15,7 +15,7 @@ configuration:
           - and:
               - isOpen
               - isAction:
-                  - action: opened
+                  - action: Opened
               - not:
                   - or:
                       - hasLabel:
