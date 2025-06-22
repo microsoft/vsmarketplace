@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|EtherFoundation.vs-ranket|6/22/2025| Malware
 |hajoo.poisoned-extension|6/20/2025| Untrustworthy
 |JacobETH.solidi|6/17/2025| Malware
 |JuanRiseETH.solidit|6/14/2025| Malware
