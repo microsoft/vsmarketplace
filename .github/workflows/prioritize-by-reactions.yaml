@@ -2,7 +2,7 @@ name: Prioritize Issues by Reactions
 
 on:
   schedule:
-    - cron: '0 */4 * * *'   # Runs every 4 hours
+    - cron: '0 0 * * *'   # Runs once a day at midnight UTC
   workflow_dispatch:       # Allows manual runs
 
 jobs:
@@ -38,21 +38,30 @@ jobs:
             total=$(echo "$reactions" | jq 'length')
 
             if [ "$total" -ge "$HIGH" ]; then
-              priority="p/0"
+              priority="Priority:0"
             elif [ "$total" -ge "$MEDIUM" ]; then
-              priority="p/1"
+              priority="Priority:1"
             else
-              priority="p/2"
+              priority="Priority:2"
             fi
 
             echo "👉 Issue #$ISSUE has $total reactions — Assigning label: $priority"
 
-            # Get current p/* label (if any)
-            current_priority=$(gh issue view $ISSUE -R $REPO --json labels -q '.labels[].name' | grep '^p/' || echo "")
+            # Get current Priority:* label (if any)
+            current_priority=$(gh issue view $ISSUE -R $REPO --json labels -q '.labels[].name' | grep '^Priority:' || echo "")
 
             if [[ "$current_priority" != "$priority" ]]; then
+              # Check if current priority label was added by github-actions
               if [[ -n "$current_priority" ]]; then
-                echo "   ⏹️  Removing old label: $current_priority"
+                # Get the timeline events to see who added the current priority label
+                label_added_by=$(gh api repos/$REPO/issues/$ISSUE/timeline --paginate | jq -r --arg label "$current_priority" '.[] | select(.event == "labeled" and .label.name == $label) | .actor.login' | tail -1)
+
+                if [[ "$label_added_by" != "github-actions[bot]" ]]; then
+                  echo "   🚫 Priority label '$current_priority' was set by '$label_added_by' (not github-actions), skipping update"
+                  continue
+                fi
+
+                echo "   ⏹️  Removing old label: $current_priority (was set by github-actions)"
                 gh issue edit $ISSUE -R $REPO --remove-label "$current_priority"
               fi
 
