@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|ab-498.httpformat|6/24/2025| Malware
+|ab-498.pythonformat|6/24/2025| Malware
+|ab-498.cppformat|6/24/2025| Malware
+|ab-498.cppplayground|6/24/2025| Malware
 |GavinLamWood.vs-blanket|6/23/2025| Malware
 |EtherFoundation.vs-ranket|6/22/2025| Malware
 |hajoo.poisoned-extension|6/20/2025| Untrustworthy
