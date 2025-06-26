@@ -120,6 +120,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |gitkraken-dev.gitlens-pro | 2/26/2025| Malware |
 | ethanielliu.audit-helper | 2/26/2025| Malware |
 | ceo.sammarco | 2/26/2025| Malware |
+| VSAnalysistest.codegpt-helper | 6/26/2025| Malware |
+| VSAnalysistest.code-ai-assistant | 6/26/2025| Malware |
+| 7finney.ethcode | 6/26/2025| Malware |
+| ahbanC.shiba | 6/26/2025| Malware |
 
 
 
