@@ -7,7 +7,19 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-|ab-498.httpformat|6/24/2025| Malware
+| Puglight.inspiredaily        | 6/26/2025 | Malware |
+| Puglight.persistorito        | 6/26/2025 | Malware |
+| Puglight.sysmotivate         | 6/26/2025 | Malware |
+| Puglight.discoverito         | 6/26/2025 | Malware |
+| Puglight.elevatio            | 6/26/2025 | Malware |
+| Puglight.impacto             | 6/26/2025 | Malware |
+| Puglight.lateralmovour       | 6/26/2025 | Malware |
+| Puglight.realmvvscode        | 6/26/2025 | Malware |
+| Puglight.shadowcore          | 6/26/2025 | Malware |
+| Puglight.vulnerabilitto      | 6/26/2025 | Malware |
+| VSAnalysistest.codegpt-helper| 6/26/2025 | Malware |
+| VSAnalysistest.code-ai-assistant | 6/26/2025 | Malware |
+| ahbanC.shiba                 | 6/26/2025 | Malware ||ab-498.httpformat|6/24/2025| Malware
 |ab-498.pythonformat|6/24/2025| Malware
 |ab-498.cppformat|6/24/2025| Malware
 |ab-498.cppplayground|6/24/2025| Malware
