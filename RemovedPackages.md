@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|liujingping.bdd-ai-toolkit|6/27/2025| Malware
 |ab-498.httpformat|6/24/2025| Malware
 |ab-498.pythonformat|6/24/2025| Malware
 |ab-498.cppformat|6/24/2025| Malware
