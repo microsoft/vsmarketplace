@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|btwiuse.gopilot-chat | 7/01/2025 | Typo-squatting |
 |CharlesHoskinson.lfamnw1 | 6/29/2025 | Malware |
 | EthersFoundation.bogitiy        | 6/28/2025 | Malware |
 | Puglight.inspiredaily        | 6/26/2025 | Malware |
