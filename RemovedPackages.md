@@ -7,7 +7,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-
 |CharlesHoskinson.lfamnw1      | 6/29/2025 | Malware |
 | EthersFoundation.bogitiy     | 6/28/2025 | Malware |
 | liujingping.bdd-ai-toolkit   | 6/27/2025 | Malware |
