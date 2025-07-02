@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|JoshWEB3.solibt| 7/01/2025 | Malware |
 |JosephLubin.solib| 7/01/2025 | Malware |
 |VitalyButerin.hardhatjs | 7/01/2025 | Malware |
 |btwiuse.gopilot-chat | 7/01/2025 | Typo-squatting |
