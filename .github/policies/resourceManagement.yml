@@ -1,10 +1,8 @@
-id: 
-name: GitOps.PullRequestIssueManagement
-description: GitOps.PullRequestIssueManagement primitive
-owner: 
+name: Issue Triage
+description: Assign label to new issues without a label
 resource: repository
 disabled: false
-where: 
+
 configuration:
   resourceManagementConfiguration:
     eventResponderTasks:
@@ -12,18 +10,113 @@ configuration:
         triggerOnOwnActions: false
         if:
           - payloadType: Issues
-          - isOpen
           - isAction:
               action: Opened
-          - hasLabel:
-              label: testing
+          - not:
+              or:
+                - hasLabel:
+                    label: Type:Bug
+                - hasLabel:
+                    label: Type:Feature
+                - hasLabel:
+                    label: Type:SupportRequest
         then:
           - addReply:
-              reply: "@${issueAuthor}, please add a Bug/Feature/SupportRequest label as
-                applicable."
+              reply: "${issueAuthor}, please add a Type:Bug/Type:Feature/Type:SupportRequest label as applicable."
           - addLabel:
               label: waitingForCustomer
           - addLabel:
               label: untriaged
-onFailure: 
-onSuccess: 
+      - description: Update issue if Type label was assigned # removes waitingForCustomer + untriaged if someone assigns a type label
+        triggerOnOwnActions: false
+        if:
+          - payloadType: Issues
+          - isOpen
+          - or:
+            - labelAdded:
+                label: Type:Bug
+            - labelAdded:
+                label: Type:Feature
+            - labelAdded:
+                label: Type:SupportRequest
+        then:
+          - if:
+              - hasLabel:
+                  label: untriaged
+            then:
+              - removeLabel:
+                  label: untriaged
+          - if:
+              - not:
+                  hasLabel:
+                    label: triaged
+            then:
+              - addLabel:
+                  label: triaged
+          - if:
+              - hasLabel:
+                  label: waitingForCustomer
+            then:
+              - removeLabel:
+                  label: waitingForCustomer
+      - description: Update issues that had recent activity
+        triggerOnOwnActions: false
+        if:
+          - payloadType: Issue_Comment
+          - isOpen
+          - or:
+            - isAction:
+                action: Created # create or update (applies to issue description too?)
+            - isAction:
+                action: Edited
+        then:
+          - if:
+              - hasLabel:
+                  label: stale
+            then:
+              - removeLabel:
+                  label: stale
+    scheduledSearches:
+      - description: search for issues that are waitingForCustomer and haven't got a response
+        frequencies:
+          - hourly:
+              hour: 1
+        filters:
+          - isOpen
+          - hasLabel:
+              label: waitingForCustomer
+          - noActivitySince:
+              days: 1
+        actions:
+          - addLabel:
+              label: stale
+      - description: close issues that are waitingForCustomer + stale for too long
+        frequencies:
+          - daily:
+              time: 20:45
+        filters:
+          - isOpen
+          - hasLabel:
+              label: waitingForCustomer
+          - hasLabel:
+              label: stale
+          - noActivitySince:
+              days: 1
+        actions:
+          - closeIssue
+          - addReply:
+              reply: "${issueAuthor}, this issue has been closed due to inactivity. Please feel free to reopen it if you have further information or questions."
+      - description: close issues that have not received any activity in 18 months
+        frequencies:
+          - daily:
+              time: 20:45
+        filters:
+          - isOpen
+          - noActivitySince:
+              days: 1
+          - hasLabel:
+              label: triageTest
+        actions:
+          - closeIssue
+          - addReply:
+              reply: "${issueAuthor}, this issue has been closed due to inactivity. Please feel free to reopen it if you have further information or questions."
