@@ -19,6 +19,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |VitalyButerin.hardhatjs | 7/01/2025 | Malware |
 |btwiuse.gopilot-chat | 7/01/2025 | Typo-squatting |
 |CharlesHoskinson.lfamnw1 | 6/29/2025 | Malware |
+| JuanBlancy.popitity        | 6/28/2025 | Malware |
 | EthersFoundation.bogitiy        | 6/28/2025 | Malware |
 | liujingping.bdd-ai-toolkit   | 6/27/2025 | Malware |
 | 7finney.ethcode              | 6/26/2025 | Malware |
