@@ -7,7 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-|JuanFrBlanco.outtro| 7/09/2025 | Malware |
+|CryptoPublisher.aidebut| 7/09/2025 | Malware |
+|JuanFrBlanco.outtro| 7/08/2025 | Malware |
 |GavinLWood.introai| 7/07/2025 | Malware |
 |AhmedCrypto.ahmedcrypto1| 7/04/2025 | Malware |
 |VisualStudioCodeStaffTeam.mannequin2| 7/03/2025 | Malware |
