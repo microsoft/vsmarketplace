@@ -59,8 +59,8 @@ jobs:
                 priority="Priority:1"
                 echo "👉 Issue #$ISSUE has $total reactions — Assigning label: $priority"
               else
-                echo "👉 Issue #$ISSUE has $total reactions — Below threshold ($FEATURE_MEDIUM), no priority label assigned"
-                continue
+                priority="Priority:2"
+                echo "👉 Issue #$ISSUE has $total reactions — Assigning label: $priority"
               fi
             else
               echo "👉 Issue #$ISSUE has no Type:Bug or Type:Feature label — Skipping prioritization"
