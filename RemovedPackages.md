@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|dafsfsdsfdfsdf11.randomic-slaying-pog| 7/10/2025 | Malware |
 |JuanFranBlancoExtensions.AmitAssaraf| 7/10/2025 | Malware |
 |JuanCrypto.juancrypto| 7/10/2025 | Malware |
 |JohnCrypto.whiteblankspace3| 7/09/2025 | Malware |
