@@ -2,7 +2,7 @@
 name: New feature or feedback
 about: Help us improve, suggest your feature
 title: ''
-labels: 'feedback'
+labels: 'Type:Feature'
 assignees: ''
 
 ---
