@@ -27,7 +27,7 @@ configuration:
               reply: "${issueAuthor}, please add a Type:Bug/Type:Feature/Type:SupportRequest label as applicable."
           - addLabel:
               label: Needs-Info
-      - description: Update issue if Type label was assigned # removes Needs-Info if someone assigns a type label
+      - description: Update issue if Type label was assigned and removes Needs-Info
         triggerOnOwnActions: false
         if:
           - payloadType: Issues
