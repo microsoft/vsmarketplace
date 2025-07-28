@@ -26,8 +26,8 @@ configuration:
           - addReply:
               reply: '${issueAuthor}, please add a `Type:Bug`/`Type:Feature`/`Type:SupportRequest` label as applicable.'
           - addLabel:
-              label: Needs-Info
-      - description: Update issue if Type label was assigned and removes Needs-Info
+              label: needs-info
+      - description: Update issue if Type label was assigned and removes needs-info
         triggerOnOwnActions: false
         if:
           - payloadType: Issues
@@ -42,10 +42,10 @@ configuration:
         then:
           - if:
               - hasLabel:
-                  label: Needs-Info
+                  label: needs-info
             then:
               - removeLabel:
-                  label: Needs-Info
+                  label: needs-info
           - if:
               - hasLabel:
                   label: Stale
@@ -53,7 +53,7 @@ configuration:
               - removeLabel:
                   label: Stale
     scheduledSearches:
-      - description: Close issues that are 'Needs-Info' and 'Stale', and have not received any activity for 1 week
+      - description: Close issues that are 'needs-info' and 'Stale', and have not received any activity for 1 week
         frequencies:
           - hourly:
               hour: 1
@@ -62,7 +62,7 @@ configuration:
           - noActivitySince:
               days: 7
           - hasLabel:
-              label: Needs-Info
+              label: needs-info
           - hasLabel:
               label: Stale
           - isNotLabeledWith:
@@ -71,7 +71,7 @@ configuration:
           - addReply:
               reply: "${issueAuthor}, this issue has been closed due to inactivity over 2 weeks. Please feel free to reopen it if you have further information or questions."
           - closeIssue
-      - description: Warn the authors on issues that are 'Needs-Info', and have not received any activity for 1 week
+      - description: Warn the authors on issues that are 'needs-info', and have not received any activity for 1 week
         frequencies:
           - hourly:
               hour: 1
@@ -80,7 +80,7 @@ configuration:
           - noActivitySince:
               days: 7
           - hasLabel:
-              label: Needs-Info
+              label: needs-info
           - isNotLabeledWith:
               label: DoNotClose
           - isNotLabeledWith:
