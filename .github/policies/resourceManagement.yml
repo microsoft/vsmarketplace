@@ -1,8 +1,10 @@
-name: Issue Triage
-description: Assign label to new issues without a label
+id: 
+name: GitOps.PullRequestIssueManagement
+description: Issue management and triage
+owner: 
 resource: repository
 disabled: false
-
+where: 
 configuration:
   resourceManagementConfiguration:
     eventResponderTasks:
@@ -24,10 +26,8 @@ configuration:
           - addReply:
               reply: "${issueAuthor}, please add a Type:Bug/Type:Feature/Type:SupportRequest label as applicable."
           - addLabel:
-              label: waitingForCustomer
-          - addLabel:
-              label: untriaged
-      - description: Update issue if Type label was assigned # removes waitingForCustomer + untriaged if someone assigns a type label
+              label: Needs-Info
+      - description: Update issue if Type label was assigned # removes Needs-Info if someone assigns a type label
         triggerOnOwnActions: false
         if:
           - payloadType: Issues
@@ -42,81 +42,95 @@ configuration:
         then:
           - if:
               - hasLabel:
-                  label: untriaged
+                  label: Needs-Info
             then:
               - removeLabel:
-                  label: untriaged
+                  label: Needs-Info
           - if:
               - not:
                   hasLabel:
-                    label: triaged
+                    label: Stale
             then:
               - addLabel:
-                  label: triaged
-          - if:
-              - hasLabel:
-                  label: waitingForCustomer
-            then:
-              - removeLabel:
-                  label: waitingForCustomer
-      - description: Update issues that had recent activity
-        triggerOnOwnActions: false
-        if:
-          - payloadType: Issue_Comment
-          - isOpen
-          - or:
-            - isAction:
-                action: Created # create or update (applies to issue description too?)
-            - isAction:
-                action: Edited
-        then:
-          - if:
-              - hasLabel:
-                  label: stale
-            then:
-              - removeLabel:
-                  label: stale
+                  label: Stale
     scheduledSearches:
-      - description: search for issues that are waitingForCustomer and haven't got a response
+      - description: Close issues that are 'Needs-Info' and 'Stale', and have not received any activity for 1 week
+        frequencies:
+          - hourly:
+              hour: 1
+        filters:
+          - isOpen
+          - noActivitySince:
+              days: 7
+          - hasLabel:
+              label: Needs-Info
+          - hasLabel:
+              label: Stale
+          - isNotLabeledWith:
+              label: DoNotClose
+        actions:
+          - addReply:
+              reply: "${issueAuthor}, this issue has been closed due to inactivity over 2 weeks. Please feel free to reopen it if you have further information or questions."
+          - closeIssue
+      - description: Warn the authors on issues that are 'Needs-Info', and have not received any activity for 1 week
+        frequencies:
+          - hourly:
+              hour: 1
+        filters:
+          - isOpen
+          - noActivitySince:
+              days: 7
+          - hasLabel:
+              label: Needs-Info
+          - isNotLabeledWith:
+              label: DoNotClose
+          - isNotLabeledWith:
+              label: Stale
+        actions:
+          - addReply:
+              reply: "${issueAuthor}, this issue will be closed soon due to inactivity. Please add more information to help us triage this issue."
+          - addLabel:
+              label: Stale
+      - description: Close lower priority issues that have not received any activity for 18 months
+        frequencies:
+          - hourly:
+              hour: 1
+        filters:
+          - isOpen
+          - noActivitySince:
+              days: 548
+          - isNotLabeledWith:
+              label: Priority:0
+          - isNotLabeledWith:
+              label: Priority:1
+          - isNotLabeledWith:
+              label: DoNotClose
+        actions:
+          - closeIssue
+          - addReply:
+              reply: "${issueAuthor}, this issue has been closed due to inactivity for 18 months. Please feel free to reopen it if you have further information or questions."
+      - description: TEST - Reply to every testing issue
         frequencies:
           - hourly:
               hour: 1
         filters:
           - isOpen
           - hasLabel:
-              label: waitingForCustomer
-          - noActivitySince:
-              days: 1
+              label: testing
         actions:
-          - addLabel:
-              label: stale
-      - description: close issues that are waitingForCustomer + stale for too long
+          - addReply:
+              reply: "TEST - Scheduled runs work"
+      - description: TEST - reply to test issue and close
         frequencies:
-          - daily:
-              time: 20:45
+          - hourly:
+              hour: 1
         filters:
           - isOpen
           - hasLabel:
-              label: waitingForCustomer
-          - hasLabel:
-              label: stale
-          - noActivitySince:
-              days: 1
+              label: testing-close
         actions:
-          - closeIssue
           - addReply:
-              reply: "${issueAuthor}, this issue has been closed due to inactivity. Please feel free to reopen it if you have further information or questions."
-      - description: close issues that have not received any activity in 18 months
-        frequencies:
-          - daily:
-              time: 20:45
-        filters:
-          - isOpen
-          - noActivitySince:
-              days: 1
-          - hasLabel:
-              label: triageTest
-        actions:
+              reply: "TEST - Scheduled runs works and can close issues"
           - closeIssue
-          - addReply:
-              reply: "${issueAuthor}, this issue has been closed due to inactivity. Please feel free to reopen it if you have further information or questions."
+onFailure:
+onSuccess:
