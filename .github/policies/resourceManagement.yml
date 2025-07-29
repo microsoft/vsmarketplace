@@ -8,6 +8,28 @@ where:
 configuration:
   resourceManagementConfiguration:
     eventResponderTasks:
+      - description: Add bug type label for issues coming from VSCode
+        triggerOnOwnActions: false
+        if:
+          - payloadType: Issues
+          - isAction:
+              action: Opened
+          - bodyContains:
+              pattern: "Type: Bug"
+        then:
+          - addLabel:
+              label: Type:Bug
+      - description: Add feature type label for issues coming from VSCode
+        triggerOnOwnActions: false
+        if:
+          - payloadType: Issues
+          - isAction:
+              action: Opened
+          - bodyContains:
+              pattern: "Type: Feature Request"
+        then:
+          - addLabel:
+              label: Type:Feature
       - description: Check if a Type label is assigned to new issues
         triggerOnOwnActions: false
         if:
@@ -24,10 +46,10 @@ configuration:
                     label: Type:CustomerSupport
         then:
           - addReply:
-              reply: '${issueAuthor}, please add a `Type:Bug`/`Type:Feature`/`Type:CustomerSupport` label as applicable.'
+              reply: 'Team, please add a `Type:Bug`/`Type:Feature`/`Type:CustomerSupport` label as applicable.'
           - addLabel:
-              label: needs-info
-      - description: Update issue if Type label was assigned and removes needs-info
+              label: needs-typeLabel
+      - description: Update issue if Type label was assigned and removes needs-typeLabel
         triggerOnOwnActions: false
         if:
           - payloadType: Issues
@@ -42,16 +64,10 @@ configuration:
         then:
           - if:
               - hasLabel:
-                  label: needs-info
+                  label: needs-typeLabel
             then:
               - removeLabel:
-                  label: needs-info
-          - if:
-              - hasLabel:
-                  label: Stale
-            then:
-              - removeLabel:
-                  label: Stale
+                  label: needs-typeLabel
     scheduledSearches:
       - description: Close issues that are 'needs-info' and 'Stale', and have not received any activity for 1 week
         frequencies:
