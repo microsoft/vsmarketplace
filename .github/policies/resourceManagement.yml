@@ -21,10 +21,10 @@ configuration:
                 - hasLabel:
                     label: Type:Feature
                 - hasLabel:
-                    label: Type:SupportRequest
+                    label: Type:CustomerSupport
         then:
           - addReply:
-              reply: '${issueAuthor}, please add a `Type:Bug`/`Type:Feature`/`Type:SupportRequest` label as applicable.'
+              reply: '${issueAuthor}, please add a `Type:Bug`/`Type:Feature`/`Type:CustomerSupport` label as applicable.'
           - addLabel:
               label: needs-info
       - description: Update issue if Type label was assigned and removes needs-info
@@ -38,7 +38,7 @@ configuration:
             - labelAdded:
                 label: Type:Feature
             - labelAdded:
-                label: Type:SupportRequest
+                label: Type:CustomerSupport
         then:
           - if:
               - hasLabel:
@@ -90,7 +90,7 @@ configuration:
               reply: "${issueAuthor}, this issue will be closed soon due to inactivity. Please add more information to help us triage this issue."
           - addLabel:
               label: Stale
-      - description: Close lower priority issues that have not received any activity for 18 months
+      - description: Close lower priority non-Feature issues that have not received any activity for 18 months
         frequencies:
           - hourly:
               hour: 1
@@ -102,6 +102,8 @@ configuration:
               label: Priority:0
           - isNotLabeledWith:
               label: Priority:1
+          - isNotLabeledWith:
+              label: Type:Feature
           - isNotLabeledWith:
               label: DoNotClose
         actions:
