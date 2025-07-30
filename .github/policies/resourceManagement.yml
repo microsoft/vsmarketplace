@@ -160,6 +160,8 @@ configuration:
               label: Type:Feature
           - isNotLabeledWith:
               label: Type:CustomerSupport
+          - isNotLabeledWith:
+              label: needs-typeLabel
         actions:
           - addLabel:
               label: needs-typeLabel
