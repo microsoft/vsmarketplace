@@ -163,6 +163,8 @@ configuration:
         actions:
           - addLabel:
               label: needs-typeLabel
+          - addReply:
+              reply: 'Team, please add a `Type:Bug`/`Type:Feature`/`Type:CustomerSupport` label as applicable.'
       - description: TEST - Reply to every testing issue
         frequencies:
           - hourly:
