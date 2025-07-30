@@ -148,6 +148,21 @@ configuration:
           - closeIssue
           - addReply:
               reply: "${issueAuthor}, this issue has been closed due to inactivity for 18 months. Please feel free to reopen it if you have further information or questions."
+      - description: Add 'needs-typeLabel' to existing issues that do not have a Type label
+        frequencies:
+          - hourly:
+              hour: 1
+        filters:
+          - isOpen
+          - isNotLabeledWith:
+              label: Type:Bug
+          - isNotLabeledWith:
+              label: Type:Feature
+          - isNotLabeledWith:
+              label: Type:CustomerSupport
+        actions:
+          - addLabel:
+              label: needs-typeLabel
       - description: TEST - Reply to every testing issue
         frequencies:
           - hourly:
