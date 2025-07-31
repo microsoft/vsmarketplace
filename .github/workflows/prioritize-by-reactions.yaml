@@ -26,7 +26,7 @@ jobs:
           BUG_MEDIUM: 5
           FEATURE_MEDIUM: 25
         run: |
-          issue_numbers=$(gh issue list -R "$REPO" --state open --json number -q '.[].number')
+          issue_numbers=$(gh issue list -R "$REPO" --state open --limit 1000 --json number -q '.[].number')
 
           for ISSUE in $issue_numbers; do
             echo "🔍 Checking Issue #$ISSUE"
