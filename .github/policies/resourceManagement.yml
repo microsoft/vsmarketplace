@@ -191,29 +191,5 @@ configuration:
               reply: 'Team, please add a `Type:Bug`/`Type:Feature`/`Type:CustomerSupport` label as applicable.'
           - addLabel:
               label: needs-typeLabel
-      - description: TEST - Reply to every testing issue
-        frequencies:
-          - hourly:
-              hour: 1
-        filters:
-          - isOpen
-          - isIssue
-          - hasLabel:
-              label: testing
-        actions:
-          - addReply:
-              reply: "TEST - Scheduled runs work"
-      - description: TEST - reply to test issue and close
-        frequencies:
-          - hourly:
-              hour: 1
-        filters:
-          - isOpen
-          - hasLabel:
-              label: testing-close
-        actions:
-          - addReply:
-              reply: "TEST - Scheduled runs works and can close issues"
-          - closeIssue
 onFailure:
 onSuccess:
