@@ -115,6 +115,7 @@ configuration:
               hour: 1
         filters:
           - isOpen
+          - isIssue
           - noActivitySince:
               days: 7
           - hasLabel:
@@ -133,6 +134,7 @@ configuration:
               hour: 1
         filters:
           - isOpen
+          - isIssue
           - noActivitySince:
               days: 7
           - hasLabel:
@@ -154,6 +156,7 @@ configuration:
               hour: 1
         filters:
           - isOpen
+          - isIssue
           - noActivitySince:
               days: 548
           - isNotLabeledWith:
@@ -174,6 +177,7 @@ configuration:
               hour: 1
         filters:
           - isOpen
+          - isIssue
           - isNotLabeledWith:
               label: Type:Bug
           - isNotLabeledWith:
@@ -193,6 +197,7 @@ configuration:
               hour: 1
         filters:
           - isOpen
+          - isIssue
           - hasLabel:
               label: testing
         actions:
