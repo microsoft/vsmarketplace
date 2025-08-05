@@ -2,11 +2,11 @@
 
 This diagram shows the flow of the `resourceManagement.yml` GitOps configuration for automated issue management and triage.
 
-![Flowchart showing the different steps of the resourceManagement.yaml steps](triageDetailFlowChart.png)
+![Flowchart showing the different steps of the resourceManagement.yaml steps](images/triageDetailFlowChart.png)
 
 ## Simplified Overview
 
-![A simplified flowchart for the 4 main steps of resourceManagement.yaml](triageSimpleFlowChart.png)
+![A simplified flowchart for the 4 main steps of resourceManagement.yaml](images/triageSimpleFlowChart.png)
 
 
 ## Configuration Summary

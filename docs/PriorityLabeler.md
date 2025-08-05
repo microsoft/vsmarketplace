@@ -2,11 +2,11 @@
 
 This diagram shows the flow of the `prioritize-by-reactions.yaml` GitHub Action workflow.
 
-![Flowchart showing the different steps of the prioritize-by-reactions.yaml steps](prioritizeDetailFlowChart.png)
+![Flowchart showing the different steps of the prioritize-by-reactions.yaml steps](images/prioritizeDetailFlowChart.png)
 
 ## Simplified Overview
 
-![A simplified flowchart for the 4 main steps of prioritize-by-reactions.yaml](prioritizeSimpleFlowChart.png)
+![A simplified flowchart for the 4 main steps of prioritize-by-reactions.yaml](images/prioritizeSimpleFlowChart.png)
 
 ## Workflow Logic Summary
 
