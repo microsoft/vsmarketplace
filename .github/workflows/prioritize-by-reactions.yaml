@@ -26,42 +26,20 @@ jobs:
           BUG_MEDIUM: 5
           FEATURE_MEDIUM: 25
         run: |
-          # Function to retry commands with exponential backoff
-          retry_command() {
-            local max_attempts=3
-            local delay=2
-            local attempt=1
-
-            while [ $attempt -le $max_attempts ]; do
-              if "$@"; then
-                return 0
-              else
-                if [ $attempt -eq $max_attempts ]; then
-                  echo "   ❌ Command failed after $max_attempts attempts"
-                  return 1
-                fi
-                echo "   ⏳ Attempt $attempt failed, retrying in ${delay}s..."
-                sleep $delay
-                delay=$((delay * 2))
-                attempt=$((attempt + 1))
-              fi
-            done
-          }
-
           issue_numbers=$(gh issue list -R "$REPO" --state open --limit 1000 --json number -q '.[].number')
 
           for ISSUE in $issue_numbers; do
             echo "🔍 Checking Issue #$ISSUE"
 
-            # Get issue labels with retry logic
-            if ! labels=$(retry_command gh issue view $ISSUE -R $REPO --json labels -q '.labels[].name' 2>/dev/null | tr '\n' ' '); then
+            # Get issue labels
+            if ! labels=$(gh issue view $ISSUE -R $REPO --json labels -q '.labels[].name' 2>/dev/null | tr '\n' ' '); then
               echo "   ⚠️  Failed to fetch labels for issue #$ISSUE, skipping..."
               continue
             fi
             echo "   Labels: $labels"
 
-            # Get reactions with retry logic and error handling
-            if ! reactions=$(retry_command curl -s -f \
+            # Get reactions with error handling
+            if ! reactions=$(curl -s -f \
               -H "Accept: application/vnd.github.squirrel-girl-preview+json" \
               -H "Authorization: token $GH_TOKEN" \
               "https://api.github.com/repos/$REPO/issues/$ISSUE/reactions" 2>/dev/null); then
@@ -102,8 +80,8 @@ jobs:
               continue
             fi
 
-            # Get current Priority:* label (if any) with retry logic
-            if ! current_priority=$(retry_command gh issue view $ISSUE -R $REPO --json labels -q '.labels[].name' 2>/dev/null | grep '^Priority:' || echo ""); then
+            # Get current Priority:* label (if any)
+            if ! current_priority=$(gh issue view $ISSUE -R $REPO --json labels -q '.labels[].name' 2>/dev/null | grep '^Priority:' || echo ""); then
               echo "   ⚠️  Failed to fetch current priority for issue #$ISSUE, skipping update..."
               continue
             fi
@@ -111,8 +89,8 @@ jobs:
             if [[ "$current_priority" != "$priority" ]]; then
               # Check if current priority label was added by github-actions
               if [[ -n "$current_priority" ]]; then
-                # Get the timeline events to see who added the current priority label with retry
-                if ! label_added_by=$(retry_command gh api repos/$REPO/issues/$ISSUE/timeline --paginate 2>/dev/null | jq -r --arg label "$current_priority" '.[] | select(.event == "labeled" and .label.name == $label) | .actor.login' | tail -1); then
+                # Get the timeline events to see who added the current priority label
+                if ! label_added_by=$(gh api repos/$REPO/issues/$ISSUE/timeline --paginate 2>/dev/null | jq -r --arg label "$current_priority" '.[] | select(.event == "labeled" and .label.name == $label) | .actor.login' | tail -1); then
                   echo "   ⚠️  Failed to fetch timeline for issue #$ISSUE, skipping update..."
                   continue
                 fi
@@ -123,14 +101,14 @@ jobs:
                 fi
 
                 echo "   ⏹️  Removing old label: $current_priority (was set by github-actions)"
-                if ! retry_command gh issue edit $ISSUE -R $REPO --remove-label "$current_priority" 2>/dev/null; then
+                if ! gh issue edit $ISSUE -R $REPO --remove-label "$current_priority" 2>/dev/null; then
                   echo "   ⚠️  Failed to remove label '$current_priority' from issue #$ISSUE"
                   continue
                 fi
               fi
 
               echo "   ➕ Adding new label: $priority"
-              if ! retry_command gh issue edit $ISSUE -R $REPO --add-label "$priority" 2>/dev/null; then
+              if ! gh issue edit $ISSUE -R $REPO --add-label "$priority" 2>/dev/null; then
                 echo "   ⚠️  Failed to add label '$priority' to issue #$ISSUE"
                 continue
               fi
