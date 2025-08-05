@@ -90,6 +90,24 @@ configuration:
             then:
               - removeLabel:
                   label: needs-typeLabel
+      - description: Add 'customerResponded' label to issues that are 'needs-info' and have received a comment from the issue author
+        triggerOnOwnActions: false
+        if:
+          - payloadType: Issue_Comment
+          - isOpen
+          - hasLabel:
+              label: needs-info
+          - isActivitySender:
+              issueAuthor: true
+        then:
+          - addLabel:
+              label: customerResponded
+          - if:
+              - hasLabel:
+                  label: Stale
+            then:
+              - removeLabel:
+                  label: Stale
     scheduledSearches:
       - description: Close issues that are 'needs-info' and 'Stale', and have not received any activity for 1 week
         frequencies:
@@ -97,6 +115,7 @@ configuration:
               hour: 1
         filters:
           - isOpen
+          - isIssue
           - noActivitySince:
               days: 7
           - hasLabel:
@@ -115,14 +134,17 @@ configuration:
               hour: 1
         filters:
           - isOpen
+          - isIssue
           - noActivitySince:
               days: 7
           - hasLabel:
               label: needs-info
           - isNotLabeledWith:
-              label: DoNotClose
+              label: customerResponded
           - isNotLabeledWith:
               label: Stale
+          - isNotLabeledWith:
+              label: DoNotClose
         actions:
           - addReply:
               reply: "${issueAuthor}, this issue will be closed soon due to inactivity. Please add more information to help us triage this issue."
@@ -134,6 +156,7 @@ configuration:
               hour: 1
         filters:
           - isOpen
+          - isIssue
           - noActivitySince:
               days: 548
           - isNotLabeledWith:
@@ -145,15 +168,16 @@ configuration:
           - isNotLabeledWith:
               label: DoNotClose
         actions:
-          - closeIssue
           - addReply:
               reply: "${issueAuthor}, this issue has been closed due to inactivity for 18 months. Please feel free to reopen it if you have further information or questions."
+          - closeIssue
       - description: Add 'needs-typeLabel' to existing issues that do not have a Type label
         frequencies:
           - hourly:
               hour: 1
         filters:
           - isOpen
+          - isIssue
           - isNotLabeledWith:
               label: Type:Bug
           - isNotLabeledWith:
@@ -163,32 +187,9 @@ configuration:
           - isNotLabeledWith:
               label: needs-typeLabel
         actions:
-          - addLabel:
-              label: needs-typeLabel
           - addReply:
               reply: 'Team, please add a `Type:Bug`/`Type:Feature`/`Type:CustomerSupport` label as applicable.'
-      - description: TEST - Reply to every testing issue
-        frequencies:
-          - hourly:
-              hour: 1
-        filters:
-          - isOpen
-          - hasLabel:
-              label: testing
-        actions:
-          - addReply:
-              reply: "TEST - Scheduled runs work"
-      - description: TEST - reply to test issue and close
-        frequencies:
-          - hourly:
-              hour: 1
-        filters:
-          - isOpen
-          - hasLabel:
-              label: testing-close
-        actions:
-          - addReply:
-              reply: "TEST - Scheduled runs works and can close issues"
-          - closeIssue
+          - addLabel:
+              label: needs-typeLabel
 onFailure:
 onSuccess:
