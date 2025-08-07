@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|YuTengjing.vscode-colorize-plus| 7/21/2025 | Typo-squatting |
 |dafsfsdsfdfsdf11.randomic-slaying-pog| 7/21/2025 | Malware |
 |JuanFranBlancoExtensions.AmitAssaraf| 7/10/2025 | Malware |
 |JuanCrypto.juancrypto| 7/10/2025 | Malware |
