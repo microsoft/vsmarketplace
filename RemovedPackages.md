@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|ETHFoundry.etherfoundrys| 8/11/2025 | Malware |
 |VanessaAster.etherefounds| 8/9/2025 | Malware |
 |bogigigigigity.etherefound| 8/9/2025 | Malware |
 |YuTengjing.vscode-colorize-plus| 7/21/2025 | Typo-squatting |
