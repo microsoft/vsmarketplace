@@ -20,3 +20,12 @@ If you find your issue already exists, make relevant comments and cast your vote
 
 #### Separate Ideas
 If you have multiple suggestions, submit multiple posts.
+
+### Issue Analytics
+
+This repository includes scripts for generating comprehensive statistics on open issues. See the [`scripts/`](scripts/) directory for:
+
+- **Issue Statistics Report**: Automated analysis of issue types, age distribution, priority levels, and assignment status
+- **Sample Reports**: Demonstration of report format and insights
+
+For more information, see [`scripts/README.md`](scripts/README.md).
