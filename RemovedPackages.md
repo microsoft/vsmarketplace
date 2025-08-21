@@ -8,7 +8,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
 |MarkWood.nonmalicious2| 8/20/2025 | Malware |
-|EllisonBrett givingblankies| 8/20/2025 | Malware |
+|EllisonBrett.givingblankies| 8/20/2025 | Malware |
 |Rojo.rojo-roblox-vscode| 8/16/2025 | Typo-squatting |
 |ETHFoundry.etherfoundrys| 8/11/2025 | Malware |
 |VanessaAster.etherefounds| 8/9/2025 | Malware |
