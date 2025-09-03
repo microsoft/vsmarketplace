@@ -7,7 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-|JuanBlanco-ETHFoundation.bland-co|9/02/2025|Malware|
+|JuanBlanco-ETHFoundation.bland-co|9/03/2025|Malware|
 |VitalikButerin-EthFoundation.blan-co|9/02/2025|Malware|
 |JuanFBlanco.awswhh|9/02/2025|Malware|
 |JosephDembele95.email-grabber|8/29/2025|Malware|
