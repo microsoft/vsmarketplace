@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|EchelonStudios.blockchain-language-support|9/03/2025|Malware|
 |JuanBlanco-ETHFoundation.bland-co|9/03/2025|Malware|
 |VitalikButerin-EthFoundation.blan-co|9/02/2025|Malware|
 |JuanFBlanco.awswhh|9/02/2025|Malware|
