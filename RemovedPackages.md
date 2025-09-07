@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|ShowSnowcrypto.SnowShoNo|9/07/2025|Malware|
 |MarcusLockwood.wgbk|9/03/2025|Malware|
 |EchelonStudios.blockchain-language-support|9/03/2025|Malware|
 |JuanBlanco-ETHFoundation.bland-co|9/03/2025|Malware|
