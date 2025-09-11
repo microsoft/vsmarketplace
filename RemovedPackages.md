@@ -7,7 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-|Crypto-Extensions.SnowShsoNo|9/11/2025|Malware|
+|Crypto-Extensions.SnowShsoNo|9/10/2025|Malware|
 |reactsnippetsai.es7-react-js-snippets-ai|9/09/2025|Malware|
 |OmniMind.node-ai |9/09/2025|Malware|
 |NFoundation.terraform-ai |9/09/2025|Malware|
