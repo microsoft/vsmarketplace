@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|BlockchainIndustries.bitcoin-toolkit|9/12/2025|Malware|
+|BlockchainIndustries.blockchain-toolkit|9/12/2025|Malware|
+|BlockchainIndustries.hardhat-toolkit|9/12/2025|Malware|
+|BlockchainIndustries.solana-toolkit|9/12/2025|Malware|
 |Crypto-Extensions.SnowShsoNo|9/10/2025|Malware|
 |reactsnippetsai.es7-react-js-snippets-ai|9/09/2025|Malware|
 |OmniMind.node-ai |9/09/2025|Malware|
