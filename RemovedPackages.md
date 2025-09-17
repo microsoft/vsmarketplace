@@ -10,7 +10,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |yfdyh000.aar-vsc-test|9/17/2025||Malware
 |mercerllc.mercer-onboarding-helper|9/17/2025|Malware|
 |esonhugh.weaponized|9/17/2025|Malware|
-|vesonhugh.weaponized|9/17/2025|Malware|
+|luater.luatide|9/17/2025|Malware|
 |BlockchainIndustries.bitcoin-toolkit|9/12/2025|Malware|
 |BlockchainIndustries.blockchain-toolkit|9/12/2025|Malware|
 |BlockchainIndustries.hardhat-toolkit|9/12/2025|Malware|
