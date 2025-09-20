@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|CryptoCurrencyExtensions.blehai|9/20/2025|Malware
 |CryptoFoundation.BlehBleh|9/19/2025|Malware
 |yfdyh000.aar-vsc-test|9/17/2025|Malware
 |mercerllc.mercer-onboarding-helper|9/17/2025|Malware|
