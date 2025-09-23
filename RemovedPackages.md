@@ -13,6 +13,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |mercerllc.mercer-onboarding-helper|9/17/2025|Malware|
 |esonhugh.weaponized|9/17/2025|Malware|
 |luater.luatide|9/17/2025|Malware|
+|zhucan.debug-cline| 9/16/2025 |Typo-squatting|
+|AIClaude.claude-code-master| 9/15/2025 | Typo-squatting |
 |BlockchainIndustries.bitcoin-toolkit|9/12/2025|Malware|
 |BlockchainIndustries.blockchain-toolkit|9/12/2025|Malware|
 |BlockchainIndustries.hardhat-toolkit|9/12/2025|Malware|
@@ -23,6 +25,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |NFoundation.terraform-ai |9/09/2025|Malware|
 |vuesnippetsai.vue-snippets-ai |9/09/2025|Malware|
 |GPTOnce.codepilot-vscode |9/09/2025|Malware|
+|sunamo-cz.specstory-autosave|9/15/2025|Typo-squatting|
 |ShowSnowcrypto.SnowShoNo|9/07/2025|Malware|
 |MarcusLockwood.wgbk|9/03/2025|Malware|
 |EchelonStudios.blockchain-language-support|9/03/2025|Malware|
