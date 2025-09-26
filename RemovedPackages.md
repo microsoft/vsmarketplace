@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|automatedlogic.automatedlogic |9/26/2025|Malware
+|webctrl.live |9/26/2025|Malware
 |dontdownloadthis.dontdownloadthis |9/26/2025|Malware
 |automated1ogic.automated1ogic|9/26/2025|Malware
 |VSAnalysistest.mycodegpt-assistant|9/26/2025|Malware
