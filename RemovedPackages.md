@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|dontdownloadthis.dontdownloadthis |9/26/2025|Malware
+|automated1ogic.automated1ogic|9/26/2025|Malware
+|VSAnalysistest.mycodegpt-assistant|9/26/2025|Malware
+|VSAnalysistest.clipboard-helper-vscode|9/26/2025|Malware
+|VSAnalysistest.discord-helper-test|9/26/2025|Malware
+|VSAnalysistest.global-state-test|9/26/2025|Malware
 |CryptoCurrencyExtensions.blehai|9/20/2025|Malware
 |CryptoFoundation.BlehBleh|9/19/2025|Malware
 |yfdyh000.aar-vsc-test|9/17/2025|Malware
