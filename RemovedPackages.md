@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|Wumpus.bold-end|10/2/2025|Malware
 |498-00.cppformat|10/2/2025|Malware
 |498-00.pythonformat|10/2/2025|Malware
 |498-00.cppplayground|10/2/2025|Malware
