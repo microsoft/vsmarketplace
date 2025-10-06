@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|ReadMeAI.readmeai|10/6/2025| Typo-squatting |
 |RachelFront.asdtif|10/6/2025|Malware
 |Sayantan710.ollot|10/3/2025|Malware
 |beisen.codecake|10/3/2025|Malware
