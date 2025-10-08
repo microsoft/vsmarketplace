@@ -7,6 +7,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|RileyMoore.stdrlabs-ext|10/7/2025|Malware|
+|Extensions-Topic.korean|10/7/2025|Malware|
+|Extensions-Topic.bulgarian|10/7/2025|Malware|
+|Extensions-Topic.italian|10/7/2025|Malware|
+|Extensions-Topic.polish|10/7/2025|Malware|
+|Extensions-Topic.coffeescript|10/7/2025|Malware|
+|Extensions-Topic.german|10/7/2025|Malware|
+|Extensions-Topic.portugese|10/7/2025|Malware|
 |ReadMeAI.readmeai|10/6/2025| Typo-squatting |
 |RachelFront.asdtif|10/6/2025|Malware
 |Sayantan710.ollot|10/3/2025|Malware
