@@ -76,13 +76,13 @@ You need to have [Docker installed](https://docs.docker.com/get-started/get-dock
    docker login privatemarketdogfoodwestus2.azurecr.io
 
    # pull the container from the registry so it's available for running
-   docker image pull "privatemarketdogfoodwestus2.azurecr.io/vscode-private-marketplace:{{ containerVersion }}"
+   docker image pull "privatemarketdogfoodwestus2.azurecr.io/vscode-private-marketplace:1.0.48"
    ```
 
 2. Start the container with port 8080 bound to your local machine.
    ```powershell
    # run the container in interactive attached mode, clean up the container after termination
-   docker run -it --rm -p 8080:8080 "privatemarketdogfoodwestus2.azurecr.io/vscode-private-marketplace:{{ containerVersion }}"
+   docker run -it --rm -p 8080:8080 "privatemarketdogfoodwestus2.azurecr.io/vscode-private-marketplace:1.0.48"
    ```
 
 3. Open [http://localhost:8080](http://localhost:8080) in your web browser. You should see a home page with the heading "Welcome to the Private Marketplace for Visual Studio Code".
@@ -123,7 +123,7 @@ Now, let's try loading some extensions into the Private Marketplace.
    docker run -it --rm -p 8080:8080 `
       -v "</path/to>/mymarketplace/extensions:/data/extensions:ro" `
       --env-file "</path/to>/mymarketplace/local.env" `
-      "privatemarketdogfoodwestus2.azurecr.io/vscode-private-marketplace:{{ containerVersion }}"
+      "privatemarketdogfoodwestus2.azurecr.io/vscode-private-marketplace:1.0.48"
    ```
 
 6. You will now see more log output from the `docker run` command, including a line starting with "Loading extension file". This is the container app reading the VSIX file in your extensions directory.
@@ -158,8 +158,8 @@ The container details are:
 - Container Registry: `privatemarketdogfoodwestus2.azurecr.io`
 - Credentials: username and password provided by our team
 - Image name: `vscode-private-marketplace`
-- Image tag: `{{ containerVersion }}`
-- Full image URL: `privatemarketdogfoodwestus2.azurecr.io/vscode-private-marketplace:{{ containerVersion }}`
+- Image tag: `1.0.48`
+- Full image URL: `privatemarketdogfoodwestus2.azurecr.io/vscode-private-marketplace:1.0.48`
 
 Without providing any configuration at all, the container should start and accept traffic over HTTP on port 8080. Basic information about the running application is shown on the root path `http://<my container hostname>:8080/`. But the application won't know where to read your private extensions from, which will be addressed in [a section below](#3-configure-the-container).
 
@@ -687,7 +687,7 @@ The container we are releasing is a preview. We hope that the core functionality
 
 The container registry, name, tag, and supported environment variables are all subject to change during subsequent releases.
 
-The tag `{{ containerVersion }}` can be considered immutable and available as long as we are using this specific Azure Container Registry as our deployment vehicle. Future releases will be made under a new tag name allowing you to control when the new container version is deployed to your infrastructure.
+The tag `1.0.48` can be considered immutable and available as long as we are using this specific Azure Container Registry as our deployment vehicle. Future releases will be made under a new tag name allowing you to control when the new container version is deployed to your infrastructure.
 
 During this private preview phase, we expect to keep the same container registry, container name, and credentials. We will introduce new container builds to you by creating new container tags that allow you to move to the new version of the container explicitly, by updating your deployment configuration. Unless there are breaking changes in the new version, the only action you should need to update to the latest version is updating the container tag portion of your deployment configuration and redeploying.
 
