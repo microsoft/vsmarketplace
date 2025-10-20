@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|WEB3Foundation.cxzczxcxz|10/19/2025|Malware|
 |cline-ai-main.cline-ai-agent|10/19/2025|Malware|
 |RileyMoore.stdrlabs-ext|10/7/2025|Malware|
 |Extensions-Topic.korean|10/7/2025|Malware|
