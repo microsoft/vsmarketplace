@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|PriyanshuMallick.clipboard-history-manager|10/20/2025|Malware|
+|labfile.labfile|10/20/2025|Malware|
 |WEB3Foundation.cxzczxcxz|10/19/2025|Malware|
 |cline-ai-main.cline-ai-agent|10/19/2025|Malware|
 |RileyMoore.stdrlabs-ext|10/7/2025|Malware|
