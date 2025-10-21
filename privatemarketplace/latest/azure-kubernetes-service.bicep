@@ -6,7 +6,7 @@ param containerRegistryUsername string
 param containerRegistryPassword string
 
 @description('The tag (version) of the image to deploy.')
-param imageTag string = '1.0.32'
+param imageTag string = '1.1.18-main.30612715'
 
 @description('The name of the deployment, used to prefix resource names. Should only contain lowercase letters to avoid resource name restrictions.')
 param resourceNamePrefix string = 'vscodeprivate'
@@ -82,23 +82,6 @@ var useArtifactsSource = !empty(artifactsOrganization)
 var useFileSystemSource = !useArtifactsSource
 var createStorageAccount = useFileSystemSource || enableFileLogging
 
-var disabledFeatureFlagsIdsEnvironmentVars = [
-  for (flag, i) in disabledFeatureFlags: {
-    name: 'feature_management__feature_flags__${i+featureFlagSkip}__id'
-    value: flag
-  }
-]
-var disabledFeatureFlagsValuesEnvironmentVars = [
-  for (flag, i) in disabledFeatureFlags: {
-    name: 'feature_management__feature_flags__${i+featureFlagSkip}__enabled'
-    value: 'false'
-  }
-]
-var disabledFeatureFlagsEnvironmentVars = concat(
-  disabledFeatureFlagsIdsEnvironmentVars,
-  disabledFeatureFlagsValuesEnvironmentVars
-)
-
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
   name: logAnalyticsWorkspaceName
   location: location
@@ -144,7 +127,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = if (cre
 var logsShareName = 'logs'
 var extensionsShareName = 'extensions'
 
-resource userAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = if (useArtifactsSource) {
+resource userAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
   name: managedIdentityName
   location: location
 }
@@ -166,6 +149,8 @@ resource extensionsShare 'Microsoft.Storage/storageAccounts/fileServices/shares@
     enabledProtocols: 'SMB'
   }
 }
+
+// Storage account configuration for Kubernetes mounting
 
 resource nsg 'Microsoft.Network/networkSecurityGroups@2021-03-01' = {
   name: nsgName
@@ -252,6 +237,17 @@ resource aksCluster 'Microsoft.ContainerService/managedClusters@2023-10-01' = {
         config: {
           logAnalyticsWorkspaceResourceID: logAnalyticsWorkspace.id
         }
+      }
+    }
+    storageProfile: {
+      fileCSIDriver: {
+        enabled: true
+      }
+      diskCSIDriver: {
+        enabled: true
+      }
+      snapshotController: {
+        enabled: true
       }
     }
   }
@@ -365,11 +361,39 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
       }
       {
         name: 'MARKETPLACE_ARTIFACTS_ORGANIZATION'
-        value: publicMarketplaceProxyMode
+        value: artifactsOrganization
       }
       {
         name: 'MARKETPLACE_CLIENT_ID'
         value: resolvedArtifactsClientId
+      }
+      {
+        name: 'MARKETPLACE_CONSOLE_LOGGING'
+        value: toLower(string(enableConsoleLogging))
+      }
+      {
+        name: 'STORAGE_ACCOUNT_NAME'
+        value: createStorageAccount ? storageAccount.name : ''
+      }
+      {
+        name: 'STORAGE_ACCOUNT_KEY'
+        secureValue: createStorageAccount ? storageAccount!.listKeys().keys[0].value : ''
+      }
+      {
+        name: 'EXTENSIONS_SHARE_NAME'
+        value: extensionsShareName
+      }
+      {
+        name: 'USE_FILE_SYSTEM_SOURCE'
+        value: toLower(string(useFileSystemSource))
+      }
+      {
+        name: 'LOGS_SHARE_NAME'
+        value: logsShareName
+      }
+      {
+        name: 'ENABLE_FILE_LOGGING'
+        value: toLower(string(enableFileLogging))
       }
     ]
     scriptContent: '''
@@ -396,7 +420,94 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
         --namespace=$NAMESPACE \
         --dry-run=client -o yaml | kubectl apply -f -
 
+      # Create Azure Files secret for storage (if file system source is enabled)
+      if [ "$USE_FILE_SYSTEM_SOURCE" = "true" ] && [ -n "$STORAGE_ACCOUNT_NAME" ]; then
+        kubectl create secret generic azure-files-secret \
+          --from-literal=azurestorageaccountname=$STORAGE_ACCOUNT_NAME \
+          --from-literal=azurestorageaccountkey="$STORAGE_ACCOUNT_KEY" \
+          --namespace=$NAMESPACE \
+          --dry-run=client -o yaml | kubectl apply -f -
+      fi
+
+      # Create Azure Files secret for logs (if file logging is enabled)
+      if [ "$ENABLE_FILE_LOGGING" = "true" ] && [ -n "$STORAGE_ACCOUNT_NAME" ]; then
+        kubectl create secret generic azure-files-logs-secret \
+          --from-literal=azurestorageaccountname=$STORAGE_ACCOUNT_NAME \
+          --from-literal=azurestorageaccountkey="$STORAGE_ACCOUNT_KEY" \
+          --namespace=$NAMESPACE \
+          --dry-run=client -o yaml | kubectl apply -f -
+      fi
+
       # Apply deployment and service
+      # Build volume mounts conditionally
+      VOLUME_MOUNTS=""
+      if [ "$USE_FILE_SYSTEM_SOURCE" = "true" ] && [ -n "$STORAGE_ACCOUNT_NAME" ]; then
+        VOLUME_MOUNTS="$VOLUME_MOUNTS
+        - name: extensions-volume
+          mountPath: /data/extensions
+          readOnly: true"
+      fi
+      if [ "$ENABLE_FILE_LOGGING" = "true" ] && [ -n "$STORAGE_ACCOUNT_NAME" ]; then
+        VOLUME_MOUNTS="$VOLUME_MOUNTS
+        - name: logs-volume
+          mountPath: /data/logs
+          readOnly: false"
+      fi
+
+      # Build volumes conditionally
+      VOLUMES=""
+      if [ "$USE_FILE_SYSTEM_SOURCE" = "true" ] && [ -n "$STORAGE_ACCOUNT_NAME" ]; then
+        VOLUMES="$VOLUMES
+      - name: extensions-volume
+        azureFile:
+          secretName: azure-files-secret
+          shareName: $EXTENSIONS_SHARE_NAME
+          readOnly: true"
+      fi
+      if [ "$ENABLE_FILE_LOGGING" = "true" ] && [ -n "$STORAGE_ACCOUNT_NAME" ]; then
+        VOLUMES="$VOLUMES
+      - name: logs-volume
+        azureFile:
+          secretName: azure-files-logs-secret
+          shareName: $LOGS_SHARE_NAME
+          readOnly: false"
+      fi
+
+      # Build environment variables conditionally
+      ENV_VARS="
+        - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+          value: \"$APP_INSIGHTS_CONNECTION\"
+        - name: Marketplace__Upstreaming_Mode
+          value: \"$MARKETPLACE_PROXY_MODE\"
+        - name: Marketplace__OrganizationName
+          value: \"$MARKETPLACE_ORGANIZATION_NAME\"
+        - name: Marketplace__ArtifactsProject
+          value: \"$MARKETPLACE_ARTIFACTS_PROJECT_NAME\"
+        - name: Marketplace__ArtifactsOrganization
+          value: \"$MARKETPLACE_ARTIFACTS_ORGANIZATION\"
+        - name: Marketplace__ArtifactsClientId
+          value: \"$MARKETPLACE_CLIENT_ID\"
+        - name: Marketplace__Logging__LogToConsole
+          value: \"$MARKETPLACE_CONSOLE_LOGGING\""
+      
+      if [[ -n "$MARKETPLACE_ARTIFACTS_FEED" ]]; then
+        ENV_VARS="$ENV_VARS
+        - name: Marketplace__ArtifactsFeed
+          value: \"$MARKETPLACE_ARTIFACTS_FEED\""
+      fi
+
+      if [ "$USE_FILE_SYSTEM_SOURCE" = "true" ]; then
+        ENV_VARS="$ENV_VARS
+        - name: Marketplace__ExtensionSourceDirectory
+          value: \"/data/extensions\""
+      fi
+      
+      if [ "$ENABLE_FILE_LOGGING" = "true" ]; then
+        ENV_VARS="$ENV_VARS
+        - name: Marketplace__LogsDirectory
+          value: \"/data/logs\""
+      fi
+
       cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
 kind: Deployment
@@ -418,21 +529,7 @@ spec:
         image: $CONTAINER_IMAGE
         ports:
         - containerPort: 8080
-        env:
-        - name: APPLICATIONINSIGHTS_CONNECTION_STRING
-          value: "$APP_INSIGHTS_CONNECTION"
-        - name: Marketplace_Upstreaming_Mode
-          value: "$MARKETPLACE_PROXY_MODE"
-        - name: Marketplace__OrganizationName
-          value: "$MARKETPLACE_ORGANIZATION_NAME"
-        - name: Marketplace__ArtifactsProject
-          value: "$MARKETPLACE_ARTIFACTS_PROJECT_NAME"
-        - name: Marketplace__ArtifactsFeed
-          value: "$MARKETPLACE_ARTIFACTS_FEED"
-        - name: Marketplace__ArtifactsOrganization
-          value: "$MARKETPLACE_ARTIFACTS_ORGANIZATION"
-        - name: Marketplace__ArtifactsClientId
-          value: "$MARKETPLACE_CLIENT_ID"
+        env:$ENV_VARS
         resources:
           requests:
             cpu: 500m
@@ -440,6 +537,7 @@ spec:
           limits:
             cpu: 1000m
             memory: 2Gi
+        $([ -n "$VOLUME_MOUNTS" ] && echo "volumeMounts:$VOLUME_MOUNTS")
         livenessProbe:
           httpGet:
             path: /health/alive
@@ -454,6 +552,7 @@ spec:
           periodSeconds: 5
       imagePullSecrets:
       - name: acr-secret
+      $([ -n "$VOLUMES" ] && echo "volumes:$VOLUMES")
 ---
 apiVersion: v1
 kind: Service
@@ -478,6 +577,7 @@ EOF
     aksCluster
     acrPullRoleAssignment
     managedIdentityAksUserRoleAssignment
+    storageContributorRoleAssignment
   ]
 }
 
@@ -486,5 +586,5 @@ output containerAppUrl string = vnetTrafficOnly
   ? 'Internal only - configure ingress controller'
   : 'Use kubectl get service -n vscode-private-marketplace to get the external IP'
 output storageAccountName string = createStorageAccount ? storageAccount.name : 'No storage account created'
-output clientId string = useArtifactsSource ? userAssignedIdentity.properties.clientId : 'No managed identity created'
+output clientId string = userAssignedIdentity.properties.clientId
 output aksClusterFqdn string = aksCluster.properties.fqdn
