@@ -6,7 +6,7 @@ param containerRegistryUsername string
 param containerRegistryPassword string
 
 @description('The tag (version) of the image to deploy.')
-param imageTag string = '1.1.19-main.30615638'
+param imageTag string = '1.1.20-main.30616245'
 
 @description('The name of the deployment, used to prefix resource names. Should only contain lowercase letters to avoid resource name restrictions.')
 param resourceNamePrefix string = 'vscodeprivate'
