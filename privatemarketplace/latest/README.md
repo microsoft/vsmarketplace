@@ -401,11 +401,11 @@ Private extensions are made available to the container via a [**mounted volume**
 
 This is the basic architecture of the application, to clarify the role of the mounted volume extension source:
 
-:::mermaid
+```mermaid
 flowchart LR
    A[Extension source<br>&lpar; ex: mounted volume&rpar; ] --- |read *.vsix| B[Private Marketplace]
    B --- |search,<br>install,<br>or update<br>extensions| C[VS Code]
-:::
+```
 
 Set the `Marketplace__ExtensionSourceDirectory` environment variable to be the *local path* (destination mount path) of the mounted volume. In the [Docker sample](#1-run-the-container-locally-using-docker) sample above, this was `/data/extensions`.
 
@@ -430,7 +430,7 @@ The Private Marketplace supports multiple upstreaming modes, allowing you to con
 
 This is the basic flow of the application when upstreaming is enabled, to clarify how the requests are routed:
 
-:::mermaid
+```mermaid
 flowchart TD
     A[API]
     C[Public Marketplace]
@@ -448,7 +448,7 @@ flowchart TD
         B --> |1.2: return Extensions | E
         E --> |1.3: Combine public + private extensions| A
     end
-:::
+```
 
 Upstreaming is not enabled by default and requires a configuration change. To enable and configure upstreaming, set the `Marketplace__Upstreaming__Mode` environment variable to one of the allowed values: `None`, `Search`, or `SearchAndAssets`.
 
