@@ -6,7 +6,7 @@ param containerRegistryUsername string
 param containerRegistryPassword string
 
 @description('The tag (version) of the image to deploy.')
-param imageTag string = '1.1.18-main.30612715'
+param imageTag string = '1.1.19-main.30615638'
 
 @description('The name of the deployment, used to prefix resource names. Should only contain lowercase letters to avoid resource name restrictions.')
 param resourceNamePrefix string = 'vscodeprivate'
@@ -15,10 +15,10 @@ param resourceNamePrefix string = 'vscodeprivate'
 param location string = resourceGroup().location
 
 @description('The container registry hosting the deployable image.')
-param containerRegistry string = 'privatemarketdogfoodwestus2.azurecr.io'
+param containerRegistry string = 'mcr.microsoft.com'
 
 @description('The name of the image in the container registry.')
-param containerRepository string = 'vscode-private-marketplace'
+param containerRepository string = 'vsmarketplace/vscode-private-marketplace'
 
 @description('The name of the organization that owns the Private Marketplace for Visual Studio Code. This is used to identify the Private Marketplace in the UI.')
 param organizationName string = ''
