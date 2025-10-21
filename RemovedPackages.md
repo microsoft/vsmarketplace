@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|BenjaminFriedl.lexica-img-fix|10/20/2025|Malware|
 |PriyanshuMallick.clipboard-history-manager|10/20/2025|Malware|
 |labfile.labfile|10/20/2025|Malware|
 |WEB3Foundation.cxzczxcxz|10/19/2025|Malware|
