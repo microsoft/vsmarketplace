@@ -1,4 +1,4 @@
-*release version: 1.1.20-main.30616245*
+*release version: 1.0.52*
 
 ---
 
@@ -73,13 +73,13 @@ You need to have [Docker installed](https://docs.docker.com/get-started/get-dock
 1. Pull the container from the [Microsoft Artifact Registry](https://mcr.microsoft.com/artifact/mar/vsmarketplace/vscode-private-marketplace)
    ```powershell
    # pull the container from the registry so it's available for running
-   docker image pull "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.1.20-main.30616245"
+   docker image pull "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.0.52"
    ```
 
 2. Start the container with port 8080 bound to your local machine.
    ```powershell
    # run the container in interactive attached mode, clean up the container after termination
-   docker run -it --rm -p 8080:8080 "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.1.20-main.30616245"
+   docker run -it --rm -p 8080:8080 "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.0.52"
    ```
 
 3. Open [http://localhost:8080](http://localhost:8080) in your web browser. You should see a home page with the heading "Welcome to the Private Marketplace for Visual Studio Code".
@@ -120,7 +120,7 @@ Now, let's try loading some extensions into the Private Marketplace.
    docker run -it --rm -p 8080:8080 `
       -v "</path/to>/mymarketplace/extensions:/data/extensions:ro" `
       --env-file "</path/to>/mymarketplace/local.env" `
-      "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.1.20-main.30616245"
+      "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.0.52"
    ```
 
 6. You will now see more log output from the `docker run` command, including a line starting with "Loading extension file". This is the container app reading the VSIX file in your extensions directory.
@@ -154,8 +154,8 @@ The container details are:
 
 - Container Registry: `mcr.microsoft.com`
 - Image name: `vscode-private-marketplace`
-- Image tag: `1.1.20-main.30616245`
-- Full image URL: `mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.1.20-main.30616245`
+- Image tag: `1.0.52`
+- Full image URL: `mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.0.52`
 
 Without providing any configuration at all, the container should start and accept traffic over HTTP on port 8080. Basic information about the running application is shown on the root path `http://<my container hostname>:8080/`. But the application won't know where to read your private extensions from, which will be addressed in [a section below](#3-configure-the-container).
 
@@ -508,37 +508,30 @@ For the Azure sample, publishing means uploading a VSIX file to the `extensions`
 
 Az PowerShell or Az CLI can be used to upload extensions to an Azure storage file share either manually or from a CI/CD pipeline. You can also use the Azure Portal or Azure Storage Explorer to interact with the storage account and file share mounted to the container.
 
-### Publish from a build pipeline
+### Publish extensions to a file-based extension source (e.g., Azure Storage file share or mounted volume):
 
-A fully integrated publishing flow could be a build pipeline that packages your private extension with `vsce package` from source and then publishes the latest version to the container volume.
+To upload the desired VSIX files to your extension source directory:
+- **For Azure Storage file share:** Use Azure Portal, Azure Storage Explorer, Az CLI, or PowerShell to upload the VSIX files to the `extensions` file share.
+   ```powershell
+   # Example using Az CLI
+   az storage file upload `
+      --account-name <storage account name> `
+      --share-name extensions `
+      --source "my-extensions/contosocopilot-0.0.5.vsix"
+   ```
+- **For a local or mounted volume:** Copy the VSIX files directly to the directory configured as your extension source (e.g., `/data/extensions`).
+   ```powershell
+   # Example for local Docker setup
+   cp my-extensions/*.vsix /path/to/mymarketplace/extensions/
+   ```
 
-## Using Pre-Packaged Extensions from the Deployment Bundle
-
-The deployment bundle includes a set of pre-packaged VSIX extension files in the `sample-extensions` directory. These can be used to quickly populate your Private Marketplace for testing without building extensions from source.
-
-### To publish these extensions to a file-based extension source (e.g., Azure Storage file share or mounted volume):
-
-1. Locate the `sample-extensions` directory in your deployment bundle. It contains files like `contosocopilot-0.0.5.vsix`, `contosooss-0.0.1.vsix`, etc.
-
-2. Upload the desired VSIX files to your extension source directory:
-   - **For Azure Storage file share:** Use Azure Portal, Azure Storage Explorer, Az CLI, or PowerShell to upload the VSIX files to the `extensions` file share.
-     ```powershell
-     # Example using Az CLI
-     az storage file upload `
-       --account-name <storage account name> `
-       --share-name extensions `
-       --source "sample-extensions/contosocopilot-0.0.5.vsix"
-     ```
-   - **For a local or mounted volume:** Copy the VSIX files directly to the directory configured as your extension source (e.g., `/data/extensions`).
-     ```powershell
-     # Example for local Docker setup
-     cp sample-extensions/*.vsix /path/to/mymarketplace/extensions/
-     ```
-
-3. The uploaded extensions will now appear in the Private Marketplace and be available for installation in VS Code.
+The uploaded extensions will now appear in the Private Marketplace and be available for installation in VS Code.
 
 > **Tip:** You can use this method to quickly test or demo the Private Marketplace with known good extensions, or to bootstrap a new deployment.
 
+### Publish from a build pipeline
+
+A fully integrated publishing flow could be a build pipeline that packages your private extension with `vsce package` from source and then publishes the latest version to the container volume.
 
 For **Azure DevOps build pipelines**, the following YAML would build the extension from source, and then upload the extension to the file share. This sample uses [Workload Identity Federation](https://devblogs.microsoft.com/devops/workload-identity-federation-for-azure-deployments-is-now-generally-available/) to authenticate with Entra ID. The service principal used for authentication must have proper permissions to the storage account, e.g. with the [Storage File Data Privileged Contributor](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#storage-file-data-privileged-contributor) role.
 
@@ -724,7 +717,7 @@ The container we are releasing is a preview. We hope that the core functionality
 
 The container registry, name, tag, and supported environment variables are all subject to change during subsequent releases.
 
-The tag `1.1.20-main.30616245` can be considered immutable and available as long as we are using this specific Azure Container Registry as our deployment vehicle. Future releases will be made under a new tag name allowing you to control when the new container version is deployed to your infrastructure.
+The tag `1.0.52` can be considered immutable and available as long as we are using this specific Azure Container Registry as our deployment vehicle. Future releases will be made under a new tag name allowing you to control when the new container version is deployed to your infrastructure.
 
 During this private preview phase, we expect to keep the same container registry, container name, and credentials. We will introduce new container builds to you by creating new container tags that allow you to move to the new version of the container explicitly, by updating your deployment configuration. Unless there are breaking changes in the new version, the only action you should need to update to the latest version is updating the container tag portion of your deployment configuration and redeploying.
 
