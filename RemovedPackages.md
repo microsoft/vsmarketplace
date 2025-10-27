@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|StackspotPlatform.StackSpot|10/27/2025|Typo-squatting|
 |EricWrite.dsafsadas|10/24/2025|Malware|
 |thesashkin.krnl-execute-thesashkin|10/24/2025|Malware|
 |plugin-manager.vscode-notes-manager|10/24/2025|Typo-squatting|
