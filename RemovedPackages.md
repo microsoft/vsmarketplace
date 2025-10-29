@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|Utilities.wowlanguage|10/28/2025|Malware|
 |AshleyHornja.prettierformattingplus|10/28/2025|Malware|
 |me80758262.piiithon-linter|10/27/2025|Malware|
 |StackspotPlatform.StackSpot|10/27/2025|Typo-squatting|
