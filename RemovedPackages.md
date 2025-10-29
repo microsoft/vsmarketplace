@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|JuanrBlanco.wow11language|10/29/2025|Malware|
 |Extensions-A.wow1language|10/29/2025|Malware|
 |esbenpp.pretier-vscodee|10/29/2025|Typo-squatting|
 |jinyang.copilot-mcp-zh-cn|10/29/2025|Typo-squatting|
