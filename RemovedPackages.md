@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|DevelopmentInc.pokemon|10/30/2025|Typo-squatting|
+|DevelopmentInc.minecraftsnippets|10/30/2025|Typo-squatting|
+|DevelopmentInc.kombai-vs|10/30/2025|Typo-squatting|
+|DevelopmentInc.cfx-lua-vs|10/30/2025|Typo-squatting|
+|DevelopmentInc.torizon-vs|10/30/2025|Typo-squatting|
 |JuanrBlanco.wow11language|10/29/2025|Malware|
 |Extensions-A.wow1language|10/29/2025|Malware|
 |esbenpp.pretier-vscodee|10/29/2025|Typo-squatting|
