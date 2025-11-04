@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|raidenshogun.javascript-null-sequence|11/03/2025| Malware|
 |DavidAsh.dcbox-vs|10/30/2025| Malware|
 |DavidAsh.gruvbox-vs|10/30/2025| Malware|
 |DavidAsh.tr-lang-pack|10/30/2025| Malware|
