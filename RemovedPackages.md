@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|suspublisher18.susvsex|11/06/2025| Malware|
 |sahil92552.cbe-456|11/03/2025| Malware|
 |annacode.pt-lab-simproc|11/03/2025| Malware|
 |raidenshogun.javascript-null-sequence|11/03/2025| Malware|
