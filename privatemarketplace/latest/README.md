@@ -717,7 +717,7 @@ Additional helpful details are:
 
 ## 7.2. Servicing lifecycle
 
-Look for new releases of Private Marketplace at https://aka.ms/vspm/home for new features and important bug fixes. Stay up to date with the latest version to ensure you have the best experience.
+Look for new releases of Private Marketplace at https://aka.ms/vspm for new features and important bug fixes. Stay up to date with the latest version to ensure you have the best experience.
 
 # 8. Appendix
 
