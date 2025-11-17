@@ -1,14 +1,12 @@
-*release version: 1.0.52*
+*release version: 1.0.57*
 
 ---
 
 Welcome to the **Private Marketplace for Visual Studio Code**!
 
-Private Marketplace enables hosting and distributing extensions on-premises or in private cloud environments, helping you meet your organizational security policies. It seamlessly integrates with the familiar VS Code Extensions experience for easy discovery and auto-updating of private extensions. It enables securing your development environment by serving as a proxy for consuming [public](https://marketplace.visualstudio.com/vscode) extensions. When combined with VS Code's [extension allowlist](https://code.visualstudio.com/docs/editor/extension-marketplace#_managing-extensions-in-enterprise-environments), Private Marketplace helps you enforce organizational policies governing which extensions are installed.
+Private Marketplace enables hosting and distributing extensions on-premises or in private cloud environments, helping you meet your organizational security policies. It seamlessly integrates with the familiar VS Code Extensions experience for easy discovery and auto-updating of private extensions. It enables securing your development environment by serving as a proxy for consuming [public](https://marketplace.visualstudio.com/vscode) extensions. When combined with VS Code's [extension allowlist](https://code.visualstudio.com/docs/setup/enterprise#_configure-allowed-extensions), Private Marketplace helps you enforce organizational policies governing which extensions are installed.
 
 This document will guide you through deploying, configuring, and monitoring your own self-hosted Private Marketplace. You will also learn how to connect VS Code to the Private Marketplace to install extensions.
-
-The latest version of the README can be found at [https://aka.ms/private-marketplace/readme](https://aka.ms/private-marketplace/readme). The latest supplemental deployment scripts are available from [https://aka.ms/private-marketplace/deployment-scripts](https://aka.ms/private-marketplace/deployment-scripts).
 
 # Available features
 **[Watch the demo▶️](https://aka.ms/privatemktdemo)**
@@ -19,7 +17,7 @@ The Private Marketplace ships with these core capabilities:
 - **Flexible storage options**: Publish and manage extensions using either a file system directory or Azure Artifacts storage.
 - **Upstreaming**: [Optional] Include public extensions automatically from the [Visual Studio Marketplace](https://marketplace.visualstudio.com).
 - **Rehosting**: [Optional] Download and host extensions from the Public Visual Studio Marketplace for additional security governance and air-gapped environments.
-- **Centralized rollout**: Roll out the Private Marketplace to your team through centralized group policy on Windows and macOS.
+- **Centralized rollout**: Roll out the Private Marketplace to your team through centralized group policy on Windows, macOS and Linux.
 - **Install and automatic updates**: Search and install extensions directly from VS Code. Receive automatic updates for new versions in the Private Marketplace.
 
 # Recommended setup
@@ -32,18 +30,20 @@ When convenience of hosting internal extensions and ease of use are the primary 
 ## Security governance
 Get to know the comprehensive multi-step scanning Microsoft uses to protect VS Code users: [Public marketplace security blog](https://aka.ms/vsmsecurityblog). Understanding the security posture of the Public Marketplace can be highly valuable in making an informed decision about which of the next two setups is right for your organization.
 
-- If your goal is to incrementally add a layer of control over what public extensions are allowed while developers maintain the convenience of accessing the latest public extensions, consider choosing the 'More Restrictive' setup.
+- If your goal is to incrementally add a layer of control over which public extensions are allowed while developers maintain the convenience of accessing the latest public extensions, consider choosing the 'More Restrictive' setup.
 
  - If you need to meet strict industry regulation or enterprise security policy that goes above and beyond the measures outlined in the [security blog](https://aka.ms/vsmsecurityblog), start with the 'Most Restrictive' setup. This is also the right option for those needing to deploy to an air-gapped or highly firewalled environment.
 
 ## Prepare the container and storage
-Choose the scenario that best matches your business needs and follow the recommended setup steps. Alternatively, you can sequentially go through the steps below. Private Marketplace ships with Bicep scripts ([download here](https://aka.ms/private-marketplace/deployment-scripts)) which make Azure deployment quick and easy by completing the container and storage setup and enabling upstreaming.
+Choose the scenario that best matches your business needs and follow the recommended setup steps. Alternatively, you can sequentially go through the steps below. Private Marketplace is available from Microsoft registry using **docker pull mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:latest**. Private Marketplace ships with Bicep scripts ([download here](https://aka.ms/vspm/scripts)) which make Azure deployment quick and easy by completing the container and storage setup and enabling upstreaming.
+
+
 
 |Scenario                                                                                                                                     | Required Steps                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Considerations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Test drive** <br>Explore the basics (non-production)                                                                                                                 | [Run the container locally using Docker](#1-run-the-container-locally-using-docker) on a development machine with VSIX files on the local file system.                                                                                                                                                                                                                                                                                                                                                      | Fastest deployment. Low overhead. Ideal for getting familiar with the app, testing, and debugging the container setup in a lightweight environment. Note that this scenario is intended for learning purposes; connecting from VS Code is not included. For production setup, choose from the scenarios below.                                                                                                                                                                                                                                                                                                                                                                      |
-| **Non-restrictive**<br>Self-host internal extensions. Let developers install any Public Marketplace extensions. | (1) Deploy to [Azure Container Apps](#24-deploying-to-azure-container-apps) or [another hosting infrastructure](#21-high-level-deployment-steps), (2) Connect to a [mounted volume](#31-configure-private-extension-source) for VSIX file storage, and (3) Turn on [upstreaming](#32-configure-the-container-to-upstream-extensions-from-the-public-visual-studio-marketplace)*.                                                                                                             | Use this option for the convenience of hosting private extensions plus access to any Public Marketplace extension. Provides a simpler setup process, especially when deployed to Azure Container Apps using the included Bicep scripts. *Skip step (3) if step (1) was deployed using the included Bicep scripts which already enable upstreaming.                                                                                                                                                                                                      |
-| **More restrictive**<br>Self-host internal extensions. Limit what developers can install from the Public Marketplace. | (1) Deploy to [Azure Container Apps](#24-deploying-to-azure-container-apps) or [another hosting infrastructure](#21-high-level-deployment-steps), (2) Connect to a [mounted volume](#31-configure-private-extension-source) for VSIX file storage, (3) Turn on [upstreaming](#32-configure-the-container-to-upstream-extensions-from-the-public-visual-studio-marketplace), and (4) Set up an [allowlist group policy](#33-configuring-allowed-extensions) using VS Code device management. | Suitable for 1 to 15 private extensions and versions. Provides a simpler setup process, especially when deployed to Azure Container Apps using the included Bicep scripts. VS Code allowlist provides granular control over which publishers, extensions, and versions are allowed, although VS Code allowlist is only supported on Windows at this time.*Skip step (3) if step (1) was deployed using the included Bicep scripts which already enable upstreaming for Search and Assets.|
+| **Non-restrictive**<br>Self-host internal extensions. Let developers install any Public Marketplace extensions. | (1) Deploy to [Azure Container Apps](#24-deploying-to-azure-container-apps) or [another hosting infrastructure](#21-high-level-deployment-steps), (2) Connect to a [mounted volume](#31-configure-private-extension-source) for VSIX file storage, and (3) Turn on [upstreaming](#32-configure-the-container-to-upstream-extensions-from-the-public-visual-studio-marketplace)*.                                                                                                             | Use this option for the convenience of hosting private extensions plus access to any Public Marketplace extension. Provides a simpler setup process, especially when deployed to Azure Container Apps or Azure Kubernetes using the included Bicep scripts. *Skip step (3) if step (1) was deployed using the included Bicep scripts which already enable upstreaming.                                                                                                                                                                                                      |
+| **More restrictive**<br>Self-host internal extensions. Limit what developers can install from the Public Marketplace. | (1) Deploy to [Azure Container Apps](#24-deploying-to-azure-container-apps) or [another hosting infrastructure](#21-high-level-deployment-steps), (2) Connect to a [mounted volume](#31-configure-private-extension-source) for VSIX file storage, (3) Turn on [upstreaming](#32-configure-the-container-to-upstream-extensions-from-the-public-visual-studio-marketplace), and (4) Set up an [allowlist group policy](#33-configuring-allowed-extensions) using VS Code device management. | Provides a simpler setup process, especially when deployed to Azure Container Apps or Azure Kubernetes using the included Bicep scripts. VS Code allowlist provides granular control over which publishers, extensions, and versions are allowed, on Windows, MacOS and Linux. *Skip step (3) if step (1) was deployed using the included Bicep scripts which already enable upstreaming for Search and Assets.|
 | **Most restrictive**<br>Rehost a larger number of extensions downloaded from the Public Marketplace.                                                | (1) Deploy to [Azure Container Apps](#24-deploying-to-azure-container-apps) or [another hosting infrastructure](#21-high-level-deployment-steps), (2) Connect to a [mounted volume](#31-configure-private-extension-source) for VSIX file storage, and (3) [Turn off upstreaming](#32-configure-the-container-to-upstream-extensions-from-the-public-visual-studio-marketplace) to prevent duplicates**. | Choose this configuration if VS Code clients must not (for example enterprise security policy) or cannot (for example client machines are air-gapped or firewalled) install extensions from the Public Marketplace. **Disable upstreaming if step (1) was deployed using the included Bicep scripts which enable upstreaming for Search.                                |
 
 <br>
@@ -73,13 +73,13 @@ You need to have [Docker installed](https://docs.docker.com/get-started/get-dock
 1. Pull the container from the [Microsoft Artifact Registry](https://mcr.microsoft.com/artifact/mar/vsmarketplace/vscode-private-marketplace)
    ```powershell
    # pull the container from the registry so it's available for running
-   docker image pull "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.0.52"
+   docker image pull "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.0.57"
    ```
 
 2. Start the container with port 8080 bound to your local machine.
    ```powershell
    # run the container in interactive attached mode, clean up the container after termination
-   docker run -it --rm -p 8080:8080 "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.0.52"
+   docker run -it --rm -p 8080:8080 "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.0.57"
    ```
 
 3. Open [http://localhost:8080](http://localhost:8080) in your web browser. You should see a home page with the heading "Welcome to the Private Marketplace for Visual Studio Code".
@@ -120,7 +120,7 @@ Now, let's try loading some extensions into the Private Marketplace.
    docker run -it --rm -p 8080:8080 `
       -v "</path/to>/mymarketplace/extensions:/data/extensions:ro" `
       --env-file "</path/to>/mymarketplace/local.env" `
-      "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.0.52"
+      "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.0.57"
    ```
 
 6. You will now see more log output from the `docker run` command, including a line starting with "Loading extension file". This is the container app reading the VSIX file in your extensions directory.
@@ -154,8 +154,8 @@ The container details are:
 
 - Container Registry: `mcr.microsoft.com`
 - Image name: `vscode-private-marketplace`
-- Image tag: `1.0.52`
-- Full image URL: `mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.0.52`
+- Image tag: `1.0.57`
+- Full image URL: `mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.0.57`
 
 Without providing any configuration at all, the container should start and accept traffic over HTTP on port 8080. Basic information about the running application is shown on the root path `http://<my container hostname>:8080/`. But the application won't know where to read your private extensions from, which will be addressed in [a section below](#3-configure-the-container).
 
@@ -700,6 +700,10 @@ Let us know about any feedback you have about missing features. If you encounter
 
 Your feedback is vital to ensure our next release is even better!
 
+* [File an issue](https://aka.ms/vspm/support/issues)
+* [Provide Feedback](https://aka.ms/vspm/support/discussions)
+* [Contact Private Marketplace Support](https://aka.ms/vspm/contactus)
+
 ## 7.1. Bug reports
 
 If you encounter a bug, gather relevant logs from your configured logging destination. Particularly useful information is exception logs, failed request logs, or other traces from the configured logging destination.
@@ -713,15 +717,7 @@ Additional helpful details are:
 
 ## 7.2. Servicing lifecycle
 
-The container we are releasing is a preview. We hope that the core functionality provided is complete enough to allow a successful deployment in your environment and enable initial integration with your team's VS Code users.
-
-The container registry, name, tag, and supported environment variables are all subject to change during subsequent releases.
-
-The tag `1.0.52` can be considered immutable and available as long as we are using this specific Azure Container Registry as our deployment vehicle. Future releases will be made under a new tag name allowing you to control when the new container version is deployed to your infrastructure.
-
-During this private preview phase, we expect to keep the same container registry, container name, and credentials. We will introduce new container builds to you by creating new container tags that allow you to move to the new version of the container explicitly, by updating your deployment configuration. Unless there are breaking changes in the new version, the only action you should need to update to the latest version is updating the container tag portion of your deployment configuration and redeploying.
-
-We do not plan on updating any existing tags with a new container build (i.e. updating the SHA digest referenced by the tag) and instead let you control this update on your own. For example, the next preview will have a tag like `0.X.Y-prerelease` and will include release notes with the new features and bug fixes.
+Look for new releases of Private Marketplace at https://aka.ms/vspm/home for new features and important bug fixes. Stay up to date with the latest version to ensure you have the best experience.
 
 # 8. Appendix
 
@@ -928,15 +924,15 @@ A single Private Marketplace per organization is recommended for easy discovery 
 
 ### How do I get help or support?
 
-For support questions, contact [privatemktplace@microsoft.com](mailto:privatemktplace@microsoft.com).
+For support questions, [contact Private Marketplace support](https://aka.ms/vspm/contactus).
 
 ### Where can I report bugs or suggest features?
 
-Report issues and feature requests on [GitHub at microsoft/vsmarketplace](https://github.com/microsoft/vsmarketplace/issues).
+Report issues and feature requests on [GitHub at microsoft/vsmarketplace](https://aka.ms/vspm/support/issues).
 
 ### Where can I find announcements and discussions?
 
-Visit the [GitHub Discussions](https://github.com/microsoft/vsmarketplace/discussions) page for announcements, updates, and community discussions.
+Visit the [GitHub Discussions](https://aka.ms/vspm/support/discussions) page for announcements, updates, and community discussions.
 
 ### Does Private Marketplace support Visual Studio extensions?
 
