@@ -476,6 +476,23 @@ Upstreaming is not enabled by default and requires a configuration change. To en
   Set the mode to `None` in your environment variable or Bicep parameter.
 
 When the feature is enabled, via `Search` or `SearchAndAssets` modes, extensions from the Public Visual Studio Marketplace will be searchable in the VS Code Extensions pane. If `SearchAndAssets` mode is configured, extensions will also be installed through your Private Marketplace.
+
+### Network Requirements for Upstreaming
+
+In more tightly controlled environments, Private Marketplace may not be able to access the public Marketplcae without changes to the network configuration. Allow Private Marketplace to reach the public Marketplace by enabling access to the following endpoints:
+
+| Endpoint | Port | Usage |
+| -- | -- | -- |
+| marketplace.visualstudio.com | https (443) | For extension search queries and metadata |
+| *.gallerycdn.vsassets.io | https (443) | For extension assets (icons, readme files, etc.) |
+
+All communication with the Public VS Code Marketplace occurs over HTTPS (443)
+
+**Additional Notes:**
+- The `*.gallerycdn.vsassets.io` domain uses publisher-specific subdomains, e.g. `https://{publisher}.gallerycdn.vsassets.io`
+- When `Marketplace__Upstreaming__Mode` is set to `Search`, Private Marketplace only needs access to the `marketplace.visualstudio.com` endpoint
+- When `Marketplace__Upstreaming__Mode` is set to `SearchAndAssets`, Private Marketplace needs access to all endpoints
+
 If it is not desirable to have the full catalog of public extensions available, see the next section on how to configure VS Code to restrict access to extensions.
 
 ## 3.3. Configuring allowed extensions
