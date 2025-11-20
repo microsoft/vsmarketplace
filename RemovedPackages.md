@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|dfadhel.vscodepython|11/20/2025| Malware|
 |solidhelium.codeforces-submitter|11/19/2025|Untrustworthy|
 |juanbIanco.soli989|11/08/2025| Malware|
 |vitalik-Buterin.soli-extensio|11/08/2025| Malware|
