@@ -128,9 +128,12 @@ Now, let's try loading some extensions into the Private Marketplace.
 8. Press Ctrl + C to terminate the Docker process and clean up the container.
 9. If you're done with the container locally, you can clean up the `mymarketplace` directory by deleting it.
 
-By completing this section, you have successfully deployed the Private Marketplace to your local environment! It is possible to connect to the local instance from VS Code by configuring HTTPS. HTTPS configuration can be done by generating a self-signed certificate and trusting it (perhaps via the `dotnet dev-certs https` command from the [.NET SDK](http://get.dot.net/)). But we'll move on to focus our efforts on a hosted deployment and [implement HTTPS as a part of that](#22-enabling-https).
+By completing this section, you have successfully deployed the Private Marketplace to your local environment! 
 
-Next, we'll deploy the container to your container host.
+> [!IMPORTANT]
+> We cannot connect to this local deployment from VS Code as it requires HTTPS configuration. We’ll conclude the local test drive here, and focus further efforts on setting up a hosted deployment where we'll enable the team to connect from VS Code.
+  
+On a side note, HTTPS configuration can be done by generating a self-signed certificate and trusting it (perhaps via the dotnet dev-certs https command from the https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-dev-certs). But we'll move on to focus our efforts on a hosted deployment and https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl. Next, we'll deploy the container to your container host.
 
 # 2. Deploy the container to your desired container host
 
@@ -958,3 +961,4 @@ Visual Studio extension hosting is currently not supported.
 ### Can I use Artifactory storage with Private Marketplace?
 
 Artifactory integration is currently not currently supported.
+
