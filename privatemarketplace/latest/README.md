@@ -112,7 +112,7 @@ Now, let's try loading some extensions into the Private Marketplace.
    mkdir extensions
    ```
 
-4. Get a .vsix file (VS Code extension file) and put it in the `extensions` directory. This could be one of your team's existing private extensions. Or, you can use VS Code to [download an extension from the Public Marketplace](https://code.visualstudio.com/docs/editor/extension-marketplace#_can-i-download-an-extension-directly-from-the-marketplace).
+4. Get a `.vsix` file (VS Code extension file) and put it in the `extensions` directory. This could be one of your team's existing private extensions. Or, you can use VS Code to [download an extension from the Public Marketplace](https://code.visualstudio.com/docs/editor/extension-marketplace#_can-i-download-an-extension-directly-from-the-marketplace).
 
    There should be at least one `*.vsix` file in the `extensions` directory at the end of this step.
 5. Start the container again with the environment variables and a mounted volume. Make sure to update the `</path/to>` in the next command to be the full path printed by `pwd` in step 1. If using Windows, the file path on the left side of the colon should be a Windows-style path like `C:\path\to\mymarketplace`. The backtick `` ` `` allows for multi-line commands in PowerShell for readability. You can replace this with `/` for multi-line commands in Bash or modify it to be a single-line command.
