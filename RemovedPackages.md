@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|SamuelPinto.better-vscode-html-css|11/25/2025| Typo-squatting|
 |SamuelPinto.prettier-vscode-pluss|11/21/2025| Typo-squatting|
 |publishingsofficial.prettier-vscode-plus|11/21/2025| Typo-squatting|
 |dfadhel.vscodepython|11/20/2025| Malware|
