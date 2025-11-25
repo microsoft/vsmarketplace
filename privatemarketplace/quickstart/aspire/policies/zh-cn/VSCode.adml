@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources revision="1.0" schemaVersion="1.0">
+	<displayName />
+	<description />
+	<resources>
+		<stringTable>
+			<string id="Application">Visual Studio Code</string>
+			<string id="Supported_1_101">Visual Studio Code &gt;= 1.101</string>
+			<string id="Supported_1_104">Visual Studio Code &gt;= 1.104</string>
+			<string id="Supported_1_106">Visual Studio Code &gt;= 1.106</string>
+			<string id="Supported_1_67">Visual Studio Code &gt;= 1.67</string>
+			<string id="Supported_1_96">Visual Studio Code &gt;= 1.96</string>
+			<string id="Supported_1_99">Visual Studio Code &gt;= 1.99</string>
+			<string id="Category_interactiveSessionConfigurationTitle">交互式会话</string>
+			<string id="Category_extensionsConfigurationTitle">扩展</string>
+			<string id="Category_terminalIntegratedConfigurationTitle">集成终端</string>
+			<string id="Category_telemetryConfigurationTitle">遥测</string>
+			<string id="Category_updateConfigurationTitle">更新</string>
+			<string id="ChatAgentExtensionTools">ChatAgentExtensionTools</string>
+			<string id="ChatAgentExtensionTools_chat_extensionToolsEnabled">使用由第三方扩展提供的工具启用。</string>
+			<string id="ChatAgentMode">ChatAgentMode</string>
+			<string id="ChatAgentMode_chat_agent_enabled_description">为聊天启用代理模式。启用此模式后，可以通过视图中的下拉列表激活代理模式。</string>
+			<string id="ChatMCP">ChatMCP</string>
+			<string id="ChatMCP_chat_mcp_access">控制对已安装的模型上下文协议服务器的访问。</string>
+			<string id="ChatMCP_chat_mcp_access_none">无法访问 MCP 服务器。</string>
+			<string id="ChatMCP_chat_mcp_access_registry">允许访问 VS Code 连接到的注册表中安装的 MCP 服务器。</string>
+			<string id="ChatMCP_chat_mcp_access_any">允许访问任何已安装的 MCP 服务器。</string>
+			<string id="ChatToolsAutoApprove">ChatToolsAutoApprove</string>
+			<string id="ChatToolsAutoApprove_autoApprove2_description">全局自动批准也称为“YOLO 模式”，它会完全禁用对所有工作区中所有工具的手动审批，从而允许智能体完全自主地执行操作。此操作极为危险，并且“从不”建议使用，因为即使是 Codespaces 和开发容器等容器化环境也会将用户密钥转发到可能遭到入侵的容器中。
+
+此功能会禁用关键安全保护，并导致攻击者能够更容易地入侵计算机。</string>
+			<string id="ChatToolsEligibleForAutoApproval">ChatToolsEligibleForAutoApproval</string>
+			<string id="ChatToolsEligibleForAutoApproval_chat_tools_eligibleForAutoApproval">Controls which tools are eligible for automatic approval. Tools set to 'false' will always present a confirmation and will never offer the option to auto-approve. The default behavior (or setting a tool to 'true') may result in the tool offering auto-approval options.</string>
+			<string id="McpGalleryServiceUrl">McpGalleryServiceUrl</string>
+			<string id="McpGalleryServiceUrl_mcp_gallery_serviceUrl">配置 MCP 库服务 URL 以连接到以下位置:</string>
+			<string id="AllowedExtensions">AllowedExtensions</string>
+			<string id="AllowedExtensions_extensions_allowed_policy">指定允许使用的扩展列表。这有助于通过限制使用未经授权的扩展来维护安全且一致的开发环境。详细信息: https://code.visualstudio.com/docs/setup/enterprise#_configure-allowed-extensions</string>
+			<string id="ExtensionGalleryServiceUrl">ExtensionGalleryServiceUrl</string>
+			<string id="ExtensionGalleryServiceUrl_extensions_gallery_serviceUrl">配置要连接到的市场服务 URL</string>
+			<string id="ChatToolsTerminalEnableAutoApprove">ChatToolsTerminalEnableAutoApprove</string>
+			<string id="ChatToolsTerminalEnableAutoApprove_autoApproveMode_description">控制在终端工具中的运行中是否允许自动审批。</string>
+			<string id="EnableFeedback">EnableFeedback</string>
+			<string id="EnableFeedback_telemetry_feedback_enabled">启用反馈机制，例如问题报告器、调查和其他反馈选项。</string>
+			<string id="TelemetryLevel">TelemetryLevel</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_policyDescription">控制遥测级别。</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_default">发送使用情况数据、错误、故障报告。</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_error">发送常规错误遥测和故障报告。</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_crash">发送 OS 级别故障报告。</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_off">禁用所有产品遥测。</string>
+			<string id="UpdateMode">UpdateMode</string>
+			<string id="UpdateMode_updateMode">配置是否接收自动更新。更改后需要重新启动。更新是从微软在线服务获取的。</string>
+			<string id="UpdateMode_none">无</string>
+			<string id="UpdateMode_manual">禁用自动后台更新检查。如果手动检查更新，更新将可用。</string>
+			<string id="UpdateMode_start">启动</string>
+			<string id="UpdateMode_default">系统</string>
+		</stringTable>
+		<presentationTable>
+			<presentation id="ChatAgentExtensionTools"><checkBox refId="ChatAgentExtensionTools">ChatAgentExtensionTools</checkBox></presentation>
+			<presentation id="ChatAgentMode"><checkBox refId="ChatAgentMode">ChatAgentMode</checkBox></presentation>
+			<presentation id="ChatMCP"><dropdownList refId="ChatMCP" /></presentation>
+			<presentation id="ChatToolsAutoApprove"><checkBox refId="ChatToolsAutoApprove">ChatToolsAutoApprove</checkBox></presentation>
+			<presentation id="ChatToolsEligibleForAutoApproval"><multiTextBox refId="ChatToolsEligibleForAutoApproval" /></presentation>
+			<presentation id="McpGalleryServiceUrl"><textBox refId="McpGalleryServiceUrl"><label>McpGalleryServiceUrl:</label></textBox></presentation>
+			<presentation id="AllowedExtensions"><multiTextBox refId="AllowedExtensions" /></presentation>
+			<presentation id="ExtensionGalleryServiceUrl"><textBox refId="ExtensionGalleryServiceUrl"><label>ExtensionGalleryServiceUrl:</label></textBox></presentation>
+			<presentation id="ChatToolsTerminalEnableAutoApprove"><checkBox refId="ChatToolsTerminalEnableAutoApprove">ChatToolsTerminalEnableAutoApprove</checkBox></presentation>
+			<presentation id="EnableFeedback"><checkBox refId="EnableFeedback">EnableFeedback</checkBox></presentation>
+			<presentation id="TelemetryLevel"><dropdownList refId="TelemetryLevel" /></presentation>
+			<presentation id="UpdateMode"><dropdownList refId="UpdateMode" /></presentation>
+		</presentationTable>
+	</resources>
+</policyDefinitionResources>

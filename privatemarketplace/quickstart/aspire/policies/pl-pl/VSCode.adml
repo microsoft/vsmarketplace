@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources revision="1.0" schemaVersion="1.0">
+	<displayName />
+	<description />
+	<resources>
+		<stringTable>
+			<string id="Application">Visual Studio Code</string>
+			<string id="Supported_1_101">Visual Studio Code &gt;= 1.101</string>
+			<string id="Supported_1_104">Visual Studio Code &gt;= 1.104</string>
+			<string id="Supported_1_106">Visual Studio Code &gt;= 1.106</string>
+			<string id="Supported_1_67">Visual Studio Code &gt;= 1.67</string>
+			<string id="Supported_1_96">Visual Studio Code &gt;= 1.96</string>
+			<string id="Supported_1_99">Visual Studio Code &gt;= 1.99</string>
+			<string id="Category_interactiveSessionConfigurationTitle">Sesja interakcyjna</string>
+			<string id="Category_extensionsConfigurationTitle">Rozszerzenia</string>
+			<string id="Category_terminalIntegratedConfigurationTitle">Zintegrowany terminal</string>
+			<string id="Category_telemetryConfigurationTitle">Telemetria</string>
+			<string id="Category_updateConfigurationTitle">Aktualizuj</string>
+			<string id="ChatAgentExtensionTools">ChatAgentExtensionTools</string>
+			<string id="ChatAgentExtensionTools_chat_extensionToolsEnabled">Włącz korzystanie z narzędzi dostarczonych przez rozszerzenia innych firm.</string>
+			<string id="ChatAgentMode">ChatAgentMode</string>
+			<string id="ChatAgentMode_chat_agent_enabled_description">Włącz tryb agenta dla czatu. Gdy ta opcja jest włączona, tryb agenta można aktywować z rozwijanej listy w widoku.</string>
+			<string id="ChatMCP">ChatMCP</string>
+			<string id="ChatMCP_chat_mcp_access">Steruje dostępem do zainstalowanych serwerów protokołu kontekstowego modelu.</string>
+			<string id="ChatMCP_chat_mcp_access_none">Brak dostępu do serwerów MCP.</string>
+			<string id="ChatMCP_chat_mcp_access_registry">Umożliwia dostęp do serwerów MCP zainstalowanych z rejestru, z którą jest połączony program VS Code.</string>
+			<string id="ChatMCP_chat_mcp_access_any">Zezwalaj na dostęp do dowolnego zainstalowanego serwera MCP.</string>
+			<string id="ChatToolsAutoApprove">ChatToolsAutoApprove</string>
+			<string id="ChatToolsAutoApprove_autoApprove2_description">Globalne automatyczne zatwierdzanie nazywane również „trybem YOLO” powoduje całkowite wyłączenie ręcznego zatwierdzania dla wszystkich narzędzi we wszystkich obszarach roboczych, co pozwala agentowi działać w pełni autonomicznie. Jest to bardzo niebezpieczne i *nigdy* nie jest rekomendowane, nawet w środowiskach konteneryzowanych, takich jak Codespaces i Dev Containers, klucze użytkownika są przekazywane do kontenera, który może zostać naruszony.
+
+Ta funkcja wyłącza krytyczne zabezpieczenia i znacznie ułatwia osobie atakującej naruszenie zabezpieczeń maszyny.</string>
+			<string id="ChatToolsEligibleForAutoApproval">ChatToolsEligibleForAutoApproval</string>
+			<string id="ChatToolsEligibleForAutoApproval_chat_tools_eligibleForAutoApproval">Controls which tools are eligible for automatic approval. Tools set to 'false' will always present a confirmation and will never offer the option to auto-approve. The default behavior (or setting a tool to 'true') may result in the tool offering auto-approval options.</string>
+			<string id="McpGalleryServiceUrl">McpGalleryServiceUrl</string>
+			<string id="McpGalleryServiceUrl_mcp_gallery_serviceUrl">Skonfiguruj adres URL usługi MCP Gallery, aby nawiązać połączenie z</string>
+			<string id="AllowedExtensions">AllowedExtensions</string>
+			<string id="AllowedExtensions_extensions_allowed_policy">Określ listę rozszerzeń, które mogą być używane. Pomaga to zachować bezpieczne i spójne środowisko programistyczne, ograniczając użycie nieautoryzowanych rozszerzeń. Więcej informacji: https://code.visualstudio.com/docs/setup/enterprise#_configure-allowed-extensions</string>
+			<string id="ExtensionGalleryServiceUrl">ExtensionGalleryServiceUrl</string>
+			<string id="ExtensionGalleryServiceUrl_extensions_gallery_serviceUrl">Konfigurowanie adresu URL usługi Marketplace w celu nawiązania połączenia z</string>
+			<string id="ChatToolsTerminalEnableAutoApprove">ChatToolsTerminalEnableAutoApprove</string>
+			<string id="ChatToolsTerminalEnableAutoApprove_autoApproveMode_description">Określa, czy zezwalać na automatyczne zatwierdzanie w narzędziu uruchamiania w terminalu.</string>
+			<string id="EnableFeedback">EnableFeedback</string>
+			<string id="EnableFeedback_telemetry_feedback_enabled">Włącz mechanizmy opinii, takie jak reporter problemu, ankiety i inne opcje opinii.</string>
+			<string id="TelemetryLevel">TelemetryLevel</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_policyDescription">Steruje poziomem telemetrii.</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_default">Wysyła dane użycia, błędy i raporty o awariach.</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_error">Wysyła ogólną telemetrię błędów i raporty o awariach.</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_crash">Wysyła raporty o awarii na poziomie systemu operacyjnego.</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_off">Wyłącza całkowicie telemetrię produktu.</string>
+			<string id="UpdateMode">UpdateMode</string>
+			<string id="UpdateMode_updateMode">Skonfiguruj, czy chcesz otrzymywać aktualizacje automatyczne. Wymaga ponownego uruchomienia po zmianie. Aktualizacje są pobierane z usługi online firmy Microsoft.</string>
+			<string id="UpdateMode_none">Brak</string>
+			<string id="UpdateMode_manual">Wyłącz automatyczne sprawdzanie aktualizacji w tle. Aktualizacje będą dostępne, jeśli wyszukasz aktualizacje ręcznie.</string>
+			<string id="UpdateMode_start">Uruchamianie</string>
+			<string id="UpdateMode_default">System</string>
+		</stringTable>
+		<presentationTable>
+			<presentation id="ChatAgentExtensionTools"><checkBox refId="ChatAgentExtensionTools">ChatAgentExtensionTools</checkBox></presentation>
+			<presentation id="ChatAgentMode"><checkBox refId="ChatAgentMode">ChatAgentMode</checkBox></presentation>
+			<presentation id="ChatMCP"><dropdownList refId="ChatMCP" /></presentation>
+			<presentation id="ChatToolsAutoApprove"><checkBox refId="ChatToolsAutoApprove">ChatToolsAutoApprove</checkBox></presentation>
+			<presentation id="ChatToolsEligibleForAutoApproval"><multiTextBox refId="ChatToolsEligibleForAutoApproval" /></presentation>
+			<presentation id="McpGalleryServiceUrl"><textBox refId="McpGalleryServiceUrl"><label>McpGalleryServiceUrl:</label></textBox></presentation>
+			<presentation id="AllowedExtensions"><multiTextBox refId="AllowedExtensions" /></presentation>
+			<presentation id="ExtensionGalleryServiceUrl"><textBox refId="ExtensionGalleryServiceUrl"><label>ExtensionGalleryServiceUrl:</label></textBox></presentation>
+			<presentation id="ChatToolsTerminalEnableAutoApprove"><checkBox refId="ChatToolsTerminalEnableAutoApprove">ChatToolsTerminalEnableAutoApprove</checkBox></presentation>
+			<presentation id="EnableFeedback"><checkBox refId="EnableFeedback">EnableFeedback</checkBox></presentation>
+			<presentation id="TelemetryLevel"><dropdownList refId="TelemetryLevel" /></presentation>
+			<presentation id="UpdateMode"><dropdownList refId="UpdateMode" /></presentation>
+		</presentationTable>
+	</resources>
+</policyDefinitionResources>

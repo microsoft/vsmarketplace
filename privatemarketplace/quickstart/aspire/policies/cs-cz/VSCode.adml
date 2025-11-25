@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources revision="1.0" schemaVersion="1.0">
+	<displayName />
+	<description />
+	<resources>
+		<stringTable>
+			<string id="Application">Visual Studio Code</string>
+			<string id="Supported_1_101">Visual Studio Code &gt;= 1.101</string>
+			<string id="Supported_1_104">Visual Studio Code &gt;= 1.104</string>
+			<string id="Supported_1_106">Visual Studio Code &gt;= 1.106</string>
+			<string id="Supported_1_67">Visual Studio Code &gt;= 1.67</string>
+			<string id="Supported_1_96">Visual Studio Code &gt;= 1.96</string>
+			<string id="Supported_1_99">Visual Studio Code &gt;= 1.99</string>
+			<string id="Category_interactiveSessionConfigurationTitle">Interaktivní relace</string>
+			<string id="Category_extensionsConfigurationTitle">Rozšíření</string>
+			<string id="Category_terminalIntegratedConfigurationTitle">Integrovaný terminál</string>
+			<string id="Category_telemetryConfigurationTitle">Telemetry</string>
+			<string id="Category_updateConfigurationTitle">Aktualizace</string>
+			<string id="ChatAgentExtensionTools">ChatAgentExtensionTools</string>
+			<string id="ChatAgentExtensionTools_chat_extensionToolsEnabled">Umožňuje používat nástroje z rozšíření třetích stran.</string>
+			<string id="ChatAgentMode">ChatAgentMode</string>
+			<string id="ChatAgentMode_chat_agent_enabled_description">Povolte režim agenta pro chat. Pokud je tato možnost povolená, můžete režim agenta aktivovat prostřednictvím rozevíracího seznamu v zobrazení.</string>
+			<string id="ChatMCP">ChatMCP</string>
+			<string id="ChatMCP_chat_mcp_access">Řídí přístup k nainstalovaným serverům protokolu Model Context Protocol.</string>
+			<string id="ChatMCP_chat_mcp_access_none">Nemáte přístup k serverům MCP.</string>
+			<string id="ChatMCP_chat_mcp_access_registry">Umožňuje přístup k serverům MCP nainstalovaným z registru, ke kterému je VS Code připojen.</string>
+			<string id="ChatMCP_chat_mcp_access_any">Povolení přístupu k libovolnému nainstalovanému serveru MCP.</string>
+			<string id="ChatToolsAutoApprove">ChatToolsAutoApprove</string>
+			<string id="ChatToolsAutoApprove_autoApprove2_description">Globální automatické schvalování, známé také jako „režim YOLO“, zcela vypíná ruční schvalování pro všechny nástroje ve všech pracovních prostorech a umožňuje agentovi jednat plně autonomně. Toto je mimořádně nebezpečné a nikdy se to nedoporučuje, i v kontejnerizovaných prostředích, jako jsou Codespaces a Dev Containers, jsou do kontejneru přeposílány uživatelské klíče, které mohou být kompromitovány.
+
+Tato funkce vypíná klíčové bezpečnostní ochrany a výrazně usnadňuje útočníkovi kompromitaci zařízení.</string>
+			<string id="ChatToolsEligibleForAutoApproval">ChatToolsEligibleForAutoApproval</string>
+			<string id="ChatToolsEligibleForAutoApproval_chat_tools_eligibleForAutoApproval">Controls which tools are eligible for automatic approval. Tools set to 'false' will always present a confirmation and will never offer the option to auto-approve. The default behavior (or setting a tool to 'true') may result in the tool offering auto-approval options.</string>
+			<string id="McpGalleryServiceUrl">McpGalleryServiceUrl</string>
+			<string id="McpGalleryServiceUrl_mcp_gallery_serviceUrl">Nakonfigurovat adresu URL služby Galerie MCP pro připojení k</string>
+			<string id="AllowedExtensions">AllowedExtensions</string>
+			<string id="AllowedExtensions_extensions_allowed_policy">Zadejte seznam rozšíření, která mohou být použita. Pomáhá to udržovat zabezpečené a konzistentní vývojové prostředí tím, že je omezeno používání neautorizovaných rozšíření. Další informace: https://code.visualstudio.com/docs/setup/enterprise#_configure-allowed-extensions</string>
+			<string id="ExtensionGalleryServiceUrl">ExtensionGalleryServiceUrl</string>
+			<string id="ExtensionGalleryServiceUrl_extensions_gallery_serviceUrl">Nakonfigurovat adresu URL služby Marketplace pro připojení k</string>
+			<string id="ChatToolsTerminalEnableAutoApprove">ChatToolsTerminalEnableAutoApprove</string>
+			<string id="ChatToolsTerminalEnableAutoApprove_autoApproveMode_description">Určuje, jestli se má povolit automatické schvalování při spuštění v nástroji terminálu.</string>
+			<string id="EnableFeedback">EnableFeedback</string>
+			<string id="EnableFeedback_telemetry_feedback_enabled">Povolte mechanismy zpětné vazby, například hlášení problémů, průzkumy a další možnosti zpětné vazby.</string>
+			<string id="TelemetryLevel">TelemetryLevel</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_policyDescription">Řídí úroveň telemetrie.</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_default">Odesílá data o využití, chyby a hlášení o selhání.</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_error">Odesílá obecné hlášení o selhání a telemetrii chyb.</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_crash">Odesílá hlášení o selhání na úrovni operačního systému.</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_off">Zakáže veškerou telemetrii produktu.</string>
+			<string id="UpdateMode">UpdateMode</string>
+			<string id="UpdateMode_updateMode">Umožňuje nakonfigurovat, jestli budete dostávat automatické aktualizace. Po změně vyžaduje restart. Aktualizace se načítají z online služby Microsoftu.</string>
+			<string id="UpdateMode_none">Žádné</string>
+			<string id="UpdateMode_manual">Zakázat automatické vyhledávání aktualizací na pozadí (aktualizace lze nechat vyhledat ručně)</string>
+			<string id="UpdateMode_start">Spustit</string>
+			<string id="UpdateMode_default">Systém</string>
+		</stringTable>
+		<presentationTable>
+			<presentation id="ChatAgentExtensionTools"><checkBox refId="ChatAgentExtensionTools">ChatAgentExtensionTools</checkBox></presentation>
+			<presentation id="ChatAgentMode"><checkBox refId="ChatAgentMode">ChatAgentMode</checkBox></presentation>
+			<presentation id="ChatMCP"><dropdownList refId="ChatMCP" /></presentation>
+			<presentation id="ChatToolsAutoApprove"><checkBox refId="ChatToolsAutoApprove">ChatToolsAutoApprove</checkBox></presentation>
+			<presentation id="ChatToolsEligibleForAutoApproval"><multiTextBox refId="ChatToolsEligibleForAutoApproval" /></presentation>
+			<presentation id="McpGalleryServiceUrl"><textBox refId="McpGalleryServiceUrl"><label>McpGalleryServiceUrl:</label></textBox></presentation>
+			<presentation id="AllowedExtensions"><multiTextBox refId="AllowedExtensions" /></presentation>
+			<presentation id="ExtensionGalleryServiceUrl"><textBox refId="ExtensionGalleryServiceUrl"><label>ExtensionGalleryServiceUrl:</label></textBox></presentation>
+			<presentation id="ChatToolsTerminalEnableAutoApprove"><checkBox refId="ChatToolsTerminalEnableAutoApprove">ChatToolsTerminalEnableAutoApprove</checkBox></presentation>
+			<presentation id="EnableFeedback"><checkBox refId="EnableFeedback">EnableFeedback</checkBox></presentation>
+			<presentation id="TelemetryLevel"><dropdownList refId="TelemetryLevel" /></presentation>
+			<presentation id="UpdateMode"><dropdownList refId="UpdateMode" /></presentation>
+		</presentationTable>
+	</resources>
+</policyDefinitionResources>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources revision="1.0" schemaVersion="1.0">
+	<displayName />
+	<description />
+	<resources>
+		<stringTable>
+			<string id="Application">Visual Studio Code</string>
+			<string id="Supported_1_101">Visual Studio Code &gt;= 1.101</string>
+			<string id="Supported_1_104">Visual Studio Code &gt;= 1.104</string>
+			<string id="Supported_1_106">Visual Studio Code &gt;= 1.106</string>
+			<string id="Supported_1_67">Visual Studio Code &gt;= 1.67</string>
+			<string id="Supported_1_96">Visual Studio Code &gt;= 1.96</string>
+			<string id="Supported_1_99">Visual Studio Code &gt;= 1.99</string>
+			<string id="Category_interactiveSessionConfigurationTitle">対話型セッション</string>
+			<string id="Category_extensionsConfigurationTitle">拡張機能</string>
+			<string id="Category_terminalIntegratedConfigurationTitle">統合ターミナル</string>
+			<string id="Category_telemetryConfigurationTitle">テレメトリ</string>
+			<string id="Category_updateConfigurationTitle">更新</string>
+			<string id="ChatAgentExtensionTools">ChatAgentExtensionTools</string>
+			<string id="ChatAgentExtensionTools_chat_extensionToolsEnabled">サード パーティの拡張機能によって提供されるツールの使用を有効にします。</string>
+			<string id="ChatAgentMode">ChatAgentMode</string>
+			<string id="ChatAgentMode_chat_agent_enabled_description">チャットのエージェント モードを有効にします。これを有効にすると、ビューのドロップダウンからエージェント モードをアクティブ化できます。</string>
+			<string id="ChatMCP">ChatMCP</string>
+			<string id="ChatMCP_chat_mcp_access">インストールされたモデル コンテキスト プロトコル サーバーへのアクセスを制御します。</string>
+			<string id="ChatMCP_chat_mcp_access_none">MCP サーバーにアクセスできません。</string>
+			<string id="ChatMCP_chat_mcp_access_registry">VS Code が接続されているレジストリからインストールされた MCP サーバーへのアクセスを許可します。</string>
+			<string id="ChatMCP_chat_mcp_access_any">インストールされている任意の MCP サーバーへのアクセスを許可します。</string>
+			<string id="ChatToolsAutoApprove">ChatToolsAutoApprove</string>
+			<string id="ChatToolsAutoApprove_autoApprove2_description">グローバル自動承認 ("YOLO モード"とも呼ばれます) は、すべてのワークスペースのすべてのツールに対する手動承認を完全に無効にし、エージェントが完全に自律的に動作できるようにします。これは非常に危険であり、*決して*推奨されません。Codespaces や Dev Containers などのコンテナー化された環境でも、ユーザー キーがコンテナー内に転送され、侵害される可能性があります。
+
+この機能により、重要なセキュリティ保護が無効になり、攻撃者がマシンを侵害しやすくなります。</string>
+			<string id="ChatToolsEligibleForAutoApproval">ChatToolsEligibleForAutoApproval</string>
+			<string id="ChatToolsEligibleForAutoApproval_chat_tools_eligibleForAutoApproval">Controls which tools are eligible for automatic approval. Tools set to 'false' will always present a confirmation and will never offer the option to auto-approve. The default behavior (or setting a tool to 'true') may result in the tool offering auto-approval options.</string>
+			<string id="McpGalleryServiceUrl">McpGalleryServiceUrl</string>
+			<string id="McpGalleryServiceUrl_mcp_gallery_serviceUrl">接続する MCP ギャラリー サービス URL を構成する</string>
+			<string id="AllowedExtensions">AllowedExtensions</string>
+			<string id="AllowedExtensions_extensions_allowed_policy">使用が許可される拡張機能のリストを指定します。これにより、承認されていない拡張機能の使用が制限され、安全で一貫性のある開発環境が維持されます。詳細情報: https://code.visualstudio.com/docs/setup/enterprise#_configure-allowed-extensions</string>
+			<string id="ExtensionGalleryServiceUrl">ExtensionGalleryServiceUrl</string>
+			<string id="ExtensionGalleryServiceUrl_extensions_gallery_serviceUrl">マーケットプレース サービスの URL を構成してから次に接続します:</string>
+			<string id="ChatToolsTerminalEnableAutoApprove">ChatToolsTerminalEnableAutoApprove</string>
+			<string id="ChatToolsTerminalEnableAutoApprove_autoApproveMode_description">ターミナル ツールでの実行時に自動承認を許可するかどうかを制御します。</string>
+			<string id="EnableFeedback">EnableFeedback</string>
+			<string id="EnableFeedback_telemetry_feedback_enabled">問題報告、アンケート、その他のフィードバック オプションなどのフィードバック メカニズムを有効にします。</string>
+			<string id="TelemetryLevel">TelemetryLevel</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_policyDescription">テレメトリのレベルを制御します。</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_default">使用状況データ、エラー、クラッシュ レポートを送信します。</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_error">一般的なエラー テレメトリとクラッシュ レポートを送信します。</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_crash">OS レベルのクラッシュ レポートを送信します。</string>
+			<string id="TelemetryLevel_telemetry_telemetryLevel_off">すべての製品テレメトリを無効にします。</string>
+			<string id="UpdateMode">UpdateMode</string>
+			<string id="UpdateMode_updateMode">自動更新を受け取るかどうかを構成します。変更後に再起動が必要です。更新プログラムは Microsoft のオンライン サービスから取得されます。</string>
+			<string id="UpdateMode_none">なし</string>
+			<string id="UpdateMode_manual">バックグラウンドでの自動更新の確認を無効にします。更新を手動で確認すると、更新を利用できます。</string>
+			<string id="UpdateMode_start">開始</string>
+			<string id="UpdateMode_default">システム</string>
+		</stringTable>
+		<presentationTable>
+			<presentation id="ChatAgentExtensionTools"><checkBox refId="ChatAgentExtensionTools">ChatAgentExtensionTools</checkBox></presentation>
+			<presentation id="ChatAgentMode"><checkBox refId="ChatAgentMode">ChatAgentMode</checkBox></presentation>
+			<presentation id="ChatMCP"><dropdownList refId="ChatMCP" /></presentation>
+			<presentation id="ChatToolsAutoApprove"><checkBox refId="ChatToolsAutoApprove">ChatToolsAutoApprove</checkBox></presentation>
+			<presentation id="ChatToolsEligibleForAutoApproval"><multiTextBox refId="ChatToolsEligibleForAutoApproval" /></presentation>
+			<presentation id="McpGalleryServiceUrl"><textBox refId="McpGalleryServiceUrl"><label>McpGalleryServiceUrl:</label></textBox></presentation>
+			<presentation id="AllowedExtensions"><multiTextBox refId="AllowedExtensions" /></presentation>
+			<presentation id="ExtensionGalleryServiceUrl"><textBox refId="ExtensionGalleryServiceUrl"><label>ExtensionGalleryServiceUrl:</label></textBox></presentation>
+			<presentation id="ChatToolsTerminalEnableAutoApprove"><checkBox refId="ChatToolsTerminalEnableAutoApprove">ChatToolsTerminalEnableAutoApprove</checkBox></presentation>
+			<presentation id="EnableFeedback"><checkBox refId="EnableFeedback">EnableFeedback</checkBox></presentation>
+			<presentation id="TelemetryLevel"><dropdownList refId="TelemetryLevel" /></presentation>
+			<presentation id="UpdateMode"><dropdownList refId="UpdateMode" /></presentation>
+		</presentationTable>
+	</resources>
+</policyDefinitionResources>
