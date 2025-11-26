@@ -77,27 +77,46 @@ try {
 
 # Check for local .NET SDK installation in quickstart/aspire folder
 Write-Host "Checking for local .NET SDK..." -ForegroundColor Gray
-# Use absolute path if repo exists, otherwise construct the expected path
-if (Test-Path $repoPath) {
-    $localDotnetPath = Join-Path (Resolve-Path $repoPath).Path "privatemarketplace\quickstart\aspire\.dotnet"
-} else {
-    $localDotnetPath = Join-Path (Join-Path $PWD $repoPath) "privatemarketplace\quickstart\aspire\.dotnet"
-}
-$localDotnetExePath = Join-Path $localDotnetPath "dotnet.exe"
 
-if (Test-Path $localDotnetExePath) {
-    # Check the actual installed SDK versions
-    try {
-        $installedSdks = & $localDotnetExePath --list-sdks 2>$null
-        $matchingSdk = $installedSdks | Where-Object { $_ -match "^$([regex]::Escape($dotnetVersion))\s" }
-        
-        if ($matchingSdk) {
-            Write-Host "  Local .NET SDK $dotnetVersion found at: $localDotnetPath" -ForegroundColor Green
-            $dotnetInstalled = $true
-        } else {
-            Write-Host "  Local .NET installation found, but version $dotnetVersion is missing" -ForegroundColor Yellow
-            Write-Host "  Installed SDKs:" -ForegroundColor Gray
-            $installedSdks | ForEach-Object { Write-Host "    $_" -ForegroundColor Gray }
+# If repo doesn't exist, .NET SDK can't exist either
+if (-not (Test-Path $repoPath)) {
+    Write-Host "  Local .NET SDK not found (repository not present)" -ForegroundColor Yellow
+    $localDotnetPath = Join-Path (Join-Path $PWD $repoPath) "privatemarketplace\quickstart\aspire\.dotnet"
+    $missingPrereqs += @{
+        Name = ".NET SDK $dotnetVersion (local)"
+        InstallMethod = "dotnet-install"
+        Version = $dotnetVersion
+        InstallPath = $localDotnetPath
+        ManualUrl = "https://dotnet.microsoft.com/download/dotnet/10.0"
+    }
+} else {
+    # Repo exists, check for .NET SDK
+    $localDotnetPath = Join-Path (Resolve-Path $repoPath).Path "privatemarketplace\quickstart\aspire\.dotnet"
+    $localDotnetExePath = Join-Path $localDotnetPath "dotnet.exe"
+
+    if (Test-Path $localDotnetExePath) {
+        # Check the actual installed SDK versions
+        try {
+            $installedSdks = & $localDotnetExePath --list-sdks 2>$null
+            $matchingSdk = $installedSdks | Where-Object { $_ -match "^$([regex]::Escape($dotnetVersion))\s" }
+            
+            if ($matchingSdk) {
+                Write-Host "  Local .NET SDK $dotnetVersion found at: $localDotnetPath" -ForegroundColor Green
+                $dotnetInstalled = $true
+            } else {
+                Write-Host "  Local .NET installation found, but version $dotnetVersion is missing" -ForegroundColor Yellow
+                Write-Host "  Installed SDKs:" -ForegroundColor Gray
+                $installedSdks | ForEach-Object { Write-Host "    $_" -ForegroundColor Gray }
+                $missingPrereqs += @{
+                    Name = ".NET SDK $dotnetVersion (local)"
+                    InstallMethod = "dotnet-install"
+                    Version = $dotnetVersion
+                    InstallPath = $localDotnetPath
+                    ManualUrl = "https://dotnet.microsoft.com/download/dotnet/10.0"
+                }
+            }
+        } catch {
+            Write-Host "  Error checking local .NET SDK: $_" -ForegroundColor Yellow
             $missingPrereqs += @{
                 Name = ".NET SDK $dotnetVersion (local)"
                 InstallMethod = "dotnet-install"
@@ -106,8 +125,8 @@ if (Test-Path $localDotnetExePath) {
                 ManualUrl = "https://dotnet.microsoft.com/download/dotnet/10.0"
             }
         }
-    } catch {
-        Write-Host "  Error checking local .NET SDK: $_" -ForegroundColor Yellow
+    } else {
+        Write-Host "  Local .NET SDK not found" -ForegroundColor Yellow
         $missingPrereqs += @{
             Name = ".NET SDK $dotnetVersion (local)"
             InstallMethod = "dotnet-install"
@@ -115,15 +134,6 @@ if (Test-Path $localDotnetExePath) {
             InstallPath = $localDotnetPath
             ManualUrl = "https://dotnet.microsoft.com/download/dotnet/10.0"
         }
-    }
-} else {
-    Write-Host "  Local .NET SDK not found" -ForegroundColor Yellow
-    $missingPrereqs += @{
-        Name = ".NET SDK $dotnetVersion (local)"
-        InstallMethod = "dotnet-install"
-        Version = $dotnetVersion
-        InstallPath = $localDotnetPath
-        ManualUrl = "https://dotnet.microsoft.com/download/dotnet/10.0"
     }
 }
 
