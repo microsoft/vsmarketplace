@@ -17,12 +17,24 @@ $dockerInstalled = $false
 $aspireInstalled = $false
 $dotnetInstalled = $false
 $repoExists = $false
+$gitAvailable = $false
 $wingetAvailable = $false
 
 # Define repository details
 $repoUrl = "https://github.com/mmcumming/vsmarketplace"
 $repoBranch = "main"  # Change this to test different branches
 $repoPath = $Path
+
+# Check git availability (needed for determining repository download method)
+try {
+    $gitVersion = git --version 2>$null
+    if ($LASTEXITCODE -eq 0) {
+        $gitAvailable = $true
+    }
+}
+catch {
+    $gitAvailable = $false
+}
 
 # Check Docker
 Write-Host "Checking for Docker..." -ForegroundColor Gray
@@ -109,17 +121,21 @@ if (Test-Path $repoPath) {
         $repoExists = $true
     } else {
         Write-Host "  Repository folder exists but appears incomplete" -ForegroundColor Yellow
+        $downloadMethod = if ($gitAvailable) { "git clone" } else { "ZIP download" }
         $missingPrereqs += @{
             Name = "VS Marketplace Repository"
             InstallMethod = "download"
+            DownloadMethod = $downloadMethod
             ManualUrl = $repoUrl
         }
     }
 } else {
     Write-Host "  Repository not found" -ForegroundColor Yellow
+    $downloadMethod = if ($gitAvailable) { "git clone" } else { "ZIP download" }
     $missingPrereqs += @{
         Name = "VS Marketplace Repository"
         InstallMethod = "download"
+        DownloadMethod = $downloadMethod
         ManualUrl = $repoUrl
     }
 }
@@ -138,13 +154,22 @@ if ($missingPrereqs.Count -gt 0) {
     foreach ($prereq in $missingPrereqs) {
         if ($prereq.InstallMethod -eq "winget" -and -not $wingetAvailable) {
             Write-Host "  - $($prereq.Name): Manual installation required" -ForegroundColor Yellow
-            Write-Host "    URL: $($prereq.ManualUrl)" -ForegroundColor Gray
+            Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
         } elseif ($prereq.InstallMethod -eq "winget") {
             Write-Host "  - $($prereq.Name): via winget" -ForegroundColor Green
+            if ($prereq.ManualUrl) {
+                Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
+            }
         } elseif ($prereq.InstallMethod -eq "script") {
             Write-Host "  - $($prereq.Name): via installation script" -ForegroundColor Green
+            if ($prereq.ManualUrl) {
+                Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
+            }
         } elseif ($prereq.InstallMethod -eq "download") {
-            Write-Host "  - $($prereq.Name): via git clone or ZIP download" -ForegroundColor Green
+            Write-Host "  - $($prereq.Name): via $($prereq.DownloadMethod)" -ForegroundColor Green
+            if ($prereq.ManualUrl) {
+                Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
+            }
         }
     }
     
