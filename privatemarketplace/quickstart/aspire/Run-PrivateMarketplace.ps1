@@ -17,24 +17,12 @@ $dockerInstalled = $false
 $aspireInstalled = $false
 $dotnetInstalled = $false
 $repoExists = $false
-$gitAvailable = $false
 $wingetAvailable = $false
 
 # Define repository details
 $repoUrl = "https://github.com/mmcumming/vsmarketplace"
 $repoBranch = "main"  # Change this to test different branches
 $repoPath = $Path
-
-# Check git availability (needed for determining repository download method)
-try {
-    $gitVersion = git --version 2>$null
-    if ($LASTEXITCODE -eq 0) {
-        $gitAvailable = $true
-    }
-}
-catch {
-    $gitAvailable = $false
-}
 
 # Check Docker
 Write-Host "Checking for Docker..." -ForegroundColor Gray
@@ -121,21 +109,21 @@ if (Test-Path $repoPath) {
         $repoExists = $true
     } else {
         Write-Host "  Repository folder exists but appears incomplete" -ForegroundColor Yellow
-        $downloadMethod = if ($gitAvailable) { "git clone" } else { "ZIP download" }
         $missingPrereqs += @{
             Name = "VS Marketplace Repository"
             InstallMethod = "download"
-            DownloadMethod = $downloadMethod
+            DownloadMethod = "ZIP download"
+            TargetFolder = $repoPath
             ManualUrl = $repoUrl
         }
     }
 } else {
     Write-Host "  Repository not found" -ForegroundColor Yellow
-    $downloadMethod = if ($gitAvailable) { "git clone" } else { "ZIP download" }
     $missingPrereqs += @{
         Name = "VS Marketplace Repository"
         InstallMethod = "download"
-        DownloadMethod = $downloadMethod
+        DownloadMethod = "ZIP download"
+        TargetFolder = $repoPath
         ManualUrl = $repoUrl
     }
 }
@@ -169,6 +157,9 @@ if ($missingPrereqs.Count -gt 0) {
             Write-Host "  - $($prereq.Name): via $($prereq.DownloadMethod)" -ForegroundColor Green
             if ($prereq.ManualUrl) {
                 Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
+            }
+            if ($prereq.TargetFolder) {
+                Write-Host "    Target: $($prereq.TargetFolder)" -ForegroundColor Gray
             }
         }
     }
@@ -293,69 +284,38 @@ if ($missingPrereqs.Count -gt 0) {
     if (-not $repoExists) {
         Write-Host "`nDownloading VS Marketplace Repository..." -ForegroundColor Cyan
         
-        # Check if git is available
-        $useGit = $false
+        # Download as ZIP
+        Write-Host "  Downloading repository as ZIP (branch: $repoBranch)..." -ForegroundColor Gray
+        $zipUrl = "$repoUrl/archive/refs/heads/$repoBranch.zip"
+        $tempZipPath = Join-Path $env:TEMP "vsmarketplace-$repoBranch.zip"
+        
         try {
-            $gitVersion = git --version 2>$null
-            if ($LASTEXITCODE -eq 0) {
-                $useGit = $true
-                Write-Host "  Git detected: $gitVersion" -ForegroundColor Gray
+            Invoke-WebRequest -Uri $zipUrl -OutFile $tempZipPath -UseBasicParsing
+            Write-Host "  ZIP downloaded successfully." -ForegroundColor Green
+            
+            Write-Host "  Extracting ZIP file..." -ForegroundColor Gray
+            $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-extract"
+            if (Test-Path $tempExtractPath) {
+                Remove-Item -Path $tempExtractPath -Recurse -Force
             }
+            Expand-Archive -Path $tempZipPath -DestinationPath $tempExtractPath -Force
+            
+            # Move the extracted folder to the target location
+            $extractedFolder = Join-Path $tempExtractPath "vsmarketplace-$repoBranch"
+            if (Test-Path $extractedFolder) {
+                Move-Item -Path $extractedFolder -Destination $repoPath -Force
+            }
+            
+            # Clean up temporary files
+            Remove-Item -Path $tempZipPath -Force
+            Remove-Item -Path $tempExtractPath -Recurse -Force
+            Write-Host "  Extraction complete." -ForegroundColor Green
+            $repoExists = $true
         }
         catch {
-            Write-Host "  Git not found in PATH." -ForegroundColor Yellow
-        }
-
-        if ($useGit) {
-            # Clone using git
-            Write-Host "  Cloning repository (branch: $repoBranch) using git..." -ForegroundColor Gray
-            
-            try {
-                git clone --branch $repoBranch $repoUrl $repoPath
-                Write-Host "  Repository cloned successfully." -ForegroundColor Green
-                $repoExists = $true
-            }
-            catch {
-                Write-Host "  Error cloning repository: $_" -ForegroundColor Red
-                Write-Host "  Falling back to ZIP download..." -ForegroundColor Yellow
-                $useGit = $false
-            }
-        }
-
-        if (-not $useGit) {
-            # Download as ZIP (fallback)
-            Write-Host "  Downloading repository as ZIP (branch: $repoBranch)..." -ForegroundColor Gray
-            $zipUrl = "$repoUrl/archive/refs/heads/$repoBranch.zip"
-            $tempZipPath = Join-Path $env:TEMP "vsmarketplace-$repoBranch.zip"
-            
-            try {
-                Invoke-WebRequest -Uri $zipUrl -OutFile $tempZipPath -UseBasicParsing
-                Write-Host "  ZIP downloaded successfully." -ForegroundColor Green
-                
-                Write-Host "  Extracting ZIP file..." -ForegroundColor Gray
-                $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-extract"
-                if (Test-Path $tempExtractPath) {
-                    Remove-Item -Path $tempExtractPath -Recurse -Force
-                }
-                Expand-Archive -Path $tempZipPath -DestinationPath $tempExtractPath -Force
-                
-                # Move the extracted folder to the target location
-                $extractedFolder = Join-Path $tempExtractPath "vsmarketplace-$repoBranch"
-                if (Test-Path $extractedFolder) {
-                    Move-Item -Path $extractedFolder -Destination $repoPath -Force
-                }
-                
-                # Clean up temporary files
-                Remove-Item -Path $tempZipPath -Force
-                Remove-Item -Path $tempExtractPath -Recurse -Force
-                Write-Host "  Extraction complete." -ForegroundColor Green
-                $repoExists = $true
-            }
-            catch {
-                Write-Host "  Error downloading or extracting ZIP: $_" -ForegroundColor Red
-                Write-Host "  Please download the repository manually from: $repoUrl" -ForegroundColor Yellow
-                return
-            }
+            Write-Host "  Error downloading or extracting ZIP: $_" -ForegroundColor Red
+            Write-Host "  Please download the repository manually from: $repoUrl" -ForegroundColor Yellow
+            return
         }
     }
     
