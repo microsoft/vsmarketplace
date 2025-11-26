@@ -499,17 +499,32 @@ if ($missingPrereqs.Count -gt 0) {
                     $markerFile = Join-Path $env:TEMP "vscode-admin-template-install.txt"
                     Set-Content -Path $markerFile -Value $policiesPath
                     
+                    # Create log file for admin template installation output
+                    $logFile = Join-Path $env:TEMP "vscode-admin-template-install.log"
+                    
                     try {
-                        # Launch the script with admin privileges
-                        $process = Start-Process -FilePath "pwsh.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -InstallAdminTemplates" -Verb RunAs -Wait -PassThru
+                        # Launch the script with admin privileges and redirect output to log file
+                        $process = Start-Process -FilePath "pwsh.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -InstallAdminTemplates" -Verb RunAs -Wait -PassThru -RedirectStandardOutput $logFile -RedirectStandardError "$logFile.err"
                         
                         if ($process.ExitCode -eq 0) {
                             Write-Host "  Administrative templates installed successfully." -ForegroundColor Green
                         } else {
                             Write-Host "    Warning: Administrative template installation exited with code $($process.ExitCode)" -ForegroundColor Yellow
+                            Write-Host "    Log file: $logFile" -ForegroundColor Gray
+                            if (Test-Path "$logFile.err") {
+                                Write-Host "    Error log: $logFile.err" -ForegroundColor Gray
+                            }
+                        }
+                        
+                        # Display log file location for debugging
+                        if (Test-Path $logFile) {
+                            Write-Host "    Installation log: $logFile" -ForegroundColor Gray
                         }
                     } catch {
                         Write-Host "    Warning: Could not install administrative templates: $_" -ForegroundColor Yellow
+                        if (Test-Path $logFile) {
+                            Write-Host "    Log file: $logFile" -ForegroundColor Gray
+                        }
                     } finally {
                         # Clean up marker file
                         if (Test-Path $markerFile) {
