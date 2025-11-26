@@ -10,6 +10,7 @@ Write-Host "`nChecking prerequisites..." -ForegroundColor Cyan
 # Initialize tracking variables
 $missingPrereqs = @()
 $dockerInstalled = $false
+$vscodeInstalled = $false
 $aspireInstalled = $false
 $dotnetInstalled = $false
 $repoExists = $false
@@ -40,40 +41,65 @@ try {
     }
 }
 
-# Check Aspire CLI (local .NET tool)
+# Check VS Code
+Write-Host "Checking for VS Code..." -ForegroundColor Gray
+
+# Check if repo doesn't exist, VS Code can't exist either
+if (-not (Test-Path $repoPath)) {
+    Write-Host "  VS Code not found (repository not present)" -ForegroundColor Yellow
+    $localVSCodePath = Join-Path (Join-Path $PWD $repoPath) "privatemarketplace\quickstart\aspire\.vscode"
+    $missingPrereqs += @{
+        Name = "VS Code (portable)"
+        InstallMethod = "vscode-local"
+        InstallPath = $localVSCodePath
+        ManualUrl = "https://code.visualstudio.com/"
+    }
+} else {
+    # Check for local VS Code installation
+    $localVSCodePath = Join-Path (Resolve-Path $repoPath).Path "privatemarketplace\quickstart\aspire\.vscode"
+    $vscodeExePath = Join-Path $localVSCodePath "Code.exe"
+    
+    if (Test-Path $vscodeExePath) {
+        Write-Host "  VS Code found at: $localVSCodePath" -ForegroundColor Green
+        $vscodeInstalled = $true
+    } else {
+        Write-Host "  VS Code not found" -ForegroundColor Yellow
+        $missingPrereqs += @{
+            Name = "VS Code (portable)"
+            InstallMethod = "vscode-local"
+            InstallPath = $localVSCodePath
+            ManualUrl = "https://code.visualstudio.com/"
+        }
+    }
+}
+
+# Check Aspire CLI (local installation)
 Write-Host "Checking for Aspire CLI..." -ForegroundColor Gray
 
-# If repo doesn't exist, Aspire can't exist either (depends on local .NET)
+# If repo doesn't exist, Aspire can't exist either
 if (-not (Test-Path $repoPath)) {
     Write-Host "  Aspire CLI not found (repository not present)" -ForegroundColor Yellow
+    $localAspirePath = Join-Path (Join-Path $PWD $repoPath) "privatemarketplace\quickstart\aspire\.aspire"
     $missingPrereqs += @{
         Name = "Aspire CLI (version 13+)"
-        InstallMethod = "dotnet-tool"
+        InstallMethod = "aspire-local"
+        InstallPath = $localAspirePath
         ManualUrl = "https://learn.microsoft.com/dotnet/aspire"
     }
 } else {
-    # Check if .NET tool manifest exists and Aspire is installed
-    $toolManifestPath = Join-Path $repoPath "privatemarketplace/quickstart/aspire/.config/dotnet-tools.json"
-    $aspireToolInstalled = $false
+    # Check for local Aspire CLI installation
+    $localAspirePath = Join-Path (Resolve-Path $repoPath).Path "privatemarketplace\quickstart\aspire\.aspire"
+    $aspireExePath = Join-Path $localAspirePath "aspire.exe"
     
-    if (Test-Path $toolManifestPath) {
-        try {
-            $manifest = Get-Content $toolManifestPath -Raw | ConvertFrom-Json
-            if ($manifest.tools."aspire") {
-                $aspireToolInstalled = $true
-                Write-Host "  Aspire CLI found in tool manifest" -ForegroundColor Green
-                $aspireInstalled = $true
-            }
-        } catch {
-            Write-Host "  Error reading tool manifest" -ForegroundColor Yellow
-        }
-    }
-    
-    if (-not $aspireToolInstalled) {
-        Write-Host "  Aspire CLI not found as local .NET tool" -ForegroundColor Yellow
+    if (Test-Path $aspireExePath) {
+        Write-Host "  Aspire CLI found at: $localAspirePath" -ForegroundColor Green
+        $aspireInstalled = $true
+    } else {
+        Write-Host "  Aspire CLI not found" -ForegroundColor Yellow
         $missingPrereqs += @{
             Name = "Aspire CLI (version 13+)"
-            InstallMethod = "dotnet-tool"
+            InstallMethod = "aspire-local"
+            InstallPath = $localAspirePath
             ManualUrl = "https://learn.microsoft.com/dotnet/aspire"
         }
     }
@@ -190,8 +216,19 @@ if ($missingPrereqs.Count -gt 0) {
             if ($prereq.ManualUrl) {
                 Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
             }
-        } elseif ($prereq.InstallMethod -eq "dotnet-tool") {
-            Write-Host "  - $($prereq.Name): via dotnet tool install" -ForegroundColor Green
+        } elseif ($prereq.InstallMethod -eq "vscode-local") {
+            Write-Host "  - $($prereq.Name): via local portable installation" -ForegroundColor Green
+            if ($prereq.InstallPath) {
+                Write-Host "    Target: $($prereq.InstallPath)" -ForegroundColor Gray
+            }
+            if ($prereq.ManualUrl) {
+                Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
+            }
+        } elseif ($prereq.InstallMethod -eq "aspire-local") {
+            Write-Host "  - $($prereq.Name): via local installation" -ForegroundColor Green
+            if ($prereq.InstallPath) {
+                Write-Host "    Target: $($prereq.InstallPath)" -ForegroundColor Gray
+            }
             if ($prereq.ManualUrl) {
                 Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
             }
@@ -346,38 +383,93 @@ if ($missingPrereqs.Count -gt 0) {
         }
     }
     
-    # Install Aspire CLI as local .NET tool if missing
-    if (-not $aspireInstalled) {
-        Write-Host "`nInstalling Aspire CLI as local .NET tool..." -ForegroundColor Cyan
+    # Install VS Code portable if missing
+    if (-not $vscodeInstalled) {
+        Write-Host "`nInstalling VS Code (portable)..." -ForegroundColor Cyan
         
         try {
-            $aspirePath = Join-Path $repoPath "privatemarketplace/quickstart/aspire"
+            # Create the local VS Code directory
+            if (-not (Test-Path $localVSCodePath)) {
+                New-Item -ItemType Directory -Path $localVSCodePath -Force | Out-Null
+                Write-Host "  Created directory: $localVSCodePath" -ForegroundColor Gray
+            }
             
-            # Use the local .NET SDK to install Aspire
-            $localDotnetExe = Join-Path $localDotnetPath "dotnet.exe"
+            # Download VS Code portable ZIP
+            Write-Host "  Downloading VS Code portable..." -ForegroundColor Gray
+            $vscodeZipUrl = "https://update.code.visualstudio.com/latest/win32-x64-archive/stable"
+            $vscodeZipPath = Join-Path $env:TEMP "vscode-portable.zip"
             
-            # Create tool manifest if it doesn't exist
-            Write-Host "  Creating .NET tool manifest..." -ForegroundColor Gray
-            Push-Location $aspirePath
-            try {
-                & $localDotnetExe new tool-manifest --force 2>$null | Out-Null
+            Invoke-WebRequest -Uri $vscodeZipUrl -OutFile $vscodeZipPath -UseBasicParsing
+            Write-Host "  VS Code downloaded successfully." -ForegroundColor Green
+            
+            # Extract VS Code
+            Write-Host "  Extracting VS Code..." -ForegroundColor Gray
+            Expand-Archive -Path $vscodeZipPath -DestinationPath $localVSCodePath -Force
+            
+            # Create data directory for portable mode
+            $vscodeDataPath = Join-Path $localVSCodePath "data"
+            New-Item -ItemType Directory -Path $vscodeDataPath -Force | Out-Null
+            
+            # Clean up
+            Remove-Item $vscodeZipPath -Force -ErrorAction SilentlyContinue
+            
+            # Verify Code.exe exists
+            $vscodeExePath = Join-Path $localVSCodePath "Code.exe"
+            if (Test-Path $vscodeExePath) {
+                Write-Host "  VS Code installed successfully." -ForegroundColor Green
+                $vscodeInstalled = $true
+            } else {
+                throw "Code.exe not found after installation"
+            }
+        } catch {
+            Write-Host "  Error installing VS Code: $_" -ForegroundColor Red
+            Write-Host "  Please install manually from: https://code.visualstudio.com/" -ForegroundColor Yellow
+            return
+        }
+    }
+    
+    # Install Aspire CLI locally if missing
+    if (-not $aspireInstalled) {
+        Write-Host "`nInstalling Aspire CLI locally..." -ForegroundColor Cyan
+        
+        try {
+            # Create the local aspire directory
+            if (-not (Test-Path $localAspirePath)) {
+                New-Item -ItemType Directory -Path $localAspirePath -Force | Out-Null
+                Write-Host "  Created directory: $localAspirePath" -ForegroundColor Gray
+            }
+            
+            # Download and run the Aspire installation script with custom path
+            Write-Host "  Downloading Aspire installation script..." -ForegroundColor Gray
+            $installScript = Invoke-WebRequest -Uri "https://aspire.dev/install.ps1" -UseBasicParsing
+            
+            if ($installScript.StatusCode -eq 200) {
+                Write-Host "  Installing Aspire CLI to: $localAspirePath" -ForegroundColor Gray
                 
-                # Install Aspire as a local tool
-                Write-Host "  Installing Aspire CLI..." -ForegroundColor Gray
-                & $localDotnetExe tool install aspire --prerelease
+                # Save script to temp file and execute with -InstallPath parameter
+                $tempScriptPath = Join-Path $env:TEMP "aspire-install.ps1"
+                $installScript.Content | Out-File -FilePath $tempScriptPath -Encoding UTF8
                 
-                if ($LASTEXITCODE -eq 0) {
-                    Write-Host "  Aspire CLI installed successfully as local .NET tool." -ForegroundColor Green
+                # Execute the installation script with -InstallPath parameter
+                & $tempScriptPath -InstallPath $localAspirePath
+                
+                # Clean up temp script
+                Remove-Item $tempScriptPath -Force -ErrorAction SilentlyContinue
+                
+                # Verify aspire.exe exists
+                $aspireExePath = Join-Path $localAspirePath "aspire.exe"
+                if (Test-Path $aspireExePath) {
+                    Write-Host "  Aspire CLI installed successfully." -ForegroundColor Green
                     $aspireInstalled = $true
                 } else {
-                    throw "Failed to install Aspire CLI"
+                    throw "aspire.exe not found after installation"
                 }
-            } finally {
-                Pop-Location
+            } else {
+                throw "Failed to download Aspire installation script"
             }
         } catch {
             Write-Host "  Error installing Aspire CLI: $_" -ForegroundColor Red
-            Write-Host "  Please install manually with: dotnet tool install aspire --prerelease" -ForegroundColor Yellow
+            Write-Host "  Please install manually from: https://aspire.dev" -ForegroundColor Yellow
             return
         }
     }
@@ -482,11 +574,12 @@ try {
     }
 }
 
-# Run aspire using local .NET tool
+# Run aspire using local installation
 Write-Host "`nRunning aspire..." -ForegroundColor Cyan
 try {
-    # Use dotnet tool run to execute the local Aspire installation
-    & $localDotnetExe tool run aspire run --non-interactive
+    # Use the local Aspire executable
+    $aspireExePath = Join-Path $localAspirePath "aspire.exe"
+    & $aspireExePath run --non-interactive
 }
 catch {
     Write-Host "Error running aspire: $_" -ForegroundColor Red
