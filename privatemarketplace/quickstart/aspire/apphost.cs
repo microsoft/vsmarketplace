@@ -19,7 +19,10 @@ var marketplace = builder.AddContainer("vscode-private-marketplace", "mcr.micros
 marketplace.RunWithHttpsDevCertificate();
 
 marketplace    
-    .WithEnvironment("Marketplace__BaseUrl", marketplace.GetEndpoint("vscode-private-marketplace"))
+    .WithEnvironment(context =>
+    {
+        context.EnvironmentVariables["Marketplace__BaseUrl"] = marketplace.GetEndpoint("vscode-private-marketplace").Url.ToString();
+    })
     .WithEnvironment("Marketplace__OrganizationName", "Contoso")
     .WithEnvironment("Marketplace__ContactSupportUri", "mailto:privatemktplace@microsoft.com")
     .WithEnvironment("Marketplace__LogsDirectory", "/logs")
