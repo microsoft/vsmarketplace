@@ -7,8 +7,24 @@ $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIde
 
 # If -InstallAdminTemplates parameter is passed, only install templates and exit
 if ($args -contains "-InstallAdminTemplates") {
-    # Set up logging
-    $logFile = Join-Path $env:TEMP "vscode-admin-template-install.log"
+    # Read the marker file first
+    $markerFile = Join-Path $env:TEMP "vscode-admin-template-install.txt"
+    
+    if (-not (Test-Path $markerFile)) {
+        Write-Host "Error: Marker file not found. Cannot determine policy source path." -ForegroundColor Red
+        Write-Host "Expected marker file at: $markerFile" -ForegroundColor Gray
+        exit 1
+    }
+    
+    # Read the policy path from the marker file
+    $vscodePolicyPath = Get-Content -Path $markerFile -Raw
+    $vscodePolicyPath = $vscodePolicyPath.Trim()
+    
+    # Extract root path (parent of policies folder) for log location
+    $rootPath = Split-Path -Parent $vscodePolicyPath
+    
+    # Set up logging in root folder
+    $logFile = Join-Path $rootPath "vscode-admin-template-install.log"
     $errorLogFile = "$logFile.err"
     
     # Start transcript to capture all output
@@ -19,17 +35,6 @@ if ($args -contains "-InstallAdminTemplates") {
         Stop-Transcript
         exit 1
     }
-    
-    # Read the policy path from the marker file
-    $markerFile = Join-Path $env:TEMP "vscode-admin-template-install.txt"
-    if (-not (Test-Path $markerFile)) {
-        Write-Host "Error: Marker file not found. Cannot determine policy source path." -ForegroundColor Red
-        Stop-Transcript
-        exit 1
-    }
-    
-    $vscodePolicyPath = Get-Content -Path $markerFile -Raw
-    $vscodePolicyPath = $vscodePolicyPath.Trim()
     
     Write-Host "Installing VS Code administrative templates..." -ForegroundColor Cyan
     Write-Host "Policy source path: $vscodePolicyPath" -ForegroundColor Gray
@@ -530,8 +535,8 @@ if ($missingPrereqs.Count -gt 0) {
                     $markerFile = Join-Path $env:TEMP "vscode-admin-template-install.txt"
                     Set-Content -Path $markerFile -Value $policiesPath
                     
-                    # Log file path
-                    $logFile = Join-Path $env:TEMP "vscode-admin-template-install.log"
+                    # Log file path in root folder
+                    $logFile = Join-Path $rootPath "vscode-admin-template-install.log"
                     
                     try {
                         # Launch the script with admin privileges
