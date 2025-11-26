@@ -77,7 +77,12 @@ try {
 
 # Check for local .NET SDK installation in quickstart/aspire folder
 Write-Host "Checking for local .NET SDK..." -ForegroundColor Gray
-$localDotnetPath = Join-Path (Resolve-Path $repoPath).Path "privatemarketplace\quickstart\aspire\.dotnet"
+# Use absolute path if repo exists, otherwise construct the expected path
+if (Test-Path $repoPath) {
+    $localDotnetPath = Join-Path (Resolve-Path $repoPath).Path "privatemarketplace\quickstart\aspire\.dotnet"
+} else {
+    $localDotnetPath = Join-Path (Join-Path $PWD $repoPath) "privatemarketplace\quickstart\aspire\.dotnet"
+}
 $localDotnetExePath = Join-Path $localDotnetPath "dotnet.exe"
 
 if (Test-Path $localDotnetExePath) {
