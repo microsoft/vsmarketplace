@@ -392,11 +392,11 @@ if ($missingPrereqs.Count -gt 0) {
 $originalDirectory = Get-Location
 
 # Navigate to the quickstart folder
-Write-Host "`nNavigating to privatemarketplace/quickstart..." -ForegroundColor Cyan
-$quickstartPath = Join-Path $repoPath "privatemarketplace/quickstart"
+Write-Host "`nNavigating to privatemarketplace/quickstart/aspire..." -ForegroundColor Cyan
+$quickstartPath = Join-Path $repoPath "privatemarketplace/quickstart/aspire"
 
 if (-not (Test-Path $quickstartPath)) {
-    Write-Host "Error: privatemarketplace/quickstart folder not found!" -ForegroundColor Red
+    Write-Host "Error: privatemarketplace/quickstart/aspire folder not found!" -ForegroundColor Red
     return
 }
 
