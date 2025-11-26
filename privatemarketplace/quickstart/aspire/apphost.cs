@@ -1,110 +1,152 @@
 #:sdk Aspire.AppHost.Sdk@13.0.0
 using System.Diagnostics;
+using System.Text.Json;
 
+using Aspire.Hosting;
+using Aspire.Hosting.ApplicationModel;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var marketplace = builder.AddContainer("vscode-private-marketplace", "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace")
-    .WithEnvironment("ASPNETCORE_URLS", "https://+:443")
-    .WithHttpsEndpoint(name:"vscode-private-marketplace", targetPort: 443)
-    .WithUrlForEndpoint("vscode-private-marketplace", (annotation) => annotation.DisplayText = "Home")
-    .WithUrl($"https://github.com/mcumming/vsmarketplace/blob/main/privatemarketplace/quickstart/aspire/README.md", "README")
-    .WithBindMount(Path.Combine(Directory.GetCurrentDirectory(), "data", "extensions"), "/extensions")
-    .WithBindMount(Path.Combine(Directory.GetCurrentDirectory(), "data", "logs"), "/logs")
-    .WithOtlpExporter()
-;
-
-marketplace.RunWithHttpsDevCertificate();
-
-marketplace    
-    .WithEnvironment(context =>
-    {
-        context.EnvironmentVariables["Marketplace__BaseUrl"] = marketplace.GetEndpoint("vscode-private-marketplace").Url.ToString();
-    })
-    .WithEnvironment("Marketplace__OrganizationName", "Contoso")
-    .WithEnvironment("Marketplace__ContactSupportUri", "mailto:privatemktplace@microsoft.com")
-    .WithEnvironment("Marketplace__LogsDirectory", "/logs")
-    .WithEnvironment("Marketplace__ExtensionSourceDirectory", "/extensions")
-    .WithEnvironment("Marketplace__Upstreaming__Mode", nameof(MarketplaceUpstreamingMode.SearchAndAssets))
-;
-
-marketplace.WithCommand(
-        name: "open",
-        displayName: "Open VS Code", 
-        executeCommand: async (context) =>
-        {
-            
-            return new ExecuteCommandResult
-            {
-                Success = false,
-                ErrorMessage = "Not implemented yet."
-            };
-        }, 
-        commandOptions: new CommandOptions { 
-            UpdateState = (context) => {
-                var snapshot = context.ResourceSnapshot;
-                var state = snapshot.State;
-
-                // First check if container is running
-                if (state?.Text != "Running")
-                {
-                    return ResourceCommandState.Hidden;
-                }
-
-                // Check for health check status in the resource properties
-                // Look for health check related properties that indicate the container is healthy
-                var healthCheckProperties = snapshot.Properties
-                    .Where(p => p.Name.Contains("health", StringComparison.OrdinalIgnoreCase) ||
-                                p.Name.Contains("Health", StringComparison.OrdinalIgnoreCase))
-                    .ToList();
-
-                // If health checks are present, ensure they're passing
-                if (healthCheckProperties.Any())
-                {
-                    var allHealthy = healthCheckProperties.All(hc =>
-                        hc.Value?.ToString()?.Contains("Healthy", StringComparison.OrdinalIgnoreCase) == true ||
-                        hc.Value?.ToString()?.Contains("Success", StringComparison.OrdinalIgnoreCase) == true);
-
-                    return allHealthy ? ResourceCommandState.Enabled : ResourceCommandState.Disabled;
-                }
-
-                // If no explicit health checks found, check for general container health indicators
-                // Look for any "Status" properties that might indicate health
-                var statusProperties = snapshot.Properties
-                    .Where(p => p.Name.Contains("Status", StringComparison.OrdinalIgnoreCase))
-                    .ToList();
-
-                if (statusProperties.Any())
-                {
-                    var hasGoodStatus = statusProperties.Any(sp =>
-                        sp.Value?.ToString()?.Contains("Healthy", StringComparison.OrdinalIgnoreCase) == true ||
-                        sp.Value?.ToString()?.Contains("Running", StringComparison.OrdinalIgnoreCase) == true ||
-                        sp.Value?.ToString()?.Contains("Ready", StringComparison.OrdinalIgnoreCase) == true);
-
-                    return hasGoodStatus ? ResourceCommandState.Enabled : ResourceCommandState.Disabled;
-                }
-
-                // As a final fallback, if container is running, enable the command
-                // This ensures the command is available even if health check metadata isn't populated yet
-                return ResourceCommandState.Enabled;
-            },
-            Description = "Launch Visual Studio Code connected to this private marketplace.",
-            IconName = "Code",
-            IconVariant = IconVariant.Filled,
-            IsHighlighted = true
-        }
-    );
+var marketplace = builder
+    .AddVSCodePrivateMarketplace("vscode-private-marketplace")
+    .WithMarketplaceConfiguration(
+        organizationName: "Contoso",
+        contactSupportUri: "mailto:privatemktplace@microsoft.com",
+        upstreamingMode: MarketplaceUpstreamingMode.SearchAndAssets)
+    .WithOpenVSCodeCommand();
 
 builder.Build().Run();
 
-enum MarketplaceUpstreamingMode
+public enum MarketplaceUpstreamingMode
 {
     None,
     Search,
     SearchAndAssets
+}
+
+public static class MarketplaceExtensions
+{
+    public static IResourceBuilder<ContainerResource> AddVSCodePrivateMarketplace(
+        this IDistributedApplicationBuilder builder,
+        string name = "vscode-private-marketplace",
+        string containerImage = "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace")
+    {
+        var marketplacePort = builder.Configuration.GetValue<int?>("Marketplace:Port") ?? 0;
+        
+        var marketplace = builder.AddContainer(name, containerImage)
+            .WithEnvironment("ASPNETCORE_URLS", "https://+:443")
+            .WithHttpsEndpoint(
+                port: marketplacePort == 0 ? null : marketplacePort,
+                name: name,
+                targetPort: 443)
+            .WithUrlForEndpoint(name, annotation => annotation.DisplayText = "Home")
+            .WithUrl($"https://github.com/mcumming/vsmarketplace/blob/main/privatemarketplace/quickstart/aspire/README.md", "README")
+            .WithBindMount(Path.Combine(Directory.GetCurrentDirectory(), "data", "extensions"), "/extensions")
+            .WithBindMount(Path.Combine(Directory.GetCurrentDirectory(), "data", "logs"), "/logs")
+            .WithOtlpExporter()
+            .RunWithHttpsDevCertificate();
+
+        // Save allocated port to appsettings.json for future runs
+        if (marketplacePort == 0)
+        {
+            var appsettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
+            builder.Eventing.Subscribe<ResourceEndpointsAllocatedEvent>(marketplace.Resource, (e, ct) =>
+            {
+                var endpoint = e.Resource.Annotations.OfType<EndpointAnnotation>()
+                    .FirstOrDefault(a => a.Name == name);
+                
+                if (endpoint?.Port.HasValue == true)
+                {
+                    var config = new { Marketplace = new { Port = endpoint.Port.Value } };
+                    var json = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
+                    File.WriteAllText(appsettingsPath, json);
+                }
+                return Task.CompletedTask;
+            });
+        }
+
+        return marketplace;
+    }
+
+    public static IResourceBuilder<ContainerResource> WithMarketplaceConfiguration(
+        this IResourceBuilder<ContainerResource> builder,
+        string organizationName,
+        string contactSupportUri,
+        MarketplaceUpstreamingMode upstreamingMode)
+    {
+        return builder
+            .WithEnvironment(context =>
+            {
+                context.EnvironmentVariables["Marketplace__BaseUrl"] = builder.Resource.GetEndpoint("vscode-private-marketplace").Url.ToString();
+            })
+            .WithEnvironment("Marketplace__OrganizationName", organizationName)
+            .WithEnvironment("Marketplace__ContactSupportUri", contactSupportUri)
+            .WithEnvironment("Marketplace__LogsDirectory", "/logs")
+            .WithEnvironment("Marketplace__ExtensionSourceDirectory", "/extensions")
+            .WithEnvironment("Marketplace__Upstreaming__Mode", upstreamingMode.ToString());
+    }
+
+    public static IResourceBuilder<ContainerResource> WithOpenVSCodeCommand(
+        this IResourceBuilder<ContainerResource> builder)
+    {
+        return builder.WithCommand(
+            name: "open",
+            displayName: "Open VS Code",
+            executeCommand: context => Task.FromResult(new ExecuteCommandResult
+            {
+                Success = false,
+                ErrorMessage = "Not implemented yet."
+            }),
+            commandOptions: new CommandOptions
+            {
+                UpdateState = context =>
+                {
+                    var snapshot = context.ResourceSnapshot;
+                    
+                    if (snapshot.State?.Text != "Running")
+                    {
+                        return ResourceCommandState.Hidden;
+                    }
+
+                    var healthCheckProperties = snapshot.Properties
+                        .Where(p => p.Name.Contains("health", StringComparison.OrdinalIgnoreCase))
+                        .ToList();
+
+                    if (healthCheckProperties.Any())
+                    {
+                        var allHealthy = healthCheckProperties.All(hc =>
+                            hc.Value?.ToString()?.Contains("Healthy", StringComparison.OrdinalIgnoreCase) == true ||
+                            hc.Value?.ToString()?.Contains("Success", StringComparison.OrdinalIgnoreCase) == true);
+
+                        return allHealthy ? ResourceCommandState.Enabled : ResourceCommandState.Disabled;
+                    }
+
+                    var statusProperties = snapshot.Properties
+                        .Where(p => p.Name.Contains("Status", StringComparison.OrdinalIgnoreCase))
+                        .ToList();
+
+                    if (statusProperties.Any())
+                    {
+                        var hasGoodStatus = statusProperties.Any(sp =>
+                            sp.Value?.ToString()?.Contains("Healthy", StringComparison.OrdinalIgnoreCase) == true ||
+                            sp.Value?.ToString()?.Contains("Running", StringComparison.OrdinalIgnoreCase) == true ||
+                            sp.Value?.ToString()?.Contains("Ready", StringComparison.OrdinalIgnoreCase) == true);
+
+                        return hasGoodStatus ? ResourceCommandState.Enabled : ResourceCommandState.Disabled;
+                    }
+
+                    return ResourceCommandState.Enabled;
+                },
+                Description = "Launch Visual Studio Code connected to this private marketplace.",
+                IconName = "Code",
+                IconVariant = IconVariant.Filled,
+                IsHighlighted = true
+            });
+    }
 }
 
 /// <summary>
