@@ -17,6 +17,7 @@ var marketplace = builder
         organizationName: "Contoso",
         contactSupportUri: "mailto:privatemktplace@microsoft.com",
         upstreamingMode: MarketplaceUpstreamingMode.SearchAndAssets)
+    .WithOpenGroupPolicyEditorCommand()
     .WithOpenVSCodeCommand();
 
 builder.Build().Run();
@@ -93,14 +94,59 @@ public static class MarketplaceExtensions
     public static IResourceBuilder<ContainerResource> WithOpenVSCodeCommand(
         this IResourceBuilder<ContainerResource> builder)
     {
+        var resource = builder.Resource;
+        
         return builder.WithCommand(
             name: "open",
             displayName: "Open VS Code",
-            executeCommand: context => Task.FromResult(new ExecuteCommandResult
+            executeCommand: context =>
             {
-                Success = false,
-                ErrorMessage = "Not implemented yet."
-            }),
+                try
+                {
+                    var endpoint = resource.Annotations.OfType<EndpointAnnotation>()
+                        .FirstOrDefault(e => e.Name == "vscode-private-marketplace");
+
+                    if (endpoint?.AllocatedEndpoint == null)
+                    {
+                        return Task.FromResult(new ExecuteCommandResult
+                        {
+                            Success = false,
+                            ErrorMessage = "Marketplace endpoint not allocated."
+                        });
+                    }
+
+                    var marketplaceUrl = endpoint.AllocatedEndpoint.UriString;
+
+                    // Find private VS Code install in .vscode folder
+                    var vscodePath = Path.Combine(Directory.GetCurrentDirectory(), ".vscode", "Code.exe");
+
+                    if (!File.Exists(vscodePath))
+                    {
+                        return Task.FromResult(new ExecuteCommandResult
+                        {
+                            Success = false,
+                            ErrorMessage = "Private VS Code installation not found in .vscode folder."
+                        });
+                    }
+
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = vscodePath,
+                        Arguments = $"--extensionGalleryServiceUrl {marketplaceUrl}",
+                        UseShellExecute = true
+                    });
+
+                    return Task.FromResult(new ExecuteCommandResult { Success = true });
+                }
+                catch (Exception ex)
+                {
+                    return Task.FromResult(new ExecuteCommandResult
+                    {
+                        Success = false,
+                        ErrorMessage = $"Failed to launch VS Code: {ex.Message}"
+                    });
+                }
+            },
             commandOptions: new CommandOptions
             {
                 UpdateState = context =>
@@ -145,6 +191,59 @@ public static class MarketplaceExtensions
                 IconName = "Code",
                 IconVariant = IconVariant.Filled,
                 IsHighlighted = true
+            });
+    }
+
+    public static IResourceBuilder<ContainerResource> WithOpenGroupPolicyEditorCommand(
+        this IResourceBuilder<ContainerResource> builder)
+    {
+        return builder.WithCommand(
+            name: "gpedit",
+            displayName: "Open Group Policy Editor",
+            executeCommand: context =>
+            {
+                try
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "gpedit.msc",
+                        UseShellExecute = true
+                    });
+
+                    return Task.FromResult(new ExecuteCommandResult { Success = true });
+                }
+                catch (Exception ex)
+                {
+                    return Task.FromResult(new ExecuteCommandResult
+                    {
+                        Success = false,
+                        ErrorMessage = $"Failed to launch Group Policy Editor: {ex.Message}"
+                    });
+                }
+            },
+            commandOptions: new CommandOptions
+            {
+                UpdateState = context =>
+                {
+                    var snapshot = context.ResourceSnapshot;
+                    
+                    if (snapshot.State?.Text != "Running")
+                    {
+                        return ResourceCommandState.Hidden;
+                    }
+
+                    // Check if VSCode.admx exists in PolicyDefinitions folder
+                    var policyDefinitionsPath = Path.Combine(
+                        Environment.GetFolderPath(Environment.SpecialFolder.Windows),
+                        "PolicyDefinitions",
+                        "VSCode.admx");
+
+                    return File.Exists(policyDefinitionsPath) ? ResourceCommandState.Enabled : ResourceCommandState.Hidden;
+                },
+                Description = "Launch the Local Group Policy Editor to configure VS Code policies.",
+                IconName = "Settings",
+                IconVariant = IconVariant.Filled,
+                IsHighlighted = false
             });
     }
 }
