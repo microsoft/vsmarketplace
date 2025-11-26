@@ -20,7 +20,8 @@ $repoExists = $false
 $wingetAvailable = $false
 
 # Define repository details
-$repoUrl = "https://github.com/microsoft/vsmarketplace"
+$repoUrl = "https://github.com/mmcumming/vsmarketplace"
+$repoBranch = "main"  # Change this to test different branches
 $repoPath = $Path
 
 # Check Docker
@@ -282,10 +283,10 @@ if ($missingPrereqs.Count -gt 0) {
 
         if ($useGit) {
             # Clone using git
-            Write-Host "  Cloning repository using git..." -ForegroundColor Gray
+            Write-Host "  Cloning repository (branch: $repoBranch) using git..." -ForegroundColor Gray
             
             try {
-                git clone $repoUrl $repoPath
+                git clone --branch $repoBranch $repoUrl $repoPath
                 Write-Host "  Repository cloned successfully." -ForegroundColor Green
                 $repoExists = $true
             }
@@ -298,9 +299,9 @@ if ($missingPrereqs.Count -gt 0) {
 
         if (-not $useGit) {
             # Download as ZIP (fallback)
-            Write-Host "  Downloading repository as ZIP..." -ForegroundColor Gray
-            $zipUrl = "$repoUrl/archive/refs/heads/main.zip"
-            $tempZipPath = Join-Path $env:TEMP "vsmarketplace-main.zip"
+            Write-Host "  Downloading repository as ZIP (branch: $repoBranch)..." -ForegroundColor Gray
+            $zipUrl = "$repoUrl/archive/refs/heads/$repoBranch.zip"
+            $tempZipPath = Join-Path $env:TEMP "vsmarketplace-$repoBranch.zip"
             
             try {
                 Invoke-WebRequest -Uri $zipUrl -OutFile $tempZipPath -UseBasicParsing
@@ -314,7 +315,7 @@ if ($missingPrereqs.Count -gt 0) {
                 Expand-Archive -Path $tempZipPath -DestinationPath $tempExtractPath -Force
                 
                 # Move the extracted folder to the target location
-                $extractedFolder = Join-Path $tempExtractPath "vsmarketplace-main"
+                $extractedFolder = Join-Path $tempExtractPath "vsmarketplace-$repoBranch"
                 if (Test-Path $extractedFolder) {
                     Move-Item -Path $extractedFolder -Destination $repoPath -Force
                 }
