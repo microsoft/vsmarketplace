@@ -7,8 +7,16 @@ $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIde
 
 # If -InstallAdminTemplates parameter is passed, only install templates and exit
 if ($args -contains "-InstallAdminTemplates") {
+    # Set up logging
+    $logFile = Join-Path $env:TEMP "vscode-admin-template-install.log"
+    $errorLogFile = "$logFile.err"
+    
+    # Start transcript to capture all output
+    Start-Transcript -Path $logFile -Force
+    
     if (-not $isAdmin) {
         Write-Host "Error: Must run as administrator to install administrative templates." -ForegroundColor Red
+        Stop-Transcript
         exit 1
     }
     
@@ -16,6 +24,7 @@ if ($args -contains "-InstallAdminTemplates") {
     $markerFile = Join-Path $env:TEMP "vscode-admin-template-install.txt"
     if (-not (Test-Path $markerFile)) {
         Write-Host "Error: Marker file not found. Cannot determine policy source path." -ForegroundColor Red
+        Stop-Transcript
         exit 1
     }
     
@@ -23,16 +32,28 @@ if ($args -contains "-InstallAdminTemplates") {
     $vscodePolicyPath = $vscodePolicyPath.Trim()
     
     Write-Host "Installing VS Code administrative templates..." -ForegroundColor Cyan
+    Write-Host "Policy source path: $vscodePolicyPath" -ForegroundColor Gray
     
     try {
         $policyDefinitionsPath = Join-Path $env:WINDIR "PolicyDefinitions"
+        Write-Host "Policy destination path: $policyDefinitionsPath" -ForegroundColor Gray
         
         # Copy main ADMX file
         $admxSource = Join-Path $vscodePolicyPath "VSCode.admx"
         $admxDest = Join-Path $policyDefinitionsPath "VSCode.admx"
         
+        Write-Host "Looking for ADMX file at: $admxSource" -ForegroundColor Gray
+        
         if (-not (Test-Path $admxSource)) {
             Write-Host "Error: VSCode.admx not found at: $admxSource" -ForegroundColor Red
+            Write-Host "Checking if policies folder exists..." -ForegroundColor Gray
+            if (Test-Path $vscodePolicyPath) {
+                Write-Host "Policies folder exists. Contents:" -ForegroundColor Gray
+                Get-ChildItem -Path $vscodePolicyPath | ForEach-Object { Write-Host "  $($_.Name)" -ForegroundColor Gray }
+            } else {
+                Write-Host "Policies folder does not exist at: $vscodePolicyPath" -ForegroundColor Red
+            }
+            Stop-Transcript
             exit 1
         }
         
@@ -41,6 +62,7 @@ if ($args -contains "-InstallAdminTemplates") {
         
         # Get all language folders in Windows PolicyDefinitions
         $windowsLangFolders = Get-ChildItem -Path $policyDefinitionsPath -Directory | Where-Object { $_.Name -match '^[a-z]{2}-[a-z]{2}$' }
+        Write-Host "Found $($windowsLangFolders.Count) language folders in Windows PolicyDefinitions" -ForegroundColor Gray
         
         # Copy matching language ADML files
         $copiedCount = 0
@@ -57,9 +79,18 @@ if ($args -contains "-InstallAdminTemplates") {
         }
         
         Write-Host "Administrative templates installed successfully ($copiedCount language files)." -ForegroundColor Green
+        Stop-Transcript
         exit 0
     } catch {
         Write-Host "Error installing administrative templates: $_" -ForegroundColor Red
+        Write-Host "Error details: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "Stack trace: $($_.ScriptStackTrace)" -ForegroundColor Gray
+        Stop-Transcript
+        
+        # Copy transcript to error log as well
+        if (Test-Path $logFile) {
+            Copy-Item -Path $logFile -Destination $errorLogFile -Force
+        }
         exit 1
     }
 }
@@ -499,26 +530,25 @@ if ($missingPrereqs.Count -gt 0) {
                     $markerFile = Join-Path $env:TEMP "vscode-admin-template-install.txt"
                     Set-Content -Path $markerFile -Value $policiesPath
                     
-                    # Create log file for admin template installation output
+                    # Log file path
                     $logFile = Join-Path $env:TEMP "vscode-admin-template-install.log"
                     
                     try {
-                        # Launch the script with admin privileges and redirect output to log file
-                        $process = Start-Process -FilePath "pwsh.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -InstallAdminTemplates" -Verb RunAs -Wait -PassThru -RedirectStandardOutput $logFile -RedirectStandardError "$logFile.err"
+                        # Launch the script with admin privileges
+                        $process = Start-Process -FilePath "pwsh.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -InstallAdminTemplates" -Verb RunAs -Wait -PassThru
                         
                         if ($process.ExitCode -eq 0) {
                             Write-Host "  Administrative templates installed successfully." -ForegroundColor Green
                         } else {
                             Write-Host "    Warning: Administrative template installation exited with code $($process.ExitCode)" -ForegroundColor Yellow
-                            Write-Host "    Log file: $logFile" -ForegroundColor Gray
-                            if (Test-Path "$logFile.err") {
-                                Write-Host "    Error log: $logFile.err" -ForegroundColor Gray
-                            }
                         }
                         
                         # Display log file location for debugging
                         if (Test-Path $logFile) {
                             Write-Host "    Installation log: $logFile" -ForegroundColor Gray
+                        }
+                        if (Test-Path "$logFile.err") {
+                            Write-Host "    Error log: $logFile.err" -ForegroundColor Gray
                         }
                     } catch {
                         Write-Host "    Warning: Could not install administrative templates: $_" -ForegroundColor Yellow
