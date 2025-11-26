@@ -11,6 +11,7 @@ var marketplace = builder.AddContainer("vscode-private-marketplace", "mcr.micros
     .WithEnvironment("ASPNETCORE_URLS", "https://+:443")
     .WithHttpsEndpoint(name:"vscode-private-marketplace", targetPort: 443)
     .WithUrlForEndpoint("vscode-private-marketplace", (annotation) => annotation.DisplayText = "Home")
+    .WithUrl($"https://github.com/mcumming/vsmarketplace/blob/main/privatemarketplace/quickstart/aspire/README.md", "README")
     .WithBindMount(Path.Combine(Directory.GetCurrentDirectory(), "data", "extensions"), "/extensions")
     .WithBindMount(Path.Combine(Directory.GetCurrentDirectory(), "data", "logs"), "/logs")
     .WithOtlpExporter()
