@@ -770,22 +770,42 @@ finally {
     
     if ($cleanupResponse -eq 'y') {
         Write-Host "Removing temporary folder..." -ForegroundColor Yellow
+        
+        # Track cleanup failures
+        $cleanupErrors = @()
+        
+        # Navigate to user profile folder before removing temp folder if we're currently in it
         try {
-            # Navigate to user profile folder before removing temp folder if we're currently in it
             $currentLocation = (Get-Location).Path
             if ($currentLocation.StartsWith($rootPath, [StringComparison]::OrdinalIgnoreCase)) {
                 Set-Location $env:USERPROFILE
                 Write-Host "Navigated to profile folder: $env:USERPROFILE" -ForegroundColor Gray
             }
-            
+        } catch {
+            Write-Host "Warning: Could not navigate to profile folder: $_" -ForegroundColor Yellow
+            $cleanupErrors += "Failed to navigate to profile folder"
+        }
+        
+        # Remove temporary folder
+        try {
             if (Test-Path $rootPath) {
-                Remove-Item -Path $rootPath -Recurse -Force
+                Remove-Item -Path $rootPath -Recurse -Force -ErrorAction Stop
                 Write-Host "Temporary folder removed successfully." -ForegroundColor Green
             } else {
                 Write-Host "Temporary folder not found." -ForegroundColor Gray
             }
         } catch {
             Write-Host "Error removing temporary folder: $_" -ForegroundColor Red
+            $cleanupErrors += "Failed to remove temporary folder: $_"
+        }
+        
+        # Display cleanup summary
+        if ($cleanupErrors.Count -gt 0) {
+            Write-Host ""
+            Write-Host "Some cleanup operations failed:" -ForegroundColor Yellow
+            foreach ($error in $cleanupErrors) {
+                Write-Host "  - $error" -ForegroundColor Yellow
+            }
             Write-Host "You can manually delete: $rootPath" -ForegroundColor Yellow
         }
     } else {
