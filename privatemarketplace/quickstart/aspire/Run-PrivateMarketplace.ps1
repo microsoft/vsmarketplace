@@ -7,21 +7,14 @@ $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIde
 
 # If -InstallAdminTemplates parameter is passed, only install templates and exit
 if ($args -contains "-InstallAdminTemplates") {
-    # Read the marker file first
-    $markerFile = Join-Path $env:TEMP "vscode-admin-template-install.txt"
-    
-    if (-not (Test-Path $markerFile)) {
-        Write-Host "Error: Marker file not found. Cannot determine policy source path." -ForegroundColor Red
-        Write-Host "Expected marker file at: $markerFile" -ForegroundColor Gray
+    if (-not $isAdmin) {
+        Write-Host "Error: Must run as administrator to install administrative templates." -ForegroundColor Red
         exit 1
     }
     
-    # Read the policy path from the marker file
-    $vscodePolicyPath = Get-Content -Path $markerFile -Raw
-    $vscodePolicyPath = $vscodePolicyPath.Trim()
-    
-    # Extract root path (parent of policies folder) for log location
-    $rootPath = Split-Path -Parent $vscodePolicyPath
+    # Determine paths based on script location
+    $rootPath = Join-Path $env:TEMP "privatemarketplace-quickstart"
+    $vscodePolicyPath = Join-Path $rootPath "policies"
     
     # Set up logging in root folder
     $logFile = Join-Path $rootPath "vscode-admin-template-install.log"
@@ -30,13 +23,8 @@ if ($args -contains "-InstallAdminTemplates") {
     # Start transcript to capture all output
     Start-Transcript -Path $logFile -Force
     
-    if (-not $isAdmin) {
-        Write-Host "Error: Must run as administrator to install administrative templates." -ForegroundColor Red
-        Stop-Transcript
-        exit 1
-    }
-    
     Write-Host "Installing VS Code administrative templates..." -ForegroundColor Cyan
+    Write-Host "Root path: $rootPath" -ForegroundColor Gray
     Write-Host "Policy source path: $vscodePolicyPath" -ForegroundColor Gray
     
     try {
@@ -531,10 +519,6 @@ if ($missingPrereqs.Count -gt 0) {
                     Write-Host "  Installing VS Code administrative templates..." -ForegroundColor Gray
                     $scriptPath = $MyInvocation.MyCommand.Path
                     
-                    # Create a marker file to signal that we're in the admin template installation phase
-                    $markerFile = Join-Path $env:TEMP "vscode-admin-template-install.txt"
-                    Set-Content -Path $markerFile -Value $policiesPath
-                    
                     # Log file path in root folder
                     $logFile = Join-Path $rootPath "vscode-admin-template-install.log"
                     
@@ -559,11 +543,6 @@ if ($missingPrereqs.Count -gt 0) {
                         Write-Host "    Warning: Could not install administrative templates: $_" -ForegroundColor Yellow
                         if (Test-Path $logFile) {
                             Write-Host "    Log file: $logFile" -ForegroundColor Gray
-                        }
-                    } finally {
-                        # Clean up marker file
-                        if (Test-Path $markerFile) {
-                            Remove-Item $markerFile -Force -ErrorAction SilentlyContinue
                         }
                     }
                 } else {
