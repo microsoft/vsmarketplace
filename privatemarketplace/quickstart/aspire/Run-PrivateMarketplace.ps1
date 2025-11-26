@@ -756,13 +756,13 @@ finally {
     Write-Host "`n" -ForegroundColor Cyan
     Write-Host "Aspire has exited." -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "IMPORTANT: Unset the Private Marketplace URL Policy" -ForegroundColor Yellow
+    Write-Host "IMPORTANT: Unset the Extension Gallery Service URL Policy" -ForegroundColor Yellow
     Write-Host "===========================================" -ForegroundColor Yellow
     Write-Host "To restore normal VS Code Marketplace access, you need to unset the" -ForegroundColor Gray
-    Write-Host "'Private Marketplace URL' Group Policy setting:" -ForegroundColor Gray
+    Write-Host "'Extension Gallery Service URL' Group Policy setting:" -ForegroundColor Gray
     Write-Host "  1. Open Group Policy Editor (gpedit.msc)" -ForegroundColor Gray
-    Write-Host "  2. Navigate to: User Configuration > Administrative Templates > Visual Studio Code" -ForegroundColor Gray
-    Write-Host "  3. Set 'Private Marketplace URL' to 'Not Configured'" -ForegroundColor Gray
+    Write-Host "  2. Navigate to: User Configuration > Administrative Templates > Visual Studio Code > Extensions" -ForegroundColor Gray
+    Write-Host "  3. Set 'Extension Gallery Service URL' to 'Not Configured'" -ForegroundColor Gray
     Write-Host ""
     Write-Host "Temporary files location: $rootPath" -ForegroundColor Gray
     Write-Host ""
