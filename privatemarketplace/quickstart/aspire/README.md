@@ -44,6 +44,8 @@ The Aspire dashboard is your control center for managing the private marketplace
 
 In the dashboard, you'll see a resource named **`vscode-private-marketplace`** - this is your private marketplace container.
 
+![Aspire Dashboard Resource Table](images/aspire-resource-table.png)
+
 ---
 
 ## Part 2: Configuring VS Code
@@ -53,13 +55,21 @@ Now let's configure VS Code to use your private marketplace instead of the publi
 ### Step 1: Get Your Marketplace URL
 
 1. In the Aspire dashboard, find the **`vscode-private-marketplace`** resource
-2. In the **Endpoints** section, click the **Home** link
+
+   ![Aspire Dashboard Resource Table](images/aspire-resource-table.png)
+
+2. In the **URLs** column, click the **Home** link
    - This opens your marketplace's web interface in a new browser tab
-3. On the marketplace home page, you'll see:
-   - **Private Marketplace URL** at the top with a copy icon (📋)
-   - **Published Extensions** section showing sample extensions already available
-4. Click the **copy icon** next to the marketplace URL to copy it to your clipboard
+3. On the marketplace home page, you'll see the Private Marketplace URL at the top with a copy icon, and the Published Extensions section below
+
+   ![Marketplace Home Page](images/marketplace-home.png)
+
+4. Click the **copy icon** (blue button on the right) next to the marketplace URL to copy it to your clipboard
    - You'll need this URL in the next step
+
+The quickstart includes three sample extensions preloaded in the marketplace:
+
+![Published Extensions](images/published-extensions.png)
 
 **Tip**: Keep the marketplace home page open in a browser tab - you'll refer to it throughout the quickstart.
 
@@ -73,11 +83,17 @@ Now let's configure VS Code to use your private marketplace instead of the publi
 
 4. From the Actions menu, select **Open Group Policy Editor**
    - **Note**: If this option doesn't appear, see the [Troubleshooting](#troubleshooting) section below
-5. In the Group Policy Editor window that opens:
+5. In the Group Policy Editor window that opens, navigate to the Extensions folder:
+
+   ![Group Policy Editor](images/gpedit-extensions.png)
+
    - Navigate to: **User Configuration → Administrative Templates → Visual Studio Code → Extensions**
    - Double-click **Extension Gallery Service URL**
-   - Select **Enabled**
-   - **Paste** the marketplace URL you copied earlier into the URL field
+   - In the settings window, select **Enabled**
+   - **Paste** the marketplace URL you copied earlier into the **ExtensionGalleryServiceUrl** field
+   
+   ![Extension Gallery Service URL Setting](images/gpedit-setting.png)
+
    - Click **OK**
 6. Close the Group Policy Editor
 
@@ -90,8 +106,13 @@ You configured Windows Group Policy to redirect VS Code's extension marketplace 
 2. Click the **Actions** button (⋮) for the **`vscode-private-marketplace`** resource
 3. Select **Open VS Code** from the menu
    - This launches the portable VS Code instance configured to use your private marketplace
-4. Once VS Code opens, click the Extensions icon in the sidebar (or press `Ctrl+Shift+X`)
-5. You'll see only the sample extensions from your private marketplace
+4. Once VS Code opens, **sign in to GitHub**:
+   - Click the **Accounts** icon in the lower-left corner (or the profile icon)
+   - Select **Sign in with GitHub**
+   - Complete the authentication process in your browser
+   - **Note**: You must sign in to GitHub before extensions will be available
+5. After signing in, click the Extensions icon in the sidebar (or press `Ctrl+Shift+X`)
+6. You'll see only the sample extensions from your private marketplace
 
 **Congratulations!** VS Code is now connected to your private marketplace.
 
@@ -107,37 +128,18 @@ The quickstart includes sample extensions, but you'll want to add your own.
 
 **Download VSIX Files**
 
-Choose one of these methods:
+To download extension VSIX files from the public VS Code Marketplace:
 
-**Option A: From VS Code Marketplace Website**
-1. Visit [marketplace.visualstudio.com](https://marketplace.visualstudio.com/)
-2. Search for the extension you want
-3. Click the **Download Extension** link on the right side of the extension page
-4. Save the `.vsix` file to your computer
-
-**Option B: From VS Code**
-1. Open VS Code (any instance)
+1. Open VS Code (any instance connected to the public marketplace)
 2. Press `Ctrl+Shift+X` to open Extensions
 3. Find the extension you want
 4. Right-click the extension → **Copy Download Link**
 5. Paste the link in your browser to download the `.vsix` file
 
-**Option C: Package Your Own Extension**
-```powershell
-cd your-extension-directory
-vsce package
-```
-
 **Add Extensions to the Marketplace**
 
 1. Open File Explorer and navigate to: `$env:TEMP\privatemarketplace-quickstart\data\extensions`
 2. Copy your `.vsix` files into this folder
-3. Return to your terminal running Aspire and press `Ctrl+C` to stop it
-4. Restart Aspire:
-   ```powershell
-   cd $env:TEMP\privatemarketplace-quickstart
-   aspire run
-   ```
 5. Refresh your marketplace home page in the browser - your new extensions will appear!
 6. In VS Code, reload the Extensions view to see the new extensions
 
@@ -150,7 +152,52 @@ Monitor what's happening in your marketplace:
 3. Or select **Structured logs** for formatted, searchable logs
 4. Use logs to troubleshoot issues or monitor extension requests
 
-### Scenario 3: Managing the Marketplace Container
+### Scenario 3: Restricting Extensions to Specific Publishers
+
+You can configure VS Code to only allow extensions from specific publishers, such as your organization's internal publisher.
+
+**Configure Allowed Extensions Policy**
+
+1. In the Aspire dashboard, click **Actions** (⋮) for **`vscode-private-marketplace`**
+2. Select **Open Group Policy Editor**
+3. Navigate to: **User Configuration → Administrative Templates → Visual Studio Code → Extensions**
+4. Double-click **Allowed Extensions**
+5. Select **Enabled**
+6. In the **AllowedExtensions** field, enter the following JSON to allow only Contoso extensions:
+   ```json
+   {"Contoso": true}
+   ```
+7. Click **OK** and close the Group Policy Editor
+8. Restart VS Code (close and reopen using the **Open VS Code** command in the Aspire dashboard)
+9. In the Extensions view, you'll now see only extensions from the Contoso publisher
+
+**What just happened?**
+The `AllowedExtensions` policy controls which extensions can be installed. By setting `"Contoso": true`, you've restricted VS Code to only show and install extensions published by Contoso. All other publishers are blocked.
+
+**Other Allowed Extensions Examples:**
+
+To allow multiple publishers:
+```json
+{"Contoso": true, "microsoft": true}
+```
+
+To allow specific extensions only:
+```json
+{"Contoso.contosocopilot": true, "Contoso.contosooss": true}
+```
+
+To block a specific extension from an allowed publisher:
+```json
+{"Contoso": true, "Contoso.contosopack": false}
+```
+
+**Restore Default (Allow All Extensions):**
+1. Return to the **Allowed Extensions** policy in Group Policy Editor
+2. Select **Not Configured**
+3. Click **OK**
+4. Restart VS Code
+
+### Scenario 4: Managing the Marketplace Container
 
 Control your marketplace lifecycle:
 
