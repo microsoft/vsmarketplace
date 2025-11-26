@@ -1,9 +1,5 @@
 # PowerShell script to download and run the VS Marketplace repository
 
-param(
-    [string]$Path = "./vsmarketplace"
-)
-
 $ErrorActionPreference = "Stop"
 
 Write-Host "Private Marketplace for VS Code Quickstart" -ForegroundColor Cyan
@@ -22,7 +18,7 @@ $wingetAvailable = $false
 # Define repository details
 $repoUrl = "https://github.com/mcumming/vsmarketplace"
 $repoBranch = "main"  # Change this to test different branches
-$repoPath = $Path
+$repoPath = Join-Path $env:TEMP "vsmarketplace-quickstart"
 $dotnetVersion = "10.0.100"  # Version of .NET to install locally
 
 # Check Docker
@@ -44,34 +40,42 @@ try {
     }
 }
 
-# Check Aspire CLI
+# Check Aspire CLI (local .NET tool)
 Write-Host "Checking for Aspire CLI..." -ForegroundColor Gray
-try {
-    $aspireVersionOutput = aspire --version 2>$null
-    if ($LASTEXITCODE -eq 0) {
-        # Extract version number (format: "13.0.0" or similar)
-        if ($aspireVersionOutput -match '(\d+)\.(\d+)\.(\d+)') {
-            $majorVersion = [int]$matches[1]
-            if ($majorVersion -ge 13) {
-                Write-Host "  Aspire CLI detected: $aspireVersionOutput" -ForegroundColor Green
-                $aspireInstalled = $true
-            } else {
-                Write-Host "  Aspire CLI version $aspireVersionOutput found, but version 13+ required" -ForegroundColor Yellow
-                throw "Aspire CLI version too old"
-            }
-        } else {
-            Write-Host "  Aspire CLI detected: $aspireVersionOutput" -ForegroundColor Green
-            $aspireInstalled = $true
-        }
-    } else {
-        throw "Aspire CLI not found"
-    }
-} catch {
-    Write-Host "  Aspire CLI 13+ not found" -ForegroundColor Yellow
+
+# If repo doesn't exist, Aspire can't exist either (depends on local .NET)
+if (-not (Test-Path $repoPath)) {
+    Write-Host "  Aspire CLI not found (repository not present)" -ForegroundColor Yellow
     $missingPrereqs += @{
         Name = "Aspire CLI (version 13+)"
-        InstallMethod = "script"
-        ManualUrl = "https://aspire.dev"
+        InstallMethod = "dotnet-tool"
+        ManualUrl = "https://learn.microsoft.com/dotnet/aspire"
+    }
+} else {
+    # Check if .NET tool manifest exists and Aspire is installed
+    $toolManifestPath = Join-Path $repoPath "privatemarketplace/quickstart/aspire/.config/dotnet-tools.json"
+    $aspireToolInstalled = $false
+    
+    if (Test-Path $toolManifestPath) {
+        try {
+            $manifest = Get-Content $toolManifestPath -Raw | ConvertFrom-Json
+            if ($manifest.tools."aspire") {
+                $aspireToolInstalled = $true
+                Write-Host "  Aspire CLI found in tool manifest" -ForegroundColor Green
+                $aspireInstalled = $true
+            }
+        } catch {
+            Write-Host "  Error reading tool manifest" -ForegroundColor Yellow
+        }
+    }
+    
+    if (-not $aspireToolInstalled) {
+        Write-Host "  Aspire CLI not found as local .NET tool" -ForegroundColor Yellow
+        $missingPrereqs += @{
+            Name = "Aspire CLI (version 13+)"
+            InstallMethod = "dotnet-tool"
+            ManualUrl = "https://learn.microsoft.com/dotnet/aspire"
+        }
     }
 }
 
@@ -186,8 +190,8 @@ if ($missingPrereqs.Count -gt 0) {
             if ($prereq.ManualUrl) {
                 Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
             }
-        } elseif ($prereq.InstallMethod -eq "script") {
-            Write-Host "  - $($prereq.Name): via installation script" -ForegroundColor Green
+        } elseif ($prereq.InstallMethod -eq "dotnet-tool") {
+            Write-Host "  - $($prereq.Name): via dotnet tool install" -ForegroundColor Green
             if ($prereq.ManualUrl) {
                 Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
             }
@@ -220,12 +224,12 @@ if ($missingPrereqs.Count -gt 0) {
     
     Write-Host "`n=== Installing Prerequisites ===" -ForegroundColor Cyan
     
-    # Download repository first if missing (needed for local .NET SDK installation)
+    # Download quickstart/aspire folder if missing (needed for local .NET SDK installation)
     if (-not $repoExists) {
-        Write-Host "`nDownloading VS Marketplace Repository..." -ForegroundColor Cyan
+        Write-Host "`nDownloading quickstart files..." -ForegroundColor Cyan
         
-        # Download as ZIP
-        Write-Host "  Downloading repository as ZIP (branch: $repoBranch)..." -ForegroundColor Gray
+        # Download only the privatemarketplace/quickstart folder
+        Write-Host "  Downloading from repository (branch: $repoBranch)..." -ForegroundColor Gray
         $zipUrl = "$repoUrl/archive/refs/heads/$repoBranch.zip"
         $tempZipPath = Join-Path $env:TEMP "vsmarketplace-$repoBranch.zip"
         
@@ -233,31 +237,39 @@ if ($missingPrereqs.Count -gt 0) {
             Invoke-WebRequest -Uri $zipUrl -OutFile $tempZipPath -UseBasicParsing
             Write-Host "  ZIP downloaded successfully." -ForegroundColor Green
             
-            Write-Host "  Extracting ZIP file..." -ForegroundColor Gray
+            Write-Host "  Extracting quickstart folder..." -ForegroundColor Gray
             $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-extract"
             if (Test-Path $tempExtractPath) {
                 Remove-Item -Path $tempExtractPath -Recurse -Force
             }
             Expand-Archive -Path $tempZipPath -DestinationPath $tempExtractPath -Force
             
-            # Move the extracted folder to the target location
-            $extractedFolder = Join-Path $tempExtractPath "vsmarketplace-$repoBranch"
-            if (Test-Path $extractedFolder) {
-                Move-Item -Path $extractedFolder -Destination $repoPath -Force
+            # Copy only the privatemarketplace/quickstart folder to the target location
+            $extractedQuickstartFolder = Join-Path $tempExtractPath "vsmarketplace-$repoBranch\privatemarketplace\quickstart"
+            if (Test-Path $extractedQuickstartFolder) {
+                # Create the target structure
+                $targetQuickstartPath = Join-Path $repoPath "privatemarketplace\quickstart"
+                New-Item -ItemType Directory -Path $targetQuickstartPath -Force | Out-Null
+                
+                # Copy the quickstart contents
+                Copy-Item -Path "$extractedQuickstartFolder\*" -Destination $targetQuickstartPath -Recurse -Force
+                Write-Host "  Quickstart files copied successfully." -ForegroundColor Green
+            } else {
+                throw "Quickstart folder not found in downloaded archive"
             }
             
             # Clean up temporary files
             Remove-Item -Path $tempZipPath -Force
             Remove-Item -Path $tempExtractPath -Recurse -Force
-            Write-Host "  Extraction complete." -ForegroundColor Green
+            Write-Host "  Download complete." -ForegroundColor Green
             $repoExists = $true
             
-            # Now that repo exists, recalculate the absolute path for local .NET SDK
+            # Now that quickstart exists, recalculate the absolute path for local .NET SDK
             $localDotnetPath = Join-Path (Resolve-Path $repoPath).Path "privatemarketplace\quickstart\aspire\.dotnet"
         }
         catch {
-            Write-Host "  Error downloading or extracting ZIP: $_" -ForegroundColor Red
-            Write-Host "  Please download the repository manually from: $repoUrl" -ForegroundColor Yellow
+            Write-Host "  Error downloading or extracting files: $_" -ForegroundColor Red
+            Write-Host "  Please download manually from: $repoUrl/tree/$repoBranch/privatemarketplace/quickstart" -ForegroundColor Yellow
             return
         }
     }
@@ -334,51 +346,38 @@ if ($missingPrereqs.Count -gt 0) {
         }
     }
     
-    # Install Aspire CLI if missing
+    # Install Aspire CLI as local .NET tool if missing
     if (-not $aspireInstalled) {
-        Write-Host "`nInstalling Aspire CLI..." -ForegroundColor Cyan
+        Write-Host "`nInstalling Aspire CLI as local .NET tool..." -ForegroundColor Cyan
         
         try {
-            # Download and run the installation script
-            Write-Host "  Downloading installation script..." -ForegroundColor Gray
-            $installScript = Invoke-WebRequest -Uri "https://aspire.dev/install.ps1" -UseBasicParsing
+            $aspirePath = Join-Path $repoPath "privatemarketplace/quickstart/aspire"
             
-            if ($installScript.StatusCode -eq 200) {
-                Write-Host "  Executing installation script..." -ForegroundColor Gray
-                # Execute the script
-                Invoke-Expression $installScript.Content
+            # Use the local .NET SDK to install Aspire
+            $localDotnetExe = Join-Path $localDotnetPath "dotnet.exe"
+            
+            # Create tool manifest if it doesn't exist
+            Write-Host "  Creating .NET tool manifest..." -ForegroundColor Gray
+            Push-Location $aspirePath
+            try {
+                & $localDotnetExe new tool-manifest --force 2>$null | Out-Null
                 
-                # Refresh environment variables to pick up the new PATH
-                $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+                # Install Aspire as a local tool
+                Write-Host "  Installing Aspire CLI..." -ForegroundColor Gray
+                & $localDotnetExe tool install aspire --prerelease
                 
-                Write-Host "  Aspire CLI installation completed." -ForegroundColor Green
-            } else {
-                throw "Failed to download installation script"
+                if ($LASTEXITCODE -eq 0) {
+                    Write-Host "  Aspire CLI installed successfully as local .NET tool." -ForegroundColor Green
+                    $aspireInstalled = $true
+                } else {
+                    throw "Failed to install Aspire CLI"
+                }
+            } finally {
+                Pop-Location
             }
         } catch {
             Write-Host "  Error installing Aspire CLI: $_" -ForegroundColor Red
-            Write-Host "  Please install manually by running: Invoke-WebRequest -Uri 'https://aspire.dev/install.ps1' -UseBasicParsing | Invoke-Expression" -ForegroundColor Yellow
-            return
-        }
-        
-        # Verify aspire command is available
-        try {
-            $aspireVersion = aspire --version 2>$null
-            if ($LASTEXITCODE -eq 0) {
-                Write-Host "  Aspire CLI is now available: $aspireVersion" -ForegroundColor Green
-                
-                # Enable automatic .NET SDK installation now that Aspire is installed
-                Write-Host "  Enabling automatic .NET SDK installation feature..." -ForegroundColor Gray
-                aspire config set features.dotnetSdkInstallationEnabled true
-                Write-Host "  Automatic .NET SDK installation enabled." -ForegroundColor Green
-            } else {
-                Write-Host "  Aspire CLI still not available. You may need to restart your terminal." -ForegroundColor Yellow
-                Write-Host "  Please run the script again." -ForegroundColor Yellow
-                return
-            }
-        } catch {
-            Write-Host "  Aspire CLI still not available. You may need to restart your terminal." -ForegroundColor Yellow
-            Write-Host "  Please run the script again." -ForegroundColor Yellow
+            Write-Host "  Please install manually with: dotnet tool install aspire --prerelease" -ForegroundColor Yellow
             return
         }
     }
@@ -483,10 +482,11 @@ try {
     }
 }
 
-# Run aspire
+# Run aspire using local .NET tool
 Write-Host "`nRunning aspire..." -ForegroundColor Cyan
 try {
-    aspire run --non-interactive
+    # Use dotnet tool run to execute the local Aspire installation
+    & $localDotnetExe tool run aspire run --non-interactive
 }
 catch {
     Write-Host "Error running aspire: $_" -ForegroundColor Red
