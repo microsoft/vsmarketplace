@@ -528,16 +528,19 @@ if ($missingPrereqs.Count -gt 0) {
                         
                         if ($process.ExitCode -eq 0) {
                             Write-Host "  Administrative templates installed successfully." -ForegroundColor Green
+                        } elseif ($process.ExitCode -eq 64) {
+                            Write-Host "    Warning: UAC prompt was cancelled. Administrative templates were not installed." -ForegroundColor Yellow
+                            Write-Host "    You can install them later using the troubleshooting steps in the README." -ForegroundColor Yellow
                         } else {
                             Write-Host "    Warning: Administrative template installation exited with code $($process.ExitCode)" -ForegroundColor Yellow
-                        }
-                        
-                        # Display log file location for debugging
-                        if (Test-Path $logFile) {
-                            Write-Host "    Installation log: $logFile" -ForegroundColor Gray
-                        }
-                        if (Test-Path "$logFile.err") {
-                            Write-Host "    Error log: $logFile.err" -ForegroundColor Gray
+                            
+                            # Display log file location for debugging
+                            if (Test-Path $logFile) {
+                                Write-Host "    Installation log: $logFile" -ForegroundColor Gray
+                            }
+                            if (Test-Path "$logFile.err") {
+                                Write-Host "    Error log: $logFile.err" -ForegroundColor Gray
+                            }
                         }
                     } catch {
                         Write-Host "    Warning: Could not install administrative templates: $_" -ForegroundColor Yellow
