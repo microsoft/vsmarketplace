@@ -388,6 +388,9 @@ if ($missingPrereqs.Count -gt 0) {
     Write-Host "`nAll prerequisites satisfied." -ForegroundColor Green
 }
 
+# Save the original directory
+$originalDirectory = Get-Location
+
 # Navigate to the quickstart folder
 Write-Host "`nNavigating to privatemarketplace/quickstart..." -ForegroundColor Cyan
 $quickstartPath = Join-Path $repoPath "privatemarketplace/quickstart"
@@ -487,5 +490,8 @@ try {
 }
 catch {
     Write-Host "Error running aspire: $_" -ForegroundColor Red
-    return
+}
+finally {
+    # Return to original directory
+    Set-Location $originalDirectory
 }
