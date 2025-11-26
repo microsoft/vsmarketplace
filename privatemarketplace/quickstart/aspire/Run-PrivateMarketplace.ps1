@@ -205,6 +205,48 @@ if ($missingPrereqs.Count -gt 0) {
     
     Write-Host "`n=== Installing Prerequisites ===" -ForegroundColor Cyan
     
+    # Download repository first if missing (needed for local .NET SDK installation)
+    if (-not $repoExists) {
+        Write-Host "`nDownloading VS Marketplace Repository..." -ForegroundColor Cyan
+        
+        # Download as ZIP
+        Write-Host "  Downloading repository as ZIP (branch: $repoBranch)..." -ForegroundColor Gray
+        $zipUrl = "$repoUrl/archive/refs/heads/$repoBranch.zip"
+        $tempZipPath = Join-Path $env:TEMP "vsmarketplace-$repoBranch.zip"
+        
+        try {
+            Invoke-WebRequest -Uri $zipUrl -OutFile $tempZipPath -UseBasicParsing
+            Write-Host "  ZIP downloaded successfully." -ForegroundColor Green
+            
+            Write-Host "  Extracting ZIP file..." -ForegroundColor Gray
+            $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-extract"
+            if (Test-Path $tempExtractPath) {
+                Remove-Item -Path $tempExtractPath -Recurse -Force
+            }
+            Expand-Archive -Path $tempZipPath -DestinationPath $tempExtractPath -Force
+            
+            # Move the extracted folder to the target location
+            $extractedFolder = Join-Path $tempExtractPath "vsmarketplace-$repoBranch"
+            if (Test-Path $extractedFolder) {
+                Move-Item -Path $extractedFolder -Destination $repoPath -Force
+            }
+            
+            # Clean up temporary files
+            Remove-Item -Path $tempZipPath -Force
+            Remove-Item -Path $tempExtractPath -Recurse -Force
+            Write-Host "  Extraction complete." -ForegroundColor Green
+            $repoExists = $true
+            
+            # Now that repo exists, recalculate the absolute path for local .NET SDK
+            $localDotnetPath = Join-Path (Resolve-Path $repoPath).Path "privatemarketplace\quickstart\aspire\.dotnet"
+        }
+        catch {
+            Write-Host "  Error downloading or extracting ZIP: $_" -ForegroundColor Red
+            Write-Host "  Please download the repository manually from: $repoUrl" -ForegroundColor Yellow
+            return
+        }
+    }
+    
     # Install Docker if missing
     if (-not $dockerInstalled) {
         Write-Host "`nInstalling Docker Desktop..." -ForegroundColor Cyan
@@ -322,45 +364,6 @@ if ($missingPrereqs.Count -gt 0) {
         } catch {
             Write-Host "  Aspire CLI still not available. You may need to restart your terminal." -ForegroundColor Yellow
             Write-Host "  Please run the script again." -ForegroundColor Yellow
-            return
-        }
-    }
-    
-    # Download repository if missing
-    if (-not $repoExists) {
-        Write-Host "`nDownloading VS Marketplace Repository..." -ForegroundColor Cyan
-        
-        # Download as ZIP
-        Write-Host "  Downloading repository as ZIP (branch: $repoBranch)..." -ForegroundColor Gray
-        $zipUrl = "$repoUrl/archive/refs/heads/$repoBranch.zip"
-        $tempZipPath = Join-Path $env:TEMP "vsmarketplace-$repoBranch.zip"
-        
-        try {
-            Invoke-WebRequest -Uri $zipUrl -OutFile $tempZipPath -UseBasicParsing
-            Write-Host "  ZIP downloaded successfully." -ForegroundColor Green
-            
-            Write-Host "  Extracting ZIP file..." -ForegroundColor Gray
-            $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-extract"
-            if (Test-Path $tempExtractPath) {
-                Remove-Item -Path $tempExtractPath -Recurse -Force
-            }
-            Expand-Archive -Path $tempZipPath -DestinationPath $tempExtractPath -Force
-            
-            # Move the extracted folder to the target location
-            $extractedFolder = Join-Path $tempExtractPath "vsmarketplace-$repoBranch"
-            if (Test-Path $extractedFolder) {
-                Move-Item -Path $extractedFolder -Destination $repoPath -Force
-            }
-            
-            # Clean up temporary files
-            Remove-Item -Path $tempZipPath -Force
-            Remove-Item -Path $tempExtractPath -Recurse -Force
-            Write-Host "  Extraction complete." -ForegroundColor Green
-            $repoExists = $true
-        }
-        catch {
-            Write-Host "  Error downloading or extracting ZIP: $_" -ForegroundColor Red
-            Write-Host "  Please download the repository manually from: $repoUrl" -ForegroundColor Yellow
             return
         }
     }
