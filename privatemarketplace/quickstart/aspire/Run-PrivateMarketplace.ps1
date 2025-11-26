@@ -336,6 +336,60 @@ if (-not (Test-Path $quickstartPath)) {
 Set-Location $quickstartPath
 Write-Host "Current directory: $(Get-Location)" -ForegroundColor Gray
 
+# Ensure Docker is running
+Write-Host "`nChecking Docker engine status..." -ForegroundColor Cyan
+try {
+    $dockerInfo = docker info 2>$null
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "  Docker engine is running." -ForegroundColor Green
+    } else {
+        throw "Docker engine not responding"
+    }
+} catch {
+    Write-Host "  Docker engine is not running. Starting Docker Desktop..." -ForegroundColor Yellow
+    
+    # Try to start Docker Desktop
+    $dockerDesktopPath = "$env:ProgramFiles\Docker\Docker\Docker Desktop.exe"
+    if (Test-Path $dockerDesktopPath) {
+        Start-Process -FilePath $dockerDesktopPath
+        Write-Host "  Waiting for Docker engine to start..." -ForegroundColor Gray
+        
+        # Wait for Docker to be ready (max 60 seconds)
+        $maxWaitTime = 60
+        $waitedTime = 0
+        $dockerReady = $false
+        
+        while ($waitedTime -lt $maxWaitTime) {
+            Start-Sleep -Seconds 2
+            $waitedTime += 2
+            
+            try {
+                $dockerInfo = docker info 2>$null
+                if ($LASTEXITCODE -eq 0) {
+                    $dockerReady = $true
+                    break
+                }
+            } catch {
+                # Continue waiting
+            }
+            
+            Write-Host "  Still waiting... ($waitedTime seconds)" -ForegroundColor Gray
+        }
+        
+        if ($dockerReady) {
+            Write-Host "  Docker engine is now running." -ForegroundColor Green
+        } else {
+            Write-Host "  Docker engine did not start within $maxWaitTime seconds." -ForegroundColor Yellow
+            Write-Host "  Please ensure Docker Desktop is running and try again." -ForegroundColor Yellow
+            return
+        }
+    } else {
+        Write-Host "  Docker Desktop not found at expected location." -ForegroundColor Red
+        Write-Host "  Please start Docker Desktop manually and run this script again." -ForegroundColor Yellow
+        return
+    }
+}
+
 # Run aspire
 Write-Host "`nRunning aspire..." -ForegroundColor Cyan
 try {
