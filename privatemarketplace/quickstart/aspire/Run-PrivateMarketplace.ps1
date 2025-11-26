@@ -610,4 +610,28 @@ catch {
 finally {
     # Return to original directory
     Set-Location $originalDirectory
+    
+    # Prompt to clean up temp folder
+    Write-Host "`n" -ForegroundColor Cyan
+    Write-Host "Aspire has exited." -ForegroundColor Cyan
+    Write-Host "Temporary files location: $repoPath" -ForegroundColor Gray
+    Write-Host ""
+    $cleanupResponse = Read-Host "Do you want to remove the temporary folder and all its contents? (y/n)"
+    
+    if ($cleanupResponse -eq 'y') {
+        Write-Host "Removing temporary folder..." -ForegroundColor Yellow
+        try {
+            if (Test-Path $repoPath) {
+                Remove-Item -Path $repoPath -Recurse -Force
+                Write-Host "Temporary folder removed successfully." -ForegroundColor Green
+            } else {
+                Write-Host "Temporary folder not found." -ForegroundColor Gray
+            }
+        } catch {
+            Write-Host "Error removing temporary folder: $_" -ForegroundColor Red
+            Write-Host "You can manually delete: $repoPath" -ForegroundColor Yellow
+        }
+    } else {
+        Write-Host "Temporary folder preserved at: $repoPath" -ForegroundColor Gray
+    }
 }
