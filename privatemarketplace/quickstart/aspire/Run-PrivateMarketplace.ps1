@@ -23,6 +23,7 @@ $wingetAvailable = $false
 $repoUrl = "https://github.com/mcumming/vsmarketplace"
 $repoBranch = "main"  # Change this to test different branches
 $repoPath = $Path
+$dotnetVersion = "10.0.100"  # Version of .NET to install locally
 
 # Check Docker
 Write-Host "Checking for Docker..." -ForegroundColor Gray
@@ -74,44 +75,49 @@ try {
     }
 }
 
-# Check .NET 10 SDK
-Write-Host "Checking for .NET 10 SDK..." -ForegroundColor Gray
-try {
-    $dotnetOutput = dotnet --list-sdks 2>$null
-    if ($LASTEXITCODE -eq 0) {
-        $dotnet10Installed = $dotnetOutput | Where-Object { $_ -match '^10\.' }
-        if ($dotnet10Installed) {
-            $dotnet10Version = ($dotnet10Installed | Select-Object -First 1) -replace '\s+\[.*\]$', ''
-            
-            # Check if version is 10.0.100 or greater (prerelease versions are considered less than stable)
-            # Pattern matches: 10.0.100, 10.0.100-preview.1, 10.0.200, etc.
-            if ($dotnet10Version -match '^10\.0\.(\d+)(-.*)?$') {
-                $patchVersion = [int]$matches[1]
-                $isPrerelease = $matches[2] -ne $null -and $matches[2] -ne ''
-                
-                if ($patchVersion -gt 100 -or ($patchVersion -eq 100 -and -not $isPrerelease)) {
-                    Write-Host "  .NET 10 SDK detected: $dotnet10Version" -ForegroundColor Green
-                    $dotnetInstalled = $true
-                } else {
-                    Write-Host "  .NET 10 SDK detected: $dotnet10Version (version 10.0.100+ stable required)" -ForegroundColor Yellow
-                    throw ".NET 10.0.100+ required"
-                }
-            } else {
-                # If version doesn't match expected pattern, accept it (handles future version formats)
-                Write-Host "  .NET 10 SDK detected: $dotnet10Version" -ForegroundColor Green
-                $dotnetInstalled = $true
-            }
+# Check for local .NET SDK installation in quickstart/aspire folder
+Write-Host "Checking for local .NET SDK..." -ForegroundColor Gray
+$localDotnetPath = Join-Path $repoPath "privatemarketplace\quickstart\aspire\.dotnet"
+$localDotnetExePath = Join-Path $localDotnetPath "dotnet.exe"
+
+if (Test-Path $localDotnetExePath) {
+    # Check the actual installed SDK versions
+    try {
+        $installedSdks = & $localDotnetExePath --list-sdks 2>$null
+        $matchingSdk = $installedSdks | Where-Object { $_ -match "^$([regex]::Escape($dotnetVersion))\s" }
+        
+        if ($matchingSdk) {
+            Write-Host "  Local .NET SDK $dotnetVersion found at: $localDotnetPath" -ForegroundColor Green
+            $dotnetInstalled = $true
         } else {
-            throw ".NET 10 SDK not found"
+            Write-Host "  Local .NET installation found, but version $dotnetVersion is missing" -ForegroundColor Yellow
+            Write-Host "  Installed SDKs:" -ForegroundColor Gray
+            $installedSdks | ForEach-Object { Write-Host "    $_" -ForegroundColor Gray }
+            $missingPrereqs += @{
+                Name = ".NET SDK $dotnetVersion (local)"
+                InstallMethod = "dotnet-install"
+                Version = $dotnetVersion
+                InstallPath = $localDotnetPath
+                ManualUrl = "https://dotnet.microsoft.com/download/dotnet/10.0"
+            }
         }
-    } else {
-        throw "dotnet command not found"
+    } catch {
+        Write-Host "  Error checking local .NET SDK: $_" -ForegroundColor Yellow
+        $missingPrereqs += @{
+            Name = ".NET SDK $dotnetVersion (local)"
+            InstallMethod = "dotnet-install"
+            Version = $dotnetVersion
+            InstallPath = $localDotnetPath
+            ManualUrl = "https://dotnet.microsoft.com/download/dotnet/10.0"
+        }
     }
-} catch {
-    Write-Host "  .NET 10 SDK 10.0.100+ not found" -ForegroundColor Yellow
+} else {
+    Write-Host "  Local .NET SDK not found" -ForegroundColor Yellow
     $missingPrereqs += @{
-        Name = ".NET 10 SDK (10.0.100+)"
-        InstallMethod = "winget"
+        Name = ".NET SDK $dotnetVersion (local)"
+        InstallMethod = "dotnet-install"
+        Version = $dotnetVersion
+        InstallPath = $localDotnetPath
         ManualUrl = "https://dotnet.microsoft.com/download/dotnet/10.0"
     }
 }
@@ -178,6 +184,14 @@ if ($missingPrereqs.Count -gt 0) {
             if ($prereq.TargetFolder) {
                 Write-Host "    Target: $($prereq.TargetFolder)" -ForegroundColor Gray
             }
+        } elseif ($prereq.InstallMethod -eq "dotnet-install") {
+            Write-Host "  - $($prereq.Name): via dotnet-install script" -ForegroundColor Green
+            if ($prereq.InstallPath) {
+                Write-Host "    Target: $($prereq.InstallPath)" -ForegroundColor Gray
+            }
+            if ($prereq.ManualUrl) {
+                Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
+            }
         }
     }
     
@@ -214,36 +228,39 @@ if ($missingPrereqs.Count -gt 0) {
         }
     }
     
-    # Install .NET 10 SDK if missing
+    # Install local .NET SDK if missing
     if (-not $dotnetInstalled) {
-        Write-Host "`nInstalling .NET 10 SDK..." -ForegroundColor Cyan
+        Write-Host "`nInstalling .NET SDK $dotnetVersion locally..." -ForegroundColor Cyan
         
-        if ($wingetAvailable) {
-            Write-Host "  Using winget to install .NET 10 SDK..." -ForegroundColor Gray
-            winget install -e --id Microsoft.DotNet.SDK.10 --accept-package-agreements --accept-source-agreements
-            
-            if ($LASTEXITCODE -eq 0) {
-                Write-Host "  .NET 10 SDK installed successfully." -ForegroundColor Green
-                
-                # Refresh environment variables
-                $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
-                
-                # Verify installation
-                $dotnetOutput = dotnet --list-sdks 2>$null
-                $dotnet10Installed = $dotnetOutput | Where-Object { $_ -match '^10\.' }
-                if ($dotnet10Installed) {
-                    $dotnet10Version = ($dotnet10Installed | Select-Object -First 1) -replace '\s+\[.*\]$', ''
-                    Write-Host "  .NET 10 SDK verified: $dotnet10Version" -ForegroundColor Green
-                } else {
-                    Write-Host "  .NET 10 SDK installed but not detected. You may need to restart your terminal." -ForegroundColor Yellow
-                }
-            } else {
-                Write-Host "  Failed to install .NET 10 SDK via winget." -ForegroundColor Red
-                Write-Host "  Please install .NET 10 SDK manually from: https://dotnet.microsoft.com/download/dotnet/10.0" -ForegroundColor Yellow
-                return
+        try {
+            # Create the local dotnet directory
+            if (-not (Test-Path $localDotnetPath)) {
+                New-Item -ItemType Directory -Path $localDotnetPath -Force | Out-Null
+                Write-Host "  Created directory: $localDotnetPath" -ForegroundColor Gray
             }
-        } else {
-            Write-Host "  winget not available. Please install .NET 10 SDK manually from: https://dotnet.microsoft.com/download/dotnet/10.0" -ForegroundColor Yellow
+            
+            # Download the dotnet-install script
+            Write-Host "  Downloading dotnet-install script..." -ForegroundColor Gray
+            $dotnetInstallScript = Join-Path $env:TEMP "dotnet-install.ps1"
+            Invoke-WebRequest -Uri "https://dot.net/v1/dotnet-install.ps1" -OutFile $dotnetInstallScript -UseBasicParsing
+            
+            # Run the installation script
+            Write-Host "  Installing .NET SDK $dotnetVersion to $localDotnetPath..." -ForegroundColor Gray
+            & $dotnetInstallScript -Version $dotnetVersion -InstallDir $localDotnetPath -NoPath
+            
+            # Verify installation
+            if (Test-Path $localDotnetSdkPath) {
+                Write-Host "  .NET SDK $dotnetVersion installed successfully." -ForegroundColor Green
+                $dotnetInstalled = $true
+            } else {
+                throw "SDK directory not found after installation"
+            }
+            
+            # Clean up
+            Remove-Item $dotnetInstallScript -Force -ErrorAction SilentlyContinue
+        } catch {
+            Write-Host "  Error installing .NET SDK: $_" -ForegroundColor Red
+            Write-Host "  Please install manually from: https://dotnet.microsoft.com/download/dotnet/10.0" -ForegroundColor Yellow
             return
         }
     }
@@ -352,6 +369,32 @@ if (-not (Test-Path $quickstartPath)) {
 
 Set-Location $quickstartPath
 Write-Host "Current directory: $(Get-Location)" -ForegroundColor Gray
+
+# Set up local .NET SDK environment
+Write-Host "`nConfiguring local .NET SDK environment..." -ForegroundColor Cyan
+$localDotnetExe = Join-Path $localDotnetPath "dotnet.exe"
+
+if (Test-Path $localDotnetExe) {
+    # Set environment variables to use local .NET
+    $env:DOTNET_ROOT = $localDotnetPath
+    $env:DOTNET_MULTILEVEL_LOOKUP = "0"  # Prevent looking in global locations
+    $env:PATH = "$localDotnetPath;$env:PATH"
+    
+    Write-Host "  DOTNET_ROOT set to: $localDotnetPath" -ForegroundColor Gray
+    Write-Host "  Local .NET version: " -NoNewline -ForegroundColor Gray
+    & $localDotnetExe --version
+    
+    # Verify SDK is available
+    $localSdks = & $localDotnetExe --list-sdks 2>$null
+    if ($localSdks -match $dotnetVersion) {
+        Write-Host "  Local .NET SDK $dotnetVersion is ready." -ForegroundColor Green
+    } else {
+        Write-Host "  Warning: Expected SDK version $dotnetVersion not found in local installation." -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "  Error: Local .NET SDK executable not found at: $localDotnetExe" -ForegroundColor Red
+    return
+}
 
 # Ensure Docker is running
 Write-Host "`nChecking Docker engine status..." -ForegroundColor Cyan
