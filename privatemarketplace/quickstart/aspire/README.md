@@ -38,20 +38,22 @@ You'll see the `vscode-private-marketplace` resource with several available comm
 
 1. In the Aspire dashboard, locate the `vscode-private-marketplace` resource
 2. Click the **Home** link in the endpoints section to open the marketplace web interface
-3. Browse available extensions in your private marketplace
+3. On the marketplace home page, you'll see the **Private Marketplace URL** displayed with a copy icon
+4. Click the **copy icon** to copy the marketplace URL to your clipboard
+   - Keep this page open or save the URL - you'll need it in the next step
 
 ### Configure Group Policy (Required for VS Code)
 
-To connect VS Code to your private marketplace, you need to configure the Private Marketplace URL policy:
+Now that you have the marketplace URL, configure VS Code to use your private marketplace:
 
-1. In the Aspire dashboard, find the `vscode-private-marketplace` resource
+1. Return to the Aspire dashboard and find the `vscode-private-marketplace` resource
 2. Click the **Open Group Policy Editor** command button
    - **Note**: This button only appears if you installed the administrative templates during setup
 3. In the Group Policy Editor:
    - Navigate to: **User Configuration → Administrative Templates → Visual Studio Code → Extensions**
    - Double-click **Extension Gallery Service URL**
    - Select **Enabled**
-   - Enter the marketplace URL (shown in the Aspire dashboard endpoints)
+   - **Paste the marketplace URL** you copied from the home page into the URL field
    - Click **OK**
 4. Close the Group Policy Editor
 
