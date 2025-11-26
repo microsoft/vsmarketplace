@@ -109,7 +109,7 @@ Write-Host "Checking for VS Code..." -ForegroundColor Gray
 # Check if repo doesn't exist, VS Code can't exist either
 if (-not (Test-Path $repoPath)) {
     Write-Host "  VS Code not found (repository not present)" -ForegroundColor Yellow
-    $localVSCodePath = Join-Path (Join-Path $PWD $repoPath) "privatemarketplace\quickstart\aspire\.vscode"
+    $localVSCodePath = Join-Path $repoPath "privatemarketplace\quickstart\aspire\.vscode"
     $missingPrereqs += @{
         Name = "VS Code (portable)"
         InstallMethod = "vscode-local"
@@ -141,7 +141,7 @@ Write-Host "Checking for Aspire CLI..." -ForegroundColor Gray
 # If repo doesn't exist, Aspire can't exist either
 if (-not (Test-Path $repoPath)) {
     Write-Host "  Aspire CLI not found (repository not present)" -ForegroundColor Yellow
-    $localAspirePath = Join-Path (Join-Path $PWD $repoPath) "privatemarketplace\quickstart\aspire\.aspire"
+    $localAspirePath = Join-Path $repoPath "privatemarketplace\quickstart\aspire\.aspire"
     $missingPrereqs += @{
         Name = "Aspire CLI (version 13+)"
         InstallMethod = "aspire-local"
@@ -173,7 +173,7 @@ Write-Host "Checking for local .NET SDK..." -ForegroundColor Gray
 # If repo doesn't exist, .NET SDK can't exist either
 if (-not (Test-Path $repoPath)) {
     Write-Host "  Local .NET SDK not found (repository not present)" -ForegroundColor Yellow
-    $localDotnetPath = Join-Path (Join-Path $PWD $repoPath) "privatemarketplace\quickstart\aspire\.dotnet"
+    $localDotnetPath = Join-Path $repoPath "privatemarketplace\quickstart\aspire\.dotnet"
     $missingPrereqs += @{
         Name = ".NET SDK $dotnetVersion (local)"
         InstallMethod = "dotnet-install"
