@@ -6,41 +6,33 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-Write-Host "Starting Private Marketplace for VS Code ..." -ForegroundColor Cyan
+Write-Host "Private Marketplace for VS Code Quickstart" -ForegroundColor Cyan
 
 # Check and install prerequisites
 Write-Host "`nChecking prerequisites..." -ForegroundColor Cyan
+
+# Initialize tracking variables
+$missingPrereqs = @()
+$dockerInstalled = $false
+$aspireInstalled = $false
+$wingetAvailable = $false
 
 # Check Docker
 Write-Host "Checking for Docker..." -ForegroundColor Gray
 try {
     $dockerVersion = docker --version 2>$null
     if ($LASTEXITCODE -eq 0) {
-        Write-Host "Docker detected: $dockerVersion" -ForegroundColor Green
+        Write-Host "  Docker detected: $dockerVersion" -ForegroundColor Green
+        $dockerInstalled = $true
     } else {
         throw "Docker not found"
     }
 } catch {
-    Write-Host "Docker not found. Installing Docker Desktop..." -ForegroundColor Yellow
-    
-    # Check if winget is available
-    $wingetAvailable = Get-Command winget -ErrorAction SilentlyContinue
-    if ($wingetAvailable) {
-        Write-Host "Installing Docker Desktop via winget..." -ForegroundColor Cyan
-        winget install -e --id Docker.DockerDesktop --accept-package-agreements --accept-source-agreements
-        
-        if ($LASTEXITCODE -eq 0) {
-            Write-Host "Docker Desktop installed successfully." -ForegroundColor Green
-            Write-Host "IMPORTANT: Please start Docker Desktop and wait for it to be ready, then re-run this script." -ForegroundColor Yellow
-            exit 0
-        } else {
-            Write-Host "Failed to install Docker Desktop via winget." -ForegroundColor Red
-            Write-Host "Please install Docker Desktop manually from: https://www.docker.com/products/docker-desktop" -ForegroundColor Yellow
-            exit 1
-        }
-    } else {
-        Write-Host "winget not available. Please install Docker Desktop manually from: https://www.docker.com/products/docker-desktop" -ForegroundColor Yellow
-        exit 1
+    Write-Host "  Docker not found" -ForegroundColor Yellow
+    $missingPrereqs += @{
+        Name = "Docker Desktop"
+        InstallMethod = "winget"
+        ManualUrl = "https://www.docker.com/products/docker-desktop"
     }
 }
 
@@ -49,63 +41,128 @@ Write-Host "Checking for Aspire CLI..." -ForegroundColor Gray
 try {
     $aspireVersion = aspire --version 2>$null
     if ($LASTEXITCODE -eq 0) {
-        Write-Host "Aspire CLI detected: $aspireVersion" -ForegroundColor Green
+        Write-Host "  Aspire CLI detected: $aspireVersion" -ForegroundColor Green
+        $aspireInstalled = $true
     } else {
         throw "Aspire CLI not found"
     }
 } catch {
-    Write-Host "Aspire CLI not found. Installing..." -ForegroundColor Yellow
-    
-    # Enable automatic .NET SDK installation preview feature
-    Write-Host "Enabling automatic .NET SDK installation feature..." -ForegroundColor Cyan
-    aspire config set features.dotnetSdkInstallationEnabled true 2>$null
-    
-    # Install Aspire CLI using the official installation script
-    Write-Host "Installing Aspire CLI..." -ForegroundColor Cyan
-    try {
-        # Download and run the installation script
-        $installScript = Invoke-WebRequest -Uri "https://aspire.dev/install.ps1" -UseBasicParsing
-        
-        if ($installScript.StatusCode -eq 200) {
-            # Execute the script
-            Invoke-Expression $installScript.Content
-            
-            # Refresh environment variables to pick up the new PATH
-            $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
-            
-            Write-Host "Aspire CLI installation completed." -ForegroundColor Green
-        } else {
-            throw "Failed to download installation script"
-        }
-    } catch {
-        Write-Host "Error installing Aspire CLI: $_" -ForegroundColor Red
-        Write-Host "Please install manually by running: Invoke-WebRequest -Uri 'https://aspire.dev/install.ps1' -UseBasicParsing | Invoke-Expression" -ForegroundColor Yellow
-        exit 1
-    }
-    
-    # Verify aspire command is available
-    try {
-        $aspireVersion = aspire --version 2>$null
-        if ($LASTEXITCODE -eq 0) {
-            Write-Host "Aspire CLI is now available: $aspireVersion" -ForegroundColor Green
-            
-            # Enable automatic .NET SDK installation now that Aspire is installed
-            Write-Host "Enabling automatic .NET SDK installation feature..." -ForegroundColor Cyan
-            aspire config set features.dotnetSdkInstallationEnabled true
-            Write-Host "Automatic .NET SDK installation enabled." -ForegroundColor Green
-        } else {
-            Write-Host "Aspire CLI still not available. You may need to restart your terminal." -ForegroundColor Yellow
-            Write-Host "Please close this terminal and run the script again." -ForegroundColor Yellow
-            exit 1
-        }
-    } catch {
-        Write-Host "Aspire CLI still not available. You may need to restart your terminal." -ForegroundColor Yellow
-        Write-Host "Please close this terminal and run the script again." -ForegroundColor Yellow
-        exit 1
+    Write-Host "  Aspire CLI not found" -ForegroundColor Yellow
+    $missingPrereqs += @{
+        Name = "Aspire CLI"
+        InstallMethod = "script"
+        ManualUrl = "https://aspire.dev"
     }
 }
 
-Write-Host "All prerequisites satisfied." -ForegroundColor Green
+# Check winget availability
+$wingetAvailable = $null -ne (Get-Command winget -ErrorAction SilentlyContinue)
+
+# Display summary if prerequisites are missing
+if ($missingPrereqs.Count -gt 0) {
+    Write-Host "`n=== Missing Prerequisites ===" -ForegroundColor Yellow
+    foreach ($prereq in $missingPrereqs) {
+        Write-Host "  - $($prereq.Name)" -ForegroundColor Yellow
+    }
+    
+    Write-Host "`nThe following will be installed:" -ForegroundColor Cyan
+    foreach ($prereq in $missingPrereqs) {
+        if ($prereq.InstallMethod -eq "winget" -and -not $wingetAvailable) {
+            Write-Host "  - $($prereq.Name): Manual installation required" -ForegroundColor Yellow
+            Write-Host "    URL: $($prereq.ManualUrl)" -ForegroundColor Gray
+        } elseif ($prereq.InstallMethod -eq "winget") {
+            Write-Host "  - $($prereq.Name): via winget" -ForegroundColor Green
+        } elseif ($prereq.InstallMethod -eq "script") {
+            Write-Host "  - $($prereq.Name): via installation script" -ForegroundColor Green
+        }
+    }
+    
+    # Prompt for confirmation
+    Write-Host ""
+    $response = Read-Host "Do you want to proceed with installation? (y/n)"
+    if ($response -ne 'y') {
+        Write-Host "Installation cancelled by user." -ForegroundColor Yellow
+        exit 0
+    }
+    
+    Write-Host "`n=== Installing Prerequisites ===" -ForegroundColor Cyan
+    
+    # Install Docker if missing
+    if (-not $dockerInstalled) {
+        Write-Host "`nInstalling Docker Desktop..." -ForegroundColor Cyan
+        
+        if ($wingetAvailable) {
+            Write-Host "  Using winget to install Docker Desktop..." -ForegroundColor Gray
+            winget install -e --id Docker.DockerDesktop --accept-package-agreements --accept-source-agreements
+            
+            if ($LASTEXITCODE -eq 0) {
+                Write-Host "  Docker Desktop installed successfully." -ForegroundColor Green
+                Write-Host "  IMPORTANT: Please start Docker Desktop and wait for it to be ready, then re-run this script." -ForegroundColor Yellow
+                exit 0
+            } else {
+                Write-Host "  Failed to install Docker Desktop via winget." -ForegroundColor Red
+                Write-Host "  Please install Docker Desktop manually from: https://www.docker.com/products/docker-desktop" -ForegroundColor Yellow
+                exit 1
+            }
+        } else {
+            Write-Host "  winget not available. Please install Docker Desktop manually from: https://www.docker.com/products/docker-desktop" -ForegroundColor Yellow
+            exit 1
+        }
+    }
+    
+    # Install Aspire CLI if missing
+    if (-not $aspireInstalled) {
+        Write-Host "`nInstalling Aspire CLI..." -ForegroundColor Cyan
+        
+        try {
+            # Download and run the installation script
+            Write-Host "  Downloading installation script..." -ForegroundColor Gray
+            $installScript = Invoke-WebRequest -Uri "https://aspire.dev/install.ps1" -UseBasicParsing
+            
+            if ($installScript.StatusCode -eq 200) {
+                Write-Host "  Executing installation script..." -ForegroundColor Gray
+                # Execute the script
+                Invoke-Expression $installScript.Content
+                
+                # Refresh environment variables to pick up the new PATH
+                $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+                
+                Write-Host "  Aspire CLI installation completed." -ForegroundColor Green
+            } else {
+                throw "Failed to download installation script"
+            }
+        } catch {
+            Write-Host "  Error installing Aspire CLI: $_" -ForegroundColor Red
+            Write-Host "  Please install manually by running: Invoke-WebRequest -Uri 'https://aspire.dev/install.ps1' -UseBasicParsing | Invoke-Expression" -ForegroundColor Yellow
+            exit 1
+        }
+        
+        # Verify aspire command is available
+        try {
+            $aspireVersion = aspire --version 2>$null
+            if ($LASTEXITCODE -eq 0) {
+                Write-Host "  Aspire CLI is now available: $aspireVersion" -ForegroundColor Green
+                
+                # Enable automatic .NET SDK installation now that Aspire is installed
+                Write-Host "  Enabling automatic .NET SDK installation feature..." -ForegroundColor Gray
+                aspire config set features.dotnetSdkInstallationEnabled true
+                Write-Host "  Automatic .NET SDK installation enabled." -ForegroundColor Green
+            } else {
+                Write-Host "  Aspire CLI still not available. You may need to restart your terminal." -ForegroundColor Yellow
+                Write-Host "  Please close this terminal and run the script again." -ForegroundColor Yellow
+                exit 1
+            }
+        } catch {
+            Write-Host "  Aspire CLI still not available. You may need to restart your terminal." -ForegroundColor Yellow
+            Write-Host "  Please close this terminal and run the script again." -ForegroundColor Yellow
+            exit 1
+        }
+    }
+    
+    Write-Host "`nAll prerequisites installed successfully." -ForegroundColor Green
+} else {
+    Write-Host "`nAll prerequisites satisfied." -ForegroundColor Green
+}
 
 # Define repository details
 $repoUrl = "https://github.com/microsoft/vsmarketplace"
