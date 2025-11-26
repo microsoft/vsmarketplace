@@ -461,6 +461,29 @@ if ($missingPrereqs.Count -gt 0) {
                 if (Test-Path $aspireExePath) {
                     Write-Host "  Aspire CLI installed successfully." -ForegroundColor Green
                     $aspireInstalled = $true
+                    
+                    # Remove Aspire paths from USER PATH environment variable
+                    Write-Host "  Removing Aspire from system PATH..." -ForegroundColor Gray
+                    try {
+                        $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
+                        if ($userPath) {
+                            # Split path into components and filter out any Aspire-related paths
+                            $pathComponents = $userPath -split ';' | Where-Object { 
+                                $_ -and $_ -notmatch '\\\.aspire\\' -and $_ -notmatch '\\aspire\\' 
+                            }
+                            $newPath = $pathComponents -join ';'
+                            
+                            # Only update if there were changes
+                            if ($userPath -ne $newPath) {
+                                [Environment]::SetEnvironmentVariable("Path", $newPath, "User")
+                                Write-Host "  Aspire paths removed from user PATH." -ForegroundColor Green
+                            } else {
+                                Write-Host "  No Aspire paths found in user PATH." -ForegroundColor Gray
+                            }
+                        }
+                    } catch {
+                        Write-Host "  Warning: Could not clean PATH environment variable: $_" -ForegroundColor Yellow
+                    }
                 } else {
                     throw "aspire.exe not found after installation"
                 }
