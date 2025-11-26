@@ -14,7 +14,7 @@ if ($args -contains "-InstallAdminTemplates") {
     
     # Determine paths based on script location
     $rootPath = Join-Path $env:TEMP "privatemarketplace-quickstart"
-    $vscodePolicyPath = Join-Path $rootPath "policies"
+    $vscodePolicyPath = Join-Path $rootPath ".vscode\policies"
     
     # Set up logging in root folder
     $logFile = Join-Path $rootPath "vscode-admin-template-install.log"
@@ -112,7 +112,7 @@ $dotnetVersion = "10.0.100"  # Version of .NET to install locally
 $localVSCodePath = Join-Path $rootPath ".vscode"
 $localAspirePath = Join-Path $rootPath ".aspire"
 $localDotnetPath = Join-Path $rootPath ".dotnet"
-$policiesPath = Join-Path $rootPath "policies"
+$policiesPath = Join-Path $localVSCodePath "policies"
 
 # Check Docker
 Write-Host "Checking for Docker..." -ForegroundColor Gray

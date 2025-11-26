@@ -38,7 +38,9 @@ You'll see the `vscode-private-marketplace` resource with several available comm
 
 1. In the Aspire dashboard, locate the `vscode-private-marketplace` resource
 2. Click the **Home** link in the endpoints section to open the marketplace web interface
-3. On the marketplace home page, you'll see the **Private Marketplace URL** displayed with a copy icon
+3. On the marketplace home page, you'll see:
+   - The **Private Marketplace URL** displayed with a copy icon
+   - The **Published Extensions** section showing sample extensions that are already available
 4. Click the **copy icon** to copy the marketplace URL to your clipboard
    - Keep this page open or save the URL - you'll need it in the next step
 
@@ -47,8 +49,11 @@ You'll see the `vscode-private-marketplace` resource with several available comm
 Now that you have the marketplace URL, configure VS Code to use your private marketplace:
 
 1. Return to the Aspire dashboard and find the `vscode-private-marketplace` resource
-2. Click the **Open Group Policy Editor** command button
-   - **Note**: This button only appears if you installed the administrative templates during setup
+2. Click the **Actions** menu (three dots) to see available commands
+3. Select **Open Group Policy Editor** from the menu
+   - **Note**: This command only appears if you installed the administrative templates during setup
+
+![Aspire Actions Menu](images/aspire-actions-menu.png)
 3. In the Group Policy Editor:
    - Navigate to: **User Configuration → Administrative Templates → Visual Studio Code → Extensions**
    - Double-click **Extension Gallery Service URL**
@@ -59,7 +64,8 @@ Now that you have the marketplace URL, configure VS Code to use your private mar
 
 ### Launch VS Code Connected to Private Marketplace
 
-1. In the Aspire dashboard, click the **Open VS Code** command button
+1. In the Aspire dashboard, open the **Actions** menu for the `vscode-private-marketplace` resource
+2. Select **Open VS Code** from the menu
    - This launches the portable VS Code instance with the private marketplace configured
 2. Open the Extensions view (`Ctrl+Shift+X`)
 3. Search for extensions - you'll see only those available in your private marketplace
@@ -69,9 +75,44 @@ Now that you have the marketplace URL, configure VS Code to use your private mar
 
 To add extensions to your private marketplace:
 
-1. Download `.vsix` files for the extensions you want to include
-2. Place them in the `data/extensions` folder in your temporary installation directory
-3. Restart the Aspire application to refresh the marketplace
+The quickstart includes sample extensions that you can see on the marketplace home page in the **Published Extensions** section. To add more extensions:
+
+### Step 1: Download VSIX Files
+
+Choose one of these methods to get `.vsix` extension files:
+
+**Option A: Download from VS Code Marketplace Website**
+1. Visit [marketplace.visualstudio.com](https://marketplace.visualstudio.com/)
+2. Search for the extension you want
+3. On the extension's page, click the **Download Extension** link on the right side
+4. Save the `.vsix` file to your computer
+
+**Option B: Download from VS Code**
+1. Open VS Code
+2. Go to Extensions view (`Ctrl+Shift+X`)
+3. Find the extension you want
+4. Right-click on the extension and select **Copy Download Link**
+5. Open the link in your browser to download the `.vsix` file
+
+**Option C: Package Your Own Extension**
+```powershell
+cd your-extension-directory
+vsce package
+```
+
+### Step 2: Add Extensions to the Marketplace
+
+1. Locate the temporary installation folder: `$env:TEMP\privatemarketplace-quickstart`
+2. Navigate to the `data\extensions` folder
+3. Copy your `.vsix` files into this folder
+4. Stop the Aspire application (press `Ctrl+C` in the terminal)
+5. Restart Aspire:
+   ```powershell
+   cd $env:TEMP\privatemarketplace-quickstart
+   aspire run
+   ```
+
+Your extensions will now appear in the private marketplace!
 
 ## Restoring Normal Marketplace Access
 
