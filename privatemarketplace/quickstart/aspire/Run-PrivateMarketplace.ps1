@@ -81,8 +81,14 @@ $wingetAvailable = $false
 # Define repository details
 $repoUrl = "https://github.com/mcumming/vsmarketplace"
 $repoBranch = "main"  # Change this to test different branches
-$repoPath = Join-Path $env:TEMP "vsmarketplace-quickstart"
+$rootPath = Join-Path $env:TEMP "privatemarketplace-quickstart"
 $dotnetVersion = "10.0.100"  # Version of .NET to install locally
+
+# Define paths for local installations
+$localVSCodePath = Join-Path $rootPath ".vscode"
+$localAspirePath = Join-Path $rootPath ".aspire"
+$localDotnetPath = Join-Path $rootPath ".dotnet"
+$policiesPath = Join-Path $rootPath "policies"
 
 # Check Docker
 Write-Host "Checking for Docker..." -ForegroundColor Gray
@@ -106,10 +112,9 @@ try {
 # Check VS Code
 Write-Host "Checking for VS Code..." -ForegroundColor Gray
 
-# Check if repo doesn't exist, VS Code can't exist either
-if (-not (Test-Path $repoPath)) {
-    Write-Host "  VS Code not found (repository not present)" -ForegroundColor Yellow
-    $localVSCodePath = Join-Path $repoPath "privatemarketplace\quickstart\aspire\.vscode"
+# Check if root doesn't exist, VS Code can't exist either
+if (-not (Test-Path $rootPath)) {
+    Write-Host "  VS Code not found (quickstart folder not present)" -ForegroundColor Yellow
     $missingPrereqs += @{
         Name = "VS Code (portable)"
         InstallMethod = "vscode-local"
@@ -117,8 +122,6 @@ if (-not (Test-Path $repoPath)) {
         ManualUrl = "https://code.visualstudio.com/"
     }
 } else {
-    # Check for local VS Code installation
-    $localVSCodePath = Join-Path (Resolve-Path $repoPath).Path "privatemarketplace\quickstart\aspire\.vscode"
     $vscodeExePath = Join-Path $localVSCodePath "Code.exe"
     
     if (Test-Path $vscodeExePath) {
@@ -138,10 +141,9 @@ if (-not (Test-Path $repoPath)) {
 # Check Aspire CLI (local installation)
 Write-Host "Checking for Aspire CLI..." -ForegroundColor Gray
 
-# If repo doesn't exist, Aspire can't exist either
-if (-not (Test-Path $repoPath)) {
-    Write-Host "  Aspire CLI not found (repository not present)" -ForegroundColor Yellow
-    $localAspirePath = Join-Path $repoPath "privatemarketplace\quickstart\aspire\.aspire"
+# If root doesn't exist, Aspire can't exist either
+if (-not (Test-Path $rootPath)) {
+    Write-Host "  Aspire CLI not found (quickstart folder not present)" -ForegroundColor Yellow
     $missingPrereqs += @{
         Name = "Aspire CLI (version 13+)"
         InstallMethod = "aspire-local"
@@ -149,8 +151,6 @@ if (-not (Test-Path $repoPath)) {
         ManualUrl = "https://learn.microsoft.com/dotnet/aspire"
     }
 } else {
-    # Check for local Aspire CLI installation
-    $localAspirePath = Join-Path (Resolve-Path $repoPath).Path "privatemarketplace\quickstart\aspire\.aspire"
     $aspireExePath = Join-Path $localAspirePath "aspire.exe"
     
     if (Test-Path $aspireExePath) {
@@ -167,13 +167,12 @@ if (-not (Test-Path $repoPath)) {
     }
 }
 
-# Check for local .NET SDK installation in quickstart/aspire folder
+# Check for local .NET SDK installation
 Write-Host "Checking for local .NET SDK..." -ForegroundColor Gray
 
-# If repo doesn't exist, .NET SDK can't exist either
-if (-not (Test-Path $repoPath)) {
-    Write-Host "  Local .NET SDK not found (repository not present)" -ForegroundColor Yellow
-    $localDotnetPath = Join-Path $repoPath "privatemarketplace\quickstart\aspire\.dotnet"
+# If root doesn't exist, .NET SDK can't exist either
+if (-not (Test-Path $rootPath)) {
+    Write-Host "  Local .NET SDK not found (quickstart folder not present)" -ForegroundColor Yellow
     $missingPrereqs += @{
         Name = ".NET SDK $dotnetVersion (local)"
         InstallMethod = "dotnet-install"
@@ -182,8 +181,6 @@ if (-not (Test-Path $repoPath)) {
         ManualUrl = "https://dotnet.microsoft.com/download/dotnet/10.0"
     }
 } else {
-    # Repo exists, check for .NET SDK
-    $localDotnetPath = Join-Path (Resolve-Path $repoPath).Path "privatemarketplace\quickstart\aspire\.dotnet"
     $localDotnetExePath = Join-Path $localDotnetPath "dotnet.exe"
 
     if (Test-Path $localDotnetExePath) {
@@ -229,31 +226,31 @@ if (-not (Test-Path $repoPath)) {
     }
 }
 
-# Check for repository
-Write-Host "Checking for repository..." -ForegroundColor Gray
-if (Test-Path $repoPath) {
-    # Verify it's the correct repository by checking for the quickstart folder
-    $quickstartPath = Join-Path $repoPath "privatemarketplace/quickstart"
-    if (Test-Path $quickstartPath) {
-        Write-Host "  Repository found at: $repoPath" -ForegroundColor Green
+# Check for aspire files
+Write-Host "Checking for aspire files..." -ForegroundColor Gray
+if (Test-Path $rootPath) {
+    # Verify key files exist
+    $apphostPath = Join-Path $rootPath "apphost.cs"
+    if (Test-Path $apphostPath) {
+        Write-Host "  Aspire files found at: $rootPath" -ForegroundColor Green
         $repoExists = $true
     } else {
-        Write-Host "  Repository folder exists but appears incomplete" -ForegroundColor Yellow
+        Write-Host "  Folder exists but appears incomplete" -ForegroundColor Yellow
         $missingPrereqs += @{
-            Name = "VS Marketplace Repository"
+            Name = "Aspire Files"
             InstallMethod = "download"
             DownloadMethod = "ZIP download"
-            TargetFolder = $repoPath
+            TargetFolder = $rootPath
             ManualUrl = $repoUrl
         }
     }
 } else {
-    Write-Host "  Repository not found" -ForegroundColor Yellow
+    Write-Host "  Aspire files not found" -ForegroundColor Yellow
     $missingPrereqs += @{
-        Name = "VS Marketplace Repository"
+        Name = "Aspire Files"
         InstallMethod = "download"
         DownloadMethod = "ZIP download"
-        TargetFolder = $repoPath
+        TargetFolder = $rootPath
         ManualUrl = $repoUrl
     }
 }
@@ -323,9 +320,14 @@ if ($missingPrereqs.Count -gt 0) {
     
     Write-Host "`n=== Installing Prerequisites ===" -ForegroundColor Cyan
     
-    # Download quickstart/aspire folder if missing (needed for local .NET SDK installation)
+    # Download aspire files if missing
     if (-not $repoExists) {
-        Write-Host "`nDownloading quickstart files..." -ForegroundColor Cyan
+        Write-Host "`nDownloading aspire files..." -ForegroundColor Cyan
+        
+        # Create root directory
+        if (-not (Test-Path $rootPath)) {
+            New-Item -ItemType Directory -Path $rootPath -Force | Out-Null
+        }
         
         # Download only the privatemarketplace/quickstart folder
         Write-Host "  Downloading from repository (branch: $repoBranch)..." -ForegroundColor Gray
@@ -336,25 +338,25 @@ if ($missingPrereqs.Count -gt 0) {
             Invoke-WebRequest -Uri $zipUrl -OutFile $tempZipPath -UseBasicParsing
             Write-Host "  ZIP downloaded successfully." -ForegroundColor Green
             
-            Write-Host "  Extracting quickstart folder..." -ForegroundColor Gray
+            Write-Host "  Extracting aspire files..." -ForegroundColor Gray
             $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-extract"
             if (Test-Path $tempExtractPath) {
                 Remove-Item -Path $tempExtractPath -Recurse -Force
             }
             Expand-Archive -Path $tempZipPath -DestinationPath $tempExtractPath -Force
             
-            # Copy only the privatemarketplace/quickstart folder to the target location
-            $extractedQuickstartFolder = Join-Path $tempExtractPath "vsmarketplace-$repoBranch\privatemarketplace\quickstart"
-            if (Test-Path $extractedQuickstartFolder) {
-                # Create the target structure
-                $targetQuickstartPath = Join-Path $repoPath "privatemarketplace\quickstart"
-                New-Item -ItemType Directory -Path $targetQuickstartPath -Force | Out-Null
-                
-                # Copy the quickstart contents
-                Copy-Item -Path "$extractedQuickstartFolder\*" -Destination $targetQuickstartPath -Recurse -Force
-                Write-Host "  Quickstart files copied successfully." -ForegroundColor Green
+            # Copy aspire folder contents directly to root (excluding .dotnet, .aspire, .vscode)
+            $extractedAspireFolder = Join-Path $tempExtractPath "vsmarketplace-$repoBranch\privatemarketplace\quickstart\aspire"
+            if (Test-Path $extractedAspireFolder) {
+                # Get all items in aspire folder except hidden tool folders
+                Get-ChildItem -Path $extractedAspireFolder | Where-Object { 
+                    $_.Name -notin @('.dotnet', '.aspire', '.vscode')
+                } | ForEach-Object {
+                    Copy-Item -Path $_.FullName -Destination $rootPath -Recurse -Force
+                }
+                Write-Host "  Aspire files copied successfully." -ForegroundColor Green
             } else {
-                throw "Quickstart folder not found in downloaded archive"
+                throw "Aspire folder not found in downloaded archive"
             }
             
             # Clean up temporary files
@@ -362,9 +364,6 @@ if ($missingPrereqs.Count -gt 0) {
             Remove-Item -Path $tempExtractPath -Recurse -Force
             Write-Host "  Download complete." -ForegroundColor Green
             $repoExists = $true
-            
-            # Now that quickstart exists, recalculate the absolute path for local .NET SDK
-            $localDotnetPath = Join-Path (Resolve-Path $repoPath).Path "privatemarketplace\quickstart\aspire\.dotnet"
         }
         catch {
             Write-Host "  Error downloading or extracting files: $_" -ForegroundColor Red
@@ -487,8 +486,7 @@ if ($missingPrereqs.Count -gt 0) {
                 
                 # Create a marker file to signal that we're in the admin template installation phase
                 $markerFile = Join-Path $env:TEMP "vscode-admin-template-install.txt"
-                $vscodePolicyPath = Join-Path (Resolve-Path $repoPath).Path "privatemarketplace\quickstart\aspire\policies"
-                Set-Content -Path $markerFile -Value $vscodePolicyPath
+                Set-Content -Path $markerFile -Value $policiesPath
                 
                 try {
                     # Launch the script with admin privileges
@@ -594,16 +592,15 @@ if ($missingPrereqs.Count -gt 0) {
 # Save the original directory
 $originalDirectory = Get-Location
 
-# Navigate to the quickstart folder
-Write-Host "`nNavigating to privatemarketplace/quickstart/aspire..." -ForegroundColor Cyan
-$quickstartPath = Join-Path $repoPath "privatemarketplace/quickstart/aspire"
+# Navigate to the aspire folder
+Write-Host "`nNavigating to aspire folder..." -ForegroundColor Cyan
 
-if (-not (Test-Path $quickstartPath)) {
-    Write-Host "Error: privatemarketplace/quickstart/aspire folder not found!" -ForegroundColor Red
+if (-not (Test-Path $rootPath)) {
+    Write-Host "Error: aspire folder not found!" -ForegroundColor Red
     return
 }
 
-Set-Location $quickstartPath
+Set-Location $rootPath
 Write-Host "Current directory: $(Get-Location)" -ForegroundColor Gray
 
 # Set up local .NET SDK environment
@@ -703,24 +700,24 @@ finally {
     # Prompt to clean up temp folder
     Write-Host "`n" -ForegroundColor Cyan
     Write-Host "Aspire has exited." -ForegroundColor Cyan
-    Write-Host "Temporary files location: $repoPath" -ForegroundColor Gray
+    Write-Host "Temporary files location: $rootPath" -ForegroundColor Gray
     Write-Host ""
     $cleanupResponse = Read-Host "Do you want to remove the temporary folder and all its contents? (y/n)"
     
     if ($cleanupResponse -eq 'y') {
         Write-Host "Removing temporary folder..." -ForegroundColor Yellow
         try {
-            if (Test-Path $repoPath) {
-                Remove-Item -Path $repoPath -Recurse -Force
+            if (Test-Path $rootPath) {
+                Remove-Item -Path $rootPath -Recurse -Force
                 Write-Host "Temporary folder removed successfully." -ForegroundColor Green
             } else {
                 Write-Host "Temporary folder not found." -ForegroundColor Gray
             }
         } catch {
             Write-Host "Error removing temporary folder: $_" -ForegroundColor Red
-            Write-Host "You can manually delete: $repoPath" -ForegroundColor Yellow
+            Write-Host "You can manually delete: $rootPath" -ForegroundColor Yellow
         }
     } else {
-        Write-Host "Temporary folder preserved at: $repoPath" -ForegroundColor Gray
+        Write-Host "Temporary folder preserved at: $rootPath" -ForegroundColor Gray
     }
 }
