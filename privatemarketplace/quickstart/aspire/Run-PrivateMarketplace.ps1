@@ -248,12 +248,24 @@ if ($missingPrereqs.Count -gt 0) {
             Write-Host "  Installing .NET SDK $dotnetVersion to $localDotnetPath..." -ForegroundColor Gray
             & $dotnetInstallScript -Version $dotnetVersion -InstallDir $localDotnetPath -NoPath
             
-            # Verify installation
-            if (Test-Path $localDotnetSdkPath) {
-                Write-Host "  .NET SDK $dotnetVersion installed successfully." -ForegroundColor Green
-                $dotnetInstalled = $true
+            # Verify installation by checking for dotnet.exe and running --list-sdks
+            $localDotnetExeCheck = Join-Path $localDotnetPath "dotnet.exe"
+            if (Test-Path $localDotnetExeCheck) {
+                try {
+                    $installedSdks = & $localDotnetExeCheck --list-sdks 2>$null
+                    $matchingSdk = $installedSdks | Where-Object { $_ -match "^$([regex]::Escape($dotnetVersion))\s" }
+                    
+                    if ($matchingSdk) {
+                        Write-Host "  .NET SDK $dotnetVersion installed successfully." -ForegroundColor Green
+                        $dotnetInstalled = $true
+                    } else {
+                        throw "SDK version $dotnetVersion not found after installation"
+                    }
+                } catch {
+                    throw "Failed to verify SDK installation: $_"
+                }
             } else {
-                throw "SDK directory not found after installation"
+                throw "dotnet.exe not found after installation"
             }
             
             # Clean up
