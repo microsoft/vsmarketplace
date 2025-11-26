@@ -20,7 +20,7 @@ $repoExists = $false
 $wingetAvailable = $false
 
 # Define repository details
-$repoUrl = "https://github.com/mmcumming/vsmarketplace"
+$repoUrl = "https://github.com/mcumming/vsmarketplace"
 $repoBranch = "main"  # Change this to test different branches
 $repoPath = $Path
 
