@@ -2,6 +2,68 @@
 
 $ErrorActionPreference = "Stop"
 
+# Check if running as administrator
+$isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+
+# If -InstallAdminTemplates parameter is passed, only install templates and exit
+if ($args -contains "-InstallAdminTemplates") {
+    if (-not $isAdmin) {
+        Write-Host "Error: Must run as administrator to install administrative templates." -ForegroundColor Red
+        exit 1
+    }
+    
+    # Read the policy path from the marker file
+    $markerFile = Join-Path $env:TEMP "vscode-admin-template-install.txt"
+    if (-not (Test-Path $markerFile)) {
+        Write-Host "Error: Marker file not found. Cannot determine policy source path." -ForegroundColor Red
+        exit 1
+    }
+    
+    $vscodePolicyPath = Get-Content -Path $markerFile -Raw
+    $vscodePolicyPath = $vscodePolicyPath.Trim()
+    
+    Write-Host "Installing VS Code administrative templates..." -ForegroundColor Cyan
+    
+    try {
+        $policyDefinitionsPath = Join-Path $env:WINDIR "PolicyDefinitions"
+        
+        # Copy main ADMX file
+        $admxSource = Join-Path $vscodePolicyPath "VSCode.admx"
+        $admxDest = Join-Path $policyDefinitionsPath "VSCode.admx"
+        
+        if (-not (Test-Path $admxSource)) {
+            Write-Host "Error: VSCode.admx not found at: $admxSource" -ForegroundColor Red
+            exit 1
+        }
+        
+        Copy-Item -Path $admxSource -Destination $admxDest -Force
+        Write-Host "  Copied VSCode.admx to PolicyDefinitions" -ForegroundColor Green
+        
+        # Get all language folders in Windows PolicyDefinitions
+        $windowsLangFolders = Get-ChildItem -Path $policyDefinitionsPath -Directory | Where-Object { $_.Name -match '^[a-z]{2}-[a-z]{2}$' }
+        
+        # Copy matching language ADML files
+        $copiedCount = 0
+        foreach ($langFolder in $windowsLangFolders) {
+            $vscodeLangPath = Join-Path $vscodePolicyPath $langFolder.Name
+            $admlSource = Join-Path $vscodeLangPath "VSCode.adml"
+            
+            if (Test-Path $admlSource) {
+                $admlDest = Join-Path (Join-Path $policyDefinitionsPath $langFolder.Name) "VSCode.adml"
+                Copy-Item -Path $admlSource -Destination $admlDest -Force
+                Write-Host "  Copied VSCode.adml for language: $($langFolder.Name)" -ForegroundColor Green
+                $copiedCount++
+            }
+        }
+        
+        Write-Host "Administrative templates installed successfully ($copiedCount language files)." -ForegroundColor Green
+        exit 0
+    } catch {
+        Write-Host "Error installing administrative templates: $_" -ForegroundColor Red
+        exit 1
+    }
+}
+
 Write-Host "Private Marketplace for VS Code Quickstart" -ForegroundColor Cyan
 
 # Check and install prerequisites
@@ -418,6 +480,33 @@ if ($missingPrereqs.Count -gt 0) {
             if (Test-Path $vscodeExePath) {
                 Write-Host "  VS Code installed successfully." -ForegroundColor Green
                 $vscodeInstalled = $true
+                
+                # Launch script as admin to install administrative templates
+                Write-Host "  Installing VS Code administrative templates..." -ForegroundColor Gray
+                $scriptPath = $MyInvocation.MyCommand.Path
+                
+                # Create a marker file to signal that we're in the admin template installation phase
+                $markerFile = Join-Path $env:TEMP "vscode-admin-template-install.txt"
+                $vscodePolicyPath = Join-Path (Resolve-Path $repoPath).Path "privatemarketplace\quickstart\aspire\policies"
+                Set-Content -Path $markerFile -Value $vscodePolicyPath
+                
+                try {
+                    # Launch the script with admin privileges
+                    $process = Start-Process -FilePath "pwsh.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -InstallAdminTemplates" -Verb RunAs -Wait -PassThru
+                    
+                    if ($process.ExitCode -eq 0) {
+                        Write-Host "  Administrative templates installed successfully." -ForegroundColor Green
+                    } else {
+                        Write-Host "    Warning: Administrative template installation exited with code $($process.ExitCode)" -ForegroundColor Yellow
+                    }
+                } catch {
+                    Write-Host "    Warning: Could not install administrative templates: $_" -ForegroundColor Yellow
+                } finally {
+                    # Clean up marker file
+                    if (Test-Path $markerFile) {
+                        Remove-Item $markerFile -Force -ErrorAction SilentlyContinue
+                    }
+                }
             } else {
                 throw "Code.exe not found after installation"
             }
