@@ -480,30 +480,56 @@ if ($missingPrereqs.Count -gt 0) {
                 Write-Host "  VS Code installed successfully." -ForegroundColor Green
                 $vscodeInstalled = $true
                 
-                # Launch script as admin to install administrative templates
-                Write-Host "  Installing VS Code administrative templates..." -ForegroundColor Gray
-                $scriptPath = $MyInvocation.MyCommand.Path
+                # Prompt before launching script as admin to install administrative templates
+                Write-Host ""
+                Write-Host "VS Code Administrative Templates" -ForegroundColor Cyan
+                Write-Host "================================" -ForegroundColor Cyan
+                Write-Host "The script needs to install VS Code Group Policy templates to the Windows" -ForegroundColor Gray
+                Write-Host "PolicyDefinitions folder. This requires administrator privileges." -ForegroundColor Gray
+                Write-Host ""
+                Write-Host "You will be prompted to grant elevated access (UAC prompt)." -ForegroundColor Yellow
+                Write-Host ""
+                $installTemplates = Read-Host "Do you want to install the administrative templates now? (y/n)"
                 
-                # Create a marker file to signal that we're in the admin template installation phase
-                $markerFile = Join-Path $env:TEMP "vscode-admin-template-install.txt"
-                Set-Content -Path $markerFile -Value $policiesPath
-                
-                try {
-                    # Launch the script with admin privileges
-                    $process = Start-Process -FilePath "pwsh.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -InstallAdminTemplates" -Verb RunAs -Wait -PassThru
+                if ($installTemplates -eq 'y') {
+                    Write-Host "  Installing VS Code administrative templates..." -ForegroundColor Gray
+                    $scriptPath = $MyInvocation.MyCommand.Path
                     
-                    if ($process.ExitCode -eq 0) {
-                        Write-Host "  Administrative templates installed successfully." -ForegroundColor Green
-                    } else {
-                        Write-Host "    Warning: Administrative template installation exited with code $($process.ExitCode)" -ForegroundColor Yellow
+                    # Create a marker file to signal that we're in the admin template installation phase
+                    $markerFile = Join-Path $env:TEMP "vscode-admin-template-install.txt"
+                    Set-Content -Path $markerFile -Value $policiesPath
+                    
+                    try {
+                        # Launch the script with admin privileges
+                        $process = Start-Process -FilePath "pwsh.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -InstallAdminTemplates" -Verb RunAs -Wait -PassThru
+                        
+                        if ($process.ExitCode -eq 0) {
+                            Write-Host "  Administrative templates installed successfully." -ForegroundColor Green
+                        } else {
+                            Write-Host "    Warning: Administrative template installation exited with code $($process.ExitCode)" -ForegroundColor Yellow
+                        }
+                    } catch {
+                        Write-Host "    Warning: Could not install administrative templates: $_" -ForegroundColor Yellow
+                    } finally {
+                        # Clean up marker file
+                        if (Test-Path $markerFile) {
+                            Remove-Item $markerFile -Force -ErrorAction SilentlyContinue
+                        }
                     }
-                } catch {
-                    Write-Host "    Warning: Could not install administrative templates: $_" -ForegroundColor Yellow
-                } finally {
-                    # Clean up marker file
-                    if (Test-Path $markerFile) {
-                        Remove-Item $markerFile -Force -ErrorAction SilentlyContinue
-                    }
+                } else {
+                    Write-Host ""
+                    Write-Host "  Skipping administrative template installation." -ForegroundColor Yellow
+                    Write-Host ""
+                    Write-Host "  To install manually, copy the following files:" -ForegroundColor Gray
+                    Write-Host "    1. Copy VSCode.admx from:" -ForegroundColor Gray
+                    Write-Host "       $policiesPath\VSCode.admx" -ForegroundColor Gray
+                    Write-Host "       to: C:\Windows\PolicyDefinitions\VSCode.admx" -ForegroundColor Gray
+                    Write-Host ""
+                    Write-Host "    2. Copy language-specific VSCode.adml files from:" -ForegroundColor Gray
+                    Write-Host "       $policiesPath\<language-code>\VSCode.adml" -ForegroundColor Gray
+                    Write-Host "       to: C:\Windows\PolicyDefinitions\<language-code>\VSCode.adml" -ForegroundColor Gray
+                    Write-Host "       (e.g., en-us, de-de, fr-fr, etc.)" -ForegroundColor Gray
+                    Write-Host ""
                 }
             } else {
                 throw "Code.exe not found after installation"
@@ -700,6 +726,15 @@ finally {
     # Prompt to clean up temp folder
     Write-Host "`n" -ForegroundColor Cyan
     Write-Host "Aspire has exited." -ForegroundColor Cyan
+    Write-Host ""
+    Write-Host "IMPORTANT: Unset the Private Marketplace URL Policy" -ForegroundColor Yellow
+    Write-Host "===========================================" -ForegroundColor Yellow
+    Write-Host "To restore normal VS Code Marketplace access, you need to unset the" -ForegroundColor Gray
+    Write-Host "'Private Marketplace URL' Group Policy setting:" -ForegroundColor Gray
+    Write-Host "  1. Open Group Policy Editor (gpedit.msc)" -ForegroundColor Gray
+    Write-Host "  2. Navigate to: User Configuration > Administrative Templates > Visual Studio Code" -ForegroundColor Gray
+    Write-Host "  3. Set 'Private Marketplace URL' to 'Not Configured'" -ForegroundColor Gray
+    Write-Host ""
     Write-Host "Temporary files location: $rootPath" -ForegroundColor Gray
     Write-Host ""
     $cleanupResponse = Read-Host "Do you want to remove the temporary folder and all its contents? (y/n)"
@@ -707,6 +742,13 @@ finally {
     if ($cleanupResponse -eq 'y') {
         Write-Host "Removing temporary folder..." -ForegroundColor Yellow
         try {
+            # Navigate to user profile folder before removing temp folder if we're currently in it
+            $currentLocation = (Get-Location).Path
+            if ($currentLocation.StartsWith($rootPath, [StringComparison]::OrdinalIgnoreCase)) {
+                Set-Location $env:USERPROFILE
+                Write-Host "Navigated to profile folder: $env:USERPROFILE" -ForegroundColor Gray
+            }
+            
             if (Test-Path $rootPath) {
                 Remove-Item -Path $rootPath -Recurse -Force
                 Write-Host "Temporary folder removed successfully." -ForegroundColor Green
@@ -718,6 +760,12 @@ finally {
             Write-Host "You can manually delete: $rootPath" -ForegroundColor Yellow
         }
     } else {
-        Write-Host "Temporary folder preserved at: $rootPath" -ForegroundColor Gray
+        Write-Host ""
+        Write-Host "Temporary folder preserved at: $rootPath" -ForegroundColor Green
+        Write-Host ""
+        Write-Host "To run the Private Marketplace again:" -ForegroundColor Cyan
+        Write-Host "  1. Open PowerShell" -ForegroundColor Gray
+        Write-Host "  2. Run: & \"$rootPath\Run-PrivateMarketplace.ps1\"" -ForegroundColor Gray
+        Write-Host ""
     }
 }
