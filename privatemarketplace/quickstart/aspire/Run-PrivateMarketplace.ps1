@@ -15,7 +15,13 @@ Write-Host "`nChecking prerequisites..." -ForegroundColor Cyan
 $missingPrereqs = @()
 $dockerInstalled = $false
 $aspireInstalled = $false
+$dotnetInstalled = $false
+$repoExists = $false
 $wingetAvailable = $false
+
+# Define repository details
+$repoUrl = "https://github.com/microsoft/vsmarketplace"
+$repoPath = $Path
 
 # Check Docker
 Write-Host "Checking for Docker..." -ForegroundColor Gray
@@ -39,19 +45,81 @@ try {
 # Check Aspire CLI
 Write-Host "Checking for Aspire CLI..." -ForegroundColor Gray
 try {
-    $aspireVersion = aspire --version 2>$null
+    $aspireVersionOutput = aspire --version 2>$null
     if ($LASTEXITCODE -eq 0) {
-        Write-Host "  Aspire CLI detected: $aspireVersion" -ForegroundColor Green
-        $aspireInstalled = $true
+        # Extract version number (format: "13.0.0" or similar)
+        if ($aspireVersionOutput -match '(\d+)\.(\d+)\.(\d+)') {
+            $majorVersion = [int]$matches[1]
+            if ($majorVersion -ge 13) {
+                Write-Host "  Aspire CLI detected: $aspireVersionOutput" -ForegroundColor Green
+                $aspireInstalled = $true
+            } else {
+                Write-Host "  Aspire CLI version $aspireVersionOutput found, but version 13+ required" -ForegroundColor Yellow
+                throw "Aspire CLI version too old"
+            }
+        } else {
+            Write-Host "  Aspire CLI detected: $aspireVersionOutput" -ForegroundColor Green
+            $aspireInstalled = $true
+        }
     } else {
         throw "Aspire CLI not found"
     }
 } catch {
-    Write-Host "  Aspire CLI not found" -ForegroundColor Yellow
+    Write-Host "  Aspire CLI 13+ not found" -ForegroundColor Yellow
     $missingPrereqs += @{
-        Name = "Aspire CLI"
+        Name = "Aspire CLI (version 13+)"
         InstallMethod = "script"
         ManualUrl = "https://aspire.dev"
+    }
+}
+
+# Check .NET 10 SDK
+Write-Host "Checking for .NET 10 SDK..." -ForegroundColor Gray
+try {
+    $dotnetOutput = dotnet --list-sdks 2>$null
+    if ($LASTEXITCODE -eq 0) {
+        $dotnet10Installed = $dotnetOutput | Where-Object { $_ -match '^10\.' }
+        if ($dotnet10Installed) {
+            $dotnet10Version = ($dotnet10Installed | Select-Object -First 1) -replace '\s+\[.*\]$', ''
+            Write-Host "  .NET 10 SDK detected: $dotnet10Version" -ForegroundColor Green
+            $dotnetInstalled = $true
+        } else {
+            throw ".NET 10 SDK not found"
+        }
+    } else {
+        throw "dotnet command not found"
+    }
+} catch {
+    Write-Host "  .NET 10 SDK not found" -ForegroundColor Yellow
+    $missingPrereqs += @{
+        Name = ".NET 10 SDK"
+        InstallMethod = "winget"
+        ManualUrl = "https://dotnet.microsoft.com/download/dotnet/10.0"
+    }
+}
+
+# Check for repository
+Write-Host "Checking for repository..." -ForegroundColor Gray
+if (Test-Path $repoPath) {
+    # Verify it's the correct repository by checking for the quickstart folder
+    $quickstartPath = Join-Path $repoPath "privatemarketplace/quickstart"
+    if (Test-Path $quickstartPath) {
+        Write-Host "  Repository found at: $repoPath" -ForegroundColor Green
+        $repoExists = $true
+    } else {
+        Write-Host "  Repository folder exists but appears incomplete" -ForegroundColor Yellow
+        $missingPrereqs += @{
+            Name = "VS Marketplace Repository"
+            InstallMethod = "download"
+            ManualUrl = $repoUrl
+        }
+    }
+} else {
+    Write-Host "  Repository not found" -ForegroundColor Yellow
+    $missingPrereqs += @{
+        Name = "VS Marketplace Repository"
+        InstallMethod = "download"
+        ManualUrl = $repoUrl
     }
 }
 
@@ -74,6 +142,8 @@ if ($missingPrereqs.Count -gt 0) {
             Write-Host "  - $($prereq.Name): via winget" -ForegroundColor Green
         } elseif ($prereq.InstallMethod -eq "script") {
             Write-Host "  - $($prereq.Name): via installation script" -ForegroundColor Green
+        } elseif ($prereq.InstallMethod -eq "download") {
+            Write-Host "  - $($prereq.Name): via git clone or ZIP download" -ForegroundColor Green
         }
     }
     
@@ -81,8 +151,8 @@ if ($missingPrereqs.Count -gt 0) {
     Write-Host ""
     $response = Read-Host "Do you want to proceed with installation? (y/n)"
     if ($response -ne 'y') {
-        Write-Host "Installation cancelled by user." -ForegroundColor Yellow
-        exit 0
+        Write-Host "Installation cancelled by user. Please install the missing prerequisites and run this script again." -ForegroundColor Yellow
+        return
     }
     
     Write-Host "`n=== Installing Prerequisites ===" -ForegroundColor Cyan
@@ -98,15 +168,49 @@ if ($missingPrereqs.Count -gt 0) {
             if ($LASTEXITCODE -eq 0) {
                 Write-Host "  Docker Desktop installed successfully." -ForegroundColor Green
                 Write-Host "  IMPORTANT: Please start Docker Desktop and wait for it to be ready, then re-run this script." -ForegroundColor Yellow
-                exit 0
+                return
             } else {
                 Write-Host "  Failed to install Docker Desktop via winget." -ForegroundColor Red
                 Write-Host "  Please install Docker Desktop manually from: https://www.docker.com/products/docker-desktop" -ForegroundColor Yellow
-                exit 1
+                return
             }
         } else {
             Write-Host "  winget not available. Please install Docker Desktop manually from: https://www.docker.com/products/docker-desktop" -ForegroundColor Yellow
-            exit 1
+            return
+        }
+    }
+    
+    # Install .NET 10 SDK if missing
+    if (-not $dotnetInstalled) {
+        Write-Host "`nInstalling .NET 10 SDK..." -ForegroundColor Cyan
+        
+        if ($wingetAvailable) {
+            Write-Host "  Using winget to install .NET 10 SDK..." -ForegroundColor Gray
+            winget install -e --id Microsoft.DotNet.SDK.10 --accept-package-agreements --accept-source-agreements
+            
+            if ($LASTEXITCODE -eq 0) {
+                Write-Host "  .NET 10 SDK installed successfully." -ForegroundColor Green
+                
+                # Refresh environment variables
+                $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+                
+                # Verify installation
+                $dotnetOutput = dotnet --list-sdks 2>$null
+                $dotnet10Installed = $dotnetOutput | Where-Object { $_ -match '^10\.' }
+                if ($dotnet10Installed) {
+                    $dotnet10Version = ($dotnet10Installed | Select-Object -First 1) -replace '\s+\[.*\]$', ''
+                    Write-Host "  .NET 10 SDK verified: $dotnet10Version" -ForegroundColor Green
+                } else {
+                    Write-Host "  .NET 10 SDK installed but not detected. You may need to restart your terminal." -ForegroundColor Yellow
+                }
+            } else {
+                Write-Host "  Failed to install .NET 10 SDK via winget." -ForegroundColor Red
+                Write-Host "  Please install .NET 10 SDK manually from: https://dotnet.microsoft.com/download/dotnet/10.0" -ForegroundColor Yellow
+                return
+            }
+        } else {
+            Write-Host "  winget not available. Please install .NET 10 SDK manually from: https://dotnet.microsoft.com/download/dotnet/10.0" -ForegroundColor Yellow
+            return
         }
     }
     
@@ -134,7 +238,7 @@ if ($missingPrereqs.Count -gt 0) {
         } catch {
             Write-Host "  Error installing Aspire CLI: $_" -ForegroundColor Red
             Write-Host "  Please install manually by running: Invoke-WebRequest -Uri 'https://aspire.dev/install.ps1' -UseBasicParsing | Invoke-Expression" -ForegroundColor Yellow
-            exit 1
+            return
         }
         
         # Verify aspire command is available
@@ -149,13 +253,83 @@ if ($missingPrereqs.Count -gt 0) {
                 Write-Host "  Automatic .NET SDK installation enabled." -ForegroundColor Green
             } else {
                 Write-Host "  Aspire CLI still not available. You may need to restart your terminal." -ForegroundColor Yellow
-                Write-Host "  Please close this terminal and run the script again." -ForegroundColor Yellow
-                exit 1
+                Write-Host "  Please run the script again." -ForegroundColor Yellow
+                return
             }
         } catch {
             Write-Host "  Aspire CLI still not available. You may need to restart your terminal." -ForegroundColor Yellow
-            Write-Host "  Please close this terminal and run the script again." -ForegroundColor Yellow
-            exit 1
+            Write-Host "  Please run the script again." -ForegroundColor Yellow
+            return
+        }
+    }
+    
+    # Download repository if missing
+    if (-not $repoExists) {
+        Write-Host "`nDownloading VS Marketplace Repository..." -ForegroundColor Cyan
+        
+        # Check if git is available
+        $useGit = $false
+        try {
+            $gitVersion = git --version 2>$null
+            if ($LASTEXITCODE -eq 0) {
+                $useGit = $true
+                Write-Host "  Git detected: $gitVersion" -ForegroundColor Gray
+            }
+        }
+        catch {
+            Write-Host "  Git not found in PATH." -ForegroundColor Yellow
+        }
+
+        if ($useGit) {
+            # Clone using git
+            Write-Host "  Cloning repository using git..." -ForegroundColor Gray
+            
+            try {
+                git clone $repoUrl $repoPath
+                Write-Host "  Repository cloned successfully." -ForegroundColor Green
+                $repoExists = $true
+            }
+            catch {
+                Write-Host "  Error cloning repository: $_" -ForegroundColor Red
+                Write-Host "  Falling back to ZIP download..." -ForegroundColor Yellow
+                $useGit = $false
+            }
+        }
+
+        if (-not $useGit) {
+            # Download as ZIP (fallback)
+            Write-Host "  Downloading repository as ZIP..." -ForegroundColor Gray
+            $zipUrl = "$repoUrl/archive/refs/heads/main.zip"
+            $tempZipPath = Join-Path $env:TEMP "vsmarketplace-main.zip"
+            
+            try {
+                Invoke-WebRequest -Uri $zipUrl -OutFile $tempZipPath -UseBasicParsing
+                Write-Host "  ZIP downloaded successfully." -ForegroundColor Green
+                
+                Write-Host "  Extracting ZIP file..." -ForegroundColor Gray
+                $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-extract"
+                if (Test-Path $tempExtractPath) {
+                    Remove-Item -Path $tempExtractPath -Recurse -Force
+                }
+                Expand-Archive -Path $tempZipPath -DestinationPath $tempExtractPath -Force
+                
+                # Move the extracted folder to the target location
+                $extractedFolder = Join-Path $tempExtractPath "vsmarketplace-main"
+                if (Test-Path $extractedFolder) {
+                    Move-Item -Path $extractedFolder -Destination $repoPath -Force
+                }
+                
+                # Clean up temporary files
+                Remove-Item -Path $tempZipPath -Force
+                Remove-Item -Path $tempExtractPath -Recurse -Force
+                Write-Host "  Extraction complete." -ForegroundColor Green
+                $repoExists = $true
+            }
+            catch {
+                Write-Host "  Error downloading or extracting ZIP: $_" -ForegroundColor Red
+                Write-Host "  Please download the repository manually from: $repoUrl" -ForegroundColor Yellow
+                return
+            }
         }
     }
     
@@ -164,96 +338,13 @@ if ($missingPrereqs.Count -gt 0) {
     Write-Host "`nAll prerequisites satisfied." -ForegroundColor Green
 }
 
-# Define repository details
-$repoUrl = "https://github.com/microsoft/vsmarketplace"
-$repoPath = $Path
-
-# Check if repository already exists
-if (Test-Path $repoPath) {
-    Write-Host "Repository already exists at: $repoPath" -ForegroundColor Yellow
-    $response = Read-Host "Do you want to delete and re-download? (y/n)"
-    if ($response -eq 'y') {
-        Write-Host "Removing existing repository..." -ForegroundColor Yellow
-        Remove-Item -Path $repoPath -Recurse -Force
-    } else {
-        Write-Host "Using existing repository..." -ForegroundColor Green
-        Set-Location $repoPath
-        Set-Location "privatemarketplace/quickstart"
-        Write-Host "Running aspire..." -ForegroundColor Cyan
-        aspire run
-        exit
-    }
-}
-
-# Check if git is available
-$useGit = $false
-try {
-    $gitVersion = git --version 2>$null
-    if ($LASTEXITCODE -eq 0) {
-        $useGit = $true
-        Write-Host "Git detected: $gitVersion" -ForegroundColor Gray
-    }
-}
-catch {
-    Write-Host "Git not found in PATH." -ForegroundColor Yellow
-}
-
-if ($useGit) {
-    # Clone using git
-    Write-Host "Cloning repository using git..." -ForegroundColor Cyan
-    
-    try {
-        git clone $repoUrl $repoPath
-        Write-Host "Repository cloned successfully." -ForegroundColor Green
-    }
-    catch {
-        Write-Host "Error cloning repository: $_" -ForegroundColor Red
-        Write-Host "Falling back to ZIP download..." -ForegroundColor Yellow
-        $useGit = $false
-    }
-}
-
-if (-not $useGit) {
-    # Download as ZIP (fallback)
-    Write-Host "Downloading repository as ZIP..." -ForegroundColor Cyan
-    $zipUrl = "$repoUrl/archive/refs/heads/main.zip"
-    $tempZipPath = Join-Path $env:TEMP "vsmarketplace-main.zip"
-    
-    try {
-        Invoke-WebRequest -Uri $zipUrl -OutFile $tempZipPath -UseBasicParsing
-        Write-Host "ZIP downloaded successfully." -ForegroundColor Green
-        
-        Write-Host "Extracting ZIP file..." -ForegroundColor Cyan
-        $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-extract"
-        if (Test-Path $tempExtractPath) {
-            Remove-Item -Path $tempExtractPath -Recurse -Force
-        }
-        Expand-Archive -Path $tempZipPath -DestinationPath $tempExtractPath -Force
-        
-        # Move the extracted folder to the target location
-        $extractedFolder = Join-Path $tempExtractPath "vsmarketplace-main"
-        if (Test-Path $extractedFolder) {
-            Move-Item -Path $extractedFolder -Destination $repoPath -Force
-        }
-        
-        # Clean up temporary files
-        Remove-Item -Path $tempZipPath -Force
-        Remove-Item -Path $tempExtractPath -Recurse -Force
-        Write-Host "Extraction complete." -ForegroundColor Green
-    }
-    catch {
-        Write-Host "Error downloading or extracting ZIP: $_" -ForegroundColor Red
-        exit 1
-    }
-}
-
 # Navigate to the quickstart folder
 Write-Host "`nNavigating to privatemarketplace/quickstart..." -ForegroundColor Cyan
 $quickstartPath = Join-Path $repoPath "privatemarketplace/quickstart"
 
 if (-not (Test-Path $quickstartPath)) {
     Write-Host "Error: privatemarketplace/quickstart folder not found!" -ForegroundColor Red
-    exit 1
+    return
 }
 
 Set-Location $quickstartPath
@@ -266,5 +357,5 @@ try {
 }
 catch {
     Write-Host "Error running aspire: $_" -ForegroundColor Red
-    exit 1
+    return
 }
