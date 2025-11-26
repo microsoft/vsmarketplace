@@ -82,8 +82,25 @@ try {
         $dotnet10Installed = $dotnetOutput | Where-Object { $_ -match '^10\.' }
         if ($dotnet10Installed) {
             $dotnet10Version = ($dotnet10Installed | Select-Object -First 1) -replace '\s+\[.*\]$', ''
-            Write-Host "  .NET 10 SDK detected: $dotnet10Version" -ForegroundColor Green
-            $dotnetInstalled = $true
+            
+            # Check if version is 10.0.100 or greater (prerelease versions are considered less than stable)
+            # Pattern matches: 10.0.100, 10.0.100-preview.1, 10.0.200, etc.
+            if ($dotnet10Version -match '^10\.0\.(\d+)(-.*)?$') {
+                $patchVersion = [int]$matches[1]
+                $isPrerelease = $matches[2] -ne $null -and $matches[2] -ne ''
+                
+                if ($patchVersion -gt 100 -or ($patchVersion -eq 100 -and -not $isPrerelease)) {
+                    Write-Host "  .NET 10 SDK detected: $dotnet10Version" -ForegroundColor Green
+                    $dotnetInstalled = $true
+                } else {
+                    Write-Host "  .NET 10 SDK detected: $dotnet10Version (version 10.0.100+ stable required)" -ForegroundColor Yellow
+                    throw ".NET 10.0.100+ required"
+                }
+            } else {
+                # If version doesn't match expected pattern, accept it (handles future version formats)
+                Write-Host "  .NET 10 SDK detected: $dotnet10Version" -ForegroundColor Green
+                $dotnetInstalled = $true
+            }
         } else {
             throw ".NET 10 SDK not found"
         }
@@ -91,9 +108,9 @@ try {
         throw "dotnet command not found"
     }
 } catch {
-    Write-Host "  .NET 10 SDK not found" -ForegroundColor Yellow
+    Write-Host "  .NET 10 SDK 10.0.100+ not found" -ForegroundColor Yellow
     $missingPrereqs += @{
-        Name = ".NET 10 SDK"
+        Name = ".NET 10 SDK (10.0.100+)"
         InstallMethod = "winget"
         ManualUrl = "https://dotnet.microsoft.com/download/dotnet/10.0"
     }
