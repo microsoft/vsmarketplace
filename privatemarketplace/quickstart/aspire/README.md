@@ -276,22 +276,22 @@ Remove-Item -Path "$env:TEMP\privatemarketplace-quickstart" -Recurse -Force
 
 If you skipped the administrative templates installation during setup, you can install them manually:
 
-1. Stop the Aspire application (press `Ctrl+C` in the terminal)
-2. Open PowerShell as Administrator (right-click → Run as Administrator)
-3. Navigate to the temporary installation folder:
+1. In the Aspire dashboard, click **Actions** (⋮) for **`vscode-private-marketplace`**
+2. Select **Stop** to stop the marketplace container
+3. Open PowerShell as Administrator (right-click → Run as Administrator)
+4. Navigate to the temporary installation folder:
    ```powershell
    cd $env:TEMP\privatemarketplace-quickstart
    ```
-4. Run the script with the install templates parameter:
+5. Run the script with the install templates parameter:
    ```powershell
    .\Run-PrivateMarketplace.ps1 -InstallAdminTemplates
    ```
-5. Restart the Aspire application:
-   ```powershell
-   aspire run
-   ```
+6. Return to the Aspire dashboard
+7. Click **Actions** (⋮) for **`vscode-private-marketplace`**
+8. Select **Restart** to restart the marketplace container
 
-The Group Policy Editor command should now appear in the Aspire dashboard.
+The Group Policy Editor command should now appear in the Aspire dashboard Actions menu.
 
 **VS Code not connecting to private marketplace?**
 - Verify the Group Policy setting is enabled and contains the correct URL
