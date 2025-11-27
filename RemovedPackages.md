@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|Prisma-Inc.prisma-studio-assistance|11/27/2025| Malware|
 |culvequeaka.Descargar-TRAIN-CREW-Prologue-gratuita-2022|11/27/2025| Malware|
 |poccccc.Download-Openal32dll-File-For-Dirt-2-Crack-kadiysy|11/27/2025| Malware|
 |newsporcolec.Penn-Elcom-Case-Designer-Crackepub-wonynoe|11/27/2025| Malware|
