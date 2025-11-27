@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|culvequeaka.Descargar-TRAIN-CREW-Prologue-gratuita-2022|11/27/2025| Malware|
+|poccccc.Download-Openal32dll-File-For-Dirt-2-Crack-kadiysy|11/27/2025| Malware|
+|newsporcolec.Penn-Elcom-Case-Designer-Crackepub-wonynoe|11/27/2025| Malware|
+|vialenliyu.Functionsandapplications11mcgrawhillryersonpdf13-sallole|11/27/2025| Malware|
 |SamuelPinto.better-vscode-html-css-support|11/25/2025| Typo-squatting|
 |SamuelPinto.better-vscode-html-css|11/25/2025| Typo-squatting|
 |SamuelPinto.prettier-vscode-pluss|11/21/2025| Typo-squatting|
