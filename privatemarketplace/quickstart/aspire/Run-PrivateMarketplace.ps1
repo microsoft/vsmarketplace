@@ -242,6 +242,41 @@ function Invoke-WithProgress {
         Write-Progress -Activity $Activity -Completed
     }
 }
+
+<#
+.SYNOPSIS
+    Creates a prerequisite definition hashtable.
+#>
+function New-PrerequisiteInfo {
+    param(
+        [string]$Name,
+        [string]$InstallMethod,
+        [string]$ManualUrl,
+        [string]$InstallPath,
+        [string]$Version,
+        [string]$DownloadMethod,
+        [string]$TargetFolder
+    )
+    
+    $info = @{ Name = $Name; InstallMethod = $InstallMethod }
+    if ($ManualUrl) { $info.ManualUrl = $ManualUrl }
+    if ($InstallPath) { $info.InstallPath = $InstallPath }
+    if ($Version) { $info.Version = $Version }
+    if ($DownloadMethod) { $info.DownloadMethod = $DownloadMethod }
+    if ($TargetFolder) { $info.TargetFolder = $TargetFolder }
+    return $info
+}
+
+<#
+.SYNOPSIS
+    Creates a directory if it doesn't exist.
+#>
+function New-DirectoryIfNeeded {
+    param([string]$Path)
+    if (-not (Test-Path $Path)) {
+        New-Item -ItemType Directory -Path $Path -Force | Out-Null
+    }
+}
 #endregion Helper Functions
 
 # Check if running as administrator
@@ -282,12 +317,8 @@ if ($InstallAdminTemplates) {
         
         if (-not (Test-Path $admxSource)) {
             Write-Host "Error: VSCode.admx not found at: $admxSource" -ForegroundColor Red
-            Write-Host "Checking if policies folder exists..." -ForegroundColor Gray
             if (Test-Path $vscodePolicyPath) {
-                Write-Host "Policies folder exists. Contents:" -ForegroundColor Gray
-                Get-ChildItem -Path $vscodePolicyPath | ForEach-Object { Write-Host "  $($_.Name)" -ForegroundColor Gray }
-            } else {
-                Write-Host "Policies folder does not exist at: $vscodePolicyPath" -ForegroundColor Red
+                Write-Host "Policies folder contents: $(( Get-ChildItem -Path $vscodePolicyPath).Name -join ', ')" -ForegroundColor Gray
             }
             Stop-Transcript
             exit 1
@@ -368,23 +399,16 @@ try {
         } catch {
             Write-Verbose "Docker check failed: $_"
             Write-Host "  Docker not found" -ForegroundColor Yellow
-            $missingPrereqs += @{
-                Name = "Docker Desktop"
-                InstallMethod = "winget"
-                ManualUrl = "https://www.docker.com/products/docker-desktop"
-            }
+            $missingPrereqs += New-PrerequisiteInfo -Name "Docker Desktop" -InstallMethod "winget" `
+                -ManualUrl "https://www.docker.com/products/docker-desktop"
         }# Check VS Code
 Write-Host "Checking for VS Code..." -ForegroundColor Gray
 
 # Check if root doesn't exist, VS Code can't exist either
 if (-not (Test-Path $rootPath)) {
     Write-Host "  VS Code not found (quickstart folder not present)" -ForegroundColor Yellow
-    $missingPrereqs += @{
-        Name = "VS Code (portable)"
-        InstallMethod = "vscode-local"
-        InstallPath = $localVSCodePath
-        ManualUrl = "https://code.visualstudio.com/"
-    }
+    $missingPrereqs += New-PrerequisiteInfo -Name "VS Code (portable)" -InstallMethod "vscode-local" `
+        -InstallPath $localVSCodePath -ManualUrl "https://code.visualstudio.com/"
 } else {
     $vscodeExePath = Join-Path $localVSCodePath "Code.exe"
     
@@ -393,12 +417,8 @@ if (-not (Test-Path $rootPath)) {
         $vscodeInstalled = $true
     } else {
         Write-Host "  VS Code not found" -ForegroundColor Yellow
-        $missingPrereqs += @{
-            Name = "VS Code (portable)"
-            InstallMethod = "vscode-local"
-            InstallPath = $localVSCodePath
-            ManualUrl = "https://code.visualstudio.com/"
-        }
+        $missingPrereqs += New-PrerequisiteInfo -Name "VS Code (portable)" -InstallMethod "vscode-local" `
+            -InstallPath $localVSCodePath -ManualUrl "https://code.visualstudio.com/"
     }
 }
 
@@ -406,28 +426,20 @@ if (-not (Test-Path $rootPath)) {
 Write-Host "Checking for Aspire CLI..." -ForegroundColor Gray
 
 # If root doesn't exist, Aspire can't exist either
+$aspirePrereq = New-PrerequisiteInfo -Name "Aspire CLI (version 13+)" -InstallMethod "aspire-local" `
+    -InstallPath $localAspirePath -ManualUrl "https://learn.microsoft.com/dotnet/aspire"
+
 if (-not (Test-Path $rootPath)) {
     Write-Host "  Aspire CLI not found (quickstart folder not present)" -ForegroundColor Yellow
-    $missingPrereqs += @{
-        Name = "Aspire CLI (version 13+)"
-        InstallMethod = "aspire-local"
-        InstallPath = $localAspirePath
-        ManualUrl = "https://learn.microsoft.com/dotnet/aspire"
-    }
+    $missingPrereqs += $aspirePrereq
 } else {
     $aspireExePath = Join-Path $localAspirePath "aspire.exe"
-    
     if (Test-Path $aspireExePath) {
         Write-Host "  Aspire CLI found at: $localAspirePath" -ForegroundColor Green
         $aspireInstalled = $true
     } else {
         Write-Host "  Aspire CLI not found" -ForegroundColor Yellow
-        $missingPrereqs += @{
-            Name = "Aspire CLI (version 13+)"
-            InstallMethod = "aspire-local"
-            InstallPath = $localAspirePath
-            ManualUrl = "https://learn.microsoft.com/dotnet/aspire"
-        }
+        $missingPrereqs += $aspirePrereq
     }
 }
 
@@ -435,15 +447,12 @@ if (-not (Test-Path $rootPath)) {
 Write-Host "Checking for local .NET SDK..." -ForegroundColor Gray
 
 # If root doesn't exist, .NET SDK can't exist either
+$dotnetPrereq = New-PrerequisiteInfo -Name ".NET SDK $dotnetVersion (local)" -InstallMethod "dotnet-install" `
+    -Version $dotnetVersion -InstallPath $localDotnetPath -ManualUrl "https://dotnet.microsoft.com/download/dotnet/10.0"
+
 if (-not (Test-Path $rootPath)) {
     Write-Host "  Local .NET SDK not found (quickstart folder not present)" -ForegroundColor Yellow
-    $missingPrereqs += @{
-        Name = ".NET SDK $dotnetVersion (local)"
-        InstallMethod = "dotnet-install"
-        Version = $dotnetVersion
-        InstallPath = $localDotnetPath
-        ManualUrl = "https://dotnet.microsoft.com/download/dotnet/10.0"
-    }
+    $missingPrereqs += $dotnetPrereq
 } else {
     $localDotnetExePath = Join-Path $localDotnetPath "dotnet.exe"
 
@@ -457,36 +466,16 @@ if (-not (Test-Path $rootPath)) {
                 Write-Host "  Local .NET SDK $dotnetVersion found at: $localDotnetPath" -ForegroundColor Green
                 $dotnetInstalled = $true
             } else {
-                Write-Host "  Local .NET installation found, but version $dotnetVersion is missing" -ForegroundColor Yellow
-                Write-Host "  Installed SDKs:" -ForegroundColor Gray
-                $installedSdks | ForEach-Object { Write-Host "    $_" -ForegroundColor Gray }
-                $missingPrereqs += @{
-                    Name = ".NET SDK $dotnetVersion (local)"
-                    InstallMethod = "dotnet-install"
-                    Version = $dotnetVersion
-                    InstallPath = $localDotnetPath
-                    ManualUrl = "https://dotnet.microsoft.com/download/dotnet/10.0"
-                }
+                Write-Host "  Version $dotnetVersion missing. Installed: $($installedSdks -join ', ')" -ForegroundColor Yellow
+                $missingPrereqs += $dotnetPrereq
             }
         } catch {
             Write-Host "  Error checking local .NET SDK: $_" -ForegroundColor Yellow
-            $missingPrereqs += @{
-                Name = ".NET SDK $dotnetVersion (local)"
-                InstallMethod = "dotnet-install"
-                Version = $dotnetVersion
-                InstallPath = $localDotnetPath
-                ManualUrl = "https://dotnet.microsoft.com/download/dotnet/10.0"
-            }
+            $missingPrereqs += $dotnetPrereq
         }
     } else {
         Write-Host "  Local .NET SDK not found" -ForegroundColor Yellow
-        $missingPrereqs += @{
-            Name = ".NET SDK $dotnetVersion (local)"
-            InstallMethod = "dotnet-install"
-            Version = $dotnetVersion
-            InstallPath = $localDotnetPath
-            ManualUrl = "https://dotnet.microsoft.com/download/dotnet/10.0"
-        }
+        $missingPrereqs += $dotnetPrereq
     }
 }
 
@@ -500,23 +489,13 @@ if (Test-Path $rootPath) {
         $repoExists = $true
     } else {
         Write-Host "  Folder exists but appears incomplete (apphost.cs not found)" -ForegroundColor Yellow
-        $missingPrereqs += @{
-            Name = "Aspire Files"
-            InstallMethod = "download"
-            DownloadMethod = "ZIP download"
-            TargetFolder = $rootPath
-            ManualUrl = $repoUrl
-        }
+        $missingPrereqs += New-PrerequisiteInfo -Name "Aspire Files" -InstallMethod "download" `
+            -DownloadMethod "ZIP download" -TargetFolder $rootPath -ManualUrl $repoUrl
     }
 } else {
     Write-Host "  Aspire files not found" -ForegroundColor Yellow
-    $missingPrereqs += @{
-        Name = "Aspire Files"
-        InstallMethod = "download"
-        DownloadMethod = "ZIP download"
-        TargetFolder = $rootPath
-        ManualUrl = $repoUrl
-    }
+    $missingPrereqs += New-PrerequisiteInfo -Name "Aspire Files" -InstallMethod "download" `
+        -DownloadMethod "ZIP download" -TargetFolder $rootPath -ManualUrl $repoUrl
 }
 
 # Check winget availability
@@ -588,10 +567,7 @@ if ($missingPrereqs.Count -gt 0) {
     if (-not $repoExists) {
         Write-Host "`nDownloading quicklaunch files..." -ForegroundColor Cyan
         
-        # Create root directory
-        if (-not (Test-Path $rootPath)) {
-            New-Item -ItemType Directory -Path $rootPath -Force | Out-Null
-        }
+        New-DirectoryIfNeeded -Path $rootPath
         
         # Download only the privatemarketplace/quickstart folder
         Write-Host "  Downloading from repository (branch: $repoBranch)..." -ForegroundColor Gray
@@ -675,11 +651,7 @@ if ($missingPrereqs.Count -gt 0) {
         Write-Host "`nInstalling .NET SDK $dotnetVersion locally..." -ForegroundColor Cyan
         
         try {
-            # Create the local dotnet directory
-            if (-not (Test-Path $localDotnetPath)) {
-                New-Item -ItemType Directory -Path $localDotnetPath -Force | Out-Null
-                Write-Host "  Created directory: $localDotnetPath" -ForegroundColor Gray
-            }
+            New-DirectoryIfNeeded -Path $localDotnetPath
             
             # Download the dotnet-install script
             $dotnetInstallScript = Join-Path $env:TEMP "dotnet-install.ps1"
@@ -729,11 +701,7 @@ if ($missingPrereqs.Count -gt 0) {
         Write-Host "`nInstalling VS Code (portable)..." -ForegroundColor Cyan
         
         try {
-            # Create the local VS Code directory
-            if (-not (Test-Path $localVSCodePath)) {
-                New-Item -ItemType Directory -Path $localVSCodePath -Force | Out-Null
-                Write-Host "  Created directory: $localVSCodePath" -ForegroundColor Gray
-            }
+            New-DirectoryIfNeeded -Path $localVSCodePath
             
             # Download VS Code portable ZIP
             $vscodeZipUrl = "https://update.code.visualstudio.com/latest/win32-x64-archive/stable"
@@ -790,24 +758,14 @@ if ($missingPrereqs.Count -gt 0) {
                         if ($process.ExitCode -eq 0) {
                             Write-Host "  Administrative templates installed successfully." -ForegroundColor Green
                         } elseif ($process.ExitCode -eq 64) {
-                            Write-Host "    Warning: UAC prompt was cancelled. Administrative templates were not installed." -ForegroundColor Yellow
-                            Write-Host "    You can install them later using the troubleshooting steps in the README." -ForegroundColor Yellow
+                            Write-Host "  Warning: UAC cancelled. Templates not installed." -ForegroundColor Yellow
                         } else {
-                            Write-Host "    Warning: Administrative template installation exited with code $($process.ExitCode)" -ForegroundColor Yellow
-                            
-                            # Display log file location for debugging
-                            if (Test-Path $logFile) {
-                                Write-Host "    Installation log: $logFile" -ForegroundColor Gray
-                            }
-                            if (Test-Path "$logFile.err") {
-                                Write-Host "    Error log: $logFile.err" -ForegroundColor Gray
-                            }
+                            Write-Host "  Warning: Installation exited with code $($process.ExitCode)" -ForegroundColor Yellow
+                            if (Test-Path $logFile) { Write-Host "  Log: $logFile" -ForegroundColor Gray }
                         }
                     } catch {
-                        Write-Host "    Warning: Could not install administrative templates: $_" -ForegroundColor Yellow
-                        if (Test-Path $logFile) {
-                            Write-Host "    Log file: $logFile" -ForegroundColor Gray
-                        }
+                        Write-Host "  Warning: Could not install templates: $_" -ForegroundColor Yellow
+                        if (Test-Path $logFile) { Write-Host "  Log: $logFile" -ForegroundColor Gray }
                     }
                 } else {
                     Write-Host ""
@@ -839,11 +797,7 @@ if ($missingPrereqs.Count -gt 0) {
         Write-Host "`nInstalling Aspire CLI locally..." -ForegroundColor Cyan
         
         try {
-            # Create the local aspire directory
-            if (-not (Test-Path $localAspirePath)) {
-                New-Item -ItemType Directory -Path $localAspirePath -Force | Out-Null
-                Write-Host "  Created directory: $localAspirePath" -ForegroundColor Gray
-            }
+            New-DirectoryIfNeeded -Path $localAspirePath
             
             # Download and run the Aspire installation script with custom path
             $installScript = Invoke-WithProgress -Activity "Installing Aspire CLI" -Status "Downloading Aspire installation script..." -ScriptBlock {
