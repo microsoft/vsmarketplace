@@ -316,13 +316,22 @@ if ($InstallAdminTemplates) {
         Read-Host "Press Enter to continue..."
         exit 1
     }
-    
-    # Start transcript to capture all output
-    Start-Transcript -Path $logFile -Force
 
     # Use configured paths
     $rootPath = $Paths.Root
     $localVSCodePath = $Paths.LocalVSCode
+    
+    # Set up logging in root folder (must be done before Start-Transcript)
+    $logFile = Join-Path $rootPath "vscode-admin-template-install.log"
+    $errorLogFile = "$logFile.err"
+    
+    # Create root path if it doesn't exist
+    if (-not (Test-Path $rootPath)) {
+        New-Item -ItemType Directory -Path $rootPath -Force | Out-Null
+    }
+    
+    # Start transcript to capture all output
+    Start-Transcript -Path $logFile -Force
     
     # Policies are inside the VS Code installation, check multiple possible locations
     $vscodePolicyPath = $null
@@ -368,15 +377,6 @@ if ($InstallAdminTemplates) {
         }
         Read-Host "Press Enter to exit"
         exit 1
-    }
-    
-    # Set up logging in root folder
-    $logFile = Join-Path $rootPath "vscode-admin-template-install.log"
-    $errorLogFile = "$logFile.err"
-    
-    # Create root path if it doesn't exist
-    if (-not (Test-Path $rootPath)) {
-        New-Item -ItemType Directory -Path $rootPath -Force | Out-Null
     }
         
     Write-Host "Installing VS Code administrative templates..." -ForegroundColor Cyan
@@ -547,6 +547,7 @@ $aspireInstalled = $false
 $dotnetInstalled = $false
 $repoExists = $false
 $wingetAvailable = $false
+$adminTemplatesHandled = $false  # Track if we've already prompted for admin templates
 
 # Use configured values and paths
 $repoUrl = $Config.RepoUrl
@@ -980,6 +981,9 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
                     Write-Host "       to: C:\Windows\PolicyDefinitions\<language-code>\VSCode.adml" -ForegroundColor Gray
                     Write-Host "       (e.g., en-us, de-de, fr-fr, etc.)`n" -ForegroundColor Gray
                 }
+                
+                # Mark that we've already handled the admin templates prompt
+                $adminTemplatesHandled = $true
             } else {
                 throw "Code.exe not found after installation"
             }
@@ -1046,12 +1050,15 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
         # Store flag for later use
         $script:dockerFirstTimeInstall = $true
     }
+    
+    # Re-check if admin templates are still needed after installation
+    $adminTemplatesNeeded = -not (Test-AdminTemplatesInstalled)
 } else {
     Write-Host "`nAll prerequisites satisfied." -ForegroundColor Green
 }
 
-# Check if VS Code is installed but admin templates are not
-if ($vscodeInstalled -and -not (Test-AdminTemplatesInstalled)) {
+# Check if VS Code is installed but admin templates are not (only if we haven't already prompted)
+if ($vscodeInstalled -and -not $adminTemplatesHandled -and -not (Test-AdminTemplatesInstalled)) {
     Write-Host "`nVS Code Administrative Templates Not Installed" -ForegroundColor Yellow
     Write-Host "============================================" -ForegroundColor Yellow
     Write-Host "The VS Code Group Policy templates are not currently installed." -ForegroundColor Gray
