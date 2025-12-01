@@ -173,6 +173,75 @@ function Remove-PathFromEnvironment {
         Write-StatusMessage "  Warning: Could not clean PATH environment variable: $_" -Level Warning
     }
 }
+
+<#
+.SYNOPSIS
+    Downloads a file and optionally verifies its hash.
+#>
+function Get-FileWithVerification {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$Url,
+        
+        [Parameter(Mandatory=$true)]
+        [string]$OutFile,
+        
+        [Parameter(Mandatory=$false)]
+        [string]$ExpectedHash,
+        
+        [Parameter(Mandatory=$false)]
+        [ValidateSet('SHA256', 'SHA1', 'MD5')]
+        [string]$HashAlgorithm = 'SHA256'
+    )
+    
+    try {
+        Write-Verbose "Downloading from: $Url"
+        Invoke-WebRequest -Uri $Url -OutFile $OutFile -UseBasicParsing
+        
+        if ($ExpectedHash) {
+            Write-Verbose "Verifying hash..."
+            $actualHash = (Get-FileHash -Path $OutFile -Algorithm $HashAlgorithm).Hash
+            
+            if ($actualHash -ne $ExpectedHash) {
+                Remove-Item -Path $OutFile -Force -ErrorAction SilentlyContinue
+                throw "Hash verification failed!`nExpected: $ExpectedHash`nActual: $actualHash"
+            }
+            
+            Write-Verbose "Hash verification passed."
+        }
+        
+        return $true
+    } catch {
+        Write-StatusMessage "  Download failed: $_" -Level Error
+        return $false
+    }
+}
+
+<#
+.SYNOPSIS
+    Executes a script block with progress indication.
+#>
+function Invoke-WithProgress {
+    param(
+        [Parameter(Mandatory=$true)]
+        [scriptblock]$ScriptBlock,
+        
+        [Parameter(Mandatory=$true)]
+        [string]$Activity,
+        
+        [Parameter(Mandatory=$false)]
+        [string]$Status = "Processing..."
+    )
+    
+    Write-Progress -Activity $Activity -Status $Status
+    try {
+        $result = & $ScriptBlock
+        return $result
+    }
+    finally {
+        Write-Progress -Activity $Activity -Completed
+    }
+}
 #endregion Helper Functions
 
 # Check if running as administrator
@@ -530,7 +599,10 @@ if ($missingPrereqs.Count -gt 0) {
         $tempZipPath = Join-Path $env:TEMP "vsmarketplace-$repoBranch.zip"
         
         try {
-            Invoke-WebRequest -Uri $zipUrl -OutFile $tempZipPath -UseBasicParsing
+            $downloadSuccess = Get-FileWithVerification -Url $zipUrl -OutFile $tempZipPath
+            if (-not $downloadSuccess) {
+                throw "Failed to download repository archive"
+            }
             Write-Host "  ZIP downloaded successfully." -ForegroundColor Green
             
             Write-Host "  Extracting quicklaunch files..." -ForegroundColor Gray
@@ -609,7 +681,10 @@ if ($missingPrereqs.Count -gt 0) {
             # Download the dotnet-install script
             Write-Host "  Downloading dotnet-install script..." -ForegroundColor Gray
             $dotnetInstallScript = Join-Path $env:TEMP "dotnet-install.ps1"
-            Invoke-WebRequest -Uri "https://dot.net/v1/dotnet-install.ps1" -OutFile $dotnetInstallScript -UseBasicParsing
+            $downloadSuccess = Get-FileWithVerification -Url "https://dot.net/v1/dotnet-install.ps1" -OutFile $dotnetInstallScript
+            if (-not $downloadSuccess) {
+                throw "Failed to download dotnet-install script"
+            }
             
             # Run the installation script
             Write-Host "  Installing .NET SDK $dotnetVersion to $localDotnetPath..." -ForegroundColor Gray
@@ -660,7 +735,12 @@ if ($missingPrereqs.Count -gt 0) {
             $vscodeZipUrl = "https://update.code.visualstudio.com/latest/win32-x64-archive/stable"
             $vscodeZipPath = Join-Path $env:TEMP "vscode-portable.zip"
             
-            Invoke-WebRequest -Uri $vscodeZipUrl -OutFile $vscodeZipPath -UseBasicParsing
+            # Note: Hash verification skipped for VS Code as the URL is for 'latest' version
+            # For production use, consider pinning to a specific version with known hash
+            $downloadSuccess = Get-FileWithVerification -Url $vscodeZipUrl -OutFile $vscodeZipPath
+            if (-not $downloadSuccess) {
+                throw "Failed to download VS Code"
+            }
             Write-Host "  VS Code downloaded successfully." -ForegroundColor Green
             
             # Extract VS Code
