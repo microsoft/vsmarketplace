@@ -1,6 +1,6 @@
 # VS Code Private Marketplace - Quickstart
 
-This quickstart walks you through setting up and testing a local VS Code Private Marketplace using .NET Aspire. You'll learn how to install the marketplace, configure VS Code to use it, and explore different usage scenarios.
+This quickstart walks you through setting up and testing a local VS Code Private Marketplace using [Aspire](https://aspire.dev). You'll learn how to install the marketplace, configure VS Code to use it, and explore different usage scenarios.
 
 ---
 
@@ -274,7 +274,7 @@ Remove-Item -Path "$env:TEMP\privatemarketplace-quickstart" -Recurse -Force
 
 **Group Policy Editor command not appearing?**
 
-If you skipped the administrative templates installation during setup, you can install them manually:
+If you skipped the administrative templates installation during setup, or they failed to install, you can install them manually:
 
 1. In the Aspire dashboard, click **Actions** (⋮) for **`vscode-private-marketplace`**
 2. Select **Stop** to stop the marketplace container
@@ -289,7 +289,7 @@ If you skipped the administrative templates installation during setup, you can i
    ```
 6. Return to the Aspire dashboard
 7. Click **Actions** (⋮) for **`vscode-private-marketplace`**
-8. Select **Restart** to restart the marketplace container
+8. Select **Start** to start the marketplace container
 
 The Group Policy Editor command should now appear in the Aspire dashboard Actions menu.
 
