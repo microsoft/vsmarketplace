@@ -9,7 +9,8 @@ $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIde
 if ($args -contains "-InstallAdminTemplates") {
     if (-not $isAdmin) {
         Write-Host "Error: Must run as administrator to install administrative templates." -ForegroundColor Red
-        exit 1
+        Read-Host "Press Enter to continue..."
+        pause
     }
     
     # Determine paths based on script location
@@ -344,9 +345,9 @@ if ($missingPrereqs.Count -gt 0) {
     
     Write-Host "`n=== Installing Prerequisites ===" -ForegroundColor Cyan
     
-    # Download aspire files if missing
+    # Download quicklaunch files if missing
     if (-not $repoExists) {
-        Write-Host "`nDownloading aspire files..." -ForegroundColor Cyan
+        Write-Host "`nDownloading quicklaunch files..." -ForegroundColor Cyan
         
         # Create root directory
         if (-not (Test-Path $rootPath)) {
@@ -362,25 +363,25 @@ if ($missingPrereqs.Count -gt 0) {
             Invoke-WebRequest -Uri $zipUrl -OutFile $tempZipPath -UseBasicParsing
             Write-Host "  ZIP downloaded successfully." -ForegroundColor Green
             
-            Write-Host "  Extracting aspire files..." -ForegroundColor Gray
+            Write-Host "  Extracting quicklaunch files..." -ForegroundColor Gray
             $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-extract"
             if (Test-Path $tempExtractPath) {
                 Remove-Item -Path $tempExtractPath -Recurse -Force
             }
             Expand-Archive -Path $tempZipPath -DestinationPath $tempExtractPath -Force
             
-            # Copy aspire folder contents directly to root (excluding .dotnet, .aspire, .vscode)
-            $extractedAspireFolder = Join-Path $tempExtractPath "vsmarketplace-$repoBranch\privatemarketplace\quickstart\aspire"
-            if (Test-Path $extractedAspireFolder) {
-                # Get all items in aspire folder except hidden tool folders
-                Get-ChildItem -Path $extractedAspireFolder | Where-Object { 
+            # Copy quicklaunch folder contents directly to root (excluding .dotnet, .aspire, .vscode)
+            $extractedquicklaunchFolder = Join-Path $tempExtractPath "vsmarketplace-$repoBranch\privatemarketplace\quickstart\aspire"
+            if (Test-Path $extractedquicklaunchFolder) {
+                # Get all items in quicklaunch folder except hidden tool folders
+                Get-ChildItem -Path $extractedquicklaunchFolder | Where-Object { 
                     $_.Name -notin @('.dotnet', '.aspire', '.vscode')
                 } | ForEach-Object {
                     Copy-Item -Path $_.FullName -Destination $rootPath -Recurse -Force
                 }
-                Write-Host "  Aspire files copied successfully." -ForegroundColor Green
+                Write-Host "  quicklaunch files copied successfully." -ForegroundColor Green
             } else {
-                throw "Aspire folder not found in downloaded archive"
+                throw "aspire folder not found in downloaded archive"
             }
             
             # Clean up temporary files
@@ -388,6 +389,11 @@ if ($missingPrereqs.Count -gt 0) {
             Remove-Item -Path $tempExtractPath -Recurse -Force
             Write-Host "  Download complete." -ForegroundColor Green
             $repoExists = $true
+
+            $appHostPath = Join-Path $rootPath "AppHost.cs"
+            if (Test-Path $appHostPath) {
+                (Get-ChildItem $appHostPath).LastWriteTime = Get-Date
+            } 
         }
         catch {
             Write-Host "  Error downloading or extracting files: $_" -ForegroundColor Red
