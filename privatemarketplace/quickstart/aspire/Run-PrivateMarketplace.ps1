@@ -941,7 +941,16 @@ if (-not $dockerEngineRunning) {
         
         # Provide context-appropriate message
         if ($script:dockerFirstTimeInstall) {
-            Write-Host "  First-time initialization in progress (typically 60-90 seconds)..." -ForegroundColor Gray
+            Write-Host "`n  ═══════════════════════════════════════════════════════════" -ForegroundColor Yellow
+            Write-Host "  Docker Desktop First-Time Setup" -ForegroundColor Yellow
+            Write-Host "  ═══════════════════════════════════════════════════════════" -ForegroundColor Yellow
+            Write-Host "  Docker Desktop is starting for the first time." -ForegroundColor Gray
+            Write-Host "  This typically takes 60-90 seconds." -ForegroundColor Gray
+            Write-Host "`n  ACTION REQUIRED:" -ForegroundColor Cyan
+            Write-Host "  - Accept the Docker Desktop Service Agreement when prompted" -ForegroundColor White
+            Write-Host "  - Complete any additional setup steps in the Docker Desktop window" -ForegroundColor White
+            Write-Host "`n  The script will wait for Docker to be ready..." -ForegroundColor Gray
+            Write-Host "  ═══════════════════════════════════════════════════════════`n" -ForegroundColor Yellow
         }
         
         # Wait for Docker to be ready using helper function
