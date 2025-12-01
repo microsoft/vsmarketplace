@@ -1215,6 +1215,10 @@ finally {
             $cleanupErrors += "Failed to navigate to profile folder"
         }
         
+        # Wait for processes to exit
+        Write-Host "Waiting for processes to exit..." -ForegroundColor Gray
+        Start-Sleep -Seconds 3
+        
         # Remove temporary folder
         try {
             if (Test-Path $rootPath) {
