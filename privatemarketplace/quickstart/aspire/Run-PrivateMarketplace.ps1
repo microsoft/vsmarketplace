@@ -739,8 +739,6 @@ if ($missingPrereqs.Count -gt 0) {
             $vscodeZipUrl = "https://update.code.visualstudio.com/latest/win32-x64-archive/stable"
             $vscodeZipPath = Join-Path $env:TEMP "vscode-portable.zip"
             
-            # Note: Hash verification skipped for VS Code as the URL is for 'latest' version
-            # For production use, consider pinning to a specific version with known hash
             $downloadSuccess = Invoke-WithProgress -Activity "Installing VS Code" -Status "Downloading VS Code portable..." -ScriptBlock {
                 Get-FileWithVerification -Url $vscodeZipUrl -OutFile $vscodeZipPath
             }
