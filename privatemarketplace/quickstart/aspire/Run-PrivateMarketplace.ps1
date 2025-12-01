@@ -934,6 +934,11 @@ if (-not $dockerEngineRunning) {
             Write-Host "  Docker Desktop is running but engine not ready. Waiting..." -ForegroundColor Gray
         }
         
+        # Refresh PATH environment variable to pick up Docker if it was just installed
+        $machinePath = [Environment]::GetEnvironmentVariable("Path", "Machine")
+        $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
+        $env:PATH = "$machinePath;$userPath"
+        
         # Provide context-appropriate message
         if ($script:dockerFirstTimeInstall) {
             Write-Host "  First-time initialization in progress (typically 60-90 seconds)..." -ForegroundColor Gray
