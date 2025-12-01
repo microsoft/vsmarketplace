@@ -1,4 +1,37 @@
-# PowerShell script to download and run the VS Marketplace repository
+<#
+.SYNOPSIS
+    Sets up and runs a private VS Code marketplace quickstart environment.
+
+.DESCRIPTION
+    This script automates the installation and configuration of all prerequisites
+    needed to run a private VS Code marketplace, including Docker, VS Code portable,
+    .NET SDK, and Aspire CLI. All tools are installed locally in a temporary folder
+    to avoid interfering with system-wide installations.
+
+.PARAMETER InstallAdminTemplates
+    When specified, only installs VS Code administrative templates (Group Policy ADMX/ADML files)
+    to the Windows PolicyDefinitions folder and exits. Requires administrator privileges.
+
+.EXAMPLE
+    .\Run-PrivateMarketplace.ps1
+    Runs the full quickstart setup, checking and installing prerequisites as needed.
+
+.EXAMPLE
+    .\Run-PrivateMarketplace.ps1 -InstallAdminTemplates
+    Installs only the VS Code administrative templates (requires elevation via UAC).
+
+.NOTES
+    Requires: PowerShell 5.1 or later, Internet connection for downloads
+    Exit Codes:
+        0 - Success
+        1 - Error occurred (see error messages)
+        64 - UAC prompt cancelled by user
+#>
+[CmdletBinding()]
+param(
+    [Parameter(HelpMessage="Install VS Code administrative templates only (requires admin rights)")]
+    [switch]$InstallAdminTemplates
+)
 
 $ErrorActionPreference = "Stop"
 
@@ -6,7 +39,7 @@ $ErrorActionPreference = "Stop"
 $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
 # If -InstallAdminTemplates parameter is passed, only install templates and exit
-if ($args -contains "-InstallAdminTemplates") {
+if ($InstallAdminTemplates) {
     if (-not $isAdmin) {
         Write-Host "Error: Must run as administrator to install administrative templates." -ForegroundColor Red
         Read-Host "Press Enter to continue..."
