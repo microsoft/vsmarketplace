@@ -583,8 +583,9 @@ if ($missingPrereqs.Count -gt 0) {
             }
             Write-Host "  ZIP downloaded successfully." -ForegroundColor Green
             
+            $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-extract"
+            
             Invoke-WithProgress -Activity "Extracting Quickstart Files" -Status "Extracting files..." -ScriptBlock {
-                $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-extract"
                 if (Test-Path $tempExtractPath) {
                     Remove-Item -Path $tempExtractPath -Recurse -Force
                 }
