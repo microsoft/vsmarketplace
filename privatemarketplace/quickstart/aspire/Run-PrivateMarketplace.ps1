@@ -49,8 +49,8 @@ $Config = @{
     RootPath = Join-Path $env:TEMP "privatemarketplace-quickstart"
     
     # Timeout settings
-    MaxDockerWaitTime = 60  # Maximum seconds to wait for Docker to start
-    DockerCheckInterval = 2  # Seconds between Docker readiness checks
+    MaxDockerWaitTime = 120  # Maximum seconds to wait for Docker to start (first-time can take 90+ seconds)
+    DockerCheckInterval = 2   # Seconds between Docker readiness checks
 }
 
 # Derived paths (calculated from configuration)
@@ -120,14 +120,19 @@ function Wait-ForCondition {
     $elapsed = 0
     while ($elapsed -lt $TimeoutSeconds) {
         if (& $Condition) {
+            Write-Progress -Activity $StatusMessage -Completed
             return $true
         }
         
         Start-Sleep -Seconds $IntervalSeconds
         $elapsed += $IntervalSeconds
-        Write-StatusMessage "  $StatusMessage... ($elapsed seconds)" -Level Gray
+        
+        # Show progress bar instead of repeated text output
+        $percentComplete = [Math]::Min(100, ($elapsed / $TimeoutSeconds) * 100)
+        Write-Progress -Activity $StatusMessage -Status "$elapsed of $TimeoutSeconds seconds" -PercentComplete $percentComplete
     }
     
+    Write-Progress -Activity $StatusMessage -Completed
     return $false
 }
 
@@ -851,6 +856,9 @@ if ($missingPrereqs.Count -gt 0) {
     # If Docker was just installed, inform user it will be started next
     if ($dockerNeedsInstall) {
         Write-Host "  Docker Desktop will be started automatically in the next step." -ForegroundColor Cyan
+        Write-Host "  Note: First-time startup typically takes 60-90 seconds." -ForegroundColor Gray
+        # Store flag for later use
+        $script:dockerFirstTimeInstall = $true
     }
 } else {
     Write-Host "`nAll prerequisites satisfied." -ForegroundColor Green
@@ -926,22 +934,32 @@ if (-not $dockerEngineRunning) {
             Write-Host "  Docker Desktop is running but engine not ready. Waiting..." -ForegroundColor Gray
         }
         
+        # Provide context-appropriate message
+        if ($script:dockerFirstTimeInstall) {
+            Write-Host "  First-time initialization in progress (typically 60-90 seconds)..." -ForegroundColor Gray
+        }
+        
         # Wait for Docker to be ready using helper function
         $dockerReady = Wait-ForCondition -Condition {
-            try {
-                $null = docker info 2>$null
-                return ($LASTEXITCODE -eq 0)
-            } catch {
-                return $false
-            }
+            $output = docker info 2>&1 | Out-String
+            # Docker is ready when output contains server info and no connection errors
+            return ($output -match 'Server:' -and $output -notmatch 'failed to connect')
         } -TimeoutSeconds $Config.MaxDockerWaitTime -IntervalSeconds $Config.DockerCheckInterval -StatusMessage "Waiting for Docker engine"
         
         if ($dockerReady) {
             Write-Host "  Docker engine is now running." -ForegroundColor Green
         } else {
             Write-Host "  Docker engine did not start within $($Config.MaxDockerWaitTime) seconds." -ForegroundColor Yellow
-            Write-Host "  This can happen on first startup after installation." -ForegroundColor Gray
-            Write-Host "  Please wait for Docker Desktop to fully start, then re-run this script." -ForegroundColor Yellow
+            
+            # Check if Docker Desktop is still starting
+            $dockerProcess = Get-Process "Docker Desktop" -ErrorAction SilentlyContinue
+            if ($dockerProcess) {
+                Write-Host "  Docker Desktop is still initializing in the background." -ForegroundColor Gray
+                Write-Host "  Please wait a bit longer for it to complete startup, then re-run this script." -ForegroundColor Yellow
+            } else {
+                Write-Host "  Docker Desktop may have encountered an issue during startup." -ForegroundColor Gray
+                Write-Host "  Please start Docker Desktop manually and re-run this script." -ForegroundColor Yellow
+            }
             return
         }
     } else {
