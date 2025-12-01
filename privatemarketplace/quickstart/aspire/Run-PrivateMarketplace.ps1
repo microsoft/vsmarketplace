@@ -12,6 +12,10 @@
     When specified, only installs VS Code administrative templates (Group Policy ADMX/ADML files)
     to the Windows PolicyDefinitions folder and exits. Requires administrator privileges.
 
+.PARAMETER RemoveAdminTemplates
+    When specified, only removes VS Code administrative templates (Group Policy ADMX/ADML files)
+    from the Windows PolicyDefinitions folder and exits. Requires administrator privileges.
+
 .EXAMPLE
     .\Run-PrivateMarketplace.ps1
     Runs the full quickstart setup, checking and installing prerequisites as needed.
@@ -19,6 +23,10 @@
 .EXAMPLE
     .\Run-PrivateMarketplace.ps1 -InstallAdminTemplates
     Installs only the VS Code administrative templates (requires elevation via UAC).
+
+.EXAMPLE
+    .\Run-PrivateMarketplace.ps1 -RemoveAdminTemplates
+    Removes only the VS Code administrative templates (requires elevation via UAC).
 
 .NOTES
     Requires: PowerShell 5.1 or later, Internet connection for downloads
@@ -30,7 +38,10 @@
 [CmdletBinding()]
 param(
     [Parameter(HelpMessage="Install VS Code administrative templates only (requires admin rights)")]
-    [switch]$InstallAdminTemplates
+    [switch]$InstallAdminTemplates,
+    
+    [Parameter(HelpMessage="Remove VS Code administrative templates only (requires admin rights)")]
+    [switch]$RemoveAdminTemplates
 )
 
 $ErrorActionPreference = "Stop"
@@ -469,6 +480,54 @@ if ($InstallAdminTemplates) {
         Write-Host "Log file: $logFile" -ForegroundColor Gray
         Write-Host "Error log: $errorLogFile" -ForegroundColor Gray
         Write-Host "═══════════════════════════════════════════════════════════`n" -ForegroundColor Red
+        Read-Host "Press Enter to exit"
+        exit 1
+    }
+}
+
+# If -RemoveAdminTemplates parameter is passed, only remove templates and exit
+if ($RemoveAdminTemplates) {
+    if (-not $isAdmin) {
+        Write-Host "Error: Must run as administrator to remove administrative templates." -ForegroundColor Red
+        Read-Host "Press Enter to continue..."
+        exit 1
+    }
+    
+    Write-Host "Removing VS Code administrative templates..." -ForegroundColor Cyan
+    
+    try {
+        $policyDefinitionsPath = Join-Path $env:WINDIR "PolicyDefinitions"
+        $admxPath = Join-Path $policyDefinitionsPath "VSCode.admx"
+        
+        Write-Host "Policy destination path: $policyDefinitionsPath" -ForegroundColor Gray
+        
+        # Remove main ADMX file
+        if (Test-Path $admxPath) {
+            Remove-Item -Path $admxPath -Force -ErrorAction Stop
+            Write-Host "  Removed VSCode.admx" -ForegroundColor Green
+        } else {
+            Write-Host "  VSCode.admx not found (already removed)" -ForegroundColor Gray
+        }
+        
+        # Remove ADML files from language folders
+        $langFolders = Get-ChildItem -Path $policyDefinitionsPath -Directory | Where-Object { $_.Name -match '^[a-z]{2}-[a-z]{2}$' }
+        $removedAdmlCount = 0
+        
+        foreach ($langFolder in $langFolders) {
+            $admlPath = Join-Path $langFolder.FullName "VSCode.adml"
+            if (Test-Path $admlPath) {
+                Remove-Item -Path $admlPath -Force -ErrorAction SilentlyContinue
+                Write-Host "  Removed VSCode.adml for language: $($langFolder.Name)" -ForegroundColor Green
+                $removedAdmlCount++
+            }
+        }
+        
+        Write-Host "Administrative templates removed successfully ($removedAdmlCount language files)." -ForegroundColor Green
+        Read-Host "Press Enter to exit"
+        exit 0
+    } catch {
+        Write-Host "Error removing administrative templates: $_" -ForegroundColor Red
+        Write-Host "Error details: $($_.Exception.Message)" -ForegroundColor Red
         Read-Host "Press Enter to exit"
         exit 1
     }
@@ -1198,7 +1257,46 @@ finally {
     $cleanupResponse = Read-Host "Do you want to remove the temporary folder and all its contents? (y/n)"
     
     if ($cleanupResponse -eq 'y') {
-        Write-Host "Removing temporary folder..." -ForegroundColor Yellow
+        # Prompt to uninstall Docker if it was installed by this script (before removing files)
+        $uninstallDocker = $false
+        if ($script:dockerFirstTimeInstall) {
+            Write-Host "`nDocker Desktop Uninstallation" -ForegroundColor Cyan
+            Write-Host "=============================" -ForegroundColor Cyan
+            Write-Host "This script installed Docker Desktop earlier." -ForegroundColor Gray
+            Write-Host ""
+            $dockerResponse = Read-Host "Do you want to uninstall Docker Desktop? (y/n)"
+            $uninstallDocker = ($dockerResponse -eq 'y')
+        }
+        
+        # Uninstall Docker before removing files (if requested)
+        if ($uninstallDocker) {
+            Write-Host "`nUninstalling Docker Desktop..." -ForegroundColor Yellow
+            
+            # Check if winget is available
+            if ($null -ne (Get-Command winget -ErrorAction SilentlyContinue)) {
+                try {
+                    Write-Host "  Using winget to uninstall Docker Desktop..." -ForegroundColor Gray
+                    $uninstallOutput = winget uninstall -e --id Docker.DockerDesktop --silent 2>&1
+                    
+                    if ($LASTEXITCODE -eq 0) {
+                        Write-Host "  Docker Desktop uninstalled successfully." -ForegroundColor Green
+                    } else {
+                        Write-Host "  Warning: Uninstall may have encountered issues." -ForegroundColor Yellow
+                        Write-Host "  You can uninstall manually via Windows Settings > Apps" -ForegroundColor Gray
+                    }
+                } catch {
+                    Write-Host "  Error uninstalling Docker Desktop: $_" -ForegroundColor Red
+                    Write-Host "  You can uninstall manually via Windows Settings > Apps" -ForegroundColor Gray
+                }
+            } else {
+                Write-Host "  winget not available." -ForegroundColor Yellow
+                Write-Host "  Please uninstall Docker Desktop manually via Windows Settings > Apps" -ForegroundColor Gray
+            }
+        } elseif ($script:dockerFirstTimeInstall) {
+            Write-Host "`nDocker Desktop will remain installed on your system." -ForegroundColor Gray
+        }
+        
+        Write-Host "`nRemoving temporary folder..." -ForegroundColor Yellow
         
         # Track cleanup failures
         $cleanupErrors = @()
@@ -1235,10 +1333,44 @@ finally {
         # Display cleanup summary
         if ($cleanupErrors.Count -gt 0) {
             Write-Host "`nSome cleanup operations failed:" -ForegroundColor Yellow
-            foreach ($error in $cleanupErrors) {
-                Write-Host "  - $error" -ForegroundColor Yellow
+            foreach ($err in $cleanupErrors) {
+                Write-Host "  - $err" -ForegroundColor Yellow
             }
             Write-Host "You can manually delete: $rootPath" -ForegroundColor Yellow
+        }
+        
+        # Remove administrative templates if they were installed
+        if (Test-AdminTemplatesInstalled) {
+            Write-Host "`nVS Code Administrative Templates Removal" -ForegroundColor Cyan
+            Write-Host "=========================================" -ForegroundColor Cyan
+            Write-Host "The VS Code Group Policy templates are currently installed." -ForegroundColor Gray
+            Write-Host "Removing them requires administrator privileges." -ForegroundColor Gray
+            Write-Host "`nYou will be prompted to grant elevated access (UAC prompt).`n" -ForegroundColor Yellow
+            $removeTemplates = Read-Host "Do you want to remove the administrative templates? (y/n)"
+            
+            if ($removeTemplates -eq 'y') {
+                Write-Host "  Removing VS Code administrative templates..." -ForegroundColor Gray
+                $scriptPath = $MyInvocation.MyCommand.Path
+                
+                try {
+                    # Launch the script with admin privileges
+                    $process = Start-Process -FilePath "pwsh.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -RemoveAdminTemplates" -Verb RunAs -Wait -PassThru
+                    
+                    if ($process.ExitCode -eq 0) {
+                        Write-Host "  Administrative templates removed successfully." -ForegroundColor Green
+                    } elseif ($process.ExitCode -eq 64) {
+                        Write-Host "  Warning: UAC cancelled. Templates not removed." -ForegroundColor Yellow
+                    } else {
+                        Write-Host "  Warning: Removal exited with code $($process.ExitCode)" -ForegroundColor Yellow
+                    }
+                } catch {
+                    Write-Host "  Warning: Could not remove templates: $_" -ForegroundColor Yellow
+                    Write-Host "  You can remove them manually from: $env:WINDIR\PolicyDefinitions" -ForegroundColor Gray
+                }
+            } else {
+                Write-Host "`n  Administrative templates will remain installed." -ForegroundColor Gray
+                Write-Host "  You can remove them manually from: $env:WINDIR\PolicyDefinitions" -ForegroundColor Gray
+            }
         }
     } else {
         Write-Host "`nTemporary folder preserved at: $rootPath" -ForegroundColor Green
