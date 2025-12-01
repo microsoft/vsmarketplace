@@ -599,18 +599,21 @@ if ($missingPrereqs.Count -gt 0) {
         $tempZipPath = Join-Path $env:TEMP "vsmarketplace-$repoBranch.zip"
         
         try {
-            $downloadSuccess = Get-FileWithVerification -Url $zipUrl -OutFile $tempZipPath
+            $downloadSuccess = Invoke-WithProgress -Activity "Downloading Quickstart Files" -Status "Downloading from repository..." -ScriptBlock {
+                Get-FileWithVerification -Url $zipUrl -OutFile $tempZipPath
+            }
             if (-not $downloadSuccess) {
                 throw "Failed to download repository archive"
             }
             Write-Host "  ZIP downloaded successfully." -ForegroundColor Green
             
-            Write-Host "  Extracting quicklaunch files..." -ForegroundColor Gray
-            $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-extract"
-            if (Test-Path $tempExtractPath) {
-                Remove-Item -Path $tempExtractPath -Recurse -Force
+            Invoke-WithProgress -Activity "Extracting Quickstart Files" -Status "Extracting files..." -ScriptBlock {
+                $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-extract"
+                if (Test-Path $tempExtractPath) {
+                    Remove-Item -Path $tempExtractPath -Recurse -Force
+                }
+                Expand-Archive -Path $tempZipPath -DestinationPath $tempExtractPath -Force
             }
-            Expand-Archive -Path $tempZipPath -DestinationPath $tempExtractPath -Force
             
             # Copy quicklaunch folder contents directly to root (excluding .dotnet, .aspire, .vscode)
             $extractedquicklaunchFolder = Join-Path $tempExtractPath "vsmarketplace-$repoBranch\privatemarketplace\quickstart\aspire"
@@ -679,16 +682,18 @@ if ($missingPrereqs.Count -gt 0) {
             }
             
             # Download the dotnet-install script
-            Write-Host "  Downloading dotnet-install script..." -ForegroundColor Gray
             $dotnetInstallScript = Join-Path $env:TEMP "dotnet-install.ps1"
-            $downloadSuccess = Get-FileWithVerification -Url "https://dot.net/v1/dotnet-install.ps1" -OutFile $dotnetInstallScript
+            $downloadSuccess = Invoke-WithProgress -Activity "Installing .NET SDK" -Status "Downloading dotnet-install script..." -ScriptBlock {
+                Get-FileWithVerification -Url "https://dot.net/v1/dotnet-install.ps1" -OutFile $dotnetInstallScript
+            }
             if (-not $downloadSuccess) {
                 throw "Failed to download dotnet-install script"
             }
             
             # Run the installation script
-            Write-Host "  Installing .NET SDK $dotnetVersion to $localDotnetPath..." -ForegroundColor Gray
-            & $dotnetInstallScript -Version $dotnetVersion -InstallDir $localDotnetPath -NoPath
+            Invoke-WithProgress -Activity "Installing .NET SDK" -Status "Installing .NET SDK $dotnetVersion..." -ScriptBlock {
+                & $dotnetInstallScript -Version $dotnetVersion -InstallDir $localDotnetPath -NoPath
+            }
             
             # Verify installation by checking for dotnet.exe and running --list-sdks
             $localDotnetExeCheck = Join-Path $localDotnetPath "dotnet.exe"
@@ -731,21 +736,23 @@ if ($missingPrereqs.Count -gt 0) {
             }
             
             # Download VS Code portable ZIP
-            Write-Host "  Downloading VS Code portable..." -ForegroundColor Gray
             $vscodeZipUrl = "https://update.code.visualstudio.com/latest/win32-x64-archive/stable"
             $vscodeZipPath = Join-Path $env:TEMP "vscode-portable.zip"
             
             # Note: Hash verification skipped for VS Code as the URL is for 'latest' version
             # For production use, consider pinning to a specific version with known hash
-            $downloadSuccess = Get-FileWithVerification -Url $vscodeZipUrl -OutFile $vscodeZipPath
+            $downloadSuccess = Invoke-WithProgress -Activity "Installing VS Code" -Status "Downloading VS Code portable..." -ScriptBlock {
+                Get-FileWithVerification -Url $vscodeZipUrl -OutFile $vscodeZipPath
+            }
             if (-not $downloadSuccess) {
                 throw "Failed to download VS Code"
             }
             Write-Host "  VS Code downloaded successfully." -ForegroundColor Green
             
             # Extract VS Code
-            Write-Host "  Extracting VS Code..." -ForegroundColor Gray
-            Expand-Archive -Path $vscodeZipPath -DestinationPath $localVSCodePath -Force
+            Invoke-WithProgress -Activity "Installing VS Code" -Status "Extracting VS Code..." -ScriptBlock {
+                Expand-Archive -Path $vscodeZipPath -DestinationPath $localVSCodePath -Force
+            }
             
             # Create data directory for portable mode
             $vscodeDataPath = Join-Path $localVSCodePath "data"
@@ -841,18 +848,19 @@ if ($missingPrereqs.Count -gt 0) {
             }
             
             # Download and run the Aspire installation script with custom path
-            Write-Host "  Downloading Aspire installation script..." -ForegroundColor Gray
-            $installScript = Invoke-WebRequest -Uri "https://aspire.dev/install.ps1" -UseBasicParsing
+            $installScript = Invoke-WithProgress -Activity "Installing Aspire CLI" -Status "Downloading Aspire installation script..." -ScriptBlock {
+                Invoke-WebRequest -Uri "https://aspire.dev/install.ps1" -UseBasicParsing
+            }
             
             if ($installScript.StatusCode -eq 200) {
-                Write-Host "  Installing Aspire CLI to: $localAspirePath" -ForegroundColor Gray
-                
                 # Save script to temp file and execute with -InstallPath parameter
                 $tempScriptPath = Join-Path $env:TEMP "aspire-install.ps1"
                 $installScript.Content | Out-File -FilePath $tempScriptPath -Encoding UTF8
                 
                 # Execute the installation script with -InstallPath parameter
-                & $tempScriptPath -InstallPath $localAspirePath
+                Invoke-WithProgress -Activity "Installing Aspire CLI" -Status "Installing Aspire CLI to: $localAspirePath" -ScriptBlock {
+                    & $tempScriptPath -InstallPath $localAspirePath
+                }
                 
                 # Clean up temp script
                 Remove-Item $tempScriptPath -Force -ErrorAction SilentlyContinue
