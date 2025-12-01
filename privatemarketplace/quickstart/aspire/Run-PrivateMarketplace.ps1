@@ -681,8 +681,9 @@ if (Test-Path $rootPath) {
 # Check winget availability
 $wingetAvailable = $null -ne (Get-Command winget -ErrorAction SilentlyContinue)
 
-# Check if admin templates are needed
-$adminTemplatesNeeded = $vscodeInstalled -and -not (Test-AdminTemplatesInstalled)
+# Check if admin templates are needed (either VS Code will be installed or it's installed but templates aren't)
+$vscodeWillBeInstalled = ($missingPrereqs | Where-Object { $_.Name -like "VS Code*" }) -ne $null
+$adminTemplatesNeeded = ($vscodeInstalled -or $vscodeWillBeInstalled) -and -not (Test-AdminTemplatesInstalled)
 
 # Display summary if prerequisites are missing
 if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
