@@ -643,7 +643,16 @@ if ($missingPrereqs.Count -gt 0) {
         Write-Host "`nInstalling Docker Desktop..." -ForegroundColor Cyan
         
         if ($wingetAvailable) {
-            Write-Host "  Using winget to install Docker Desktop..." -ForegroundColor Gray
+            Write-Host "`n  ═══════════════════════════════════════════════════════════" -ForegroundColor Yellow
+            Write-Host "  Docker Desktop Installation" -ForegroundColor Yellow
+            Write-Host "  ═══════════════════════════════════════════════════════════" -ForegroundColor Yellow
+            Write-Host "  ACTION REQUIRED:" -ForegroundColor Cyan
+            Write-Host "  - You will be prompted to approve administrator access (UAC)" -ForegroundColor White
+            Write-Host "  - Docker Desktop requires elevated privileges to install" -ForegroundColor White
+            Write-Host "`n  Installation may take several minutes..." -ForegroundColor Gray
+            Write-Host "  ═══════════════════════════════════════════════════════════`n" -ForegroundColor Yellow
+            
+            Write-Host "  Starting installation via winget..." -ForegroundColor Gray
             $wingetOutput = winget install -e --id Docker.DockerDesktop --accept-package-agreements --accept-source-agreements 2>&1
             
             if ($LASTEXITCODE -eq 0) {
