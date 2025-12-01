@@ -129,10 +129,16 @@ public static class MarketplaceExtensions
                         });
                     }
 
+                    // Create isolated user data and extensions directories
+                    var userDataDir = Path.Combine(Directory.GetCurrentDirectory(), ".vscode-data");
+                    var extensionsDir = Path.Combine(Directory.GetCurrentDirectory(), ".vscode-extensions");
+                    Directory.CreateDirectory(userDataDir);
+                    Directory.CreateDirectory(extensionsDir);
+
                     Process.Start(new ProcessStartInfo
                     {
                         FileName = vscodePath,
-                        Arguments = $"--extensionGalleryServiceUrl {marketplaceUrl}",
+                        Arguments = $"--user-data-dir \"{userDataDir}\" --extensions-dir \"{extensionsDir}\" --extensionGalleryServiceUrl {marketplaceUrl}",
                         UseShellExecute = true
                     });
 
