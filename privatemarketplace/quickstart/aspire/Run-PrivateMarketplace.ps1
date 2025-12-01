@@ -282,6 +282,16 @@ function New-DirectoryIfNeeded {
         New-Item -ItemType Directory -Path $Path -Force | Out-Null
     }
 }
+
+<#
+.SYNOPSIS
+    Checks if VS Code administrative templates are installed.
+#>
+function Test-AdminTemplatesInstalled {
+    $policyDefinitionsPath = Join-Path $env:WINDIR "PolicyDefinitions"
+    $admxPath = Join-Path $policyDefinitionsPath "VSCode.admx"
+    return (Test-Path $admxPath)
+}
 #endregion Helper Functions
 
 # Check if running as administrator
@@ -916,6 +926,45 @@ if ($missingPrereqs.Count -gt 0) {
     }
 } else {
     Write-Host "`nAll prerequisites satisfied." -ForegroundColor Green
+}
+
+# Check if VS Code is installed but admin templates are not
+if ($vscodeInstalled -and -not (Test-AdminTemplatesInstalled)) {
+    Write-Host "`nVS Code Administrative Templates Not Installed" -ForegroundColor Yellow
+    Write-Host "============================================" -ForegroundColor Yellow
+    Write-Host "The VS Code Group Policy templates are not currently installed." -ForegroundColor Gray
+    Write-Host "These templates are required to configure the private marketplace." -ForegroundColor Gray
+    Write-Host "`nYou will be prompted to grant elevated access (UAC prompt).`n" -ForegroundColor Yellow
+    $installTemplates = Read-Host "Do you want to install the administrative templates now? (y/n)"
+    
+    if ($installTemplates -eq 'y') {
+        Write-Host "  Installing VS Code administrative templates..." -ForegroundColor Gray
+        $scriptPath = $MyInvocation.MyCommand.Path
+        
+        # Log file path in root folder
+        $logFile = Join-Path $rootPath "vscode-admin-template-install.log"
+        
+        try {
+            # Launch the script with admin privileges
+            $process = Start-Process -FilePath "pwsh.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -InstallAdminTemplates" -Verb RunAs -Wait -PassThru
+            
+            if ($process.ExitCode -eq 0) {
+                Write-Host "  Administrative templates installed successfully." -ForegroundColor Green
+            } elseif ($process.ExitCode -eq 64) {
+                Write-Host "  Warning: UAC cancelled. Templates not installed." -ForegroundColor Yellow
+                Write-Host "  The private marketplace may not work correctly without these templates." -ForegroundColor Yellow
+            } else {
+                Write-Host "  Warning: Installation exited with code $($process.ExitCode)" -ForegroundColor Yellow
+                if (Test-Path $logFile) { Write-Host "  Log: $logFile" -ForegroundColor Gray }
+            }
+        } catch {
+            Write-Host "  Warning: Could not install templates: $_" -ForegroundColor Yellow
+            if (Test-Path $logFile) { Write-Host "  Log: $logFile" -ForegroundColor Gray }
+        }
+    } else {
+        Write-Host "`n  Skipping administrative template installation." -ForegroundColor Yellow
+        Write-Host "  Note: You can run this script again later to install the templates." -ForegroundColor Gray
+    }
 }
 
 # Save the original directory
