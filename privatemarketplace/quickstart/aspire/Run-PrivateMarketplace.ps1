@@ -1122,7 +1122,7 @@ if (Test-Path $localDotnetExe) {
 Write-Host "`nChecking Docker engine status..." -ForegroundColor Cyan
 $dockerEngineRunning = $false
 try {
-    $dockerInfo = docker info 2>$null
+    $null = docker info 2>$null
     if ($LASTEXITCODE -eq 0) {
         Write-Host "  Docker engine is running." -ForegroundColor Green
         $dockerEngineRunning = $true
@@ -1276,7 +1276,7 @@ finally {
             if ($null -ne (Get-Command winget -ErrorAction SilentlyContinue)) {
                 try {
                     Write-Host "  Using winget to uninstall Docker Desktop..." -ForegroundColor Gray
-                    $uninstallOutput = winget uninstall -e --id Docker.DockerDesktop --silent 2>&1
+                    $null = winget uninstall -e --id Docker.DockerDesktop --silent 2>&1
                     
                     if ($LASTEXITCODE -eq 0) {
                         Write-Host "  Docker Desktop uninstalled successfully." -ForegroundColor Green
