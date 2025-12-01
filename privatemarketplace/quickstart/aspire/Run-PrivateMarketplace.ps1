@@ -119,6 +119,10 @@ function Wait-ForCondition {
     
     $elapsed = 0
     while ($elapsed -lt $TimeoutSeconds) {
+        # Show progress bar before checking condition
+        $percentComplete = [Math]::Min(100, ($elapsed / $TimeoutSeconds) * 100)
+        Write-Progress -Activity $StatusMessage -Status "$elapsed of $TimeoutSeconds seconds" -PercentComplete $percentComplete
+        
         if (& $Condition) {
             Write-Progress -Activity $StatusMessage -Completed
             return $true
@@ -126,10 +130,6 @@ function Wait-ForCondition {
         
         Start-Sleep -Seconds $IntervalSeconds
         $elapsed += $IntervalSeconds
-        
-        # Show progress bar instead of repeated text output
-        $percentComplete = [Math]::Min(100, ($elapsed / $TimeoutSeconds) * 100)
-        Write-Progress -Activity $StatusMessage -Status "$elapsed of $TimeoutSeconds seconds" -PercentComplete $percentComplete
     }
     
     Write-Progress -Activity $StatusMessage -Completed
