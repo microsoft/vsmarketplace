@@ -979,7 +979,24 @@ Write-Host "`nRunning quickstart..." -ForegroundColor Cyan
 try {
     # Use the local Aspire executable
     $aspireExePath = Join-Path $localAspirePath "aspire.exe"
-    & $aspireExePath run --non-interactive
+    
+    # Verify environment is still configured
+    Write-Host "  Using .NET SDK: $($env:DOTNET_ROOT)" -ForegroundColor Gray
+    Write-Host "  .NET version: " -NoNewline -ForegroundColor Gray
+    & $localDotnetExe --version
+    
+    # Launch Aspire with explicit environment variables to ensure it uses local .NET
+    $psi = New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName = $aspireExePath
+    $psi.Arguments = "run --non-interactive"
+    $psi.UseShellExecute = $false
+    $psi.WorkingDirectory = $rootPath
+    $psi.EnvironmentVariables["DOTNET_ROOT"] = $localDotnetPath
+    $psi.EnvironmentVariables["DOTNET_MULTILEVEL_LOOKUP"] = "0"
+    $psi.EnvironmentVariables["PATH"] = "$localDotnetPath;$($env:PATH)"
+    
+    $process = [System.Diagnostics.Process]::Start($psi)
+    $process.WaitForExit()
 }
 catch {
     Write-Host "Error running quickstart: $_" -ForegroundColor Red
