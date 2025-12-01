@@ -351,6 +351,43 @@ if ($InstallAdminTemplates) {
         }
         
         Write-Host "Administrative templates installed successfully ($copiedCount language files)." -ForegroundColor Green
+        
+        # Verify installation
+        Write-Host "`nVerifying installation..." -ForegroundColor Cyan
+        $verificationFailed = $false
+        
+        # Check ADMX file
+        if (-not (Test-Path $admxDest)) {
+            Write-Host "  ERROR: VSCode.admx not found at destination: $admxDest" -ForegroundColor Red
+            $verificationFailed = $true
+        } else {
+            Write-Host "  ✓ VSCode.admx verified" -ForegroundColor Green
+        }
+        
+        # Check at least one ADML file
+        if ($copiedCount -eq 0) {
+            Write-Host "  WARNING: No language files were copied" -ForegroundColor Yellow
+            $verificationFailed = $true
+        } else {
+            Write-Host "  ✓ $copiedCount language file(s) verified" -ForegroundColor Green
+        }
+        
+        if ($verificationFailed) {
+            Write-Host "`n═══════════════════════════════════════════════════════════" -ForegroundColor Red
+            Write-Host "Installation Verification FAILED" -ForegroundColor Red
+            Write-Host "═══════════════════════════════════════════════════════════" -ForegroundColor Red
+            Write-Host "The administrative templates were not installed correctly." -ForegroundColor Yellow
+            Write-Host "`nSource location: $vscodePolicyPath" -ForegroundColor Gray
+            Write-Host "Destination: $policyDefinitionsPath" -ForegroundColor Gray
+            Write-Host "Log file: $logFile" -ForegroundColor Gray
+            Write-Host "`nPlease review the log and try again." -ForegroundColor Yellow
+            Write-Host "═══════════════════════════════════════════════════════════`n" -ForegroundColor Red
+            Stop-Transcript
+            Read-Host "Press Enter to exit"
+            exit 1
+        }
+        
+        Write-Host "`nInstallation verification passed!" -ForegroundColor Green
         Stop-Transcript
         exit 0
     } catch {
@@ -363,6 +400,14 @@ if ($InstallAdminTemplates) {
         if (Test-Path $logFile) {
             Copy-Item -Path $logFile -Destination $errorLogFile -Force
         }
+        
+        Write-Host "`n═══════════════════════════════════════════════════════════" -ForegroundColor Red
+        Write-Host "Installation FAILED" -ForegroundColor Red
+        Write-Host "═══════════════════════════════════════════════════════════" -ForegroundColor Red
+        Write-Host "Log file: $logFile" -ForegroundColor Gray
+        Write-Host "Error log: $errorLogFile" -ForegroundColor Gray
+        Write-Host "═══════════════════════════════════════════════════════════`n" -ForegroundColor Red
+        Read-Host "Press Enter to exit"
         exit 1
     }
 }
