@@ -307,17 +307,69 @@ if ($InstallAdminTemplates) {
     
     # Use configured paths
     $rootPath = $Paths.Root
-    $vscodePolicyPath = $Paths.Policies
+    $localVSCodePath = $Paths.LocalVSCode
+    
+    # Policies are inside the VS Code installation, check multiple possible locations
+    $vscodePolicyPath = $null
+    $possiblePolicyPaths = @(
+        (Join-Path $localVSCodePath "resources\app\product.json"),
+        (Join-Path $localVSCodePath "Code.exe")
+    )
+    
+    # Find VS Code installation by looking for key files
+    $vscodeFound = $false
+    foreach ($testPath in $possiblePolicyPaths) {
+        if (Test-Path $testPath) {
+            $vscodeFound = $true
+            break
+        }
+    }
+    
+    if (-not $vscodeFound) {
+        Write-Host "Error: VS Code installation not found at: $localVSCodePath" -ForegroundColor Red
+        Write-Host "Please ensure VS Code is installed before installing administrative templates." -ForegroundColor Yellow
+        Read-Host "Press Enter to exit"
+        exit 1
+    }
+    
+    # Try to find policies folder in common locations
+    $policySearchPaths = @(
+        (Join-Path $localVSCodePath "resources\app\policies"),
+        (Join-Path $localVSCodePath "policies")
+    )
+    
+    foreach ($searchPath in $policySearchPaths) {
+        if (Test-Path $searchPath) {
+            $vscodePolicyPath = $searchPath
+            break
+        }
+    }
+    
+    if (-not $vscodePolicyPath) {
+        Write-Host "Error: Policies folder not found in VS Code installation." -ForegroundColor Red
+        Write-Host "Searched locations:" -ForegroundColor Gray
+        foreach ($searchPath in $policySearchPaths) {
+            Write-Host "  - $searchPath" -ForegroundColor Gray
+        }
+        Read-Host "Press Enter to exit"
+        exit 1
+    }
     
     # Set up logging in root folder
     $logFile = Join-Path $rootPath "vscode-admin-template-install.log"
     $errorLogFile = "$logFile.err"
+    
+    # Create root path if it doesn't exist
+    if (-not (Test-Path $rootPath)) {
+        New-Item -ItemType Directory -Path $rootPath -Force | Out-Null
+    }
     
     # Start transcript to capture all output
     Start-Transcript -Path $logFile -Force
     
     Write-Host "Installing VS Code administrative templates..." -ForegroundColor Cyan
     Write-Host "Root path: $rootPath" -ForegroundColor Gray
+    Write-Host "VS Code path: $localVSCodePath" -ForegroundColor Gray
     Write-Host "Policy source path: $vscodePolicyPath" -ForegroundColor Gray
     
     try {
