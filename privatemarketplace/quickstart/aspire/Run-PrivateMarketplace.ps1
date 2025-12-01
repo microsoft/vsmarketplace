@@ -487,22 +487,22 @@ if (-not (Test-Path $rootPath)) {
     }
 }
 
-# Check for aspire files
-Write-Host "Checking for aspire files..." -ForegroundColor Gray
+# Check for quickstart files
+Write-Host "Checking for quickstart files..." -ForegroundColor Gray
 if (Test-Path $rootPath) {
     # Verify key files exist
     $apphostPath = Join-Path $rootPath "apphost.cs"
     if (Test-Path $apphostPath) {
-        Write-Host "  Aspire files found at: $rootPath" -ForegroundColor Green
+        Write-Host "  Quickstart files found at: $rootPath" -ForegroundColor Green
         $repoExists = $true
     } else {
         Write-Host "  Folder exists but appears incomplete (apphost.cs not found)" -ForegroundColor Yellow
-        $missingPrereqs += New-PrerequisiteInfo -Name "Aspire Files" -InstallMethod "download" `
+        $missingPrereqs += New-PrerequisiteInfo -Name "Quickstart Files" -InstallMethod "download" `
             -DownloadMethod "ZIP download" -TargetFolder $rootPath -ManualUrl $repoUrl
     }
 } else {
-    Write-Host "  Aspire files not found" -ForegroundColor Yellow
-    $missingPrereqs += New-PrerequisiteInfo -Name "Aspire Files" -InstallMethod "download" `
+    Write-Host "  Quickstart files not found" -ForegroundColor Yellow
+    $missingPrereqs += New-PrerequisiteInfo -Name "Quickstart Files" -InstallMethod "download" `
         -DownloadMethod "ZIP download" -TargetFolder $rootPath -ManualUrl $repoUrl
 }
 
@@ -748,14 +748,11 @@ if ($missingPrereqs.Count -gt 0) {
                 $vscodeInstalled = $true
                 
                 # Prompt before launching script as admin to install administrative templates
-                Write-Host ""
-                Write-Host "VS Code Administrative Templates" -ForegroundColor Cyan
+                Write-Host "`nVS Code Administrative Templates" -ForegroundColor Cyan
                 Write-Host "================================" -ForegroundColor Cyan
                 Write-Host "The script needs to install VS Code Group Policy templates to the Windows" -ForegroundColor Gray
                 Write-Host "PolicyDefinitions folder. This requires administrator privileges." -ForegroundColor Gray
-                Write-Host ""
-                Write-Host "You will be prompted to grant elevated access (UAC prompt)." -ForegroundColor Yellow
-                Write-Host ""
+                Write-Host "`nYou will be prompted to grant elevated access (UAC prompt).`n" -ForegroundColor Yellow
                 $installTemplates = Read-Host "Do you want to install the administrative templates now? (y/n)"
                 
                 if ($installTemplates -eq 'y') {
@@ -782,19 +779,15 @@ if ($missingPrereqs.Count -gt 0) {
                         if (Test-Path $logFile) { Write-Host "  Log: $logFile" -ForegroundColor Gray }
                     }
                 } else {
-                    Write-Host ""
-                    Write-Host "  Skipping administrative template installation." -ForegroundColor Yellow
-                    Write-Host ""
-                    Write-Host "  To install manually, copy the following files:" -ForegroundColor Gray
+                    Write-Host "`n  Skipping administrative template installation." -ForegroundColor Yellow
+                    Write-Host "`n  To install manually, copy the following files:" -ForegroundColor Gray
                     Write-Host "    1. Copy VSCode.admx from:" -ForegroundColor Gray
                     Write-Host "       $policiesPath\VSCode.admx" -ForegroundColor Gray
                     Write-Host "       to: C:\Windows\PolicyDefinitions\VSCode.admx" -ForegroundColor Gray
-                    Write-Host ""
-                    Write-Host "    2. Copy language-specific VSCode.adml files from:" -ForegroundColor Gray
+                    Write-Host "`n    2. Copy language-specific VSCode.adml files from:" -ForegroundColor Gray
                     Write-Host "       $policiesPath\<language-code>\VSCode.adml" -ForegroundColor Gray
                     Write-Host "       to: C:\Windows\PolicyDefinitions\<language-code>\VSCode.adml" -ForegroundColor Gray
-                    Write-Host "       (e.g., en-us, de-de, fr-fr, etc.)" -ForegroundColor Gray
-                    Write-Host ""
+                    Write-Host "       (e.g., en-us, de-de, fr-fr, etc.)`n" -ForegroundColor Gray
                 }
             } else {
                 throw "Code.exe not found after installation"
@@ -866,11 +859,11 @@ if ($missingPrereqs.Count -gt 0) {
 # Save the original directory
 $originalDirectory = Get-Location
 
-# Navigate to the aspire folder
-Write-Host "`nNavigating to aspire folder..." -ForegroundColor Cyan
+# Navigate to the quickstart folder
+Write-Host "`nNavigating to quickstart folder..." -ForegroundColor Cyan
 
 if (-not (Test-Path $rootPath)) {
-    Write-Host "Error: aspire folder not found!" -ForegroundColor Red
+    Write-Host "Error: quickstart folder not found!" -ForegroundColor Red
     return
 }
 
@@ -958,15 +951,15 @@ if (-not $dockerEngineRunning) {
     }
 }
 
-# Run aspire using local installation
-Write-Host "`nRunning aspire..." -ForegroundColor Cyan
+# Run quickstart using local installation of aspire
+Write-Host "`nRunning quickstart..." -ForegroundColor Cyan
 try {
     # Use the local Aspire executable
     $aspireExePath = Join-Path $localAspirePath "aspire.exe"
     & $aspireExePath run --non-interactive
 }
 catch {
-    Write-Host "Error running aspire: $_" -ForegroundColor Red
+    Write-Host "Error running quickstart: $_" -ForegroundColor Red
 }
 finally {
     # Return to original directory
@@ -974,7 +967,7 @@ finally {
     
     # Prompt to clean up temp folder
     Write-Host "`n" -ForegroundColor Cyan
-    Write-Host "Aspire has exited." -ForegroundColor Cyan
+    Write-Host "Quickstart has exited." -ForegroundColor Cyan
     Write-Host ""
     Write-Host "IMPORTANT: Unset the Extension Gallery Service URL Policy" -ForegroundColor Yellow
     Write-Host "===========================================" -ForegroundColor Yellow
@@ -1021,18 +1014,15 @@ finally {
         
         # Display cleanup summary
         if ($cleanupErrors.Count -gt 0) {
-            Write-Host ""
-            Write-Host "Some cleanup operations failed:" -ForegroundColor Yellow
+            Write-Host "`nSome cleanup operations failed:" -ForegroundColor Yellow
             foreach ($error in $cleanupErrors) {
                 Write-Host "  - $error" -ForegroundColor Yellow
             }
             Write-Host "You can manually delete: $rootPath" -ForegroundColor Yellow
         }
     } else {
-        Write-Host ""
-        Write-Host "Temporary folder preserved at: $rootPath" -ForegroundColor Green
-        Write-Host ""
-        Write-Host "To run the Private Marketplace again:" -ForegroundColor Cyan
+        Write-Host "`nTemporary folder preserved at: $rootPath" -ForegroundColor Green
+        Write-Host "`nTo run the Private Marketplace again:" -ForegroundColor Cyan
         Write-Host "  1. Open PowerShell" -ForegroundColor Gray
         Write-Host "  2. Run: & \"$rootPath\Run-PrivateMarketplace.ps1\"" -ForegroundColor Gray
         Write-Host ""
