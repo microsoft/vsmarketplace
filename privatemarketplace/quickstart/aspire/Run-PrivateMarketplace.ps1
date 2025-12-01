@@ -583,14 +583,14 @@ if ($missingPrereqs.Count -gt 0) {
             }
             Write-Host "  ZIP downloaded successfully." -ForegroundColor Green
             
+            # Extract files
             $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-extract"
-            
-            Invoke-WithProgress -Activity "Extracting Quickstart Files" -Status "Extracting files..." -ScriptBlock {
-                if (Test-Path $tempExtractPath) {
-                    Remove-Item -Path $tempExtractPath -Recurse -Force
-                }
-                Expand-Archive -Path $tempZipPath -DestinationPath $tempExtractPath -Force
+            if (Test-Path $tempExtractPath) {
+                Remove-Item -Path $tempExtractPath -Recurse -Force
             }
+            Write-Progress -Activity "Extracting Quickstart Files" -Status "Extracting files..."
+            Expand-Archive -Path $tempZipPath -DestinationPath $tempExtractPath -Force
+            Write-Progress -Activity "Extracting Quickstart Files" -Completed
             
             # Copy quicklaunch folder contents directly to root (excluding .dotnet, .aspire, .vscode)
             $extractedquicklaunchFolder = Join-Path $tempExtractPath "vsmarketplace-$repoBranch\privatemarketplace\quickstart\aspire"
