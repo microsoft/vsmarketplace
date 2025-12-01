@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|71eb6d78-f65c-69f8-a0fd-58407e50bfc6.twilightofthewarriorswalledin|12/1/2025| Spam|
+|71eb6d78-f65c-69f8-a0fd-58407e50bfc6.twilightofthewarriorswalledinhdtw|12/1/2025| Spam|
+|71eb6d78-f65c-69f8-a0fd-58407e50bfc6.market|12/1/2025| Spam|
 |Prisma-Inc.prisma-studio-assistance|11/27/2025| Malware|
 |culvequeaka.Descargar-TRAIN-CREW-Prologue-gratuita-2022|11/27/2025| Malware|
 |poccccc.Download-Openal32dll-File-For-Dirt-2-Crack-kadiysy|11/27/2025| Malware|
