@@ -35,6 +35,34 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+#region Configuration
+# Script configuration - modify these values to customize the behavior
+$Config = @{
+    # Repository settings
+    RepoUrl = "https://github.com/mcumming/vsmarketplace"
+    RepoBranch = "main"  # Change this to test different branches
+    
+    # Version requirements
+    DotNetVersion = "10.0.100"  # Version of .NET SDK to install locally
+    
+    # Installation paths
+    RootPath = Join-Path $env:TEMP "privatemarketplace-quickstart"
+    
+    # Timeout settings
+    MaxDockerWaitTime = 60  # Maximum seconds to wait for Docker to start
+    DockerCheckInterval = 2  # Seconds between Docker readiness checks
+}
+
+# Derived paths (calculated from configuration)
+$Paths = @{
+    Root = $Config.RootPath
+    LocalVSCode = Join-Path $Config.RootPath ".vscode"
+    LocalAspire = Join-Path $Config.RootPath ".aspire"
+    LocalDotnet = Join-Path $Config.RootPath ".dotnet"
+    Policies = Join-Path $Config.RootPath ".vscode\policies"
+}
+#endregion Configuration
+
 # Check if running as administrator
 $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
@@ -46,9 +74,9 @@ if ($InstallAdminTemplates) {
         exit 1
     }
     
-    # Determine paths based on script location
-    $rootPath = Join-Path $env:TEMP "privatemarketplace-quickstart"
-    $vscodePolicyPath = Join-Path $rootPath ".vscode\policies"
+    # Use configured paths
+    $rootPath = $Paths.Root
+    $vscodePolicyPath = $Paths.Policies
     
     # Set up logging in root folder
     $logFile = Join-Path $rootPath "vscode-admin-template-install.log"
@@ -136,17 +164,15 @@ $dotnetInstalled = $false
 $repoExists = $false
 $wingetAvailable = $false
 
-# Define repository details
-$repoUrl = "https://github.com/mcumming/vsmarketplace"
-$repoBranch = "main"  # Change this to test different branches
-$rootPath = Join-Path $env:TEMP "privatemarketplace-quickstart"
-$dotnetVersion = "10.0.100"  # Version of .NET to install locally
-
-# Define paths for local installations
-$localVSCodePath = Join-Path $rootPath ".vscode"
-$localAspirePath = Join-Path $rootPath ".aspire"
-$localDotnetPath = Join-Path $rootPath ".dotnet"
-$policiesPath = Join-Path $localVSCodePath "policies"
+# Use configured values and paths
+$repoUrl = $Config.RepoUrl
+$repoBranch = $Config.RepoBranch
+$rootPath = $Paths.Root
+$dotnetVersion = $Config.DotNetVersion
+$localVSCodePath = $Paths.LocalVSCode
+$localAspirePath = $Paths.LocalAspire
+$localDotnetPath = $Paths.LocalDotnet
+$policiesPath = $Paths.Policies
 
 # Check Docker
 Write-Host "Checking for Docker..." -ForegroundColor Gray
