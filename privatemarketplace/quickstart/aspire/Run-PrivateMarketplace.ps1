@@ -30,6 +30,7 @@
 
 .NOTES
     Requires: PowerShell 5.1 or later, Internet connection for downloads
+    Administrator privileges required to install VS Code Group Policy templates (recommended for marketplace configuration)
     Exit Codes:
         0 - Success
         1 - Error occurred (see error messages)
@@ -316,6 +317,9 @@ if ($InstallAdminTemplates) {
         exit 1
     }
     
+    # Start transcript to capture all output
+    Start-Transcript -Path $logFile -Force
+
     # Use configured paths
     $rootPath = $Paths.Root
     $localVSCodePath = $Paths.LocalVSCode
@@ -374,10 +378,7 @@ if ($InstallAdminTemplates) {
     if (-not (Test-Path $rootPath)) {
         New-Item -ItemType Directory -Path $rootPath -Force | Out-Null
     }
-    
-    # Start transcript to capture all output
-    Start-Transcript -Path $logFile -Force
-    
+        
     Write-Host "Installing VS Code administrative templates..." -ForegroundColor Cyan
     Write-Host "Root path: $rootPath" -ForegroundColor Gray
     Write-Host "VS Code path: $localVSCodePath" -ForegroundColor Gray
@@ -680,11 +681,17 @@ if (Test-Path $rootPath) {
 # Check winget availability
 $wingetAvailable = $null -ne (Get-Command winget -ErrorAction SilentlyContinue)
 
+# Check if admin templates are needed
+$adminTemplatesNeeded = $vscodeInstalled -and -not (Test-AdminTemplatesInstalled)
+
 # Display summary if prerequisites are missing
-if ($missingPrereqs.Count -gt 0) {
+if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
     Write-Host "`n=== Missing Prerequisites ===" -ForegroundColor Yellow
     foreach ($prereq in $missingPrereqs) {
         Write-Host "  - $($prereq.Name)" -ForegroundColor Yellow
+    }
+    if ($adminTemplatesNeeded) {
+        Write-Host "  - VS Code Administrative Templates (requires admin privileges)" -ForegroundColor Yellow
     }
     
     Write-Host "`nThe following will be installed:" -ForegroundColor Cyan
@@ -730,6 +737,10 @@ if ($missingPrereqs.Count -gt 0) {
                 Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
             }
         }
+    }
+    if ($adminTemplatesNeeded) {
+        Write-Host "  - VS Code Administrative Templates: via elevated script execution" -ForegroundColor Green
+        Write-Host "    Note: Requires administrator privileges (UAC prompt)" -ForegroundColor Gray
     }
     
     # Prompt for confirmation
