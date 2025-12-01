@@ -582,7 +582,9 @@ try {
         $missingPrereqs += New-PrerequisiteInfo -Name "Docker Desktop" -InstallMethod "winget" `
             -ManualUrl "https://www.docker.com/products/docker-desktop"
     }
-}# Check VS Code
+}
+
+# Check VS Code
 Write-Host "Checking for VS Code..." -ForegroundColor Gray
 
 # Check if root doesn't exist, VS Code can't exist either
@@ -939,51 +941,6 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
                 Write-Host "  VS Code installed successfully." -ForegroundColor Green
                 $vscodeInstalled = $true
                 
-                # Prompt before launching script as admin to install administrative templates
-                Write-Host "`nVS Code Administrative Templates" -ForegroundColor Cyan
-                Write-Host "================================" -ForegroundColor Cyan
-                Write-Host "The script needs to install VS Code Group Policy templates to the Windows" -ForegroundColor Gray
-                Write-Host "PolicyDefinitions folder. This requires administrator privileges." -ForegroundColor Gray
-                Write-Host "`nYou will be prompted to grant elevated access (UAC prompt).`n" -ForegroundColor Yellow
-                $installTemplates = Read-Host "Do you want to install the administrative templates now? (y/n)"
-                
-                if ($installTemplates -eq 'y') {
-                    Write-Host "  Installing VS Code administrative templates..." -ForegroundColor Gray
-                    $scriptPath = $MyInvocation.MyCommand.Path
-                    
-                    # Log file path in root folder
-                    $logFile = Join-Path $rootPath "vscode-admin-template-install.log"
-                    
-                    try {
-                        # Launch the script with admin privileges
-                        $process = Start-Process -FilePath "pwsh.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -InstallAdminTemplates" -Verb RunAs -Wait -PassThru
-                        
-                        if ($process.ExitCode -eq 0) {
-                            Write-Host "  Administrative templates installed successfully." -ForegroundColor Green
-                        } elseif ($process.ExitCode -eq 64) {
-                            Write-Host "  Warning: UAC cancelled. Templates not installed." -ForegroundColor Yellow
-                        } else {
-                            Write-Host "  Warning: Installation exited with code $($process.ExitCode)" -ForegroundColor Yellow
-                            if (Test-Path $logFile) { Write-Host "  Log: $logFile" -ForegroundColor Gray }
-                        }
-                    } catch {
-                        Write-Host "  Warning: Could not install templates: $_" -ForegroundColor Yellow
-                        if (Test-Path $logFile) { Write-Host "  Log: $logFile" -ForegroundColor Gray }
-                    }
-                } else {
-                    Write-Host "`n  Skipping administrative template installation." -ForegroundColor Yellow
-                    Write-Host "`n  To install manually, copy the following files:" -ForegroundColor Gray
-                    Write-Host "    1. Copy VSCode.admx from:" -ForegroundColor Gray
-                    Write-Host "       $policiesPath\VSCode.admx" -ForegroundColor Gray
-                    Write-Host "       to: C:\Windows\PolicyDefinitions\VSCode.admx" -ForegroundColor Gray
-                    Write-Host "`n    2. Copy language-specific VSCode.adml files from:" -ForegroundColor Gray
-                    Write-Host "       $policiesPath\<language-code>\VSCode.adml" -ForegroundColor Gray
-                    Write-Host "       to: C:\Windows\PolicyDefinitions\<language-code>\VSCode.adml" -ForegroundColor Gray
-                    Write-Host "       (e.g., en-us, de-de, fr-fr, etc.)`n" -ForegroundColor Gray
-                }
-                
-                # Mark that we've already handled the admin templates prompt
-                $adminTemplatesHandled = $true
             } else {
                 throw "Code.exe not found after installation"
             }
@@ -1058,11 +1015,12 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
 }
 
 # Check if VS Code is installed but admin templates are not (only if we haven't already prompted)
-if ($vscodeInstalled -and -not $adminTemplatesHandled -and -not (Test-AdminTemplatesInstalled)) {
-    Write-Host "`nVS Code Administrative Templates Not Installed" -ForegroundColor Yellow
-    Write-Host "============================================" -ForegroundColor Yellow
-    Write-Host "The VS Code Group Policy templates are not currently installed." -ForegroundColor Gray
-    Write-Host "These templates are required to configure the private marketplace." -ForegroundColor Gray
+if ( -not (Test-AdminTemplatesInstalled)) {
+    # Prompt before launching script as admin to install administrative templates
+    Write-Host "`nVS Code Administrative Templates" -ForegroundColor Cyan
+    Write-Host "================================" -ForegroundColor Cyan
+    Write-Host "The script needs to install VS Code Group Policy templates to the Windows" -ForegroundColor Gray
+    Write-Host "PolicyDefinitions folder. This requires administrator privileges." -ForegroundColor Gray
     Write-Host "`nYou will be prompted to grant elevated access (UAC prompt).`n" -ForegroundColor Yellow
     $installTemplates = Read-Host "Do you want to install the administrative templates now? (y/n)"
     
@@ -1081,7 +1039,6 @@ if ($vscodeInstalled -and -not $adminTemplatesHandled -and -not (Test-AdminTempl
                 Write-Host "  Administrative templates installed successfully." -ForegroundColor Green
             } elseif ($process.ExitCode -eq 64) {
                 Write-Host "  Warning: UAC cancelled. Templates not installed." -ForegroundColor Yellow
-                Write-Host "  The private marketplace may not work correctly without these templates." -ForegroundColor Yellow
             } else {
                 Write-Host "  Warning: Installation exited with code $($process.ExitCode)" -ForegroundColor Yellow
                 if (Test-Path $logFile) { Write-Host "  Log: $logFile" -ForegroundColor Gray }
@@ -1092,8 +1049,16 @@ if ($vscodeInstalled -and -not $adminTemplatesHandled -and -not (Test-AdminTempl
         }
     } else {
         Write-Host "`n  Skipping administrative template installation." -ForegroundColor Yellow
-        Write-Host "  Note: You can run this script again later to install the templates." -ForegroundColor Gray
+        Write-Host "`n  To install manually, copy the following files:" -ForegroundColor Gray
+        Write-Host "    1. Copy VSCode.admx from:" -ForegroundColor Gray
+        Write-Host "       $policiesPath\VSCode.admx" -ForegroundColor Gray
+        Write-Host "       to: C:\Windows\PolicyDefinitions\VSCode.admx" -ForegroundColor Gray
+        Write-Host "`n    2. Copy language-specific VSCode.adml files from:" -ForegroundColor Gray
+        Write-Host "       $policiesPath\<language-code>\VSCode.adml" -ForegroundColor Gray
+        Write-Host "       to: C:\Windows\PolicyDefinitions\<language-code>\VSCode.adml" -ForegroundColor Gray
+        Write-Host "       (e.g., en-us, de-de, fr-fr, etc.)`n" -ForegroundColor Gray
     }
+                
 }
 
 # Save the original directory
