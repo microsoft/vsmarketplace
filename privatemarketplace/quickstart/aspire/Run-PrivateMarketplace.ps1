@@ -63,6 +63,118 @@ $Paths = @{
 }
 #endregion Configuration
 
+#region Helper Functions
+<#
+.SYNOPSIS
+    Tests if a command exists in the current environment.
+#>
+function Test-CommandExists {
+    param([string]$Command)
+    $null -ne (Get-Command $Command -ErrorAction SilentlyContinue)
+}
+
+<#
+.SYNOPSIS
+    Writes a status message with consistent formatting.
+#>
+function Write-StatusMessage {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$Message,
+        
+        [Parameter(Mandatory=$false)]
+        [ValidateSet('Info', 'Success', 'Warning', 'Error', 'Gray')]
+        [string]$Level = 'Info'
+    )
+    
+    $colors = @{
+        Info = 'Cyan'
+        Success = 'Green'
+        Warning = 'Yellow'
+        Error = 'Red'
+        Gray = 'Gray'
+    }
+    
+    Write-Host $Message -ForegroundColor $colors[$Level]
+}
+
+<#
+.SYNOPSIS
+    Waits for a condition to become true within a timeout period.
+#>
+function Wait-ForCondition {
+    param(
+        [Parameter(Mandatory=$true)]
+        [scriptblock]$Condition,
+        
+        [Parameter(Mandatory=$false)]
+        [int]$TimeoutSeconds = 60,
+        
+        [Parameter(Mandatory=$false)]
+        [int]$IntervalSeconds = 2,
+        
+        [Parameter(Mandatory=$false)]
+        [string]$StatusMessage = "Waiting for condition"
+    )
+    
+    $elapsed = 0
+    while ($elapsed -lt $TimeoutSeconds) {
+        if (& $Condition) {
+            return $true
+        }
+        
+        Start-Sleep -Seconds $IntervalSeconds
+        $elapsed += $IntervalSeconds
+        Write-StatusMessage "  $StatusMessage... ($elapsed seconds)" -Level Gray
+    }
+    
+    return $false
+}
+
+<#
+.SYNOPSIS
+    Removes specified paths from the user PATH environment variable.
+#>
+function Remove-PathFromEnvironment {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string[]]$PathPatterns
+    )
+    
+    try {
+        $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
+        if (-not $userPath) {
+            return
+        }
+        
+        # Split path into components and filter out matching patterns
+        $pathComponents = $userPath -split ';' | Where-Object { $_ }
+        $filteredComponents = $pathComponents | Where-Object { 
+            $path = $_
+            $shouldKeep = $true
+            foreach ($pattern in $PathPatterns) {
+                if ($path -like $pattern) {
+                    $shouldKeep = $false
+                    break
+                }
+            }
+            $shouldKeep
+        }
+        
+        # Only update if there were changes
+        if ($filteredComponents.Count -lt $pathComponents.Count) {
+            $newPath = $filteredComponents -join ';'
+            [Environment]::SetEnvironmentVariable("Path", $newPath, "User")
+            Write-StatusMessage "  Removed matching paths from user PATH." -Level Success
+        } else {
+            Write-StatusMessage "  No matching paths found in user PATH." -Level Gray
+        }
+    } catch {
+        Write-StatusMessage "  Warning: Could not clean PATH environment variable: $_" -Level Warning
+    }
+}
+#endregion Helper Functions
+
 # Check if running as administrator
 $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
@@ -150,10 +262,10 @@ if ($InstallAdminTemplates) {
     }
 }
 
-Write-Host "Private Marketplace for VS Code Quickstart" -ForegroundColor Cyan
+Write-StatusMessage "Private Marketplace for VS Code Quickstart" -Level Info
 
 # Check and install prerequisites
-Write-Host "`nChecking prerequisites..." -ForegroundColor Cyan
+Write-StatusMessage "`nChecking prerequisites..." -Level Info
 
 # Initialize tracking variables
 $missingPrereqs = @()
@@ -673,26 +785,7 @@ if ($missingPrereqs.Count -gt 0) {
                     
                     # Remove Aspire paths from USER PATH environment variable
                     Write-Host "  Removing Aspire from system PATH..." -ForegroundColor Gray
-                    try {
-                        $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
-                        if ($userPath) {
-                            # Split path into components and filter out any Aspire-related paths
-                            $pathComponents = $userPath -split ';' | Where-Object { 
-                                $_ -and $_ -notmatch '\\\.aspire\\' -and $_ -notmatch '\\aspire\\' 
-                            }
-                            $newPath = $pathComponents -join ';'
-                            
-                            # Only update if there were changes
-                            if ($userPath -ne $newPath) {
-                                [Environment]::SetEnvironmentVariable("Path", $newPath, "User")
-                                Write-Host "  Aspire paths removed from user PATH." -ForegroundColor Green
-                            } else {
-                                Write-Host "  No Aspire paths found in user PATH." -ForegroundColor Gray
-                            }
-                        }
-                    } catch {
-                        Write-Host "  Warning: Could not clean PATH environment variable: $_" -ForegroundColor Yellow
-                    }
+                    Remove-PathFromEnvironment -PathPatterns @('*\.aspire\*', '*\aspire\*')
                 } else {
                     throw "aspire.exe not found after installation"
                 }
@@ -769,32 +862,20 @@ try {
         Start-Process -FilePath $dockerDesktopPath
         Write-Host "  Waiting for Docker engine to start..." -ForegroundColor Gray
         
-        # Wait for Docker to be ready (max 60 seconds)
-        $maxWaitTime = 60
-        $waitedTime = 0
-        $dockerReady = $false
-        
-        while ($waitedTime -lt $maxWaitTime) {
-            Start-Sleep -Seconds 2
-            $waitedTime += 2
-            
+        # Wait for Docker to be ready using helper function
+        $dockerReady = Wait-ForCondition -Condition {
             try {
-                $dockerInfo = docker info 2>$null
-                if ($LASTEXITCODE -eq 0) {
-                    $dockerReady = $true
-                    break
-                }
+                $null = docker info 2>$null
+                return ($LASTEXITCODE -eq 0)
             } catch {
-                # Continue waiting
+                return $false
             }
-            
-            Write-Host "  Still waiting... ($waitedTime seconds)" -ForegroundColor Gray
-        }
+        } -TimeoutSeconds $Config.MaxDockerWaitTime -IntervalSeconds $Config.DockerCheckInterval -StatusMessage "Waiting for Docker engine"
         
         if ($dockerReady) {
             Write-Host "  Docker engine is now running." -ForegroundColor Green
         } else {
-            Write-Host "  Docker engine did not start within $maxWaitTime seconds." -ForegroundColor Yellow
+            Write-Host "  Docker engine did not start within $($Config.MaxDockerWaitTime) seconds." -ForegroundColor Yellow
             Write-Host "  Please ensure Docker Desktop is running and try again." -ForegroundColor Yellow
             return
         }
