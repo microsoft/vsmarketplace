@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|priskinski.Theme-Afterglow-remake|12/1/2025| Malware|
+|priskinski.Theme-AllHallowsEve-remake|12/1/2025| Malware|
+|priskinski.Theme-Amber-remake|12/1/2025| Malware|
+|priskinski.Theme-Amy-remake|12/1/2025| Malware|
+|priskinski.Theme-AgolaDark-remake|12/1/2025| Malware|
+|betterthanalltime.calva-vscode|12/1/2025| Typo-squatting|
 |71eb6d78-f65c-69f8-a0fd-58407e50bfc6.twilightofthewarriorswalledin|12/1/2025| Spam|
 |71eb6d78-f65c-69f8-a0fd-58407e50bfc6.twilightofthewarriorswalledinhdtw|12/1/2025| Spam|
 |71eb6d78-f65c-69f8-a0fd-58407e50bfc6.market|12/1/2025| Spam|
