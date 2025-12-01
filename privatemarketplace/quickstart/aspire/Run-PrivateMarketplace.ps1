@@ -400,6 +400,7 @@ if ($InstallAdminTemplates) {
                 Write-Host "Policies folder contents: $(( Get-ChildItem -Path $vscodePolicyPath).Name -join ', ')" -ForegroundColor Gray
             }
             Stop-Transcript
+            Read-Host "Press Enter to exit"
             exit 1
         }
         
@@ -1026,7 +1027,7 @@ if ( -not (Test-AdminTemplatesInstalled)) {
     
     if ($installTemplates -eq 'y') {
         Write-Host "  Installing VS Code administrative templates..." -ForegroundColor Gray
-        $scriptPath = $MyInvocation.MyCommand.Path
+        $scriptPath = Join-Path $rootPath "Run-PrivateMarketplace.ps1"
         
         # Log file path in root folder
         $logFile = Join-Path $rootPath "vscode-admin-template-install.log"
