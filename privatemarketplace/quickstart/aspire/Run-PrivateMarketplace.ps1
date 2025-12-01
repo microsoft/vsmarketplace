@@ -51,7 +51,7 @@ $ErrorActionPreference = "Stop"
 # Script configuration - modify these values to customize the behavior
 $Config = @{
     # Repository settings
-    RepoUrl = "https://github.com/mcumming/vsmarketplace"
+    RepoUrl = "https://github.com/microsoft/vsmarketplace"
     RepoBranch = "main"  # Change this to test different branches
     
     # Version requirements

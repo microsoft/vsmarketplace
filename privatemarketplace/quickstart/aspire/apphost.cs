@@ -45,7 +45,7 @@ public static class MarketplaceExtensions
                 name: name,
                 targetPort: 443)
             .WithUrlForEndpoint(name, annotation => annotation.DisplayText = "Home")
-            .WithUrl($"https://github.com/mcumming/vsmarketplace/blob/main/privatemarketplace/quickstart/aspire/README.md", "README")
+            .WithUrl($"https://github.com/microsoft/vsmarketplace/blob/main/privatemarketplace/quickstart/aspire/README.md", "README")
             .WithBindMount(Path.Combine(Directory.GetCurrentDirectory(), "data", "extensions"), "/extensions")
             .WithBindMount(Path.Combine(Directory.GetCurrentDirectory(), "data", "logs"), "/logs")
             .WithOtlpExporter()

@@ -17,7 +17,7 @@ Before you begin, ensure you have:
 Open PowerShell and run the quickstart script:
 
 ```powershell
-irm https://raw.githubusercontent.com/mcumming/vsmarketplace/main/privatemarketplace/quickstart/aspire/Run-PrivateMarketplace.ps1 | iex
+irm https://raw.githubusercontent.com/microsoft/vsmarketplace/main/privatemarketplace/quickstart/aspire/Run-PrivateMarketplace.ps1 | iex
 ```
 
 The script will automatically:
