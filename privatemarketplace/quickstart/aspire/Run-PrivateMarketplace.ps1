@@ -396,12 +396,20 @@ try {
     } else {
         throw "Docker not found"
     }
-        } catch {
-            Write-Verbose "Docker check failed: $_"
-            Write-Host "  Docker not found" -ForegroundColor Yellow
-            $missingPrereqs += New-PrerequisiteInfo -Name "Docker Desktop" -InstallMethod "winget" `
-                -ManualUrl "https://www.docker.com/products/docker-desktop"
-        }# Check VS Code
+} catch {
+    Write-Verbose "Docker check failed: $_"
+    
+    # Check if Docker Desktop is installed but just not in PATH or not running
+    $dockerDesktopPath = "$env:ProgramFiles\Docker\Docker\Docker Desktop.exe"
+    if (Test-Path $dockerDesktopPath) {
+        Write-Host "  Docker Desktop installed but not accessible" -ForegroundColor Yellow
+        $dockerInstalled = $true  # Mark as installed, will handle startup later
+    } else {
+        Write-Host "  Docker not found" -ForegroundColor Yellow
+        $missingPrereqs += New-PrerequisiteInfo -Name "Docker Desktop" -InstallMethod "winget" `
+            -ManualUrl "https://www.docker.com/products/docker-desktop"
+    }
+}# Check VS Code
 Write-Host "Checking for VS Code..." -ForegroundColor Gray
 
 # Check if root doesn't exist, VS Code can't exist either
@@ -625,20 +633,25 @@ if ($missingPrereqs.Count -gt 0) {
     }
     
     # Install Docker if missing
+    $dockerNeedsInstall = $false
     if (-not $dockerInstalled) {
         Write-Host "`nInstalling Docker Desktop..." -ForegroundColor Cyan
         
         if ($wingetAvailable) {
             Write-Host "  Using winget to install Docker Desktop..." -ForegroundColor Gray
-            winget install -e --id Docker.DockerDesktop --accept-package-agreements --accept-source-agreements
+            $wingetOutput = winget install -e --id Docker.DockerDesktop --accept-package-agreements --accept-source-agreements 2>&1
             
             if ($LASTEXITCODE -eq 0) {
                 Write-Host "  Docker Desktop installed successfully." -ForegroundColor Green
-                Write-Host "  IMPORTANT: Please start Docker Desktop and wait for it to be ready, then re-run this script." -ForegroundColor Yellow
-                return
+                $dockerInstalled = $true
+                $dockerNeedsInstall = $true
+            } elseif ($wingetOutput -match "No available upgrade found|already installed") {
+                Write-Host "  Docker Desktop already installed." -ForegroundColor Green
+                $dockerInstalled = $true
             } else {
                 Write-Host "  Failed to install Docker Desktop via winget." -ForegroundColor Red
                 Write-Host "  Please install Docker Desktop manually from: https://www.docker.com/products/docker-desktop" -ForegroundColor Yellow
+                Write-Host "  After installation, re-run this script." -ForegroundColor Yellow
                 return
             }
         } else {
@@ -841,6 +854,11 @@ if ($missingPrereqs.Count -gt 0) {
     }
     
     Write-Host "`nAll prerequisites installed successfully." -ForegroundColor Green
+    
+    # If Docker was just installed, inform user it will be started next
+    if ($dockerNeedsInstall) {
+        Write-Host "  Docker Desktop will be started automatically in the next step." -ForegroundColor Cyan
+    }
 } else {
     Write-Host "`nAll prerequisites satisfied." -ForegroundColor Green
 }
@@ -887,21 +905,33 @@ if (Test-Path $localDotnetExe) {
 
 # Ensure Docker is running
 Write-Host "`nChecking Docker engine status..." -ForegroundColor Cyan
+$dockerEngineRunning = $false
 try {
     $dockerInfo = docker info 2>$null
     if ($LASTEXITCODE -eq 0) {
         Write-Host "  Docker engine is running." -ForegroundColor Green
+        $dockerEngineRunning = $true
     } else {
         throw "Docker engine not responding"
     }
 } catch {
-    Write-Host "  Docker engine is not running. Starting Docker Desktop..." -ForegroundColor Yellow
-    
+    Write-Host "  Docker engine is not running." -ForegroundColor Yellow
+}
+
+if (-not $dockerEngineRunning) {
     # Try to start Docker Desktop
     $dockerDesktopPath = "$env:ProgramFiles\Docker\Docker\Docker Desktop.exe"
     if (Test-Path $dockerDesktopPath) {
-        Start-Process -FilePath $dockerDesktopPath
-        Write-Host "  Waiting for Docker engine to start..." -ForegroundColor Gray
+        Write-Host "  Starting Docker Desktop..." -ForegroundColor Cyan
+        
+        # Check if Docker Desktop is already running (process exists)
+        $dockerProcess = Get-Process "Docker Desktop" -ErrorAction SilentlyContinue
+        if (-not $dockerProcess) {
+            Start-Process -FilePath $dockerDesktopPath
+            Write-Host "  Docker Desktop started. Waiting for engine to be ready..." -ForegroundColor Gray
+        } else {
+            Write-Host "  Docker Desktop is running but engine not ready. Waiting..." -ForegroundColor Gray
+        }
         
         # Wait for Docker to be ready using helper function
         $dockerReady = Wait-ForCondition -Condition {
@@ -917,7 +947,8 @@ try {
             Write-Host "  Docker engine is now running." -ForegroundColor Green
         } else {
             Write-Host "  Docker engine did not start within $($Config.MaxDockerWaitTime) seconds." -ForegroundColor Yellow
-            Write-Host "  Please ensure Docker Desktop is running and try again." -ForegroundColor Yellow
+            Write-Host "  This can happen on first startup after installation." -ForegroundColor Gray
+            Write-Host "  Please wait for Docker Desktop to fully start, then re-run this script." -ForegroundColor Yellow
             return
         }
     } else {
