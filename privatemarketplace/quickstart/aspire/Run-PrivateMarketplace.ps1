@@ -10,7 +10,7 @@ if ($args -contains "-InstallAdminTemplates") {
     if (-not $isAdmin) {
         Write-Host "Error: Must run as administrator to install administrative templates." -ForegroundColor Red
         Read-Host "Press Enter to continue..."
-        pause
+        exit 1
     }
     
     # Determine paths based on script location
@@ -125,16 +125,15 @@ try {
     } else {
         throw "Docker not found"
     }
-} catch {
-    Write-Host "  Docker not found" -ForegroundColor Yellow
-    $missingPrereqs += @{
-        Name = "Docker Desktop"
-        InstallMethod = "winget"
-        ManualUrl = "https://www.docker.com/products/docker-desktop"
-    }
-}
-
-# Check VS Code
+        } catch {
+            Write-Verbose "Docker check failed: $_"
+            Write-Host "  Docker not found" -ForegroundColor Yellow
+            $missingPrereqs += @{
+                Name = "Docker Desktop"
+                InstallMethod = "winget"
+                ManualUrl = "https://www.docker.com/products/docker-desktop"
+            }
+        }# Check VS Code
 Write-Host "Checking for VS Code..." -ForegroundColor Gray
 
 # Check if root doesn't exist, VS Code can't exist either
@@ -260,7 +259,7 @@ if (Test-Path $rootPath) {
         Write-Host "  Aspire files found at: $rootPath" -ForegroundColor Green
         $repoExists = $true
     } else {
-        Write-Host "  Folder exists but appears incomplete" -ForegroundColor Yellow
+        Write-Host "  Folder exists but appears incomplete (apphost.cs not found)" -ForegroundColor Yellow
         $missingPrereqs += @{
             Name = "Aspire Files"
             InstallMethod = "download"
