@@ -1003,6 +1003,18 @@ try {
     Write-Host "  .NET version: " -NoNewline -ForegroundColor Gray
     & $localDotnetExe --version
     
+    Write-Host "`n  ═══════════════════════════════════════════════════════════" -ForegroundColor Yellow
+    Write-Host "  Aspire Dashboard SSL Certificate Setup" -ForegroundColor Yellow
+    Write-Host "  ═══════════════════════════════════════════════════════════" -ForegroundColor Yellow
+    Write-Host "  On first run, Aspire will configure a local SSL certificate" -ForegroundColor Gray
+    Write-Host "  for secure HTTPS access to the dashboard." -ForegroundColor Gray
+    Write-Host "`n  ACTION REQUIRED (if prompted):" -ForegroundColor Cyan
+    Write-Host "  - Click 'Yes' to trust the ASP.NET Core HTTPS development certificate" -ForegroundColor White
+    Write-Host "  - This is a one-time setup for secure local development" -ForegroundColor White
+    Write-Host "  - The certificate is only trusted on this computer" -ForegroundColor White
+    Write-Host "`n  Starting Aspire dashboard..." -ForegroundColor Gray
+    Write-Host "  ═══════════════════════════════════════════════════════════`n" -ForegroundColor Yellow
+    
     # Launch Aspire with explicit environment variables to ensure it uses local .NET
     $psi = New-Object System.Diagnostics.ProcessStartInfo
     $psi.FileName = $aspireExePath
