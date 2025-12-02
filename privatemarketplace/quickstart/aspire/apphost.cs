@@ -60,7 +60,7 @@ public static class MarketplaceExtensions
                 var endpoint = e.Resource.Annotations.OfType<EndpointAnnotation>()
                     .FirstOrDefault(a => a.Name == name);
                 
-                if (endpoint?.Port.HasValue)
+                if (endpoint?.Port.HasValue == true)
                 {
                     var config = new { Marketplace = new { Port = endpoint.Port.Value } };
                     var json = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
@@ -171,8 +171,8 @@ public static class MarketplaceExtensions
                     if (healthCheckProperties.Any())
                     {
                         var allHealthy = healthCheckProperties.All(hc =>
-                            hc.Value.ToString().Contains("Healthy", StringComparison.OrdinalIgnoreCase) ||
-                            hc.Value.ToString().Contains("Success", StringComparison.OrdinalIgnoreCase));
+                            hc.Value?.ToString()?.Contains("Healthy", StringComparison.OrdinalIgnoreCase) == true ||
+                            hc.Value?.ToString()?.Contains("Success", StringComparison.OrdinalIgnoreCase) == true);
 
                         return allHealthy ? ResourceCommandState.Enabled : ResourceCommandState.Disabled;
                     }
@@ -184,9 +184,9 @@ public static class MarketplaceExtensions
                     if (statusProperties.Any())
                     {
                         var hasGoodStatus = statusProperties.Any(sp =>
-                            sp.Value.ToString().Contains("Healthy", StringComparison.OrdinalIgnoreCase) ||
-                            sp.Value.ToString().Contains("Running", StringComparison.OrdinalIgnoreCase) ||
-                            sp.Value.ToString().Contains("Ready", StringComparison.OrdinalIgnoreCase));
+                            sp.Value?.ToString()?.Contains("Healthy", StringComparison.OrdinalIgnoreCase) == true ||
+                            sp.Value?.ToString()?.Contains("Running", StringComparison.OrdinalIgnoreCase) == true ||
+                            sp.Value?.ToString()?.Contains("Ready", StringComparison.OrdinalIgnoreCase) == true);
 
                         return hasGoodStatus ? ResourceCommandState.Enabled : ResourceCommandState.Disabled;
                     }
