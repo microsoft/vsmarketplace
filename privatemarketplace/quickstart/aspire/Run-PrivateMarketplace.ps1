@@ -628,8 +628,16 @@ if (-not (Test-Path $rootPath)) {
 # Check for local .NET SDK installation
 Write-Host "Checking for local .NET SDK..." -ForegroundColor Gray
 
+# Extract major.minor version for channel checking
+$versionParts = $dotnetVersion -split '\.'
+if ($versionParts.Count -ge 2) {
+    $channel = "$($versionParts[0]).$($versionParts[1])"
+} else {
+    $channel = $dotnetVersion
+}
+
 # If root doesn't exist, .NET SDK can't exist either
-$dotnetPrereq = New-PrerequisiteInfo -Name ".NET SDK $dotnetVersion (local)" -InstallMethod "dotnet-install" `
+$dotnetPrereq = New-PrerequisiteInfo -Name ".NET SDK $dotnetVersion+ (local)" -InstallMethod "dotnet-install" `
     -Version $dotnetVersion -InstallPath $localDotnetPath -ManualUrl "https://dotnet.microsoft.com/download/dotnet/10.0"
 
 if (-not (Test-Path $rootPath)) {
@@ -642,13 +650,33 @@ if (-not (Test-Path $rootPath)) {
         # Check the actual installed SDK versions
         try {
             $installedSdks = & $localDotnetExePath --list-sdks 2>$null
-            $matchingSdk = $installedSdks | Where-Object { $_ -match "^$([regex]::Escape($dotnetVersion))\s" }
+            # Check for any SDK matching the major.minor channel with version >= minimum
+            $majorMinorPattern = "^$([regex]::Escape($channel))\.(\d+)\s"
+            $matchingSdks = $installedSdks | Where-Object { $_ -match $majorMinorPattern }
             
-            if ($matchingSdk) {
-                Write-Host "  Local .NET SDK $dotnetVersion found at: $localDotnetPath" -ForegroundColor Green
-                $dotnetInstalled = $true
+            if ($matchingSdks) {
+                # Extract version numbers and check if any meet the minimum requirement
+                $hasValidVersion = $false
+                foreach ($sdk in $matchingSdks) {
+                    if ($sdk -match "^([\d\.]+)\s") {
+                        $installedVersion = [version]$matches[1]
+                        $minimumVersion = [version]$dotnetVersion
+                        if ($installedVersion -ge $minimumVersion) {
+                            Write-Host "  Local .NET SDK $($matches[1]) found at: $localDotnetPath" -ForegroundColor Green
+                            $hasValidVersion = $true
+                            break
+                        }
+                    }
+                }
+                
+                if ($hasValidVersion) {
+                    $dotnetInstalled = $true
+                } else {
+                    Write-Host "  Found SDK(s) in channel $channel but below minimum version $dotnetVersion" -ForegroundColor Yellow
+                    $missingPrereqs += $dotnetPrereq
+                }
             } else {
-                Write-Host "  Version $dotnetVersion missing. Installed: $($installedSdks -join ', ')" -ForegroundColor Yellow
+                Write-Host "  No SDK found for channel $channel. Installed: $($installedSdks -join ', ')" -ForegroundColor Yellow
                 $missingPrereqs += $dotnetPrereq
             }
         } catch {
@@ -869,9 +897,20 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
                 throw "Failed to download dotnet-install script"
             }
             
-            # Run the installation script
-            Invoke-WithProgress -Activity "Installing .NET SDK" -Status "Installing .NET SDK $dotnetVersion..." -ScriptBlock {
-                & $dotnetInstallScript -Version $dotnetVersion -InstallDir $localDotnetPath -NoPath
+            # Extract major.minor version from dotnetVersion (e.g., "10.0" from "10.0.100")
+            $versionParts = $dotnetVersion -split '\.'
+            if ($versionParts.Count -ge 2) {
+                $channel = "$($versionParts[0]).$($versionParts[1])"
+            } else {
+                throw "Invalid .NET version format: $dotnetVersion"
+            }
+            
+            Write-Host "  Querying latest patch version for channel $channel..." -ForegroundColor Gray
+            
+            # Run the installation script with -Channel to get the latest patch version
+            # This installs the latest patch version for the specified major.minor channel
+            Invoke-WithProgress -Activity "Installing .NET SDK" -Status "Installing latest .NET SDK for channel $channel..." -ScriptBlock {
+                & $dotnetInstallScript -Channel $channel -InstallDir $localDotnetPath -NoPath
             }
             
             # Verify installation by checking for dotnet.exe and running --list-sdks
@@ -879,13 +918,21 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
             if (Test-Path $localDotnetExeCheck) {
                 try {
                     $installedSdks = & $localDotnetExeCheck --list-sdks 2>$null
-                    $matchingSdk = $installedSdks | Where-Object { $_ -match "^$([regex]::Escape($dotnetVersion))\s" }
+                    # Find any SDK matching the major.minor version pattern
+                    $majorMinorPattern = "^$([regex]::Escape($channel))\.(\d+)\s"
+                    $matchingSdk = $installedSdks | Where-Object { $_ -match $majorMinorPattern }
                     
                     if ($matchingSdk) {
-                        Write-Host "  .NET SDK $dotnetVersion installed successfully." -ForegroundColor Green
+                        # Extract the actual version number that was installed
+                        if ($matchingSdk -match "^([\d\.]+)\s") {
+                            $installedVersion = $matches[1]
+                            Write-Host "  .NET SDK $installedVersion installed successfully (latest patch for channel $channel)." -ForegroundColor Green
+                        } else {
+                            Write-Host "  .NET SDK installed successfully (channel $channel)." -ForegroundColor Green
+                        }
                         $dotnetInstalled = $true
                     } else {
-                        throw "SDK version $dotnetVersion not found after installation"
+                        throw "SDK for channel $channel not found after installation"
                     }
                 } catch {
                     throw "Failed to verify SDK installation: $_"
