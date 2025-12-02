@@ -1,6 +1,6 @@
 # VS Code Private Marketplace - Quickstart
 
-This quickstart walks you through setting up and testing a local VS Code Private Marketplace using [Aspire](https://aspire.dev). You'll learn how to install the marketplace, configure VS Code to use it, and explore different usage scenarios.
+This quickstart walks you through setting up and testing a local VS Code Private Marketplace using [Aspire](https://aspire.dev) on Windows. You'll learn how to install the marketplace, configure VS Code to use it, and explore different usage scenarios.
 
 ---
 
@@ -10,7 +10,7 @@ This quickstart walks you through setting up and testing a local VS Code Private
 
 Before you begin, ensure you have:
 - **Docker Desktop** installed and running
-- **PowerShell** (pwsh) for running the setup script
+- **PowerShell 5.1 or later** for running the setup script
 
 ### Run the Setup Script
 
@@ -19,13 +19,19 @@ Open PowerShell and run the quickstart script:
 ```powershell
 irm https://raw.githubusercontent.com/microsoft/vsmarketplace/main/privatemarketplace/quickstart/aspire/Run-PrivateMarketplace.ps1 | iex
 ```
+> [!IMPORTANT]
+  Never run scripts from untrusted sources, always review the script before running it.
 
 The script will automatically:
-- Download the quickstart files to a temporary folder (`$env:TEMP\privatemarketplace-quickstart`)
-- Install a portable version of VS Code
-- Install .NET SDK 10 and Aspire CLI locally
+- Check for and install missing prerequisites (after prompting for confirmation):
+  - Docker Desktop (if not found)
+  - Download quickstart files to `$env:TEMP\privatemarketplace-quickstart`
+  - Portable VS Code
+  - Portable .NET SDK 10.0.100
+  - Portable Aspire CLI version 13+
 - Prompt you to install VS Code Group Policy templates (requires admin privileges - **recommended**)
-- Start the Private Marketplace container via Aspire
+- Start Docker Desktop if not running
+- Launch the Private Marketplace container via Aspire
 
 **Important**: When prompted to install administrative templates, choose **Yes (y)** to enable Group Policy configuration later.
 
@@ -36,13 +42,13 @@ Once installation completes, the Aspire dashboard will open automatically in you
 ![Aspire Dashboard URL in Terminal](images/aspire-dashboard-url.png)
 
 **What is the Aspire Dashboard?**
-The Aspire dashboard is your control center for managing the private marketplace. It provides:
+The Aspire dashboard is your control center for managing the Private Marketplace. It provides:
 - Real-time status of your marketplace container
 - Quick access to the marketplace web interface
 - Commands to launch VS Code and configure settings
 - Logs and monitoring information
 
-In the dashboard, you'll see a resource named **`vscode-private-marketplace`** - this is your private marketplace container.
+In the dashboard, you'll see a resource named **`vscode-private-marketplace`** - this is your Private Marketplace container.
 
 ![Aspire Dashboard Resource Table](images/aspire-resource-table.png)
 
@@ -50,7 +56,7 @@ In the dashboard, you'll see a resource named **`vscode-private-marketplace`** -
 
 ## Part 2: Configuring VS Code
 
-Now let's configure VS Code to use your private marketplace instead of the public VS Code Marketplace.
+Now let's configure VS Code to use your Private Marketplace instead of the public VS Code Marketplace.
 
 ### Step 1: Get Your Marketplace URL
 
@@ -82,8 +88,11 @@ The quickstart includes three sample extensions preloaded in the marketplace:
    ![Aspire Actions Menu](images/aspire-actions-menu.png)
 
 4. From the Actions menu, select **Open Group Policy Editor**
-   - **Note**: If this option doesn't appear, see the [Troubleshooting](#troubleshooting) section below
+   > [!NOTE]
+   If this option doesn't appear, see the [Troubleshooting](#troubleshooting) section below
 5. In the Group Policy Editor window that opens, navigate to the Extensions folder:
+   > [!NOTE]
+   The Group Policy Editor window might not open in the forground, look in the taskbar for the application.
 
    ![Group Policy Editor](images/gpedit-extensions.png)
 
@@ -98,29 +107,36 @@ The quickstart includes three sample extensions preloaded in the marketplace:
 6. Close the Group Policy Editor
 
 **What just happened?**
-You configured Windows Group Policy to redirect VS Code's extension marketplace to your private instance. VS Code will now only show extensions from your private marketplace.
+You configured Windows Group Policy to redirect VS Code's extension marketplace to your private instance. VS Code will now only show extensions from your Private Marketplace.
 
 ### Step 3: Launch VS Code
 
 1. Return to the Aspire dashboard
 2. Click the **Actions** button (⋮) for the **`vscode-private-marketplace`** resource
+
+   ![Aspire Actions Menu](images/aspire-actions-menu.png)
+
 3. Select **Open VS Code** from the menu
-   - This launches the portable VS Code instance configured to use your private marketplace
+   - This launches the portable VS Code instance configured to use your Private Marketplace
 4. Once VS Code opens, **sign in to GitHub**:
    - Click the **Accounts** icon in the lower-left corner (or the profile icon)
-   - Select **Sign in with GitHub**
-   - Complete the authentication process in your browser
-   - **Note**: You must sign in to GitHub before extensions will be available
-5. After signing in, click the Extensions icon in the sidebar (or press `Ctrl+Shift+X`)
-6. You'll see only the sample extensions from your private marketplace
+   - Select **Sign in to access Extensions Marketplace...**
 
-**Congratulations!** VS Code is now connected to your private marketplace.
+   ![VS Code Account Menu](images/vscode-account-menu.png)
+
+   - Complete the authentication process in your browser
+   > [!NOTE]
+      You must sign in to GitHub before extensions will be available
+5. After signing in, click the Extensions icon in the sidebar (or press `Ctrl+Shift+X`)
+6. You'll see the sample extensions from your Private Marketplace listed first, followed by public extensions.
+
+**Congratulations!** VS Code is now connected to your Private Marketplace.
 
 ---
 
 ## Part 3: Usage Scenarios
 
-Now that you have a working private marketplace, try these common scenarios:
+Now that you have a working Private Marketplace, try these common scenarios:
 
 ### Scenario 1: Adding Extensions to Your Marketplace
 
@@ -169,10 +185,10 @@ You can configure VS Code to only allow extensions from specific publishers, suc
    ```
 7. Click **OK** and close the Group Policy Editor
 8. Restart VS Code (close and reopen using the **Open VS Code** command in the Aspire dashboard)
-9. In the Extensions view, you'll now see only extensions from the Contoso publisher
+9. In the Extensions view, only extensions from the Contoso publisher can be installed.
 
 **What just happened?**
-The `AllowedExtensions` policy controls which extensions can be installed. By setting `"Contoso": true`, you've restricted VS Code to only show and install extensions published by Contoso. All other publishers are blocked.
+The `AllowedExtensions` policy controls which extensions can be installed. By setting `"Contoso": true`, you've restricted VS Code to only allow installation of extensions published by Contoso. All other publishers are blocked. See the [VS Code Documentation](https://code.visualstudio.com/docs/setup/enterprise#_configure-allowed-extensions) for more ways to configure the Allowed Extensions setting.
 
 **Other Allowed Extensions Examples:**
 
@@ -293,7 +309,7 @@ If you skipped the administrative templates installation during setup, or they f
 
 The Group Policy Editor command should now appear in the Aspire dashboard Actions menu.
 
-**VS Code not connecting to private marketplace?**
+**VS Code not connecting to Private Marketplace?**
 - Verify the Group Policy setting is enabled and contains the correct URL
 - Restart VS Code after changing the policy
 
