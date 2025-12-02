@@ -17,14 +17,13 @@ Before you begin, ensure you have:
 > [!IMPORTANT]
   Never run scripts from untrusted sources, always review the script before running it.
   Always verify the script's hash before executing. The expected hash can be found in the repository or release notes.
-  Open PowerShell and run the quickstart script:
 
 The script will automatically:
 - Check for and install missing prerequisites (after prompting for confirmation):
   - Docker Desktop (if not found)
   - Download quickstart files to `$env:TEMP\privatemarketplace-quickstart`
   - Portable VS Code
-  - Portable .NET SDK 10.0.100
+  - Portable .NET SDK 10.0+
   - Portable Aspire CLI version 13+
 - Prompt you to install VS Code Group Policy templates (requires admin privileges - **required for VS Code**)
 - Start Docker Desktop if not running
@@ -77,10 +76,10 @@ You should see output similar to the following snippet:
     - VS Code (portable): via local portable installation
        Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart\.vscode
        Source: https://code.visualstudio.com/
-    - Aspire CLI (version 13+): via local installation
+    - Aspire CLI (version 13+) (local): via local portable installation
        Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart\.aspire
        Source: https://learn.microsoft.com/dotnet/aspire
-    - .NET SDK 10.0.100 (local): via dotnet-install script
+    - .NET SDK 10.0.100+ (local): via dotnet-install script
        Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart\.dotnet
        Source: https://dotnet.microsoft.com/download/dotnet/10.0
     - Quickstart Files: via ZIP download
@@ -91,7 +90,6 @@ You should see output similar to the following snippet:
    
     Do you want to proceed with installation? (y/n):
   ```
-
 
 ### Access the Aspire Dashboard
 
@@ -263,6 +261,57 @@ To block a specific extension from an allowed publisher:
 4. Restart VS Code
 
 ### Scenario 3: Configure Upstreaming to Public Marketplace
+
+Upstreaming is a feature of the Private Marketplace that makes the extensions in the public Marketplace available to VS Code clients. Upstreaming has three modes of operation, "None", "Search" and "SearchAndAssets". 
+
+By changing the mode the Private Marketplace can support different scenarios
+* None
+
+  internal and rehosted extensions only, suitable for air-gapped environments.
+* Search
+
+  VS Code sends request to Private Marketplace to search and list extensions, but details and installation bypass the Private Marketplace offering a hybrid approach
+* SearchAndAssets
+
+  VS Code sends request to Private Marketplace to search and list extensions, details, and installation 
+
+To change the Upstreaming mode in the Quickstart:
+1. In the Aspire dashboard, click the **Actions** button (⋮) for **`vscode-private-marketplace`**
+
+   ![Aspire Actions Menu](images/aspire-actions-menu.png)
+
+1. Select **Stop** from the menu
+1. Close VS Code if it is open
+1. Open the `$env:TEMP\privatemarketplace-quickstart\AppHost.cs` file in an editor such as VS Code.
+1. Locate the following section:
+
+   ```csharp
+   14   builder
+   15      .AddVSCodePrivateMarketplace("vscode-private-marketplace")
+   16      .WithMarketplaceConfiguration(
+   17         organizationName: "Contoso",
+   18         contactSupportUri: "mailto:privatemktplace@microsoft.com",
+   19         upstreamingMode: MarketplaceUpstreamingMode.SearchAndAssets)
+   20      .WithOpenGroupPolicyEditorCommand()
+   21      .WithOpenVSCodeCommand();
+   ```
+1. Change line 19 to:
+   ```csharp
+         upstreamingMode: MarketplaceUpstreamingMode.None
+   ```
+1. Back in the Aspire dashboard, click the **Home** link
+   
+   You should see upstreaming to the public Marketplace is now disabled.
+
+   ![Upstreaming is disabled](images/marketplace-upstreaming-disabled.png)
+
+1. Back in the Aspire dashboard, click the **Actions** button (⋮) for **`vscode-private-marketplace`**
+
+   ![Aspire Actions Menu](images/aspire-actions-menu.png)
+
+1. Select **Start** from the menu
+1. Open VS Code from the Actions menu
+1. In the Extensions view, only extensions published through the Private MArketplace are listed and installable.
 
 ### Scenario 4: Viewing Marketplace Logs
 
