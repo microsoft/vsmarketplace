@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|Iconkieftwo.icon-theme-materiall|12/2/2025| Malware|
 |priskinski.Theme-Afterglow-remake|12/1/2025| Malware|
 |priskinski.Theme-AllHallowsEve-remake|12/1/2025| Malware|
 |priskinski.Theme-Amber-remake|12/1/2025| Malware|
