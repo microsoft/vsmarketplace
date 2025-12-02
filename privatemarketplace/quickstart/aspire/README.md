@@ -14,13 +14,10 @@ Before you begin, ensure you have:
 
 ### Run the Setup Script
 
-Open PowerShell and run the quickstart script:
-
-```powershell
-irm https://raw.githubusercontent.com/microsoft/vsmarketplace/main/privatemarketplace/quickstart/aspire/Run-PrivateMarketplace.ps1 | iex
-```
 > [!IMPORTANT]
   Never run scripts from untrusted sources, always review the script before running it.
+  Always verify the script's hash before executing. The expected hash can be found in the repository or release notes.
+  Open PowerShell and run the quickstart script:
 
 The script will automatically:
 - Check for and install missing prerequisites (after prompting for confirmation):
@@ -29,11 +26,72 @@ The script will automatically:
   - Portable VS Code
   - Portable .NET SDK 10.0.100
   - Portable Aspire CLI version 13+
-- Prompt you to install VS Code Group Policy templates (requires admin privileges - **recommended**)
+- Prompt you to install VS Code Group Policy templates (requires admin privileges - **required for VS Code**)
 - Start Docker Desktop if not running
 - Launch the Private Marketplace container via Aspire
 
-**Important**: When prompted to install administrative templates, choose **Yes (y)** to enable Group Policy configuration later.
+The Quickstart is installed into a temporary folder ($TEMP\privatemarketplace-quickstart), along with all of the dependencies, except Docker. To remove the Quickstart and all the dependencies, just delete the temporary folder, and uninstall Docker, if desired. The script will attempt to uninstall Docker and remove the temporary folder after Quickstart exits.
+
+The Private Marketplace Quickstart is installed using an installation script available for PowerShell on Windows.
+
+#### Download and install
+
+```powershell
+irm https://raw.githubusercontent.com/microsoft/vsmarketplace/main/privatemarketplace/quickstart/aspire/Run-PrivateMarketplace.ps1 | iex
+```
+
+Alternatively, you can download the script and run it as a two-step process:
+
+1. Open a terminal.
+
+2. Download the script and save it as a file:
+
+  > irm https://raw.githubusercontent.com/microsoft/vsmarketplace/main/privatemarketplace/quickstart/aspire/Run-PrivateMarketplace.ps1 -OutFile Run-PrivateMarketplace.ps1
+
+3. Run the script to install the required components and the Private Marketplace container.
+
+You should see output similar to the following snippet:
+  ```text
+  Private Marketplace for VS Code Quickstart
+  
+    Checking prerequisites...
+    Checking for Docker...
+    Docker detected: Docker version 29.0.1, build eedd969
+    Checking for VS Code...
+    VS Code not found
+    Checking for Aspire CLI...
+    Aspire CLI not found
+    Checking for local .NET SDK...
+    Local .NET SDK not found
+    Checking for quickstart files...
+    Folder exists but appears incomplete (apphost.cs not found)
+   
+    === Missing Prerequisites ===
+    - VS Code (portable)
+    - Aspire CLI (version 13+)
+    - .NET SDK 10.0.100 (local)
+    - Quickstart Files
+    - VS Code Administrative Templates (requires admin privileges)
+
+    The following will be installed:
+    - VS Code (portable): via local portable installation
+       Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart\.vscode
+       Source: https://code.visualstudio.com/
+    - Aspire CLI (version 13+): via local installation
+       Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart\.aspire
+       Source: https://learn.microsoft.com/dotnet/aspire
+    - .NET SDK 10.0.100 (local): via dotnet-install script
+       Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart\.dotnet
+       Source: https://dotnet.microsoft.com/download/dotnet/10.0
+    - Quickstart Files: via ZIP download
+       Source: https://github.com/mcumming/vsmarketplace
+       Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart
+    - VS Code Administrative Templates: via elevated script execution
+       Note: Requires administrator privileges (UAC prompt)
+   
+    Do you want to proceed with installation? (y/n):
+  ```
+
 
 ### Access the Aspire Dashboard
 
@@ -140,17 +198,17 @@ Now that you have a working Private Marketplace, try these common scenarios:
 
 ### Scenario 1: Adding Extensions to Your Marketplace
 
-The quickstart includes sample extensions, but you'll want to add your own.
+The quickstart includes sample extensions, but you'll want to add your own, or rehost extensions from the public Marketplace
 
 **Download VSIX Files**
 
-To download extension VSIX files from the public VS Code Marketplace:
+To download extension VSIX files from the public Marketplace for rehosting:
 
 1. Open VS Code (any instance connected to the public marketplace)
 2. Press `Ctrl+Shift+X` to open Extensions
 3. Find the extension you want
-4. Right-click the extension → **Copy Download Link**
-5. Paste the link in your browser to download the `.vsix` file
+4. Right-click the extension → **Download VSIX**
+5. Select the location to save the downloaded `.vsix` file to
 
 **Add Extensions to the Marketplace**
 
@@ -159,16 +217,7 @@ To download extension VSIX files from the public VS Code Marketplace:
 5. Refresh your marketplace home page in the browser - your new extensions will appear!
 6. In VS Code, reload the Extensions view to see the new extensions
 
-### Scenario 2: Viewing Marketplace Logs
-
-Monitor what's happening in your marketplace:
-
-1. In the Aspire dashboard, click the **Actions** button (⋮) for **`vscode-private-marketplace`**
-2. Select **Console logs** to see real-time container output
-3. Or select **Structured logs** for formatted, searchable logs
-4. Use logs to troubleshoot issues or monitor extension requests
-
-### Scenario 3: Restricting Extensions to Specific Publishers
+### Scenario 2: Restricting Extensions to Specific Publishers
 
 You can configure VS Code to only allow extensions from specific publishers, such as your organization's internal publisher.
 
@@ -213,19 +262,30 @@ To block a specific extension from an allowed publisher:
 3. Click **OK**
 4. Restart VS Code
 
-### Scenario 4: Managing the Marketplace Container
+### Scenario 3: Configure Upstreaming to Public Marketplace
+
+### Scenario 4: Viewing Marketplace Logs
+
+Monitor what's happening in your marketplace:
+
+1. In the Aspire dashboard, click the **Actions** button (⋮) for **`vscode-private-marketplace`**
+2. Select **Console logs** to see real-time container output
+3. Or select **Structured logs** for formatted, searchable logs
+4. Use logs to troubleshoot issues or monitor extension requests
+
+### Aspire Tips: Managing the Marketplace Container
 
 Control your marketplace lifecycle:
+
+**Start the Marketplace**
+1. Click **Actions** (⋮)
+2. Select **Start**
+3. Wait for the status to show "Running"
 
 **Stop the Marketplace**
 1. In the Aspire dashboard, click **Actions** (⋮)
 2. Select **Stop**
 3. The marketplace is now offline
-
-**Restart the Marketplace**
-1. Click **Actions** (⋮)
-2. Select **Restart**
-3. Wait for the status to show "Running"
 
 **View Detailed Information**
 1. Click **Actions** (⋮)
