@@ -985,7 +985,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
                     
                     # Remove Aspire paths from USER PATH environment variable
                     Write-Host "  Removing Aspire from system PATH..." -ForegroundColor Gray
-                    Remove-PathFromEnvironment -PathPatterns @('*\.aspire\*', '*\aspire\*')
+                    Remove-PathFromEnvironment -PathPatterns @($localAspirePath)
                 } else {
                     throw "aspire.exe not found after installation"
                 }
