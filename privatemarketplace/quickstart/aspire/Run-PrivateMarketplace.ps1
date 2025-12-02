@@ -525,7 +525,6 @@ if ($RemoveAdminTemplates) {
         }
         
         Write-Host "Administrative templates removed successfully ($removedAdmlCount language files)." -ForegroundColor Green
-        Read-Host "Press Enter to exit"
         exit 0
     } catch {
         Write-Host "Error removing administrative templates: $_" -ForegroundColor Red
@@ -548,7 +547,6 @@ $aspireInstalled = $false
 $dotnetInstalled = $false
 $repoExists = $false
 $wingetAvailable = $false
-$adminTemplatesHandled = $false  # Track if we've already prompted for admin templates
 
 # Use configured values and paths
 $repoUrl = $Config.RepoUrl
