@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|Malkolm.Theme-bashling-remake|12/2/2025| Malware|
+|Malkolm.Theme-azure-remake|12/2/2025| Malware|
+|Malkolm.Theme-Aurora-remake|12/2/2025| Malware|
+|Malkolm.Theme-ArtSchool-remake|12/2/2025| Malware|
+|Malkolm.Theme-Ascetic-remake|12/2/2025| Malware|
 |heartacker.git-graph-ai|12/2/2025| Typo-squatting|
 |Med-H.git-graph-revamped|12/2/2025| Typo-squatting|
 |Iconkieftwo.icon-theme-materiall|12/2/2025| Malware|
