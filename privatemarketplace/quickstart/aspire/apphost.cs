@@ -171,8 +171,8 @@ public static class MarketplaceExtensions
                     if (healthCheckProperties.Any())
                     {
                         var allHealthy = healthCheckProperties.All(hc =>
-                            hc.Value?.ToString()?.Contains("Healthy", StringComparison.OrdinalIgnoreCase) ||
-                            hc.Value?.ToString()?.Contains("Success", StringComparison.OrdinalIgnoreCase));
+                            hc.Value.ToString().Contains("Healthy", StringComparison.OrdinalIgnoreCase) ||
+                            hc.Value.ToString().Contains("Success", StringComparison.OrdinalIgnoreCase));
 
                         return allHealthy ? ResourceCommandState.Enabled : ResourceCommandState.Disabled;
                     }
@@ -184,9 +184,9 @@ public static class MarketplaceExtensions
                     if (statusProperties.Any())
                     {
                         var hasGoodStatus = statusProperties.Any(sp =>
-                            sp.Value?.ToString()?.Contains("Healthy", StringComparison.OrdinalIgnoreCase) ||
-                            sp.Value?.ToString()?.Contains("Running", StringComparison.OrdinalIgnoreCase) ||
-                            sp.Value?.ToString()?.Contains("Ready", StringComparison.OrdinalIgnoreCase));
+                            sp.Value.ToString().Contains("Healthy", StringComparison.OrdinalIgnoreCase) ||
+                            sp.Value.ToString().Contains("Running", StringComparison.OrdinalIgnoreCase) ||
+                            sp.Value.ToString().Contains("Ready", StringComparison.OrdinalIgnoreCase));
 
                         return hasGoodStatus ? ResourceCommandState.Enabled : ResourceCommandState.Disabled;
                     }
