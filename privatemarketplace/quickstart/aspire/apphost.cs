@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var marketplace = builder
+builder
     .AddVSCodePrivateMarketplace("vscode-private-marketplace")
     .WithMarketplaceConfiguration(
         organizationName: "Contoso",
@@ -60,7 +60,7 @@ public static class MarketplaceExtensions
                 var endpoint = e.Resource.Annotations.OfType<EndpointAnnotation>()
                     .FirstOrDefault(a => a.Name == name);
                 
-                if (endpoint?.Port.HasValue == true)
+                if (endpoint?.Port.HasValue)
                 {
                     var config = new { Marketplace = new { Port = endpoint.Port.Value } };
                     var json = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
@@ -171,8 +171,8 @@ public static class MarketplaceExtensions
                     if (healthCheckProperties.Any())
                     {
                         var allHealthy = healthCheckProperties.All(hc =>
-                            hc.Value?.ToString()?.Contains("Healthy", StringComparison.OrdinalIgnoreCase) == true ||
-                            hc.Value?.ToString()?.Contains("Success", StringComparison.OrdinalIgnoreCase) == true);
+                            hc.Value?.ToString()?.Contains("Healthy", StringComparison.OrdinalIgnoreCase) ||
+                            hc.Value?.ToString()?.Contains("Success", StringComparison.OrdinalIgnoreCase));
 
                         return allHealthy ? ResourceCommandState.Enabled : ResourceCommandState.Disabled;
                     }
@@ -184,9 +184,9 @@ public static class MarketplaceExtensions
                     if (statusProperties.Any())
                     {
                         var hasGoodStatus = statusProperties.Any(sp =>
-                            sp.Value?.ToString()?.Contains("Healthy", StringComparison.OrdinalIgnoreCase) == true ||
-                            sp.Value?.ToString()?.Contains("Running", StringComparison.OrdinalIgnoreCase) == true ||
-                            sp.Value?.ToString()?.Contains("Ready", StringComparison.OrdinalIgnoreCase) == true);
+                            sp.Value?.ToString()?.Contains("Healthy", StringComparison.OrdinalIgnoreCase) ||
+                            sp.Value?.ToString()?.Contains("Running", StringComparison.OrdinalIgnoreCase) ||
+                            sp.Value?.ToString()?.Contains("Ready", StringComparison.OrdinalIgnoreCase));
 
                         return hasGoodStatus ? ResourceCommandState.Enabled : ResourceCommandState.Disabled;
                     }
@@ -353,7 +353,7 @@ public static class DevCertHostingExtensions
             WindowStyle = ProcessWindowStyle.Hidden,
         };
 
-        var exportProcess = new Process { StartInfo = exportStartInfo };
+        using var exportProcess = new Process { StartInfo = exportStartInfo };
 
         Task? stdOutTask = null;
         Task? stdErrTask = null;
