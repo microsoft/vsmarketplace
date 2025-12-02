@@ -1,3 +1,17 @@
 {
-  "appHostPath": "../apphost.cs"
+  "appHostPath": "../apphost.cs",
+  "features": {
+    "deployCommandEnabled": "false",
+    "doCommandEnabled": "false",
+    "execCommandEnabled": "false",
+    "minimumSdkCheckEnabled": "false",
+    "orphanDetectionWithTimestampEnabled": "false",
+    "packageSearchDiskCachingEnabled": "false",
+    "publishCommandEnabled": "false",
+    "showDeprecatedPackages": "false",
+    "singleFileAppHostEnabled": "true",
+    "stagingChannelEnabled": "false",
+    "updateCommandEnabled": "false",
+    "updateNotificationsEnabled": "false"
+  }
 }

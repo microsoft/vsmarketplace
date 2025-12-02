@@ -791,7 +791,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
             if (Test-Path $extractedquicklaunchFolder) {
                 # Get all items in quicklaunch folder except hidden tool folders
                 Get-ChildItem -Path $extractedquicklaunchFolder | Where-Object { 
-                    $_.Name -notin @('.dotnet', '.aspire', '.vscode')
+                    $_.Name -notin @('.dotnet', '.vscode')
                 } | ForEach-Object {
                     Copy-Item -Path $_.FullName -Destination $rootPath -Recurse -Force
                 }
