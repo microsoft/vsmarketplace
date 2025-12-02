@@ -608,7 +608,7 @@ if (-not (Test-Path $rootPath)) {
 Write-Host "Checking for Aspire CLI..." -ForegroundColor Gray
 
 # If root doesn't exist, Aspire can't exist either
-$aspirePrereq = New-PrerequisiteInfo -Name "Aspire CLI (version 13+)" -InstallMethod "aspire-local" `
+$aspirePrereq = New-PrerequisiteInfo -Name "Aspire CLI (version 13+) (local)" -InstallMethod "aspire-local" `
     -InstallPath $localAspirePath -ManualUrl "https://learn.microsoft.com/dotnet/aspire"
 
 if (-not (Test-Path $rootPath)) {
@@ -715,7 +715,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
                 Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
             }
         } elseif ($prereq.InstallMethod -eq "aspire-local") {
-            Write-Host "  - $($prereq.Name): via local installation" -ForegroundColor Green
+            Write-Host "  - $($prereq.Name): via local portableinstallation" -ForegroundColor Green
             if ($prereq.InstallPath) {
                 Write-Host "    Target: $($prereq.InstallPath)" -ForegroundColor Gray
             }
