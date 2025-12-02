@@ -328,11 +328,6 @@ public static class DevCertHostingExtensions
             return (true, certExportPath);
         }
 
-        if (File.Exists(certExportPath))
-        {
-            File.Delete(certExportPath);
-        }
-
         if (!Directory.Exists(tempDir))
         {
             Directory.CreateDirectory(tempDir);
