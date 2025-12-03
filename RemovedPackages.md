@@ -7,6 +7,17 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|flutcode.flutter-extension|12/2/2025| Malware|
+|csvmech.csvrainbow|12/2/2025| Malware|
+|saoudrizvsce.claude-devsce|12/2/2025| Malware|
+|cweijamysq.sync-settings-vscode|12/2/2025| Malware|
+|bphpburnsus.iconesvscode|12/2/2025| Malware|
+|vims-vsce.vscode-vim|12/2/2025| Malware|
+|yamlcode.yaml-vscode-extension|12/2/2025| Malware|
+|solblanco.svetle-vsce|12/2/2025| Malware|
+|vsceue.volar-vscode|12/2/2025| Malware|
+|redmat.vscode-quarkus-pro|12/2/2025| Malware|
+|msjsdreact.react-native-vsce|12/2/2025| Malware|
 |Malkolm.Theme-bashling-remake|12/2/2025| Malware|
 |Malkolm.Theme-azure-remake|12/2/2025| Malware|
 |Malkolm.Theme-Aurora-remake|12/2/2025| Malware|
