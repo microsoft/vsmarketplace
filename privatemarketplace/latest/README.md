@@ -66,74 +66,10 @@ If you run into any issues or want to check the health status of your Private Ma
 
 # 1. Run the container locally using Docker
 
-Before running the application in a cloud or data center, you can run the application locally using Docker. This will help you understand what the app looks like when it is running and what configuration is needed. We'll walk through connecting to the app from VS Code after [deploying to your desired container host](#2-deploy-the-container-to-your-desired-container-host), to avoid issues with SSL setup on the local Docker deployment.
-
+Before running the application in a cloud or data center, you can run the application locally using Docker. This will help you understand what the app looks like when it is running and what configuration is needed. 
 You need to have [Docker installed](https://docs.docker.com/get-started/get-docker/) to perform these steps.
 
-1. Pull the container from the [Microsoft Artifact Registry](https://mcr.microsoft.com/artifact/mar/vsmarketplace/vscode-private-marketplace)
-   ```powershell
-   # pull the container from the registry so it's available for running
-   docker image pull "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.0.57"
-   ```
-
-2. Start the container with port 8080 bound to your local machine.
-   ```powershell
-   # run the container in interactive attached mode, clean up the container after termination
-   docker run -it --rm -p 8080:8080 "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.0.57"
-   ```
-
-3. Open [http://localhost:8080](http://localhost:8080) in your web browser. You should see a home page with the heading "Welcome to the Private Marketplace for Visual Studio Code".
-4. Press Ctrl + C to terminate the Docker process and clean up the container.
-
-Now, let's try loading some extensions into the Private Marketplace.
-
-1. Create a working directory for these steps.
-   ```powershell
-   mkdir ~/mymarketplace
-   cd ~/mymarketplace
-   pwd # show the full working directory
-   ```
-
-2. Create a text file called `local.env` in the working directory. This will serve as a list of environment variables used by the container.
-   ```powershell
-   # open the local.env file in VS Code for editing
-   code local.env
-   ```
-
-   Save the following contents in the file:
-
-   ```env
-   Marketplace__ExtensionSourceDirectory=/data/extensions
-   Marketplace__Logging__LogToConsole=true
-   ```
-
-3. Make a directory for private extensions and print the full path.
-   ```powershell
-   mkdir extensions
-   ```
-
-4. Get a `.vsix` file (VS Code extension file) and put it in the `extensions` directory. This could be one of your team's existing private extensions. Or, you can use VS Code to [download an extension from the Public Marketplace](https://code.visualstudio.com/docs/editor/extension-marketplace#_can-i-download-an-extension-directly-from-the-marketplace).
-
-   There should be at least one `*.vsix` file in the `extensions` directory at the end of this step.
-5. Start the container again with the environment variables and a mounted volume. Make sure to update the `</path/to>` in the next command to be the full path printed by `pwd` in step 1. If using Windows, the file path on the left side of the colon should be a Windows-style path like `C:\path\to\mymarketplace`. The backtick `` ` `` allows for multi-line commands in PowerShell for readability. You can replace this with `/` for multi-line commands in Bash or modify it to be a single-line command.
-   ```powershell
-   docker run -it --rm -p 8080:8080 `
-      -v "</path/to>/mymarketplace/extensions:/data/extensions:ro" `
-      --env-file "</path/to>/mymarketplace/local.env" `
-      "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.0.57"
-   ```
-
-6. You will now see more log output from the `docker run` command, including a line starting with "Loading extension file". This is the container app reading the VSIX file in your extensions directory.
-7. Open [http://localhost:8080](http://localhost:8080) in your web browser. You should see the same welcome page as before as well as a table under the "Published extensions" heading showing metadata from your extension file.
-8. Press Ctrl + C to terminate the Docker process and clean up the container.
-9. If you're done with the container locally, you can clean up the `mymarketplace` directory by deleting it.
-
-By completing this section, you have successfully deployed the Private Marketplace to your local environment! 
-
-> [!IMPORTANT]
-> We cannot connect to this local deployment from VS Code as it requires HTTPS configuration. We’ll conclude the local test drive here, and focus further efforts on setting up a hosted deployment where we'll enable the team to connect from VS Code.
-  
-On a side note, HTTPS configuration can be done by generating a self-signed certificate and trusting it (perhaps via the dotnet dev-certs https command from the https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-dev-certs). But we'll move on to focus our efforts on a hosted deployment and https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl. Next, we'll deploy the container to your container host.
+Follow [this Quickstart](https://github.com/microsoft/vsmarketplace/blob/main/privatemarketplace/quickstart/aspire/README.md) to get the Private Marketplace running quickly on your local computer!
 
 # 2. Deploy the container to your desired container host
 
@@ -961,4 +897,5 @@ Visual Studio extension hosting is currently not supported.
 ### Can I use Artifactory storage with Private Marketplace?
 
 Artifactory integration is currently not currently supported.
+
 
