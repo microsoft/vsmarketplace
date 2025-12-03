@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|eamodas.shiny-vscode|12/2/2025| Malware|
+|ovixcodes.basedpyright-vscode|12/2/2025| Malware|
 |flutcode.flutter-extension|12/2/2025| Malware|
 |csvmech.csvrainbow|12/2/2025| Malware|
 |saoudrizvsce.claude-devsce|12/2/2025| Malware|
