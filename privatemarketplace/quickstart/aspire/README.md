@@ -181,6 +181,7 @@ You configured Windows Group Policy to redirect VS Code's extension marketplace 
    ![VS Code Account Menu](images/vscode-account-menu.png)
 
    - Complete the authentication process in your browser
+   
    > [!NOTE]
       You must sign in to GitHub before extensions will be available
 5. After signing in, click the Extensions icon in the sidebar (or press `Ctrl+Shift+X`)
