@@ -145,13 +145,13 @@ The quickstart includes three sample extensions preloaded in the marketplace:
 
 4. From the Actions menu, select **Open Group Policy Editor**
 
-   > [!NOTE]
-     If this option doesn't appear, see the [Troubleshooting](#troubleshooting) section below
+> [!NOTE]
+  If this option doesn't appear, see the [Troubleshooting](#troubleshooting) section below
 
 5. In the Group Policy Editor window that opens, navigate to the Extensions folder:   
  
-   > [!NOTE]
-     The Group Policy Editor window might not open in the foreground, look in the taskbar for the application.
+> [!NOTE]
+  The Group Policy Editor window might not open in the foreground, look in the taskbar for the application.
 
    ![Group Policy Editor](images/gpedit-extensions.png)
 
@@ -185,8 +185,9 @@ You configured Windows Group Policy to redirect VS Code's extension marketplace 
 
    - Complete the authentication process in your browser
    
-   > [!NOTE]
-      You must sign in to GitHub before extensions will be available
+> [!IMPORTANT]
+  You must sign in to GitHub before extensions will be available
+
 5. After signing in, click the Extensions icon in the sidebar (or press `Ctrl+Shift+X`)
 6. You'll see the sample extensions from your Private Marketplace listed first, followed by public extensions.
 
