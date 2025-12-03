@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": false,
+      "launchBrowser": true,
+      "applicationUrl": "https://quickstart.dev.localhost:17092",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "DOTNET_ENVIRONMENT": "Production",
+        "ASPIRE_DASHBOARD_OTLP_ENDPOINT_URL": "https://localhost:21199",
+        "ASPIRE_DASHBOARD_MCP_ENDPOINT_URL": "https://localhost:23103",
+        "ASPIRE_RESOURCE_SERVICE_ENDPOINT_URL": "https://localhost:22012"
+      }
+    }
+  }
+}
