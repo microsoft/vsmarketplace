@@ -148,7 +148,7 @@ The quickstart includes three sample extensions preloaded in the marketplace:
    If this option doesn't appear, see the [Troubleshooting](#troubleshooting) section below
 5. In the Group Policy Editor window that opens, navigate to the Extensions folder:
    > [!NOTE]
-   The Group Policy Editor window might not open in the forground, look in the taskbar for the application.
+   The Group Policy Editor window might not open in the foreground, look in the taskbar for the application.
 
    ![Group Policy Editor](images/gpedit-extensions.png)
 
@@ -265,15 +265,10 @@ To block a specific extension from an allowed publisher:
 Upstreaming is a feature of the Private Marketplace that makes the extensions in the public Marketplace available to VS Code clients. Upstreaming has three modes of operation, "None", "Search" and "SearchAndAssets". 
 
 By changing the mode the Private Marketplace can support different scenarios
-* None
-
-  internal and rehosted extensions only, suitable for air-gapped environments.
-* Search
-
-  VS Code sends request to Private Marketplace to search and list extensions, but details and installation bypass the Private Marketplace offering a hybrid approach
-* SearchAndAssets
-
-  VS Code sends request to Private Marketplace to search and list extensions, details, and installation 
+- `None`: No upstreaming. Only private extensions are available.
+- `Search`: Only search queries for public extensions are proxied. Asset downloads (VSIX, icons, etc.) are fetched directly from the Public Marketplace by VS Code.
+- `SearchAndAssets`: Both search queries and asset downloads for public extensions are fetched through the Private Marketplace. This mode ensures all Public Visual Studio Marketplace requests go through your Private Marketplace instance, and clients do not contact the Public Visual Studio Marketplace directly.
+ 
 
 To change the Upstreaming mode in the Quickstart:
 1. In the Aspire dashboard, click the **Actions** button (⋮) for **`vscode-private-marketplace`**
@@ -311,7 +306,7 @@ To change the Upstreaming mode in the Quickstart:
 
 1. Select **Start** from the menu
 1. Open VS Code from the Actions menu
-1. In the Extensions view, only extensions published through the Private MArketplace are listed and installable.
+1. In the Extensions view, only extensions published through the Private Marketplace are listed and installable.
 
 ### Scenario 4: Viewing Marketplace Logs
 
