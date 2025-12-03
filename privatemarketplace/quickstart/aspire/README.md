@@ -144,11 +144,14 @@ The quickstart includes three sample extensions preloaded in the marketplace:
    ![Aspire Actions Menu](images/aspire-actions-menu.png)
 
 4. From the Actions menu, select **Open Group Policy Editor**
+
    > [!NOTE]
-   If this option doesn't appear, see the [Troubleshooting](#troubleshooting) section below
-5. In the Group Policy Editor window that opens, navigate to the Extensions folder:
+     If this option doesn't appear, see the [Troubleshooting](#troubleshooting) section below
+
+5. In the Group Policy Editor window that opens, navigate to the Extensions folder:   
+ 
    > [!NOTE]
-   The Group Policy Editor window might not open in the foreground, look in the taskbar for the application.
+     The Group Policy Editor window might not open in the foreground, look in the taskbar for the application.
 
    ![Group Policy Editor](images/gpedit-extensions.png)
 
