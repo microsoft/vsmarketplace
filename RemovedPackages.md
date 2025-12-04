@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|MahendrakarPrateek.prettyxml-pro|12/4/2025| Typo-squatting|
 |piithon.piiithon-linter|12/4/2025| Malware|
 |fyzhu.git-pretty-graph|12/4/2025| Typo-squatting|
 |77qingliu.sas-syntax|12/3/2025| Typo-squatting|
