@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|BigBlack.bitcoin-black|12/5/2025| Malware|
+|SpecStoryInc.specstory-vscode-pro|12/5/2025| Typo-squatting|
+|lyywemhan.code-formatter-and-minifier-vscode|12/5/2025| Typo-squatting|
 |TheMysteryPanda.discodemulti|12/5/2025| Typo-squatting|
 |RooIncVeterinaryDev.roo-cline-pro|12/4/2025| Typo-squatting|
 |DevCatppuccinpro.catppuccin-pro-vsc|12/4/2025| Typo-squatting|
