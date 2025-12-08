@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|theme-cyberpunk.theme-neon-cyberpunk|12/8/2025| Malware|
+|BigBlack.mrbigblacktheme|12/8/2025| Malware|
+|BigBlack.codo-ai|12/8/2025| Malware|
+|AkhilTeotia.prettier-vscode-cfml|12/5/2025| Typo-squatting|
+|complete.prettier-vscode-community|12/5/2025| Typo-squatting|
 |BigBlack.bitcoin-black|12/5/2025| Malware|
 |SpecStoryInc.specstory-vscode-pro|12/5/2025| Typo-squatting|
 |lyywemhan.code-formatter-and-minifier-vscode|12/5/2025| Typo-squatting|
