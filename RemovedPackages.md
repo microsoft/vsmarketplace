@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|jeronimodevex.color-picker-pro|12/5/2025| Typo-squatting|
+|ozz3dev.bitcoin-auto-trading|12/8/2025| Malware|
 |theme-cyberpunk.theme-neon-cyberpunk|12/8/2025| Malware|
 |BigBlack.mrbigblacktheme|12/8/2025| Malware|
 |BigBlack.codo-ai|12/8/2025| Malware|
