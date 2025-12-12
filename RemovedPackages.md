@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|zigbook.pilot-repl|12/12/2025|Potentially malicious|
 |MisterAAR.codex-ai-pro|12/11/2025| Malware|
 |trlanfeng.turbo-console-log|12/10/2025| Typo-squatting|
 |LuizDoPc.luizdopc-turbo-console-log|12/10/2025| Typo-squatting|
