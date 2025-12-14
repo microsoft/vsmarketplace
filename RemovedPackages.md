@@ -13,7 +13,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |DotRush.dotrushV2-0|12/13/2025|Malware|
 |pythoner.Black-Molokai-Theme|12/13/2025|Malware|
 |juanblancodevelopment.ether-solid|12/13/2025|Malware|
-|ethers.ethersfoundry|12/13/2025|Malware|
+|ethers.ethersfoundry|12/12/2025|Malware|
 |zigbook.pilot-repl|12/12/2025|Potentially malicious|
 |MisterAAR.codex-ai-pro|12/11/2025| Malware|
 |trlanfeng.turbo-console-log|12/10/2025| Typo-squatting|
