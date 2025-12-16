@@ -7,6 +7,15 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|siffat-ahmed.ai-autocomplete-siffat-ahmed|12/15/2025|Typo Squatting|
+|embeddteam.embeddedprojectmanager|12/15/2025|Typo Squatting|
+|embeddteam.embedded-build-analyzer|12/15/2025|Typo Squatting|
+|embeddteam.embedded-cortex-debug|12/15/2025|Typo Squatting|
+|OPENEDAI.OPENEDAI|12/15/2025|Typo Squatting|
+|EfferSmart.code-studio-pro|12/15/2025|Malware|
+|EfferSmart.qoodo-ai|12/15/2025|Malware|
+|InternetLK.username-poc|12/15/2025|Malware|
+|marketplacer.marketplacer|12/15/2025|Malware|
 |AARCarti.fortex-ai-pro|12/14/2025|Malware|
 |AARCarti.darkai-ai-pro|12/14/2025|Malware|
 |DonJayamne.DonJayamne|12/14/2025|Impersonation|
