@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|SyntaxDev.New-Christmas-Theme|12/18/2025|Malware|
 |AhmedSleem.secure-code|12/16/2025|Malware|
 |siffat-ahmed.ai-autocomplete-siffat-ahmed|12/15/2025|Typo Squatting|
 |embeddteam.embeddedprojectmanager|12/15/2025|Typo Squatting|
