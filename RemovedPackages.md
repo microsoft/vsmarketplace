@@ -7,6 +7,15 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|RogDeved.Night-moonlight-theme|12/18/2025|Typo Squatting|
+|WilliamAsaba.dev-time-tracker|12/19/2025|Malware|
+|yonbip.yds-gitlab-workflow|12/18/2025|Typo Squatting|
+|ferrymo.intellij-idea-new-ui-pretty-ferrymo|12/18/2025|Typo Squatting|
+|cn00.sqltools-duckdb|12/18/2025|Typo Squatting|
+|cn00.duckdb-lab|12/18/2025|Typo Squatting|
+|chess-color-theme.chess-svelte-5-snippets|12/18/2025|Typo Squatting|
+|wlnxingdev.free-senltig|12/18/2025|Typo Squatting|
+|SyntaxDev.New-Christmas-Theme|12/18/2025|Malware|
 |codevsce.codelddb-vscode|12/18/2025|Typo Squatting|
 |SyntaxDev.New-Christmas-Theme|12/18/2025|Malware|
 |AhmedSleem.secure-code|12/16/2025|Malware|
