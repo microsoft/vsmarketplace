@@ -7,6 +7,18 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|Kiki67.gambling-corner|12/21/2025|Spam|
+|Ritchie.cursor-dark-plus|12/21/2025|Typo Squatting|
+|wuyifeng.ai-svn-scm|12/21/2025|Typo Squatting|
+|wuyifeng.vscode-database-client|12/21/2025|Typo Squatting|
+|nourgaser.google-tasks-json-fork|12/21/2025|Typo Squatting|
+|lsq-xgydxdx.git-graph-tool-chinese|12/21/2025|Typo Squatting|
+|Benachile-studio.protobuf-pro|12/21/2025|Typo Squatting|
+|embedd-team.embedd-cortex-debug|12/19/2025|Typo Squatting|
+|embedd-team.embedd-peripheral-viewer|12/19/2025|Typo Squatting|
+|embedd-team.embedd-build-analyzer|12/19/2025|Typo Squatting|
+|embedd-team.embedd-project-manager|12/19/2025|Typo Squatting|
+|naveenkunder.format-html|12/19/2025|Typo Squatting|
 |RogDeved.Night-moonlight-theme|12/18/2025|Typo Squatting|
 |WilliamAsaba.dev-time-tracker|12/19/2025|Malware|
 |yonbip.yds-gitlab-workflow|12/18/2025|Typo Squatting|
