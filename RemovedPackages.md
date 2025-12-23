@@ -7,6 +7,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|QuantumCodeLabs.dracula-pro-theme | 12/22/2025 | Malware
+|QuantumCodeLabs.ai-code-explainer | 12/22/2025 | Malware
+|QuantumCodeLabs.ayu-theme | 12/22/2025 | Malware
+|QuantumCodeLabs.qoodo-ai-assistant | 12/22/2025 | Malware
+|QuantumCodeLabs.ai-test-generator | 12/22/2025 | Malware
+|QuantumCodeLabs.ai-doc-generator | 12/22/2025 | Malware
+|QuantumCodeLabs.darky-ai | 12/22/2025 | Malware
+|TechSolutionsPro.bitcoin-cake-theme|12/22/2025|Malware
 |Kiki67.gambling-corner|12/21/2025|Spam|
 |Ritchie.cursor-dark-plus|12/21/2025|Typo Squatting|
 |wuyifeng.ai-svn-scm|12/21/2025|Typo Squatting|
