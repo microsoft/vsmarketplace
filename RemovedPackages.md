@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|serialt.sugar-proto  | 12/22/2025 | Typo Squatting |
+|serialt.sugar-extension-pack | 12/22/2025 | Typo Squatting |
+|krabt.krabt-extension-pack | 12/22/2025 | Typo Squatting |
+|krabt.krabt-proto | 12/22/2025 | Typo Squatting |
+|AutoMind.automindX | 12/22/2025 | Malware |
 |QuantumCodeLabs.dracula-pro-theme | 12/22/2025 | Malware
 |QuantumCodeLabs.ai-code-explainer | 12/22/2025 | Malware
 |QuantumCodeLabs.ayu-theme | 12/22/2025 | Malware
