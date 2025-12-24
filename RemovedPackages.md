@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|OktayAydoan.smarty-formatter  | 12/23/2025 | Typo Squatting |
+|StefanYosif.axion-ai  | 12/23/2025 | Malware |
 |serialt.sugar-proto  | 12/22/2025 | Typo Squatting |
 |serialt.sugar-extension-pack | 12/22/2025 | Typo Squatting |
 |krabt.krabt-extension-pack | 12/22/2025 | Typo Squatting |
