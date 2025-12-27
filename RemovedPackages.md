@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|ZhangQuan.code-translate-enhanced | 12/25/2025 | Typo Squatting |
+|DiegoPandiello.aws-srp-rest-client | 12/25/2025 | Typo Squatting |
+|DiegoPandiello.elixir-ls-test-args | 12/25/2025 | Typo Squatting |
 |OktayAydoan.smarty-formatter  | 12/23/2025 | Typo Squatting |
 |StefanYosif.axion-ai  | 12/23/2025 | Malware |
 |serialt.sugar-proto  | 12/22/2025 | Typo Squatting |
