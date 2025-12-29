@@ -7,17 +7,19 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-|diegofernandezpandiello.super-elixir-ls | 12/29/2025 | Typo Squatting |
-|Batch.Docker-Vscode-V2 | 12/28/2025 | Typo Squatting |
-|ZhangQuan.code-translate-enhanced | 12/25/2025 | Typo Squatting |
-|DiegoPandiello.aws-srp-rest-client | 12/25/2025 | Typo Squatting |
-|DiegoPandiello.elixir-ls-test-args | 12/25/2025 | Typo Squatting |
-|OktayAydoan.smarty-formatter  | 12/23/2025 | Typo Squatting |
+|solario.enhanced-favorites | 12/29/2025 | Impersonation |
+|pablaofficeal.taskmanager-vscode | 12/29/2025 | Malware |
+|diegofernandezpandiello.super-elixir-ls | 12/29/2025 | Impersonation |
+|Batch.Docker-Vscode-V2 | 12/28/2025 | Impersonation |
+|ZhangQuan.code-translate-enhanced | 12/25/2025 | Impersonation |
+|DiegoPandiello.aws-srp-rest-client | 12/25/2025 | Impersonation |
+|DiegoPandiello.elixir-ls-test-args | 12/25/2025 | Impersonation |
+|OktayAydoan.smarty-formatter  | 12/23/2025 | Impersonation |
 |StefanYosif.axion-ai  | 12/23/2025 | Malware |
-|serialt.sugar-proto  | 12/22/2025 | Typo Squatting |
-|serialt.sugar-extension-pack | 12/22/2025 | Typo Squatting |
-|krabt.krabt-extension-pack | 12/22/2025 | Typo Squatting |
-|krabt.krabt-proto | 12/22/2025 | Typo Squatting |
+|serialt.sugar-proto  | 12/22/2025 | Impersonation |
+|serialt.sugar-extension-pack | 12/22/2025 | Impersonation |
+|krabt.krabt-extension-pack | 12/22/2025 | Impersonation |
+|krabt.krabt-proto | 12/22/2025 | Impersonation |
 |AutoMind.automindX | 12/22/2025 | Malware |
 |QuantumCodeLabs.dracula-pro-theme | 12/22/2025 | Malware
 |QuantumCodeLabs.ai-code-explainer | 12/22/2025 | Malware
@@ -28,33 +30,33 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |QuantumCodeLabs.darky-ai | 12/22/2025 | Malware
 |TechSolutionsPro.bitcoin-cake-theme|12/22/2025|Malware
 |Kiki67.gambling-corner|12/21/2025|Spam|
-|Ritchie.cursor-dark-plus|12/21/2025|Typo Squatting|
-|wuyifeng.ai-svn-scm|12/21/2025|Typo Squatting|
-|wuyifeng.vscode-database-client|12/21/2025|Typo Squatting|
-|nourgaser.google-tasks-json-fork|12/21/2025|Typo Squatting|
-|lsq-xgydxdx.git-graph-tool-chinese|12/21/2025|Typo Squatting|
-|Benachile-studio.protobuf-pro|12/21/2025|Typo Squatting|
-|embedd-team.embedd-cortex-debug|12/19/2025|Typo Squatting|
-|embedd-team.embedd-peripheral-viewer|12/19/2025|Typo Squatting|
-|embedd-team.embedd-build-analyzer|12/19/2025|Typo Squatting|
-|embedd-team.embedd-project-manager|12/19/2025|Typo Squatting|
-|naveenkunder.format-html|12/19/2025|Typo Squatting|
-|RogDeved.Night-moonlight-theme|12/18/2025|Typo Squatting|
+|Ritchie.cursor-dark-plus|12/21/2025|Impersonation|
+|wuyifeng.ai-svn-scm|12/21/2025|Impersonation|
+|wuyifeng.vscode-database-client|12/21/2025|Impersonation|
+|nourgaser.google-tasks-json-fork|12/21/2025|Impersonation|
+|lsq-xgydxdx.git-graph-tool-chinese|12/21/2025|Impersonation|
+|Benachile-studio.protobuf-pro|12/21/2025|Impersonation|
+|embedd-team.embedd-cortex-debug|12/19/2025|Impersonation|
+|embedd-team.embedd-peripheral-viewer|12/19/2025|Impersonation|
+|embedd-team.embedd-build-analyzer|12/19/2025|Impersonation|
+|embedd-team.embedd-project-manager|12/19/2025|Impersonation|
+|naveenkunder.format-html|12/19/2025|Impersonation|
+|RogDeved.Night-moonlight-theme|12/18/2025|Impersonation|
 |WilliamAsaba.dev-time-tracker|12/19/2025|Malware|
-|yonbip.yds-gitlab-workflow|12/18/2025|Typo Squatting|
-|ferrymo.intellij-idea-new-ui-pretty-ferrymo|12/18/2025|Typo Squatting|
-|cn00.sqltools-duckdb|12/18/2025|Typo Squatting|
-|cn00.duckdb-lab|12/18/2025|Typo Squatting|
-|chess-color-theme.chess-svelte-5-snippets|12/18/2025|Typo Squatting|
-|wlnxingdev.free-senltig|12/18/2025|Typo Squatting|
-|codevsce.codelddb-vscode|12/18/2025|Typo Squatting|
+|yonbip.yds-gitlab-workflow|12/18/2025|Impersonation|
+|ferrymo.intellij-idea-new-ui-pretty-ferrymo|12/18/2025|Impersonation|
+|cn00.sqltools-duckdb|12/18/2025|Impersonation|
+|cn00.duckdb-lab|12/18/2025|Impersonation|
+|chess-color-theme.chess-svelte-5-snippets|12/18/2025|Impersonation|
+|wlnxingdev.free-senltig|12/18/2025|Impersonation|
+|codevsce.codelddb-vscode|12/18/2025|Impersonation|
 |SyntaxDev.New-Christmas-Theme|12/18/2025|Malware|
 |AhmedSleem.secure-code|12/16/2025|Malware|
-|siffat-ahmed.ai-autocomplete-siffat-ahmed|12/15/2025|Typo Squatting|
-|embeddteam.embeddedprojectmanager|12/15/2025|Typo Squatting|
-|embeddteam.embedded-build-analyzer|12/15/2025|Typo Squatting|
-|embeddteam.embedded-cortex-debug|12/15/2025|Typo Squatting|
-|OPENEDAI.OPENEDAI|12/15/2025|Typo Squatting|
+|siffat-ahmed.ai-autocomplete-siffat-ahmed|12/15/2025|Impersonation|
+|embeddteam.embeddedprojectmanager|12/15/2025|Impersonation|
+|embeddteam.embedded-build-analyzer|12/15/2025|Impersonation|
+|embeddteam.embedded-cortex-debug|12/15/2025|Impersonation|
+|OPENEDAI.OPENEDAI|12/15/2025|Impersonation|
 |EfferSmart.code-studio-pro|12/15/2025|Malware|
 |EfferSmart.qoodo-ai|12/15/2025|Malware|
 |InternetLK.username-poc|12/15/2025|Malware|
@@ -68,23 +70,23 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |ethers.ethersfoundry|12/12/2025|Malware|
 |zigbook.pilot-repl|12/12/2025|Potentially malicious|
 |MisterAAR.codex-ai-pro|12/11/2025| Malware|
-|trlanfeng.turbo-console-log|12/10/2025| Typo-squatting|
-|LuizDoPc.luizdopc-turbo-console-log|12/10/2025| Typo-squatting|
-|zero-pzp.turbo-console-log-pzp|12/10/2025| Typo-squatting|
-|val-brlt.turbo-console-no-comma|12/10/2025| Typo-squatting|
-|linlinzhao.turbo-console-log-enhance|12/10/2025| Typo-squatting|
-|samuanv.turbo-console-log-single-quotes|12/10/2025| Typo-squatting|
-|mishannn.custom-turbo-console-log|12/10/2025| Typo-squatting|
-|cuitianze.turbo-console-log-with-emoji|12/10/2025| Typo-squatting|
-|tuur29.turbo-console-log|12/10/2025| Typo-squatting|
-|altynbek132.turbo-console-log-custom|12/10/2025| Typo-squatting|
-|ygqygq2.turbo-print-log|12/10/2025| Typo-squatting|
-|CartagoNova.turbo-console-log-forked-by-cartago|12/10/2025| Typo-squatting|
-|gerson577.turbo-console-log-modify|12/10/2025| Typo-squatting|
-|idanSaban.turbo-console-debuglog|12/10/2025| Typo-squatting|
-|sachinsmc.turbo-rust-println|12/10/2025| Typo-squatting|
-|mahdihajian.vscode-shelf|12/10/2025| Typo-squatting|
-|mahdihajian.vscode-pull-request-azure-devops|12/10/2025| Typo-squatting|
+|trlanfeng.turbo-console-log|12/10/2025| Impersonation|
+|LuizDoPc.luizdopc-turbo-console-log|12/10/2025| Impersonation|
+|zero-pzp.turbo-console-log-pzp|12/10/2025| Impersonation|
+|val-brlt.turbo-console-no-comma|12/10/2025| Impersonation|
+|linlinzhao.turbo-console-log-enhance|12/10/2025| Impersonation|
+|samuanv.turbo-console-log-single-quotes|12/10/2025| Impersonation|
+|mishannn.custom-turbo-console-log|12/10/2025| Impersonation|
+|cuitianze.turbo-console-log-with-emoji|12/10/2025| Impersonation|
+|tuur29.turbo-console-log|12/10/2025| Impersonation|
+|altynbek132.turbo-console-log-custom|12/10/2025| Impersonation|
+|ygqygq2.turbo-print-log|12/10/2025| Impersonation|
+|CartagoNova.turbo-console-log-forked-by-cartago|12/10/2025| Impersonation|
+|gerson577.turbo-console-log-modify|12/10/2025| Impersonation|
+|idanSaban.turbo-console-debuglog|12/10/2025| Impersonation|
+|sachinsmc.turbo-rust-println|12/10/2025| Impersonation|
+|mahdihajian.vscode-shelf|12/10/2025| Impersonation|
+|mahdihajian.vscode-pull-request-azure-devops|12/10/2025| Impersonation|
 |EffetMer.darkgpt|12/10/2025| Malware|
 |levicarlsson.shelly|12/10/2025| Malware|
 |devcodaro.codaro-pro|12/10/2025| Malware|
@@ -95,47 +97,47 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |pandaexpress.Theme-arstotzka-plugin|12/9/2025| Malware|
 |johnpborgon.react-exe-runner|12/9/2025| Malware|
 |johnpborgon.codecompiler|12/9/2025| Malware|
-|cyrilproletuzi.angular-schematics-pro|12/9/2025| Typo-squatting|
-|brainz-digital-com.brainz-digital-netbeans-keybindings|12/9/2025| Typo-squatting|
-|benpzhao.emmylua-aoe|12/9/2025| Typo-squatting|
-|alexevanczuk.pks-vscode|12/9/2025| Typo-squatting|
-|ghlandy.LiveServer-2|12/9/2025| Typo-squatting|
-|frunoob.ankimini|12/9/2025| Typo-squatting|
-|env.Javascript-snippets-plus|12/9/2025| Typo-squatting|
-|env.Better-dotenv|12/9/2025| Typo-squatting|
-|svltsweet.Svetle-for-Cursor|12/9/2025| Typo-squatting|
-|SupporterREditor.r-vscode|12/9/2025| Typo-squatting|
-|dechuen-lee.tailwindcss-intellisense-auto-space|12/9/2025| Typo-squatting|
-|sseveur.vscode-bigquery-v2|12/9/2025| Typo-squatting|
-|PhungXuanAnh.auto-run-command-with-condition|12/9/2025| Typo-squatting|
-|Noe.noe-tokyo-night-horizon|12/9/2025| Typo-squatting|
-|nocnokneo.gif-player-plus|12/9/2025| Typo-squatting|
-|NeoMain.Neo-Better-DevTracker|12/9/2025| Typo-squatting|
-|mahdihajian.angular-files-creator|12/9/2025| Typo-squatting|
-|littensydev.charmed-icons-pro|12/9/2025| Typo-squatting|
-|harrisonLin.fcbox-ai-code|12/9/2025| Typo-squatting|
-|phantomgz.vscode-theme-onedark-c|12/9/2025| Typo-squatting|
-|jeronimodevex.color-picker-pro|12/9/2025| Typo-squatting|
+|cyrilproletuzi.angular-schematics-pro|12/9/2025| Impersonation|
+|brainz-digital-com.brainz-digital-netbeans-keybindings|12/9/2025| Impersonation|
+|benpzhao.emmylua-aoe|12/9/2025| Impersonation|
+|alexevanczuk.pks-vscode|12/9/2025| Impersonation|
+|ghlandy.LiveServer-2|12/9/2025| Impersonation|
+|frunoob.ankimini|12/9/2025| Impersonation|
+|env.Javascript-snippets-plus|12/9/2025| Impersonation|
+|env.Better-dotenv|12/9/2025| Impersonation|
+|svltsweet.Svetle-for-Cursor|12/9/2025| Impersonation|
+|SupporterREditor.r-vscode|12/9/2025| Impersonation|
+|dechuen-lee.tailwindcss-intellisense-auto-space|12/9/2025| Impersonation|
+|sseveur.vscode-bigquery-v2|12/9/2025| Impersonation|
+|PhungXuanAnh.auto-run-command-with-condition|12/9/2025| Impersonation|
+|Noe.noe-tokyo-night-horizon|12/9/2025| Impersonation|
+|nocnokneo.gif-player-plus|12/9/2025| Impersonation|
+|NeoMain.Neo-Better-DevTracker|12/9/2025| Impersonation|
+|mahdihajian.angular-files-creator|12/9/2025| Impersonation|
+|littensydev.charmed-icons-pro|12/9/2025| Impersonation|
+|harrisonLin.fcbox-ai-code|12/9/2025| Impersonation|
+|phantomgz.vscode-theme-onedark-c|12/9/2025| Impersonation|
+|jeronimodevex.color-picker-pro|12/9/2025| Impersonation|
 |ozz3dev.bitcoin-auto-trading|12/8/2025| Malware|
 |theme-cyberpunk.theme-neon-cyberpunk|12/8/2025| Malware|
 |BigBlack.mrbigblacktheme|12/8/2025| Malware|
 |BigBlack.codo-ai|12/8/2025| Malware|
-|AkhilTeotia.prettier-vscode-cfml|12/5/2025| Typo-squatting|
-|complete.prettier-vscode-community|12/5/2025| Typo-squatting|
+|AkhilTeotia.prettier-vscode-cfml|12/5/2025| Impersonation|
+|complete.prettier-vscode-community|12/5/2025| Impersonation|
 |BigBlack.bitcoin-black|12/5/2025| Malware|
-|SpecStoryInc.specstory-vscode-pro|12/5/2025| Typo-squatting|
-|lyywemhan.code-formatter-and-minifier-vscode|12/5/2025| Typo-squatting|
-|TheMysteryPanda.discodemulti|12/5/2025| Typo-squatting|
-|RooIncVeterinaryDev.roo-cline-pro|12/4/2025| Typo-squatting|
-|DevCatppuccinpro.catppuccin-pro-vsc|12/4/2025| Typo-squatting|
-|devCHOUZZ.vscode-better-align-pro|12/4/2025| Typo-squatting|
-|sqlmtxredev.quarto-pro|12/4/2025| Typo-squatting|
-|senseDevpro.profiler-php-pro|12/4/2025| Typo-squatting|
-|MahendrakarPrateek.prettyxml-pro|12/4/2025| Typo-squatting|
+|SpecStoryInc.specstory-vscode-pro|12/5/2025| Impersonation|
+|lyywemhan.code-formatter-and-minifier-vscode|12/5/2025| Impersonation|
+|TheMysteryPanda.discodemulti|12/5/2025| Impersonation|
+|RooIncVeterinaryDev.roo-cline-pro|12/4/2025| Impersonation|
+|DevCatppuccinpro.catppuccin-pro-vsc|12/4/2025| Impersonation|
+|devCHOUZZ.vscode-better-align-pro|12/4/2025| Impersonation|
+|sqlmtxredev.quarto-pro|12/4/2025| Impersonation|
+|senseDevpro.profiler-php-pro|12/4/2025| Impersonation|
+|MahendrakarPrateek.prettyxml-pro|12/4/2025| Impersonation|
 |piithon.piiithon-linter|12/4/2025| Malware|
-|fyzhu.git-pretty-graph|12/4/2025| Typo-squatting|
-|77qingliu.sas-syntax|12/3/2025| Typo-squatting|
-|pvparuchuri.sas|12/3/2025| Typo-squatting|
+|fyzhu.git-pretty-graph|12/4/2025| Impersonation|
+|77qingliu.sas-syntax|12/3/2025| Impersonation|
+|pvparuchuri.sas|12/3/2025| Impersonation|
 |Dart-vsc.code-dart|12/3/2025| Malware|
 |eamodas.shiny-vscode|12/2/2025| Malware|
 |ovixcodes.basedpyright-vscode|12/2/2025| Malware|
@@ -155,15 +157,15 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |Malkolm.Theme-Aurora-remake|12/2/2025| Malware|
 |Malkolm.Theme-ArtSchool-remake|12/2/2025| Malware|
 |Malkolm.Theme-Ascetic-remake|12/2/2025| Malware|
-|heartacker.git-graph-ai|12/2/2025| Typo-squatting|
-|Med-H.git-graph-revamped|12/2/2025| Typo-squatting|
+|heartacker.git-graph-ai|12/2/2025| Impersonation|
+|Med-H.git-graph-revamped|12/2/2025| Impersonation|
 |Iconkieftwo.icon-theme-materiall|12/2/2025| Malware|
 |priskinski.Theme-Afterglow-remake|12/1/2025| Malware|
 |priskinski.Theme-AllHallowsEve-remake|12/1/2025| Malware|
 |priskinski.Theme-Amber-remake|12/1/2025| Malware|
 |priskinski.Theme-Amy-remake|12/1/2025| Malware|
 |priskinski.Theme-AgolaDark-remake|12/1/2025| Malware|
-|betterthanalltime.calva-vscode|12/1/2025| Typo-squatting|
+|betterthanalltime.calva-vscode|12/1/2025| Impersonation|
 |71eb6d78-f65c-69f8-a0fd-58407e50bfc6.twilightofthewarriorswalledin|12/1/2025| Spam|
 |71eb6d78-f65c-69f8-a0fd-58407e50bfc6.twilightofthewarriorswalledinhdtw|12/1/2025| Spam|
 |71eb6d78-f65c-69f8-a0fd-58407e50bfc6.market|12/1/2025| Spam|
@@ -172,10 +174,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |poccccc.Download-Openal32dll-File-For-Dirt-2-Crack-kadiysy|11/27/2025| Malware|
 |newsporcolec.Penn-Elcom-Case-Designer-Crackepub-wonynoe|11/27/2025| Malware|
 |vialenliyu.Functionsandapplications11mcgrawhillryersonpdf13-sallole|11/27/2025| Malware|
-|SamuelPinto.better-vscode-html-css-support|11/25/2025| Typo-squatting|
-|SamuelPinto.better-vscode-html-css|11/25/2025| Typo-squatting|
-|SamuelPinto.prettier-vscode-pluss|11/21/2025| Typo-squatting|
-|publishingsofficial.prettier-vscode-plus|11/21/2025| Typo-squatting|
+|SamuelPinto.better-vscode-html-css-support|11/25/2025| Impersonation|
+|SamuelPinto.better-vscode-html-css|11/25/2025| Impersonation|
+|SamuelPinto.prettier-vscode-pluss|11/21/2025| Impersonation|
+|publishingsofficial.prettier-vscode-plus|11/21/2025| Impersonation|
 |dfadhel.vscodepython|11/20/2025| Malware|
 |solidhelium.codeforces-submitter|11/19/2025|Untrustworthy|
 |juanbIanco.soli989|11/08/2025| Malware|
@@ -188,22 +190,22 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |DavidAsh.dcbox-vs|10/30/2025| Malware|
 |DavidAsh.gruvbox-vs|10/30/2025| Malware|
 |DavidAsh.tr-lang-pack|10/30/2025| Malware|
-|DevelopmentInc.pokemon|10/30/2025|Typo-squatting, Malware|
-|DevelopmentInc.minecraftsnippets|10/30/2025|Typo-squatting, Malware|
-|DevelopmentInc.kombai-vs|10/30/2025|Typo-squatting, Malware|
-|DevelopmentInc.cfx-lua-vs|10/30/2025|Typo-squatting, Malware|
-|DevelopmentInc.torizon-vs|10/30/2025|Typo-squatting, Malware|
+|DevelopmentInc.pokemon|10/30/2025|Impersonation, Malware|
+|DevelopmentInc.minecraftsnippets|10/30/2025|Impersonation, Malware|
+|DevelopmentInc.kombai-vs|10/30/2025|Impersonation, Malware|
+|DevelopmentInc.cfx-lua-vs|10/30/2025|Impersonation, Malware|
+|DevelopmentInc.torizon-vs|10/30/2025|Impersonation, Malware|
 |JuanrBlanco.wow11language|10/29/2025|Malware|
 |Extensions-A.wow1language|10/29/2025|Malware|
-|esbenpp.pretier-vscodee|10/29/2025|Typo-squatting|
-|jinyang.copilot-mcp-zh-cn|10/29/2025|Typo-squatting|
+|esbenpp.pretier-vscodee|10/29/2025|Impersonation|
+|jinyang.copilot-mcp-zh-cn|10/29/2025|Impersonation|
 |Utilities.wowlanguage|10/28/2025|Malware|
 |AshleyHornja.prettierformattingplus|10/28/2025|Malware|
 |me80758262.piiithon-linter|10/27/2025|Malware|
-|StackspotPlatform.StackSpot|10/27/2025|Typo-squatting|
+|StackspotPlatform.StackSpot|10/27/2025|Impersonation|
 |EricWrite.dsafsadas|10/24/2025|Malware|
 |thesashkin.krnl-execute-thesashkin|10/24/2025|Malware|
-|plugin-manager.vscode-notes-manager|10/24/2025|Typo-squatting|
+|plugin-manager.vscode-notes-manager|10/24/2025|Impersonation|
 |BenjaminFriedl.lexica-img-fix|10/20/2025|Malware|
 |PriyanshuMallick.clipboard-history-manager|10/20/2025|Malware|
 |labfile.labfile|10/20/2025|Malware|
@@ -217,7 +219,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |Extensions-Topic.coffeescript|10/7/2025|Malware|
 |Extensions-Topic.german|10/7/2025|Malware|
 |Extensions-Topic.portugese|10/7/2025|Malware|
-|ReadMeAI.readmeai|10/6/2025| Typo-squatting |
+|ReadMeAI.readmeai|10/6/2025| Impersonation |
 |RachelFront.asdtif|10/6/2025|Malware
 |Sayantan710.ollot|10/3/2025|Malware
 |beisen.codecake|10/3/2025|Malware
@@ -240,8 +242,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |mercerllc.mercer-onboarding-helper|9/17/2025|Malware|
 |esonhugh.weaponized|9/17/2025|Malware|
 |luater.luatide|9/17/2025|Malware|
-|zhucan.debug-cline| 9/16/2025 |Typo-squatting|
-|AIClaude.claude-code-master| 9/15/2025 | Typo-squatting |
+|zhucan.debug-cline| 9/16/2025 |Impersonation|
+|AIClaude.claude-code-master| 9/15/2025 | Impersonation |
 |BlockchainIndustries.bitcoin-toolkit|9/12/2025|Malware|
 |BlockchainIndustries.blockchain-toolkit|9/12/2025|Malware|
 |BlockchainIndustries.hardhat-toolkit|9/12/2025|Malware|
@@ -252,7 +254,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |NFoundation.terraform-ai |9/09/2025|Malware|
 |vuesnippetsai.vue-snippets-ai |9/09/2025|Malware|
 |GPTOnce.codepilot-vscode |9/09/2025|Malware|
-|sunamo-cz.specstory-autosave|9/15/2025|Typo-squatting|
+|sunamo-cz.specstory-autosave|9/15/2025|Impersonation|
 |ShowSnowcrypto.SnowShoNo|9/07/2025|Malware|
 |MarcusLockwood.wgbk|9/03/2025|Malware|
 |EchelonStudios.blockchain-language-support|9/03/2025|Malware|
@@ -263,11 +265,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |RabobankAI.rabobank-code-assistant| 8/26/2025 | Malware |
 |MarkWood.nonmalicious2| 8/20/2025 | Malware |
 |EllisonBrett.givingblankies| 8/20/2025 | Malware |
-|Rojo.rojo-roblox-vscode| 8/16/2025 | Typo-squatting |
+|Rojo.rojo-roblox-vscode| 8/16/2025 | Impersonation |
 |ETHFoundry.etherfoundrys| 8/11/2025 | Malware |
 |VanessaAster.etherefounds| 8/9/2025 | Malware |
 |bogigigigigity.etherefound| 8/9/2025 | Malware |
-|YuTengjing.vscode-colorize-plus| 7/21/2025 | Typo-squatting |
+|YuTengjing.vscode-colorize-plus| 7/21/2025 | Impersonation |
 |dafsfsdsfdfsdf11.randomic-slaying-pog| 7/21/2025 | Malware |
 |JuanFranBlancoExtensions.AmitAssaraf| 7/10/2025 | Malware |
 |JuanCrypto.juancrypto| 7/10/2025 | Malware |
@@ -283,7 +285,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |JoshWEB3.solibt| 7/01/2025 | Malware |
 |JosephLubin.solib| 7/01/2025 | Malware |
 |VitalyButerin.hardhatjs | 7/01/2025 | Malware |
-|btwiuse.gopilot-chat | 7/01/2025 | Typo-squatting |
+|btwiuse.gopilot-chat | 7/01/2025 | Impersonation |
 |CharlesHoskinson.lfamnw1 | 6/29/2025 | Malware |
 | JuanBlancy.popitity        | 6/28/2025 | Malware |
 | EthersFoundation.bogitiy        | 6/28/2025 | Malware |
@@ -325,7 +327,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |DanielBlockchain.chocosnack|5/16/2025| Malware
 |JuanBlanking.Solidy|5/15/2025| Malware
 |VitalikButt.Solids|5/14/2025| Malware
-|KomaKamaki.vscode-api-client-lite|5/13/2025|Typo-squatting
+|KomaKamaki.vscode-api-client-lite|5/13/2025|Impersonation
 |jsayol.firebase-explorer| 5/13/2025| Copyright violation
 |JohnAaronNelson.ForceCode| 5/13/2025| Copyright violation
 |JohnAaronNelson.visualforce| 5/13/2025| Copyright violation
@@ -339,11 +341,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |BlockchainWEB3.blankebestxstnion| 5/12/2025| Malware
 |OfekBickel.wpp| 5/12/2025| Malware
 |JohnGaffney.blankebesxstnion | 5/12/2025| Malware
-|bysabi.prettier-vscode-semistandard | 5/12/2025|  Typo-squatting
-|bysabi.prettier-vscode-standard| 5/12/2025|  Typo-squatting
-|Shunqian.prettier-plus| 5/12/2025|  Typo-squatting
-|remimarsal.prettier-now| 5/12/2025|  Typo-squatting
-|iSayme.vscode-prettier-standard|5/12/2025|  Typo-squatting
+|bysabi.prettier-vscode-semistandard | 5/12/2025|  Impersonation
+|bysabi.prettier-vscode-standard| 5/12/2025|  Impersonation
+|Shunqian.prettier-plus| 5/12/2025|  Impersonation
+|remimarsal.prettier-now| 5/12/2025|  Impersonation
+|iSayme.vscode-prettier-standard|5/12/2025|  Impersonation
 |fnweoifweiofewofwoeifjwefvsjceqk.node-snippets-ai | 5/11/2025| Malware
 |minlabs.quiet-code| 5/11/2025| Malware
 |SFRA-FAKA.sfra-toolkit| 5/11/2025| Malware
@@ -355,8 +357,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |testrl777.Solidity-Ethereum| 5/8/2025| Malware
 |soIidity.cryptoovertheweekend4| 5/7/2025| Malware
 |Onaga08.vibecode| 5/7/2025| Malware
-|jishutuan.prettier-vscode| 5/6/2025| Typo-squatting
-|jameszhanga.even-prettier| 5/6/2025| Typo-squatting
+|jishutuan.prettier-vscode| 5/6/2025| Impersonation
+|jameszhanga.even-prettier| 5/6/2025| Impersonation
 |kaijialin.pvts| 5/6/2025| Typo-squatting
 |lakshits11.fresh-material-theme| 5/5/2025| Copyright violation
 |jRichardeau.vscode-vsproj| 5/5/2025| Copyright violation
@@ -365,12 +367,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |abhiagr.livs| 5/5/2025| Copyright violation
 |azure-dev.azure-cli-helper| 5/5/2025| Copyright violation
 |v-test-publisher.vscode-azure-functions-remote-web-test| 5/5/2025| Copyright violation
-|DylanRampage.prettier-optimized| 5/4/2025| Typo-squatting
-|duailibe.miniprettier| 5/4/2025| Typo-squatting
-|dotatong.wt-prettier-vscode|5/4/2025| Typo-squatting
-|nkurasawa.vscode-ignore-prettier| 5/4/2025| Typo-squatting
-|hyperproof.vscode-ext-prettier-java| 5/4/2025| Typo-squatting
-|publishingsofficial.prettier-plus-vscode| 5/4/2025| Typo-squatting
+|DylanRampage.prettier-optimized| 5/4/2025| Impersonation
+|duailibe.miniprettier| 5/4/2025| Impersonation
+|dotatong.wt-prettier-vscode|5/4/2025| Impersonation
+|nkurasawa.vscode-ignore-prettier| 5/4/2025| Impersonation
+|hyperproof.vscode-ext-prettier-java| 5/4/2025| Impersonation
+|publishingsofficial.prettier-plus-vscode| 5/4/2025| Impersonation
 |johnhtml.dasfasdsadasdf| 5/2/2025| Malware
 |outthaway.sol2-lang| 5/2/2025| Malware
 |johnh.solibit22-lang| 5/2/2025| Malware
