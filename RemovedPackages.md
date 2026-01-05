@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|juancryptoblanco.ether-solidt | 1/4/2026 | Malware |
+|OryonTechnology.oryon| 1/2/2026 | Malware |
+|FRONT-END-AI.front-end-ai | 12/31/2025 | Publisher requested |
 |solario.enhanced-favorites | 12/29/2025 | Impersonation |
 |pablaofficeal.taskmanager-vscode | 12/29/2025 | Malware |
 |diegofernandezpandiello.super-elixir-ls | 12/29/2025 | Impersonation |
