@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|lone17.lone-vscode-pets | 1/6/2026 | Deprecated |
+|MaikeyShrimp.vscode-pets-shrimp-bata | 1/6/2026 | Deprecated |
+|wli273088.vscode-pets-for-courses-demo | 1/5/2026 | Malware |
+|ANZ-BANK.vscode-sysl | 1/5/2026 | Malware |
+|dingdao-opensource.pwa-kit-studio | 1/5/2026 | Malware |
+|OmGawande.sonata | 1/5/2026 | Impersonation |
 |juancryptoblanco.ether-solidt | 1/4/2026 | Malware |
 |OryonTechnology.oryon| 1/2/2026 | Malware |
 |FRONT-END-AI.front-end-ai | 12/31/2025 | Publisher requested |
