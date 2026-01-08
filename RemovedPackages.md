@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|devokai.codesleep| 1/8/2026 | Malware |
 |hatsunemikulover.gutils | 1/6/2026 | Impersonation |
 |ynqq.comment-anchors-ynqq | 1/6/2026 | Impersonation |
 |lone17.lone-vscode-pets | 1/6/2026 | Deprecated |
