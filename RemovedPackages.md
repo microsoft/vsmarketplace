@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|thewerthon.thewerthon-scope-to-this| 1/9/2026 | Impersonation |
 |juanblan281.solid281| 1/9/2026 | Malware |
 |devokai.codesleep| 1/8/2026 | Malware |
 |hatsunemikulover.gutils | 1/6/2026 | Impersonation |
