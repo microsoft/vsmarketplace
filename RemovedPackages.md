@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|akirakudo911.kudosflow2| 1/12/2026 | Impersonation |
+|ctk.commandlist-enhanced| 1/12/2026 | Impersonation |
+|teakovva.overpy-bastion| 1/11/2026 | Impersonation |
 |thewerthon.thewerthon-scope-to-this| 1/9/2026 | Impersonation |
 |juanblan281.solid281| 1/9/2026 | Malware |
 |devokai.codesleep| 1/8/2026 | Malware |
