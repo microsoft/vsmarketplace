@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|VibeKanban.vibe-kanban-vscode| 1/13/2026 | Impersonation |
+|atom8n.thor-client-atom8n| 1/13/2026 | Impersonation |
 |akirakudo911.kudosflow2| 1/12/2026 | Impersonation |
 |ctk.commandlist-enhanced| 1/12/2026 | Impersonation |
 |teakovva.overpy-bastion| 1/11/2026 | Impersonation |
