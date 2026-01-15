@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|DarshanChauhan.tm-workitem-tab| 1/14/2026 | Impersonation |
+|vjoker.legend-script-editor| 1/14/2026 | Impersonation |
+|borgius.lm-proxy-responses| 1/14/2026 | Impersonation |
+|borgius.localrag| 1/14/2026 | Impersonation |
 |VibeKanban.vibe-kanban-vscode| 1/13/2026 | Impersonation |
 |atom8n.thor-client-atom8n| 1/13/2026 | Impersonation |
 |akirakudo911.kudosflow2| 1/12/2026 | Impersonation |
