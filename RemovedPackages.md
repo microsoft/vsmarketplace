@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|xuli.qt-for-python| 1/15/2026 | Impersonation |
 |DarshanChauhan.tm-workitem-tab| 1/14/2026 | Impersonation |
 |vjoker.legend-script-editor| 1/14/2026 | Impersonation |
 |borgius.lm-proxy-responses| 1/14/2026 | Impersonation |
