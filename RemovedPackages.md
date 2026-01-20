@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|gyvscode.continue-vs| 1/19/2026 | Impersonation |
+|devSparkle.luau-lsp-overtur| 1/19/2026 | Impersonation |
+|t1mt.vsc-go-imports-sorter| 1/16/2026 | Impersonation |
 |xuli.qt-for-python| 1/15/2026 | Impersonation |
 |DarshanChauhan.tm-workitem-tab| 1/14/2026 | Impersonation |
 |vjoker.legend-script-editor| 1/14/2026 | Impersonation |
