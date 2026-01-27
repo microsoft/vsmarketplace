@@ -7,7 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-VisualStudioOnlineApplicationInsights.application-insights| 1/25/2026| Publisher requested|
+|jianbe-03.pesto-roblox-project-explorer| 1/27/2026 | Malware |
+|JackHerry.prettier-advanced-ai| 1/26/2026 | Impersonation |
+|JackHerry.neon-night-theme-ai| 1/26/2026 | Impersonation |
+|JackHerry.copilotx-ai-assistant| 1/26/2026 | Impersonation |
+|JackHerry.gitlens-turbocharged| 1/26/2026 | Impersonation |
+|JackHerry.dark-ai| 1/26/2026 | Malware |
+|VisualStudioOnlineApplicationInsights.application-insights| 1/25/2026| Publisher requested|
 |ms-vscode.vscode-embedded-tools| 1/23/2026 | Publisher requested |
 |unique123.continue-plus| 1/21/2026 | Impersonation |
 |gyvscode.continue-vs| 1/19/2026 | Impersonation |
