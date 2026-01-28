@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|Naki.ariake2022| 1/27/2026 | Impersonation |
 |jianbe-03.pesto-roblox-project-explorer| 1/27/2026 | Malware |
 |JackHerry.prettier-advanced-ai| 1/26/2026 | Impersonation |
 |JackHerry.neon-night-theme-ai| 1/26/2026 | Impersonation |
