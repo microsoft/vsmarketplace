@@ -7,7 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-|clawdbot.clawdbot-agent| 1/27/2026 | Malware |
+|GitlensPro.gitpro-ai-tools| 1/29/2026| Malware |
+|GitlensPro.gitlens-monocharged | 1/29/2026| Malware |
+|GitlensPro.codebeauty-formatter  | 1/29/2026| Malware |
+|GitlensPro.aicode-companion| 1/29/2026| Malware |
+|GitlensPro.peacock-workspace-colorizer | 1/29/2026| Malware |
+|GitlensPro.error-lens-ultra-pro | 1/29/2026| Malware |
+|clawdbot.clawdbot-agent| 1/27/2026| Malware |
 |pk4uDMD.vscode-containers-forked| 1/27/2026 | Impersonation |
 |Naki.ariake2022| 1/27/2026 | Impersonation |
 |jianbe-03.pesto-roblox-project-explorer| 1/27/2026 | Malware |
