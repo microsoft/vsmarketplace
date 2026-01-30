@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Knotron.treky-dev| 1/30/2026    | Impersonation |
+| aurora-them-creator.theme-aurora-nocturne | 1/30/2026 | Impersonation |
+| PapaVault.papa-vault| 1/30/2026 | Expired domain |
+| S4mu31.drawfolderstructure-s4mu31  | 1/30/2026    | Impersonation |
+| S4mu31.command-runner-v2| 1/30/2026| Impersonation |
+| S4mu31.s4mu31-tema-color| 1/30/2026| Impersonation |
 |GitlensPro.gitpro-ai-tools| 1/29/2026| Malware |
 |GitlensPro.gitlens-monocharged | 1/29/2026| Malware |
 |GitlensPro.codebeauty-formatter  | 1/29/2026| Malware |
