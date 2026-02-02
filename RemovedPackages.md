@@ -7,19 +7,19 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| 4t-ia.4t-ia   | 01/31/2026   | Untrustworthy     |
-| claudecodeassist.claudecodeassist |   01/31/2026    | Malware     |
-| lakeFS.lakefs-dvc|   01/31/2026| Impersonation |
-| AhmedSlem.secure-codee |01/31/2026   | Malware  |
-| sanchuan.kimi-copilot  | 01/31/2026  | Spam / Malware    |
-| sanchuan.kimi-coding-copilot  |01/31/2026   | Spam / Malware    |
-| sanchuan.glm-copilot|  01/31/2026 | Spam / Malware    |
-| sanchuan.minimax-copilot |   01/31/2026   | Spam / Malware    |
-| sanchuan.mimo-copilot   |   01/31/2026  | Spam / Malware    |
-| OzzyDev777.csharp-editor-pro   |   01/31/2026 | Malware|
-| OzzyDev777.dark-ai-professional |  01/31/2026| Malware|
-| OzzyDev777.gitlens-turbo-pro     |   01/31/2026 | Malware|
-| OzzyDev777.peacock-professional-edition  | 01/31/2026 | Malware|
+| 4t-ia.4t-ia   | 1/31/2026   | Untrustworthy     |
+| claudecodeassist.claudecodeassist |  1/31/2026     | Malware     |
+| lakeFS.lakefs-dvc|   1/31/2026 | Impersonation |
+| AhmedSlem.secure-codee |1/31/2026    | Malware  |
+| sanchuan.kimi-copilot  | 1/31/2026   | Spam / Malware    |
+| sanchuan.kimi-coding-copilot  |1/31/2026 | Spam / Malware    |
+| sanchuan.glm-copilot|  1/31/2026  | Spam / Malware    |
+| sanchuan.minimax-copilot |   1/31/2026    | Spam / Malware    |
+| sanchuan.mimo-copilot   |1/31/2026  | Spam / Malware    |
+| OzzyDev777.csharp-editor-pro   |   1/31/2026  | Malware|
+| OzzyDev777.dark-ai-professional | 1/31/2026 | Malware|
+| OzzyDev777.gitlens-turbo-pro     |   1/31/2026  | Malware|
+| OzzyDev777.peacock-professional-edition  |1/31/2026  | Malware|
 | Knotron.treky-dev| 1/30/2026    | Impersonation |
 | aurora-them-creator.theme-aurora-nocturne | 1/30/2026 | Impersonation |
 | PapaVault.papa-vault| 1/30/2026 | Expired domain |
