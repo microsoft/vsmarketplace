@@ -8,7 +8,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
 | 4t-ia.4t-ia   | 1/31/2026   | Untrustworthy     |
-| claudecodeassist.claudecodeassist |  1/31/2026     | Malware     |
+| claudecodeassist.claudecodeassist |  1/31/2026     | Untrustworthy          |
 | lakeFS.lakefs-dvc|   1/31/2026 | Impersonation |
 | AhmedSlem.secure-codee |1/31/2026    | Malware  |
 | sanchuan.kimi-copilot  | 1/31/2026   | Spam / Malware    |
