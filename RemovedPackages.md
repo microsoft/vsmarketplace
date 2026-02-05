@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Doro2.dart-flutter-export-no-comments|   2/4/2026 | Impersonation |
+| DoroKPNC.dart-flutter-exports-local|   2/4/2026 | Impersonation |
+| DoroKPNC.dart-flutter-export-helper|   2/4/2026 | Impersonation |
+| cosmic-themes.theme-cosmic-nebula|   2/4/2026 | Malware |
 | 4t-ia.4t-ia   | 1/31/2026   | Untrustworthy     |
 | claudecodeassist.claudecodeassist |  1/31/2026     | Untrustworthy          |
 | lakeFS.lakefs-dvc|   1/31/2026 | Impersonation |
