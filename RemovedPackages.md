@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| mrcrispy.cpln| 2/5/2026 | Malware |
 | Doro2.dart-flutter-export-no-comments|   2/4/2026 | Impersonation |
 | DoroKPNC.dart-flutter-exports-local|   2/4/2026 | Impersonation |
 | DoroKPNC.dart-flutter-export-helper|   2/4/2026 | Impersonation |
