@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| probes-team.probes| 2/8/2026 | Malware |
+| ax60.electricblackfelixdivallportvs2022|   2/7/2026 | Impersonation |
+| ProjectStarboy.projectstarboy-vscode|   2/7/2026 | Impersonation |
 | mrcrispy.cpln| 2/5/2026 | Malware |
 | Doro2.dart-flutter-export-no-comments|   2/4/2026 | Impersonation |
 | DoroKPNC.dart-flutter-exports-local|   2/4/2026 | Impersonation |
