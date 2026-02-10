@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| kaiwu-probes.Probes-ai| 2/9/2026 | Malware |
 | probes-team.probes| 2/8/2026 | Malware |
 | ax60.electricblackfelixdivallportvs2022|   2/7/2026 | Impersonation |
 | ProjectStarboy.projectstarboy-vscode|   2/7/2026 | Impersonation |
