@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|devolutionsinc.devolutions-powershell-universal|2/11/2026| Impersonation|
+|anovagroups.sas-data-explorer|2/11/2026 |Impersonation|
+|VelocityCoderPro.velocitycodeproupdate|2/11/2026 |Malware|
+| XLRIT.vscode-gears-by-xlrit| 2/11/2026 | Impersonation |
 | kaiwu-probes.Probes-ai| 2/9/2026 | Malware |
 | probes-team.probes| 2/8/2026 | Malware |
 | ax60.electricblackfelixdivallportvs2022|   2/7/2026 | Impersonation |
