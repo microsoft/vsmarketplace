@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|fq.markdown-checkbox-with-timestamp-at-creation|2/11/2026| Impersonation|
+|xxnuo.mtrancode|2/11/2026| Impersonation|
+|ArchMedia.sp-isc-devtools|2/11/2026| Impersonation|
 |devolutionsinc.devolutions-powershell-universal|2/11/2026| Impersonation|
 |anovagroups.sas-data-explorer|2/11/2026 |Impersonation|
 |VelocityCoderPro.velocitycodeproupdate|2/11/2026 |Malware|
