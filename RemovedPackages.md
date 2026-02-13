@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|GoDeveloper.go-developer-support-extension| 2/13/2026| Impersonation|
+|yujiitadori.the-undertaker-2|2/13/2026|Malware|
+|yujiitadori.demon-slayer-infinity-castle| 2/13/2026| Malware|
 |fq.markdown-checkbox-with-timestamp-at-creation|2/11/2026| Impersonation|
 |xxnuo.mtrancode|2/11/2026| Impersonation|
 |ArchMedia.sp-isc-devtools|2/11/2026| Impersonation|
