@@ -7,6 +7,15 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|gglin001-vscode.vscode-mlir-custom|2/16/2026|Impersonation|
+|AzelSync.alk-icons|2/16/2026|Impersonation|
+|TheRealGorgan.vscode-google-tasks-extension|2/16/2026|Impersonation|
+|TheRealGorgan.better-sidebar-markdown-notes|2/16/2026|Impersonation|
+|TheRealGorgan.copilot-chat-history-fork| 2/16/2026|Impersonation|
+|ALT5.sqflint-cn-revised |2/16/2026| Impersonation|
+|AlissonKopp.clickup-extension |2/16/2026|Impersonation|
+|alien-fish-person.htmltoscss| 2/16/2026| Impersonation|
+|SymbiozTechnologie.mia-assistant |2/16/2026| Malware |
 |carrycodeai.carrycode-vscode|2/13/2026|Untrustworthy|
 |EladNahman.Super-Cool-Extension|2/13/2026|Malware|
 |GoDeveloper.go-developer-support-extension| 2/13/2026| Impersonation|
