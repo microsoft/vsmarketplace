@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|carrycodeai.carrycode-vscode|2/13/2026|Untrustworthy|
+|EladNahman.Super-Cool-Extension|2/13/2026|Malware|
 |GoDeveloper.go-developer-support-extension| 2/13/2026| Impersonation|
 |yujiitadori.the-undertaker-2|2/13/2026|Malware|
 |yujiitadori.demon-slayer-infinity-castle| 2/13/2026| Malware|
