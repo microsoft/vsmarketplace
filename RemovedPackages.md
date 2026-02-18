@@ -7,6 +7,34 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|colan100.gemini100|2/17/2026|Untrustworthy|
+|colan100.ccbrasil|2/17/2026|Untrustworthy|
+|colan100.antigravity100|2/17/2026|Untrustworthy|
+|kodawari.cline-japanese|2/17/2026|Impersonation|
+|kodawari.code-runner-Japanese|2/17/2026|Impersonation|
+|kodawari.error-lens-Japanese|2/17/2026|Impersonation|
+|kodawari.gitlens-japanese|2/17/2026|Impersonation|
+|kodawari.gitlens-zh|2/17/2026|Impersonation|
+|AppHelix.apphelix-blog-search |2/17/2026|Impersonation|
+|AMAARETS.hebrew-ui-translation-amaarets|2/17/2026|Impersonation|
+|Always-Victorious.trailing-spaces-always-victorious-edit|2/17/2026|Impersonation|
+|amkig.i18n-ally-po|2/17/2026|Impersonation|
+|AiagentPro.pydebugpro|2/17/2026|Impersonation|
+|bl-vc-java.bl-tomcat|2/17/2026|Impersonation|
+|WhenSunset.chatgpt-china|2/17/2026|Untrustworthy|
+|zhukunpeng.chat-moss|2/17/2026|Untrustworthy|
+|bobqianic.imperial-llm-dev|2/17/2026|Impersonation|
+|SymbiozTechnologie.mia-assistant2/17/2026|Malware|
+|cancline.cancline-dev|2/17/2026|Impersonation|
+|btwiuse.flexport|2/17/2026|Impersonation|
+|bryanlo22.vscode-rufo-fix|2/17/2026|Impersonation|
+|bobqianic.imperial-llm-dev|2/17/2026|Impersonation|
+|11011.blenderPluginDevTool11011|2/17/2026|Impersonation|
+|11011.ubuntutheme11011|2/17/2026|Impersonation|
+|11011.markdown-shortcuts-like-obsidian-merge|2/17/2026|Impersonation|
+|11011.markdown-shortcuts-like-obsidian-ob|2/17/2026|Impersonation|
+|Acronix-dev.Go-work-tools|2/17/2026|Impersonation|
+|723Studio.fta-ruleset-tools|2/17/2026|Impersonation|
 |gglin001-vscode.vscode-mlir-custom|2/16/2026|Impersonation|
 |AzelSync.alk-icons|2/16/2026|Impersonation|
 |TheRealGorgan.vscode-google-tasks-extension|2/16/2026|Impersonation|
