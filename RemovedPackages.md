@@ -7,9 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-|colan100.gemini100|2/17/2026|Impersonation|
-|colan100.ccbrasil|2/17/2026|Impersonation|
-|colan100.antigravity100|2/17/2026|Impersonation|
+|colan100.gemini100|2/17/2026|Untrustworthy|
+|colan100.ccbrasil|2/17/2026|Untrustworthy|
+|colan100.antigravity100|2/17/2026|Untrustworthy|
 |kodawari.cline-japanese|2/17/2026|Impersonation|
 |kodawari.code-runner-Japanese|2/17/2026|Impersonation|
 |kodawari.error-lens-Japanese|2/17/2026|Impersonation|
@@ -21,8 +21,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |amkig.i18n-ally-po|2/17/2026|Impersonation|
 |AiagentPro.pydebugpro|2/17/2026|Impersonation|
 |bl-vc-java.bl-tomcat|2/17/2026|Impersonation|
-|WhenSunset.chatgpt-china|2/17/2026|Malware|
-|zhukunpeng.chat-moss|2/17/2026|Malware|
+|WhenSunset.chatgpt-china|2/17/2026|Untrustworthy|
+|zhukunpeng.chat-moss|2/17/2026|Untrustworthy|
 |bobqianic.imperial-llm-dev|2/17/2026|Impersonation|
 |SymbiozTechnologie.mia-assistant2/17/2026|Malware|
 |cancline.cancline-dev|2/17/2026|Impersonation|
