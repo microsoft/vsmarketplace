@@ -7,6 +7,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|diamond.diamond|2/18/2026|Impersonation|
+|DigitalJSMTUGroup.digitaljsmtu|2/18/2026|Impersonation|
+|clclw.php-formatterclclw|2/18/2026|Impersonation|
+|crazypanda.git-commit-plugin-custom|2/18/2026|Impersonation|
+|AirCactus500.animal-crossing-file-icon-theme-with-flutter-support|2/18/2026|Impersonation|
+|zstings.claude-code-zh-cn|2/17/2026|Impersonation|
+|bazantici.suse-valey-styleguide|2/17/2026|Impersonation|
+|bazantici.dapsy|2/17/2026|Impersonation|
 |colan100.gemini100|2/17/2026|Untrustworthy|
 |colan100.ccbrasil|2/17/2026|Untrustworthy|
 |colan100.antigravity100|2/17/2026|Untrustworthy|
