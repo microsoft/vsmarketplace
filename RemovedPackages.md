@@ -51,7 +51,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |WhenSunset.chatgpt-china|2/17/2026|Untrustworthy|
 |zhukunpeng.chat-moss|2/17/2026|Untrustworthy|
 |bobqianic.imperial-llm-dev|2/17/2026|Impersonation|
-|SymbiozTechnologie.mia-assistant2/17/2026|Malware|
+|SymbiozTechnologie.mia-assistant|2/17/2026|Malware|
 |cancline.cancline-dev|2/17/2026|Impersonation|
 |btwiuse.flexport|2/17/2026|Impersonation|
 |bryanlo22.vscode-rufo-fix|2/17/2026|Impersonation|
@@ -70,7 +70,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |ALT5.sqflint-cn-revised |2/16/2026| Impersonation|
 |AlissonKopp.clickup-extension |2/16/2026|Impersonation|
 |alien-fish-person.htmltoscss| 2/16/2026| Impersonation|
-|SymbiozTechnologie.mia-assistant |2/16/2026| Malware |
+|SymbiozTechnologie.mia-assistant|2/16/2026| Malware|
 |carrycodeai.carrycode-vscode|2/13/2026|Untrustworthy|
 |EladNahman.Super-Cool-Extension|2/13/2026|Malware|
 |GoDeveloper.go-developer-support-extension| 2/13/2026| Impersonation|
