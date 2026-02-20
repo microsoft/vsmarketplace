@@ -7,6 +7,25 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| AmsTaFFix.daemonic-lua-api | 2/19/2026 | Malware |
+| FEYeh.ssc-ibs | 2/19/2026 | Malware |
+| cobot100.cosave101 | 2/19/2026 | Malware |
+| cobot100.kilochinese | 2/19/2026 | Malware |
+| cobot100.kilojapan | 2/19/2026 | Malware |
+| cobot100.kilobrasil | 2/19/2026 | Malware |
+| cobot100.cursor100 | 2/19/2026 | Malware |
+| clicli100.openclaw100 | 2/19/2026 | Malware |
+| clicli100.windsurf100 | 2/19/2026 | malware |
+| clacla100.claudemem | 2/19/2026 | Malware |
+| clacla100.cosave100 | 2/19/2026 | Malware |
+| devokaicode.codesleepai | 2/19/2026 | Malware |
+| devokaicode.cosave | 2/19/2026 | Malware |
+|TrueCrimeDev.tableau-lsp|2/19/2026|Impersonation|
+|FrancoisLe.cmake-tools-with-post-configure-task|2/19/2026|Impersonation|
+|Eradani.eradani-assist|2/19/2026|Impersonation|
+|fecet.vscode-neovim-fecet|2/19/2026|Impersonation|
+|siehc.vscode-proto3-rebirth|2/19/2026|Impersonation|
+|null-Island.your-new-favorite-extension|2/19/2026|Untrustworthy|
 |diamond.diamond|2/18/2026|Impersonation|
 |DigitalJSMTUGroup.digitaljsmtu|2/18/2026|Impersonation|
 |clclw.php-formatterclclw|2/18/2026|Impersonation|
@@ -32,7 +51,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |WhenSunset.chatgpt-china|2/17/2026|Untrustworthy|
 |zhukunpeng.chat-moss|2/17/2026|Untrustworthy|
 |bobqianic.imperial-llm-dev|2/17/2026|Impersonation|
-|SymbiozTechnologie.mia-assistant2/17/2026|Malware|
+|SymbiozTechnologie.mia-assistant|2/17/2026|Malware|
 |cancline.cancline-dev|2/17/2026|Impersonation|
 |btwiuse.flexport|2/17/2026|Impersonation|
 |bryanlo22.vscode-rufo-fix|2/17/2026|Impersonation|
@@ -51,7 +70,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |ALT5.sqflint-cn-revised |2/16/2026| Impersonation|
 |AlissonKopp.clickup-extension |2/16/2026|Impersonation|
 |alien-fish-person.htmltoscss| 2/16/2026| Impersonation|
-|SymbiozTechnologie.mia-assistant |2/16/2026| Malware |
+|SymbiozTechnologie.mia-assistant|2/16/2026| Malware|
 |carrycodeai.carrycode-vscode|2/13/2026|Untrustworthy|
 |EladNahman.Super-Cool-Extension|2/13/2026|Malware|
 |GoDeveloper.go-developer-support-extension| 2/13/2026| Impersonation|
