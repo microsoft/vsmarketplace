@@ -7,6 +7,25 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| AmsTaFFix.daemonic-lua-api | 2/19/2026 | Malware |
+| FEYeh.ssc-ibs | 2/19/2026 | Malware |
+| cobot100.cosave101 | 2/19/2026 | Malware |
+| cobot100.kilochinese | 2/19/2026 | Malware |
+| cobot100.kilojapan | 2/19/2026 | Malware |
+| cobot100.kilobrasil | 2/19/2026 | Malware |
+| cobot100.cursor100 | 2/19/2026 | Malware |
+| clicli100.openclaw100 | 2/19/2026 | Malware |
+| clicli100.windsurf100 | 2/19/2026 | malware |
+| clacla100.claudemem | 2/19/2026 | Malware |
+| clacla100.cosave100 | 2/19/2026 | Malware |
+| devokaicode.codesleepai | 2/19/2026 | Malware |
+| devokaicode.cosave | 2/19/2026 | Malware |
+|TrueCrimeDev.tableau-lsp|2/19/2026|Impersonation|
+|FrancoisLe.cmake-tools-with-post-configure-task|2/19/2026|Impersonation|
+|Eradani.eradani-assist|2/19/2026|Impersonation|
+|fecet.vscode-neovim-fecet|2/19/2026|Impersonation|
+|siehc.vscode-proto3-rebirth|2/19/2026|Impersonation|
+|null-Island.your-new-favorite-extension|2/19/2026|Untrustworthy|
 |diamond.diamond|2/18/2026|Impersonation|
 |DigitalJSMTUGroup.digitaljsmtu|2/18/2026|Impersonation|
 |clclw.php-formatterclclw|2/18/2026|Impersonation|
