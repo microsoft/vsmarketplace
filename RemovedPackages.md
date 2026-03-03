@@ -7,6 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|Sajjad19397.faah-error-sound|3/2/2026|Untrustworthy|
+|tanmoy-debnath.faaaaaahhh|3/2/2026|Untrustworthy|
+|pksunkara.file-mod-templates|3/2/2026|Impersonation|
+|NPC1.unify-chat-provider-ui|3/2/2026|Impersonation|
+|mycline.my-sibo-claude-dev|3/2/2026|Impersonation|
+|OxfordAbstracts.ide-purescript-oa-hybrid|3/2/2026|Impersonation|
+|PeterC.i18n-ally-fork-peter|3/2/2026|Impersonation|
 |adityasanwal.faa-sound|3/1/2026|Untrustworthy|
 |kazi08.mcp-audit-pii-guard|2/28/2026|Impersonation|
 |njzy.pnpm-catalog-lens-njzy|2/28/2026|Impersonation|
