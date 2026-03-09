@@ -7,6 +7,30 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|rizort.phpstorm-pack-109|3/8/2026|Impersonation|
+|rizort.phpstorm-light-theme-109|3/8/2026|Impersonation|
+|rizort.laravel-pack-109|3/8/2026|Impersonation|
+|Zubair.faah-sound-error|3/7/2026|Untrustworthy|
+|Zubair.maakabhosraaag-terminal-error|3/7/2026|Untrustworthy|
+|Zubair.makabhosda-aag-sound-error|3/7/2026|Untrustworthy|
+|Zubair.aaahhhhhh-sound-error|3/7/2026|Untrustworthy|
+|Zubair.AnimeAAhhhh-sound-error|3/7/2026|Untrustworthy|
+|Zubair.kyu-re-madarchod-cid-error|3/7/2026|Untrustworthy|
+|Zubair.chicken-on-tree-screaming|3/7/2026|Untrustworthy|
+|Zubair.yooooooooooooooooooooooooo-error|3/7/2026|Untrustworthy|
+|Zubair.siuuuuu-error|3/7/2026|Untrustworthy|
+|Zubair.shah-rukh-khan-error|3/7/2026|Untrustworthy|
+|Zubair.cat-laugh-error|3/7/2026|Untrustworthy|
+|Zubair.laughing-dog-meme-error|3/7/2026|Untrustworthy|
+|Zubair.perfect-fart-error|3/7/2026|Untrustworthy|
+|neha-arikatla.terminal-fahhh|3/6/2026|Untrustworthy|
+|Exile404.faaah-error-sound|3/6/2026|Untrustworthy|
+|shoaibkorai.faaah|3/6/2026|Untrustworthy|
+|devpiyushraj.faah-sound-effect|3/6/2026|Untrustworthy|
+|AnujLabs.sound-on-error|3/6/2026|Untrustworthy|
+|AnujLabs.sound-on-file-event|3/6/2026|Untrustworthy|
+|Ruoqi.xplosion|3/5/2026|Impersonation|
+|Ruoqi.cf-cph|3/5/2026|Impersonation|
 |mastersam.faaaah-on-fail|3/4/2026|Untrustworthy|
 |shellingye.xsj-emmylua|3/3/2026|Impersonation|
 |shenlin.i18n-ally-shenlin|3/3/2026|Impersonation|
