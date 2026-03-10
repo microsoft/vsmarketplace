@@ -7,6 +7,19 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|Anujlabsv2.sound-on-error-v2|3/9/2026|Untrustworthy|
+|Anujlabsv2.sound-on-file-event-v2|3/9/2026|Untrustworthy|
+|yasosubin.yasosubin-vscode|3/9/2026|Untrustworthy|
+|tria-technologies.simpleswitch-vscode|3/9/2026|Impersonation|
+|snrico-moonlight.gruvbox-material-community|3/9/2026|Impersonation|
+|vroshupkin.plantuml-png-microfork|3/9/2026|Impersonation|
+|veryl-lang.veryl-vscode|3/9/2026|Impersonation|
+|YuTengjing.vscode-github-actions-tj|3/9/2026|Impersonation|
+|zouguowei.krtc-filter-line|3/9/2026|Impersonation|
+|zhucan.xx-zc-test|3/9/2026|Impersonation|
+|zhucan.zc-claude-dev|3/9/2026|Impersonation|
+|yishifuhua.highlight-line-new|3/9/2026|Impersonation|
+|yishifuhua.local-history-chinese|3/9/2026|Impersonation|
 |rizort.phpstorm-pack-109|3/8/2026|Impersonation|
 |rizort.phpstorm-light-theme-109|3/8/2026|Impersonation|
 |rizort.laravel-pack-109|3/8/2026|Impersonation|
