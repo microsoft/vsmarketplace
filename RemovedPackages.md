@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|haseeb-raza.terminal-faah|3/10/2026|Untrustworthy|
+|avisharma.faaaavisharma.faaa|3/10/2026|Untrustworthy|
 |Anujlabsv2.sound-on-error-v2|3/9/2026|Untrustworthy|
 |Anujlabsv2.sound-on-file-event-v2|3/9/2026|Untrustworthy|
 |yasosubin.yasosubin-vscode|3/9/2026|Untrustworthy|
