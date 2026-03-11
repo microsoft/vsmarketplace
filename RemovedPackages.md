@@ -7,6 +7,26 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|vue2-snippets-plus-least.vue2-snippets-plus-least|3/10/2026|impersonation|
+|we125182.vue-volar|3/10/2026|impersonation|
+|wtklbm.code-debuger-fork|3/10/2026|impersonation|
+|stratomercata.strato-mercata|3/10/2026|impersonation|
+|smarty1337.nixware-snippets|3/10/2026|impersonation|
+|streamax.claude-dev-streamax|3/10/2026|impersonation|
+|ben14.tailwind-fold-opinionated|3/10/2026|impersonation|
+|ben14.ayu-warm|3/10/2026|impersonation|
+|Azir-11.azir-vscode-theme|3/10/2026|impersonation|
+|avenableivytech.vscode-sqlite-av|3/10/2026|impersonation|
+|AtroxEGO.better-folding-plus|3/10/2026|impersonation|
+|ascholer.chemeketa-gitdoc|3/10/2026|impersonation|
+|auguwu.opentofu-vscode|3/10/2026|impersonation|
+|RdbtCVS.chattriggers-latest|3/10/2026|impersonation|
+|yanfeixin.king-trae-icon|3/10/2026|impersonation|
+|xilong88.stepfun-i18n|3/10/2026|impersonation|
+|PCODE-pl.vscode-favorites-plus|3/10/2026|impersonation|
+|PCODE-pl.vscode-autohide-plus|3/10/2026|impersonation|
+|PCODE-pl.LiveServerPlus|3/10/2026|impersonation|
+|PCODE-pl.hide-files-toggle|3/10/2026|impersonation|
 |haseeb-raza.terminal-faah|3/10/2026|Untrustworthy|
 |avisharma.faaa|3/10/2026|Untrustworthy|
 |Anujlabsv2.sound-on-error-v2|3/9/2026|Untrustworthy|
