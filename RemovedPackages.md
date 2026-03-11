@@ -35,7 +35,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |tria-technologies.simpleswitch-vscode|3/9/2026|Impersonation|
 |snrico-moonlight.gruvbox-material-community|3/9/2026|Impersonation|
 |vroshupkin.plantuml-png-microfork|3/9/2026|Impersonation|
-|veryl-lang.veryl-vscode|3/9/2026|Impersonation|
 |YuTengjing.vscode-github-actions-tj|3/9/2026|Impersonation|
 |zouguowei.krtc-filter-line|3/9/2026|Impersonation|
 |zhucan.xx-zc-test|3/9/2026|Impersonation|
