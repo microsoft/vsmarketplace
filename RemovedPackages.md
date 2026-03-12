@@ -7,8 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-|Alleexxii.cfxlua-cheat-vscode extension|3/11/2026|impersonation|
-|areynard.iceberg-theme-code-visible extension|3/11/2026|impersonation|
+|Alleexxii.cfxlua-cheat-vscode|3/11/2026|impersonation|
+|areynard.iceberg-theme-code-visible|3/11/2026|impersonation|
 |guojun.code-keeper|3/11/2026|impersonation|
 |godot42.cmantic-forked|3/11/2026|impersonation|
 |genon.cline-for-genos|3/11/2026|impersonation|
