@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|Alleexxii.cfxlua-cheat-vscode extension|3/11/2026|impersonation|
+|areynard.iceberg-theme-code-visible extension|3/11/2026|impersonation|
+|guojun.code-keeper|3/11/2026|impersonation|
+|godot42.cmantic-forked|3/11/2026|impersonation|
+|genon.cline-for-genos|3/11/2026|impersonation|
 |vue2-snippets-plus-least.vue2-snippets-plus-least|3/10/2026|impersonation|
 |we125182.vue-volar|3/10/2026|impersonation|
 |wtklbm.code-debuger-fork|3/10/2026|impersonation|
@@ -318,7 +323,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |embedd-team.embedd-project-manager|12/19/2025|Impersonation|
 |naveenkunder.format-html|12/19/2025|Impersonation|
 |RogDeved.Night-moonlight-theme|12/18/2025|Impersonation|
-|WilliamAsaba.dev-time-tracker|12/19/2025|Malware|
 |yonbip.yds-gitlab-workflow|12/18/2025|Impersonation|
 |ferrymo.intellij-idea-new-ui-pretty-ferrymo|12/18/2025|Impersonation|
 |cn00.sqltools-duckdb|12/18/2025|Impersonation|
