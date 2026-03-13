@@ -7,7 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-|quartz.quartz-markdown-editor|3/11/2026|untrustworthy |
+|quartz.quartz-markdown-editor|3/11/2026|Untrustworthy|
 |FrancescoOrtu.slurm-dashboard-orfeo|3/11/2026|Impersonation|
 |fortune.investment-assistant|3/11/2026|Impersonation|
 |emersxw.min-theme-emersxw|3/11/2026|Impersonation|
