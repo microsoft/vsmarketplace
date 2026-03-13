@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|quartz.quartz-markdown-editor|3/11/2026|untrustworthy |
+|FrancescoOrtu.slurm-dashboard-orfeo|3/11/2026|Impersonation|
+|fortune.investment-assistant|3/11/2026|Impersonation|
+|emersxw.min-theme-emersxw|3/11/2026|Impersonation|
 |Alleexxii.cfxlua-cheat-vscode|3/11/2026|Impersonation|
 |areynard.iceberg-theme-code-visible|3/11/2026|Impersonation|
 |guojun.code-keeper|3/11/2026|Impersonation|
@@ -23,7 +27,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |Azir-11.azir-vscode-theme|3/10/2026|Impersonation|
 |avenableivytech.vscode-sqlite-av|3/10/2026|Impersonation|
 |AtroxEGO.better-folding-plus|3/10/2026|Impersonation|
-|ascholer.chemeketa-gitdoc|3/10/2026|Impersonation|
 |auguwu.opentofu-vscode|3/10/2026|Impersonation|
 |RdbtCVS.chattriggers-latest|3/10/2026|Impersonation|
 |yanfeixin.king-trae-icon|3/10/2026|Impersonation|
