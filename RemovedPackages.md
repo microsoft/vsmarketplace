@@ -19,7 +19,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |jamesoncrate.universal-3d-preview|3/16/2026|Impersonation|
 |marpo.gruvbox-material-marpo|3/16/2026|Impersonation|
 |benkeen.pnpm-catalog-lens-rush-fork|3/16/2026|Impersonation|
-
 |quartz.quartz-markdown-editor|3/11/2026|Untrustworthy|
 |FrancescoOrtu.slurm-dashboard-orfeo|3/11/2026|Impersonation|
 |fortune.investment-assistant|3/11/2026|Impersonation|
