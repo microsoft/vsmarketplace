@@ -7,6 +7,19 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|InnuendoPi.vscode-espfs|3/16/2026|Impersonation|
+|iridium.pinkcandy|3/16/2026|Impersonation|
+|Itchino.robloxlsp-for-exploit|3/16/2026|Impersonation|
+|ivanstepanovftwgaynottaken.camelhumps|3/16/2026|Impersonation|
+|jackolope.lit-analyzer-plugin|3/16/2026|Impersonation|
+|jaeck-zj.highlight-words-by-jack|3/16/2026|Impersonation|
+|okg21.bigquery-explorer|3/16/2026|Impersonation|
+|orca.vscode-armlite|3/16/2026|Impersonation|
+|octohash.powermode-plus|3/16/2026|Impersonation|
+|jamesoncrate.universal-3d-preview|3/16/2026|Impersonation|
+|marpo.gruvbox-material-marpo|3/16/2026|Impersonation|
+|benkeen.pnpm-catalog-lens-rush-fork|3/16/2026|Impersonation|
+|vue2-snippets-plus-least.vue2-snippets-plus-least|3/16/2026|Impersonation|
 |quartz.quartz-markdown-editor|3/11/2026|Untrustworthy|
 |FrancescoOrtu.slurm-dashboard-orfeo|3/11/2026|Impersonation|
 |fortune.investment-assistant|3/11/2026|Impersonation|
