@@ -7,6 +7,31 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|funkyproject.vscode-phpunit-funky-fork|3/18/2026|Impersonation|
+|grovejt.open-folder-in-cursor|3/18/2026|Impersonation|
+|reorx.github-abs-vscode-theme|3/18/2026|Impersonation|
+|rfkhusnutdinov.pug-ecsstractor|3/18/2026|Impersonation|
+|rgeraskin.vscode-commitizen-rg|3/18/2026|Impersonation|
+|lxl66566.vim-lxl66566|3/18/2026|Impersonation|
+|agility6.go-sort-imports|3/18/2026|Impersonation|
+|agility6.gruvbox-concoctis-agility6|3/18/2026|Impersonation|
+|Alex-Chen.vscode-m5stack-mpy-uiflow2|3/18/2026|Impersonation|
+|AlesMenzel.line-utils|3/18/2026|Impersonation|
+|alberto-pilotto.code-ca65-syntax-color-outliner|3/18/2026|Impersonation|
+|alanguo.zed-one-theme-for-vscode|3/18/2026|Impersonation|
+|AIClub.aadb2c-fork|3/18/2026|Impersonation|
+|kingace2056.json-to-dart-fixed-kingace2056|3/18/2026|Impersonation|
+|CalebBaird.leaderkey-configurable|3/18/2026|Impersonation|
+|HarshChitaliya.harshchitaliya-wds-blog-search|3/18/2026|Impersonation|
+|HarshChitaliya.harshchitaliya-ai-study-companion|3/18/2026|Impersonation|
+|Kochan.vs-nord-theme|3/18/2026|Impersonation|
+|hazi.hazi-theme|3/18/2026|Impersonation|
+|havedifficultyinfindingnames.debug-leetcode-refined|3/18/2026|Impersonation|
+|seolmuah.jupyter-live-share|3/18/2026|Malware|
+|Dhakshinesh.sfdx-package-xml-generator-by-dk|3/18/2026|Impersonation|
+|DipakParmar.cumulusci|3/18/2026|Impersonation|
+|dloux.i18n-ally-skip-duplicate|3/18/2026|Impersonation|
+|tmp-primes.wtinymist|3/18/2026|Impersonation|
 |InnuendoPi.vscode-espfs|3/16/2026|Impersonation|
 |iridium.pinkcandy|3/16/2026|Impersonation|
 |Itchino.robloxlsp-for-exploit|3/16/2026|Impersonation|
