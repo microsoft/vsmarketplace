@@ -15,7 +15,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |lxl66566.vim-lxl66566|3/18/2026|Impersonation|
 |agility6.go-sort-imports|3/18/2026|Impersonation|
 |agility6.gruvbox-concoctis-agility6|3/18/2026|Impersonation|
-|Alex-Chen.vscode-m5stack-mpy-uiflow2|3/18/2026|Impersonation
+|Alex-Chen.vscode-m5stack-mpy-uiflow2|3/18/2026|Impersonation|
 |AlesMenzel.line-utils|3/18/2026|Impersonation|
 |alberto-pilotto.code-ca65-syntax-color-outliner|3/18/2026|Impersonation|
 |alanguo.zed-one-theme-for-vscode|3/18/2026|Impersonation|
