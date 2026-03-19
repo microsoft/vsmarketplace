@@ -7,7 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-|InnuendoPi.vscode-espfs|3/18/2026|Impersonation|funkyproject.vscode-phpunit-funky-fork|
+|funkyproject.vscode-phpunit-funky-fork|3/18/2026|Impersonation|
 |grovejt.open-folder-in-cursor|3/18/2026|Impersonation|
 |reorx.github-abs-vscode-theme|3/18/2026|Impersonation|
 |rfkhusnutdinov.pug-ecsstractor|3/18/2026|Impersonation|
