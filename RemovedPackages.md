@@ -7,6 +7,60 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|HonzaPudil.vscode-theme-onedarker-custom|3/19/2026|Impersonation
+|hsn8086.cph-hsn-edition|3/19/2026|Impersonation
+|hyoban.file-icons-continue|3/19/2026|Impersonation
+|iabacus-publisher.iabacus-dev|3/19/2026|Impersonation
+|iceeedR.amxx-pawn-language-editor|3/19/2026|Impersonation
+|idlesilver.comment-driver|3/19/2026|Impersonation
+|LiamDrew.arm-assembly|3/19/2026|Impersonation
+|LiamWang.vscode-image-gallery-liamwang|3/19/2026|Impersonation
+|LinkingMountains.SonarColorizer|3/19/2026|Impersonation
+|littleCareless.dish-base-development-extensions-pack|3/19/2026|Impersonation
+|liuhui.shadow-reader-pro|3/19/2026|Impersonation
+|politsin.cline-pached|3/19/2026|Impersonation
+|przybylski.cursor-harpoon|3/19/2026|Impersonation
+|qusic.easysass-ng|3/19/2026|Impersonation
+|RahulSinha.bracketeer-personal|3/19/2026|Impersonation|
+|XYIAN.dark-synth-theme-xys|3/20/2026|Impersonation|
+|xwildeyes.vercel-vscode-by-xwildeyes|3/20/2026|Impersonation|
+|xvaldetaro.ai-prompt-compiler|3/20/2026|Impersonation|
+|xuhuanzy.emmylua-luals|3/20/2026|Impersonation|
+|xsf0105.open-in-github-pr|3/20/2026|Impersonation|
+|xiaym-gh.background-cover-simplified|3/20/2026|Impersonation|
+|xiaolvpuzi.vim-smart-input-pro|3/20/2026|Impersonation|
+|yelmuratoff.dart-data-class-tools-dev|3/20/2026|Impersonation|
+|YasenDimitrov.lazygit-vscode-v2|3/20/2026|Impersonation|
+|pit00.github-shortcuts|3/20/2026|Impersonation|
+|pit00.brackets-selection-plus|3/20/2026|Impersonation|
+|pit00.simple-icons-plus|3/20/2026|Impersonation|
+|pit00.mini-diff|3/20/2026|Impersonation|
+|pit00.vscode-ristretto-icons|3/20/2026|Impersonation|
+|pit00.direct-cmd|3/20/2026|Impersonation|
+|pit00.whitespace-counter|3/20/2026|Impersonation|
+|pit00.vscode-image-preview-alt|3/20/2026|Impersonation|
+|pit00.text-marker-numbered|3/20/2026|Impersonation|
+|pit00.fenced-code-blocks-tools|3/20/2026|Impersonation|
+|pit00.regex-hover|3/20/2026|Impersonation|
+|pit00.multiple-commands|3/20/2026|Impersonation|
+|pit00.vscode-indent-empty-line|3/20/2026|Impersonation|
+|pit00.multiple-cursor-pattern|3/20/2026|Impersonation|
+|pit00.global-regex|3/20/2026|Impersonation|
+|pit00.vscode-breakline-highlight|3/20/2026|Impersonation|
+|pit00.cursor-view-focus|3/20/2026|Impersonation|
+|robna.wordcount-selection|3/20/2026|Impersonation|
+|vs-browser-openUrl.vs-browser-openUrl|3/20/2026|Impersonation|
+|verreauxblack.vscode-git-commands-helper|3/20/2026|Impersonation|
+|vbtheory.gitlab-pipeline-monitor-advanced|3/20/2026|Impersonation|
+|saltand.completions-tester|3/20/2026|Impersonation|
+|sadan.insight-doc|3/20/2026|Impersonation|
+|ryanolsonx.poimandres-contrast|3/20/2026|Impersonation|
+|kingepic84.symphony-language |3/19/2026| As owner request
+|uladluch.cursor-mobile-connector |3/19/2026| Malware
+|Cencurity.cencurity-connector |3/19/2026| Malware
+|mpw.ccbscf-biz-snippets |3/19/2026| As owner request
+|mpw.ccbscf-snippets|3/19/2026| As owner request
+|mpw.ccbscf-ui-transfer|3/19/2026| As owner request
 |funkyproject.vscode-phpunit-funky-fork|3/18/2026|Impersonation|
 |grovejt.open-folder-in-cursor|3/18/2026|Impersonation|
 |reorx.github-abs-vscode-theme|3/18/2026|Impersonation|
