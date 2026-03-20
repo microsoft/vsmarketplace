@@ -60,7 +60,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |Cencurity.cencurity-connector |3/19/2026| Malware
 |mpw.ccbscf-biz-snippets |3/19/2026| As owner request
 |mpw.ccbscf-snippets|3/19/2026| As owner request
-|mpw.ccbscf-ui-transfer|3/19/2026| As owner request
+|mpw.ccbscf-ui-transfer|3/19/2026| As owner request|
 |funkyproject.vscode-phpunit-funky-fork|3/18/2026|Impersonation|
 |grovejt.open-folder-in-cursor|3/18/2026|Impersonation|
 |reorx.github-abs-vscode-theme|3/18/2026|Impersonation|
