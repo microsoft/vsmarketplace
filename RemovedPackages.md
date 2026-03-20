@@ -7,21 +7,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-|HonzaPudil.vscode-theme-onedarker-custom|3/19/2026|Impersonation|
-|hsn8086.cph-hsn-edition|3/19/2026|Impersonation|
-|hyoban.file-icons-continue|3/19/2026|Impersonation|
-|iabacus-publisher.iabacus-dev|3/19/2026|Impersonation|
-|iceeedR.amxx-pawn-language-editor|3/19/2026|Impersonation|
-|idlesilver.comment-driver|3/19/2026|Impersonation|
-|LiamDrew.arm-assembly|3/19/2026|Impersonation|
-|LiamWang.vscode-image-gallery-liamwang|3/19/2026|Impersonation|
-|LinkingMountains.SonarColorizer|3/19/2026|Impersonation|
-|littleCareless.dish-base-development-extensions-pack|3/19/2026|Impersonation|
-|liuhui.shadow-reader-pro|3/19/2026|Impersonation|
-|politsin.cline-pached|3/19/2026|Impersonation|
-|przybylski.cursor-harpoon|3/19/2026|Impersonation|
-|qusic.easysass-ng|3/19/2026|Impersonation|
-|RahulSinha.bracketeer-personal|3/19/2026|Impersonation|
 |XYIAN.dark-synth-theme-xys|3/20/2026|Impersonation|
 |xwildeyes.vercel-vscode-by-xwildeyes|3/20/2026|Impersonation|
 |xvaldetaro.ai-prompt-compiler|3/20/2026|Impersonation|
@@ -55,12 +40,27 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |saltand.completions-tester|3/20/2026|Impersonation|
 |sadan.insight-doc|3/20/2026|Impersonation|
 |ryanolsonx.poimandres-contrast|3/20/2026|Impersonation|
-|kingepic84.symphony-language |3/19/2026| As owner request
-|uladluch.cursor-mobile-connector |3/19/2026| Malware
-|Cencurity.cencurity-connector |3/19/2026| Malware
-|mpw.ccbscf-biz-snippets |3/19/2026| As owner request
-|mpw.ccbscf-snippets|3/19/2026| As owner request
-|mpw.ccbscf-ui-transfer|3/19/2026| As owner request|
+|HonzaPudil.vscode-theme-onedarker-custom|3/19/2026|Impersonation|
+|hsn8086.cph-hsn-edition|3/19/2026|Impersonation|
+|hyoban.file-icons-continue|3/19/2026|Impersonation|
+|iabacus-publisher.iabacus-dev|3/19/2026|Impersonation|
+|iceeedR.amxx-pawn-language-editor|3/19/2026|Impersonation|
+|idlesilver.comment-driver|3/19/2026|Impersonation|
+|LiamDrew.arm-assembly|3/19/2026|Impersonation|
+|LiamWang.vscode-image-gallery-liamwang|3/19/2026|Impersonation|
+|LinkingMountains.SonarColorizer|3/19/2026|Impersonation|
+|littleCareless.dish-base-development-extensions-pack|3/19/2026|Impersonation|
+|liuhui.shadow-reader-pro|3/19/2026|Impersonation|
+|politsin.cline-pached|3/19/2026|Impersonation|
+|przybylski.cursor-harpoon|3/19/2026|Impersonation|
+|qusic.easysass-ng|3/19/2026|Impersonation|
+|RahulSinha.bracketeer-personal|3/19/2026|Impersonation|
+|kingepic84.symphony-language |3/19/2026| Owner Request|
+|uladluch.cursor-mobile-connector |3/19/2026| Malware|
+|Cencurity.cencurity-connector |3/19/2026| Malware|
+|mpw.ccbscf-biz-snippets |3/19/2026| Owner Request|
+|mpw.ccbscf-snippets|3/19/2026| Owner Request|
+|mpw.ccbscf-ui-transfer|3/19/2026| Owner Request|
 |funkyproject.vscode-phpunit-funky-fork|3/18/2026|Impersonation|
 |grovejt.open-folder-in-cursor|3/18/2026|Impersonation|
 |reorx.github-abs-vscode-theme|3/18/2026|Impersonation|
