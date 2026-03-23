@@ -115,10 +115,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |xwildeyes.vercel-vscode-by-xwildeyes|3/20/2026|Impersonation|
 |xvaldetaro.ai-prompt-compiler|3/20/2026|Impersonation|
 |xuhuanzy.emmylua-luals|3/20/2026|Impersonation|
-| JustLookAtNow.gitlab-mr-ui | 3/20/2026 | Impersonation |
-| COMP.sqltools-enhanced | 3/20/2026 | Impersonation |
-| jonasxwebdev.sftp-dssCOMP.java-bazel-extension | 3/20/2026 | Impersonation |
-| COMP.sqltools-driver-postgres | 3/20/2026 | Impersonation |
+|JustLookAtNow.gitlab-mr-ui|3/20/2026|Impersonation|
+|COMP.sqltools-enhanced|3/20/2026|Impersonation|
+|jonasxwebdev.sftp-dssCOMP.java-bazel-extension|3/20/2026|Impersonation|
+|COMP.sqltools-driver-postgres|3/20/2026|Impersonation|
 |xsf0105.open-in-github-pr|3/20/2026|Impersonation|
 |xiaym-gh.background-cover-simplified|3/20/2026|Impersonation|
 |xiaolvpuzi.vim-smart-input-pro|3/20/2026|Impersonation|
