@@ -7,14 +7,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-|Vikang.vscode-acnh-icon-theme|3/23/2026| Impersonation|
-|Vikang.acnh-vscode-theme|3/23/2026| Impersonation|
-|uladluch.antigravity-mobile-connector|3/23/2026| Malware|
-|anwar.papyrus-pdf|3/23/2026| Impersonation|
-|soongfs.gruvbox-material-continued|3/23/2026| Impersonation|
-|meow-d.markless-meowd|3/23/2026| Impersonation|
-| SiFli.sifli-sdk-codekit | 3/22/2026 | Malware |
-| daelmaak.next-error | 3/21/2026 | Impersonation |
+| Vikang.vscode-acnh-icon-theme        | 3/23/2026    | Impersonation                |
+| Vikang.acnh-vscode-theme             | 3/23/2026    | Impersonation                |
+| uladluch.antigravity-mobile-connector | 3/23/2026   | Malware                      |
+| anwar.papyrus-pdf                    | 3/23/2026    | Impersonation                |
+| soongfs.gruvbox-material-continued   | 3/23/2026    | Impersonation                |
+| meow-d.markless-meowd                | 3/23/2026    | Impersonation                |
+| SiFli.sifli-sdk-codekit              | 3/22/2026    | Malware                      |
+| daelmaak.next-error                  | 3/21/2026    | Impersonation                |
 | danieloaks.rest-client-do | 3/21/2026 | Impersonation |
 | day253.system-information-status-bar | 3/21/2026 | Impersonation |
 | day253.data-scientist-development-pack | 3/21/2026 | Impersonation |
