@@ -7,6 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| BITS2500.bits-codon | 3/25/2026 | Impersonation |
+| tanukii.autoversion | 3/25/2026 | Impersonation |
+| SoulFriends.eslint-rules-zh-with-pretty | 3/25/2026 | Impersonation |
+| ASUS-AICS.aics-copilot | 3/25/2026 | Impersonation |
+| qianzijiao.continue-with-code-swift | 3/25/2026 | Impersonation |
+| mikeljl.continue-ljl-fork | 3/25/2026 | Impersonation |
+| vibe-xyz.vibe-xyz | 3/25/2026 | Impersonation |
 | lumirelle.shell-format-rev | 3/24/2026 | Impersonation |
 | Milynn.bongocat-sidebar | 3/24/2026 | Impersonation |
 | gh555.qqq | 3/24/2026 | Malware |
