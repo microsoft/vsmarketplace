@@ -14,8 +14,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | qianzijiao.continue-with-code-swift  | 3/25/2026    | Impersonation                |
 | mikeljl.continue-ljl-fork           | 3/25/2026    | Impersonation                |
 | vibe-xyz.vibe-xyz                    | 3/25/2026    | Impersonation                |
-| lumirelle.shell-format-rev           | 3/24/2026    | Impersonation                |
-| Milynn.bongocat-sidebar              | 3/24/2026    | Impersonation                |
+| lumirelle.shell-format-rev | 3/24/2026 | Impersonation |
+| Milynn.bongocat-sidebar | 3/24/2026 | Impersonation |
 | gh555.qqq | 3/24/2026 | Malware |
 | SVO.continue-svo-test | 3/24/2026 | Impersonation |
 | Vikang.vscode-acnh-icon-theme | 3/23/2026 | Impersonation |
