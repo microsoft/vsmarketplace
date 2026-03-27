@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Ilham-ahmedow.sftp20| 3/26/2026  | Impersonation |
+| bbznop.open-in-external-app-pro|3/26/2026  | Impersonation   |
+| Kanishk-B.mass-rename-extension5 | 3/26/2026  | Impersonation   |
+| RevoData.vscode-for-just | 3/26/2026  |Impersonation |
+| MominRaza.rest-client-maintained| 3/26/2026 |Impersonation|
+| trandaison.trandaison-git-file-history | 3/26/2026  |Impersonation |
 | BITS2500.bits-codon | 3/25/2026 | Impersonation |
 | tanukii.autoversion | 3/25/2026 | Impersonation |
 | SoulFriends.eslint-rules-zh-with-pretty | 3/25/2026 | Impersonation |
