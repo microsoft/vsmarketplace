@@ -1,0 +1,72 @@
+name: Find Issues Without External Comments
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # Runs once a day at midnight UTC
+  workflow_dispatch:       # Allows manual runs
+
+jobs:
+  find-issues:
+    permissions:
+      issues: read
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Find issues with no non-auth-user comments in the past 580 days
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: microsoft/vsmarketplace
+          LOOKBACK_DAYS: 580
+          # Space-separated list of authorized users whose comments are ignored
+          AUTH_USERS: "tj-devel709"
+        run: |
+          # Build the cutoff timestamp (580 days ago, UTC)
+          SINCE=$(date -u -d "${LOOKBACK_DAYS} days ago" +"%Y-%m-%dT%H:%M:%SZ")
+          echo "Cutoff date : $SINCE"
+          echo "Auth users  : $AUTH_USERS"
+          echo ""
+
+          # Convert AUTH_USERS (space-separated) to a JSON array for jq
+          AUTH_USERS_JSON=$(echo "$AUTH_USERS" | tr ' ' '\n' | jq -R . | jq -sc .)
+
+          # Collect all open issue numbers (up to 1 000)
+          issue_numbers=$(gh issue list \
+            -R "$REPO" \
+            --state open \
+            --limit 1000 \
+            --json number \
+            -q '.[].number')
+
+          matched_issues=""
+
+          for ISSUE in $issue_numbers; do
+            echo "🔍 Checking Issue #$ISSUE"
+
+            # Fetch comments created/updated since the cutoff (paginated, max 100 per page)
+            comments=$(gh api \
+              "repos/$REPO/issues/$ISSUE/comments?since=${SINCE}&per_page=100" \
+              2>/dev/null || echo "[]")
+
+            # Count comments whose author is NOT in the AUTH_USERS list
+            non_auth_count=$(echo "$comments" | jq \
+              --argjson auth "$AUTH_USERS_JSON" \
+              '[.[] | select(.user.login as $u | ($auth | index($u)) == null)] | length')
+
+            if [ "$non_auth_count" -eq 0 ]; then
+              echo "   ✅ Issue #$ISSUE — no comments from non-auth users in the past ${LOOKBACK_DAYS} days"
+              matched_issues="$matched_issues $ISSUE"
+            else
+              echo "   ➡️  Issue #$ISSUE — ${non_auth_count} comment(s) from non-auth user(s), skipping"
+            fi
+            echo ""
+          done
+
+          echo "============================================================"
+          echo "Issues with no non-auth-user comments in the past ${LOOKBACK_DAYS} days:"
+          if [ -z "$matched_issues" ]; then
+            echo "  (none found)"
+          else
+            for ISSUE in $matched_issues; do
+              echo "  • https://github.com/$REPO/issues/$ISSUE"
+            done
+          fi
