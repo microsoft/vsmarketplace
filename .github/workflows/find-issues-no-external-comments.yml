@@ -29,13 +29,24 @@ jobs:
           # Convert AUTH_USERS (space-separated) to a JSON array for jq
           AUTH_USERS_JSON=$(echo "$AUTH_USERS" | tr ' ' '\n' | jq -R . | jq -sc .)
 
-          # Collect all open issue numbers (up to 1 000)
-          issue_numbers=$(gh issue list \
+          # Labels that disqualify an issue from the report
+          SKIP_LABELS=("Priority:0" "Priority:1" "Type:Feature" "DoNotClose")
+
+          # Collect all open issues with their labels (up to 1 000)
+          issues_json=$(gh issue list \
             -R "$REPO" \
             --state open \
             --limit 1000 \
-            --json number \
-            -q '.[].number')
+            --json number,labels)
+
+          # Build a jq expression that skips issues carrying any of the skip labels
+          SKIP_LABELS_JSON=$(printf '%s\n' "${SKIP_LABELS[@]}" | jq -R . | jq -sc .)
+
+          issue_numbers=$(echo "$issues_json" | jq -r \
+            --argjson skip "$SKIP_LABELS_JSON" \
+            '.[] | select(
+              (.labels | map(.name) | any(. as $l | $skip | index($l) != null)) | not
+            ) | .number')
 
           matched_issues=""
 
