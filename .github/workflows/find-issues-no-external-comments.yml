@@ -32,20 +32,22 @@ jobs:
           # Labels that disqualify an issue from the report
           SKIP_LABELS=("Priority:0" "Priority:1" "Type:Feature" "DoNotClose")
 
-          # Collect all open issues with their labels (up to 1 000)
+          # Collect all open issues with their labels and creation date (up to 1 000)
           issues_json=$(gh issue list \
             -R "$REPO" \
             --state open \
             --limit 1000 \
-            --json number,labels)
+            --json number,labels,createdAt)
 
           # Build a jq expression that skips issues carrying any of the skip labels
           SKIP_LABELS_JSON=$(printf '%s\n' "${SKIP_LABELS[@]}" | jq -R . | jq -sc .)
 
           issue_numbers=$(echo "$issues_json" | jq -r \
             --argjson skip "$SKIP_LABELS_JSON" \
+            --arg since "$SINCE" \
             '.[] | select(
-              (.labels | map(.name) | any(. as $l | $skip | index($l) != null)) | not
+              (.createdAt <= $since) and
+              ((.labels | map(.name) | any(. as $l | $skip | index($l) != null)) | not)
             ) | .number')
 
           matched_issues=""
