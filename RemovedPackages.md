@@ -7,6 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| IoliteLabs.solidity-macos| 3/28/2026 | Malware |
+| IoliteLabs.solidity-linux| 3/28/2026 | Malware |
+| IoliteLabs.solidity-windows| 3/28/2026 | Malware |
+| zenplusplus.sonaita | 3/27/2026 | Impersonation |
+| Rabiloo.ethery | 3/27/2026 | Impersonation | 
+| RachmatKaligis.robotcode-gherkin-extended | 3/29/2026 | Impersonation | 
+| nanmu.office-viewer-pro | 3/29/2026 | Impersonation |
 | Ilham-ahmedow.sftp20 | 3/26/2026 | Impersonation |
 | bbznop.open-in-external-app-pro | 3/26/2026 | Impersonation |
 | Kanishk-B.mass-rename-extension5 | 3/26/2026 | Impersonation |
@@ -33,7 +40,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | soongfs.gruvbox-material-continued | 3/23/2026 | Impersonation |
 | meow-d.markless-meowd | 3/23/2026 | Impersonation |
 | pit00.magenta-one-dark-pro | 3/23/2026 | Impersonation |
-| SiFli.sifli-sdk-codekit | 3/22/2026 | Malware |
 | daelmaak.next-error                  | 3/21/2026    | Impersonation                |
 | danieloaks.rest-client-do | 3/21/2026 | Impersonation |
 | day253.system-information-status-bar | 3/21/2026 | Impersonation |
