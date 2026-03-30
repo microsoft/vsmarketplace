@@ -9,9 +9,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |---------------------------------------|--------------|-------------------------------|
 | RachmatKaligis.robotcode-gherkin-extended | 3/29/2026 | Impersonation | 
 | nanmu.office-viewer-pro | 3/29/2026 | Impersonation |
-| IoliteLabs.solidity-macos| 3/28/2026 | Malware |
-| IoliteLabs.solidity-linux| 3/28/2026 | Malware |
-| IoliteLabs.solidity-windows| 3/28/2026 | Malware |
+| IoliteLabs.solidity-macos | 3/28/2026 | Malware |
+| IoliteLabs.solidity-linux | 3/28/2026 | Malware |
+| IoliteLabs.solidity-windows | 3/28/2026 | Malware |
 | zenplusplus.sonaita | 3/27/2026 | Impersonation |
 | Rabiloo.ethery | 3/27/2026 | Impersonation | 
 | Ilham-ahmedow.sftp20 | 3/26/2026 | Impersonation |
