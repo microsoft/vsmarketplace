@@ -3,12 +3,12 @@ name: Find Issues Without External Comments
 on:
   schedule:
     - cron: '0 0 * * *'   # Runs once a day at midnight UTC
-  workflow_dispatch:       # Allows manual runs
+  workflow_dispatch:      # Allows manual runs
 
 jobs:
   find-issues:
     permissions:
-      issues: read
+      issues: write
     runs-on: ubuntu-latest
 
     steps:
@@ -18,7 +18,7 @@ jobs:
           REPO: microsoft/vsmarketplace
           LOOKBACK_DAYS: 580
           # Space-separated list of authorized users whose comments are ignored
-          AUTH_USERS: "tj-devel709"
+          AUTH_USERS: "github-actions[bot] microsoft-github-policy-service[bot] joaomoreno joelverhagen agr fiveisprime sbanni pjcollins jimmylewis erdembayar sandy081 mariaghiondea chabiss skofman1 mcumming seaniyer etvorun  tj-devel709 zhhyu Lanaparezanin pragnya17 japarson lyndaidaii advay26 isidorn madhurivadaligithub v-ponkumar v-manil2 v-sulagnapal satapathyj V-ManaliP pratikgawali-msft"
         run: |
           # Build the cutoff timestamp (580 days ago, UTC)
           SINCE=$(date -u -d "${LOOKBACK_DAYS} days ago" +"%Y-%m-%dT%H:%M:%SZ")
@@ -29,13 +29,26 @@ jobs:
           # Convert AUTH_USERS (space-separated) to a JSON array for jq
           AUTH_USERS_JSON=$(echo "$AUTH_USERS" | tr ' ' '\n' | jq -R . | jq -sc .)
 
-          # Collect all open issue numbers (up to 1 000)
-          issue_numbers=$(gh issue list \
+          # Labels that disqualify an issue from the report
+          SKIP_LABELS=("Priority:0" "Priority:1" "Type:Feature" "DoNotClose")
+
+          # Collect all open issues with their labels and creation date (up to 1 000)
+          issues_json=$(gh issue list \
             -R "$REPO" \
             --state open \
             --limit 1000 \
-            --json number \
-            -q '.[].number')
+            --json number,labels,createdAt)
+
+          # Build a jq expression that skips issues carrying any of the skip labels
+          SKIP_LABELS_JSON=$(printf '%s\n' "${SKIP_LABELS[@]}" | jq -R . | jq -sc .)
+
+          issue_numbers=$(echo "$issues_json" | jq -r \
+            --argjson skip "$SKIP_LABELS_JSON" \
+            --arg since "$SINCE" \
+            '.[] | select(
+              (.createdAt <= $since) and
+              ((.labels | map(.name) | any(. as $l | $skip | index($l) != null)) | not)
+            ) | .number')
 
           matched_issues=""
 
@@ -52,17 +65,38 @@ jobs:
               --argjson auth "$AUTH_USERS_JSON" \
               '[.[] | select(.user.login as $u | ($auth | index($u)) == null)] | length')
 
+            # Get unique non-auth usernames for this issue (one per line)
+            non_auth_users=$(echo "$comments" | jq -r \
+              --argjson auth "$AUTH_USERS_JSON" \
+              '[.[] | select(.user.login as $u | ($auth | index($u)) == null) | .user.login]
+               | unique
+               | .[]'
+            )
+
             if [ "$non_auth_count" -eq 0 ]; then
-              echo "   ✅ Issue #$ISSUE — no comments from non-auth users in the past ${LOOKBACK_DAYS} days"
+              echo "   ✅ Issue #$ISSUE — no comments from customers in the past ${LOOKBACK_DAYS} days"
               matched_issues="$matched_issues $ISSUE"
+
+              # Add a staleness comment (but only once)
+              STALE_COMMENT="This issue will be closed due to staleness for the past ${LOOKBACK_DAYS} days"
+              echo "      💬 Posting staleness comment to Issue #$ISSUE"
+              gh issue comment "$ISSUE" -R "$REPO" --body "$STALE_COMMENT" >/dev/null
+
+              # Close the issue
+              echo "      ✅ Closing issue"
+              gh issue close "$ISSUE" -R "$REPO" >/dev/null
+
             else
               echo "   ➡️  Issue #$ISSUE — ${non_auth_count} comment(s) from non-auth user(s), skipping"
+
+              echo "      Non-auth user(s):"
+              echo "$non_auth_users" | sed 's/^/      - /'
             fi
             echo ""
           done
 
           echo "============================================================"
-          echo "Issues with no non-auth-user comments in the past ${LOOKBACK_DAYS} days:"
+          echo "Issues with no customer comments in the past ${LOOKBACK_DAYS} days that were closed:"
           if [ -z "$matched_issues" ]; then
             echo "  (none found)"
           else
