@@ -55,8 +55,8 @@ jobs:
           for ISSUE in $issue_numbers; do
             echo "🔍 Checking Issue #$ISSUE"
 
-            # Fetch comments created/updated since the cutoff (paginated, max 100 per page)
-            comments=$(gh api \
+            # Fetch comments created/updated since the cutoff (retrieve all pages)
+            comments=$(gh api --paginate \
               "repos/$REPO/issues/$ISSUE/comments?since=${SINCE}&per_page=100" \
               2>/dev/null || echo "[]")
 
