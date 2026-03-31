@@ -27,7 +27,7 @@ This diagram shows the flow of the `resourceManagement.yml` GitOps configuration
    - Issues with `needs-info` + 7 days inactive + `Stale` → **Close**
    - Issues with `needs-info` + 7 days inactive (no `Stale`) → **Warn + Add Stale label**
 
-3. **Type Label Maintenance**:
+2. **Type Label Maintenance**:
    - Issues missing type labels → **Add `needs-typeLabel` + comment**
 
 ### Safety Features:

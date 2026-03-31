@@ -1,14 +1,14 @@
 # Close stale issues workflow
 
-This workflow script is located at `.github/workflows/close-stale-issues.yaml` and runs daily (and on manual dispatch) to find and close GitHub issues that have had no customer (non-authorized) comments within a configured lookback window.
+This workflow script is located at `../.github/workflows/close-stale-issues.yaml` and runs daily (and on manual dispatch) to find and close GitHub issues that have had no customer (non-authorized) comments within a configured lookback window.
 
 Summary
-- Purpose: automatically comment on and close issues that have not received any non-authorized-user comments within the last 580 days.
+- Purpose: automatically comment on and close issues that have not received any non-authorized-user comments within the last 548 days.
 - Trigger: daily schedule (`0 0 * * *`, midnight UTC) and `workflow_dispatch` for manual runs.
 - Runner: `ubuntu-latest`.
 
 How it works
-- The job lists open issues and filters those created on or before the cutoff date (computed from `LOOKBACK_DAYS`, default 580).
+- The job lists open issues and filters those created on or before the cutoff date (computed from `LOOKBACK_DAYS`, default 548).
 - Issues are excluded if they carry any skip labels (e.g. `Priority:0`, `Priority:1`, `Type:Feature`, `DoNotClose`).
 - For each candidate issue, the workflow fetches issue comments since the cutoff and counts only comments from users not in the authorized users list (`AUTH_USERS`).
 - If there are no such customer comments, the workflow posts a staleness comment and closes the issue.
