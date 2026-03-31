@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ihyajb.cfxlua-intellisense| 3/31/2026 | Impersonation |
+| SoumyadeepDas.gemini-code-converter| 3/31/2026 | Impersonation |
+| otimiza.local-agent-screen-viewer| 3/30/2026 | Malware |
+| itanshield.titanshield-vscode| 3/30/2026 | Malware |
+| ultimateBroK.symbols-enhance| 3/30/2026 | Impersonation |
+| Superxin.ctags-c-cpp | 3/30/2026 | Impersonation |
 | RachmatKaligis.robotcode-gherkin-extended | 3/29/2026 | Impersonation | 
 | nanmu.office-viewer-pro | 3/29/2026 | Impersonation |
 | IoliteLabs.solidity-macos | 3/28/2026 | Malware |
