@@ -13,7 +13,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | rabbitsyntax.rabbitsyntax| 4/1/2026 | Owner Request|
 | FlowIndex.flowindex-cadence| 4/1/2026 | Impersonation|
 | Brett-Wilson.markdown-shortcuts-chinese | 4/1/2026 | Impersonation |
-| AugmentedValueAcceleration.ava-supernova  | 4/1/2026 | Malware|
+| AugmentedValueAcceleration.ava-supernova | 4/1/2026 | Malware |
 | ihyajb.cfxlua-intellisense| 3/31/2026 | Impersonation |
 | SoumyadeepDas.gemini-code-converter| 3/31/2026 | Impersonation |
 | otimiza.local-agent-screen-viewer| 3/30/2026 | Malware |
