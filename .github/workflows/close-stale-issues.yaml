@@ -78,7 +78,7 @@ jobs:
               matched_issues="$matched_issues $ISSUE"
 
               # Add a staleness comment (but only once)
-              STALE_COMMENT="This issue is being closed due to staleness for the past ${LOOKBACK_DAYS} days"
+              STALE_COMMENT="This issue is being closed due to staleness for the past ${LOOKBACK_DAYS} days. If you want to keep this issue open, respond with a comment on this issue."
               echo "      💬 Posting staleness comment to Issue #$ISSUE"
               gh issue comment "$ISSUE" -R "$REPO" --body "$STALE_COMMENT" >/dev/null
 
