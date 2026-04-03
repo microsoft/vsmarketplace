@@ -14,7 +14,7 @@ How it works
 - If there are no such customer comments, the workflow posts a staleness comment and closes the issue.
 
 Configuration / customization
-- `LOOKBACK_DAYS`: number of days to look back for comments (default 580).
+- `LOOKBACK_DAYS`: number of days to look back for comments (default 548).
 - `AUTH_USERS`: space-separated list of usernames whose comments are ignored (bots and internal reviewers).
 - `SKIP_LABELS`: array in the script holds labels that prevent automatic closing.
 - `REPO`: repository owner/name is set in the workflow environment.
