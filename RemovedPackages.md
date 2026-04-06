@@ -7,6 +7,21 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| abczyx2006.rust-coder | 4/3/2026 | Impersonation |
+| camork.fonted-plus | 4/3/2026 | Impersonation |
+| RecoLive.lldb-dap-android | 4/3/2026 | Impersonation |
+| cryptninjaswap.cryptoninja-auto-accept | 4/3/2026 | Impersonation |
+| cryptninjaswap.cryptoninja-japanese-pack | 4/3/2026 | Impersonation |
+| cryptninjaswap.cryptoninja-diff-viewer | 4/3/2026 | Impersonation |
+| cryptninjaswap.cryptoninja-color-picker | 4/3/2026 | Impersonation |
+| cryptninjaswap.cryptoninja-json-tools | 4/3/2026 | Impersonation |
+| cryptninjaswap.cryptoninja-code-review | 4/3/2026 | Impersonation |
+| cryptninjaswap.cryptoninja-shuriken-dojo | 4/3/2026 | Impersonation |
+| cryptninjaswap.cryptoninja-commit-helper | 4/3/2026 | Impersonation |
+| cryptninjaswap.cryptoninja-regex-tester | 4/3/2026 | Impersonation |
+| cryptninjaswap.cryptoninja-prompt-pack | 4/3/2026 | Impersonation |
+| jackieyyang.jackieyyang-git-extension-pack | 4/3/2026 | Impersonation |
+| devxlogan.jetbrains-rider-new-ui-theme-fixed | 4/3/2026 | Impersonation |
 | toommyliu.cursor-dark-no-italicse| 4/1/2026 | Impersonation|
 | kova-lang.kova-material-iconse| 4/1/2026 | Impersonation|
 | DaMaoCloud.damao-aie| 4/1/2026 | Impersonation|
