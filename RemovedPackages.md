@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| duanyll.image-gallery | 4/3/2026 | Impersonation |
 | abczyx2006.rust-coder | 4/3/2026 | Impersonation |
 | camork.fonted-plus | 4/3/2026 | Impersonation |
 | RecoLive.lldb-dap-android | 4/3/2026 | Impersonation |
