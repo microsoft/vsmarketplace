@@ -55,10 +55,11 @@ jobs:
           for ISSUE in $issue_numbers; do
             echo "🔍 Checking Issue #$ISSUE"
 
-            # Fetch comments created/updated since the cutoff (retrieve all pages)
+            # Fetch comments created/updated since the cutoff (retrieve all pages).
+            # If the API call fails, let the workflow fail instead of treating the
+            # error as "no comments" and potentially closing the issue incorrectly.
             comments=$(gh api --paginate \
-              "repos/$REPO/issues/$ISSUE/comments?since=${SINCE}&per_page=100" \
-              2>/dev/null || echo "[]")
+              "repos/$REPO/issues/$ISSUE/comments?since=${SINCE}&per_page=100")
 
             # Count comments whose author is NOT in the AUTH_USERS list
             non_auth_count=$(echo "$comments" | jq \
