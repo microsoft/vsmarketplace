@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| qpluslang.qplusos| 4/7/2026 | Spam|
+| foba-language.foba-language| 4/7/2026 | Spam|
+| vox-studio.vox-language| 4/7/2026 | Spam|
+| hqvjet.pixel-agents-remake|4/7/2026|Impersonation|
 | duanyll.image-gallery | 4/3/2026 | Impersonation |
 | abczyx2006.rust-coder | 4/3/2026 | Impersonation |
 | camork.fonted-plus | 4/3/2026 | Impersonation |
