@@ -7,6 +7,17 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| sneakyloris.team-pulse| 4/7/2026 | Malware|
+| Price.automatic-recording-code| 4/7/2026 | Potentially malicious|
+| Price.code-documentation-utilities| 4/7/2026 | Potentially malicious|
+| Price.automatic-printing-codem| 4/7/2026 | Potentially malicious|
+| ChristopherCRobinson.browser-tools-for-testcafe| 4/7/2026 | Impersonation|
+| kindly-robotics.inferall-ai| 4/7/2026 | Impersonation|
+| tohuw.focus-lines| 4/7/2026 | Impersonation|
+| cognivision.cogni-dev| 4/7/2026 | Impersonation|
+| thirst.cfxlua-types-intellisense| 4/7/2026 | Impersonation|
+| stunning-yunwu.code-debugger-plus| 4/7/2026 | Impersonation|
+| pedrocmota.workspace-formatter-multiple| 4/7/2026 | Impersonation|
 | qpluslang.qplusos| 4/7/2026 | Spam|
 | foba-language.foba-language| 4/7/2026 | Spam|
 | vox-studio.vox-language| 4/7/2026 | Spam|
