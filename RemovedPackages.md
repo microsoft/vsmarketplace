@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| sla-guardian.static-sla-guardian | 4/8/2026 | Untrustworthy |
+| tak-vibecoding.tak | 4/8/2026 | Untrustworthy |
+| IZOT-TE-3.static-code-parser | 4/8/2026 | Untrustworthy |
+| IZOT-TE-3-FINAL.static-code-parser-FINAL | 4/8/2026 | Untrustworthy |
 | sneakyloris.team-pulse| 4/7/2026 | Malware|
 | Price.automatic-recording-code| 4/7/2026 | Potentially malicious|
 | Price.code-documentation-utilities| 4/7/2026 | Potentially malicious|
