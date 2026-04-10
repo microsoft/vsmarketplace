@@ -7,6 +7,39 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| SlashMarkHub.error-explainer-by-slashmark | 04/08/2026 | Spam | 
+| SlashMarkHub.auto-log-tracker-by-slashmark | 04/08/2026 | Spam |
+| SlashMarkHub.global-notes-snippets-by-slashmark | 04/08/2026 | Spam |
+| slashmarkdev.env-file-manager-by-slashmark | 04/08/2026 | Spam |
+| slashmarkdev.api-tester-by-slashmark-it | 04/08/2026 | Spam |
+| SlashMarkITSolutionsOPCPvtLtd.slashmark-json-yaml-converter | 04/08/2026 | Spam |
+| SlashMark.slashmark-base64 | 04/08/2026 | Spam |
+| SlashMark.slashmark-fahh | 04/08/2026 | Spam |
+| SlashMark.slashmark-duplicate-line-highlighter | 04/08/2026 | Spam |
+| SlashMark.slashmark-duplicate-line-remover | 04/08/2026 | Spam |
+| SlashMark.slashmark-remove-trailing-spaces | 04/08/2026 | Spam |
+| SlashMark.slashmark-url-encoder | 04/08/2026 | Spam |
+| SlashMark.slashmark-hash-generator | 04/08/2026 | Spam | 
+| SlashMark.slashmark-word-counter | 04/08/2026 | Spam |
+| SlashMark.slashmark-workspace-reset | 04/08/2026 | Spam |
+| SlashMark.slashmark-case-converter | 04/08/2026 | Spam |
+| SlashMark.slashmark-terminal-cleaner | 04/08/2026 | Spam |
+| SlashMark.slashmark-random-data-generator | 04/08/2026 | Spam |
+| SlashMark.slashmark-kill-port | 04/08/2026 | Spam |
+| SlashMark.slashmark-jwt-decoder | 04/08/2026 | Spam |
+| SlashMark.slashmark-remove-empty-lines | 04/08/2026 | Spam | 
+| SlashMark.slashmark-uuid | 04/08/2026 | Spam | 
+| SlashMark.slashmark-timestamp-converter | 04/08/2026 | Spam |
+| SlashMark.slashmark-rage-quit | 04/08/2026 | Spam |
+| SlashMark.slashmark-regex-tester | 04/08/2026 | Spam |
+| SlashMark.slashmark-json-formatter | 04/08/2026 | Spam |
+| SlashMark.slashmark-text-sorter | 04/08/2026 | Spam |
+| SlashMark.slashmark-tab-killer | 04/08/2026 | Spam |
+| SlashMark.slashmark-http-status | 04/08/2026 | Spam |
+| SlashMark.slashmark-lorem-generator | 04/08/2026 | Spam | 
+| SlashMark.slashmark-password-generator | 04/08/2026 | Spam |
+| shahul-dev.internal| 04/08/2026 | Spam |
+| sentinelvs.sentinel-debug| 04/08/2026 | Spam |
 | sla-guardian.static-sla-guardian | 4/8/2026 | Untrustworthy |
 | tak-vibecoding.tak | 4/8/2026 | Untrustworthy |
 | IZOT-TE-3.static-code-parser | 4/8/2026 | Untrustworthy |
@@ -48,7 +81,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | rabbitsyntax.rabbitsyntax| 4/1/2026 | Owner Request|
 | FlowIndex.flowindex-cadence| 4/1/2026 | Impersonation|
 | Brett-Wilson.markdown-shortcuts-chinese | 4/1/2026 | Impersonation |
-| AugmentedValueAcceleration.ava-supernova | 4/1/2026 | Malware |
 | ihyajb.cfxlua-intellisense| 3/31/2026 | Impersonation |
 | SoumyadeepDas.gemini-code-converter| 3/31/2026 | Impersonation |
 | otimiza.local-agent-screen-viewer| 3/30/2026 | Malware |
