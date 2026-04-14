@@ -7,39 +7,56 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| SlashMarkHub.error-explainer-by-slashmark | 04/08/2026 | Spam | 
-| SlashMarkHub.auto-log-tracker-by-slashmark | 04/08/2026 | Spam |
-| SlashMarkHub.global-notes-snippets-by-slashmark | 04/08/2026 | Spam |
-| slashmarkdev.env-file-manager-by-slashmark | 04/08/2026 | Spam |
-| slashmarkdev.api-tester-by-slashmark-it | 04/08/2026 | Spam |
-| SlashMarkITSolutionsOPCPvtLtd.slashmark-json-yaml-converter | 04/08/2026 | Spam |
-| SlashMark.slashmark-base64 | 04/08/2026 | Spam |
-| SlashMark.slashmark-fahh | 04/08/2026 | Spam |
-| SlashMark.slashmark-duplicate-line-highlighter | 04/08/2026 | Spam |
-| SlashMark.slashmark-duplicate-line-remover | 04/08/2026 | Spam |
-| SlashMark.slashmark-remove-trailing-spaces | 04/08/2026 | Spam |
-| SlashMark.slashmark-url-encoder | 04/08/2026 | Spam |
-| SlashMark.slashmark-hash-generator | 04/08/2026 | Spam | 
-| SlashMark.slashmark-word-counter | 04/08/2026 | Spam |
-| SlashMark.slashmark-workspace-reset | 04/08/2026 | Spam |
-| SlashMark.slashmark-case-converter | 04/08/2026 | Spam |
-| SlashMark.slashmark-terminal-cleaner | 04/08/2026 | Spam |
-| SlashMark.slashmark-random-data-generator | 04/08/2026 | Spam |
-| SlashMark.slashmark-kill-port | 04/08/2026 | Spam |
-| SlashMark.slashmark-jwt-decoder | 04/08/2026 | Spam |
-| SlashMark.slashmark-remove-empty-lines | 04/08/2026 | Spam | 
-| SlashMark.slashmark-uuid | 04/08/2026 | Spam | 
-| SlashMark.slashmark-timestamp-converter | 04/08/2026 | Spam |
-| SlashMark.slashmark-rage-quit | 04/08/2026 | Spam |
-| SlashMark.slashmark-regex-tester | 04/08/2026 | Spam |
-| SlashMark.slashmark-json-formatter | 04/08/2026 | Spam |
-| SlashMark.slashmark-text-sorter | 04/08/2026 | Spam |
-| SlashMark.slashmark-tab-killer | 04/08/2026 | Spam |
-| SlashMark.slashmark-http-status | 04/08/2026 | Spam |
-| SlashMark.slashmark-lorem-generator | 04/08/2026 | Spam | 
-| SlashMark.slashmark-password-generator | 04/08/2026 | Spam |
-| shahul-dev.internal| 04/08/2026 | Spam |
-| sentinelvs.sentinel-debug| 04/08/2026 | Spam |
+|vs-publisher-1489718.SQLinFormVS20222026 | 4/10/2026 | impersonation|
+|chenjingqing.yuque-editor | 4/10/2026 | impersonation|
+|funovus.dcei-vscode-teal | 4/10/2026 | impersonation|
+|funovus.dceilua | 4/10/2026 | impersonation|
+|KrishnaChirravuri.SmartStartupProjectSwitcher | 4/10/2026 | impersonation|
+|reflection.test-gl-workflow-fork | 4/10/2026 | impersonation|
+|617694668.cline-cn | 4/10/2026 | impersonation|
+|agent.devdock | 4/10/2026 | impersonation|
+|KuCai.kucai-autojs6-vscode-ext | 4/10/2026 | impersonation|
+|longguanghui.baiteda-vscode-i18n | 4/10/2026 | impersonation|
+|PatrikHuber.ImageWatch | 4/10/2026 | impersonation|
+|secunit.caddyfile-syntax | 4/10/2026 | impersonation|
+|huangshiyu.sftp-uploader | 4/10/2026 | impersonation|
+|WillZhang.dracula-variants | 4/10/2026 | impersonation|
+|lumirelle.shell-format-rev | 4/10/2026 | impersonation|
+|Gabeseltzer.behave-vsc-gs | 4/10/2026 | impersonation|
+|lukasfull.protheus-app-generator | 4/10/2026 | Spam|
+| SlashMarkHub.error-explainer-by-slashmark | 4/8/2026 | Spam | 
+| SlashMarkHub.auto-log-tracker-by-slashmark | 4/8/2026 | Spam |
+| SlashMarkHub.global-notes-snippets-by-slashmark | 4/8/2026 | Spam |
+| slashmarkdev.env-file-manager-by-slashmark | 4/8/2026 | Spam |
+| slashmarkdev.api-tester-by-slashmark-it | 4/8/2026 | Spam |
+| SlashMarkITSolutionsOPCPvtLtd.slashmark-json-yaml-converter | 4/8/2026 | Spam |
+| SlashMark.slashmark-base64 | 4/8/2026 | Spam |
+| SlashMark.slashmark-fahh | 4/8/2026 | Spam |
+| SlashMark.slashmark-duplicate-line-highlighter | 4/8/2026 | Spam |
+| SlashMark.slashmark-duplicate-line-remover | 4/8/2026 | Spam |
+| SlashMark.slashmark-remove-trailing-spaces | 4/8/2026 | Spam |
+| SlashMark.slashmark-url-encoder | 4/8/2026 | Spam |
+| SlashMark.slashmark-hash-generator | 4/8/2026 | Spam | 
+| SlashMark.slashmark-word-counter | 4/8/2026 | Spam |
+| SlashMark.slashmark-workspace-reset | 4/8/2026 | Spam |
+| SlashMark.slashmark-case-converter | 4/8/2026 | Spam |
+| SlashMark.slashmark-terminal-cleaner | 4/8/2026 | Spam |
+| SlashMark.slashmark-random-data-generator | 4/8/2026 | Spam |
+| SlashMark.slashmark-kill-port | 4/8/2026 | Spam |
+| SlashMark.slashmark-jwt-decoder | 4/8/2026 | Spam |
+| SlashMark.slashmark-remove-empty-lines | 4/8/2026 | Spam | 
+| SlashMark.slashmark-uuid | 4/8/2026 | Spam | 
+| SlashMark.slashmark-timestamp-converter | 4/8/2026 | Spam |
+| SlashMark.slashmark-rage-quit | 4/8/2026 | Spam |
+| SlashMark.slashmark-regex-tester | 4/8/2026 | Spam |
+| SlashMark.slashmark-json-formatter | 4/8/2026 | Spam |
+| SlashMark.slashmark-text-sorter | 4/8/2026 | Spam |
+| SlashMark.slashmark-tab-killer | 4/8/2026 | Spam |
+| SlashMark.slashmark-http-status | 4/8/2026 | Spam |
+| SlashMark.slashmark-lorem-generator | 4/8/2026 | Spam | 
+| SlashMark.slashmark-password-generator | 4/8/2026 | Spam |
+| shahul-dev.internal|4/8/2026 | Spam |
+| sentinelvs.sentinel-debug| 4/8/2026 | Spam |
 | sla-guardian.static-sla-guardian | 4/8/2026 | Untrustworthy |
 | tak-vibecoding.tak | 4/8/2026 | Untrustworthy |
 | IZOT-TE-3.static-code-parser | 4/8/2026 | Untrustworthy |
