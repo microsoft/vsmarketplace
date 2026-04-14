@@ -21,8 +21,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |secunit.caddyfile-syntax | 4/10/2026 | impersonation|
 |huangshiyu.sftp-uploader | 4/10/2026 | impersonation|
 |WillZhang.dracula-variants | 4/10/2026 | impersonation|
-|lumirelle.shell-format-rev | 4/10/2026 | impersonation|
-|Gabeseltzer.behave-vsc-gs | 4/10/2026 | impersonation|
 |lukasfull.protheus-app-generator | 4/10/2026 | Spam|
 | SlashMarkHub.error-explainer-by-slashmark | 4/8/2026 | Spam | 
 | SlashMarkHub.auto-log-tracker-by-slashmark | 4/8/2026 | Spam |
@@ -124,7 +122,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | qianzijiao.continue-with-code-swift | 3/25/2026 | Impersonation |
 | mikeljl.continue-ljl-fork | 3/25/2026 | Impersonation |
 | vibe-xyz.vibe-xyz | 3/25/2026 | Impersonation |
-| lumirelle.shell-format-rev | 3/24/2026 | Impersonation |
 | Milynn.bongocat-sidebar | 3/24/2026 | Impersonation |
 | gh555.qqq | 3/24/2026 | Malware |
 | SVO.continue-svo-test | 3/24/2026 | Impersonation |
