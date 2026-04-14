@@ -7,20 +7,20 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-|vs-publisher-1489718.SQLinFormVS20222026 | 4/10/2026 | impersonation|
-|chenjingqing.yuque-editor | 4/10/2026 | impersonation|
-|funovus.dcei-vscode-teal | 4/10/2026 | impersonation|
-|funovus.dceilua | 4/10/2026 | impersonation|
-|KrishnaChirravuri.SmartStartupProjectSwitcher | 4/10/2026 | impersonation|
-|reflection.test-gl-workflow-fork | 4/10/2026 | impersonation|
-|617694668.cline-cn | 4/10/2026 | impersonation|
-|agent.devdock | 4/10/2026 | impersonation|
-|KuCai.kucai-autojs6-vscode-ext | 4/10/2026 | impersonation|
-|longguanghui.baiteda-vscode-i18n | 4/10/2026 | impersonation|
-|PatrikHuber.ImageWatch | 4/10/2026 | impersonation|
-|secunit.caddyfile-syntax | 4/10/2026 | impersonation|
-|huangshiyu.sftp-uploader | 4/10/2026 | impersonation|
-|WillZhang.dracula-variants | 4/10/2026 | impersonation|
+|vs-publisher-1489718.SQLinFormVS20222026 | 4/10/2026 | Impersonation|
+|chenjingqing.yuque-editor | 4/10/2026 | Impersonation|
+|funovus.dcei-vscode-teal | 4/10/2026 | Impersonation|
+|funovus.dceilua | 4/10/2026 | Impersonation|
+|KrishnaChirravuri.SmartStartupProjectSwitcher | 4/10/2026 | Impersonation|
+|reflection.test-gl-workflow-fork | 4/10/2026 | Impersonation|
+|617694668.cline-cn | 4/10/2026 | Impersonation|
+|agent.devdock | 4/10/2026 | Impersonation|
+|KuCai.kucai-autojs6-vscode-ext | 4/10/2026 | Impersonation|
+|longguanghui.baiteda-vscode-i18n | 4/10/2026 | Impersonation|
+|PatrikHuber.ImageWatch | 4/10/2026 | Impersonation|
+|secunit.caddyfile-syntax | 4/10/2026 | Impersonation|
+|huangshiyu.sftp-uploader | 4/10/2026 | Impersonation|
+|WillZhang.dracula-variants | 4/10/2026 | Impersonation|
 |lukasfull.protheus-app-generator | 4/10/2026 | Spam|
 | SlashMarkHub.error-explainer-by-slashmark | 4/8/2026 | Spam | 
 | SlashMarkHub.auto-log-tracker-by-slashmark | 4/8/2026 | Spam |
