@@ -7,6 +7,46 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| toilamanh.claude-usage-pilot-v2 | 4/16/2026 | Spam
+| illbeurs.team-vibe | 4/14/2026 | Malware
+| tangxia.roo-code-ex | 4/14/2026 | Impersonation |
+| SysheadLabs.kubernetes-safe-apply | 4/14/2026 | Impersonation |
+| Remotebase.snapdev | 4/14/2026 | Impersonation |
+| nilaykd.arborist-notes | 4/14/2026 | Impersonation |
+| Eddy.eddy-stellaris-cwt | 4/14/2026 | Impersonation |
+| ArcanicAI.cono | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish11 | 4/14/2026 | Impersonation |
+| electropol-fr.vscode-drawio-VFS | 4/14/2026 | Impersonation |
+| weiboplat.wecodergtfish1988.gtfish25-sql-formatter | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish08 | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish22-python-string-sql | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish14 | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish23-language-injection | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish01 | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish16-auto-align | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish13 | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish15-split-join-text | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish04 | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish09-insertcomma | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish10 | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish07-change-case | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish02 | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish18-instant-md-table | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish19-wrap-selection | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish24-jira-markdown | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish20-notes | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish12 | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish06 | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish17-open-file | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish21-labeled-bookmarks | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish26-join-selected-string | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish28-add-header | 4/14/2026 | Impersonation |
+| gtfish1988.gtfish31-folding | 4/14/2026 | Impersonation |
+| AngelSalazar-dev.all-pixel-agents | 04/14/2026 | Impersonation
+| xicunyang.ts-space-prompt  | 04/14/2026 | Impersonation
+| LeiaBalan.luaulink | 4/14/2026 | Untrustworthy
+| LeiaBalan.roblox-sync |  4/14/2026 | Untrustworthy
+| LeiaBalan.romanager |  4/14/2026 | Untrustworthy
 |vs-publisher-1489718.SQLinFormVS20222026 | 4/10/2026 | Impersonation|
 |chenjingqing.yuque-editor | 4/10/2026 | Impersonation|
 |funovus.dcei-vscode-teal | 4/10/2026 | Impersonation|
