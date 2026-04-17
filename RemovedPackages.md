@@ -7,8 +7,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| toilamanh.claude-usage-pilot-v2 | 4/16/2026 | Spam
-| illbeurs.team-vibe | 4/14/2026 | Malware
+| kide.kide-csharp | 4/16/2026 | Impersonation |
+| sameerrahman.cursor-theme-for-vscode | 4/16/2026 | Impersonation |
+| shinganEuler.codex-profile-switcher | 4/16/2026 | Impersonation |
+| MohammadWaliduddin.codexeconpixel | 4/16/2026 | Impersonation |
+| shaokun.cangjie-code | 4/16/2026 | Impersonation |
+| stan-stani.autolaunch-plus | 4/16/2026 | Impersonation |
+| toilamanh.claude-usage-pilot-v2 | 4/16/2026 | Spam |
+| illbeurs.team-vibe | 4/14/2026 | Malware |
 | tangxia.roo-code-ex | 4/14/2026 | Impersonation |
 | SysheadLabs.kubernetes-safe-apply | 4/14/2026 | Impersonation |
 | Remotebase.snapdev | 4/14/2026 | Impersonation |
@@ -42,11 +48,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | gtfish1988.gtfish26-join-selected-string | 4/14/2026 | Impersonation |
 | gtfish1988.gtfish28-add-header | 4/14/2026 | Impersonation |
 | gtfish1988.gtfish31-folding | 4/14/2026 | Impersonation |
-| AngelSalazar-dev.all-pixel-agents | 04/14/2026 | Impersonation
-| xicunyang.ts-space-prompt  | 04/14/2026 | Impersonation
-| LeiaBalan.luaulink | 4/14/2026 | Untrustworthy
-| LeiaBalan.roblox-sync |  4/14/2026 | Untrustworthy
-| LeiaBalan.romanager |  4/14/2026 | Untrustworthy
+| AngelSalazar-dev.all-pixel-agents | 04/14/2026 | Impersonation |
+| xicunyang.ts-space-prompt  | 04/14/2026 | Impersonation |
+| LeiaBalan.luaulink | 4/14/2026 | Untrustworthy |
+| LeiaBalan.roblox-sync |  4/14/2026 | Untrustworthy |
+| LeiaBalan.romanager |  4/14/2026 | Untrustworthy |
 |vs-publisher-1489718.SQLinFormVS20222026 | 4/10/2026 | Impersonation|
 |chenjingqing.yuque-editor | 4/10/2026 | Impersonation|
 |funovus.dcei-vscode-teal | 4/10/2026 | Impersonation|
