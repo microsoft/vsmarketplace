@@ -48,8 +48,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | gtfish1988.gtfish26-join-selected-string | 4/14/2026 | Impersonation |
 | gtfish1988.gtfish28-add-header | 4/14/2026 | Impersonation |
 | gtfish1988.gtfish31-folding | 4/14/2026 | Impersonation |
-| AngelSalazar-dev.all-pixel-agents | 04/14/2026 | Impersonation |
-| xicunyang.ts-space-prompt  | 04/14/2026 | Impersonation |
+| AngelSalazar-dev.all-pixel-agents | 4/14/2026 | Impersonation |
+| xicunyang.ts-space-prompt  | 4/14/2026 | Impersonation |
 | LeiaBalan.luaulink | 4/14/2026 | Untrustworthy |
 | LeiaBalan.roblox-sync |  4/14/2026 | Untrustworthy |
 | LeiaBalan.romanager |  4/14/2026 | Untrustworthy |
