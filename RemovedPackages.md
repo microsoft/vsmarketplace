@@ -19,12 +19,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | tylerdotrar.goodbyeworldng                  | 4/19/2026 | Impersonation  |
 | fsiovn.ai-autocomplete                     | 4/18/2026 | Impersonation  |
 | fsiovn.chat-provider                       | 4/18/2026 | Impersonation  |
-| fsiovn.coper-copilot                       |4/18/2026 | Impersonation  |
+| fsiovn.coper-copilot                       | 4/18/2026 | Impersonation  |
 | fsiovn.copilot-provider                    | 4/18/2026 | Impersonation  |
 | fsiovn.autocomplete-copilot                | 4/18/2026 | Impersonation  |
-|leonardomth.claudio-code|4/18/2026|Malware|
-|sairus.sairustech|4/18/2026|Malware|
-|CodeSecureDev.dependency-scan|4/18/2026|Malware|
+| leonardomth.claudio-code                   | 4/18/2026 | Malware        |
+| sairus.sairustech                          | 4/18/2026 | Malware        |
+| CodeSecureDev.dependency-scan              | 4/18/2026 | Malware        |
 | wumo1016.vue-legacy-extension-1           | 4/17/2026 | Impersonation |
 | Realtek.ameba                            | 4/17/2026 | Impersonation |
 | MakinCo.luau-lsp-library                 | 4/17/2026 | Impersonation | 
