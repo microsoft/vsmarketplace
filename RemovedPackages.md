@@ -27,7 +27,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | CodeSecureDev.dependency-scan              | 4/18/2026 | Malware        |
 | wumo1016.vue-legacy-extension-1           | 4/17/2026 | Impersonation |
 | Realtek.ameba                            | 4/17/2026 | Impersonation |
-| MakinCo.luau-lsp-library                 | 4/17/2026 | Impersonation | 
+| MakinCo.luau-lsp-library                 | 4/17/2026 | Impersonation |
 | keindl29.opencodegui-kei                 | 4/17/2026 | Impersonation |
 | kide.kide-csharp | 4/16/2026 | Impersonation |
 | sameerrahman.cursor-theme-for-vscode | 4/16/2026 | Impersonation |
