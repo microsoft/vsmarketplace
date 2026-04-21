@@ -7,8 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| LeiaBalan.LeiaBalan  | 04/19/2026 | Untrustworthy |
-| Frankie.vscodium-change-case | 04/19/2026 | Impersonation |
+| LeiaBalan.LeiaBalan  | 4/19/2026 | Untrustworthy |
+| Frankie.vscodium-change-case | 4/19/2026 | Impersonation |
 | agtest.csbz | 4/19/2026 | Impersonation |
 | xikey.minimax-vscode-m27 | 4/19/2026 | Impersonation |
 | TheKiltedCoder.convert-to-template-string | 4/19/2026 | Impersonation |
