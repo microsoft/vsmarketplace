@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| matthewbill.hue-code  | 04/21/2026 | Owner request|
+| joezhoujinjing.vscode-tmux-worktree-agent | 04/21/2026 | Impersonation|
+|Removed packages EXyang.cpp-project-config-ch | 04/20/2026 |
 | LeiaBalan.LeiaBalan  | 4/19/2026 | Untrustworthy |
 | Frankie.vscodium-change-case | 4/19/2026 | Impersonation |
 | agtest.csbz | 4/19/2026 | Impersonation |
@@ -160,6 +163,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | cryptninjaswap.cryptoninja-prompt-pack | 4/3/2026 | Impersonation |
 | jackieyyang.jackieyyang-git-extension-pack | 4/3/2026 | Impersonation |
 | devxlogan.jetbrains-rider-new-ui-theme-fixed | 4/3/2026 | Impersonation |
+| Infineon-technologies-ag.modus-toolbox-for-vscode| 04/02/2026 | Impersonation|
 | toommyliu.cursor-dark-no-italicse| 4/1/2026 | Impersonation|
 | kova-lang.kova-material-iconse| 4/1/2026 | Impersonation|
 | DaMaoCloud.damao-aie| 4/1/2026 | Impersonation|
