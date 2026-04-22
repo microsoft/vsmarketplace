@@ -7,7 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| matthewbill.hue-code  | 04/21/2026 | Owner request|
+| matthewbill.hue-code  | 04/21/2026 | Owner Request|
 | joezhoujinjing.vscode-tmux-worktree-agent | 04/21/2026 | Impersonation|
 | EXyang.cpp-project-config-ch | 04/20/2026 |Impersonation|
 | LeiaBalan.LeiaBalan  | 4/19/2026 | Untrustworthy |
