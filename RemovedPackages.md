@@ -168,7 +168,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |kevin12314.svn-scm-ai-next| 04/02/2026 | Impersonation|
 |GustavoMaia.gruber-adapted| 04/02/2026 | Impersonation|
 |fab1can.docker-compose-fixed| 04/02/2026 | Impersonation|
-| Infineon-technologies-ag.modus-toolbox-for-vscode| 04/02/2026 | Impersonation|
+| Infineon-technologies-ag.modus-toolbox-for-vscode | 4/2/2026 | Impersonation |
 | toommyliu.cursor-dark-no-italicse| 4/1/2026 | Impersonation|
 | kova-lang.kova-material-iconse| 4/1/2026 | Impersonation|
 | DaMaoCloud.damao-aie| 4/1/2026 | Impersonation|
