@@ -12,9 +12,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | lijiangang.vscode-picgo-paste-adpt-wayland | 4/26/2026 | Impersonation |
 | Marvello.js-beautify-wrapper | 4/26/2026 | Impersonation |
 | SenkoTheKitsune.nomo-dark-extended | 4/24/2026 | Impersonation |
-| matthewbill.hue-code  | 04/21/2026 | Owner Request |
-| joezhoujinjing.vscode-tmux-worktree-agent | 04/21/2026 | Impersonation |
-| EXyang.cpp-project-config-ch | 04/20/2026 | Impersonation |
+| matthewbill.hue-code  | 4/21/2026 | Owner Request |
+| joezhoujinjing.vscode-tmux-worktree-agent | 4/21/2026 | Impersonation |
+| EXyang.cpp-project-config-ch | 4/20/2026 | Impersonation |
 | LeiaBalan.LeiaBalan  | 4/19/2026 | Untrustworthy |
 | Frankie.vscodium-change-case | 4/19/2026 | Impersonation |
 | agtest.csbz | 4/19/2026 | Impersonation |
