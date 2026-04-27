@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| r0kuko.jetbrains-file-icon-theme-extended | 4/26/2026 | Impersonation|
+| MMitsuha.vscode-docker-registry-explorer-rev | 4/26/2026 | Impersonation|
+| lijiangang.vscode-picgo-paste-adpt-wayland | 4/26/2026 | Impersonation|
+| Marvello.js-beautify-wrapper | 4/26/2026 | Impersonation|
+| SenkoTheKitsune.nomo-dark-extended | 4/24/2026 | Impersonation|
 | matthewbill.hue-code  | 04/21/2026 | Owner Request|
 | joezhoujinjing.vscode-tmux-worktree-agent | 04/21/2026 | Impersonation|
 | EXyang.cpp-project-config-ch | 04/20/2026 |Impersonation|
@@ -90,7 +95,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |agent.devdock | 4/10/2026 | Impersonation|
 |KuCai.kucai-autojs6-vscode-ext | 4/10/2026 | Impersonation|
 |longguanghui.baiteda-vscode-i18n | 4/10/2026 | Impersonation|
-|PatrikHuber.ImageWatch | 4/10/2026 | Impersonation|
 |secunit.caddyfile-syntax | 4/10/2026 | Impersonation|
 |huangshiyu.sftp-uploader | 4/10/2026 | Impersonation|
 |WillZhang.dracula-variants | 4/10/2026 | Impersonation|
