@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| gtfish1988.gtfish32-markdown-formatter | 4/27/2026 | Impersonation |
+| NavAI-B.svn-scm-modified | 4/27/2026 | Impersonation |
+| abstractalgo.package-json-upgrade-abstractalgo | 4/27/2026 | Impersonation |
+| SeoDoktoru.minimax-god-mode | 4/27/2026 | Impersonation |
+| valentinbeaumont.youtrack-vscode | 4/27/2026 | Impersonation |
 | NolanWang.omnimedia-player | 4/27/2026 | Impersonation |
 | r0kuko.jetbrains-file-icon-theme-extended | 4/26/2026 | Impersonation |
 | MMitsuha.vscode-docker-registry-explorer-rev | 4/26/2026 | Impersonation |
