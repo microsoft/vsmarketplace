@@ -7,6 +7,15 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| alpgul.vscode-copilot-fallback | 4/28/2026 | Impersonation |
+| OrqentAi.orqentai-code | 4/28/2026 | Impersonation |
+| theChrisKent.spfx-local-workbench | 4/28/2026 | Impersonation |
+| Drake90.library-roblox-api | 4/28/2026 | Untrustworthy |
+| RustygoonersandView.skidai | 4/28/2026 | Untrustworthy |
+| saurav-sinha.CodeClaude | 4/28/2026 | Impersonation |
+| RiderTran.nextg-code-review | 4/28/2026 | Impersonation |
+| mtc2000.vscode-pdf-viewer | 4/28/2026 | Impersonation |
+| deciosfernandes.git-auto-set-config | 4/28/2026 | Impersonation |
 | gtfish1988.gtfish32-markdown-formatter | 4/27/2026 | Impersonation |
 | NavAI-B.svn-scm-modified | 4/27/2026 | Impersonation |
 | abstractalgo.package-json-upgrade-abstractalgo | 4/27/2026 | Impersonation |
