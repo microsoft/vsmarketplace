@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| litou.transify | 4/30/2026 | Impersonation |
+| soshnikov.http-proxy-toggle-soshnikov | 4/30/2026 | Impersonation |
+| tinysam.kanagawa-pro | 4/30/2026 | Impersonation |
+| Realtek.realtek-ameba | 4/30/2026 | Impersonation |
 | veraeva.RojoDB | 4/29/2026 | Impersonation |
 | clint.rust-essentials-pack | 4/29/2026 | Untrustworthy |
 | jinshi-news.jinshi-news | 4/29/2026 | Impersonation |
