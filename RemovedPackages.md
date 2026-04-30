@@ -7,7 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| jinshi-news.jinshi-news | 4/28/2026 | Impersonation |
+| veraeva.RojoDB | 4/29/2026 | Impersonation |
+| clint.rust-essentials-pack | 4/29/2026 | Untrustworthy |
+| jinshi-news.jinshi-news | 4/29/2026 | Impersonation |
 | alpgul.vscode-copilot-fallback | 4/28/2026 | Impersonation |
 | OrqentAi.orqentai-code | 4/28/2026 | Impersonation |
 | theChrisKent.spfx-local-workbench | 4/28/2026 | Impersonation |
