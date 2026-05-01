@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Klioai.Klioai | 5/1/2026 | Impersonation |
+| ant5888.opencode-vscode-cn | 5/1/2026 | Impersonation |
 | litou.transify | 4/30/2026 | Impersonation |
 | soshnikov.http-proxy-toggle-soshnikov | 4/30/2026 | Impersonation |
 | tinysam.kanagawa-pro | 4/30/2026 | Impersonation |
