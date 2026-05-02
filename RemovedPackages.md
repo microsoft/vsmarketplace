@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ManuelMiethe.openhab-config-aligner-2026 | 5/2/2026 | Impersonation |
+| gisonyeung.pika-svelte-vscode | 5/2/2026 | Impersonation |
+| danlt2k.sarif-monitor-v000 | 5/2/2026 | Impersonation |
+| Zurab-mvrck.dependency-tracer | 5/1/2026 | Untrustworthy |
+| BobCAD-CAM.bobcad-post | 5/1/2026 | Untrustworthy |
 | Klioai.Klioai | 5/1/2026 | Impersonation |
 | ant5888.opencode-vscode-cn | 5/1/2026 | Impersonation |
 | litou.transify | 4/30/2026 | Impersonation |
