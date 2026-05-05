@@ -7,6 +7,25 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| gh555com.Dream-Radio | 5/5/2026 | Spam |
+| gh555com.Export-Doc | 5/5/2026 | Spam |
+| gh555com.Export-Docx | 5/5/2026 | Spam |
+| gh555com.Export-Zip | 5/5/2026 | Spam |
+| gh555com.File-Explorer-qqq | 5/5/2026 | Spam |
+| gh555com.html-qqq | 5/5/2026 | Spam |
+| gh555com.Image-Preview-Directly | 5/5/2026 | Spam |
+| gh555com.Image-preview-qqq | 5/5/2026 | Spam |
+| gh555com.Navigator-qqq | 5/5/2026 | Spam |
+| gh555com.notebook-qqq | 5/5/2026 | Spam |
+| gh555com.Paste-everything | 5/5/2026 | Spam |
+| gh555com.Paste-Image-Directly | 5/5/2026 | Spam |
+| gh555com.Paste-Image-qqq | 5/5/2026 | Spam |
+| gh555com.presentation-resources | 5/5/2026 | Spam |
+| gh555com.q3 | 5/5/2026 | Spam |
+| gh555com.Rich-Note | 5/5/2026 | Spam |
+| gh555com.Roam | 5/5/2026 | Spam |
+| gh555com.video-qqq | 5/5/2026 | Spam |
+| gh555com.WYSIWYG-qqq | 5/5/2026 | Spam |
 | devcoreAi-Coding-Agent.devcoreai-agent | 5/4/2026 | Impersonation |
 | mark9804.zotero-latex-cite | 5/4/2026 | Impersonation |
 | ClockZinc.vscode-copilot-chat-cn | 5/4/2026 | Impersonation |
