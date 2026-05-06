@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| b-shan.jsonyamlkeynavigator | 5/6/2026 | Impersonation |
+| VibeRaven.viberaven-station | 5/6/2026 | Untrustworthy |
 | gh555com.Dream-Radio | 5/5/2026 | Spam |
 | gh555com.Export-Doc | 5/5/2026 | Spam |
 | gh555com.Export-Docx | 5/5/2026 | Spam |
