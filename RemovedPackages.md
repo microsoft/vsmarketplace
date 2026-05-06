@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Vizards.copilot-chat-porter | 5/6/2026 | Untrustworthy |
 | MoisessantosHernandez.go-live-pages | 5/6/2026 | Untrustworthy |
 | b-shan.jsonyamlkeynavigator | 5/6/2026 | Impersonation |
 | VibeRaven.viberaven-station | 5/6/2026 | Untrustworthy |
