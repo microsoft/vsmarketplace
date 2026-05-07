@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| JaviGuarin.prompt-registry-ado-beta | 5/7/2026 | Impersonation |
+| tkafka.markdown-mermaid-updated | 5/7/2026 | Impersonation |
+| tria-technologies.simpleswitch-vscode-tools | 5/7/2026 | Impersonation |
+| owenrossikeen.script-buttons-extended | 5/7/2026 | Impersonation |
+| leonardomjq.goblin-mode | 5/7/2026 | Impersonation |
+| brett-pappas.claude-in-editor | 5/7/2026 | Impersonation |
 | LuaShield.lua-shield | 5/6/2026 | Malware |
 | Vizards.localias | 5/6/2026 | Untrustworthy |
 | Vizards.copilot-chat-porter | 5/6/2026 | Untrustworthy |
