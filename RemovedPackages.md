@@ -7,6 +7,19 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| camsAI.camsAI | 5/7/2026 | Spam |
+| DoPracticalAI.practical-ai-orchestrator-jarvis | 5/7/2026 | Spam |
+| JaviGuarin.prompt-registry-ado-beta | 5/7/2026 | Impersonation |
+| tkafka.markdown-mermaid-updated | 5/7/2026 | Impersonation |
+| tria-technologies.simpleswitch-vscode-tools | 5/7/2026 | Impersonation |
+| owenrossikeen.script-buttons-extended | 5/7/2026 | Impersonation |
+| leonardomjq.goblin-mode | 5/7/2026 | Impersonation |
+| brett-pappas.claude-in-editor | 5/7/2026 | Impersonation |
+| LuaShield.lua-shield | 5/6/2026 | Malware |
+| Vizards.localias | 5/6/2026 | Untrustworthy |
+| Vizards.copilot-chat-porter | 5/6/2026 | Untrustworthy |
+| Vizards.deepseek-v4-for-copilot | 5/6/2026 | Untrustworthy |
+| MoisessantosHernandez.go-live-pages | 5/6/2026 | Untrustworthy |
 | b-shan.jsonyamlkeynavigator | 5/6/2026 | Impersonation |
 | VibeRaven.viberaven-station | 5/6/2026 | Untrustworthy |
 | gh555com.Dream-Radio | 5/5/2026 | Spam |
@@ -103,7 +116,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | illbeurs.team-vibe | 4/14/2026 | Malware |
 | tangxia.roo-code-ex | 4/14/2026 | Impersonation |
 | SysheadLabs.kubernetes-safe-apply | 4/14/2026 | Impersonation |
-| Remotebase.snapdev | 4/14/2026 | Impersonation |
 | nilaykd.arborist-notes | 4/14/2026 | Impersonation |
 | Eddy.eddy-stellaris-cwt | 4/14/2026 | Impersonation |
 | ArcanicAI.cono | 4/14/2026 | Impersonation |
