@@ -108,7 +108,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | illbeurs.team-vibe | 4/14/2026 | Malware |
 | tangxia.roo-code-ex | 4/14/2026 | Impersonation |
 | SysheadLabs.kubernetes-safe-apply | 4/14/2026 | Impersonation |
-| Remotebase.snapdev | 4/14/2026 | Impersonation |
 | nilaykd.arborist-notes | 4/14/2026 | Impersonation |
 | Eddy.eddy-stellaris-cwt | 4/14/2026 | Impersonation |
 | ArcanicAI.cono | 4/14/2026 | Impersonation |
