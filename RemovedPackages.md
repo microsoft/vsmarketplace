@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| camsAI.camsAI | 5/7/2026 | Spam |
+| DoPracticalAI.practical-ai-orchestrator-jarvis | 5/7/2026 | Spam |
 | JaviGuarin.prompt-registry-ado-beta | 5/7/2026 | Impersonation |
 | tkafka.markdown-mermaid-updated | 5/7/2026 | Impersonation |
 | tria-technologies.simpleswitch-vscode-tools | 5/7/2026 | Impersonation |
