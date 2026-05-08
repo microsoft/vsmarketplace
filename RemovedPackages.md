@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Tone.wolfram-prettier-vscode | 5/8/2026 | Impersonation |
+| ebextensions.active-clang-format | 5/8/2026 | Impersonation |
+| IamTheKaaZZ.valgrind-debug | 5/8/2026 | Impersonation |
 | camsAI.camsAI | 5/7/2026 | Spam |
 | DoPracticalAI.practical-ai-orchestrator-jarvis | 5/7/2026 | Spam |
 | JaviGuarin.prompt-registry-ado-beta | 5/7/2026 | Impersonation |
