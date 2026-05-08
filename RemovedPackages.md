@@ -13,7 +13,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | MeaghanBass.quantum-developer-theme | 5/8/2026 | Owner Request |
 | MultiCortexDevCore202.MultiCortexDevCore202 | 5/8/2026 | Impersonation |
 | ByteBarn.bytebarnhello | 5/8/2026 | Untrustworthy |
-| ByteBarn.byte-barn-devkit | 5/8/2026 | Malicious |
+| ByteBarn.byte-barn-devkit | 5/8/2026 | Malware |
 | Tone.wolfram-prettier-vscode | 5/7/2026 | Impersonation |
 | ebextensions.active-clang-format | 5/7/2026 | Impersonation |
 | IamTheKaaZZ.valgrind-debug | 5/7/2026 | Impersonation |
