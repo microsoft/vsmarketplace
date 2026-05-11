@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Cognitrace3.cognitrace3 | 5/11/2026 | Impersonation |
 | Tone.prettier-vscode-wolfram | 5/9/2026 | Impersonation |
 | elliepreston.kiro-theme-tweaked | 5/9/2026 | Impersonation |
 | okystudio.sude-pets | 5/8/2026 | Untrustworthy |
