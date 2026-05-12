@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| luxuia.anotheremmylua | 5/12/2026 | Impersonation |
+| wanxiong.thief-book-pro-plus | 5/12/2026 | Impersonation |
+| atomgit.atomcode-vscode | 5/12/2026 | Spam |
 | chat-gimay-agent.chat-gimay-agent | 5/11/2026 | Spam |
 | Cognitrace3.cognitrace3 | 5/11/2026 | Impersonation |
 | Zamiel.vscode-isaac-afterbirth-plus | 5/11/2026 | Owner Request |
@@ -33,9 +36,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | leonardomjq.goblin-mode | 5/7/2026 | Impersonation |
 | brett-pappas.claude-in-editor | 5/7/2026 | Impersonation |
 | LuaShield.lua-shield | 5/6/2026 | Malware |
-| Vizards.localias | 5/6/2026 | Untrustworthy |
-| Vizards.copilot-chat-porter | 5/6/2026 | Untrustworthy |
-| Vizards.deepseek-v4-for-copilot | 5/6/2026 | Untrustworthy |
 | MoisessantosHernandez.go-live-pages | 5/6/2026 | Untrustworthy |
 | b-shan.jsonyamlkeynavigator | 5/6/2026 | Impersonation |
 | VibeRaven.viberaven-station | 5/6/2026 | Untrustworthy |
@@ -625,7 +625,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |jackywjs.node-modules-enhanced|2/22/2026|Impersonation|
 |hetu.HetuGit|2/22/2026|Impersonation|
 |Hakai.functional-purple-modified|2/22/2026|Impersonation|
-|hhu-stups.prob|2/22/2026|Impersonation|
 |hapTeam.hap-eslint|2/22/2026|Impersonation|
 |HanazakiShiki.emmylua-cgame|2/22/2026|Impersonation|
 |v8tech.v8-code|2/21/2026|Malware|
