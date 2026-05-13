@@ -7,8 +7,18 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| rubiin.nestjs-snippets-vscode | 5/13/2026 | Impersonation |
+| ZeroGAIzerog-ai.zerog-vscode-bridge | 5/13/2026 | Spam |
+| rpeter.python-code-lens | 5/13/2026 | Untrustworthy |
+| GCIDCAIAmericasAndAsia.A11y-Agent | 5/13/2026 | Untrustworthy |
+| ironplc.ironplc | 5/13/2026 | Untrustworthy |
+| mirrorflat.mirrorflatlog | 5/13/2026 | Untrustworthy |
+| ToanNguyen.claude-remote | 5/13/2026 | Untrustworthy |
+| zestones.octoclock | 5/13/2026 | Untrustworthy |
+| deltalenz.deltalenz | 5/13/2026 | Untrustworthy |
+| MasterByte.masterb-argo-kubernetes-utils | 5/12/2026 | Malware |
 | txtx20.sunrise-greeter-demo | 5/12/2026 | Untrustworthy |
-| txtx20.new-txtx | 5/12/2026 | Malicious |
+| txtx20.new-txtx | 5/12/2026 | Malware |
 | luxuia.anotheremmylua | 5/12/2026 | Impersonation |
 | wanxiong.thief-book-pro-plus | 5/12/2026 | Impersonation |
 | atomgit.atomcode-vscode | 5/12/2026 | Spam |
