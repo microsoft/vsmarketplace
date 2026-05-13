@@ -7,6 +7,15 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|  | 5/13/2026 | Untrustworthy |
+|  | 5/13/2026 | Untrustworthy |
+|  | 5/13/2026 | Untrustworthy |
+|  | 5/13/2026 | Untrustworthy |
+|  | 5/13/2026 | Untrustworthy |
+|  | 5/13/2026 | Untrustworthy |
+|  | 5/13/2026 | Untrustworthy |
+| deltalenz.deltalenz | 5/13/2026 | Untrustworthy |
+| MasterByte.masterb-argo-kubernetes-utils | 5/12/2026 | Malicious |
 | txtx20.sunrise-greeter-demo | 5/12/2026 | Untrustworthy |
 | txtx20.new-txtx | 5/12/2026 | Malicious |
 | luxuia.anotheremmylua | 5/12/2026 | Impersonation |
