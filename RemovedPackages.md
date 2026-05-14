@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| qweqweqwe.test | 5/14/2026 | Untrustworthy |
 | rubiin.nestjs-snippets-vscode | 5/13/2026 | Impersonation |
 | ZeroGAIzerog-ai.zerog-vscode-bridge | 5/13/2026 | Spam |
 | rpeter.python-code-lens | 5/13/2026 | Untrustworthy |
