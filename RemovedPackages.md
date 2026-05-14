@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| yassinebougacha.state-diagram-editor-exe | 5/14/2026 | Untrustworthy |
+| yassinebougacha.state-diagram-editor-yassine-V10-exe | 5/14/2026 | Untrustworthy |
 | Dylan-Edwards.CodeTracker-Oracle | 5/14/2026 | Untrustworthy |
 | RPinkau.al-object-id-samurai | 5/14/2026 | Impersonation |
 | Hidden-Pixel.vscode-chippy | 5/14/2026 | Spam |
