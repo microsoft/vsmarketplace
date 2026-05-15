@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| tapl-lang.material-icon-theme-tapl | 5/15/2026 | Impersonation |
+| smhc.agent-plugins-installer | 5/15/2026 | Impersonation |
+| Jial.claude-paper-theme | 5/15/2026 | Impersonation |
+| guangshaai.cangjie-AI | 5/15/2026 | Impersonation |
+| TailwindCSSIntelliSenseplus.vscode-tailwindcss-plus | 5/15/2026 | Impersonation |
+| fanrj.gs-lang-with-driver | 5/15/2026 | Impersonation |
 | numso.vscode-tailwindcss-with-hex-colors | 5/15/2026 | Impersonation |
 | HeleneSmith.rSW | 5/14/2026 | Untrustworthy |
 | yassinebougacha.state-diagram-editor-exe | 5/14/2026 | Untrustworthy |
