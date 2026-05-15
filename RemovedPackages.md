@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| KeeleyLednergznl.ri7 | 5/15/2026 | Untrustworthy |
 | tapl-lang.material-icon-theme-tapl | 5/15/2026 | Impersonation |
 | smhc.agent-plugins-installer | 5/15/2026 | Impersonation |
 | Jial.claude-paper-theme | 5/15/2026 | Impersonation |
