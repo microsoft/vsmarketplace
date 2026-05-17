@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| TONFoundation.ton-vscode | 5/17/2026 | Impersonation |
+| TONFoundation.func-language | 5/17/2026 | Impersonation |
+| AndreiMoraru.norrsken-semantic | 5/17/2026 | Impersonation |
 | shellingye.jx3-emmylua | 5/16/2026 | Impersonation |
 | tria.readonlywin | 5/16/2026 | Impersonation |
 | BeyondR34CH.theme-br-monokai | 5/16/2026 | Impersonation |
