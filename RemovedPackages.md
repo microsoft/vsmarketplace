@@ -7,6 +7,15 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| DevCrew.devc-python-toolkit | 5/17/2026 | Malware |
+| BrennonR.File-Explorer-2026 | 5/17/2026 | Untrustworthy |
+| kyleobr.Paste-Image-zen | 5/17/2026 | Untrustworthy |
+| TONFoundation.ton-vscode | 5/17/2026 | Impersonation |
+| TONFoundation.func-language | 5/17/2026 | Impersonation |
+| AndreiMoraru.norrsken-semantic | 5/17/2026 | Impersonation |
+| shellingye.jx3-emmylua | 5/16/2026 | Impersonation |
+| tria.readonlywin | 5/16/2026 | Impersonation |
+| BeyondR34CH.theme-br-monokai | 5/16/2026 | Impersonation |
 | KeeleyLednergznl.ri7 | 5/15/2026 | Untrustworthy |
 | tapl-lang.material-icon-theme-tapl | 5/15/2026 | Impersonation |
 | smhc.agent-plugins-installer | 5/15/2026 | Impersonation |
