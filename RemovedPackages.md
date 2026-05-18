@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Autolexia.testwise | 5/18/2026 | Impersonation |
+| quantix.quantix-pro | 5/18/2026 | Impersonation |
+| runsystemcopilot.runsystem-copilot-chat | 5/18/2026 | Untrustworthy |
+| nubond.nubond-language-service | 5/17/2026 | Untrustworthy |
 | DevCrew.devc-python-toolkit | 5/17/2026 | Malware |
 | BrennonR.File-Explorer-2026 | 5/17/2026 | Untrustworthy |
 | kyleobr.Paste-Image-zen | 5/17/2026 | Untrustworthy |
