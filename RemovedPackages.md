@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| OriVale.clineneo | 5/19/2026 | Impersonation |
+| GSZN.cangjie-ai-code | 5/19/2026 | Impersonation |
+| cfeltz.taskpanel | 5/19/2026 | Impersonation |
+| continueautocommand.continue-auto-command | 5/19/2026 | Impersonation |
+| congyang.atom-one-dark-theme-intellij-idea | 5/19/2026 | Impersonation |
 | Autolexia.testwise | 5/18/2026 | Impersonation |
 | quantix.quantix-pro | 5/18/2026 | Impersonation |
 | runsystemcopilot.runsystem-copilot-chat | 5/18/2026 | Untrustworthy |
