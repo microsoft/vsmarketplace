@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|roboard.roboard| 5/20/2026| Untrustworthy|
 | OriVale.clineneo | 5/19/2026 | Impersonation |
 | GSZN.cangjie-ai-code | 5/19/2026 | Impersonation |
 | cfeltz.taskpanel | 5/19/2026 | Impersonation |
