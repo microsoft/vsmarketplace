@@ -7,7 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| roboard.roboard | 5/20/2026 | Untrustworthy |
+| KoltinSmith.project-restructure-nodejs | 5/20/2026 | Untrustworthy |
+| KoltinSmith.hello-world-extension-koltin-smith-test | 5/20/2026 | Untrustworthy |
+| KoltinSmith.hello-world-extension-koltin-smith | 5/20/2026 | Untrustworthy |
+| whatnick.acp-client-whatnick | 5/20/2026 | Impersonation |
+| RYNBD.rynbd-laragon-terminal-pro | 5/20/2026 | Impersonation |
+| Men3emkhaled.agent-assistant | 5/20/2026 | Untrustworthy |
+| roboard.roboard | 5/19/2026 | Untrustworthy |
 | OriVale.clineneo | 5/19/2026 | Impersonation |
 | GSZN.cangjie-ai-code | 5/19/2026 | Impersonation |
 | cfeltz.taskpanel | 5/19/2026 | Impersonation |
