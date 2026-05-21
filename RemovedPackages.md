@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| stark.bgide | 5/21/2026 | Impersonation |
 | taillaaa.codilore-ai | 5/21/2026 | Impersonation |
 | HarshAgarwal1012.openclaude-vscode | 5/20/2026 | Impersonation |
 | romanager.ro-manager | 5/20/2026 | Untrustworthy |
