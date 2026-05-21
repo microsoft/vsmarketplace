@@ -7,7 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| romanager.ro-manager | 5/21/2026 | Untrustworthy |
+| VivekChoudhury.google-gui-support | 5/21/2026 | Impersonation |
+| sunsetHightlight.sunset-highlight | 5/21/2026 | Malware |
+| stark.bgide | 5/21/2026 | Impersonation |
+| taillaaa.codilore-ai | 5/21/2026 | Impersonation |
+| HarshAgarwal1012.openclaude-vscode | 5/20/2026 | Impersonation |
+| romanager.ro-manager | 5/20/2026 | Untrustworthy |
 | KoltinSmith.project-restructure-nodejs | 5/20/2026 | Untrustworthy |
 | KoltinSmith.hello-world-extension-koltin-smith-test | 5/20/2026 | Untrustworthy |
 | KoltinSmith.hello-world-extension-koltin-smith | 5/20/2026 | Untrustworthy |
