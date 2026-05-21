@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| TONCoreLabs.func-syntax-tool | 5/21/2026 | Untrustworthy |
 | VivekChoudhury.google-gui-support | 5/21/2026 | Impersonation |
 | sunsetHightlight.sunset-highlight | 5/21/2026 | Malware |
 | stark.bgide | 5/21/2026 | Impersonation |
