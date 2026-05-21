@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| sunsetHightlight.sunset-highlight | 5/21/2026 | Malware |
 | stark.bgide | 5/21/2026 | Impersonation |
 | taillaaa.codilore-ai | 5/21/2026 | Impersonation |
 | HarshAgarwal1012.openclaude-vscode | 5/20/2026 | Impersonation |
