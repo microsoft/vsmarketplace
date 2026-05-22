@@ -8,6 +8,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
 | dimitrius-cadimout.confluence-publisher | 5/21/2026 | Untrustworthy |
+| auraone.rubric-studio | 5/21/2026 | Untrustworthy |
 | auraone.agent-studio-open | 5/21/2026 | Untrustworthy |
 | TONCoreLabs.func-syntax-tool | 5/21/2026 | Untrustworthy |
 | VivekChoudhury.google-gui-support | 5/21/2026 | Impersonation |
