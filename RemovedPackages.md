@@ -7,6 +7,15 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| samkj.orchestrai | 5/22/2026 | Untrustworthy |
+| Embedder.embedder-infineon | 5/22/2026 | Untrustworthy |
+| wenox.wenox | 5/22/2026 | Untrustworthy |
+| LangNico.maxima-syntax-highlighting-new | 5/22/2026 | Impersonation |
+| FlyingsMarmot.vscode-clangd-ucpp | 5/22/2026 | Impersonation |
+| vix.php-import-resolver | 5/22/2026 | Impersonation |
+| dimitrius-cadimout.confluence-publisher | 5/21/2026 | Untrustworthy |
+| auraone.rubric-studio | 5/21/2026 | Untrustworthy |
+| auraone.agent-studio-open | 5/21/2026 | Untrustworthy |
 | TONCoreLabs.func-syntax-tool | 5/21/2026 | Untrustworthy |
 | VivekChoudhury.google-gui-support | 5/21/2026 | Impersonation |
 | sunsetHightlight.sunset-highlight | 5/21/2026 | Malware |
