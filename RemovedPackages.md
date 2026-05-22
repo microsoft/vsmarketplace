@@ -7,7 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| flywine.vscode-clangd | 5/22/2026 | Impersonation |
+| FlyingsMarmot.vscode-clangd-ucpp | 5/22/2026 | Impersonation |
 | vix.php-import-resolver | 5/22/2026 | Impersonation |
 | dimitrius-cadimout.confluence-publisher | 5/21/2026 | Untrustworthy |
 | auraone.rubric-studio | 5/21/2026 | Untrustworthy |
