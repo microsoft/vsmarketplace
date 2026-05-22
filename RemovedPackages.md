@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| vix.php-import-resolver | 5/22/2026 | Impersonation |
 | dimitrius-cadimout.confluence-publisher | 5/21/2026 | Untrustworthy |
 | auraone.rubric-studio | 5/21/2026 | Untrustworthy |
 | auraone.agent-studio-open | 5/21/2026 | Untrustworthy |
