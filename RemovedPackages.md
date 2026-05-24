@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| eclipse-cdt.vscode-clangd-cdtcloud | 5/24/2026 | Impersonation |
+| flywine.vscode-clangd | 5/24/2026 | Impersonation |
+| gea-embedded.vscode-clangd-gea-embedded | 5/24/2026 | Impersonation |
 | openbase.openbase-theme | 5/24/2026 | Untrustworthy |
 | openbase.openbase-icons | 5/24/2026 | Untrustworthy |
 | openbase.openbase-vscode | 5/24/2026 | Untrustworthy |
