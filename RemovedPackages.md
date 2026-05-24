@@ -7,7 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| romanage.romanage | 5/24/2026 | Untrustworthy |
+| AmirBenShimol3111824.amir-synapse-nexus | 5/24/2026 | Untrustworthy |
+| romanage.romanage | 5/23/2026 | Untrustworthy |
 | samkj.orchestrai | 5/22/2026 | Untrustworthy |
 | Embedder.embedder-infineon | 5/22/2026 | Untrustworthy |
 | wenox.wenox | 5/22/2026 | Untrustworthy |
