@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| onreal-Elysia886.elysia-todo-tree | 5/24/2026 | Impersonation |
 | eclipse-cdt.vscode-clangd-cdtcloud | 5/24/2026 | Impersonation |
 | flywine.vscode-clangd | 5/24/2026 | Impersonation |
 | gea-embedded.vscode-clangd-gea-embedded | 5/24/2026 | Impersonation |
