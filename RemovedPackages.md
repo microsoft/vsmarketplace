@@ -7,6 +7,15 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| onreal-Elysia886.elysia-todo-tree | 5/24/2026 | Impersonation |
+| eclipse-cdt.vscode-clangd-cdtcloud | 5/24/2026 | Impersonation |
+| flywine.vscode-clangd | 5/24/2026 | Impersonation |
+| gea-embedded.vscode-clangd-gea-embedded | 5/24/2026 | Impersonation |
+| openbase.openbase-theme | 5/24/2026 | Untrustworthy |
+| openbase.openbase-icons | 5/24/2026 | Untrustworthy |
+| openbase.openbase-vscode | 5/24/2026 | Untrustworthy |
+| AmirBenShimol3111824.amir-synapse-nexus | 5/24/2026 | Untrustworthy |
+| romanage.romanage | 5/23/2026 | Untrustworthy |
 | samkj.orchestrai | 5/22/2026 | Untrustworthy |
 | Embedder.embedder-infineon | 5/22/2026 | Untrustworthy |
 | wenox.wenox | 5/22/2026 | Untrustworthy |
