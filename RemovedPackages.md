@@ -15,6 +15,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | openbase.openbase-icons | 5/24/2026 | Untrustworthy |
 | openbase.openbase-vscode | 5/24/2026 | Untrustworthy |
 | AmirBenShimol3111824.amir-synapse-nexus | 5/24/2026 | Untrustworthy |
+| VSCodeExtensionDevelopment.project-restructure-typescript | 5/23/2026 | Malware |
+| Moushu.material-icon-theme-moushu | 5/23/2026 | Impersonation |
 | romanage.romanage | 5/23/2026 | Untrustworthy |
 | samkj.orchestrai | 5/22/2026 | Untrustworthy |
 | Embedder.embedder-infineon | 5/22/2026 | Untrustworthy |
