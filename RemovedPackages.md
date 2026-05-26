@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| zijinshanren.vscode-clangd-modules | 5/26/2026 | Impersonation |
+| zhoulufeng.blf-viewer-canfd | 5/26/2026 | Impersonation |
+| songyanglin.vscode-office-plus | 5/26/2026 | Impersonation |
+| ArthurNeuman.eslint-disable-typescript-snippets | 5/26/2026 | Impersonation |
+| Trent-Tompkins.claude-codex-black-edition | 5/26/2026 | Impersonation |
 | ray2666.antigravity-proxy | 5/26/2026 | Untrustworthy |
 | copilot-multi-provider.copilot-multi-provider | 5/26/2026 | Impersonation |
 | onreal-Elysia886.elysia-todo-tree | 5/24/2026 | Impersonation |
