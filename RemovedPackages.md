@@ -7,6 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| zijinshanren.vscode-clangd-modules | 5/26/2026 | Impersonation |
+| zhoulufeng.blf-viewer-canfd | 5/26/2026 | Impersonation |
+| songyanglin.vscode-office-plus | 5/26/2026 | Impersonation |
+| ArthurNeuman.eslint-disable-typescript-snippets | 5/26/2026 | Impersonation |
+| Trent-Tompkins.claude-codex-black-edition | 5/26/2026 | Impersonation |
+| ray2666.antigravity-proxy | 5/26/2026 | Untrustworthy |
+| copilot-multi-provider.copilot-multi-provider | 5/26/2026 | Impersonation |
 | onreal-Elysia886.elysia-todo-tree | 5/24/2026 | Impersonation |
 | eclipse-cdt.vscode-clangd-cdtcloud | 5/24/2026 | Impersonation |
 | flywine.vscode-clangd | 5/24/2026 | Impersonation |
@@ -15,6 +22,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | openbase.openbase-icons | 5/24/2026 | Untrustworthy |
 | openbase.openbase-vscode | 5/24/2026 | Untrustworthy |
 | AmirBenShimol3111824.amir-synapse-nexus | 5/24/2026 | Untrustworthy |
+| VSCodeExtensionDevelopment.project-restructure-typescript | 5/23/2026 | Malware |
+| Moushu.material-icon-theme-moushu | 5/23/2026 | Impersonation |
 | romanage.romanage | 5/23/2026 | Untrustworthy |
 | samkj.orchestrai | 5/22/2026 | Untrustworthy |
 | Embedder.embedder-infineon | 5/22/2026 | Untrustworthy |
@@ -1152,7 +1161,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | Puglight.vulnerabilitto      | 6/26/2025 | Malware |
 | VSAnalysistest.codegpt-helper| 6/26/2025 | Malware |
 | VSAnalysistest.code-ai-assistant | 6/26/2025 | Malware |
-| ahbanC.shiba                 | 6/26/2025 | Malware ||ab-498.httpformat|6/24/2025| Malware
+| ahbanC.shiba                 | 6/26/2025 | Malware |
+| ab-498.httpformat | 6/24/2025 | Malware |
 |ab-498.pythonformat|6/24/2025| Malware
 |ab-498.cppformat|6/24/2025| Malware
 |ab-498.cppplayground|6/24/2025| Malware
