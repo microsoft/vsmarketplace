@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ray2666.antigravity-proxy | 5/26/2026 | Untrustworthy |
 | copilot-multi-provider.copilot-multi-provider | 5/26/2026 | Impersonation |
 | onreal-Elysia886.elysia-todo-tree | 5/24/2026 | Impersonation |
 | eclipse-cdt.vscode-clangd-cdtcloud | 5/24/2026 | Impersonation |
@@ -1155,7 +1156,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | Puglight.vulnerabilitto      | 6/26/2025 | Malware |
 | VSAnalysistest.codegpt-helper| 6/26/2025 | Malware |
 | VSAnalysistest.code-ai-assistant | 6/26/2025 | Malware |
-| ahbanC.shiba                 | 6/26/2025 | Malware ||ab-498.httpformat|6/24/2025| Malware
+| ahbanC.shiba                 | 6/26/2025 | Malware |
+|ab-498.httpformat|6/24/2025| Malware
 |ab-498.pythonformat|6/24/2025| Malware
 |ab-498.cppformat|6/24/2025| Malware
 |ab-498.cppplayground|6/24/2025| Malware
