@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| 64kramsystem.vscode-open-in-github-wiki-fixed | 5/27/2026 | Impersonation |
+| Sm1lerrpasy.ton-func-syntax-highlighter | 5/27/2026 | Malware |
 | zijinshanren.vscode-clangd-modules | 5/26/2026 | Impersonation |
 | zhoulufeng.blf-viewer-canfd | 5/26/2026 | Impersonation |
 | songyanglin.vscode-office-plus | 5/26/2026 | Impersonation |
