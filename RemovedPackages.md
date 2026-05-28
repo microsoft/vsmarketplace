@@ -10,7 +10,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | seeker.super-change-case-fork | 5/28/2026 | Impersonation |
 | li-zheng-rong.vscode-clangd-modules-support | 5/28/2026 | Impersonation |
 | aurogon-as.unreal-angelscript-aurogon | 5/28/2026 | Impersonation |
-| DorianN612.wordcountertool | 5/27/2026 | Malware |
+| DorianN612.wordcountertool | 5/27/2026 | Untrustworthy |
 | DorianN612.remote-text-fetcher | 5/27/2026 | Malware |
 | 64kramsystem.vscode-open-in-github-wiki-fixed | 5/27/2026 | Impersonation |
 | Sm1lerrpasy.ton-func-syntax-highlighter | 5/27/2026 | Malware |
