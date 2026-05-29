@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| simplerjiang.oai-compatible-copilot-kong | 5/29/2026 | Impersonation |
+| ravaelles.search-anywhere | 5/29/2026 | Impersonation |
+| Eyaa.vue-swift-i18n-plus | 5/29/2026 | Impersonation |
 | IteoluwakiishiDedeke.ite-agent | 5/29/2026 | Untrustworthy |
 | SafeBreach.safebreach-visual-attack-studio | 5/29/2026 | Untrustworthy |
 | joshuadaniel8090.vscode-telegram-bridge | 5/29/2026 | Untrustworthy |
