@@ -7,9 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ktav-lang.ktav | 5/30/2026 | Untrustworthy |
 | kaighe.esp-idf-light | 5/30/2026 | Impersonation |
 | NikiTester.claude-commit-generator | 5/30/2026 | Impersonation |
-| KirillKnize.test-extension-vscode | 5/29/2026 | Impersonation |
+| KirillKnize.test-extension-vscode | 5/30/2026 | Impersonation |
 | FreeIdom.cs-symbols | 5/30/2026 | Impersonation |
 | FreeIdom.cs-fluent-icons | 5/30/2026 | Impersonation |
 | muhammadirfangorsi.api-stress-tester | 5/29/2026 | Untrustworthy |
