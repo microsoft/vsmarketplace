@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| mathieu42.monokai-dark-by-mathieu42  | 6/1/2026 | Impersonation |
+| RoyHtml.xampp-manager | 6/1/2026 | Malware |
 | IsagiYoichi.Json-advanced-formatter-pro | 6/1/2026 | Malware |
 | ktav-lang.ktav | 5/30/2026 | Untrustworthy |
 | kaighe.esp-idf-light | 5/30/2026 | Impersonation |
