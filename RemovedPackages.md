@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| test-ui-harry.harry-test | 6/1/2026 | Untrustworthy |
 | test-ui-harry.preview-beta | 6/1/2026 | Untrustworthy |
 | phpLens.phpLens | 6/1/2026 | Spam |
 | AllHelperByDi.AllHelperByDi | 6/1/2026 | Spam |
