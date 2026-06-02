@@ -9,7 +9,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |---------------------------------------|--------------|-------------------------------|
 | wenwj.luaforqc | 6/2/2026 | Impersonation |
 | vtkn.amazon-bedrock-copilot-chat | 6/2/2026 | Malware |
-| BloxTask.bloxtask | 6/2/2026 | Spam |
+| BloxTask.bloxtask | 6/2/2026 | Untrustworthy |
 | test-ui-harry.harry-test | 6/1/2026 | Untrustworthy |
 | test-ui-harry.preview-beta | 6/1/2026 | Untrustworthy |
 | phpLens.phpLens | 6/1/2026 | Spam |
