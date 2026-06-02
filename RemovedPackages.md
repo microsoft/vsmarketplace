@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| wenwj.luaforqc | 6/2/2026 | Impersonation |
+| vtkn.amazon-bedrock-copilot-chat | 6/2/2026 | Malware |
 | BloxTask.bloxtask | 6/2/2026 | Spam |
 | test-ui-harry.harry-test | 6/1/2026 | Untrustworthy |
 | test-ui-harry.preview-beta | 6/1/2026 | Untrustworthy |
