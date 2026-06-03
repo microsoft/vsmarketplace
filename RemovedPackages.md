@@ -7,7 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| Involute.bs5-kit&ssr | 6/2/2026 | Untrustworthy |
+| rubiin.nestjs-snippets-vscode | 6/3/2026 | Impersonation |
+| Involute.bs5-kit | 6/2/2026 | Untrustworthy |
 | wenwj.luaforqc | 6/2/2026 | Impersonation |
 | vtkn.amazon-bedrock-copilot-chat | 6/2/2026 | Malware |
 | BloxTask.bloxtask | 6/2/2026 | Untrustworthy |
