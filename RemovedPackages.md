@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| RoPilot.ropilot | 6/4/2026 | Malware |
+| RoPlanner.roplanner | 6/4/2026 | Malware |
+| RoTasker.rotasker | 6/4/2026 | Malware |
 | apzcode.apzcode-ai | 6/4/2026 | Impersonation |
 | wenwj.qc-lua | 6/4/2026 | Impersonation |
 | guabutian.todo-tree-fix | 6/4/2026 | Impersonation |
