@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| apzcode.apzcode-ai | 6/4/2026 | Impersonation |
+| wenwj.qc-lua | 6/4/2026 | Impersonation |
+| guabutian.todo-tree-fix | 6/4/2026 | Impersonation |
 | laurence06363.laurence-hello-world-5 | 6/4/2026 | Untrustworthy |
 | pemhkakbh.theme-helper-utils | 6/3/2026 | Untrustworthy |
 | rubiin.nestjs-snippets-vscode | 6/3/2026 | Impersonation |
