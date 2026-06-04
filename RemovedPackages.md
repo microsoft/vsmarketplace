@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| laurence06363.laurence-hello-world-5 | 6/4/2026 | Untrustworthy |
 | pemhkakbh.theme-helper-utils | 6/3/2026 | Untrustworthy |
 | rubiin.nestjs-snippets-vscode | 6/3/2026 | Impersonation |
 | Involute.bs5-kit | 6/2/2026 | Untrustworthy |
