@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| luutuankiet.settings-on-fire-cloud | 6/5/2026 | Impersonation |
+| DataScienceResearchPeru.vscode-anime-companions | 6/5/2026 | Impersonation |
 | voanhnd.copilot-credit-counter |  6/5/2026 | Untrustworthy |
 | SchlafferBenjamin.terminal-compiler |  6/5/2026 | Untrustworthy |
 | SchlafferBenjamin.tridev-development-hub | 6/5/2026 | Untrustworthy |
