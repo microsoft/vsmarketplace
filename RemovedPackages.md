@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| voanhnd.copilot-credit-counter |  6/5/2026 | Untrustworthy |
 | Tekstac-TeknoturfInfoServices.tekstac-vscode-extension |  6/5/2026 | Untrustworthy |
 | SchlafferBenjamin.terminal-compiler |  6/5/2026 | Untrustworthy |
 | SchlafferBenjamin.tridev-development-hub | 6/5/2026 | Untrustworthy |
