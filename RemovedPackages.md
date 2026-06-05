@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Tekstac-TeknoturfInfoServices.tekstac-vscode-extension |  6/5/2026 | Untrustworthy |
+| SchlafferBenjamin.terminal-compiler |  6/5/2026 | Untrustworthy |
+| SchlafferBenjamin.tridev-development-hub | 6/5/2026 | Untrustworthy |
 | apzcode.apzcode-ai | 6/4/2026 | Impersonation |
 | wenwj.qc-lua | 6/4/2026 | Impersonation |
 | guabutian.todo-tree-fix | 6/4/2026 | Impersonation |
