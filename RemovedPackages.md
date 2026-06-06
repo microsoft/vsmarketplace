@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| fibanez.sftp-sync-maintained | 6/6/2026 | Impersonation |
+| EvgeniiShapovalov.sftp-link | 6/6/2026 | Impersonation |
 | voanhnd.copilot-credit-counter |  6/5/2026 | Untrustworthy |
 | SchlafferBenjamin.terminal-compiler |  6/5/2026 | Untrustworthy |
 | SchlafferBenjamin.tridev-development-hub | 6/5/2026 | Untrustworthy |
