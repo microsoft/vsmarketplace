@@ -7,9 +7,17 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| prnx.synapsez-ext | 6/6/2026 | Untrustworthy |
+| RoDesk.rodesk | 6/6/2026 | Malware | 
 | mariovalney.wordpress-readme-to-markdown | 6/6/2026 | Untrustworthy |
 | fibanez.sftp-sync-maintained | 6/6/2026 | Impersonation |
 | EvgeniiShapovalov.sftp-link | 6/6/2026 | Impersonation |
+| BloxTasker.ropilot | 6/4/2026 | Malware | 
+| podborodok.dbtoolsforpythonv2 | 6/4/2026 | Malware | 
+| manageblox.manageblox | 6/4/2026 | Malware | 
+| RoOrganizer.rooranizer | 6/4/2026 | Malware | 
+| luutuankiet.settings-on-fire-cloud | 6/5/2026 | Impersonation |
+| DataScienceResearchPeru.vscode-anime-companions | 6/5/2026 | Impersonation |
 | voanhnd.copilot-credit-counter |  6/5/2026 | Untrustworthy |
 | SchlafferBenjamin.terminal-compiler |  6/5/2026 | Untrustworthy |
 | SchlafferBenjamin.tridev-development-hub | 6/5/2026 | Untrustworthy |
