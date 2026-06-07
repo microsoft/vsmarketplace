@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| rg-ImTheDragonFly.ori-sucks | 6/7/2026 | Spam |
 | prnx.synapsez-ext | 6/6/2026 | Untrustworthy |
 | RoDesk.rodesk | 6/6/2026 | Malware | 
 | mariovalney.wordpress-readme-to-markdown | 6/6/2026 | Untrustworthy |
