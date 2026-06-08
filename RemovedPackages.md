@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| luutuankiet.copy-to-llm-rtk | 6/8/2026 | Impersonation |
+| contextflow.contextflow-vscode | 6/8/2026 | Malware |
 | RblxTasker.RblxTasker | 6/7/2026 | Malware |
 | RoTracker.rotracker | 6/7/2026 | Malware |
 | phyrasaur.vscodian | 6/7/2026 | Impersonation |
