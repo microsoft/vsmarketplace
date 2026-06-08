@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+|JehanWeerasuriya.vscode-nestjs-snippets-backend-development| 6/8/2026|Impersonation |
+| hy6.favorites-panel-fork | 6/8/2026 | Impersonation |
 | RblxTasker.RblxTasker | 6/7/2026 | Malware |
 | RoTracker.rotracker | 6/7/2026 | Malware |
 | phyrasaur.vscodian | 6/7/2026 | Impersonation |
