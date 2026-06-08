@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| RblxTasker.RblxTasker | 6/7/2026 | Malware | 
 | RoTracker.rotracker | 6/7/2026 | Malware | 
 | phyrasaur.vscodian | 6/7/2026 | Impersonation |
 | liuxy-CN.preview-everything | 6/7/2026 | Impersonation |
