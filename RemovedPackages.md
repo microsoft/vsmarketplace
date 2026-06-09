@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| state-diagram-yass-kpit.state-diagram-editor-yassinebougachaaaa | 6/9/2026 | Malware |
+| state-diagram-yass-kpit.state-diagram-editor-yassinebougachaaa | 6/9/2026 | Malware |
+| state-diagram-yass-kpit.state-diagram-editor-yassinebougacha | 6/9/2026 | Malware |
+| test-ui-harry.preview-beta | 6/9/2026 | Untrustworthy |
 | Guyutongxue.gts-vscode | 6/9/2026 | Impersonation |
 | hakor-plugins.tsmap-vscode | 6/8/2026 | Untrustworthy |
 | hakor-plugins.tabletype | 6/8/2026 | Untrustworthy |
