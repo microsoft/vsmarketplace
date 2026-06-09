@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Guyutongxue.gts-vscode | 6/9/2026 | Impersonation |
 | hakor-plugins.tsmap-vscode | 6/8/2026 | Untrustworthy |
 | hakor-plugins.tabletype | 6/8/2026 | Untrustworthy |
 | hakor-plugins.modux-tooling | 6/8/2026 | Malware |
