@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| AppCreationPLC.boardwalk | 6/9/2026 | Malware |
 | TaskRblx.taskrblx | 6/9/2026 | Malware |
 | state-diagram-yass-kpit.state-diagram-editor-yassinebougachaaaa | 6/9/2026 | Malware |
 | state-diagram-yass-kpit.state-diagram-editor-yassinebougachaaa | 6/9/2026 | Malware |
