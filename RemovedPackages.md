@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| NEVSTOP-LAB.vsc-open-in-integrated-browser | 6/10/2026 | Untrustworthy |
+| NEVSTOP-LAB.csm-vsc-support | 6/10/2026 | Malware |
 | YiEvan.remotetest | 6/10/2026 | Malware |
 | MrMainframe.pitel-library | 6/10/2026 | Malware |
 | KronaSecurity.krona-vscode-extension | 6/10/2026 | Malware |
