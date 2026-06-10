@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| KronaSecurity.krona-vscode-extension | 6/10/2026 | Malware |
 | rwbcy.trwbcy-poc | 6/10/2026 | Malware |
 | NexusCode.nexus-code | 6/10/2026 | Untrustworthy |
 | charcoal141II.imu-view | 6/10/2026 | Untrustworthy |
