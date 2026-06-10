@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Aveva-Technology.forge-bridge | 6/10/2026 | Malware |
 | cmd-studio.pua | 6/10/2026 | Malware |
 | hunterdurbin.vscode-4d-callchain | 6/10/2026 | Malware |
 | NEVSTOP-LAB.vsc-open-in-integrated-browser | 6/10/2026 | Untrustworthy |
