@@ -7,8 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| sun-xm.quick-action | 6/10/2026 | Untrustworthy |
-| diola.vscode-agent-tour | 6/10/2026 | Untrustworthy |
+| devsessioncanvas.dev-session-canvas | 6/10/2026 | Untrustworthy |
+| devsessioncanvas.dev-session-canvas-notifier | 6/10/2026 | Untrustworthy |
+| sun-xm.quick-action | 6/10/2026 | Malware |
+| diola.vscode-agent-tour | 6/10/2026 | Malware |
 | AnilAlapati.pqc-beta | 6/10/2026 | Untrustworthy |
 | AnilAlapati.leancontext | 6/10/2026 | Malware |
 | Aveva-Technology.forge-bridge | 6/10/2026 | Malware |
