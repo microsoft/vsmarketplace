@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| rwbcy.trwbcy-poc | 6/10/2026 | Malware |
+| NexusCode.nexus-code | 6/10/2026 | Untrustworthy |
+| charcoal141II.imu-view | 6/10/2026 | Untrustworthy |
+| solderspark.spark-code | 6/10/2026 | Malware |
+| SecretTea.project-tea | 6/10/2026 | Untrustworthy |
 | AppCreationLLP.boardwalkapp | 6/9/2026 | Malware |
 | AppCreationPLC.boardwalk | 6/9/2026 | Malware |
 | TaskRblx.taskrblx | 6/9/2026 | Malware |
