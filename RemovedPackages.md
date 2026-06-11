@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| alinma.alinma-dev-studio | 6/11/2026 | Impersonation |
+| CCD-Studios.ccd-sftp | 6/11/2026 | Impersonation |
+| visomaGmbH.vsm-vscode-deploy-reloaded | 6/11/2026 | Impersonation |
 | AppCreationLLP.boardwalkapp | 6/9/2026 | Malware |
 | AppCreationPLC.boardwalk | 6/9/2026 | Malware |
 | TaskRblx.taskrblx | 6/9/2026 | Malware |
