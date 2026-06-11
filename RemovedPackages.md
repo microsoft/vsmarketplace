@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| JahidLimon.php-namespace-resolver-plus | 6/11/2026 | Impersonation |
+| liumeng1201.android-helper | 6/11/2026 | Impersonation |
 | alinma.alinma-dev-studio | 6/10/2026 | Impersonation |
 | CCD-Studios.ccd-sftp | 6/10/2026 | Impersonation |
 | visomaGmbH.vsm-vscode-deploy-reloaded | 6/10/2026 | Impersonation |
