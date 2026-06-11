@@ -7,6 +7,16 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| tuanpham.tunas-ruby-call-flow | 6/11/2026 | Untrustworthy |
+| tuanpham.tunas-graphql-explorer-pro | 6/11/2026 | Untrustworthy |
+| SerbByteDevelopment.gpt-code-generator | 6/11/2026 | Untrustworthy |
+| smooth-soft.assessme-flow | 6/11/2026 | Malware |
+| barakolshe.forq | 6/11/2026 | Malware |
+| Blamely.blamely | 6/11/2026 | Malware |
+| kudsu.sober-ssh | 6/11/2026 | Malware |
+| madmansidea.sidetrack-music | 6/11/2026 | Malware |
+| JahidLimon.php-namespace-resolver-plus | 6/11/2026 | Impersonation |
+| liumeng1201.android-helper | 6/11/2026 | Impersonation |
 | alinma.alinma-dev-studio | 6/10/2026 | Impersonation |
 | CCD-Studios.ccd-sftp | 6/10/2026 | Impersonation |
 | visomaGmbH.vsm-vscode-deploy-reloaded | 6/10/2026 | Impersonation |
