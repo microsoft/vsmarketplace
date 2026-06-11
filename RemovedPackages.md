@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| tuanpham.tunas-ruby-call-flow | 6/11/2026 | Untrustworthy |
+| tuanpham.tunas-graphql-explorer-pro | 6/11/2026 | Untrustworthy |
+| SerbByteDevelopment.gpt-code-generator | 6/11/2026 | Untrustworthy |
 | smooth-soft.assessme-flow | 6/11/2026 | Malware |
 | barakolshe.forq | 6/11/2026 | Malware |
 | Blamely.blamely | 6/11/2026 | Malware |
