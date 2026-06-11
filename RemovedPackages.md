@@ -7,9 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| alinma.alinma-dev-studio | 6/11/2026 | Impersonation |
-| CCD-Studios.ccd-sftp | 6/11/2026 | Impersonation |
-| visomaGmbH.vsm-vscode-deploy-reloaded | 6/11/2026 | Impersonation |
+| alinma.alinma-dev-studio | 6/10/2026 | Impersonation |
+| CCD-Studios.ccd-sftp | 6/10/2026 | Impersonation |
+| visomaGmbH.vsm-vscode-deploy-reloaded | 6/10/2026 | Impersonation |
 | codivus.codivus | 6/10/2026 | Malware |
 | devsessioncanvas.dev-session-canvas | 6/10/2026 | Untrustworthy |
 | devsessioncanvas.dev-session-canvas-notifier | 6/10/2026 | Untrustworthy |
