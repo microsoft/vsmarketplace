@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| MaximeKjaer.scala | 6/12/2026 | Impersonation |
 | weimh.opencode-conn | 6/12/2026 | Impersonation |
 | appcreationsplc.boardwalkdev | 6/12/2026 | Malware |
 | suyb.v-sci-roo | 6/12/2026 | Impersonation |
