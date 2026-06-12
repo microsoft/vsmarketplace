@@ -8,6 +8,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
 | suyb.v-sci-roo | 6/12/2026 | Impersonation |
+| Nhatsave.smart-snippets-vue | 6/12/2026 | Untrustworthy |
+| ThreatVector.threatvault-vscode | 6/12/2026 | Untrustworthy |
 | ShopifySTORES.liquidpeptide | 6/11/2026 | Malware |
 | AppCreationsPLC.boardwalkdevapp | 6/11/2026 | Untrustworthy |
 | Aussie.FastTask | 6/11/2026 | Untrustworthy |
