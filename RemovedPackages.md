@@ -17,7 +17,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | mg-lab.mb-lab | 6/12/2026 | Malware |
 | ShopifySTORES.builderliquid | 6/12/2026 | Malware |
 | kudsu.soberssh | 6/12/2026 | Malware |
-| spinback.spinback | 6/12/2026 | Malware 
+| spinback.spinback | 6/12/2026 | Malware |
 | MaximeKjaer.scala | 6/12/2026 | Impersonation |
 | weimh.opencode-conn | 6/12/2026 | Impersonation |
 | appcreationsplc.boardwalkdev | 6/12/2026 | Malware |
