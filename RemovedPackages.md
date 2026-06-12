@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| DevMatrix.devmatrix | 6/12/2026 | Malware |
+| Quantam.quantam | 6/12/2026 | Malware |
 | yasbougacha.state-diagram-editor-yassinebou | 6/12/2026 | Malware |
 | yasbougacha.state-diagram-editor-yassinebougacha1 | 6/12/2026 | Malware |
 | yasbougacha.state-diagram-editor-yassinebouu | 6/12/2026 | Malware |
