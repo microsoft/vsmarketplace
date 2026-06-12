@@ -7,6 +7,23 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| DevMatrix.devmatrix | 6/12/2026 | Malware |
+| Quantam.quantam | 6/12/2026 | Malware |
+| yasbougacha.state-diagram-editor-yassinebou | 6/12/2026 | Malware |
+| yasbougacha.state-diagram-editor-yassinebougacha1 | 6/12/2026 | Malware |
+| yasbougacha.state-diagram-editor-yassinebouu | 6/12/2026 | Malware |
+| yasbougacha.state-diagram-editor-yassinebouga | 6/12/2026 | Malware |
+| ost-fh.micropython-for-arduino | 6/12/2026 | Malware |
+| mg-lab.mb-lab | 6/12/2026 | Malware |
+| ShopifySTORES.builderliquid | 6/12/2026 | Malware |
+| kudsu.soberssh | 6/12/2026 | Malware |
+| spinback.spinback | 6/12/2026 | Malware |
+| MaximeKjaer.scala | 6/12/2026 | Impersonation |
+| weimh.opencode-conn | 6/12/2026 | Impersonation |
+| appcreationsplc.boardwalkdev | 6/12/2026 | Malware |
+| suyb.v-sci-roo | 6/12/2026 | Impersonation |
+| Nhatsave.smart-snippets-vue | 6/12/2026 | Untrustworthy |
+| ThreatVector.threatvault-vscode | 6/12/2026 | Untrustworthy |
 | ShopifySTORES.liquidpeptide | 6/11/2026 | Malware |
 | AppCreationsPLC.boardwalkdevapp | 6/11/2026 | Untrustworthy |
 | Aussie.FastTask | 6/11/2026 | Untrustworthy |
