@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| CMSbrand.liquidfred | 6/13/2026 | Malware |
 | jsjm.latex-utilities-jsjm | 6/13/2026 | Impersonation |
 | jsjm.compress-download-extension-jsjm | 6/13/2026 | Impersonation |
 | smooth-cat.bobe-cat | 6/13/2026 | Impersonation |
