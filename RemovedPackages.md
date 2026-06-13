@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| jsjm.latex-utilities-jsjm | 06/13/2026 | Impersonation
+| jsjm.compress-download-extension-jsjm | 06/13/2026 | Impersonation
+| smooth-cat.bobe-cat | 06/13/2026 | Impersonation
+| suyb.u-sci-roo | 06/13/2026 | Impersonation
+| AppCreationLTD.dockyardapp | 06/13/2026 | Malware
+| solvex-solutions.epm-lsp-server | 06/13/2026 | Untrustworthy
 | DevMatrix.devmatrix | 6/12/2026 | Malware |
 | Quantam.quantam | 6/12/2026 | Malware |
 | yasbougacha.state-diagram-editor-yassinebou | 6/12/2026 | Malware |
