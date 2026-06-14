@@ -7,6 +7,34 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Quant.Quantam-M | 6/14/2026 | Impersonation |
+| GitDEV.fredliquid | 6/14/2026 | Impersonation | 
+| AppLabs.boardstep | 6/14/2026 | Impersonation |
+| JDCOM.coding-workflow | 6/14/2026 | Impersonation |
+| LinJun.bigquery-support | 6/14/2026 | Impersonation |
+| LinJun.aws-s3-support | 6/14/2026 | Impersonation |
+| LinJun.cassandra-support | 6/14/2026 | Impersonation |
+| LinJun.clickhouse-support | 6/14/2026 | Impersonation |
+| LinJun.databricks-support | 6/14/2026 | Impersonation |
+| LinJun.dbeaver-support | 6/14/2026 | Impersonation |
+| LinJun.docker-support | 6/14/2026 | Impersonation |
+| LinJun.ftp-support | 6/14/2026 | Impersonation |
+| LinJun.hive-support | 6/14/2026 | Impersonation |
+| LinJun.ibm-db2-support | 6/14/2026 | Impersonation |
+| LinJun.kafka-support | 6/14/2026 | Impersonation |
+| LinJun.mongodb-support | 6/14/2026 | Impersonation |
+| LinJun.navicat-support | 6/14/2026 | Impersonation |
+| LinJun.oracle-support | 6/14/2026 | Impersonation |
+| LinJun.redshift-support | 6/14/2026 | Impersonation |
+| LinJun.snowflake-support | 6/14/2026 | Impersonation |
+| LinJun.sqlite-support | 6/14/2026 | Impersonation |
+| LinJun.trino-support | 6/14/2026 | Impersonation |
+| rustcc.rust-analyzer-cn | 6/14/2026 | Impersonation |
+| Primer4128.rust-analyzer-fork | 6/14/2026 | Impersonation |
+| namhhitvn.gitlens-support-symbolic-link | 6/14/2026 | Impersonation |
+| mtglitch.claude-usage-bars | 6/14/2026 | Impersonation |
+| Roger-Han.mimo-code | 6/14/2026 | Impersonation |
+| ismael-ripoll.abaquspy-input-file-syntax-highlighter | 6/14/2026 | Untrustworthy |
 | CMSbrand.liquidfred | 6/13/2026 | Malware |
 | jsjm.latex-utilities-jsjm | 6/13/2026 | Impersonation |
 | jsjm.compress-download-extension-jsjm | 6/13/2026 | Impersonation |
