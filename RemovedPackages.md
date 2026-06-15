@@ -7,9 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| Quant.Quantam-M | 6/14/2026 | Impersonation |
-| GitDEV.fredliquid | 6/14/2026 | Impersonation |
-| AppLabs.boardstep | 6/14/2026 | Impersonation |
+| Quant.Quantam-M | 6/14/2026 | Malware |
+| GitDEV.fredliquid | 6/14/2026 | Malware |
+| AppLabs.boardstep | 6/14/2026 | Malware |
 | JDCOM.coding-workflow | 6/14/2026 | Impersonation |
 | LinJun.bigquery-support | 6/14/2026 | Impersonation |
 | LinJun.aws-s3-support | 6/14/2026 | Impersonation |
