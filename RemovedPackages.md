@@ -10,9 +10,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | Horizon-Projects.Horizon-Collaboration-Tracker | 6/15/2026 | Malware |
 | PixelLabs.boardflow | 6/15/2026 | Malware |
 | mglab.mglab | 6/15/2026 | Malware |
-| Primer4128.rust-analyzer-fork | 6/14/2026 | Impersonation |
-| rustcc.rust-analyzer-cn | 6/14/2026 | Impersonation |
-| namhhitvn.gitlens-support-symbolic-link | 6/14/2026 | Impersonation |
 | Quant.Quantam-M | 6/14/2026 | Malware |
 | GitDEV.fredliquid | 6/14/2026 | Malware |
 | AppLabs.boardstep | 6/14/2026 | Malware |
