@@ -7,10 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-|ulysses4ever.jayret-parley| 6/15/2026| Impersonation|
-|mtglitch.claude-usage-monitor-mtg| 6/15/2026| Impersonation|
-|0miles.vscode-git-graph-alter| 6/15/2026| Impersonation|
-|Primer4128.polykai-pro| 6/15/2026| Impersonation|
+| ulysses4ever.jayret-parley | 6/15/2026 | Impersonation |
+| mtglitch.claude-usage-monitor-mtg | 6/15/2026 | Impersonation |
+| 0miles.vscode-git-graph-alter | 6/15/2026 | Impersonation |
+| Primer4128.polykai-pro | 6/15/2026 | Impersonation |
 | Horizon-Projects.Horizon-Collaboration-Tracker | 6/15/2026 | Malware |
 | PixelLabs.boardflow | 6/15/2026 | Malware |
 | mglab.mglab | 6/15/2026 | Malware |
