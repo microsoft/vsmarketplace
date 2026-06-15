@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| EonaCat.AvaloniaFree | 6/15/2026 | Impersonation |
 | swarmiq-os.swarmiq-connect | 6/15/2026 | Malware |
 | ulysses4ever.jayret-parley | 6/15/2026 | Impersonation |
 | mtglitch.claude-usage-monitor-mtg | 6/15/2026 | Impersonation |
