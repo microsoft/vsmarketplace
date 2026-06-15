@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Horizon-Projects.Horizon-Collaboration-Tracker | 6/15/2026 | Malware |
+| PixelLabs.boardflow | 6/15/2026 | Malware |
+| mglab.mglab | 6/15/2026 | Malware |
 | Quant.Quantam-M | 6/14/2026 | Malware |
 | GitDEV.fredliquid | 6/14/2026 | Malware |
 | AppLabs.boardstep | 6/14/2026 | Malware |
