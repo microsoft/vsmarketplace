@@ -9,7 +9,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |---------------------------------------|--------------|-------------------------------|
 | EonaCat.AvaloniaFree | 6/15/2026 | Impersonation |
 | swarmiq-os.swarmiq-connect | 6/15/2026 | Malware |
-| ulysses4ever.jayret-parley | 6/15/2026 | Impersonation |
 | mtglitch.claude-usage-monitor-mtg | 6/15/2026 | Impersonation |
 | 0miles.vscode-git-graph-alter | 6/15/2026 | Impersonation |
 | Primer4128.polykai-pro | 6/15/2026 | Impersonation |
