@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| atman-dev.opencode-chat-unofficial-custom | 6/16/2026 | Impersonation |
 | YicoFighting.line-lens | 6/16/2026 | Malware |
 | mkd-corp.keural-vscode | 6/16/2026 | Malware |
 | arclens.arc-lens | 6/16/2026 | Malware |
