@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| git-ai-cli.git-ai-cli | 6/16/2026 | Impersonation |
+| mkd-corp.keural-vscode | 6/16/2026 | Malware |
+| Abhilash001.t-ex | 6/16/2026 | Malware |
+| sparrowcodes.sparrowcodes | 6/16/2026 | Malware |
 | PatchLabs.boardtrack | 6/15/2026 | Malware |
 | EonaCat.AvaloniaFree | 6/15/2026 | Impersonation |
 | swarmiq-os.swarmiq-connect | 6/15/2026 | Malware |
