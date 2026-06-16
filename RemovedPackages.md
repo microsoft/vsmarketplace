@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| MachineConfiguration-test.machine-configuration | 6/16/2026 | Untrustworthy 
+| QiYijiazhen.glm-for-copilot | 6/16/2026 | Untrustworthy 
+| adwaitkeshari.lull | 6/16/2026 |  Malware
 | git-ai-cli.git-ai-cli | 6/16/2026 | Impersonation |
 | mkd-corp.keural-vscode | 6/16/2026 | Malware |
 | Abhilash001.t-ex | 6/16/2026 | Malware |
