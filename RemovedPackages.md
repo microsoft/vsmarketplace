@@ -7,6 +7,21 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Roger-Han.mimo-code-ai | 6/16/2026 | Impersonation |
+| ext-lab.git-history-plus | 6/16/2026 | Impersonation |
+| kiracode.kira-code | 6/16/2026 | Impersonation |
+| atman-dev.opencode-chat-unofficial-custom | 6/16/2026 | Impersonation |
+| YicoFighting.line-lens | 6/16/2026 | Malware |
+| mkd-corp.keural-vscode | 6/16/2026 | Malware |
+| arclens.arc-lens | 6/16/2026 | Malware |
+| agent.devdock | 6/16/2026 | Impersonation |
+| Kickbacksai.kickbacks-ai | 6/16/2026 | Untrustworthy |
+| MachineConfiguration-test.machine-configuration | 6/16/2026 | Untrustworthy |
+| QiYijiazhen.glm-for-copilot | 6/16/2026 | Untrustworthy |
+| adwaitkeshari.lull | 6/16/2026 | Malware |
+| git-ai-cli.git-ai-cli | 6/16/2026 | Impersonation |
+| Abhilash001.t-ex | 6/16/2026 | Malware |
+| sparrowcodes.sparrowcodes | 6/16/2026 | Malware |
 | PatchLabs.boardtrack | 6/15/2026 | Malware |
 | EonaCat.AvaloniaFree | 6/15/2026 | Impersonation |
 | swarmiq-os.swarmiq-connect | 6/15/2026 | Malware |
