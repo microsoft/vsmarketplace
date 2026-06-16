@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Kickbacksai.kickbacks-ai | 6/16/2026 | Untrustworthy|
 | MachineConfiguration-test.machine-configuration | 6/16/2026 | Untrustworthy 
 | QiYijiazhen.glm-for-copilot | 6/16/2026 | Untrustworthy 
 | adwaitkeshari.lull | 6/16/2026 |  Malware
