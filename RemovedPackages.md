@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| YicoFighting.line-lens | 6/16/2026 | Malware |
+| mkd-corp.keural-vscode | 6/16/2026 | Malware |
+| arclens.arc-lens | 6/16/2026 | Malware |
 | agent.devdock | 6/16/2026 | Impersonation |
 | Kickbacksai.kickbacks-ai | 6/16/2026 | Untrustworthy |
 | MachineConfiguration-test.machine-configuration | 6/16/2026 | Untrustworthy |
