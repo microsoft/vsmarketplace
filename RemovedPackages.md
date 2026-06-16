@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Roger-Han.mimo-code-ai | 6/16/2026 | Impersonation |
 | ext-lab.git-history-plus | 6/16/2026 | Impersonation |
 | kiracode.kira-code | 6/16/2026 | Impersonation |
 | atman-dev.opencode-chat-unofficial-custom | 6/16/2026 | Impersonation |
