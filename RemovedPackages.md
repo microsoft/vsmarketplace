@@ -7,6 +7,18 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| keeptrack.keeptrack-notes-manager | 6/17/2026 | Untrustworthy |
+| ovolab-veritas.codesnap-neo | 6/17/2026 | Impersonation |
+| Forms.gitlab-workflow-kontur | 6/17/2026 | Impersonation |
+| JacksonChen.apifox-helper-vs | 6/17/2026 | Impersonation |
+| weiboplat.wecoder | 6/17/2026 | Impersonation |
+| shinganEuler.vscode-unity-debug | 6/17/2026 | Impersonation |
+| windy.windy-minecraft-debugger | 6/17/2026 | Impersonation |
+| CursorFree.cursor-free | 6/17/2026 | Impersonation |
+| Worklink-Copilot.worklinkcopilot | 6/17/2026 | Impersonation |
+| doctorliang-continue.local-continue | 6/17/2026 | Impersonation |
+| Vistagi.vista-code-agent | 6/17/2026 | Impersonation |
+| ext-lab.ftp-supports | 6/17/2026 | Untrustworthy |
 | 360-Geelib-Copilot-Code.geelibcopilotcode | 6/16/2026 | Impersonation |
 | CompassLLMCode.autosail | 6/16/2026 | Impersonation |
 | rgcode.rgcode | 6/16/2026 | Impersonation |
