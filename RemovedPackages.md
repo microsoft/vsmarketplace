@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| CursorFree.cursor-free | 6/17/2026 | Impersonation|
+| Worklink-Copilot.worklinkcopilot | 6/17/2026 | Impersonation|
+| doctorliang-continue.local-continue | 6/17/2026 | Impersonation |
+| Vistagi.vista-code-agent | 6/17/2026 | Impersonation|
+| ext-lab.ftp-supports | 6/17/2026 | Impersonation|
 | Roger-Han.mimo-code-ai | 6/16/2026 | Impersonation |
 | ext-lab.git-history-plus | 6/16/2026 | Impersonation |
 | kiracode.kira-code | 6/16/2026 | Impersonation |
