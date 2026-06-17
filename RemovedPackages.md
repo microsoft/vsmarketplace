@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| keeptrack.keeptrack-notes-manager | 6/17/2026 | Untrustworthy |
 | ovolab-veritas.codesnap-neo | 6/17/2026 | Impersonation |
 | Forms.gitlab-workflow-kontur | 6/17/2026 | Impersonation |
 | JacksonChen.apifox-helper-vs | 6/17/2026 | Impersonation |
