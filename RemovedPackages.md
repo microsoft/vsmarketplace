@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| weiboplat.wecoder | 6/17/2026 | Impersonation |
+| shinganEuler.vscode-unity-debug | 6/17/2026 | Impersonation |
+| windy.windy-minecraft-debugger | 6/17/2026 | Impersonation |
 | Roger-Han.mimo-code-ai | 6/16/2026 | Impersonation |
 | ext-lab.git-history-plus | 6/16/2026 | Impersonation |
 | kiracode.kira-code | 6/16/2026 | Impersonation |
