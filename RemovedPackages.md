@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ovolab-veritas.codesnap-neo | 6/17/2026 | Impersonation |
+| JacksonChen.apifox-helper-vs | 6/17/2026 | Impersonation |
+| weiboplat.wecoder | 6/17/2026 | Impersonation |
+| shinganEuler.vscode-unity-debug | 6/17/2026 | Impersonation |
+| windy.windy-minecraft-debugger | 6/17/2026 | Impersonation |
 | CursorFree.cursor-free | 6/17/2026 | Impersonation|
 | Worklink-Copilot.worklinkcopilot | 6/17/2026 | Impersonation|
 | doctorliang-continue.local-continue | 6/17/2026 | Impersonation |
