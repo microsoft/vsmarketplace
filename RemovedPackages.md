@@ -19,6 +19,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | doctorliang-continue.local-continue | 6/17/2026 | Impersonation |
 | Vistagi.vista-code-agent | 6/17/2026 | Impersonation |
 | ext-lab.ftp-supports | 6/17/2026 | Impersonation |
+| 360-Geelib-Copilot-Code.geelibcopilotcode | 6/16/2026 | Impersonation |
+| CompassLLMCode.autosail | 6/16/2026 | Impersonation |
+| rgcode.rgcode | 6/16/2026 | Impersonation |
+| hanan.hanan-code | 6/16/2026 | Impersonation |
+| ASUS-AICS.xhis-copilot | 6/16/2026 | Impersonation |
 | Roger-Han.mimo-code-ai | 6/16/2026 | Impersonation |
 | ext-lab.git-history-plus | 6/16/2026 | Impersonation |
 | kiracode.kira-code | 6/16/2026 | Impersonation |
