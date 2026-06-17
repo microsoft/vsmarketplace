@@ -8,6 +8,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
 | ovolab-veritas.codesnap-neo | 6/17/2026 | Impersonation |
+| Forms.gitlab-workflow-kontur | 6/17/2026 | Impersonation |
 | JacksonChen.apifox-helper-vs | 6/17/2026 | Impersonation |
 | weiboplat.wecoder | 6/17/2026 | Impersonation |
 | shinganEuler.vscode-unity-debug | 6/17/2026 | Impersonation |
