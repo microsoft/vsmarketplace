@@ -28,6 +28,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | pit00.global-linter | 6/18/2026 | Impersonation |
 | pit00.repeatable-commands | 6/18/2026 | Impersonation |
 | Zlmiles.zlmiles-liquid | 6/18/2026 | Malware |
+| JacksonChen.git-remote-actions | 6/18/2026 | Impersonation |
 | rishiishah.csegraph-vscode | 6/18/2026 | Untrustworthy |
 | 617694668.cline-cn | 6/18/2026 | Impersonation |
 | keeptrack.keeptrack-notes-manager | 6/17/2026 | Untrustworthy |
