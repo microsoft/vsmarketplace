@@ -18,7 +18,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | pit00.numbered-highlighter | 6/18/2026 | Impersonation |
 | pit00.vscode-breaklines-highlight | 6/18/2026 | Impersonation |
 | pit00.github-shortcut | 6/18/2026 | Impersonation |
-| pit00.image-hover-tools| 6/18/2026 | Impersonation |
+| pit00.image-hover-tools | 6/18/2026 | Impersonation |
 | pit00.brackets-scopes | 6/18/2026 | Impersonation |
 | pit00.mini-diffs | 6/18/2026 | Impersonation |
 | pit00.indent-empty-line | 6/18/2026 | Impersonation |
@@ -27,8 +27,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | pit00.cursors-view-focus | 6/18/2026 | Impersonation |
 | pit00.global-linter | 6/18/2026 | Impersonation |
 | pit00.repeatable-commands | 6/18/2026 | Impersonation |
-| Zlmiles.zlmiles-liquid  | 6/18/2026 | Malware 
-| rishiishah.csegraph-vscode  | 6/18/2026 | Untrustworthy
+| Zlmiles.zlmiles-liquid | 6/18/2026 | Malware |
+| rishiishah.csegraph-vscode | 6/18/2026 | Untrustworthy |
 | 617694668.cline-cn | 6/18/2026 | Impersonation |
 | keeptrack.keeptrack-notes-manager | 6/17/2026 | Untrustworthy |
 | ovolab-veritas.codesnap-neo | 6/17/2026 | Impersonation |
