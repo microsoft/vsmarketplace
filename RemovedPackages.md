@@ -7,6 +7,33 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| pit00.multiple-cursor-patterns | 6/18/2026 | Impersonation |
+| pit00.ristretto-file-icons | 6/18/2026 | Impersonation |
+| metagogo.metagogo | 6/18/2026 | Impersonation |
+| consistem-sistemas.consistem-language-server | 6/18/2026 | Impersonation |
+| consistem-sistemas.consistem-tools | 6/18/2026 | Impersonation |
+| consistem-sistemas.consistem-servermanager | 6/18/2026 | Impersonation |
+| consistem-sistemas.consistem-vscode-objectscript | 6/18/2026 | Impersonation |
+| LBGroup.lineputscript-formatter | 6/18/2026 | Impersonation |
+| zjt.zjt-onedark-modern | 6/18/2026 | Impersonation |
+| pit00.one-dark-pro-magenta | 6/18/2026 | Impersonation |
+| pit00.direct-cmds | 6/18/2026 | Impersonation |
+| pit00.numbered-highlighter | 6/18/2026 | Impersonation |
+| pit00.vscode-breaklines-highlight | 6/18/2026 | Impersonation |
+| pit00.github-shortcut | 6/18/2026 | Impersonation |
+| pit00.image-hover-tools | 6/18/2026 | Impersonation |
+| pit00.brackets-scopes | 6/18/2026 | Impersonation |
+| pit00.mini-diffs | 6/18/2026 | Impersonation |
+| pit00.indent-empty-line | 6/18/2026 | Impersonation |
+| pit00.fenced-blocks-tools | 6/18/2026 | Impersonation |
+| pit00.whitespace-counters | 6/18/2026 | Impersonation |
+| pit00.cursors-view-focus | 6/18/2026 | Impersonation |
+| pit00.global-linter | 6/18/2026 | Impersonation |
+| pit00.repeatable-commands | 6/18/2026 | Impersonation |
+| Zlmiles.zlmiles-liquid | 6/18/2026 | Malware |
+| JacksonChen.git-remote-actions | 6/18/2026 | Impersonation |
+| rishiishah.csegraph-vscode | 6/18/2026 | Untrustworthy |
+| 617694668.cline-cn | 6/18/2026 | Impersonation |
 | keeptrack.keeptrack-notes-manager | 6/17/2026 | Untrustworthy |
 | ovolab-veritas.codesnap-neo | 6/17/2026 | Impersonation |
 | Forms.gitlab-workflow-kontur | 6/17/2026 | Impersonation |
