@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| consistem-sistemas.consistem-language-server | 6/18/2026 | Impersonation|
+| consistem-sistemas.consistem-tools | 6/18/2026 | Impersonation|
+| consistem-sistemas.consistem-servermanager | 6/18/2026 | Impersonation|
+| consistem-sistemas.consistem-vscode-objectscript | 6/18/2026 | Impersonation|
+| LBGroup.lineputscript-formatter | 6/18/2026 | Impersonation|
+| zjt.zjt-onedark-modern | 6/18/2026 | Impersonation|
 | pit00.one-dark-pro-magenta | 6/18/2026 | Impersonation |
 | pit00.direct-cmds | 6/18/2026 | Impersonation |
 | pit00.numbered-highlighter | 6/18/2026 | Impersonation |
