@@ -7,6 +7,20 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| pit00.one-dark-pro-magenta | 6/18/2026 | Impersonation |
+| pit00.direct-cmds | 6/18/2026 | Impersonation |
+| pit00.numbered-highlighter | 6/18/2026 | Impersonation |
+| pit00.vscode-breaklines-highlight | 6/18/2026 | Impersonation |
+| pit00.github-shortcut | 6/18/2026 | Impersonation |
+| pit00.image-hover-tools| 6/18/2026 | Impersonation |
+| pit00.brackets-scopes | 6/18/2026 | Impersonation |
+| pit00.mini-diffs | 6/18/2026 | Impersonation |
+| pit00.indent-empty-line | 6/18/2026 | Impersonation |
+| pit00.fenced-blocks-tools | 6/18/2026 | Impersonation |
+| pit00.whitespace-counters | 6/18/2026 | Impersonation |
+| pit00.cursors-view-focus | 6/18/2026 | Impersonation |
+| pit00.global-linter | 6/18/2026 | Impersonation |
+| pit00.repeatable-commands | 6/18/2026 | Impersonation |
 | Zlmiles.zlmiles-liquid  | 6/18/2026 | Malware 
 | rishiishah.csegraph-vscode  | 6/18/2026 | Untrustworthy
 | 617694668.cline-cn | 6/18/2026 | Impersonation |
