@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| TuyaOpen.TuyaOpenIDE | 6/18/2026 | Impersonation |
 | pit00.multiple-cursor-patterns | 6/18/2026 | Impersonation |
 | pit00.ristretto-file-icons | 6/18/2026 | Impersonation |
 | metagogo.metagogo | 6/18/2026 | Impersonation |
