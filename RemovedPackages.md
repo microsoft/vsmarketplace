@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| metagogo.metagogo | 6/18/2026 | Impersonation |
 | consistem-sistemas.consistem-language-server | 6/18/2026 | Impersonation |
 | consistem-sistemas.consistem-tools | 6/18/2026 | Impersonation |
 | consistem-sistemas.consistem-servermanager | 6/18/2026 | Impersonation |
