@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| CyrusRune.codearts-cli-launcher | 6/18/2026 | Impersonation |
+| pogacic.vscode-proto3-upkeep | 6/18/2026 | Impersonation |
 | GB0099.gb0099-liquid | 6/18/2026 | Malware |
 | TuyaOpen.TuyaOpenIDE | 6/18/2026 | Impersonation |
 | pit00.multiple-cursor-patterns | 6/18/2026 | Impersonation |
