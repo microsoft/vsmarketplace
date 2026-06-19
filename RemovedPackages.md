@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| GB0099.gb0099-liquid | 6/18/2026 | Malware |
 | TuyaOpen.TuyaOpenIDE | 6/18/2026 | Impersonation |
 | pit00.multiple-cursor-patterns | 6/18/2026 | Impersonation |
 | pit00.ristretto-file-icons | 6/18/2026 | Impersonation |
