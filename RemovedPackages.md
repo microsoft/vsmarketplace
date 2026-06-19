@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| bismarkvargas.bkcode | 6/19/2026 | Malware |
 | CyrusRune.codearts-cli-launcher | 6/18/2026 | Impersonation |
 | pogacic.vscode-proto3-upkeep | 6/18/2026 | Impersonation |
 | GB0099.gb0099-liquid | 6/18/2026 | Malware |
