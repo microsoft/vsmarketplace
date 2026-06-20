@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| 0x7a69.whhid | 6/20/2026 | Untrustworthy |
+| devnazir.gosh-interpreter | 6/20/2026 | Impersonation |
+| outstand.outstand-elixir-ls | 6/20/2026 | Impersonation |
+| touchlab.touchlab-vscode-office | 6/20/2026 | Impersonation |
+| pvjagtap.arxml-workbench | 6/20/2026 | Impersonation |
 | dhakshnamoorthi.nexus-code-agent | 6/19/2026 | Untrustworthy |
 | AppCreatePLC.boardtrackapps | 6/19/2026 | Malware |
 | everyapi-ai.everyapi-vscode | 6/19/2026 | Untrustworthy |
