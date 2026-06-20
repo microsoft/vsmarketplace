@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| 0x7a69.whhid | 6/20/2026 | Impersonation |
 | devnazir.gosh-interpreter | 6/20/2026 | Impersonation |
 | outstand.outstand-elixir-ls | 6/20/2026 | Impersonation |
 | touchlab.touchlab-vscode-office | 6/20/2026 | Impersonation |
