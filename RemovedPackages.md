@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| dhakshnamoorthi.nexus-code-agent | 6/19/2026 | Untrustworthy |
+| AppCreatePLC.boardtrackapps | 6/19/2026 | Malware |
 | everyapi-ai.everyapi-vscode | 6/19/2026 | Untrustworthy |
 | bismarkvargas.bkcode | 6/19/2026 | Malware |
 | CyrusRune.codearts-cli-launcher | 6/19/2026 | Impersonation |
