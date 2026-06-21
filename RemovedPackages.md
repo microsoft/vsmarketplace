@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| xhastudio.SynthetixMyanmar | 6/20/2026 | Untrustworthy |
+| Synthetixfordebug.synthetix-debugger | 6/20/2026 | Untrustworthy |
 | markdown-office-viewer.markdown-office-viewer-pro | 6/21/2026 | Impersonation |
 | 0x7a69.whhid | 6/20/2026 | Untrustworthy |
 | devnazir.gosh-interpreter | 6/20/2026 | Impersonation |
