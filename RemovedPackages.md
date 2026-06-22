@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| bortolabs.claude-code-usage-bar | 6/22/2026 | Untrustworthy
+| richardgubangxa.sf-buddy | 6/22/2026 | Malware
 | ng-jk.sftp-ng-jk | 6/22/2026 | Impersonation |
 | markdown-office-viewer.markdown-office-viewer-pro | 6/21/2026 | Impersonation |
 | xhastudio.SynthetixMyanmar | 6/20/2026 | Untrustworthy |
