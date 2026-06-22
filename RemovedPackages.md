@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| worldline.aicodefix | 6/22/2026 | Malware |
+| worldline.wlpfo-toolkit | 6/22/2026 | Malware |
+| kazan.myworldline | 6/22/2026 | Malware |
+| guavaduck.omnirouter-ai | 6/22/2026 | Malware |
+| Floriani.mcp-hub | 6/22/2026 | Malware |
 | RoamAI.roam-crew | 6/22/2026 | Malware |
 | bortolabs.claude-code-usage-bar | 6/22/2026 | Untrustworthy |
 | richardgubangxa.sf-buddy | 6/22/2026 | Malware |
