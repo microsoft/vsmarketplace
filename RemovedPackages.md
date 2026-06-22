@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ng-jk.sftp-ng-jk | 6/22/2026 | Impersonation |
 | markdown-office-viewer.markdown-office-viewer-pro | 6/21/2026 | Impersonation |
 | xhastudio.SynthetixMyanmar | 6/20/2026 | Untrustworthy |
 | Synthetixfordebug.synthetix-debugger | 6/20/2026 | Untrustworthy |
