@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| smonteros.pixel-agents-opencode | 6/23/2026 | Impersonation |
+| songyanglin.office-viewer-vditor | 6/23/2026 | Impersonation |
+| zyk-zhang.zyk-microapp-plugin | 6/23/2026 | Impersonation |
 | worldline.aicodefix | 6/22/2026 | Malware |
 | worldline.wlpfo-toolkit | 6/22/2026 | Malware |
 | kazan.myworldline | 6/22/2026 | Malware |
