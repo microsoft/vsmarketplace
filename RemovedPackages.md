@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| pascal-lab.vide-ide | 6/23/2026  | Malware |
 | Lars-Ve.cses-tracker | 6/23/2026 | Untrustworthy |
 | xdearboy.xdearboy-pack-s | 6/23/2026 | Untrustworthy |
 | smonteros.pixel-agents-opencode | 6/23/2026 | Impersonation |
