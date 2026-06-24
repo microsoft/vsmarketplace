@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| rainbowflesh.moondusttheme-fork | 6/24/2026 | Impersonation |
 | AppPublishPLC.boardtrackappel | 6/23/2026 | Malware |
 | hexlabs.boardtrackappe | 6/23/2026 | Malware |
 | pascal-lab.vide-ide | 6/23/2026 | Malware |
