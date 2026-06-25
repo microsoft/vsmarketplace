@@ -7,7 +7,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| HuxLabs.huxlabsapp | 6/25/2026 | Untrustworthy |
+| benzoXdev2.vscode-3abid-v1 | 6/25/2026 | Untrustworthy |
+| CipherLabs.CipherLabsApplication | 6/25/2026 | Malware |
 | chery-brake-tools.chery-brake-tools | 6/25/2026 | Untrustworthy |
+| benzoXdev.vscode-3abid-pets | 6/24/2026 | Untrustworthy |
+| AppPublishersPLC.boardlinkapp | 6/24/2026 | Malware |
+| guavadev.omnirouter | 6/24/2026 | Malware |
+| AppReleasePLC.boardlinkapplication | 6/24/2026 | Malware |
 | ecocode-sci-monitor.ecocode-sci-monitor | 6/24/2026 | Malware |
 | rainbowflesh.moondusttheme-fork | 6/24/2026 | Impersonation |
 | AppPublishPLC.boardtrackappel | 6/23/2026 | Malware |
