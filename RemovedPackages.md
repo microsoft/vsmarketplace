@@ -7,6 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| HrushikeshPhapale.ClaudeCodeForVS | 6/26/2026 | Impersonation |
+| felcadev.sweetdraculav2 | 6/26/2026 | Impersonation |
+| stx-emma.git-e-graph | 6/26/2026 | Impersonation |
+| paul0dev.deepseek-copilot-byok | 6/26/2026 | Impersonation |
+| cot-eis-team.cot-eis-team-solution-development-studio | 6/26/2026 | Impersonation |
+| cot-eis-team.cot-eis-team-extension-pack | 6/26/2026 | Impersonation |
+| cot-eis-team.cot-eis-team-bytestream-route-designer | 6/26/2026 | Impersonation |
 | stx-emma.git-e-graph | 6/26/2026 | Untrustworthy |
 | n3tw4lk3r.tomorrow-night-rusty | 6/26/2026 | Untrustworthy |
 | BenzoXdev2.vscode-3abid-v1 | 6/25/2026 | Impersonation |
