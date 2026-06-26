@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| stx-emma.git-e-graph | 6/26/2026 | Untrustworthy |
+| n3tw4lk3r.tomorrow-night-rusty | 6/26/2026 | Untrustworthy |
+| BenzoXdev2.vscode-3abid-v1 | 6/25/2026 | Impersonation |
+| ifplusor.semantic-lunaria | 6/25/2026 | Impersonation |
+| wincell.vlog-tb-instance-gen | 6/25/2026 | Impersonation |
 | HuxLabs.huxlabsapp | 6/25/2026 | Untrustworthy |
 | benzoXdev2.vscode-3abid-v1 | 6/25/2026 | Untrustworthy |
 | CipherLabs.CipherLabsApplication | 6/25/2026 | Malware |
