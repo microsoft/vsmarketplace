@@ -7,6 +7,22 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| TiroTeam.tiro-application-toolkit | 6/26/2026 | Untrustworthy |
+| dongtran.cds-debug | 6/26/2026 | Untrustworthy |
+| AnhNT.claude-commit-ai | 6/26/2026 | Impersonation |
+| KineticBrew.boardspacedev | 6/26/2026 | Untrustworthy |
+| ClovisReyes.boardhub | 6/26/2026 | Untrustworthy |
+| jzeeed.jzeeed | 6/26/2026 | Untrustworthy |
+| HrushikeshPhapale.ClaudeCodeForVS | 6/26/2026 | Impersonation |
+| felcadev.sweetdraculav2 | 6/26/2026 | Impersonation |
+| stx-emma.git-e-graph | 6/26/2026 | Impersonation |
+| paul0dev.deepseek-copilot-byok | 6/26/2026 | Impersonation |
+| cot-eis-team.cot-eis-team-solution-development-studio | 6/26/2026 | Impersonation |
+| cot-eis-team.cot-eis-team-extension-pack | 6/26/2026 | Impersonation |
+| cot-eis-team.cot-eis-team-bytestream-route-designer | 6/26/2026 | Impersonation |
+| n3tw4lk3r.tomorrow-night-rusty | 6/26/2026 | Untrustworthy |
+| ifplusor.semantic-lunaria | 6/25/2026 | Impersonation |
+| wincell.vlog-tb-instance-gen | 6/25/2026 | Impersonation |
 | HuxLabs.huxlabsapp | 6/25/2026 | Untrustworthy |
 | benzoXdev2.vscode-3abid-v1 | 6/25/2026 | Untrustworthy |
 | CipherLabs.CipherLabsApplication | 6/25/2026 | Malware |
