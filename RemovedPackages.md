@@ -7,12 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| TiroTeam.tiro-application-toolkit  | 6/26/2026| Untrustworthy|
-| dongtran.cds-debug  | 6/26/2026| Untrustworthy|
-| AnhNT.claude-commit-ai  | 6/26/2026| Impersonation|
-| KineticBrew.boardspacedev  | 6/26/2026| Untrustworthy|
-| ClovisReyes.boardhub | 6/26/2026| Untrustworthy|
-| jzeeed.jzeeed | 6/26/2026| Untrustworthy|
+| TiroTeam.tiro-application-toolkit | 6/26/2026 | Untrustworthy |
+| dongtran.cds-debug | 6/26/2026 | Untrustworthy |
+| AnhNT.claude-commit-ai | 6/26/2026 | Impersonation |
+| KineticBrew.boardspacedev | 6/26/2026 | Untrustworthy |
+| ClovisReyes.boardhub | 6/26/2026 | Untrustworthy |
+| jzeeed.jzeeed | 6/26/2026 | Untrustworthy |
 | HrushikeshPhapale.ClaudeCodeForVS | 6/26/2026 | Impersonation |
 | felcadev.sweetdraculav2 | 6/26/2026 | Impersonation |
 | stx-emma.git-e-graph | 6/26/2026 | Impersonation |
