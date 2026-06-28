@@ -7,8 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| d-led.commentray-vscode | 6/28/2026 | Untrustworthy|
 | jsonbourne.jsonbourne | 6/28/2026 | Untrustworthy|
-| NordicMidnight.codesilence | 6/28/2026 | Untrustworthy|
+| NordicMidnight.codesilence | 6/28/2026 | Malware|
 | TiroTeam.tiro-application-toolkit | 6/26/2026 | Untrustworthy |
 | dongtran.cds-debug | 6/26/2026 | Untrustworthy |
 | AnhNT.claude-commit-ai | 6/26/2026 | Impersonation |
