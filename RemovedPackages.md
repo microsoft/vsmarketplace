@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| vextlabs.theron-vext | 6/28/2026 | Untrustworthy|
 | d-led.commentray-vscode | 6/28/2026 | Untrustworthy|
 | jsonbourne.jsonbourne | 6/28/2026 | Untrustworthy|
 | NordicMidnight.codesilence | 6/28/2026 | Malware|
