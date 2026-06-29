@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| itv3.kilo-code-plus | 6/29/2026 | Impersonation |
+| qiyefazhan.super-agent | 6/29/2026 | Impersonation |
+| jaw3l.cisco-ng | 6/29/2026 | Impersonation |
 | POCreations.worklane | 6/29/2026 | Untrustworthy |
 | TiroTeam.tiro-application-toolkit | 6/26/2026 | Untrustworthy |
 | dongtran.cds-debug | 6/26/2026 | Untrustworthy |
