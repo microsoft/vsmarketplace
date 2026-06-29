@@ -7,7 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-|kyledunne.aios-icon-theme | 6/28/2026 | Impersonation |
+| itv3.kilo-code-plus | 6/29/2026 | Impersonation |
+| qiyefazhan.super-agent | 6/29/2026 | Impersonation |
+| jaw3l.cisco-ng | 6/29/2026 | Impersonation |
+| POCreations.worklane | 6/29/2026 | Untrustworthy |
+| kyledunne.aios-icon-theme | 6/28/2026 | Impersonation |
 | Senforsce.tndr | 6/28/2026 | Impersonation |
 | Senforsce.vscode-tndr | 6/28/2026 | Impersonation |
 | responsivewebio.vscode-sftp-2026 | 6/28/2026 | Impersonation |
