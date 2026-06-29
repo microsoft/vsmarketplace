@@ -11,6 +11,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | qiyefazhan.super-agent | 6/29/2026 | Impersonation |
 | jaw3l.cisco-ng | 6/29/2026 | Impersonation |
 | POCreations.worklane | 6/29/2026 | Untrustworthy |
+| kyledunne.aios-icon-theme | 6/28/2026 | Impersonation |
+| Senforsce.tndr | 6/28/2026 | Impersonation |
+| Senforsce.vscode-tndr | 6/28/2026 | Impersonation |
+| responsivewebio.vscode-sftp-2026 | 6/28/2026 | Impersonation |
+| vextlabs.theron-vext | 6/28/2026 | Untrustworthy |
+| d-led.commentray-vscode | 6/28/2026 | Untrustworthy |
+| jsonbourne.jsonbourne | 6/28/2026 | Untrustworthy |
+| NordicMidnight.codesilence | 6/28/2026 | Malware |
 | TiroTeam.tiro-application-toolkit | 6/26/2026 | Untrustworthy |
 | dongtran.cds-debug | 6/26/2026 | Untrustworthy |
 | AnhNT.claude-commit-ai | 6/26/2026 | Impersonation |
