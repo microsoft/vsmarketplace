@@ -11,7 +11,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | chenjianan.battle-city-for-vscode | 7/1/2026 | Untrustworthy |
 | smartflow.sf-stream | 6/30/2026 | Impersonation |
 | kzhoa.sftp-x | 6/30/2026 | Impersonation |
-| cdfzo.mizu | 6/30/2026 | Untrustworthy |
 | Cognicio.sftp-deployment | 6/30/2026 | Untrustworthy |
 | itv3.kilo-code-plus | 6/29/2026 | Impersonation |
 | qiyefazhan.super-agent | 6/29/2026 | Impersonation |
