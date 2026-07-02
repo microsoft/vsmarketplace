@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| BurstCode.burstcode | 7/2/2026 | Untrustworthy |
 | ps-aditya.redis-live | 7/1/2026 | Impersonation |
 | chenjianan.battle-city-for-vscode | 7/1/2026 | Untrustworthy |
 | smartflow.sf-stream | 6/30/2026 | Impersonation |
