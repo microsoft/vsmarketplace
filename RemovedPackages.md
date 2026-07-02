@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Taro-Native.taro-native-language-support | 7/2/2026 | Impersonation |
+| spshah.claude-config-switcher | 7/2/2026 | Impersonation |
+| shao.deepcode-fx | 7/2/2026 | Impersonation |
+| JavvDev.one-candy-dark-vs | 7/2/2026 | Impersonation |
+| hzcheng.project-steward | 7/2/2026 | Impersonation |
+| dabidsillo.kanagawa-flat | 7/2/2026 | Impersonation |
 | OxCamlEnhanced.oxcaml-enhanced | 7/2/2026 | Untrustworthy |
 | BurstCode.burstcode | 7/2/2026 | Untrustworthy |
 | ps-aditya.redis-live | 7/1/2026 | Impersonation |
