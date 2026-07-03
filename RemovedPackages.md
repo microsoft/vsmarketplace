@@ -7,8 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| uai-systems.uai-extension| 7/2/2026 | Untrustworthy |
-| BlocWeave.blocweave | 7/2/2026 | Untrustworthy |
+| deepsweep-ai.deepsweep | 7/3/2026 | Untrustworthy |
+| uai-systems.uai-extension| 7/3/2026 | Untrustworthy |
+| BlocWeave.blocweave | 7/3/2026 | Untrustworthy |
 | devflowtools.projectflow | 7/2/2026 | Malicious |
 | Taro-Native.taro-native-language-support | 7/2/2026 | Impersonation |
 | spshah.claude-config-switcher | 7/2/2026 | Impersonation |
