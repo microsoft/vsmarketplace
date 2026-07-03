@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| dastan-prince.cline-cn-ai | 7/3/2026 | Impersonation |
 | mangaba-ai.mangaba-ai | 7/3/2026 | Malware |
 | yhx6071.nc | 7/3/2026 | Untrustworthy |
 | deepsweep-ai.deepsweep | 7/2/2026 | Untrustworthy |
