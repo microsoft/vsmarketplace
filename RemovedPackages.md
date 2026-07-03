@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| yhx6071.nc | 7/3/2026 | Untrustworthy |
 | deepsweep-ai.deepsweep | 7/2/2026 | Untrustworthy |
 | uai-systems.uai-extension | 7/2/2026 | Untrustworthy |
 | BlocWeave.blocweave | 7/2/2026 | Untrustworthy |
