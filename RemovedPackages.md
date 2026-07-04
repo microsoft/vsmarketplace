@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Ares-Agent.ares-agent | 7/4/2026 | Malware |
+| vscodemobile.vscodemobile | 7/4/2026 | Malware |
 | Barkerbg001.xaml-lineup | 7/3/2026 | Malware |
 | dastan-prince.cline-cn-ai | 7/3/2026 | Impersonation |
 | mangaba-ai.mangaba-ai | 7/2/2026 | Malware |
