@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ChristopherDengler.imagecomments | 7/5/2026 | Untrustworthy |
 | DevFlowHub.devflowhub | 7/5/2026 | Malware |
 | OIOXO.oioxo-vscode | 7/5/2026 | Malware |
 | Ares-Agent.ares-agent | 7/4/2026 | Malware |
