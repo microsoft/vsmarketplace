@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| DevFlowHub.devflowhub | 7/5/2026 | Malware |
+| OIOXO.oioxo-vscode | 7/5/2026 | Malware |
 | Ares-Agent.ares-agent | 7/4/2026 | Malware |
 | vscodemobile.vscodemobile | 7/4/2026 | Malware |
 | Barkerbg001.xaml-lineup | 7/3/2026 | Malware |
