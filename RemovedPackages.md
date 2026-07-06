@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| LesMiserablesMod.hoi4modutilities-maintained | 7/6/2026 | Impersonation |
+| fiyqkrc.vscode-acp-chat | 7/6/2026 | Impersonation |
+| fiyqkrc.opencode-vscode-client | 7/6/2026 | Impersonation |
 | ChristopherDengler.imagecomments | 7/5/2026 | Untrustworthy |
 | DevFlowHub.devflowhub | 7/5/2026 | Malware |
 | OIOXO.oioxo-vscode | 7/5/2026 | Malware |
