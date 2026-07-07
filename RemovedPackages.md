@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Ansicht.hyperspekt | 7/7/2026 | Untrustworthy |
 | capplicorn.plaintextplus | 7/6/2026 | Untrustworthy |
 | LesMiserablesMod.hoi4modutilities-maintained | 7/6/2026 | Impersonation |
 | fiyqkrc.vscode-acp-chat | 7/6/2026 | Impersonation |
