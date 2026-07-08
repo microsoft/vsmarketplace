@@ -7,6 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| yonbip.yds-explorer | 7/8/2026 | Impersonation |
+| yonbip.yonbip-development-studio-fe | 7/8/2026 | Impersonation |
+| yonbip.yonbip-development-studio | 7/8/2026 | Impersonation |
+| yonbip.yds-script-tools | 7/8/2026 | Impersonation |
+| yonbip.yds-multilang-tools | 7/8/2026 | Impersonation |
+| yonbip.yds-copilot | 7/8/2026 | Impersonation |
+| yonbip.yds-extension-pack | 7/8/2026 | Impersonation |
 | nbreier.virtualworkspacesf | 7/7/2026 | Impersonation |
 | Ansicht.hyperspekt | 7/6/2026 | Untrustworthy |
 | capplicorn.plaintextplus | 7/6/2026 | Untrustworthy |
