@@ -8,6 +8,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
 | AbhishekChakrabartti.localghostllmclientextension | 7/8/2026 | Untrustworthy |
+| cot-eis-dev.cot-eis-dev-test-extension-pack | 7/8/2026 | Impersonation |
 | yonbip.yds-explorer | 7/8/2026 | Impersonation |
 | yonbip.yonbip-development-studio-fe | 7/8/2026 | Impersonation |
 | yonbip.yonbip-development-studio | 7/8/2026 | Impersonation |
