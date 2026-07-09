@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| v-snalawade.vss-services-bitbucket1 | 7/9/2026 | Impersonation |
+| ts-org.one-dark-remix | 7/9/2026 | Impersonation |
+| worma.worma-vscode | 7/9/2026 | Impersonation |
 | kokoma.nvm-studio | 7/9/2026 | Impersonation |
 | cot-eis-dev.cot-eis-dev-bytestream-route-designer | 7/9/2026 | Impersonation |
 | cot-eis-dev.cot-eis-dev-solution-development-studio | 7/9/2026 | Impersonation |
