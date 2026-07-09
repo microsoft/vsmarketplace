@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| kokoma.nvm-studio | 7/9/2026 | Impersonation |
+| cot-eis-dev.cot-eis-dev-bytestream-route-designer | 7/9/2026 | Impersonation |
+| cot-eis-dev.cot-eis-dev-solution-development-studio | 7/9/2026 | Impersonation |
+| numa-forge.sftp-enhanced | 7/9/2026 | Impersonation |
 | AbhishekChakrabartti.localghostllmclientextension | 7/8/2026 | Untrustworthy |
 | cot-eis-dev.cot-eis-dev-test-extension-pack | 7/8/2026 | Impersonation |
 | yonbip.yds-explorer | 7/8/2026 | Impersonation |
