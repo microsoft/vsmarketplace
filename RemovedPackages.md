@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| mo7ammedd.vscode-blur | 7/10/2026 | Impersonation |
 | 0x141c6.auto-open-previews |7/10/2026| Untrustworthy |
 | regina-prompt-spittingcode.regina-prompt-spittingcode |7/10/2026| Untrustworthy |
 | ts-org.one-dark-remix | 7/9/2026 | Impersonation |
