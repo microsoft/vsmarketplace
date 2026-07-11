@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| DevLingo.devlingo-ia | 7/11/2026 | Untrustworthy |
 | rzkyagngngr.kylo | 7/10/2026 | Impersonation |
 | mo-masoud.claude-code-rtl-arabic | 7/10/2026 | Impersonation |
 | mo7ammedd.vscode-blur | 7/10/2026 | Impersonation |
