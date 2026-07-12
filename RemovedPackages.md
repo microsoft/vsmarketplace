@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Raidfire.mes-reference-library | 7/12/2026 | Untrustworthy |
+| TCDev.entire-vscode | 7/12/2026 | Untrustworthy |
+| farhadggu.commitpilotify | 7/12/2026 | Untrustworthy |
 | DevLingo.devlingo-ia | 7/11/2026 | Untrustworthy |
 | rzkyagngngr.kylo | 7/10/2026 | Impersonation |
 | mo-masoud.claude-code-rtl-arabic | 7/10/2026 | Impersonation |
