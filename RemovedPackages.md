@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ScrambleCloudUG.lurus-code-vscode | 7/13/2026 | Untrustworthy |
+| krzysztof-d.justybaselite-netezza | 7/13/2026 | Untrustworthy |
 | ptanmay143.vscode-gitignore | 7/12/2026 | Impersonation |
 | DRAWNCODES.sftp-sync-drawncodes | 7/12/2026 | Impersonation |
 | cloorc.graphing | 7/12/2026 | Impersonation |
