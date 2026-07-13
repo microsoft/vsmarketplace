@@ -7,6 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| cloorc.vscefiles | 7/13/2026 | Impersonation |
+| cloorc.kubernetes-tools | 7/13/2026 | Impersonation |
+| cassandragargoyle.portunix-pdf-viewer | 7/13/2026 | Impersonation |
+| dg19.todo-atlas | 7/13/2026 | Impersonation |
+| IONDev.iondev | 7/13/2026 | Untrustworthy |
+| ScrambleCloudUG.lurus-code-vscode | 7/13/2026 | Untrustworthy |
+| krzysztof-d.justybaselite-netezza | 7/13/2026 | Untrustworthy |
 | AutomationStudio.automation-studio | 7/13/2026 | Malware |
 | ptanmay143.vscode-gitignore | 7/12/2026 | Impersonation |
 | DRAWNCODES.sftp-sync-drawncodes | 7/12/2026 | Impersonation |
