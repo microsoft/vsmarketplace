@@ -7,7 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| Jumbo.JumboKey | 7/14/2026 | Malware |
+| Jumbo.JumboKey | 7/13/2026 | Untrustworthy |
 | cloorc.vscefiles | 7/13/2026 | Impersonation |
 | cloorc.kubernetes-tools | 7/13/2026 | Impersonation |
 | cassandragargoyle.portunix-pdf-viewer | 7/13/2026 | Impersonation |
