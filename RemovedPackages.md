@@ -7,7 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| JumboCore.Jumbos | 7/15/2026 | Untrustworthy|
+| JumboCore.Jumbos | 7/15/2026 | Untrustworthy |
 | Ship-lab.markpad | 7/15/2026 | Untrustworthy |
 | adr-org.adr-manager-vscode | 7/14/2026 | Impersonation |
 | Gopherlume.colorloco | 7/13/2026 | Untrustworthy |
