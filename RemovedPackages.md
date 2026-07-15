@@ -7,6 +7,16 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| mantasmikaI.vscode-theme-pIuto | 7/15/2026 | Impersonation |
+| ebdonato.donato-ariake-dark | 7/15/2026 | Impersonation |
+| 128BitStudios.codex-stats-updated | 7/15/2026 | Impersonation |
+| justybase.justybase-postgresql | 7/15/2026 | Impersonation |
+| justybase.justybase-netezza | 7/15/2026 | Impersonation |
+| justybase.justybase-oracle | 7/15/2026 | Impersonation |
+| justybase.justybase-mysql | 7/15/2026 | Impersonation |
+| justybase.justybase-mssql | 7/15/2026 | Impersonation |
+| justybase.justybase-duckdb | 7/15/2026 | Impersonation |
+| justybase.justybase-db2 | 7/15/2026 | Impersonation |
 | JumboCore.Jumbos | 7/15/2026 | Untrustworthy |
 | Ship-lab.markpad | 7/15/2026 | Untrustworthy |
 | adr-org.adr-manager-vscode | 7/14/2026 | Impersonation |
