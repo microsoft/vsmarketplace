@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| jacky32.gemfile-insights | 7/16/2026 | Impersonation |
 | ebdonato.donato-one-dark | 7/16/2026 | Impersonation |
 | mantasmikaI.vscode-theme-pIuto | 7/15/2026 | Impersonation |
 | ebdonato.donato-ariake-dark | 7/15/2026 | Impersonation |
