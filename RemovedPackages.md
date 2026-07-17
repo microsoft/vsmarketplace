@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| phillip-merritt.vscode-beads-rust | 7/17/2026 | Impersonation |
+| kauricre.vscode-styled-components-modern | 7/17/2026 | Impersonation |
+| ms-gmolveau.vscode-hadolint2 | 7/17/2026 | Impersonation |
 | dinesh112.hml-code-generator | 7/16/2026 | Untrustworthy |
 | Itaib24.claude-cup | 7/16/2026 | Untrustworthy |
 | jacky32.gemfile-insights | 7/16/2026 | Impersonation |
