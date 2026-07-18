@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| konyshevav.dbml-schema-visualizer | 7/18/2026 | Impersonation |
+| force1-app.force1-app | 7/18/2026 | Impersonation |
 | phillip-merritt.vscode-beads-rust | 7/17/2026 | Impersonation |
 | kauricre.vscode-styled-components-modern | 7/17/2026 | Impersonation |
 | ms-gmolveau.vscode-hadolint2 | 7/17/2026 | Impersonation |
