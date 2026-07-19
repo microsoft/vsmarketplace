@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| oub.theme-bluloco-light-oub-rmx | 7/19/2026 | Impersonation |
+| oub.lucide-product-icon-theme-fork| 7/19/2026 | Impersonation |
+| SERVER-G.sakura-ai-engine-for-vscode | 7/19/2026 | Untrustworthy |
+| Corvalon.lichen-vscode | 7/19/2026 | Untrustworthy |
 | konyshevav.dbml-schema-visualizer | 7/18/2026 | Impersonation |
 | force1-app.force1-app | 7/18/2026 | Impersonation |
 | phillip-merritt.vscode-beads-rust | 7/17/2026 | Impersonation |
