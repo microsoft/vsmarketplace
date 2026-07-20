@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ashutosh-sanodia.riai-marketplace-mcp | 7/20/2026 | Malware |
+|ashutosh-sanodia.translator-plugin | 7/20/2026 | Malware |
 | RandomityGuy.torquescript-support | 7/20/2026 | Impersonation |
 | markdown-office-viewer-new.markdown-office-viewer-new | 7/20/2026 | Impersonation |
 | famibee2.skynovel2 | 7/20/2026 | Impersonation |
