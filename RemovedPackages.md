@@ -7,6 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ashutosh-sanodia.riai-marketplace-mcp | 7/20/2026 | Malware |
+| ashutosh-sanodia.translator-plugin | 7/20/2026 | Malware |
+| RandomityGuy.torquescript-support | 7/20/2026 | Impersonation |
+| markdown-office-viewer-new.markdown-office-viewer-new | 7/20/2026 | Impersonation |
+| famibee2.skynovel2 | 7/20/2026 | Impersonation |
+| inaiv.inaiv | 7/20/2026 | Impersonation |
+| markdown.markdown-all-pro | 7/20/2026 | Malware |
 | oub.theme-bluloco-light-oub-rmx | 7/19/2026 | Impersonation |
 | oub.lucide-product-icon-theme-fork | 7/19/2026 | Impersonation |
 | SERVER-G.sakura-ai-engine-for-vscode | 7/19/2026 | Untrustworthy |
@@ -40,7 +47,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | cassandragargoyle.portunix-pdf-viewer | 7/13/2026 | Impersonation |
 | dg19.todo-atlas | 7/13/2026 | Impersonation |
 | IONDev.iondev | 7/13/2026 | Untrustworthy |
-| ScrambleCloudUG.lurus-code-vscode | 7/13/2026 | Untrustworthy |
 | krzysztof-d.justybaselite-netezza | 7/13/2026 | Untrustworthy |
 | AutomationStudio.automation-studio | 7/13/2026 | Malware |
 | ptanmay143.vscode-gitignore | 7/12/2026 | Impersonation |
