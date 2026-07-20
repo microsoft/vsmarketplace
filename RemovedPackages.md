@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| RandomityGuy.torquescript-support | 7/20/2026 | Impersonation |
+| markdown-office-viewer-new.markdown-office-viewer-new | 7/20/2026 | Impersonation |
+| famibee2.skynovel2 | 7/20/2026 | Impersonation |
+| inaiv.inaiv | 7/20/2026 | Impersonation |
+| markdown.markdown-all-pro | 7/20/2026 | Malware |
 | oub.theme-bluloco-light-oub-rmx | 7/19/2026 | Impersonation |
 | oub.lucide-product-icon-theme-fork | 7/19/2026 | Impersonation |
 | SERVER-G.sakura-ai-engine-for-vscode | 7/19/2026 | Untrustworthy |
