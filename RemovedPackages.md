@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| adi-trev.trev-flashing | 7/21/2026 | Impersonation |
 | riai-mkp.riai-marketplaceMcp| 7/21/2026 | Untrustworthy |
 | UlfBissbort.zef | 7/21/2026 | Untrustworthy |
 | AviDev.pure-agent-rtl | 7/21/2026 | Untrustworthy |
