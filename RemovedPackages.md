@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| LongNguyen2k.longnguyen-db | 7/21/2026 | Untrustworthy |
 | ashutosh-sanodia.riai-marketplace-mcp | 7/20/2026 | Malware |
 | ashutosh-sanodia.translator-plugin | 7/20/2026 | Malware |
 | RandomityGuy.torquescript-support | 7/20/2026 | Impersonation |
