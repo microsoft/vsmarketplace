@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| UlfBissbort.zef | 7/21/2026 | Untrustworthy |
 | AviDev.pure-agent-rtl | 7/21/2026 | Untrustworthy |
 | LongNguyen2k.longnguyen-db | 7/21/2026 | Untrustworthy |
 | ashutosh-sanodia.riai-marketplace-mcp | 7/20/2026 | Malware |
