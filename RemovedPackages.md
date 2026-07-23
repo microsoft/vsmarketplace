@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| MarkdownLinks.markdown-links-pro | 7/23/2026 | Untrustworthy |
+| MarkdownLinks.tunnel-pro | 7/23/2026 | Untrustworthy |
 | dark-matter7232.stm32-for-vscode-community | 7/22/2026 | Impersonation |
 | GHT.gpp | 7/22/2026 | Untrustworthy |
 | GHT.java-compiler | 7/22/2026 | Untrustworthy |
