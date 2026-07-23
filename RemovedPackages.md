@@ -7,8 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| riai-marketplace.riai-marketplace-mcp-test| 7/23/2026 | Malware |
-| markovic.jetbrains-file-icon-theme-php| 7/23/2026 | Impersonation |
+| riai-marketplace.riai-marketplace-mcp-test | 7/23/2026 | Malware |
+| markovic.jetbrains-file-icon-theme-php | 7/23/2026 | Impersonation |
 | everestsystems.lotse-language-vscode | 7/22/2026 | Untrustworthy |
 | MarkdownLinks.markdown-links-pro | 7/22/2026 | Untrustworthy |
 | MarkdownLinks.tunnel-pro | 7/22/2026 | Untrustworthy |
