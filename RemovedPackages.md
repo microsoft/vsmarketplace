@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| riai-marketplace.riai-marketplace-mcp-test | 7/23/2026 | Malware |
+| markovic.jetbrains-file-icon-theme-php | 7/23/2026 | Impersonation |
 | everestsystems.lotse-language-vscode | 7/22/2026 | Untrustworthy |
 | MarkdownLinks.markdown-links-pro | 7/22/2026 | Untrustworthy |
 | MarkdownLinks.tunnel-pro | 7/22/2026 | Untrustworthy |
@@ -14,7 +16,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | GHT.gpp | 7/22/2026 | Untrustworthy |
 | GHT.java-compiler | 7/22/2026 | Untrustworthy |
 | adi-trev.trev-flashing | 7/21/2026 | Impersonation |
-| riai-mkp.riai-marketplaceMcp | 7/21/2026 | Untrustworthy |
+| riai-mkp.riai-marketplaceMcp | 7/21/2026 | Malware |
 | UlfBissbort.zef | 7/21/2026 | Untrustworthy |
 | AviDev.pure-agent-rtl | 7/21/2026 | Untrustworthy |
 | LongNguyen2k.longnguyen-db | 7/21/2026 | Untrustworthy |
