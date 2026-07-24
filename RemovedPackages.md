@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| CPLUSPLUS.cpp-compiler-provider | 7/24/2026 | Untrustworthy |
+| CPLUSPLUS.java-compiler-provider | 7/24/2026 | Untrustworthy |
 | riai-marketplace.riai-marketplace-mcp-test | 7/23/2026 | Malware |
 | markovic.jetbrains-file-icon-theme-php | 7/23/2026 | Impersonation |
 | everestsystems.lotse-language-vscode | 7/22/2026 | Untrustworthy |
