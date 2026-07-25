@@ -7,11 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| devshub-ai.devshub-basedpyright | 7/25/2026  | Impersonation |
-| devshub-ai.devshub-dotenv | 7/25/2026  | Impersonation |
-| devshub-ai.devshub-file-icons | 7/25/2026  | Impersonation |
-| devshub-ai.devshub-go | 7/25/2026  | Impersonation |
-| devshub-ai.devshub-python | 7/25/2026  | Impersonation |
+| devshub-ai.devshub-basedpyright | 7/25/2026 | Impersonation |
+| devshub-ai.devshub-dotenv | 7/25/2026 | Impersonation |
+| devshub-ai.devshub-file-icons | 7/25/2026 | Impersonation |
+| devshub-ai.devshub-go | 7/25/2026 | Impersonation |
+| devshub-ai.devshub-python | 7/25/2026 | Impersonation |
 | GMSoftwares.trello-workspace | 7/25/2026  | Impersonation |
 | Pstudio.pstudio-cph | 7/25/2026  | Impersonation |
 | Zaur.zz-sftp | 7/25/2026  | Impersonation |
