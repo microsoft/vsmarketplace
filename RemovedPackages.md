@@ -7,6 +7,15 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| devshub-ai.devshub-basedpyright | 7/25/2026  | Impersonation |
+| devshub-ai.devshub-dotenv | 7/25/2026  | Impersonation |
+| devshub-ai.devshub-file-icons | 7/25/2026  | Impersonation |
+| devshub-ai.devshub-go | 7/25/2026  | Impersonation |
+| devshub-ai.devshub-python | 7/25/2026  | Impersonation |
+| GMSoftwares.trello-workspace | 7/25/2026  | Impersonation |
+| Pstudio.pstudio-cph | 7/25/2026  | Impersonation |
+| Zaur.zz-sftp | 7/25/2026  | Impersonation |
+| DevMany.verde-sync | 7/24/2026 | Untrustworthy |
 | model-selection.TerminalRun | 7/23/2026 | Impersonation |
 | CPLUSPLUS.cpp-compiler-provider | 7/23/2026 | Untrustworthy |
 | CPLUSPLUS.java-compiler-provider | 7/23/2026 | Untrustworthy |
