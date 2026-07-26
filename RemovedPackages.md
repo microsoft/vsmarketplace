@@ -7,7 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| RealismHub.trello-management | 7/26/2026 | Untrustworthy |
+| RealismHub.trello-management | 7/26/2026 | Malware |
 | PTIT.ptit-java-timeline | 7/26/2026 | Untrustworthy |
 | PTIT.ptit-cpp-timeline | 7/26/2026 | Untrustworthy |
 | qaqulya2.ai-autocomplete2 | 7/26/2026 | Untrustworthy |
@@ -28,9 +28,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | CPLUSPLUS.java-compiler-provider | 7/23/2026 | Untrustworthy |
 | riai-marketplace.riai-marketplace-mcp-test | 7/23/2026 | Malware |
 | markovic.jetbrains-file-icon-theme-php | 7/23/2026 | Impersonation |
-| everestsystems.lotse-language-vscode | 7/22/2026 | Untrustworthy |
-| MarkdownLinks.markdown-links-pro | 7/22/2026 | Untrustworthy |
-| MarkdownLinks.tunnel-pro | 7/22/2026 | Untrustworthy |
+| everestsystems.lotse-language-vscode | 7/22/2026 | Malware |
+| MarkdownLinks.markdown-links-pro | 7/22/2026 | Malware |
+| MarkdownLinks.tunnel-pro | 7/22/2026 | Malware |
 | dark-matter7232.stm32-for-vscode-community | 7/22/2026 | Impersonation |
 | GHT.gpp | 7/22/2026 | Untrustworthy |
 | GHT.java-compiler | 7/22/2026 | Untrustworthy |
