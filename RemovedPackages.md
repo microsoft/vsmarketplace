@@ -7,6 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| RealismHub.trello-management| 7/26/2026 | Untrustworthy |
+| PTIT.ptit-java-timeline | 7/26/2026 | Untrustworthy |
+| PTIT.ptit-cpp-timeline | 7/26/2026 | Untrustworthy |
+| qaqulya2.ai-autocomplete2 | 7/26/2026 | Untrustworthy |
+| mindandhand.vscode-zhihu-maintained | 7/26/2026 | Impersonation |
+| ovolab-veritas.codesnap-lite | 7/26/2026  | Impersonation |
+| sunstoneapps.opencode-selection | 7/26/2026  | Impersonation |
 | devshub-ai.devshub-basedpyright | 7/25/2026 | Impersonation |
 | devshub-ai.devshub-dotenv | 7/25/2026 | Impersonation |
 | devshub-ai.devshub-file-icons | 7/25/2026 | Impersonation |
