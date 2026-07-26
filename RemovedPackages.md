@@ -7,7 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| RealismHub.trello-management| 7/26/2026 | Untrustworthy |
+| RealismHub.trello-management | 7/26/2026 | Untrustworthy |
 | PTIT.ptit-java-timeline | 7/26/2026 | Untrustworthy |
 | PTIT.ptit-cpp-timeline | 7/26/2026 | Untrustworthy |
 | qaqulya2.ai-autocomplete2 | 7/26/2026 | Untrustworthy |
