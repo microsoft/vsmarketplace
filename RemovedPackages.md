@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| oleg-the-developer.sftp-sync-fork | 7/27/2026 | Impersonation |
+| GFSoftworks.trello-manager | 7/27/2026 | Impersonation |
+| alex-fitzgerald.neuromancer | 7/27/2026 | Impersonation |
 | RealismHub.trello-management | 7/26/2026 | Malware |
 | PTIT.ptit-java-timeline | 7/26/2026 | Untrustworthy |
 | PTIT.ptit-cpp-timeline | 7/26/2026 | Untrustworthy |
