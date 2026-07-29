@@ -7,6 +7,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| tpill90.latex-utilities-fork | 7/29/2026 | Impersonation |
+| qutto.markdown-navigation-new | 7/29/2026 | Impersonation |
+| okok909090.csv-grid-editor-plus | 7/29/2026 | Impersonation |
+| katrine-jensen.vscode-language-pack-da | 7/29/2026 | Impersonation |
+| idea-icons-themes-for-vscode.idea-icons-themes-for-vscode | 7/29/2026 | Impersonation |
+| atharkes.vscode-yaml-formatter | 7/29/2026 | Impersonation |
+| MatthewEvans.click-board | 7/29/2026 | Impersonation |
+| danylobodnar.rose-pine-black | 7/29/2026 | Impersonation |
 | MN34studio.cph-2077 | 7/28/2026 | Impersonation |
 | oleg-the-developer.sftp-sync-fork | 7/27/2026 | Impersonation |
 | GFSoftworks.trello-manager | 7/27/2026 | Impersonation |
