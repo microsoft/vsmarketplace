@@ -7,6 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| vsit.vsit | 7/30/2026 | Impersonation |
+| tetsuji16.csv-edit | 7/30/2026 | Impersonation |
+| leapliu.mindmap-github-image-bed | 7/30/2026 | Impersonation |
+| lce.lce-code | 7/30/2026 | Impersonation |
+| Avan0203.wgsl-literal-enhanced | 7/30/2026 | Impersonation |
+| okok909090.fast-open-csv-viewer-pro | 7/30/2026 | Impersonation |
+| okok909090.fast-open-csv-and-xlsx-plus | 7/30/2026 | Impersonation |
 | tpill90.latex-utilities-fork | 7/29/2026 | Impersonation |
 | qutto.markdown-navigation-new | 7/29/2026 | Impersonation |
 | okok909090.csv-grid-editor-plus | 7/29/2026 | Impersonation |
