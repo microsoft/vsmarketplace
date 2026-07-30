@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| okok909090.fixed-Partial-diff-clipboard | 7/30/2026 | Spam |
+| okok909090.mathlive-sync | 7/30/2026 | Spam |
+| okok909090.academic-paper-preview | 7/30/2026 | Spam |
+| okok909090.matlab-section-runner | 7/30/2026 | Spam |
+| okok909090.latex-markdown-preview-see-quikly | 7/30/2026 | Spam |
 | vsit.vsit | 7/30/2026 | Impersonation |
 | leapliu.mindmap-github-image-bed | 7/30/2026 | Impersonation |
 | lce.lce-code | 7/30/2026 | Impersonation |
