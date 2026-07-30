@@ -8,7 +8,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
 | vsit.vsit | 7/30/2026 | Impersonation |
-| tetsuji16.csv-edit | 7/30/2026 | Impersonation |
 | leapliu.mindmap-github-image-bed | 7/30/2026 | Impersonation |
 | lce.lce-code | 7/30/2026 | Impersonation |
 | Avan0203.wgsl-literal-enhanced | 7/30/2026 | Impersonation |
