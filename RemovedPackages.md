@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| KhoaZero123.sftp-extension | 7/31/2026 | Impersonation |
+| xinzhuang.sftp-fork | 7/31/2026 | Impersonation |
+| tpill90.latex-utilities-fork2 | 7/31/2026 | Impersonation |
 | okok909090.fixed-Partial-diff-clipboard | 7/30/2026 | Spam |
 | okok909090.mathlive-sync | 7/30/2026 | Spam |
 | okok909090.academic-paper-preview | 7/30/2026 | Spam |
