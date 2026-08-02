@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| xiupos.excalidraw-vscode-latex | 8/02/2026 | Impersonation |
 | KhoaZero123.sftp-extension | 7/31/2026 | Impersonation |
 | xinzhuang.sftp-fork | 7/31/2026 | Impersonation |
 | tpill90.latex-utilities-fork2 | 7/31/2026 | Impersonation |
