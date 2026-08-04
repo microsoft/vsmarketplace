@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Wynncraft.wynnscript-lang | 8/4/2026 | Impersonation |
+| WuZhiguo.callgraph-viz | 8/4/2026 | Impersonation |
 | VXL.vxl | 8/3/2026 | Impersonation |
 | vxhern.Vesper | 8/3/2026 | Impersonation |
 | xiupos.excalidraw-vscode-latex | 8/2/2026 | Impersonation |
