@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| BurstCode.burstcode-local-alerts | 8/7/2026 | Untrustworthy| 
 | codebuddy-znt.codebuddy-znt| 8/7/2026 | Untrustworthy| 
 | VSCodeIndustries.azure-devops-sync-helper-presso | 8/7/2026 | Untrustworthy|
 | liuweigl.comment-divider-next | 8/6/2026 | Impersonation |
