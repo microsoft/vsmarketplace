@@ -9,6 +9,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |---------------------------------------|--------------|-------------------------------|
 | b1bu.scm-buttons-vscode-fork | 8/7/2026 | Impersonation |
 | hollykbuck.opengitea | 8/7/2026 | Impersonation |
+| utkarsh-payal.dev-connect | 8/7/2026 | Untrustworthy |
+| BurstCode.burstcode-local-alerts | 8/7/2026 | Untrustworthy |
+| codebuddy-znt.codebuddy-znt | 8/7/2026 | Untrustworthy |
+| VSCodeIndustries.azure-devops-sync-helper-presso | 8/7/2026 | Untrustworthy |
 | liuweigl.comment-divider-next | 8/6/2026 | Impersonation |
 | tosslib-ai.tosslib-ai | 8/5/2026 | Impersonation |
 | ethancao.mathpix-markdown-studio | 8/5/2026 | Impersonation |
