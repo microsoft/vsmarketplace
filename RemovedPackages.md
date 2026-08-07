@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| codebuddy-znt.codebuddy-znt| 8/7/2026 | Untrustworthy|
 | liuweigl.comment-divider-next | 8/6/2026 | Impersonation |
 | ethancao.mathpix-markdown-studio | 8/5/2026 | Impersonation |
 | KooCode.KooCode | 8/5/2026 | Impersonation |
