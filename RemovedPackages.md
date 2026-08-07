@@ -10,6 +10,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | b1bu.scm-buttons-vscode-fork | 8/7/2026 | Impersonation |
 | hollykbuck.opengitea | 8/7/2026 | Impersonation |
 | liuweigl.comment-divider-next | 8/6/2026 | Impersonation |
+| tosslib-ai.tosslib-ai | 8/5/2026 | Impersonation |
 | ethancao.mathpix-markdown-studio | 8/5/2026 | Impersonation |
 | KooCode.KooCode | 8/5/2026 | Impersonation |
 | vscpluginDeveloperJay30.vscdeterminer | 8/5/2026 | Impersonation |
