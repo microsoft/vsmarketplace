@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ziop.jetgit | 8/8/2026 | Impersonation |
+| tosslib-tools.tosslib-tool | 8/8/2026 | Impersonation |
+| kolling88.claude-code-chats | 8/8/2026 | Impersonation |
+| flarre.flarre | 8/8/2026 | Impersonation |
 | b1bu.scm-buttons-vscode-fork | 8/7/2026 | Impersonation |
 | hollykbuck.opengitea | 8/7/2026 | Impersonation |
 | utkarsh-payal.dev-connect | 8/7/2026 | Untrustworthy |
