@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| kruton.vscode-lambdamoo | 8/9/2026 | Malware |
 | Studiooo.trelloboard | 8/9/2026 | Malware |
 | pascalabcnet.pascalabc-net | 8/9/2026 | Impersonation |
 | Cognitrace3.cognitrace-v2 | 8/9/2026 | Impersonation |
