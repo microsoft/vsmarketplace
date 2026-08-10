@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| LihengLuo.proxy-bridge-extension-pack | 8/10/2026 | Untrustworthy |
 | funovus.funovuslua | 8/9/2026 | Impersonation |
 | funovus.funovus-trdb | 8/9/2026 | Impersonation |
 | funovus.funovus-vscode-teal | 8/9/2026 | Impersonation |
