@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| vscodeaiassistant.vscodeaiassistant | 8/11/2026 | Malware |
+| alanas-is-testing.alanas-is-testing | 8/11/2026 | Malware |
+| BFCollective.pulse-board | 8/11/2026 | Malware |
+| BFSoftworks.flux-board | 8/11/2026 | Malware |
+| BLSoftworks.FocusDeck | 8/11/2026 | Malware |
 | MarkdownViewerPro.MarkdownViewerPro | 8/11/2026 | Impersonation |
 | LihengLuo.proxy-bridge-extension-pack | 8/10/2026 | Malware |
 | transitrix.transitrix-studio | 8/10/2026 | Malware |
