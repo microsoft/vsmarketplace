@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| zpy-ai.clinez | 8/11/2026 | Impersonation |
 | vscodeaiassistant.vscodeaiassistant | 8/11/2026 | Malware |
 | alanas-is-testing.alanas-is-testing | 8/11/2026 | Malware |
 | BFCollective.pulse-board | 8/11/2026 | Malware |
