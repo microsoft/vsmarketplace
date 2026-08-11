@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| MarkdownViewerPro.MarkdownViewerPro | 8/11/2026 | Impersonation |
 | LihengLuo.proxy-bridge-extension-pack | 8/10/2026 | Malware |
 | transitrix.transitrix-studio | 8/10/2026 | Malware |
 | funovus.funovuslua | 8/9/2026 | Impersonation |
