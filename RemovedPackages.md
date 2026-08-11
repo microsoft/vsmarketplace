@@ -13,6 +13,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | BFSoftworks.flux-board | 8/11/2026 | Malware |
 | BLSoftworks.FocusDeck | 8/11/2026 | Malware |
 | MarkdownViewerPro.MarkdownViewerPro | 8/11/2026 | Impersonation |
+| Microco.trelloboarda | 8/10/2026 | Malware |
+| Studio-Co.trelloboardv2 | 8/10/2026 | Malware |
 | LihengLuo.proxy-bridge-extension-pack | 8/10/2026 | Malware |
 | transitrix.transitrix-studio | 8/10/2026 | Malware |
 | funovus.funovuslua | 8/9/2026 | Impersonation |
