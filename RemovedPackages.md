@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ascii-fetcher.ascii-fetcher | 8/11/2026 | Malware |
+| KsWpsClaude.wps-claude-vscode | 8/11/2026 | Malware |
 | vscodeaiassistant.vscodeaiassistant | 8/11/2026 | Malware |
 | alanas-is-testing.alanas-is-testing | 8/11/2026 | Malware |
 | BFCollective.pulse-board | 8/11/2026 | Malware |
