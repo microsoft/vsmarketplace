@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| luketebo.dnova-for-copilot | 8/12/2026 | Impersonation |
+| llej.git-graph-guseng | 8/12/2026 | Impersonation |
+| tosslib-ai-tool.tosslib-ai-tool | 8/12/2026 | Impersonation |
+| natereprogle.php-namespace-resolver-v2 | 8/12/2026 | Impersonation |
+| fms-tec.fms-agent | 8/12/2026 | Impersonation |
 | SEAFTeam.SEAF | 8/12/2026 | Impersonation |
 | zpy-ai.clinez | 8/11/2026 | Impersonation |
 | ascii-fetcher.ascii-fetcher | 8/11/2026 | Malware |
