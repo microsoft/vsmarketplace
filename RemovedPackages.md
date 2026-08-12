@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| SEAFTeam.SEAF | 8/12/2026 | Impersonation |
 | zpy-ai.clinez | 8/11/2026 | Impersonation |
 | ascii-fetcher.ascii-fetcher | 8/11/2026 | Malware |
 | KsWpsClaude.wps-claude-vscode | 8/11/2026 | Malware |
