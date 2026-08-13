@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| TrelloSoftWorks.trello-deck | 8/13/2026 | Malware |
 | LineInnovation.LineDeck | 8/12/2026 | Malware |
 | luketebo.dnova-for-copilot | 8/12/2026 | Impersonation |
 | llej.git-graph-guseng | 8/12/2026 | Impersonation |
