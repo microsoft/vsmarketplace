@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| peanutsplash.mcdev-tools-plus | 8/14/2026 | Malware |
+| eugenK.opencoder-ko | 8/14/2026 | Malware |
 | TrelloSoftWorks.trello-deck | 8/13/2026 | Malware |
 | TrelloWorks.trello-board | 8/12/2026 | Malware |
 | LineInnovation.LineDeck | 8/12/2026 | Malware |
