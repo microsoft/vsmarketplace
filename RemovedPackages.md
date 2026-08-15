@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| mingxi2077.dsh-harness-vscode | 8/15/2026 | Impersonation |
 | peanutsplash.mcdev-tools-plus | 8/14/2026 | Malware |
 | eugenK.opencoder-ko | 8/14/2026 | Malware |
 | TrelloSoftWorks.trello-deck | 8/13/2026 | Malware |
