@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| hikaoxx-tech.dsh-pro | 8/16/2026 | Impersonation |
+| kongdetuo.AxamlCraft | 8/16/2026 | Impersonation |
+| tosslib-tool.tosslibai | 8/16/2026 | Impersonation |
 | dutu-mike.vim-cheatsheet-cn | 8/16/2026 | Impersonation |
 | FengXCs.best-novel-reader | 8/16/2026 | Impersonation |
 | Muzammil.smart-attach | 8/16/2026 | Impersonation |
