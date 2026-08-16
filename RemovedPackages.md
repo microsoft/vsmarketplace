@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| dutu-mike.vim-cheatsheet-cn | 8/16/2026 | Impersonation |
+| FengXCs.best-novel-reader | 8/16/2026 | Impersonation |
+| Muzammil.smart-attach | 8/16/2026 | Impersonation |
 | mingxi2077.dsh-harness-vscode | 8/15/2026 | Impersonation |
 | k-lani.k-lani-code-translator | 8/15/2026 | Malware |
 | peanutsplash.mcdev-tools-plus | 8/14/2026 | Malware |
