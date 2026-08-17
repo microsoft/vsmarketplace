@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| baseballyama.rsvelte-vscode | 8/17/2026 | Malware |
 | hikaoxx-tech.dsh-pro | 8/16/2026 | Impersonation |
 | kongdetuo.AxamlCraft | 8/16/2026 | Impersonation |
 | tosslib-tool.tosslibai | 8/16/2026 | Impersonation |
