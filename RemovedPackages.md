@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Ext1.vsce-extensions | 8/17/2026 | Spam |
+| Ext2.smart-updater | 8/17/2026 | Spam |
+| Ext3.code-assists | 8/17/2026 | Spam |
+| Ext4.npm-dependency-installer | 8/17/2026 | Spam |
 | hikaoxx-tech.dsh-pro | 8/16/2026 | Impersonation |
 | kongdetuo.AxamlCraft | 8/16/2026 | Impersonation |
 | tosslib-tool.tosslibai | 8/16/2026 | Impersonation |
