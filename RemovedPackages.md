@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| nevalang.vscode-nevalang | 8/17/2026 | Untrustworthy |
 | GRSoftworks.Brux-Board | 8/17/2026 | Malware |
 | Baue.update-fetcher | 8/17/2026 | Malware |
 | Dean.npmpkg | 8/17/2026 | Malware |
