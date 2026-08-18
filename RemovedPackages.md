@@ -7,6 +7,19 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| GRSoftworks.Brux-Board | 8/17/2026 | Malware |
+| Baue.update-fetcher | 8/17/2026 | Malware |
+| Dean.npmpkg | 8/17/2026 | Malware |
+| Cairo.intelli-code-pair-pilot | 8/17/2026 | Malware |
+| Azalea.editor-essentials-extensions | 8/17/2026 | Malware |
+| JessieAAA.jessie-pkg-tool | 8/17/2026 | Malware |
+| SadiqShuaibu.minimal-pastel-theme | 8/17/2026 | Malware | 
+| SadiqShuaibu.sadiq-dep-checker | 8/17/2026 | Malware |
+| SadiqShuaibu.sadiq-npm-updater | 8/17/2026 | Malware |
+| SadiqShuaibu.sadiq-dep-helper | 8/17/2026 | Malware |
+| SadiqShuaibu.sadiq-dep-lens | 8/17/2026 | Malware |
+| SadiqShuaibu.sadiq-dep-tool | 8/17/2026 | Malware |
+| workern.appblink | 8/17/2026 | Malware |
 | Ext1.vsce-extensions | 8/17/2026 | Spam |
 | Ext2.smart-updater | 8/17/2026 | Spam |
 | Ext3.code-assists | 8/17/2026 | Spam |
