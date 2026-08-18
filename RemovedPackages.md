@@ -9,8 +9,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |---------------------------------------|--------------|-------------------------------|
 | GRSoftworks.SlixBoard | 8/18/2026 | Malware |
 | Brix.upgrader | 8/18/2026 | Malware |
-| JessieAAA.jessie-pkg-tool| 8/18/2026 | Malware |
-| SadiqShuaibu.sadiq-dep-helper| 8/18/2026 | Malware |
+| JessieAAA.jessie-pkg-tool | 8/18/2026 | Malware |
+| SadiqShuaibu.sadiq-dep-helper | 8/18/2026 | Malware |
 | Ext1.vsce-extensions | 8/17/2026 | Spam |
 | Ext2.smart-updater | 8/17/2026 | Spam |
 | Ext3.code-assists | 8/17/2026 | Spam |
