@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| yunhaoli24.leafrelay | 8/17/2026 | Impersonation |
+| mttankkeo.vscode-flutter-widget-preview | 8/17/2026 | Impersonation |
+| MagicTeatime.student-cline | 8/17/2026 | Impersonation |
+| floatinghotpot.deepseek-harness-web-for-vscode | 8/17/2026 | Impersonation |
 | nevalang.vscode-nevalang | 8/17/2026 | Untrustworthy |
 | GRSoftworks.Brux-Board | 8/17/2026 | Malware |
 | Baue.update-fetcher | 8/17/2026 | Malware |
