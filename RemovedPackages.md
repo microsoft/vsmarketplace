@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ronakmaheshwari.purrfect-code | 8/19/2026 | Impersonation |
+| kangaechu.open-in-github-kangaechu | 8/19/2026 | Impersonation |
+| flarreai.flarre-ai | 8/19/2026 | Impersonation |
+| amr-elzoghby.opencode-native | 8/19/2026 | Impersonation |
 | DotPrivilegeLabs.prime-agent-RL-vscode | 8/18/2026 | Untrustworthy |
 | yunhaoli24.leafrelay | 8/18/2026 | Impersonation |
 | mttankkeo.vscode-flutter-widget-preview | 8/18/2026 | Impersonation |
