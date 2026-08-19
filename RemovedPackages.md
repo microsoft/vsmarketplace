@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| souhailaserbout.codelight | 8/19/2026 | Untrustworthy |
+| verified.pypi-deepseek | 8/19/2026 | Malware |
+| verified.pypi-keyBank | 8/19/2026 | Malware |
 | baseballyama.rsvelte-vscode | 8/19/2026 | Malware |
 | ronakmaheshwari.purrfect-code | 8/19/2026 | Impersonation |
 | kangaechu.open-in-github-kangaechu | 8/19/2026 | Impersonation |
