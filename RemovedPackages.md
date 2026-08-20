@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| logicalrblx7.shareboard | 8/20/2026 | Malware |
+| StackStudios.swimlane | 8/20/2026 | Malware |
+| deepseek-harness-remote.deepseek-harness-remote-vscode | 8/20/2026 | Impersonation |
+| EvaLiu.vscode-antimony-2 | 8/20/2026 | Impersonation |
+| NormB.kamailio-lsp | 8/20/2026 | Spam |
+| NormB.opensips-lsp;NormB.kamailio-lsp | 8/20/2026 | Spam |
 | souhailaserbout.codelight | 8/19/2026 | Untrustworthy |
 | verified.pypi-deepseek | 8/19/2026 | Malware |
 | verified.pypi-keyBank | 8/19/2026 | Malware |
