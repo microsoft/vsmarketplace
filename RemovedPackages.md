@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| code-colab.codecolab | 8/23/2026 | Untrustworthy
 | luo2430.luo2430-npmx | 8/22/2026 | Impersonation |
 | naruse-love.google-antigravity-zh-cn | 8/22/2026 | Impersonation |
 | mnjit.mnjit-vscode | 8/21/2026 | Impersonation |
