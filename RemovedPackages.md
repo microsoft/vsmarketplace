@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| VincentUllmann.vscode-nuke | 8/24/2026 | Impersonation |
+| ronakmaheshwari077.Cat-Code | 8/24/2026 | Impersonation |
+| mervick.deepseek-peak-hours | 8/24/2026 | Impersonation |
+| CODEZPC.deepseek-statusbar | 8/24/2026 | Impersonation |
+| AgentChatBus.deepseek-gold-harness | 8/24/2026 | Impersonation |
 | agentself.cc-switch-2026 | 8/23/2026 | Impersonation |
 | agentself.claude-usage-gauge | 8/23/2026 | Impersonation |
 | agentself.codex-usage | 8/23/2026 | Impersonation |
