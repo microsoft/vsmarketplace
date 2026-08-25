@@ -7,7 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| vithrive.deepseek-harness-vscode | 8/24/2026 | Untrustworthy |
+| luo2430.luo2430-npmx-0 | 8/25/2026 | Impersonation |
 | VincentUllmann.vscode-nuke | 8/24/2026 | Impersonation |
 | ronakmaheshwari077.Cat-Code | 8/24/2026 | Impersonation |
 | mervick.deepseek-peak-hours | 8/24/2026 | Impersonation |
