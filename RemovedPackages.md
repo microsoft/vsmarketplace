@@ -7,6 +7,19 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| AgendaStudios.frux-board | 8/26/2026 | Malware |
+| WellinWorks.arux-board | 8/26/2026 | Malware |
+| dsh-vscode-plugin.dsh-vscode-plugin | 8/26/2026 | Impersonation |
+| RandomityMB.torquescript-debugger | 8/26/2026 | Impersonation |
+| RandomityMB.torquescript-language-support | 8/26/2026 | Impersonation |
+| ShunichiHorigome.vscode-log-viewer-fork | 8/26/2026 | Impersonation |
+| TianliangQi.antigravity-usage-monitor | 8/26/2026 | Impersonation |
+| luo2430.luo2430-npmx-0 | 8/25/2026 | Impersonation |
+| VincentUllmann.vscode-nuke | 8/24/2026 | Impersonation |
+| ronakmaheshwari077.Cat-Code | 8/24/2026 | Impersonation |
+| mervick.deepseek-peak-hours | 8/24/2026 | Impersonation |
+| CODEZPC.deepseek-statusbar | 8/24/2026 | Impersonation |
+| AgentChatBus.deepseek-gold-harness | 8/24/2026 | Impersonation |
 | agentself.cc-switch-2026 | 8/23/2026 | Impersonation |
 | agentself.claude-usage-gauge | 8/23/2026 | Impersonation |
 | agentself.codex-usage | 8/23/2026 | Impersonation |
