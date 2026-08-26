@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| AgendaStudios.frux-board | 8/26/2026 | Malware |
+| WellinWorks.arux-board | 8/26/2026 | Malware |
 | dsh-vscode-plugin.dsh-vscode-plugin | 8/26/2026 | Impersonation |
 | RandomityMB.torquescript-debugger | 8/26/2026 | Impersonation |
 | RandomityMB.torquescript-language-support | 8/26/2026 | Impersonation |
