@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| dsh-vscode-plugin.dsh-vscode-plugin | 8/26/2026 | Impersonation |
+| RandomityMB.torquescript-debugger | 8/26/2026 | Impersonation |
+| RandomityMB.torquescript-language-support | 8/26/2026 | Impersonation |
+| ShunichiHorigome.vscode-log-viewer-fork | 8/26/2026 | Impersonation |
+| TianliangQi.antigravity-usage-monitor | 8/26/2026 | Impersonation |
 | luo2430.luo2430-npmx-0 | 8/25/2026 | Impersonation |
 | VincentUllmann.vscode-nuke | 8/24/2026 | Impersonation |
 | ronakmaheshwari077.Cat-Code | 8/24/2026 | Impersonation |
