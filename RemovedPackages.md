@@ -7,7 +7,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| CodeAgentMobile.codeagent-mobile | 8/26/2026 | Malware |
 | agentself.cc-switch-2026 | 8/23/2026 | Impersonation |
 | agentself.claude-usage-gauge | 8/23/2026 | Impersonation |
 | agentself.codex-usage | 8/23/2026 | Impersonation |
