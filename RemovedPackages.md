@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| luo2430.luo2430-npmx-1 | 8/27/2026 | Impersonation |
 | AgendaStudios.frux-board | 8/26/2026 | Malware |
 | WellinWorks.arux-board | 8/26/2026 | Malware |
 | dsh-vscode-plugin.dsh-vscode-plugin | 8/26/2026 | Impersonation |
