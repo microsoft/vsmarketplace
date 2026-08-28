@@ -7,6 +7,28 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| fj-dev.zem-tc | 8/28/2026 | Spam |
+| fj-dev.zem-calibration-tool | 8/28/2026 | Spam |
+| fj-dev.internal-hv-test-box | 8/28/2026 | Spam |
+| fj-dev.zem-motorcontrol | 8/28/2026 | Spam |
+| fj-dev.zem-utility-tools | 8/28/2026 | Spam |
+| fj-dev.zem-auto-focus-test | 8/28/2026 | Spam |
+| fj-dev.zem-butterfly-valve-test | 8/28/2026 | Spam |
+| fj-dev.zem-ccs-tool | 8/28/2026 | Spam |
+| fj-dev.zem-cmd-test-tool | 8/28/2026 | Spam |
+| fj-dev.zem-coarse-focusing-model-tool | 8/28/2026 | Spam |
+| fj-dev.zem-control-lib-test | 8/28/2026 | Spam |
+| fj-dev.zem-fdc12-chv-box | 8/28/2026 | Spam |
+| fj-dev.zem-fzb-pump-controller | 8/28/2026 | Spam |
+| fj-dev.zem-fly-data-tool | 8/28/2026 | Spam |
+| fj-dev.zem-hv-controller | 8/28/2026 | Spam |
+| fj-dev.zem-image-analyzer | 8/28/2026 | Spam |
+| fj-dev.zem-image-comparator | 8/28/2026 | Spam |
+| fj-dev.zem-image-magic | 8/28/2026 | Spam |
+| fj-dev.zem-instrument-data-retriever | 8/28/2026 | Spam |
+| fj-dev.zem-vac-monitor | 8/28/2026 | Spam |
+| fj-dev.zem-stage-xy-acc | 8/28/2026 | Spam |
+| fj-dev.zs-ebeam-optics | 8/28/2026 | Spam |
 | ThinkWorks.think-board | 8/27/2026 | Malware |
 | QOBYN.s-git | 8/27/2026 | Malware |
 | luo2430.luo2430-npmx-1 | 8/27/2026 | Impersonation |
@@ -32,6 +54,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | code-colab.codecolab | 8/23/2026 | Untrustworthy |
 | luo2430.luo2430-npmx | 8/22/2026 | Impersonation |
 | naruse-love.google-antigravity-zh-cn | 8/22/2026 | Impersonation |
+| fj-dev.zem-hvbox-4ch | 8/21/2026 | Spam |
 | mnjit.mnjit-vscode | 8/21/2026 | Impersonation |
 | logicalrblx7.shareboard | 8/20/2026 | Malware |
 | StackStudios.swimlane | 8/20/2026 | Malware |
