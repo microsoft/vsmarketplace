@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ThinkCreations.founderboard-app | 8/28/2026 | Malware |
 | mskelton.go-to-error | 8/28/2026 | Impersonation |
 | fj-dev.zem-tc | 8/28/2026 | Spam |
 | fj-dev.zem-calibration-tool | 8/28/2026 | Spam |
