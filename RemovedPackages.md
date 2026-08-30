@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| peterdmv.pine-script-highlighting | 8/30/2026 | Impersonation |
 | YummyGroup.claude-multi-sessions | 8/29/2026 | Impersonation |
 | Gitea.gitea-for-vscode | 8/29/2026 | Impersonation |
 | bennett.lcfc-project-manager | 8/29/2026 | Impersonation |
