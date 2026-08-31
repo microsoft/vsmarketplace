@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| BoxZero.puppet-x | 8/31/2026 | Untrustworthy |
+| funcdfs.lesser | 8/31/2026 | Impersonation |
+| mmxmxm.antigravity-cockpit-github-style | 8/31/2026 | Impersonation |
+| ShaunsWork.tabletopsimulator-lua-community | 8/31/2026 | Impersonation |
+| SmileSB101.style-best-formate | 8/31/2026 | Impersonation |
+| XiaoShen.sol-intro | 8/31/2026 | Impersonation |
 | peterdmv.pine-script-highlighting | 8/30/2026 | Impersonation |
 | YummyGroup.claude-multi-sessions | 8/29/2026 | Impersonation |
 | Gitea.gitea-for-vscode | 8/29/2026 | Impersonation |
