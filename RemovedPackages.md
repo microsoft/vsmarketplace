@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| clode-agentstop.codebase-stats | 9/1/2026 | Malware |
 | BoxZero.puppet-x | 8/31/2026 | Untrustworthy |
 | funcdfs.lesser | 8/31/2026 | Impersonation |
 | mmxmxm.antigravity-cockpit-github-style | 8/31/2026 | Impersonation |
