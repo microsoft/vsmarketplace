@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| MicroLLC.typewriter-keyin | 9/2/2026 | Untrustworthy |
+| dsanms.dsanms | 9/2/2026 | Untrustworthy |
+| Pstudio.search-code-ultra | 9/2/2026 | Untrustworthy |
 | PetrosPanayi.ucy-cs-homework-editor | 9/2/2026 | Untrustworthy |
 | donotinstallthis.rust-osascript | 9/1/2026 | Untrustworthy |
 | zhangleilei.magic-coding | 9/1/2026 | Untrustworthy |
