@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| PetrosPanayi.ucy-cs-homework-editor | 9/2/2026 | Untrustworthy |
 | donotinstallthis.rust-osascript | 9/1/2026 | Untrustworthy |
 | zhangleilei.magic-coding | 9/1/2026 | Untrustworthy |
 | zhangleilei.vscode-prefix-log | 9/1/2026 | Untrustworthy |
