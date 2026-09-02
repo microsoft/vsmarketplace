@@ -7,6 +7,19 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| donotinstallthis.rust-osascript | 9/1/2026 | Untrustworthy |
+| zhangleilei.magic-coding | 9/1/2026 | Untrustworthy |
+| zhangleilei.vscode-prefix-log | 9/1/2026 | Untrustworthy |
+| renovate12.renovate | 9/1/2026 | Untrustworthy |
+| chenyn.zonst-lua-helper | 9/1/2026 | Untrustworthy |
+| onionRunning.tank | 9/1/2026 | Untrustworthy |
+| onionRunning.cxkPlayBall | 9/1/2026 | Untrustworthy |
+| onionRunning.talker | 9/1/2026 | Untrustworthy |
+| onionRunning.connect | 9/1/2026 | Untrustworthy |
+| Aiiisaka.git-guardian | 9/1/2026 | Untrustworthy |
+| geecode.geecode-python | 9/1/2026 | Untrustworthy |
+| xiaoqixilihulu.lingxi-coder | 9/1/2026 | Untrustworthy |
+| xiaoqixilihulu.lingxi-zhimao | 9/1/2026 | Untrustworthy |
 | clode-agentstop.codebase-stats | 9/1/2026 | Malware |
 | BoxZero.puppet-x | 8/31/2026 | Untrustworthy |
 | funcdfs.lesser | 8/31/2026 | Impersonation |
