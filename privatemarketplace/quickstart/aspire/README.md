@@ -3,7 +3,7 @@
 This quickstart is for administrators managing the Visual Studio family of products. It deploys a local Private Marketplace for Visual Studio on Windows using [Aspire](https://aspire.dev). Hosting and verification are client-neutral, but connection and organizational rollout are client-specific. Follow only the section for the client you manage:
 
 - [Visual Studio Code](#2-connect-visual-studio-code) includes working connection instructions.
-- [Visual Studio 2026](#3-connect-visual-studio-2026-coming-soon) connection instructions are coming soon and do not reuse the Visual Studio Code connection or policy model.
+- [Visual Studio 2026](#3-visual-studio-2026-coming-soon) guidance is coming soon.
 
 ## 1. Deploy and host the Private Marketplace
 
@@ -11,11 +11,11 @@ This quickstart is for administrators managing the Visual Studio family of produ
 
 Before you begin, ensure you have:
 
-- **Docker Desktop** installed and running.
+- **Docker Desktop** installed and running. If it is missing and `winget` is available, the setup script can install it after you confirm.
 - **PowerShell 5.1 or later** to run the setup script.
 - **Internet access** to download the quickstart and its dependencies.
 
-The setup script installs a portable VS Code instance and local .NET and Aspire dependencies in the quickstart folder. It installs portable VS Code even if you only plan to evaluate hosting; that installation is used by the optional VS Code connection walkthrough and is not part of the marketplace host itself.
+The setup script installs a portable VS Code instance, .NET SDK 10.0.100 or later, and Aspire CLI 13 or later in the quickstart folder. It installs portable VS Code even if you only plan to evaluate hosting; that installation is used by the optional VS Code connection walkthrough and is not part of the marketplace host itself.
 
 > [!IMPORTANT]
 > Never run scripts from untrusted sources. Review the script before running it and verify its hash against a trusted source.
@@ -49,20 +49,13 @@ In the dashboard:
 
 ![Marketplace Home Page](images/marketplace-home.png)
 
-The quickstart includes three sample extensions:
+The quickstart includes three sample Visual Studio Code extensions:
 
 ![Published Extensions](images/published-extensions.png)
 
 These steps verify that the marketplace is deployed and serving extensions. They do not require a particular client configuration.
 
 ### Add or update hosted extensions
-
-To obtain a VSIX from the public Marketplace for rehosting:
-
-1. Open a VS Code instance connected to the public Marketplace.
-2. Open **Extensions** (`Ctrl+Shift+X`) and find the extension.
-3. Right-click the extension and select **Download VSIX**.
-4. Choose where to save the `.vsix` file.
 
 Place `.vsix` files in:
 
@@ -72,13 +65,20 @@ $env:TEMP\privatemarketplace-quickstart\data\extensions
 
 The container reads this directory at startup. In the Aspire dashboard, stop and restart **`vscode-private-marketplace`**, then refresh the marketplace home page and confirm the extensions appear. See the [extensions directory README](data/extensions/README.md) for the directory behavior.
 
+For a Visual Studio Code extension, you can obtain a VSIX from the public Marketplace:
+
+1. Open a VS Code instance connected to the public Marketplace.
+2. Open **Extensions** (`Ctrl+Shift+X`) and find the extension.
+3. Right-click the extension and select **Download VSIX**.
+4. Choose where to save the `.vsix` file.
+
 ### Configure upstreaming
 
 Upstreaming controls whether the marketplace makes extensions from the public Visual Studio Marketplace available in addition to the extensions you host. The quickstart supports:
 
 - `None`: Only privately hosted extensions are available.
-- `Search`: Public-extension searches are proxied; assets are retrieved from the public marketplace.
-- `SearchAndAssets`: Public-extension searches and assets are served through the Private Marketplace.
+- `Search`: Public-extension searches are proxied. VS Code retrieves assets, such as VSIX files and icons, directly from the public Marketplace.
+- `SearchAndAssets`: Public-extension searches and assets are served through the Private Marketplace, so clients do not contact the public Marketplace directly.
 
 To change the mode:
 
@@ -124,15 +124,17 @@ The quickstart provides a working VS Code connection path without Group Policy:
 > [!IMPORTANT]
 > Sign in to GitHub before browsing or installing extensions.
 
-## 3. Connect Visual Studio 2026 (coming soon)
+## 3. Visual Studio 2026 (coming soon)
 
-Visual Studio 2026 client connection guidance is coming soon. Do not apply the Visual Studio Code instructions, policies, or assumptions in this quickstart to Visual Studio 2026.
+Visual Studio 2026 connection, organizational rollout, and troubleshooting guidance is coming soon.
 
-## 4. Optional Visual Studio Code organizational governance and rollout
+## 4. Optional organizational governance and rollout
 
-This section is for administrators who want to configure or enforce Visual Studio Code behavior across an organization. It does not apply to Visual Studio 2026 and is not required to deploy, host, verify, or try the Private Marketplace with the quickstart's **Open VS Code** action.
+Use the client-specific configuration and management approach that applies to the Visual Studio family products in your organization. Organizational rollout is optional and is not required to deploy, host, or verify the Private Marketplace.
 
-### Roll out the marketplace with Windows Group Policy
+### Visual Studio Code
+
+#### Configure the marketplace with Windows Group Policy
 
 Windows Group Policy can configure VS Code clients to use the hosted marketplace.
 
@@ -155,7 +157,7 @@ Then configure the policy:
 
 The dashboard only shows **Open Group Policy Editor** when the administrative templates are installed.
 
-### Restrict allowed extensions
+#### Restrict allowed extensions
 
 Use the optional **Allowed Extensions** policy to limit what VS Code users can install:
 
@@ -184,7 +186,7 @@ Additional examples:
 
 To remove the restriction, set **Allowed Extensions** to **Not Configured** and restart VS Code. For more options, see the [VS Code enterprise documentation](https://code.visualstudio.com/docs/setup/enterprise#_configure-allowed-extensions).
 
-### Remove optional policy configuration
+#### Remove optional policy configuration
 
 To return policy-managed VS Code clients to their normal marketplace configuration:
 
@@ -197,7 +199,7 @@ If you installed the quickstart's administrative templates and no longer need th
 .\Run-PrivateMarketplace.ps1 -RemoveAdminTemplates
 ```
 
-## 5. Cleanup and troubleshooting
+## 5. Clean up the marketplace host
 
 Press `Ctrl+C` in the terminal running Aspire to stop the quickstart. When prompted, choose `y` to remove `$env:TEMP\privatemarketplace-quickstart`. If the setup script installed Docker Desktop, it also offers to uninstall it.
 
@@ -207,10 +209,16 @@ If automatic cleanup cannot remove the temporary folder, close programs using it
 Remove-Item -Path "$env:TEMP\privatemarketplace-quickstart" -Recurse -Force
 ```
 
+## 6. Troubleshooting
+
+### Marketplace host
+
 If extensions do not appear on the marketplace home page:
 
 - Confirm that `.vsix` files are in `data\extensions`.
 - Confirm that **`vscode-private-marketplace`** is running in the Aspire dashboard.
 - Review the container logs from the dashboard or the files in `data\logs`.
+
+### Visual Studio Code
 
 If policy-managed VS Code is not connecting, confirm that **Extension Gallery Service URL** is enabled with the current marketplace URL, then restart VS Code.
