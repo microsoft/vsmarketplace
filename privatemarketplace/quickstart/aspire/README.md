@@ -29,6 +29,9 @@ irm https://raw.githubusercontent.com/microsoft/vsmarketplace/main/privatemarket
 .\Run-PrivateMarketplace.ps1
 ```
 
+> [!NOTE]
+> If PowerShell blocks the downloaded script because of your execution policy, run `Unblock-File .\Run-PrivateMarketplace.ps1` and then run the script again.
+
 The script downloads the quickstart to `$env:TEMP\privatemarketplace-quickstart`, starts Docker Desktop if necessary, and launches the Private Marketplace container through Aspire.
 
 The script may offer to install VS Code administrative templates. **This is optional.** Select `n` to skip it when you are only hosting, verifying, or using the quickstart's direct VS Code launch. You can install the templates later if you want to use Windows Group Policy for a centralized rollout.
