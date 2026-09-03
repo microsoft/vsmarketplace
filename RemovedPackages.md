@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| elodie.go-master | 9/3/2026 | Untrustworthy |
 | PRSoftworks.vlux-board| 9/3/2026 | Malware |
 | TypinKey.typewritin-keyal | 9/3/2026 | Malware |
 | MicroLLC.typewriter-keyin | 9/2/2026 | Untrustworthy |
