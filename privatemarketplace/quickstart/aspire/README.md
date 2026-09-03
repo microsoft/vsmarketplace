@@ -13,8 +13,9 @@ Before you begin, ensure you have:
 
 - **Docker Desktop** installed and running.
 - **PowerShell 5.1 or later** to run the setup script.
+- **Internet access** to download the quickstart and its dependencies.
 
-The setup script also installs a portable VS Code instance and local .NET and Aspire dependencies for the quickstart. The VS Code installation is only used by the optional VS Code connection walkthrough; it is not required to host or verify the marketplace.
+The setup script installs a portable VS Code instance and local .NET and Aspire dependencies in the quickstart folder. It installs portable VS Code even if you only plan to evaluate hosting; that installation is used by the optional VS Code connection walkthrough and is not part of the marketplace host itself.
 
 > [!IMPORTANT]
 > Never run scripts from untrusted sources. Review the script before running it and verify its hash against a trusted source.
