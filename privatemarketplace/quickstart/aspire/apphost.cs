@@ -1,4 +1,4 @@
-#:sdk Aspire.AppHost.Sdk@13.0.0
+#:sdk Aspire.AppHost.Sdk@13.5.3
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -111,7 +111,7 @@ public static class MarketplaceExtensions
                         return Task.FromResult(new ExecuteCommandResult
                         {
                             Success = false,
-                            ErrorMessage = "Marketplace endpoint not allocated."
+                            Message = "Marketplace endpoint not allocated."
                         });
                     }
 
@@ -125,7 +125,7 @@ public static class MarketplaceExtensions
                         return Task.FromResult(new ExecuteCommandResult
                         {
                             Success = false,
-                            ErrorMessage = "Private VS Code installation not found in .vscode folder."
+                            Message = "Private VS Code installation not found in .vscode folder."
                         });
                     }
 
@@ -149,7 +149,7 @@ public static class MarketplaceExtensions
                     return Task.FromResult(new ExecuteCommandResult
                     {
                         Success = false,
-                        ErrorMessage = $"Failed to launch VS Code: {ex.Message}"
+                        Message = $"Failed to launch VS Code: {ex.Message}"
                     });
                 }
             },
@@ -223,7 +223,7 @@ public static class MarketplaceExtensions
                     return Task.FromResult(new ExecuteCommandResult
                     {
                         Success = false,
-                        ErrorMessage = $"Failed to launch Group Policy Editor: {ex.Message}"
+                        Message = $"Failed to launch Group Policy Editor: {ex.Message}"
                     });
                 }
             },
