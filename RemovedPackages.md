@@ -7,8 +7,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Aelionyxe.cobnox-language-support | 9/4/2026 | Malware |
+| zeug-zz.opencode-research | 9/4/2026 | Impersonation |
+| HernandoR.duck-viewer | 9/4/2026 | Impersonation |
+| alessandroraffa.tangyr | 9/4/2026 | Malware |
+| alessandroraffa.arit-toolkit | 9/4/2026 | Untrustworthy |
 | abersheeran.greet-theme | 9/3/2026 | Impersonation |
 | elodie.go-master | 9/3/2026 | Untrustworthy |
+| KakaStudio.language-compiler | 9/3/2026 | Malware |
 | PRSoftworks.vlux-board | 9/3/2026 | Malware |
 | TypinKey.typewritin-keyal | 9/3/2026 | Malware |
 | MicroLLC.typewriter-keyin | 9/2/2026 | Untrustworthy |
