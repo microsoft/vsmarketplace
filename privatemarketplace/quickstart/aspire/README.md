@@ -18,6 +18,11 @@ Before you begin, ensure you have:
 - **PowerShell 5.1 or later** for running the setup script (Windows PowerShell or PowerShell 7)
 - **Internet access** to download the quickstart and its dependencies
 
+By default the quickstart installs its own portable copies of VS Code, the .NET SDK, and the Aspire CLI, so nothing already on the machine is used or altered. The `-UseGlobalInstalls` option changes that - see [Reusing existing installations](#reusing-existing-installations).
+
+> [!IMPORTANT]
+  Using a machine-wide VS Code installation means the quickstart's configuration is applied to the VS Code you use every day. The Group Policy setting in [Step 2](#step-2-configure-group-policy) changes the extension gallery for every VS Code installation on the machine, so your normal editor will use the Private Marketplace instead of the public Marketplace until you set the policy back to **Not Configured**. See [Restoring Normal Client Access](#restoring-normal-client-access) to undo it.
+
 ### Run the Setup Script
 
 > [!IMPORTANT]
@@ -198,7 +203,7 @@ The quickstart includes three sample extensions preloaded in the marketplace:
 4. From the Actions menu, select **Open Group Policy Editor**
 
 > [!NOTE]
-  If this option doesn't appear, see the [Troubleshooting](#troubleshooting) section below
+  If this option doesn't appear, see the [Troubleshooting](#part-5-troubleshooting) section below
 
 5. In the Group Policy Editor window that opens, navigate to the Extensions folder:   
  
