@@ -377,6 +377,40 @@ function ConvertTo-ComparableVersion {
 
 <#
 .SYNOPSIS
+    Returns the highest released .NET SDK version that meets a minimum, or $null.
+.DESCRIPTION
+    Accepts the output of "dotnet --list-sdks". Any SDK at or above the minimum qualifies,
+    regardless of its major.minor channel, so a newer SDK is never reported as missing.
+    Prerelease SDKs are ignored so the quickstart runs on a released toolchain.
+#>
+function Get-SdkVersionMeetingMinimum {
+    param(
+        [string[]]$SdkLines,
+        [string]$MinimumVersion
+    )
+
+    $minimum = ConvertTo-ComparableVersion $MinimumVersion
+    if (-not $minimum) { return $null }
+
+    $best = $null
+    foreach ($line in $SdkLines) {
+        # Lines look like: 10.0.400 [C:\Program Files\dotnet\sdk]
+        if ($line -notmatch '^(\S+)\s+\[') { continue }
+        $rawVersion = $matches[1]
+
+        if ($rawVersion -match '-') { continue }
+
+        $version = ConvertTo-ComparableVersion $rawVersion
+        if ($version -and $version -ge $minimum) {
+            if (-not $best -or $version -gt $best) { $best = $version }
+        }
+    }
+
+    return $best
+}
+
+<#
+.SYNOPSIS
     Finds a machine-wide .NET SDK that meets the minimum version.
 .OUTPUTS
     An object with Version and Root (the DOTNET_ROOT directory), or $null.
@@ -389,30 +423,13 @@ function Get-GlobalDotNetInfo {
 
     try { $sdkLines = & $command.Source --list-sdks 2>$null } catch { return $null }
 
-    $minimum = ConvertTo-ComparableVersion $MinimumVersion
-    if (-not $minimum) { return $null }
+    $version = Get-SdkVersionMeetingMinimum -SdkLines $sdkLines -MinimumVersion $MinimumVersion
+    if (-not $version) { return $null }
 
-    $best = $null
-    foreach ($line in $sdkLines) {
-        # Lines look like: 10.0.400 [C:\Program Files\dotnet\sdk]
-        if ($line -notmatch '^(\S+)\s+\[') { continue }
-        $rawVersion = $matches[1]
-
-        # Ignore prerelease SDKs so the quickstart runs on a released toolchain
-        if ($rawVersion -match '-') { continue }
-
-        $version = ConvertTo-ComparableVersion $rawVersion
-        if ($version -and $version -ge $minimum) {
-            if (-not $best -or $version -gt $best.Version) {
-                $best = [pscustomobject]@{
-                    Version = $version
-                    Root    = Split-Path -Parent $command.Source
-                }
-            }
-        }
+    return [pscustomobject]@{
+        Version = $version
+        Root    = Split-Path -Parent $command.Source
     }
-
-    return $best
 }
 
 <#
@@ -926,33 +943,14 @@ if ($usingGlobalDotnet) {
         # Check the actual installed SDK versions
         try {
             $installedSdks = & $localDotnetExePath --list-sdks 2>$null
-            # Check for any SDK matching the major.minor channel with version >= minimum
-            $majorMinorPattern = "^$([regex]::Escape($channel))\.(\d+)\s"
-            $matchingSdks = $installedSdks | Where-Object { $_ -match $majorMinorPattern }
-            
-            if ($matchingSdks) {
-                # Extract version numbers and check if any meet the minimum requirement
-                $hasValidVersion = $false
-                foreach ($sdk in $matchingSdks) {
-                    if ($sdk -match "^([\d\.]+)\s") {
-                        $installedVersion = [version]$matches[1]
-                        $minimumVersion = [version]$dotnetVersion
-                        if ($installedVersion -ge $minimumVersion) {
-                            Write-Host "  Local .NET SDK $($matches[1]) found at: $localDotnetPath" -ForegroundColor Green
-                            $hasValidVersion = $true
-                            break
-                        }
-                    }
-                }
-                
-                if ($hasValidVersion) {
-                    $dotnetInstalled = $true
-                } else {
-                    Write-Host "  Found SDK(s) in channel $channel but below minimum version $dotnetVersion" -ForegroundColor Yellow
-                    $missingPrereqs += $dotnetPrereq
-                }
+            # Any SDK at or above the minimum qualifies, including newer channels
+            $usableSdk = Get-SdkVersionMeetingMinimum -SdkLines $installedSdks -MinimumVersion $dotnetVersion
+
+            if ($usableSdk) {
+                Write-Host "  Local .NET SDK $usableSdk found at: $localDotnetPath" -ForegroundColor Green
+                $dotnetInstalled = $true
             } else {
-                Write-Host "  No SDK found for channel $channel. Installed: $($installedSdks -join ', ')" -ForegroundColor Yellow
+                Write-Host "  No local .NET SDK $dotnetVersion or later found. Installed: $($installedSdks -join ', ')" -ForegroundColor Yellow
                 $missingPrereqs += $dotnetPrereq
             }
         } catch {
@@ -1415,12 +1413,14 @@ if (Test-Path $effectiveDotnetExe) {
     Write-Host "  .NET version: " -NoNewline -ForegroundColor Gray
     & $effectiveDotnetExe --version
     
-    # Verify an SDK for the required channel is available
+    # Verify an SDK that meets the minimum is available. Any version at or above the
+    # minimum qualifies, so a newer SDK is never reported as missing.
     $availableSdks = & $effectiveDotnetExe --list-sdks 2>$null
-    if ($availableSdks -match "^$([regex]::Escape($channel))\.") {
-        Write-Host "  .NET SDK for channel $channel is ready." -ForegroundColor Green
+    $readySdk = Get-SdkVersionMeetingMinimum -SdkLines $availableSdks -MinimumVersion $dotnetVersion
+    if ($readySdk) {
+        Write-Host "  .NET SDK $readySdk is ready." -ForegroundColor Green
     } else {
-        Write-Host "  Warning: No SDK for channel $channel found at $effectiveDotnetRoot." -ForegroundColor Yellow
+        Write-Host "  Warning: No .NET SDK $dotnetVersion or later found at $effectiveDotnetRoot." -ForegroundColor Yellow
     }
 } else {
     Write-Host "  Error: .NET SDK executable not found at: $effectiveDotnetExe" -ForegroundColor Red
