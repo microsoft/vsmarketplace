@@ -600,43 +600,45 @@ try {
 }
 
 # Check VS Code
-Write-Host "Checking for VS Code..." -ForegroundColor Gray
+Write-Host "Checking for local VS Code..." -ForegroundColor Gray
 
 # Check if root doesn't exist, VS Code can't exist either
 if (-not (Test-Path $rootPath)) {
-    Write-Host "  VS Code not found (quickstart folder not present)" -ForegroundColor Yellow
+    Write-Host "  Local VS Code not found (quickstart folder not present)" -ForegroundColor Yellow
     $missingPrereqs += New-PrerequisiteInfo -Name "VS Code (portable)" -InstallMethod "vscode-local" `
         -InstallPath $localVSCodePath -ManualUrl "https://code.visualstudio.com/"
 } else {
     $vscodeExePath = Join-Path $localVSCodePath "Code.exe"
     
     if (Test-Path $vscodeExePath) {
-        Write-Host "  VS Code found at: $localVSCodePath" -ForegroundColor Green
+        Write-Host "  Local VS Code found at: $localVSCodePath" -ForegroundColor Green
         $vscodeInstalled = $true
     } else {
-        Write-Host "  VS Code not found" -ForegroundColor Yellow
+        Write-Host "  Local VS Code not found" -ForegroundColor Yellow
         $missingPrereqs += New-PrerequisiteInfo -Name "VS Code (portable)" -InstallMethod "vscode-local" `
             -InstallPath $localVSCodePath -ManualUrl "https://code.visualstudio.com/"
     }
 }
 
 # Check Aspire CLI (local installation)
-Write-Host "Checking for Aspire CLI..." -ForegroundColor Gray
+# Note: this intentionally ignores any machine-wide Aspire CLI. The quickstart keeps
+# its tools in the temporary folder so it does not interfere with system-wide installs.
+Write-Host "Checking for local Aspire CLI..." -ForegroundColor Gray
 
 # If root doesn't exist, Aspire can't exist either
 $aspirePrereq = New-PrerequisiteInfo -Name "Aspire CLI (version 13+) (local)" -InstallMethod "aspire-local" `
     -InstallPath $localAspirePath -ManualUrl "https://learn.microsoft.com/dotnet/aspire"
 
 if (-not (Test-Path $rootPath)) {
-    Write-Host "  Aspire CLI not found (quickstart folder not present)" -ForegroundColor Yellow
+    Write-Host "  Local Aspire CLI not found (quickstart folder not present)" -ForegroundColor Yellow
     $missingPrereqs += $aspirePrereq
 } else {
     $aspireExePath = Join-Path $localAspirePath "aspire.exe"
     if (Test-Path $aspireExePath) {
-        Write-Host "  Aspire CLI found at: $localAspirePath" -ForegroundColor Green
+        Write-Host "  Local Aspire CLI found at: $localAspirePath" -ForegroundColor Green
         $aspireInstalled = $true
     } else {
-        Write-Host "  Aspire CLI not found" -ForegroundColor Yellow
+        Write-Host "  Local Aspire CLI not found" -ForegroundColor Yellow
         $missingPrereqs += $aspirePrereq
     }
 }
@@ -962,7 +964,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
         } catch {
             Write-Host "  Error installing .NET SDK: $_" -ForegroundColor Red
             Write-Host "  Please install manually from: https://dotnet.microsoft.com/download/dotnet/10.0" -ForegroundColor Yellow
-            return
+            exit 1
         }
     }
     
@@ -1009,7 +1011,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
         } catch {
             Write-Host "  Error installing VS Code: $_" -ForegroundColor Red
             Write-Host "  Please install manually from: https://code.visualstudio.com/" -ForegroundColor Yellow
-            return
+            exit 1
         }
     }
     
@@ -1056,7 +1058,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
         } catch {
             Write-Host "  Error installing Aspire CLI: $_" -ForegroundColor Red
             Write-Host "  Please install manually from: https://aspire.dev" -ForegroundColor Yellow
-            return
+            exit 1
         }
     }
     
