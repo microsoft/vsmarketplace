@@ -55,7 +55,7 @@ $Config = @{
     RepoBranch = "main"  # Change this to test different branches
     
     # Version requirements
-    DotNetVersion = "10.0.100"  # Version of .NET SDK to install locally
+    DotNetVersion = "10.0.100"  # Minimum .NET SDK version. The latest patch in this major.minor channel is installed.
     
     # Installation paths
     RootPath = Join-Path $env:TEMP "privatemarketplace-quickstart"
@@ -901,7 +901,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
     
     # Install local .NET SDK if missing
     if (-not $dotnetInstalled) {
-        Write-Host "`nInstalling .NET SDK $dotnetVersion locally..." -ForegroundColor Cyan
+        Write-Host "`nInstalling the latest .NET SDK for channel $channel locally (minimum $dotnetVersion)..." -ForegroundColor Cyan
         
         try {
             New-DirectoryIfNeeded -Path $localDotnetPath

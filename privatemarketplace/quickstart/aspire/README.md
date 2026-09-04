@@ -90,7 +90,7 @@ You should see output similar to the following snippet:
     === Missing Prerequisites ===
     - VS Code (portable)
     - Aspire CLI (version 13+)
-    - .NET SDK 10.0.100 (local)
+    - .NET SDK 10.0.100+ (local)
     - Quickstart Files
     - VS Code Administrative Templates (requires admin privileges)
 
