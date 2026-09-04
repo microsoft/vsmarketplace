@@ -321,13 +321,14 @@ By changing the mode the Private Marketplace can support different scenarios
  
 
 To change the Upstreaming mode in the Quickstart:
-1. In the Aspire dashboard, click the **Actions** button (⋮) for **`vscode-private-marketplace`**
 
-   ![Aspire Actions Menu](images/aspire-actions-menu.png)
+> [!IMPORTANT]
+  The upstreaming mode is compiled into the AppHost, so changing it requires restarting the **AppHost**. Stopping and starting the **`vscode-private-marketplace`** resource from the Aspire dashboard is not enough - the container's configuration is built when the AppHost starts.
 
-1. Select **Stop** from the menu
 1. Close VS Code if it is open
-1. Open the `$env:TEMP\privatemarketplace-quickstart\AppHost.cs` file in an editor such as VS Code.
+1. In the terminal running Aspire, press `Ctrl+C` to stop the AppHost
+1. When prompted to remove the temporary folder, answer **`n`**. Answering `y` deletes the quickstart and all of its dependencies.
+1. Open the `$env:TEMP\privatemarketplace-quickstart\apphost.cs` file in an editor such as VS Code.
 1. Locate the following section:
 
    ```csharp
@@ -344,17 +345,20 @@ To change the Upstreaming mode in the Quickstart:
    ```csharp
          upstreamingMode: MarketplaceUpstreamingMode.None
    ```
-1. Back in the Aspire dashboard, click the **Home** link
-   
+1. Save the file
+1. Restart the quickstart from a PowerShell terminal:
+
+   ```powershell
+   cd $env:TEMP\privatemarketplace-quickstart
+   .\Run-PrivateMarketplace.ps1
+   ```
+
+   The script detects the existing installation and relaunches Aspire with the rebuilt AppHost.
+1. When the Aspire dashboard reopens, click the **Home** link
+
    You should see upstreaming to the public Marketplace is now disabled.
 
    ![Upstreaming is disabled](images/marketplace-upstreaming-disabled.png)
-
-1. Back in the Aspire dashboard, click the **Actions** button (⋮) for **`vscode-private-marketplace`**
-
-   ![Aspire Actions Menu](images/aspire-actions-menu.png)
-
-1. Select **Start** from the menu
 
 **Verify the change**
 
