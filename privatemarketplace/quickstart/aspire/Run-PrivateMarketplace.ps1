@@ -1022,38 +1022,39 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
         try {
             New-DirectoryIfNeeded -Path $localAspirePath
             
-            # Download and run the Aspire installation script with custom path
-            $installScript = Invoke-WithProgress -Activity "Installing Aspire CLI" -Status "Downloading Aspire installation script..." -ScriptBlock {
-                Invoke-WebRequest -Uri "https://aspire.dev/install.ps1" -UseBasicParsing
+            # Download the Aspire installation script.
+            # Note: write the response straight to disk. aspire.dev serves the script as
+            # application/octet-stream, so Invoke-WebRequest returns Content as a byte[];
+            # piping that to Out-File would write one decimal byte value per line and
+            # produce a corrupt script.
+            $tempScriptPath = Join-Path $env:TEMP "aspire-install.ps1"
+            $downloadSuccess = Invoke-WithProgress -Activity "Installing Aspire CLI" -Status "Downloading Aspire installation script..." -ScriptBlock {
+                Get-FileWithVerification -Url "https://aspire.dev/install.ps1" -OutFile $tempScriptPath
             }
-            
-            if ($installScript.StatusCode -eq 200) {
-                # Save script to temp file and execute with -InstallPath parameter
-                $tempScriptPath = Join-Path $env:TEMP "aspire-install.ps1"
-                $installScript.Content | Out-File -FilePath $tempScriptPath -Encoding UTF8
-                
-                # Execute the installation script with -InstallPath parameter
-                Invoke-WithProgress -Activity "Installing Aspire CLI" -Status "Installing Aspire CLI to: $localAspirePath" -ScriptBlock {
-                    & $tempScriptPath -InstallPath $localAspirePath
-                }
-                
-                # Clean up temp script
-                Remove-Item $tempScriptPath -Force -ErrorAction SilentlyContinue
-                
-                # Verify aspire.exe exists
-                $aspireExePath = Join-Path $localAspirePath "aspire.exe"
-                if (Test-Path $aspireExePath) {
-                    Write-Host "  Aspire CLI installed successfully." -ForegroundColor Green
-                    $aspireInstalled = $true
-                    
-                    # Remove Aspire paths from USER PATH environment variable
-                    Write-Host "  Removing Aspire from system PATH..." -ForegroundColor Gray
-                    Remove-PathFromEnvironment -PathPatterns @($localAspirePath)
-                } else {
-                    throw "aspire.exe not found after installation"
-                }
-            } else {
+            if (-not $downloadSuccess) {
                 throw "Failed to download Aspire installation script"
+            }
+
+            # Execute the installation script with -InstallPath parameter.
+            # -SkipPath keeps the portable install out of the user's PATH.
+            Invoke-WithProgress -Activity "Installing Aspire CLI" -Status "Installing Aspire CLI to: $localAspirePath" -ScriptBlock {
+                & $tempScriptPath -InstallPath $localAspirePath -SkipPath
+            }
+
+            # Clean up temp script
+            Remove-Item $tempScriptPath -Force -ErrorAction SilentlyContinue
+
+            # Verify aspire.exe exists
+            $aspireExePath = Join-Path $localAspirePath "aspire.exe"
+            if (Test-Path $aspireExePath) {
+                Write-Host "  Aspire CLI installed successfully." -ForegroundColor Green
+                $aspireInstalled = $true
+
+                # Remove Aspire paths from USER PATH environment variable
+                Write-Host "  Removing Aspire from system PATH..." -ForegroundColor Gray
+                Remove-PathFromEnvironment -PathPatterns @($localAspirePath)
+            } else {
+                throw "aspire.exe not found after installation"
             }
         } catch {
             Write-Host "  Error installing Aspire CLI: $_" -ForegroundColor Red
