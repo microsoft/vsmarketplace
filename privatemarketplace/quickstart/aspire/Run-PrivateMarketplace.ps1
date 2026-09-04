@@ -166,8 +166,14 @@ function Wait-ForCondition {
     PowerShell errors.
 #>
 function Test-DockerEngineReady {
+    $dockerCommand = Get-Command docker.exe -CommandType Application -ErrorAction SilentlyContinue |
+        Select-Object -First 1
+    if ($null -eq $dockerCommand -or -not (Test-Path $dockerCommand.Source)) {
+        return $false
+    }
+
     $psi = New-Object System.Diagnostics.ProcessStartInfo
-    $psi.FileName = "docker.exe"
+    $psi.FileName = $dockerCommand.Source
     $psi.Arguments = "info"
     $psi.UseShellExecute = $false
     $psi.CreateNoWindow = $true
@@ -176,12 +182,58 @@ function Test-DockerEngineReady {
 
     $process = New-Object System.Diagnostics.Process
     $process.StartInfo = $psi
-    [void]$process.Start()
+    try {
+        [void]$process.Start()
+    } catch [System.ComponentModel.Win32Exception] {
+        return $false
+    } catch [System.InvalidOperationException] {
+        return $false
+    }
+
     $output = $process.StandardOutput.ReadToEnd()
     [void]$process.StandardError.ReadToEnd()
     $process.WaitForExit()
 
     return ($process.ExitCode -eq 0 -and $output -match 'Server:')
+}
+
+<#
+.SYNOPSIS
+    Gets an Aspire CLI version without treating native stderr as a PowerShell error.
+#>
+function Get-AspireCliVersion {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$Path
+    )
+
+    $psi = New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName = $Path
+    $psi.Arguments = "--version"
+    $psi.UseShellExecute = $false
+    $psi.CreateNoWindow = $true
+    $psi.RedirectStandardOutput = $true
+    $psi.RedirectStandardError = $true
+
+    $process = New-Object System.Diagnostics.Process
+    $process.StartInfo = $psi
+    try {
+        [void]$process.Start()
+    } catch [System.ComponentModel.Win32Exception] {
+        return $null
+    } catch [System.InvalidOperationException] {
+        return $null
+    }
+
+    $output = $process.StandardOutput.ReadToEnd().Trim()
+    [void]$process.StandardError.ReadToEnd()
+    $process.WaitForExit()
+
+    if ($process.ExitCode -eq 0 -and $output -match '^(?<version>\d+(?:\.\d+){0,3})') {
+        return [version]$matches['version']
+    }
+
+    return $null
 }
 
 <#
@@ -649,24 +701,39 @@ if ($SkipVSCode) {
 # Check Aspire CLI (local installation or PATH)
 Write-Host "Checking for Aspire CLI..." -ForegroundColor Gray
 
-$aspirePrereq = New-PrerequisiteInfo -Name "Aspire CLI (version 13+) (local)" -InstallMethod "aspire-local" `
+$aspirePrereq = New-PrerequisiteInfo -Name "Aspire CLI (version 13+)" -InstallMethod "aspire-local" `
     -InstallPath $localAspirePath -ManualUrl "https://learn.microsoft.com/dotnet/aspire"
 
-if (Test-Path (Join-Path $localAspirePath "aspire.exe")) {
-    $aspireExePath = Join-Path $localAspirePath "aspire.exe"
-    Write-Host "  Aspire CLI found at: $localAspirePath" -ForegroundColor Green
-    $aspireInstalled = $true
-} else {
-    $aspireCommand = Get-Command aspire -CommandType Application -ErrorAction SilentlyContinue |
-        Select-Object -First 1
-    if ($null -ne $aspireCommand -and (Test-Path $aspireCommand.Source)) {
-        $aspireExePath = $aspireCommand.Source
-        Write-Host "  Aspire CLI found at: $aspireExePath" -ForegroundColor Green
+$aspireCandidates = @()
+$localAspireExePath = Join-Path $localAspirePath "aspire.exe"
+if (Test-Path $localAspireExePath) {
+    $aspireCandidates += $localAspireExePath
+}
+
+$aspireCommand = Get-Command aspire -CommandType Application -ErrorAction SilentlyContinue |
+    Select-Object -First 1
+if ($null -ne $aspireCommand -and (Test-Path $aspireCommand.Source)) {
+    $aspireCandidates += $aspireCommand.Source
+}
+
+$aspireCandidates = $aspireCandidates | Select-Object -Unique
+foreach ($candidate in $aspireCandidates) {
+    $aspireVersion = Get-AspireCliVersion -Path $candidate
+    if ($null -ne $aspireVersion -and $aspireVersion.Major -ge 13) {
+        $aspireExePath = $candidate
+        Write-Host "  Aspire CLI $aspireVersion found at: $aspireExePath" -ForegroundColor Green
         $aspireInstalled = $true
+        break
+    }
+}
+
+if (-not $aspireInstalled) {
+    if ($aspireCandidates.Count -gt 0) {
+        Write-Host "  Aspire CLI version 13 or later not found" -ForegroundColor Yellow
     } else {
         Write-Host "  Aspire CLI not found" -ForegroundColor Yellow
-        $missingPrereqs += $aspirePrereq
     }
+    $missingPrereqs += $aspirePrereq
 }
 
 # Check for local .NET SDK installation
