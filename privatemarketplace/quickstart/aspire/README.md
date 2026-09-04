@@ -113,6 +113,29 @@ You should see output similar to the following snippet:
     Do you want to proceed with installation? (y/n):
   ```
 
+#### Reusing existing installations
+
+By default the quickstart installs its own portable copies of VS Code, the .NET SDK, and the Aspire CLI into the temporary folder, so it never interferes with what you already have installed.
+
+If you would rather reuse tools already on the machine, run the script with `-UseGlobalInstalls`:
+
+```powershell
+.\Run-PrivateMarketplace.ps1 -UseGlobalInstalls
+```
+
+Each tool is used only when it meets a minimum version:
+
+| Tool | Minimum version |
+| --- | --- |
+| VS Code | 1.99 |
+| .NET SDK | 10.0.100 |
+| Aspire CLI | 13.0.0 |
+
+Anything missing or too old is still installed locally, so you can mix the two. Docker Desktop is always used from the machine.
+
+> [!NOTE]
+  Machine-wide VS Code installations ship `VSCode.admx` without the `VSCode.adml` language files. If you plan to configure the marketplace through Group Policy, run the quickstart without `-UseGlobalInstalls` so the portable VS Code, which includes the language files, is used.
+
 ### Access the Aspire Dashboard
 
 Once installation completes, the Aspire dashboard will open automatically in your browser. If it doesn't open automatically, look for the dashboard URL in the terminal output and open it manually.

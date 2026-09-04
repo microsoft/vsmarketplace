@@ -117,15 +117,21 @@ public static class MarketplaceExtensions
 
                     var marketplaceUrl = endpoint.AllocatedEndpoint.UriString;
 
-                    // Find private VS Code install in .vscode folder
-                    var vscodePath = Path.Combine(Directory.GetCurrentDirectory(), ".vscode", "Code.exe");
+                    // Find VS Code. The quickstart script sets QUICKSTART_VSCODE_PATH when it is
+                    // using a machine-wide installation; otherwise use the portable copy.
+                    var vscodePath = Environment.GetEnvironmentVariable("QUICKSTART_VSCODE_PATH");
+
+                    if (string.IsNullOrWhiteSpace(vscodePath))
+                    {
+                        vscodePath = Path.Combine(Directory.GetCurrentDirectory(), ".vscode", "Code.exe");
+                    }
 
                     if (!File.Exists(vscodePath))
                     {
                         return Task.FromResult(new ExecuteCommandResult
                         {
                             Success = false,
-                            Message = "Private VS Code installation not found in .vscode folder."
+                            Message = $"VS Code installation not found at: {vscodePath}"
                         });
                     }
 
