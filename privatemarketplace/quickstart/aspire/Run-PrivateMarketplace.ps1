@@ -16,6 +16,12 @@
     When specified, only removes VS Code administrative templates (Group Policy ADMX/ADML files)
     from the Windows PolicyDefinitions folder and exits. Requires administrator privileges.
 
+.PARAMETER SkipVSCode
+    Skips installation and prerequisite checks for portable VS Code.
+
+.PARAMETER SkipAdminTemplates
+    Skips installation and prerequisite checks for VS Code administrative templates.
+
 .EXAMPLE
     .\Run-PrivateMarketplace.ps1
     Runs the full quickstart setup, checking and installing prerequisites as needed.
@@ -42,7 +48,13 @@ param(
     [switch]$InstallAdminTemplates,
     
     [Parameter(HelpMessage="Remove VS Code administrative templates only (requires admin rights)")]
-    [switch]$RemoveAdminTemplates
+    [switch]$RemoveAdminTemplates,
+
+    [Parameter(HelpMessage="Skip portable VS Code installation")]
+    [switch]$SkipVSCode,
+
+    [Parameter(HelpMessage="Skip VS Code administrative templates installation")]
+    [switch]$SkipAdminTemplates
 )
 
 $ErrorActionPreference = "Stop"
@@ -146,6 +158,30 @@ function Wait-ForCondition {
     
     Write-Progress -Activity $StatusMessage -Completed
     return $false
+}
+
+<#
+.SYNOPSIS
+    Checks Docker readiness without allowing native stderr warnings to become
+    PowerShell errors.
+#>
+function Test-DockerEngineReady {
+    $psi = New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName = "docker.exe"
+    $psi.Arguments = "info"
+    $psi.UseShellExecute = $false
+    $psi.CreateNoWindow = $true
+    $psi.RedirectStandardOutput = $true
+    $psi.RedirectStandardError = $true
+
+    $process = New-Object System.Diagnostics.Process
+    $process.StartInfo = $psi
+    [void]$process.Start()
+    $output = $process.StandardOutput.ReadToEnd()
+    [void]$process.StandardError.ReadToEnd()
+    $process.WaitForExit()
+
+    return ($process.ExitCode -eq 0 -and $output -match 'Server:')
 }
 
 <#
@@ -557,6 +593,7 @@ $localVSCodePath = $Paths.LocalVSCode
 $localAspirePath = $Paths.LocalAspire
 $localDotnetPath = $Paths.LocalDotnet
 $policiesPath = $Paths.Policies
+$aspireExePath = $null
 
 # Check Docker
 Write-Host "Checking for Docker..." -ForegroundColor Gray
@@ -584,40 +621,47 @@ try {
 }
 
 # Check VS Code
-Write-Host "Checking for VS Code..." -ForegroundColor Gray
-
-# Check if root doesn't exist, VS Code can't exist either
-if (-not (Test-Path $rootPath)) {
-    Write-Host "  VS Code not found (quickstart folder not present)" -ForegroundColor Yellow
-    $missingPrereqs += New-PrerequisiteInfo -Name "VS Code (portable)" -InstallMethod "vscode-local" `
-        -InstallPath $localVSCodePath -ManualUrl "https://code.visualstudio.com/"
+if ($SkipVSCode) {
+    Write-Host "Skipping VS Code (portable) installation." -ForegroundColor Gray
+    $vscodeInstalled = $true
 } else {
-    $vscodeExePath = Join-Path $localVSCodePath "Code.exe"
-    
-    if (Test-Path $vscodeExePath) {
-        Write-Host "  VS Code found at: $localVSCodePath" -ForegroundColor Green
-        $vscodeInstalled = $true
-    } else {
-        Write-Host "  VS Code not found" -ForegroundColor Yellow
+    Write-Host "Checking for VS Code..." -ForegroundColor Gray
+
+    # Check if root doesn't exist, VS Code can't exist either
+    if (-not (Test-Path $rootPath)) {
+        Write-Host "  VS Code not found (quickstart folder not present)" -ForegroundColor Yellow
         $missingPrereqs += New-PrerequisiteInfo -Name "VS Code (portable)" -InstallMethod "vscode-local" `
             -InstallPath $localVSCodePath -ManualUrl "https://code.visualstudio.com/"
+    } else {
+        $vscodeExePath = Join-Path $localVSCodePath "Code.exe"
+
+        if (Test-Path $vscodeExePath) {
+            Write-Host "  VS Code found at: $localVSCodePath" -ForegroundColor Green
+            $vscodeInstalled = $true
+        } else {
+            Write-Host "  VS Code not found" -ForegroundColor Yellow
+            $missingPrereqs += New-PrerequisiteInfo -Name "VS Code (portable)" -InstallMethod "vscode-local" `
+                -InstallPath $localVSCodePath -ManualUrl "https://code.visualstudio.com/"
+        }
     }
 }
 
-# Check Aspire CLI (local installation)
+# Check Aspire CLI (local installation or PATH)
 Write-Host "Checking for Aspire CLI..." -ForegroundColor Gray
 
-# If root doesn't exist, Aspire can't exist either
 $aspirePrereq = New-PrerequisiteInfo -Name "Aspire CLI (version 13+) (local)" -InstallMethod "aspire-local" `
     -InstallPath $localAspirePath -ManualUrl "https://learn.microsoft.com/dotnet/aspire"
 
-if (-not (Test-Path $rootPath)) {
-    Write-Host "  Aspire CLI not found (quickstart folder not present)" -ForegroundColor Yellow
-    $missingPrereqs += $aspirePrereq
-} else {
+if (Test-Path (Join-Path $localAspirePath "aspire.exe")) {
     $aspireExePath = Join-Path $localAspirePath "aspire.exe"
-    if (Test-Path $aspireExePath) {
-        Write-Host "  Aspire CLI found at: $localAspirePath" -ForegroundColor Green
+    Write-Host "  Aspire CLI found at: $localAspirePath" -ForegroundColor Green
+    $aspireInstalled = $true
+} else {
+    $aspireCommand = Get-Command aspire -CommandType Application -ErrorAction SilentlyContinue |
+        Select-Object -First 1
+    if ($null -ne $aspireCommand -and (Test-Path $aspireCommand.Source)) {
+        $aspireExePath = $aspireCommand.Source
+        Write-Host "  Aspire CLI found at: $aspireExePath" -ForegroundColor Green
         $aspireInstalled = $true
     } else {
         Write-Host "  Aspire CLI not found" -ForegroundColor Yellow
@@ -712,7 +756,35 @@ if (Test-Path $rootPath) {
 $wingetAvailable = $null -ne (Get-Command winget -ErrorAction SilentlyContinue)
 
 # Check if admin templates are needed
-$adminTemplatesNeeded = -not (Test-AdminTemplatesInstalled)
+$adminTemplatesNeeded = (-not $SkipAdminTemplates) -and (-not (Test-AdminTemplatesInstalled))
+$adminTemplatesPrompted = $false
+
+if ($SkipVSCode) {
+    $SkipAdminTemplates = $true
+    $adminTemplatesNeeded = $false
+}
+
+# Ask about optional components only when the checks find them missing.
+if (-not $vscodeInstalled -and -not $SkipVSCode) {
+    $installVSCode = Read-Host "Portable VS Code is not installed. Install it now? (y/n)"
+    if ($installVSCode -ne 'y') {
+        $SkipVSCode = $true
+        $SkipAdminTemplates = $true
+        $adminTemplatesNeeded = $false
+        $missingPrereqs = @($missingPrereqs | Where-Object {
+            $_.InstallMethod -ne "vscode-local"
+        })
+    }
+}
+
+if ($adminTemplatesNeeded -and -not $SkipVSCode) {
+    $installAdminTemplatesChoice = Read-Host "VS Code administrative templates are not installed. Install them now? (y/n)"
+    $adminTemplatesPrompted = $true
+    if ($installAdminTemplatesChoice -ne 'y') {
+        $SkipAdminTemplates = $true
+        $adminTemplatesNeeded = $false
+    }
+}
 
 # Display summary if prerequisites are missing
 if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
@@ -951,7 +1023,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
     }
     
     # Install VS Code portable if missing
-    if (-not $vscodeInstalled) {
+    if (-not $SkipVSCode -and -not $vscodeInstalled) {
         Write-Host "`nInstalling VS Code (portable)..." -ForegroundColor Cyan
         
         try {
@@ -1055,20 +1127,24 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
     }
     
     # Re-check if admin templates are still needed after installation
-    $adminTemplatesNeeded = -not (Test-AdminTemplatesInstalled)
+    $adminTemplatesNeeded = (-not $SkipAdminTemplates) -and (-not (Test-AdminTemplatesInstalled))
 } else {
     Write-Host "`nAll prerequisites satisfied." -ForegroundColor Green
 }
 
 # Check if VS Code is installed but admin templates are not (only if we haven't already prompted)
-if ( -not (Test-AdminTemplatesInstalled)) {
+if (-not $SkipAdminTemplates -and -not $SkipVSCode -and -not (Test-AdminTemplatesInstalled)) {
     # Prompt before launching script as admin to install administrative templates
     Write-Host "`nVS Code Administrative Templates" -ForegroundColor Cyan
     Write-Host "================================" -ForegroundColor Cyan
     Write-Host "The script needs to install VS Code Group Policy templates to the Windows" -ForegroundColor Gray
     Write-Host "PolicyDefinitions folder. This requires administrator privileges." -ForegroundColor Gray
     Write-Host "`nYou will be prompted to grant elevated access (UAC prompt).`n" -ForegroundColor Yellow
-    $installTemplates = Read-Host "Do you want to install the administrative templates now? (y/n)"
+    if ($adminTemplatesPrompted) {
+        $installTemplates = 'y'
+    } else {
+        $installTemplates = Read-Host "Do you want to install the administrative templates now? (y/n)"
+    }
     
     if ($installTemplates -eq 'y') {
         Write-Host "  Installing VS Code administrative templates..." -ForegroundColor Gray
@@ -1198,9 +1274,7 @@ if (-not $dockerEngineRunning) {
         
         # Wait for Docker to be ready using helper function
         $dockerReady = Wait-ForCondition -Condition {
-            $output = docker info 2>&1 | Out-String
-            # Docker is ready when output contains server info and no connection errors
-            return ($output -match 'Server:' -and $output -notmatch 'failed to connect')
+            Test-DockerEngineReady
         } -TimeoutSeconds $Config.MaxDockerWaitTime -IntervalSeconds $Config.DockerCheckInterval -StatusMessage "Waiting for Docker engine"
         
         if ($dockerReady) {
@@ -1229,9 +1303,6 @@ if (-not $dockerEngineRunning) {
 # Run quickstart using local installation of aspire
 Write-Host "`nRunning quickstart..." -ForegroundColor Cyan
 try {
-    # Use the local Aspire executable
-    $aspireExePath = Join-Path $localAspirePath "aspire.exe"
-    
     # Verify environment is still configured
     Write-Host "  Using .NET SDK: $($env:DOTNET_ROOT)" -ForegroundColor Gray
     Write-Host "  .NET version: " -NoNewline -ForegroundColor Gray
