@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| alessandroraffa.tangyr | 9/4/2026 | Untrustworthy |
 | abersheeran.greet-theme | 9/3/2026 | Impersonation |
 | elodie.go-master | 9/3/2026 | Untrustworthy |
 | PRSoftworks.vlux-board | 9/3/2026 | Malware |
