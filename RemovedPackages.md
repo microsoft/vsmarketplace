@@ -11,7 +11,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | licc.htmlto-link-vscode | 9/4/2026 | Malware |
 | licc.htmlto-link-md | 9/4/2026 | Malware |
 | zeug-zz.opencode-research | 9/4/2026 | Impersonation |
-| HernandoR.duck-viewer| 9/4/2026 | Impersonation |
+| HernandoR.duck-viewer | 9/4/2026 | Impersonation |
 | alessandroraffa.tangyr | 9/4/2026 | Untrustworthy |
 | abersheeran.greet-theme | 9/3/2026 | Impersonation |
 | elodie.go-master | 9/3/2026 | Untrustworthy |
