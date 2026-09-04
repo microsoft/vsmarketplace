@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Aelionyxe.cobnox-language-support | 9/4/2026 | Malware |
 | licc.htmlto-link-vscode | 9/4/2026 | Malware |
 | licc.htmlto-link-md | 9/4/2026 | Malware |
 | zeug-zz.opencode-research | 9/4/2026 | Impersonation |
