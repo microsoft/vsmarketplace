@@ -15,7 +15,7 @@ Installing and hosting the marketplace is the same regardless of which client yo
 
 Before you begin, ensure you have:
 - **Docker Desktop** installed and running. If it's missing and `winget` is available, the setup script can install it for you after prompting for confirmation.
-- **PowerShell 7 or later** (`pwsh`) for running the setup script. Windows ships with Windows PowerShell 5.1, which is a separate product - install PowerShell 7 with `winget install --id Microsoft.PowerShell` or from the [PowerShell install guide](https://learn.microsoft.com/powershell/scripting/install/installing-powershell-on-windows).
+- **PowerShell 5.1 or later** for running the setup script (Windows PowerShell or PowerShell 7)
 - **Internet access** to download the quickstart and its dependencies
 
 ### Run the Setup Script
@@ -46,7 +46,7 @@ The Private Marketplace Quickstart is installed using an installation script ava
 
 #### Download and install
 
-All commands in this quickstart run in a **PowerShell 7** terminal (`pwsh`). Open one, then run:
+All commands in this quickstart run in a **PowerShell** terminal. Open one, then run:
 
 ```powershell
 irm https://raw.githubusercontent.com/microsoft/vsmarketplace/main/privatemarketplace/quickstart/aspire/Run-PrivateMarketplace.ps1 | iex
@@ -54,7 +54,7 @@ irm https://raw.githubusercontent.com/microsoft/vsmarketplace/main/privatemarket
 
 Alternatively, you can download the script and run it as a two-step process:
 
-1. Open a PowerShell 7 terminal.
+1. Open a PowerShell terminal.
 
 2. Download the script and save it as a file:
 
@@ -431,7 +431,7 @@ Guidance for restoring Visual Studio is coming soon.
 
 If you installed the VS Code Group Policy templates and want to remove them:
 
-1. Open PowerShell 7 as Administrator
+1. Open PowerShell as Administrator
 2. Navigate to the temporary installation folder:
    ```powershell
    cd $env:TEMP\privatemarketplace-quickstart
@@ -467,7 +467,7 @@ If you skipped the administrative templates installation during setup, or they f
 
 1. In the Aspire dashboard, click **Actions** (⋮) for **`vscode-private-marketplace`**
 2. Select **Stop** to stop the marketplace container
-3. Open PowerShell 7 as Administrator (right-click → Run as Administrator)
+3. Open PowerShell as Administrator (right-click → Run as Administrator)
 4. Navigate to the temporary installation folder:
    ```powershell
    cd $env:TEMP\privatemarketplace-quickstart

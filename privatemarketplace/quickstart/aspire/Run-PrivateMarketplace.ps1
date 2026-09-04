@@ -304,6 +304,22 @@ function Test-AdminTemplatesInstalled {
     $admxPath = Join-Path $policyDefinitionsPath "VSCode.admx"
     return (Test-Path $admxPath)
 }
+
+<#
+.SYNOPSIS
+    Returns the PowerShell executable to use for elevated self-invocation.
+.DESCRIPTION
+    Prefers PowerShell 7 (pwsh.exe) when available, and falls back to Windows
+    PowerShell (powershell.exe), which is present on all supported Windows
+    versions. The elevated code paths only use cmdlets available in 5.1, so
+    either host works.
+#>
+function Get-PowerShellExecutable {
+    if (Test-CommandExists "pwsh") {
+        return "pwsh.exe"
+    }
+    return "powershell.exe"
+}
 #endregion Helper Functions
 
 # Check if running as administrator
@@ -1079,7 +1095,8 @@ if ( -not (Test-AdminTemplatesInstalled)) {
         
         try {
             # Launch the script with admin privileges
-            $process = Start-Process -FilePath "pwsh.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -InstallAdminTemplates" -Verb RunAs -Wait -PassThru
+            $psExe = Get-PowerShellExecutable
+            $process = Start-Process -FilePath $psExe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -InstallAdminTemplates" -Verb RunAs -Wait -PassThru
             
             if ($process.ExitCode -eq 0) {
                 Write-Host "  Administrative templates installed successfully." -ForegroundColor Green
@@ -1383,7 +1400,8 @@ finally {
                 
                 try {
                     # Launch the script with admin privileges
-                    $process = Start-Process -FilePath "pwsh.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -RemoveAdminTemplates" -Verb RunAs -Wait -PassThru
+                    $psExe = Get-PowerShellExecutable
+                    $process = Start-Process -FilePath $psExe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -RemoveAdminTemplates" -Verb RunAs -Wait -PassThru
                     
                     if ($process.ExitCode -eq 0) {
                         Write-Host "  Administrative templates removed successfully." -ForegroundColor Green
