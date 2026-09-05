@@ -7,6 +7,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| silvercastledigital.archclive | 9/5/2026 | Impersonation |
+| RavidAmar.resources-monitor | 9/5/2026 | Impersonation |
+| RamiAbughazaleh.RamiAbughazalehDiffFinderVS2026 | 9/5/2026 | Impersonation |
+| Kxnrl.vsc-panorama-ext | 9/5/2026 | Impersonation |
+| a7bz.svn-a7bz | 9/5/2026 | Impersonation |
+| Alioth.ms-devtools | 9/5/2026 | Untrustworthy |
+| Alioth.vscode-glui-helper | 9/5/2026 | Untrustworthy |
+| Aelionyxe.cobnox-language-support | 9/4/2026 | Malware |
 | Alioth.ms-devtools | 9/5/2026 | Untrustworthy |
 | Alioth.vscode-glui-helper | 9/5/2026 | Untrustworthy |
 | Aelionyxe.cobnox-language-support | 9/4/2026 | Malware |
