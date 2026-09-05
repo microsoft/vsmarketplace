@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Alioth.ms-devtools | 9/5/2026 | Untrustworthy |
+| Alioth.vscode-glui-helper | 9/5/2026 | Untrustworthy |
 | Aelionyxe.cobnox-language-support | 9/4/2026 | Malware |
 | zeug-zz.opencode-research | 9/4/2026 | Impersonation |
 | HernandoR.duck-viewer | 9/4/2026 | Impersonation |
