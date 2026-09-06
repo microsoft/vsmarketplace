@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| kototok903.vscode-harbor-bronze| 9/6/2026 | Impersonation |
 | Aelionyxe.cobnox-language-support | 9/4/2026 | Malware |
 | zeug-zz.opencode-research | 9/4/2026 | Impersonation |
 | HernandoR.duck-viewer | 9/4/2026 | Impersonation |
