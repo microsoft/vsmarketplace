@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| pathvela.pathvela | 9/6/2026 | Malware |
+| JuanFra.sol-prac | 9/6/2026 | Malware |
+| AgendaLLC.zlux-board | 9/6/2026 | Malware |
+| NotePadExtra.notepadextraplus | 9/6/2026 | Malware |
+| kototok903.vscode-harbor-bronze | 9/6/2026 | Impersonation |
 | silvercastledigital.archclive | 9/5/2026 | Impersonation |
 | RavidAmar.resources-monitor | 9/5/2026 | Impersonation |
 | RamiAbughazaleh.RamiAbughazalehDiffFinderVS2026 | 9/5/2026 | Impersonation |
