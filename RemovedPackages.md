@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| PetrosPanayi.ucy-cs-lab-homework-editor | 9/7/2026 | Malware |
 | serviceme.serviceme-devtools | 9/7/2026 | Malware |
 | pathvela.pathvela | 9/6/2026 | Malware |
 | JuanFra.sol-prac | 9/6/2026 | Malware |
