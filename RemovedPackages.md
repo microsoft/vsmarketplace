@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| TrellKhan.devora | 9/7/2026 | Malware |
+| BadginLNN.badgerposts | 9/7/2026 | Malware |
 | TestZeron-CySec.TestZeron-CySec | 9/7/2026 | Malware |
 | PetrosPanayi.ucy-cs-lab-homework-editor | 9/7/2026 | Untrustworthy |
 | serviceme.serviceme-devtools | 9/7/2026 | Malware |
