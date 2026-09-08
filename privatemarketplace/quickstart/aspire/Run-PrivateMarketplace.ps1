@@ -1693,7 +1693,7 @@ finally {
         Write-Host "`nTemporary folder preserved at: $rootPath" -ForegroundColor Green
         Write-Host "`nTo run the Private Marketplace again:" -ForegroundColor Cyan
         Write-Host "  1. Open PowerShell" -ForegroundColor Gray
-        Write-Host "  2. Run: & \"$rootPath\Run-PrivateMarketplace.ps1\"" -ForegroundColor Gray
+        Write-Host "  2. Run: & '$rootPath\Run-PrivateMarketplace.ps1'" -ForegroundColor Gray
         Write-Host ""
     }
 }
