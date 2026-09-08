@@ -792,7 +792,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
         # Download only the privatemarketplace/preview/quickstart folder
         Write-Host "  Downloading from repository (branch: $repoBranch)..." -ForegroundColor Gray
         $zipUrl = "$repoUrl/archive/refs/heads/$repoBranch.zip"
-        $tempZipPath = Join-Path $env:TEMP "vsmarketplace-$repoBranch.zip"
+        $tempZipPath = Join-Path $env:TEMP "vsmarketplace-preview-$repoBranch.zip"
         
         try {
             $downloadSuccess = Invoke-WithProgress -Activity "Downloading Quickstart Files" -Status "Downloading from repository..." -ScriptBlock {
@@ -804,7 +804,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
             Write-Host "  ZIP downloaded successfully." -ForegroundColor Green
             
             # Extract files
-            $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-extract"
+            $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-preview-extract"
             if (Test-Path $tempExtractPath) {
                 Remove-Item -Path $tempExtractPath -Recurse -Force
             }
