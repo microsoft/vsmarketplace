@@ -136,10 +136,25 @@ Each tool is used only when it meets a minimum version:
 | .NET SDK | 10.0.100 |
 | Aspire CLI | 13.0.0 |
 
-Anything missing or too old is still installed locally, so you can mix the two. Docker Desktop is always used from the machine.
+Anything missing or too old is still installed locally, so you can mix the two. Docker Desktop is always used from the local machine installation.
 
 > [!NOTE]
   Machine-wide VS Code installations ship `VSCode.admx` without the `VSCode.adml` language files. If you plan to configure the marketplace through Group Policy, run the quickstart without `-UseGlobalInstalls` so the portable VS Code, which includes the language files, is used.
+
+#### Skipping optional components
+
+The marketplace host itself does not need VS Code or the Group Policy templates. To host and verify the marketplace without them, or to run the quickstart unattended:
+
+```powershell
+.\Run-PrivateMarketplace.ps1 -SkipVSCode -SkipAdminTemplates
+```
+
+| Option | Effect |
+| --- | --- |
+| `-SkipVSCode` | Skips the portable VS Code check and installation. Implies `-SkipAdminTemplates` unless a machine-wide VS Code is being used, because the templates are read from a VS Code installation. |
+| `-SkipAdminTemplates` | Skips the administrative templates check and installation, so the run never prompts for elevation. |
+
+Skipping VS Code means the dashboard's **Open VS Code** command has nothing to launch, so use these when you only need the marketplace running.
 
 ### Access the Aspire Dashboard
 
@@ -154,7 +169,7 @@ The Aspire dashboard is your control center for managing the Private Marketplace
 - Commands to launch VS Code and configure settings
 - Logs and monitoring information
 
-In the dashboard, you'll see a resource named **`vscode-private-marketplace`** - this is your Private Marketplace container.
+In the dashboard, you'll see a resource named **`visualstudio-private-marketplace`** - this is your Private Marketplace container.
 
 ![Aspire Dashboard Resource Table](images/aspire-resource-table.png)
 

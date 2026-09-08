@@ -26,6 +26,13 @@
     Internal. The VS Code installation directory to read Group Policy templates from when the
     script re-launches itself elevated. Defaults to the portable copy in the quickstart folder.
 
+.PARAMETER SkipVSCode
+    Skips the prerequisite check and installation for portable VS Code. Implies
+    -SkipAdminTemplates, because the templates are read from a VS Code installation.
+
+.PARAMETER SkipAdminTemplates
+    Skips the prerequisite check and installation for the VS Code administrative templates.
+
 .EXAMPLE
     .\Run-PrivateMarketplace.ps1
     Runs the full quickstart setup, checking and installing prerequisites as needed.
@@ -62,7 +69,13 @@ param(
     [switch]$UseGlobalInstalls,
 
     [Parameter(HelpMessage="Internal. VS Code installation directory to read Group Policy templates from")]
-    [string]$VSCodePath
+    [string]$VSCodePath,
+
+    [Parameter(HelpMessage="Skip the portable VS Code check and installation")]
+    [switch]$SkipVSCode,
+
+    [Parameter(HelpMessage="Skip the VS Code administrative templates check and installation")]
+    [switch]$SkipAdminTemplates
 )
 
 $ErrorActionPreference = "Stop"
@@ -382,6 +395,99 @@ function ConvertTo-ComparableVersion {
 
 <#
 .SYNOPSIS
+    Runs a native command and captures stdout without letting stderr become a PowerShell error.
+.DESCRIPTION
+    Native tools often write progress or warnings to stderr. Under
+    $ErrorActionPreference = 'Stop', Windows PowerShell 5.1 turns that output into a
+    terminating NativeCommandError. Redirecting both streams through ProcessStartInfo avoids
+    creating an error record at all.
+.OUTPUTS
+    An object with ExitCode and StandardOutput, or $null when the process could not start.
+#>
+function Invoke-NativeCommand {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$FilePath,
+
+        [Parameter(Mandatory=$false)]
+        [string]$Arguments = ""
+    )
+
+    $psi = New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName = $FilePath
+    $psi.Arguments = $Arguments
+    $psi.UseShellExecute = $false
+    $psi.CreateNoWindow = $true
+    $psi.RedirectStandardOutput = $true
+    $psi.RedirectStandardError = $true
+
+    $process = New-Object System.Diagnostics.Process
+    $process.StartInfo = $psi
+
+    try {
+        [void]$process.Start()
+    } catch [System.ComponentModel.Win32Exception] {
+        return $null
+    } catch [System.InvalidOperationException] {
+        return $null
+    }
+
+    $standardOutput = $process.StandardOutput.ReadToEnd()
+    [void]$process.StandardError.ReadToEnd()
+    $process.WaitForExit()
+
+    return [pscustomobject]@{
+        ExitCode       = $process.ExitCode
+        StandardOutput = $standardOutput
+    }
+}
+
+<#
+.SYNOPSIS
+    Determines whether the Docker engine is running and accepting requests.
+.DESCRIPTION
+    Gates on the exit code rather than matching error text, so it is not affected by the
+    display language or by harmless warnings such as the blkio message Docker emits on
+    some hosts.
+#>
+function Test-DockerEngineReady {
+    $dockerCommand = Get-Command docker.exe -CommandType Application -ErrorAction SilentlyContinue |
+        Select-Object -First 1
+    if ($null -eq $dockerCommand -or -not (Test-Path $dockerCommand.Source)) {
+        return $false
+    }
+
+    $result = Invoke-NativeCommand -FilePath $dockerCommand.Source -Arguments "info"
+    if ($null -eq $result) {
+        return $false
+    }
+
+    return ($result.ExitCode -eq 0 -and $result.StandardOutput -match 'Server:')
+}
+
+<#
+.SYNOPSIS
+    Returns the version of an Aspire CLI executable, or $null when it cannot be determined.
+#>
+function Get-AspireCliVersion {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$Path
+    )
+
+    if (-not (Test-Path $Path)) { return $null }
+
+    $result = Invoke-NativeCommand -FilePath $Path -Arguments "--version"
+    if ($null -eq $result -or $result.ExitCode -ne 0) {
+        return $null
+    }
+
+    $firstLine = ($result.StandardOutput -split "`r?`n" | Select-Object -First 1)
+    return ConvertTo-ComparableVersion $firstLine
+}
+
+<#
+.SYNOPSIS
     Returns the highest released .NET SDK version that meets a minimum, or $null.
 .DESCRIPTION
     Accepts the output of "dotnet --list-sdks". Any SDK at or above the minimum qualifies,
@@ -446,12 +552,11 @@ function Get-GlobalDotNetInfo {
 function Get-GlobalAspireInfo {
     param([string]$MinimumVersion)
 
-    $command = Get-Command aspire -ErrorAction SilentlyContinue
+    $command = Get-Command aspire -CommandType Application -ErrorAction SilentlyContinue |
+        Select-Object -First 1
     if (-not $command) { return $null }
 
-    try { $rawVersion = & $command.Source --version 2>$null | Select-Object -First 1 } catch { return $null }
-
-    $version = ConvertTo-ComparableVersion $rawVersion
+    $version = Get-AspireCliVersion -Path $command.Source
     $minimum = ConvertTo-ComparableVersion $MinimumVersion
     if ($version -and $minimum -and $version -ge $minimum) {
         return [pscustomobject]@{
@@ -497,7 +602,10 @@ function Get-GlobalVSCodeInfo {
     $rawVersion = $null
     $shim = Join-Path $root "bin\code.cmd"
     if (Test-Path $shim) {
-        try { $rawVersion = & $shim --version 2>$null | Select-Object -First 1 } catch { }
+        $shimResult = Invoke-NativeCommand -FilePath $shim -Arguments "--version"
+        if ($null -ne $shimResult -and $shimResult.ExitCode -eq 0) {
+            $rawVersion = ($shimResult.StandardOutput -split "`r?`n" | Select-Object -First 1)
+        }
     }
 
     # Fall back to product.json, which may sit under a commit-hash folder
@@ -874,7 +982,10 @@ try {
 Write-Host "Checking for local VS Code..." -ForegroundColor Gray
 
 # Check if root doesn't exist, VS Code can't exist either
-if ($usingGlobalVSCode) {
+if ($SkipVSCode) {
+    Write-Host "  Skipped (-SkipVSCode)" -ForegroundColor Gray
+    $vscodeInstalled = $true
+} elseif ($usingGlobalVSCode) {
     Write-Host "  Skipped, using the machine-wide installation" -ForegroundColor Green
     $vscodeInstalled = $true
 } elseif (-not (Test-Path $rootPath)) {
@@ -901,7 +1012,7 @@ if ($usingGlobalVSCode) {
 Write-Host "Checking for local Aspire CLI..." -ForegroundColor Gray
 
 # If root doesn't exist, Aspire can't exist either
-$aspirePrereq = New-PrerequisiteInfo -Name "Aspire CLI (version 13+) (local)" -InstallMethod "aspire-local" `
+$aspirePrereq = New-PrerequisiteInfo -Name "Aspire CLI ($($Config.AspireVersion)+) (local)" -InstallMethod "aspire-local" `
     -InstallPath $localAspireBinPath -ManualUrl "https://learn.microsoft.com/dotnet/aspire"
 
 if ($usingGlobalAspire) {
@@ -913,8 +1024,21 @@ if ($usingGlobalAspire) {
 } else {
     $aspireExePath = Join-Path $localAspireBinPath "aspire.exe"
     if (Test-Path $aspireExePath) {
-        Write-Host "  Local Aspire CLI found at: $localAspireBinPath" -ForegroundColor Green
-        $aspireInstalled = $true
+        # Verify the version rather than trusting that the file exists, so a stale copy from
+        # an earlier run is replaced instead of being used.
+        $localAspireVersion = Get-AspireCliVersion -Path $aspireExePath
+        $minimumAspireVersion = ConvertTo-ComparableVersion $Config.AspireVersion
+
+        if ($localAspireVersion -and $minimumAspireVersion -and $localAspireVersion -ge $minimumAspireVersion) {
+            Write-Host "  Local Aspire CLI $localAspireVersion found at: $localAspireBinPath" -ForegroundColor Green
+            $aspireInstalled = $true
+        } elseif ($localAspireVersion) {
+            Write-Host "  Local Aspire CLI $localAspireVersion is below the minimum $($Config.AspireVersion)" -ForegroundColor Yellow
+            $missingPrereqs += $aspirePrereq
+        } else {
+            Write-Host "  Local Aspire CLI found but its version could not be determined" -ForegroundColor Yellow
+            $missingPrereqs += $aspirePrereq
+        }
     } else {
         Write-Host "  Local Aspire CLI not found" -ForegroundColor Yellow
         $missingPrereqs += $aspirePrereq
@@ -991,8 +1115,13 @@ if (Test-Path $rootPath) {
 # Check winget availability
 $wingetAvailable = $null -ne (Get-Command winget -ErrorAction SilentlyContinue)
 
-# Check if admin templates are needed
-$adminTemplatesNeeded = -not (Test-AdminTemplatesInstalled)
+# Check if admin templates are needed.
+# -SkipVSCode implies -SkipAdminTemplates, because the templates are read from a VS Code
+# installation, and there is no local VS Code to read them from when it is skipped.
+if ($SkipVSCode -and -not $usingGlobalVSCode) {
+    $SkipAdminTemplates = $true
+}
+$adminTemplatesNeeded = (-not $SkipAdminTemplates) -and (-not (Test-AdminTemplatesInstalled))
 
 # Display summary if prerequisites are missing
 if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
@@ -1231,7 +1360,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
     }
     
     # Install VS Code portable if missing
-    if (-not $vscodeInstalled) {
+    if (-not $SkipVSCode -and -not $vscodeInstalled) {
         Write-Host "`nInstalling VS Code (portable)..." -ForegroundColor Cyan
         
         try {
@@ -1338,13 +1467,13 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
     }
     
     # Re-check if admin templates are still needed after installation
-    $adminTemplatesNeeded = -not (Test-AdminTemplatesInstalled)
+    $adminTemplatesNeeded = (-not $SkipAdminTemplates) -and (-not (Test-AdminTemplatesInstalled))
 } else {
     Write-Host "`nAll prerequisites satisfied." -ForegroundColor Green
 }
 
 # Check if VS Code is installed but admin templates are not (only if we haven't already prompted)
-if ( -not (Test-AdminTemplatesInstalled)) {
+if (-not $SkipAdminTemplates -and -not (Test-AdminTemplatesInstalled)) {
     # Prompt before launching script as admin to install administrative templates
     Write-Host "`nVS Code Administrative Templates" -ForegroundColor Cyan
     Write-Host "================================" -ForegroundColor Cyan
@@ -1437,16 +1566,10 @@ if (Test-Path $effectiveDotnetExe) {
 
 # Ensure Docker is running
 Write-Host "`nChecking Docker engine status..." -ForegroundColor Cyan
-$dockerEngineRunning = $false
-try {
-    $null = docker info 2>$null
-    if ($LASTEXITCODE -eq 0) {
-        Write-Host "  Docker engine is running." -ForegroundColor Green
-        $dockerEngineRunning = $true
-    } else {
-        throw "Docker engine not responding"
-    }
-} catch {
+$dockerEngineRunning = Test-DockerEngineReady
+if ($dockerEngineRunning) {
+    Write-Host "  Docker engine is running." -ForegroundColor Green
+} else {
     Write-Host "  Docker engine is not running." -ForegroundColor Yellow
 }
 
@@ -1486,12 +1609,7 @@ if (-not $dockerEngineRunning) {
         
         # Wait for Docker to be ready using helper function
         $dockerReady = Wait-ForCondition -Condition {
-            # Docker writes to stderr while the engine is still starting. Suppress the error
-            # preference locally so that output does not surface as a NativeCommandError,
-            # which is a terminating error under $ErrorActionPreference = 'Stop'.
-            $output = & { $ErrorActionPreference = 'SilentlyContinue'; docker info 2>&1 } | Out-String
-            # Docker is ready when output contains server info and no connection errors
-            return ($output -match 'Server:' -and $output -notmatch 'failed to connect')
+            Test-DockerEngineReady
         } -TimeoutSeconds $Config.MaxDockerWaitTime -IntervalSeconds $Config.DockerCheckInterval -StatusMessage "Waiting for Docker engine"
         
         if ($dockerReady) {
