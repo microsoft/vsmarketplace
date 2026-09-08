@@ -1138,6 +1138,31 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
         $zipUrl = "$repoUrl/archive/refs/heads/$repoBranch.zip"
         $tempZipPath = Join-Path $env:TEMP "vsmarketplace-preview-$branchSlug.zip"
         
+        # A wrong branch name is the most likely failure here, and the raw archive error does
+        # not say so. Probe first and fail with something actionable.
+        try {
+            $null = Invoke-WebRequest -Uri $zipUrl -Method Head -UseBasicParsing -ErrorAction Stop
+        } catch {
+            $statusCode = $null
+            if ($_.Exception.Response) { $statusCode = [int]$_.Exception.Response.StatusCode }
+            
+            if ($statusCode -eq 404) {
+                Write-Host "  Branch '$repoBranch' was not found in $repoUrl" -ForegroundColor Red
+                Write-Host "`n  Check the branch name:" -ForegroundColor Yellow
+                Write-Host "    - Branch names are case-sensitive and must match exactly." -ForegroundColor Gray
+                Write-Host "    - Use the branch name, not a local folder or worktree name;" -ForegroundColor Gray
+                Write-Host "      these often differ (for example 'dev/user/my-branch' vs 'dev-user-my-branch')." -ForegroundColor Gray
+                Write-Host "    - The branch must be pushed to $repoUrl before it can be downloaded." -ForegroundColor Gray
+                Write-Host "`n  Branches: $repoUrl/branches" -ForegroundColor Gray
+                Write-Host "  To use the default branch instead, re-run without -RepoBranch." -ForegroundColor Gray
+                return
+            }
+            
+            # Anything else (offline, proxy, transient) still gets the normal download attempt,
+            # which reports the underlying error.
+            Write-Verbose "Branch probe did not succeed (status: $statusCode); continuing to download."
+        }
+        
         try {
             $downloadSuccess = Invoke-WithProgress -Activity "Downloading Quickstart Files" -Status "Downloading from repository..." -ScriptBlock {
                 Get-FileWithVerification -Url $zipUrl -OutFile $tempZipPath
