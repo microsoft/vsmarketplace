@@ -17,6 +17,7 @@ builder
         organizationName: "Contoso",
         contactSupportUri: "mailto:privatemktplace@microsoft.com",
         upstreamingMode: MarketplaceUpstreamingMode.SearchAndAssets)
+    .WithEnvironment("FeatureManagement__VSExtensionSupport", "true")
     .WithOpenGroupPolicyEditorCommand()
     .WithOpenVSCodeCommand();
 

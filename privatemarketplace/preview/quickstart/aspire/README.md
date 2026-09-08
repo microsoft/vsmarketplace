@@ -292,8 +292,9 @@ To change the Upstreaming mode in the Quickstart:
    17         organizationName: "Contoso",
    18         contactSupportUri: "mailto:privatemktplace@microsoft.com",
    19         upstreamingMode: MarketplaceUpstreamingMode.SearchAndAssets)
-   20      .WithOpenGroupPolicyEditorCommand()
-   21      .WithOpenVSCodeCommand();
+   20      .WithEnvironment("FeatureManagement__VSExtensionSupport", "true")
+   21      .WithOpenGroupPolicyEditorCommand()
+   22      .WithOpenVSCodeCommand();
    ```
 1. Change line 19 to:
    ```csharp
