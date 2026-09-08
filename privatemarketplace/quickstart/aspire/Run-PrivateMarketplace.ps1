@@ -92,6 +92,11 @@ $Paths = @{
     Root = $Config.RootPath
     LocalVSCode = Join-Path $Config.RootPath ".vscode"
     LocalAspire = Join-Path $Config.RootPath ".aspire"
+    # The Aspire CLI is installed under <LocalAspire>\bin. For script-route installs the CLI
+    # treats the parent of its own bin directory as ASPIRE_HOME, so this keeps ASPIRE_HOME on
+    # .aspire instead of the quickstart root, where it would collide with the project's own
+    # aspire.config.json and write cache, cli, and logs folders next to the AppHost.
+    LocalAspireBin = Join-Path $Config.RootPath ".aspire\bin"
     LocalDotnet = Join-Path $Config.RootPath ".dotnet"
     Policies = Join-Path $Config.RootPath ".vscode\policies"
 }
@@ -796,6 +801,7 @@ $rootPath = $Paths.Root
 $dotnetVersion = $Config.DotNetVersion
 $localVSCodePath = $Paths.LocalVSCode
 $localAspirePath = $Paths.LocalAspire
+$localAspireBinPath = $Paths.LocalAspireBin
 $localDotnetPath = $Paths.LocalDotnet
 $policiesPath = $Paths.Policies
 
@@ -803,7 +809,7 @@ $policiesPath = $Paths.Policies
 # are redirected to machine-wide installations when -UseGlobalInstalls finds suitable versions.
 $effectiveVSCodeRoot = $localVSCodePath
 $effectiveDotnetRoot = $localDotnetPath
-$effectiveAspireExe  = Join-Path $localAspirePath "aspire.exe"
+$effectiveAspireExe  = Join-Path $localAspireBinPath "aspire.exe"
 $usingGlobalVSCode   = $false
 $usingGlobalDotnet   = $false
 $usingGlobalAspire   = $false
@@ -896,7 +902,7 @@ Write-Host "Checking for local Aspire CLI..." -ForegroundColor Gray
 
 # If root doesn't exist, Aspire can't exist either
 $aspirePrereq = New-PrerequisiteInfo -Name "Aspire CLI (version 13+) (local)" -InstallMethod "aspire-local" `
-    -InstallPath $localAspirePath -ManualUrl "https://learn.microsoft.com/dotnet/aspire"
+    -InstallPath $localAspireBinPath -ManualUrl "https://learn.microsoft.com/dotnet/aspire"
 
 if ($usingGlobalAspire) {
     Write-Host "  Skipped, using the machine-wide installation" -ForegroundColor Green
@@ -905,9 +911,9 @@ if ($usingGlobalAspire) {
     Write-Host "  Local Aspire CLI not found (quickstart folder not present)" -ForegroundColor Yellow
     $missingPrereqs += $aspirePrereq
 } else {
-    $aspireExePath = Join-Path $localAspirePath "aspire.exe"
+    $aspireExePath = Join-Path $localAspireBinPath "aspire.exe"
     if (Test-Path $aspireExePath) {
-        Write-Host "  Local Aspire CLI found at: $localAspirePath" -ForegroundColor Green
+        Write-Host "  Local Aspire CLI found at: $localAspireBinPath" -ForegroundColor Green
         $aspireInstalled = $true
     } else {
         Write-Host "  Local Aspire CLI not found" -ForegroundColor Yellow
@@ -1276,7 +1282,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
         Write-Host "`nInstalling Aspire CLI locally..." -ForegroundColor Cyan
         
         try {
-            New-DirectoryIfNeeded -Path $localAspirePath
+            New-DirectoryIfNeeded -Path $localAspireBinPath
             
             # Download the Aspire installation script.
             # Note: write the response straight to disk. aspire.dev serves the script as
@@ -1293,22 +1299,24 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
 
             # Execute the installation script with -InstallPath parameter.
             # -SkipPath keeps the portable install out of the user's PATH.
-            Invoke-WithProgress -Activity "Installing Aspire CLI" -Status "Installing Aspire CLI to: $localAspirePath" -ScriptBlock {
-                & $tempScriptPath -InstallPath $localAspirePath -SkipPath
+            # Installing into <.aspire>\bin keeps ASPIRE_HOME on the .aspire folder rather
+            # than the quickstart root; see the LocalAspireBin note in the configuration.
+            Invoke-WithProgress -Activity "Installing Aspire CLI" -Status "Installing Aspire CLI to: $localAspireBinPath" -ScriptBlock {
+                & $tempScriptPath -InstallPath $localAspireBinPath -SkipPath
             }
 
             # Clean up temp script
             Remove-Item $tempScriptPath -Force -ErrorAction SilentlyContinue
 
             # Verify aspire.exe exists
-            $aspireExePath = Join-Path $localAspirePath "aspire.exe"
+            $aspireExePath = Join-Path $localAspireBinPath "aspire.exe"
             if (Test-Path $aspireExePath) {
                 Write-Host "  Aspire CLI installed successfully." -ForegroundColor Green
                 $aspireInstalled = $true
 
                 # Remove Aspire paths from USER PATH environment variable
                 Write-Host "  Removing Aspire from system PATH..." -ForegroundColor Gray
-                Remove-PathFromEnvironment -PathPatterns @($localAspirePath)
+                Remove-PathFromEnvironment -PathPatterns @($localAspireBinPath, $localAspirePath)
             } else {
                 throw "aspire.exe not found after installation"
             }

@@ -104,7 +104,7 @@ You should see output similar to the following snippet:
        Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart\.vscode
        Source: https://code.visualstudio.com/
     - Aspire CLI (version 13+) (local): via local portable installation
-       Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart\.aspire
+       Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart\.aspire\bin
        Source: https://learn.microsoft.com/dotnet/aspire
     - .NET SDK 10.0.100+ (local): via dotnet-install script
        Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart\.dotnet
