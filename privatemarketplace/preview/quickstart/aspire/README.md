@@ -1,6 +1,6 @@
-# VS Code Private Marketplace - Quickstart
+# Private Marketplace - Quickstart
 
-This quickstart walks you through setting up and testing a local VS Code Private Marketplace using [Aspire](https://aspire.dev) on Windows. You'll learn how to install the marketplace, configure VS Code to use it, and explore different usage scenarios.
+This quickstart walks you through setting up and testing a local Private Marketplace using [Aspire](https://aspire.dev) on Windows. You'll learn how to install the marketplace, configure Visual Studio Code and/or Visual Studio to use it, and explore different usage scenarios.
 
 ---
 
@@ -11,6 +11,48 @@ This quickstart walks you through setting up and testing a local VS Code Private
 Before you begin, ensure you have:
 - **Docker Desktop** installed and running
 - **PowerShell 5.1 or later** for running the setup script
+- **Visual Studio 18.11 or later** — only if you choose Visual Studio as a supported client. The script checks for it but **does not install it**; install or update it with the Visual Studio Installer.
+
+### Choose your clients
+
+When the script starts it asks which client(s) the Private Marketplace should support:
+
+```text
+Which client(s) should the Private Marketplace support?
+  [1] VS Code
+  [2] Visual Studio
+  [3] Both
+  Visual Studio must already be installed; this script will not install it.
+
+Enter your choice (1-3):
+```
+
+Your answer determines which prerequisites are required:
+
+| Choice | Portable VS Code | VS Code Group Policy templates | Visual Studio 18.11+ |
+|---|---|---|---|
+| VS Code | installed by script | installed by script | not checked |
+| Visual Studio | skipped | skipped | must already be installed |
+| Both | installed by script | installed by script | must already be installed |
+
+Docker, the .NET SDK, the Aspire CLI, and the quickstart files are always required.
+
+To skip the prompt, pass the choice on the command line:
+
+```powershell
+.\Run-PrivateMarketplace.ps1 -Clients Both   # or: VSCode, VS
+```
+
+If you choose Visual Studio and no installation of 18.11 or later is found, the script reports what it found and exits without changing anything:
+
+```text
+=== Action Required ===
+The following prerequisites must be installed manually before continuing:
+  - Visual Studio 18.11 or later
+    Current: 18.9.2 installed
+    Location: C:\Program Files\Microsoft Visual Studio\18\Enterprise
+    Download: https://visualstudio.microsoft.com/downloads/
+```
 
 ### Run the Setup Script
 
@@ -19,12 +61,14 @@ Before you begin, ensure you have:
   Always verify the script's hash before executing. The expected hash can be found in the repository or release notes.
 
 The script will automatically:
+- Ask which client(s) to support, then check only the prerequisites those clients need
 - Check for and install missing prerequisites (after prompting for confirmation):
   - Docker Desktop (if not found)
   - Download quickstart files to `$env:TEMP\privatemarketplace-quickstart-preview`
-  - Portable VS Code
+  - Portable VS Code (only when VS Code is a selected client)
   - Portable .NET SDK 10.0+
   - Portable Aspire CLI version 13+
+- Verify Visual Studio 18.11 or later is present (only when Visual Studio is a selected client) — it is never installed for you
 - Prompt you to install VS Code Group Policy templates (requires admin privileges - **required for VS Code**)
 - Start Docker Desktop if not running
 - Launch the Private Marketplace container via Aspire
@@ -79,7 +123,7 @@ that folder for `$env:TEMP\privatemarketplace-quickstart-preview` in the steps b
 
 You should see output similar to the following snippet:
   ```text
-  Private Marketplace for VS Code Quickstart
+  Private Marketplace Quickstart
   
     Checking prerequisites...
     Checking for Docker...

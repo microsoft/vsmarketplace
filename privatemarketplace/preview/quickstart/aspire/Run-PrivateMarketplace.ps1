@@ -26,9 +26,32 @@
     '/' are supported. When a branch other than 'main' is used, the quickstart installs
     into a branch-specific folder so it cannot pick up stale files from a previous run.
 
+.PARAMETER Clients
+    Which client(s) the Private Marketplace should support: 'VSCode', 'VS', or 'Both'.
+    If omitted, the script prompts for a choice.
+
+    The selection determines which prerequisites are required:
+      VSCode - portable VS Code is downloaded, and the VS Code Group Policy templates
+               are installed.
+      VS     - an existing Visual Studio installation of at least version 18.11 is
+               required. Visual Studio is never installed by this script; if it is
+               missing or too old the script reports what to do and exits.
+      Both   - all of the above.
+
+    Docker, the .NET SDK, the Aspire CLI, and the quickstart files are always required.
+
 .EXAMPLE
     .\Run-PrivateMarketplace.ps1
-    Runs the full quickstart setup, checking and installing prerequisites as needed.
+    Runs the full quickstart setup, prompting for the clients to support.
+
+.EXAMPLE
+    .\Run-PrivateMarketplace.ps1 -Clients Both
+    Runs the quickstart with support for both Visual Studio and VS Code, without prompting.
+
+.EXAMPLE
+    .\Run-PrivateMarketplace.ps1 -Clients VS
+    Runs the quickstart for Visual Studio only. Portable VS Code and the VS Code
+    Group Policy templates are skipped.
 
 .EXAMPLE
     .\Run-PrivateMarketplace.ps1 -RepoBranch 'dev/mcumming/privatemarketplace-preview-docs'
@@ -66,7 +89,11 @@ param(
     [string]$RepoUrl = "https://github.com/microsoft/vsmarketplace",
     
     [Parameter(HelpMessage="Branch to download quickstart files from (use to test unmerged preview changes)")]
-    [string]$RepoBranch = "main"
+    [string]$RepoBranch = "main",
+    
+    [Parameter(HelpMessage="Client(s) to support: VSCode, VS, or Both. Prompts if omitted.")]
+    [ValidateSet('VSCode', 'VS', 'Both')]
+    [string]$Clients
 )
 
 $ErrorActionPreference = "Stop"
@@ -100,6 +127,7 @@ $Config = @{
     
     # Version requirements
     DotNetVersion = "10.0.100"  # Version of .NET SDK to install locally
+    MinimumVSVersion = "18.11"  # Minimum Visual Studio version required for VS extension support
     
     # Installation paths
     RootPath = Join-Path $env:TEMP $rootFolderName
@@ -348,6 +376,93 @@ function Test-AdminTemplatesInstalled {
     $admxPath = Join-Path $policyDefinitionsPath "VSCode.admx"
     return (Test-Path $admxPath)
 }
+
+<#
+.SYNOPSIS
+    Prompts for the client(s) the Private Marketplace should support.
+.DESCRIPTION
+    Returns 'VSCode', 'VS', or 'Both'. When a value was supplied on the command line it is
+    returned unchanged so the script can run unattended.
+#>
+function Get-SupportedClients {
+    param([string]$Preselected)
+    
+    if ($Preselected) {
+        return $Preselected
+    }
+    
+    Write-Host "`nWhich client(s) should the Private Marketplace support?" -ForegroundColor Cyan
+    Write-Host "  [1] VS Code" -ForegroundColor Gray
+    Write-Host "  [2] Visual Studio" -ForegroundColor Gray
+    Write-Host "  [3] Both" -ForegroundColor Gray
+    Write-Host "  Visual Studio must already be installed; this script will not install it." -ForegroundColor DarkGray
+    
+    while ($true) {
+        $answer = (Read-Host "`nEnter your choice (1-3)").Trim()
+        switch -Regex ($answer) {
+            '^(1|vscode|vs code|code)$' { return 'VSCode' }
+            '^(2|vs|visualstudio|visual studio)$' { return 'VS' }
+            '^(3|both)$' { return 'Both' }
+            default { Write-Host "  Please enter 1, 2, or 3." -ForegroundColor Yellow }
+        }
+    }
+}
+
+<#
+.SYNOPSIS
+    Finds the newest Visual Studio installation that can host extensions.
+.DESCRIPTION
+    Uses vswhere, which ships with the Visual Studio Installer. Build Tools instances are
+    excluded because they cannot host extensions. Returns $null when no suitable
+    installation is found, otherwise a hashtable with Version, DisplayName and Path.
+#>
+function Get-VisualStudioInstallation {
+    $vsWherePath = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio\Installer\vswhere.exe"
+    if (-not (Test-Path $vsWherePath)) {
+        Write-Verbose "vswhere.exe not found at: $vsWherePath"
+        return $null
+    }
+    
+    try {
+        # -prerelease so preview channels are considered; JSON avoids fragile text parsing.
+        $output = & $vsWherePath -products * -prerelease -format json 2>$null | Out-String
+        if ([string]::IsNullOrWhiteSpace($output)) {
+            return $null
+        }
+        $instances = $output | ConvertFrom-Json
+    } catch {
+        Write-Verbose "vswhere query failed: $_"
+        return $null
+    }
+    
+    if (-not $instances) {
+        return $null
+    }
+    
+    $best = $null
+    foreach ($instance in @($instances)) {
+        # Build Tools has no IDE, so it cannot host extensions.
+        if ($instance.productId -eq 'Microsoft.VisualStudio.Product.BuildTools') {
+            continue
+        }
+        
+        $parsedVersion = $null
+        if (-not [version]::TryParse($instance.installationVersion, [ref]$parsedVersion)) {
+            Write-Verbose "Could not parse VS version: $($instance.installationVersion)"
+            continue
+        }
+        
+        if ($null -eq $best -or $parsedVersion -gt $best.Version) {
+            $best = @{
+                Version = $parsedVersion
+                DisplayName = $instance.displayName
+                Path = $instance.installationPath
+            }
+        }
+    }
+    
+    return $best
+}
 #endregion Helper Functions
 
 # Check if running as administrator
@@ -578,13 +693,26 @@ if ($RemoveAdminTemplates) {
     }
 }
 
-Write-StatusMessage "Private Marketplace for VS Code Quickstart" -Level Info
+Write-StatusMessage "Private Marketplace Quickstart" -Level Info
+
+# Ask which clients to support; this determines which prerequisites are required.
+$Clients = Get-SupportedClients -Preselected $Clients
+$supportVSCode = $Clients -in @('VSCode', 'Both')
+$supportVS     = $Clients -in @('VS', 'Both')
+
+$clientSummary = switch ($Clients) {
+    'VSCode' { 'VS Code' }
+    'VS'     { 'Visual Studio' }
+    'Both'   { 'Visual Studio and VS Code' }
+}
+Write-Host "`nConfiguring the Private Marketplace for: $clientSummary" -ForegroundColor Green
 
 # Check and install prerequisites
 Write-StatusMessage "`nChecking prerequisites..." -Level Info
 
 # Initialize tracking variables
 $missingPrereqs = @()
+$blockingPrereqs = @()  # Prerequisites this script cannot install on the user's behalf
 $dockerInstalled = $false
 $vscodeInstalled = $false
 $aspireInstalled = $false
@@ -597,6 +725,7 @@ $repoUrl = $Config.RepoUrl
 $repoBranch = $Config.RepoBranch
 $rootPath = $Paths.Root
 $dotnetVersion = $Config.DotNetVersion
+$minimumVSVersion = [version]$Config.MinimumVSVersion
 $localVSCodePath = $Paths.LocalVSCode
 $localAspirePath = $Paths.LocalAspire
 $localDotnetPath = $Paths.LocalDotnet
@@ -628,23 +757,53 @@ try {
 }
 
 # Check VS Code
-Write-Host "Checking for VS Code..." -ForegroundColor Gray
-
-# Check if root doesn't exist, VS Code can't exist either
-if (-not (Test-Path $rootPath)) {
-    Write-Host "  VS Code not found (quickstart folder not present)" -ForegroundColor Yellow
-    $missingPrereqs += New-PrerequisiteInfo -Name "VS Code (portable)" -InstallMethod "vscode-local" `
-        -InstallPath $localVSCodePath -ManualUrl "https://code.visualstudio.com/"
-} else {
-    $vscodeExePath = Join-Path $localVSCodePath "Code.exe"
+if ($supportVSCode) {
+    Write-Host "Checking for VS Code..." -ForegroundColor Gray
     
-    if (Test-Path $vscodeExePath) {
-        Write-Host "  VS Code found at: $localVSCodePath" -ForegroundColor Green
-        $vscodeInstalled = $true
-    } else {
-        Write-Host "  VS Code not found" -ForegroundColor Yellow
+    # Check if root doesn't exist, VS Code can't exist either
+    if (-not (Test-Path $rootPath)) {
+        Write-Host "  VS Code not found (quickstart folder not present)" -ForegroundColor Yellow
         $missingPrereqs += New-PrerequisiteInfo -Name "VS Code (portable)" -InstallMethod "vscode-local" `
             -InstallPath $localVSCodePath -ManualUrl "https://code.visualstudio.com/"
+    } else {
+        $vscodeExePath = Join-Path $localVSCodePath "Code.exe"
+        
+        if (Test-Path $vscodeExePath) {
+            Write-Host "  VS Code found at: $localVSCodePath" -ForegroundColor Green
+            $vscodeInstalled = $true
+        } else {
+            Write-Host "  VS Code not found" -ForegroundColor Yellow
+            $missingPrereqs += New-PrerequisiteInfo -Name "VS Code (portable)" -InstallMethod "vscode-local" `
+                -InstallPath $localVSCodePath -ManualUrl "https://code.visualstudio.com/"
+        }
+    }
+} else {
+    Write-Host "Skipping VS Code (not a selected client)" -ForegroundColor Gray
+    # Nothing to install, and nothing downstream should treat this as missing.
+    $vscodeInstalled = $true
+}
+
+# Check Visual Studio. This script never installs Visual Studio; it only verifies that a
+# new enough installation is already present.
+if ($supportVS) {
+    Write-Host "Checking for Visual Studio $minimumVSVersion or later..." -ForegroundColor Gray
+    $vsInstall = Get-VisualStudioInstallation
+    
+    if (-not $vsInstall) {
+        Write-Host "  Visual Studio not found" -ForegroundColor Yellow
+        $blockingPrereqs += New-PrerequisiteInfo -Name "Visual Studio $minimumVSVersion or later" `
+            -InstallMethod "manual" -ManualUrl "https://visualstudio.microsoft.com/downloads/" `
+            -Version "not installed"
+    } elseif ($vsInstall.Version -lt $minimumVSVersion) {
+        Write-Host "  Visual Studio $($vsInstall.Version) found, but $minimumVSVersion or later is required" -ForegroundColor Yellow
+        Write-Host "    $($vsInstall.DisplayName)" -ForegroundColor Gray
+        Write-Host "    $($vsInstall.Path)" -ForegroundColor Gray
+        $blockingPrereqs += New-PrerequisiteInfo -Name "Visual Studio $minimumVSVersion or later" `
+            -InstallMethod "manual" -ManualUrl "https://visualstudio.microsoft.com/downloads/" `
+            -Version "$($vsInstall.Version) installed" -InstallPath $vsInstall.Path
+    } else {
+        Write-Host "  Visual Studio detected: $($vsInstall.DisplayName) ($($vsInstall.Version))" -ForegroundColor Green
+        Write-Host "    $($vsInstall.Path)" -ForegroundColor Gray
     }
 }
 
@@ -755,8 +914,30 @@ if (Test-Path $rootPath) {
 # Check winget availability
 $wingetAvailable = $null -ne (Get-Command winget -ErrorAction SilentlyContinue)
 
-# Check if admin templates are needed
-$adminTemplatesNeeded = -not (Test-AdminTemplatesInstalled)
+# Check if admin templates are needed. The templates only apply to VS Code.
+$adminTemplatesNeeded = $supportVSCode -and -not (Test-AdminTemplatesInstalled)
+
+# Stop on prerequisites this script cannot install. Visual Studio in particular is never
+# installed here, so the user has to resolve it before the quickstart can continue.
+if ($blockingPrereqs.Count -gt 0) {
+    Write-Host "`n=== Action Required ===" -ForegroundColor Red
+    Write-Host "The following prerequisites must be installed manually before continuing:" -ForegroundColor Yellow
+    foreach ($prereq in $blockingPrereqs) {
+        Write-Host "  - $($prereq.Name)" -ForegroundColor Yellow
+        if ($prereq.Version) {
+            Write-Host "    Current: $($prereq.Version)" -ForegroundColor Gray
+        }
+        if ($prereq.InstallPath) {
+            Write-Host "    Location: $($prereq.InstallPath)" -ForegroundColor Gray
+        }
+        if ($prereq.ManualUrl) {
+            Write-Host "    Download: $($prereq.ManualUrl)" -ForegroundColor Gray
+        }
+    }
+    Write-Host "`nUpdate or install Visual Studio using the Visual Studio Installer, then run this" -ForegroundColor Gray
+    Write-Host "script again. To continue without Visual Studio, re-run with: -Clients VSCode" -ForegroundColor Gray
+    return
+}
 
 # Display summary if prerequisites are missing
 if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
@@ -995,7 +1176,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
     }
     
     # Install VS Code portable if missing
-    if (-not $vscodeInstalled) {
+    if ($supportVSCode -and -not $vscodeInstalled) {
         Write-Host "`nInstalling VS Code (portable)..." -ForegroundColor Cyan
         
         try {
@@ -1099,13 +1280,14 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
     }
     
     # Re-check if admin templates are still needed after installation
-    $adminTemplatesNeeded = -not (Test-AdminTemplatesInstalled)
+    $adminTemplatesNeeded = $supportVSCode -and -not (Test-AdminTemplatesInstalled)
 } else {
     Write-Host "`nAll prerequisites satisfied." -ForegroundColor Green
 }
 
-# Check if VS Code is installed but admin templates are not (only if we haven't already prompted)
-if ( -not (Test-AdminTemplatesInstalled)) {
+# Check if VS Code is installed but admin templates are not (only if we haven't already prompted).
+# The templates configure VS Code policy only, so they are skipped for a Visual Studio-only run.
+if ($supportVSCode -and -not (Test-AdminTemplatesInstalled)) {
     # Prompt before launching script as admin to install administrative templates
     Write-Host "`nVS Code Administrative Templates" -ForegroundColor Cyan
     Write-Host "================================" -ForegroundColor Cyan
@@ -1317,14 +1499,16 @@ finally {
     Write-Host "`n" -ForegroundColor Cyan
     Write-Host "Quickstart has exited." -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "IMPORTANT: Unset the Extension Gallery Service URL Policy" -ForegroundColor Yellow
-    Write-Host "===========================================" -ForegroundColor Yellow
-    Write-Host "To restore normal VS Code Marketplace access, you need to unset the" -ForegroundColor Gray
-    Write-Host "'Extension Gallery Service URL' Group Policy setting:" -ForegroundColor Gray
-    Write-Host "  1. Open Group Policy Editor (gpedit.msc)" -ForegroundColor Gray
-    Write-Host "  2. Navigate to: User Configuration > Administrative Templates > Visual Studio Code > Extensions" -ForegroundColor Gray
-    Write-Host "  3. Set 'Extension Gallery Service URL' to 'Not Configured'" -ForegroundColor Gray
-    Write-Host ""
+    if ($supportVSCode) {
+        Write-Host "IMPORTANT: Unset the Extension Gallery Service URL Policy" -ForegroundColor Yellow
+        Write-Host "===========================================" -ForegroundColor Yellow
+        Write-Host "To restore normal VS Code Marketplace access, you need to unset the" -ForegroundColor Gray
+        Write-Host "'Extension Gallery Service URL' Group Policy setting:" -ForegroundColor Gray
+        Write-Host "  1. Open Group Policy Editor (gpedit.msc)" -ForegroundColor Gray
+        Write-Host "  2. Navigate to: User Configuration > Administrative Templates > Visual Studio Code > Extensions" -ForegroundColor Gray
+        Write-Host "  3. Set 'Extension Gallery Service URL' to 'Not Configured'" -ForegroundColor Gray
+        Write-Host ""
+    }
     Write-Host "Temporary files location: $rootPath" -ForegroundColor Gray
     Write-Host ""
     $cleanupResponse = Read-Host "Do you want to remove the temporary folder and all its contents? (y/n)"
@@ -1412,8 +1596,9 @@ finally {
             Write-Host "You can manually delete: $rootPath" -ForegroundColor Yellow
         }
         
-        # Remove administrative templates if they were installed
-        if (Test-AdminTemplatesInstalled) {
+        # Remove administrative templates if this run installed or relied on them.
+        # A Visual Studio-only run never touches them, so leave any existing ones alone.
+        if ($supportVSCode -and (Test-AdminTemplatesInstalled)) {
             Write-Host "`nVS Code Administrative Templates Removal" -ForegroundColor Cyan
             Write-Host "=========================================" -ForegroundColor Cyan
             Write-Host "The VS Code Group Policy templates are currently installed." -ForegroundColor Gray
