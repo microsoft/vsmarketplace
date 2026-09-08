@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ccimage.ccimage-emoji-log | 9/8/2026 | Impersonation |
+| YummyGroup.Fristaylo-sessions | 9/8/2026 | Impersonation |
+| tae-h-yang.vscode-3d-preview-true-origin | 9/8/2026 | Impersonation |
+| maizhuoying.vscode-office-enhance | 9/8/2026 | Impersonation |
+| faxes.autominifyfiles | 9/8/2026 | Impersonation |
+| DaChengZhou.zed-theme-recreated | 9/8/2026 | Impersonation |
 | TrellKhan.devora | 9/7/2026 | Malware |
 | BadginLNN.badgerposts | 9/7/2026 | Malware |
 | TestZeron-CySec.TestZeron-CySec | 9/7/2026 | Malware |
