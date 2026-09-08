@@ -40,6 +40,10 @@
 
     Docker, the .NET SDK, the Aspire CLI, and the quickstart files are always required.
 
+.PARAMETER SkipVSVersionCheck
+    Proceeds even when the Visual Studio version cannot be verified or is below the minimum.
+    Useful when the Visual Studio Installer (which provides vswhere.exe) is unavailable.
+
 .EXAMPLE
     .\Run-PrivateMarketplace.ps1
     Runs the full quickstart setup, prompting for the clients to support.
@@ -93,7 +97,10 @@ param(
     
     [Parameter(HelpMessage="Client(s) to support: VSCode, VS, or Both. Prompts if omitted.")]
     [ValidateSet('VSCode', 'VS', 'Both')]
-    [string]$Clients
+    [string]$Clients,
+    
+    [Parameter(HelpMessage="Proceed even if the Visual Studio version cannot be verified")]
+    [switch]$SkipVSVersionCheck
 )
 
 $ErrorActionPreference = "Stop"
@@ -410,33 +417,125 @@ function Get-SupportedClients {
 
 <#
 .SYNOPSIS
+    Locates vswhere.exe.
+.DESCRIPTION
+    vswhere ships with the Visual Studio Installer rather than with Visual Studio itself, so
+    it is normally under Program Files (x86) even for 64-bit installs. It can be absent if the
+    Installer was removed or damaged, so the caller must handle $null.
+#>
+function Find-VSWhere {
+    $candidates = @()
+    if (${env:ProgramFiles(x86)}) {
+        $candidates += Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio\Installer\vswhere.exe"
+    }
+    if ($env:ProgramFiles) {
+        $candidates += Join-Path $env:ProgramFiles "Microsoft Visual Studio\Installer\vswhere.exe"
+    }
+    
+    foreach ($candidate in $candidates) {
+        if (Test-Path $candidate) { return $candidate }
+    }
+    
+    $onPath = Get-Command vswhere.exe -ErrorAction SilentlyContinue
+    if ($onPath) { return $onPath.Source }
+    
+    return $null
+}
+
+<#
+.SYNOPSIS
+    Reads Visual Studio instances from the installer's instance state, without vswhere.
+.DESCRIPTION
+    The Visual Studio Installer records every instance under ProgramData. This is the fallback
+    used when vswhere is unavailable. Returns $null when the instance store itself is missing,
+    which is a different situation from finding it and seeing no usable instance.
+#>
+function Get-VSInstancesFromState {
+    $instancesRoot = Join-Path $env:ProgramData "Microsoft\VisualStudio\Packages\_Instances"
+    if (-not (Test-Path $instancesRoot)) {
+        return $null
+    }
+    
+    $results = @()
+    foreach ($dir in (Get-ChildItem $instancesRoot -Directory -ErrorAction SilentlyContinue)) {
+        $stateFile = Join-Path $dir.FullName "state.json"
+        if (-not (Test-Path $stateFile)) { continue }
+        
+        try {
+            $state = Get-Content $stateFile -Raw -ErrorAction Stop | ConvertFrom-Json
+        } catch {
+            Write-Verbose "Could not parse $stateFile : $_"
+            continue
+        }
+        
+        $installPath = $state.installationPath
+        if (-not $installPath) { continue }
+        
+        # Only the IDE can host extensions. Build Tools launches a command prompt, not devenv.
+        $hasIde = Test-Path (Join-Path $installPath "Common7\IDE\devenv.exe")
+        if (-not $hasIde) { continue }
+        
+        $versionText = $state.catalogInfo.buildVersion
+        if (-not $versionText) { $versionText = $state.installationVersion }
+        if (-not $versionText) { continue }
+        
+        $results += [pscustomobject]@{
+            installationVersion = $versionText
+            installationPath    = $installPath
+            displayName         = if ($state.installationName) { $state.installationName } else { "Visual Studio" }
+        }
+    }
+    
+    return ,$results
+}
+
+<#
+.SYNOPSIS
     Finds the newest Visual Studio installation that can host extensions.
 .DESCRIPTION
-    Uses vswhere, which ships with the Visual Studio Installer. Build Tools instances are
-    excluded because they cannot host extensions. Returns $null when no suitable
-    installation is found, otherwise a hashtable with Version, DisplayName and Path.
+    Prefers vswhere and falls back to the installer's instance state when vswhere is missing.
+    Build Tools instances are excluded because they have no IDE to host extensions.
+
+    Returns a hashtable whose Status is one of:
+      Found    - a usable installation was detected; Version/DisplayName/Path are populated
+      NotFound - detection worked and no Visual Studio is installed
+      Unknown  - detection itself failed, so presence could not be determined
+
+    Unknown must not be treated as NotFound: blocking on it would strand a user who has a
+    perfectly good Visual Studio but a damaged or missing installer.
 #>
 function Get-VisualStudioInstallation {
-    $vsWherePath = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio\Installer\vswhere.exe"
-    if (-not (Test-Path $vsWherePath)) {
-        Write-Verbose "vswhere.exe not found at: $vsWherePath"
-        return $null
-    }
+    $instances = $null
+    $method = $null
     
-    try {
-        # -prerelease so preview channels are considered; JSON avoids fragile text parsing.
-        $output = & $vsWherePath -products * -prerelease -format json 2>$null | Out-String
-        if ([string]::IsNullOrWhiteSpace($output)) {
-            return $null
+    $vsWherePath = Find-VSWhere
+    if ($vsWherePath) {
+        try {
+            # -prerelease so preview channels count; JSON avoids fragile text parsing.
+            $output = & $vsWherePath -products * -prerelease -format json 2>$null | Out-String
+            if ($LASTEXITCODE -eq 0) {
+                $method = "vswhere"
+                $instances = if ([string]::IsNullOrWhiteSpace($output)) { @() } else { @($output | ConvertFrom-Json) }
+            } else {
+                Write-Verbose "vswhere exited with code $LASTEXITCODE"
+            }
+        } catch {
+            Write-Verbose "vswhere query failed: $_"
         }
-        $instances = $output | ConvertFrom-Json
-    } catch {
-        Write-Verbose "vswhere query failed: $_"
-        return $null
+    } else {
+        Write-Verbose "vswhere.exe not found; falling back to installer instance state."
     }
     
-    if (-not $instances) {
-        return $null
+    if ($null -eq $instances) {
+        $instances = Get-VSInstancesFromState
+        if ($null -ne $instances) {
+            $method = "installer state"
+        }
+    }
+    
+    if ($null -eq $instances) {
+        # Neither vswhere nor the instance store could be read.
+        return @{ Status = 'Unknown'; Method = 'none' }
     }
     
     $best = $null
@@ -454,11 +553,17 @@ function Get-VisualStudioInstallation {
         
         if ($null -eq $best -or $parsedVersion -gt $best.Version) {
             $best = @{
+                Status = 'Found'
                 Version = $parsedVersion
                 DisplayName = $instance.displayName
                 Path = $instance.installationPath
+                Method = $method
             }
         }
+    }
+    
+    if ($null -eq $best) {
+        return @{ Status = 'NotFound'; Method = $method }
     }
     
     return $best
@@ -789,21 +894,35 @@ if ($supportVS) {
     Write-Host "Checking for Visual Studio $minimumVSVersion or later..." -ForegroundColor Gray
     $vsInstall = Get-VisualStudioInstallation
     
-    if (-not $vsInstall) {
-        Write-Host "  Visual Studio not found" -ForegroundColor Yellow
-        $blockingPrereqs += New-PrerequisiteInfo -Name "Visual Studio $minimumVSVersion or later" `
-            -InstallMethod "manual" -ManualUrl "https://visualstudio.microsoft.com/downloads/" `
-            -Version "not installed"
-    } elseif ($vsInstall.Version -lt $minimumVSVersion) {
+    if ($SkipVSVersionCheck) {
+        Write-Host "  Skipping the Visual Studio version check (-SkipVSVersionCheck)." -ForegroundColor Yellow
+        if ($vsInstall.Status -eq 'Found') {
+            Write-Host "  Detected: $($vsInstall.DisplayName) ($($vsInstall.Version))" -ForegroundColor Gray
+        }
+    } elseif ($vsInstall.Status -eq 'Found' -and $vsInstall.Version -ge $minimumVSVersion) {
+        Write-Host "  Visual Studio detected: $($vsInstall.DisplayName) ($($vsInstall.Version))" -ForegroundColor Green
+        Write-Host "    $($vsInstall.Path)" -ForegroundColor Gray
+    } elseif ($vsInstall.Status -eq 'Found') {
         Write-Host "  Visual Studio $($vsInstall.Version) found, but $minimumVSVersion or later is required" -ForegroundColor Yellow
         Write-Host "    $($vsInstall.DisplayName)" -ForegroundColor Gray
         Write-Host "    $($vsInstall.Path)" -ForegroundColor Gray
         $blockingPrereqs += New-PrerequisiteInfo -Name "Visual Studio $minimumVSVersion or later" `
             -InstallMethod "manual" -ManualUrl "https://visualstudio.microsoft.com/downloads/" `
             -Version "$($vsInstall.Version) installed" -InstallPath $vsInstall.Path
+    } elseif ($vsInstall.Status -eq 'NotFound') {
+        Write-Host "  Visual Studio not found" -ForegroundColor Yellow
+        $blockingPrereqs += New-PrerequisiteInfo -Name "Visual Studio $minimumVSVersion or later" `
+            -InstallMethod "manual" -ManualUrl "https://visualstudio.microsoft.com/downloads/" `
+            -Version "not installed"
     } else {
-        Write-Host "  Visual Studio detected: $($vsInstall.DisplayName) ($($vsInstall.Version))" -ForegroundColor Green
-        Write-Host "    $($vsInstall.Path)" -ForegroundColor Gray
+        # Detection itself failed. Visual Studio may well be installed and new enough, so warn
+        # and continue rather than blocking on something we could not actually determine.
+        Write-Host "  Could not determine the Visual Studio version." -ForegroundColor Yellow
+        Write-Host "    vswhere.exe was not found and the Visual Studio Installer's instance" -ForegroundColor Gray
+        Write-Host "    data could not be read. This does not necessarily mean Visual Studio" -ForegroundColor Gray
+        Write-Host "    is missing; the Visual Studio Installer may have been removed." -ForegroundColor Gray
+        Write-Host "    Ensure Visual Studio $minimumVSVersion or later is installed before using" -ForegroundColor Gray
+        Write-Host "    Visual Studio extensions from the Private Marketplace." -ForegroundColor Gray
     }
 }
 

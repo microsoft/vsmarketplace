@@ -54,6 +54,22 @@ The following prerequisites must be installed manually before continuing:
     Download: https://visualstudio.microsoft.com/downloads/
 ```
 
+#### How Visual Studio is detected
+
+The script looks for Visual Studio using `vswhere.exe`, and falls back to the Visual Studio
+Installer's instance data under `%ProgramData%` when `vswhere.exe` is unavailable. `vswhere.exe`
+ships with the Visual Studio *Installer* rather than with Visual Studio itself, so it can be
+absent if the Installer was removed. Build Tools installations are ignored because they have no
+IDE to host extensions.
+
+If neither source can be read, the script says so and continues rather than blocking, since a
+failed check does not mean Visual Studio is missing. Use `-SkipVSVersionCheck` to bypass the
+version requirement entirely:
+
+```powershell
+.\Run-PrivateMarketplace.ps1 -Clients VS -SkipVSVersionCheck
+```
+
 ### Run the Setup Script
 
 > [!IMPORTANT]
