@@ -188,7 +188,7 @@ Now let's configure VS Code to use your Private Marketplace instead of the publi
 
 #### Step 1: Get Your Marketplace URL
 
-1. In the Aspire dashboard, find the **`vscode-private-marketplace`** resource
+1. In the Aspire dashboard, find the **`visualstudio-private-marketplace`** resource
 
    ![Aspire Dashboard Resource Table](images/aspire-resource-table.png)
 
@@ -210,7 +210,7 @@ The quickstart includes three sample extensions preloaded in the marketplace:
 #### Step 2: Configure Group Policy
 
 1. Return to the Aspire dashboard browser tab
-2. Locate the **`vscode-private-marketplace`** resource
+2. Locate the **`visualstudio-private-marketplace`** resource
 3. Click the **Actions** button (three vertical dots ⋮) on the right side of the resource row
    
    ![Aspire Actions Menu](images/aspire-actions-menu.png)
@@ -243,7 +243,7 @@ You configured Windows Group Policy to redirect VS Code's extension marketplace 
 #### Step 3: Launch VS Code
 
 1. Return to the Aspire dashboard
-2. Click the **Actions** button (⋮) for the **`vscode-private-marketplace`** resource
+2. Click the **Actions** button (⋮) for the **`visualstudio-private-marketplace`** resource
 
    ![Aspire Actions Menu](images/aspire-actions-menu.png)
 
@@ -310,7 +310,7 @@ You can configure your client to only allow extensions from specific publishers,
 
 **Configure Allowed Extensions Policy**
 
-1. In the Aspire dashboard, click **Actions** (⋮) for **`vscode-private-marketplace`**
+1. In the Aspire dashboard, click **Actions** (⋮) for **`visualstudio-private-marketplace`**
 2. Select **Open Group Policy Editor**
 3. Navigate to: **User Configuration → Administrative Templates → Visual Studio Code → Extensions**
 4. Double-click **Allowed Extensions**
@@ -366,7 +366,7 @@ By changing the mode the Private Marketplace can support different scenarios
 To change the Upstreaming mode in the Quickstart:
 
 > [!IMPORTANT]
-  The upstreaming mode is compiled into the AppHost, so changing it requires restarting the **AppHost**. Stopping and starting the **`vscode-private-marketplace`** resource from the Aspire dashboard is not enough - the container's configuration is built when the AppHost starts.
+  The upstreaming mode is compiled into the AppHost, so changing it requires restarting the **AppHost**. Stopping and starting the **`visualstudio-private-marketplace`** resource from the Aspire dashboard is not enough - the container's configuration is built when the AppHost starts.
 
 1. Close VS Code if it is open
 1. In the terminal running Aspire, press `Ctrl+C` to stop the AppHost
@@ -376,7 +376,7 @@ To change the Upstreaming mode in the Quickstart:
 
    ```csharp
    14   builder
-   15      .AddVSCodePrivateMarketplace("vscode-private-marketplace")
+   15      .AddVSCodePrivateMarketplace()
    16      .WithMarketplaceConfiguration(
    17         organizationName: "Contoso",
    18         contactSupportUri: "mailto:privatemktplace@microsoft.com",
@@ -418,7 +418,7 @@ Verification steps for Visual Studio are coming soon.
 
 Monitor what's happening in your marketplace:
 
-1. In the Aspire dashboard, click the **Actions** button (⋮) for **`vscode-private-marketplace`**
+1. In the Aspire dashboard, click the **Actions** button (⋮) for **`visualstudio-private-marketplace`**
 2. Select **Console logs** to see real-time container output
 3. Or select **Structured logs** for formatted, searchable logs
 4. Use logs to troubleshoot issues or monitor extension requests
@@ -454,7 +454,7 @@ When you're done testing, restore your client to use the public marketplace.
 
 If you configured Group Policy in Part 2, clear it:
 
-1. In the Aspire dashboard, click **Actions** (⋮) for **`vscode-private-marketplace`**
+1. In the Aspire dashboard, click **Actions** (⋮) for **`visualstudio-private-marketplace`**
 2. Select **Open Group Policy Editor**
 3. Navigate to: **User Configuration → Administrative Templates → Visual Studio Code → Extensions**
 4. Double-click **Extension Gallery Service URL**
@@ -512,7 +512,7 @@ Remove-Item -Path "$env:TEMP\privatemarketplace-quickstart" -Recurse -Force
 
 If you skipped the administrative templates installation during setup, or they failed to install, you can install them manually:
 
-1. In the Aspire dashboard, click **Actions** (⋮) for **`vscode-private-marketplace`**
+1. In the Aspire dashboard, click **Actions** (⋮) for **`visualstudio-private-marketplace`**
 2. Select **Stop** to stop the marketplace container
 3. Open PowerShell as Administrator (right-click → Run as Administrator)
 4. Navigate to the temporary installation folder:
@@ -524,7 +524,7 @@ If you skipped the administrative templates installation during setup, or they f
    .\Run-PrivateMarketplace.ps1 -InstallAdminTemplates
    ```
 6. Return to the Aspire dashboard
-7. Click **Actions** (⋮) for **`vscode-private-marketplace`**
+7. Click **Actions** (⋮) for **`visualstudio-private-marketplace`**
 8. Select **Start** to start the marketplace container
 
 The Group Policy Editor command should now appear in the Aspire dashboard Actions menu.

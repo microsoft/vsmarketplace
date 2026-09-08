@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 var builder = DistributedApplication.CreateBuilder(args);
 
 builder
-    .AddVSCodePrivateMarketplace("vscode-private-marketplace")
+    .AddVSCodePrivateMarketplace()
     .WithMarketplaceConfiguration(
         organizationName: "Contoso",
         contactSupportUri: "mailto:privatemktplace@microsoft.com",
@@ -31,9 +31,15 @@ public enum MarketplaceUpstreamingMode
 
 public static class MarketplaceExtensions
 {
+    /// <summary>
+    /// The Aspire resource name for the Private Marketplace container. This is also used as the
+    /// HTTPS endpoint name, so it must be the value looked up when resolving that endpoint.
+    /// </summary>
+    public const string MarketplaceResourceName = "visualstudio-private-marketplace";
+
     public static IResourceBuilder<ContainerResource> AddVSCodePrivateMarketplace(
         this IDistributedApplicationBuilder builder,
-        string name = "vscode-private-marketplace",
+        string name = MarketplaceResourceName,
         string containerImage = "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace")
     {
         var marketplacePort = builder.Configuration.GetValue<int?>("Marketplace:Port") ?? 0;
@@ -82,7 +88,7 @@ public static class MarketplaceExtensions
         return builder
             .WithEnvironment(context =>
             {
-                context.EnvironmentVariables["Marketplace__BaseUrl"] = builder.Resource.GetEndpoint("vscode-private-marketplace").Url.ToString();
+                context.EnvironmentVariables["Marketplace__BaseUrl"] = builder.Resource.GetEndpoint(builder.Resource.Name).Url.ToString();
             })
             .WithEnvironment("Marketplace__OrganizationName", organizationName)
             .WithEnvironment("Marketplace__ContactSupportUri", contactSupportUri)
@@ -104,7 +110,7 @@ public static class MarketplaceExtensions
                 try
                 {
                     var endpoint = resource.Annotations.OfType<EndpointAnnotation>()
-                        .FirstOrDefault(e => e.Name == "vscode-private-marketplace");
+                        .FirstOrDefault(e => e.Name == resource.Name);
 
                     if (endpoint?.AllocatedEndpoint == null)
                     {
