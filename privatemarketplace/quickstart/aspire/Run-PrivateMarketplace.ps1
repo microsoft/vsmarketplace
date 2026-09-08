@@ -30,8 +30,9 @@
     script re-launches itself elevated. Defaults to the portable copy in the quickstart folder.
 
 .PARAMETER SkipVSCode
-    Skips the prerequisite check and installation for portable VS Code. Implies
-    -SkipAdminTemplates, because the templates are read from a VS Code installation.
+    Skips the prerequisite check and installation for portable VS Code. This also implies
+    -SkipAdminTemplates, unless -UseGlobalInstalls found a machine-wide VS Code, because the
+    administrative templates are read from a VS Code installation.
 
 .PARAMETER SkipAdminTemplates
     Skips the prerequisite check and installation for the VS Code administrative templates.

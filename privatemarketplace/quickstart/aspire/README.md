@@ -21,13 +21,13 @@ Before you begin, ensure you have:
 By default the quickstart installs its own portable copies of VS Code, the .NET SDK, and the Aspire CLI, so nothing already on the machine is used or altered. The `-UseGlobalInstalls` option changes that - see [Reusing existing installations](#reusing-existing-installations).
 
 > [!IMPORTANT]
-  Using a machine-wide VS Code installation means the quickstart's configuration is applied to the VS Code you use every day. The Group Policy setting in [Step 2](#step-2-configure-group-policy) changes the extension gallery for every VS Code installation on the machine, so your normal editor will use the Private Marketplace instead of the public Marketplace until you set the policy back to **Not Configured**. See [Restoring Normal Client Access](#restoring-normal-client-access) to undo it.
+> Using a machine-wide VS Code installation means the quickstart's configuration is applied to the VS Code you use every day. The Group Policy setting in [Step 2](#step-2-configure-group-policy) changes the extension gallery for every VS Code installation on the machine, so your normal editor will use the Private Marketplace instead of the public Marketplace until you set the policy back to **Not Configured**. See [Restoring Normal Client Access](#restoring-normal-client-access) to undo it.
 
 ### Run the Setup Script
 
 > [!IMPORTANT]
-  Never run scripts from untrusted sources, always review the script before running it.
-  Always verify the script's hash before executing. The expected hash can be found in the repository or release notes.
+> Never run scripts from untrusted sources, always review the script before running it.
+> Always verify the script's hash before executing. The expected hash can be found in the repository or release notes.
 
 The script will automatically:
 - Check for and install missing prerequisites (after prompting for confirmation):
@@ -43,7 +43,7 @@ The script will automatically:
 Portable VS Code is installed even if you only plan to evaluate hosting. It's used by the VS Code walkthrough in Part 2 and isn't part of the marketplace host itself.
 
 > [!NOTE]
-  The VS Code Group Policy templates are optional. Answer `n` to skip them - the quickstart can still launch VS Code connected to your Private Marketplace. You can install them later with `.\Run-PrivateMarketplace.ps1 -InstallAdminTemplates` if you want to configure clients through Windows Group Policy.
+> The VS Code Group Policy templates are optional. Answer `n` to skip them - the quickstart can still launch VS Code connected to your Private Marketplace. You can install them later with `.\Run-PrivateMarketplace.ps1 -InstallAdminTemplates` if you want to configure clients through Windows Group Policy.
 
 The Quickstart is installed into a temporary folder ($TEMP\privatemarketplace-quickstart), along with all of the dependencies, except Docker. To remove the Quickstart and all the dependencies, just delete the temporary folder, and uninstall Docker, if desired. The script will attempt to uninstall Docker and remove the temporary folder after Quickstart exits.
 
@@ -74,7 +74,7 @@ Alternatively, you can download the script and run it as a two-step process:
    ```
 
 > [!NOTE]
-  If PowerShell blocks the downloaded script because of your execution policy, run `Unblock-File .\Run-PrivateMarketplace.ps1` and then run it again.
+> If PowerShell blocks the downloaded script because of your execution policy, run `Unblock-File .\Run-PrivateMarketplace.ps1` and then run it again.
 
 You should see output similar to the following snippet:
   ```text
@@ -139,7 +139,7 @@ Each tool is used only when it meets a minimum version:
 Anything missing or too old is still installed locally, so you can mix the two. Docker Desktop is always used from the local machine installation.
 
 > [!NOTE]
-  Machine-wide VS Code installations ship `VSCode.admx` without the `VSCode.adml` language files. If you plan to configure the marketplace through Group Policy, run the quickstart without `-UseGlobalInstalls` so the portable VS Code, which includes the language files, is used.
+> Machine-wide VS Code installations ship `VSCode.admx` without the `VSCode.adml` language files. If you plan to configure the marketplace through Group Policy, run the quickstart without `-UseGlobalInstalls` so the portable VS Code, which includes the language files, is used.
 
 #### Skipping optional components
 
@@ -184,7 +184,7 @@ Installation is complete and the marketplace is running. The next step depends o
 Now let's configure VS Code to use your Private Marketplace instead of the public VS Code Marketplace.
 
 > [!NOTE]
-  The quickstart's **Open VS Code** command launches a portable VS Code instance already connected to your Private Marketplace, without Group Policy. Step 2 below configures Windows Group Policy, which is what you'd use to point your own VS Code installation - or your organization's - at the marketplace.
+> The quickstart's **Open VS Code** command launches a portable VS Code instance already connected to your Private Marketplace, without Group Policy. Step 2 below configures Windows Group Policy, which is what you'd use to point your own VS Code installation - or your organization's - at the marketplace.
 
 #### Step 1: Get Your Marketplace URL
 
@@ -218,12 +218,12 @@ The quickstart includes three sample extensions preloaded in the marketplace:
 4. From the Actions menu, select **Open Group Policy Editor**
 
 > [!NOTE]
-  If this option doesn't appear, see the [Troubleshooting](#part-5-troubleshooting) section below
+> If this option doesn't appear, see the [Troubleshooting](#part-5-troubleshooting) section below
 
 5. In the Group Policy Editor window that opens, navigate to the Extensions folder:   
  
 > [!NOTE]
-  The Group Policy Editor window might not open in the foreground, look in the taskbar for the application.
+> The Group Policy Editor window might not open in the foreground, look in the taskbar for the application.
 
    ![Group Policy Editor](images/gpedit-extensions.png)
 
@@ -258,7 +258,7 @@ You configured Windows Group Policy to redirect VS Code's extension marketplace 
    - Complete the authentication process in your browser
    
 > [!IMPORTANT]
-  You must sign in to GitHub before extensions will be available
+> You must sign in to GitHub before extensions will be available
 
 5. After signing in, click the Extensions icon in the sidebar (or press `Ctrl+Shift+X`)
 6. You'll see the sample extensions from your Private Marketplace listed first, followed by public extensions.
@@ -366,7 +366,7 @@ By changing the mode the Private Marketplace can support different scenarios
 To change the Upstreaming mode in the Quickstart:
 
 > [!IMPORTANT]
-  The upstreaming mode is compiled into the AppHost, so changing it requires restarting the **AppHost**. Stopping and starting the **`visualstudio-private-marketplace`** resource from the Aspire dashboard is not enough - the container's configuration is built when the AppHost starts.
+> The upstreaming mode is compiled into the AppHost, so changing it requires restarting the **AppHost**. Stopping and starting the **`visualstudio-private-marketplace`** resource from the Aspire dashboard is not enough - the container's configuration is built when the AppHost starts.
 
 1. Close VS Code if it is open
 1. In the terminal running Aspire, press `Ctrl+C` to stop the AppHost
