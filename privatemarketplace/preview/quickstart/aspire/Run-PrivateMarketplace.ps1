@@ -16,9 +16,27 @@
     When specified, only removes VS Code administrative templates (Group Policy ADMX/ADML files)
     from the Windows PolicyDefinitions folder and exits. Requires administrator privileges.
 
+.PARAMETER RepoUrl
+    Repository to download the quickstart files from.
+    Defaults to https://github.com/microsoft/vsmarketplace. Use this to test from a fork.
+
+.PARAMETER RepoBranch
+    Branch to download the quickstart files from. Defaults to 'main'.
+    Use this to test preview changes that have not merged yet. Branch names containing
+    '/' are supported. When a branch other than 'main' is used, the quickstart installs
+    into a branch-specific folder so it cannot pick up stale files from a previous run.
+
 .EXAMPLE
     .\Run-PrivateMarketplace.ps1
     Runs the full quickstart setup, checking and installing prerequisites as needed.
+
+.EXAMPLE
+    .\Run-PrivateMarketplace.ps1 -RepoBranch 'dev/mcumming/privatemarketplace-preview-docs'
+    Runs the quickstart using files from the specified branch instead of 'main'.
+
+.EXAMPLE
+    .\Run-PrivateMarketplace.ps1 -RepoUrl 'https://github.com/mcumming/vsmarketplace' -RepoBranch 'my-feature'
+    Runs the quickstart using files from a fork and branch.
 
 .EXAMPLE
     .\Run-PrivateMarketplace.ps1 -InstallAdminTemplates
@@ -42,23 +60,49 @@ param(
     [switch]$InstallAdminTemplates,
     
     [Parameter(HelpMessage="Remove VS Code administrative templates only (requires admin rights)")]
-    [switch]$RemoveAdminTemplates
+    [switch]$RemoveAdminTemplates,
+    
+    [Parameter(HelpMessage="Repository to download quickstart files from")]
+    [string]$RepoUrl = "https://github.com/microsoft/vsmarketplace",
+    
+    [Parameter(HelpMessage="Branch to download quickstart files from (use to test unmerged preview changes)")]
+    [string]$RepoBranch = "main"
 )
 
 $ErrorActionPreference = "Stop"
 
 #region Configuration
+# Accept clone-style URLs (trailing '/' or '.git') without breaking the archive URL.
+$RepoUrl = ($RepoUrl.TrimEnd('/')) -replace '\.git$', ''
+
+# GitHub replaces '/' with '-' when naming archive files and their root folder,
+# and '/' is not valid in a local path, so slugify the branch for anything on disk.
+$branchSlug = $RepoBranch -replace '[^A-Za-z0-9._-]', '-'
+
+# Repository name, used to locate the root folder inside the downloaded archive.
+$repoName = ($RepoUrl -split '/')[-1]
+
+# Keep the documented folder for the default branch, but sandbox other branches so a
+# previous run's files are never mistaken for the branch under test.
+$rootFolderName = if ($RepoBranch -eq 'main') {
+    "privatemarketplace-quickstart-preview"
+} else {
+    "privatemarketplace-quickstart-preview-$branchSlug"
+}
+
 # Script configuration - modify these values to customize the behavior
 $Config = @{
-    # Repository settings
-    RepoUrl = "https://github.com/microsoft/vsmarketplace"
-    RepoBranch = "main"  # Change this to test different branches
+    # Repository settings (overridable via -RepoUrl / -RepoBranch)
+    RepoUrl = $RepoUrl
+    RepoBranch = $RepoBranch
+    RepoName = $repoName
+    BranchSlug = $branchSlug
     
     # Version requirements
     DotNetVersion = "10.0.100"  # Version of .NET SDK to install locally
     
     # Installation paths
-    RootPath = Join-Path $env:TEMP "privatemarketplace-quickstart-preview"
+    RootPath = Join-Path $env:TEMP $rootFolderName
     
     # Timeout settings
     MaxDockerWaitTime = 120  # Maximum seconds to wait for Docker to start (first-time can take 90+ seconds)
@@ -792,7 +836,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
         # Download only the privatemarketplace/preview/quickstart folder
         Write-Host "  Downloading from repository (branch: $repoBranch)..." -ForegroundColor Gray
         $zipUrl = "$repoUrl/archive/refs/heads/$repoBranch.zip"
-        $tempZipPath = Join-Path $env:TEMP "vsmarketplace-preview-$repoBranch.zip"
+        $tempZipPath = Join-Path $env:TEMP "vsmarketplace-preview-$branchSlug.zip"
         
         try {
             $downloadSuccess = Invoke-WithProgress -Activity "Downloading Quickstart Files" -Status "Downloading from repository..." -ScriptBlock {
@@ -804,7 +848,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
             Write-Host "  ZIP downloaded successfully." -ForegroundColor Green
             
             # Extract files
-            $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-preview-extract"
+            $tempExtractPath = Join-Path $env:TEMP "vsmarketplace-preview-extract-$branchSlug"
             if (Test-Path $tempExtractPath) {
                 Remove-Item -Path $tempExtractPath -Recurse -Force
             }
@@ -813,7 +857,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
             Write-Progress -Activity "Extracting Quickstart Files" -Completed
             
             # Copy quicklaunch folder contents directly to root (excluding .dotnet, .aspire, .vscode)
-            $extractedquicklaunchFolder = Join-Path $tempExtractPath "vsmarketplace-$repoBranch\privatemarketplace\preview\quickstart\aspire"
+            $extractedquicklaunchFolder = Join-Path $tempExtractPath "$repoName-$branchSlug\privatemarketplace\preview\quickstart\aspire"
             if (Test-Path $extractedquicklaunchFolder) {
                 # Get all items in quicklaunch folder except hidden tool folders
                 Get-ChildItem -Path $extractedquicklaunchFolder | Where-Object { 
