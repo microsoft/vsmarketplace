@@ -1,12 +1,15 @@
 <#
 .SYNOPSIS
-    Sets up and runs a private VS Code marketplace quickstart environment.
+    Sets up and runs a Private Marketplace quickstart environment for the Visual Studio family.
 
 .DESCRIPTION
-    This script automates the installation and configuration of all prerequisites
-    needed to run a private VS Code marketplace, including Docker, VS Code portable,
-    .NET SDK, and Aspire CLI. All tools are installed locally in a temporary folder
-    to avoid interfering with system-wide installations.
+    This script automates the installation and configuration of all prerequisites needed to run
+    a local Private Marketplace, including Docker, portable VS Code, the .NET SDK, and the
+    Aspire CLI. By default all tools are installed locally in a temporary folder to avoid
+    interfering with system-wide installations; see -UseGlobalInstalls to reuse existing ones.
+
+    Client connection guidance is currently available for Visual Studio Code. Visual Studio
+    connection guidance is coming soon.
 
 .PARAMETER InstallAdminTemplates
     When specified, only installs VS Code administrative templates (Group Policy ADMX/ADML files)
