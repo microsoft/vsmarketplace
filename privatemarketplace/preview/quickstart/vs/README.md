@@ -109,6 +109,7 @@ Once installation completes, the Aspire dashboard will open automatically in you
 ![Aspire Dashboard URL in Terminal](images/aspire-dashboard-url.png)
 
 **What is the Aspire Dashboard?**
+
 [Aspire](https://aspire.dev) is a separate Microsoft product for running and observing distributed applications locally. It is not part of the Private Marketplace and is not required to run one - this quickstart simply uses it to start the marketplace container and give you somewhere to watch it. The dashboard it provides offers:
 - Real-time status of your marketplace container
 - Quick access to the marketplace web interface
@@ -134,8 +135,13 @@ Installation is complete and the marketplace is running. Now point Visual Studio
 
 2. In the **URLs** column, click the **Home** link
    - This opens your marketplace's web interface in a new browser tab
+
+   ![Private Marketplace home page with the Connect to Marketplace button](images/marketplace-connect-button.png)
+
 3. On the marketplace home page, click **Connect to Marketplace**, select the **Visual Studio** tab, and click the copy button next to the **Gallery URL**
    - You'll need this URL in the next step
+
+   ![Connect to Marketplace dialog on the Visual Studio tab showing the Gallery URL](images/marketplace-gallery-url.png)
 
 **Tip**: Keep the marketplace home page open in a browser tab - you'll refer to it throughout the quickstart.
 

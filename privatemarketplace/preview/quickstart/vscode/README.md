@@ -176,11 +176,13 @@ Once installation completes, the Aspire dashboard will open automatically in you
 ![Aspire Dashboard URL in Terminal](images/aspire-dashboard-url.png)
 
 **What is the Aspire Dashboard?**
-The Aspire dashboard is your control center for managing the Private Marketplace. It provides:
+[Aspire](https://aspire.dev) is a separate Microsoft product for running and observing distributed applications locally. It is not part of the Private Marketplace and is not required to run one - this quickstart simply uses it to start the marketplace container and give you somewhere to watch it. The dashboard it provides offers:
 - Real-time status of your marketplace container
 - Quick access to the marketplace web interface
 - Commands to launch VS Code and configure settings
 - Logs and monitoring information
+
+Anything you do in the dashboard acts on the container Aspire started for this quickstart. When you deploy a Private Marketplace for real, you host the same container image yourself and Aspire is not involved.
 
 In the dashboard, you'll see a resource named **`visualstudio-private-marketplace`** - this is your Private Marketplace container.
 
