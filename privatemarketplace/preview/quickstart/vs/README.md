@@ -2,7 +2,8 @@
 
 This quickstart walks you through setting up and testing a local Private Marketplace for Visual Studio using [Aspire](https://aspire.dev) on Windows. You'll learn how to install the marketplace, connect Visual Studio to it, and explore different usage scenarios.
 
-Visual Studio extension support is a preview feature. This quickstart enables it for you: the AppHost sets `FeatureManagement__VSExtensionSupport`, and sample Visual Studio extensions are included. With the flag off, Visual Studio extensions are ignored by the marketplace.
+> [!IMPORTANT]
+> Visual Studio extension support is a preview feature. This quickstart turns it on for you, and includes sample Visual Studio extensions.
 
 ---
 
@@ -18,11 +19,9 @@ Before you begin, ensure you have:
 
 By default the quickstart installs its own portable copies of the .NET SDK and the Aspire CLI, so nothing already on the machine is used or altered. The `-UseGlobalInstalls` option changes that - see [Reusing existing installations](#reusing-existing-installations).
 
-#### How Visual Studio is detected
+#### Visual Studio Detection
 
-The script looks for Visual Studio using `vswhere.exe`, and falls back to the Visual Studio Installer's instance data under `%ProgramData%` when `vswhere.exe` is unavailable. `vswhere.exe` ships with the Visual Studio *Installer* rather than with Visual Studio itself, so it can be absent if the Installer was removed. Build Tools installations are ignored because they have no IDE to host extensions.
-
-If a suitable installation is not found, the script reports what it found and exits without changing anything:
+The setup script checks for Visual Studio before it does anything else. If a suitable installation is not found, it reports what it found and exits without changing anything:
 
 ```text
 === Action Required ===
@@ -33,7 +32,9 @@ The following prerequisites must be installed manually before continuing:
     Download: https://visualstudio.microsoft.com/downloads/
 ```
 
-If neither detection source can be read, the script says so and continues rather than blocking, since a failed check does not mean Visual Studio is missing. Use `-SkipVSVersionCheck` to bypass the version requirement entirely.
+Update or install Visual Studio with the Visual Studio Installer, then run the script again.
+
+Occasionally the script cannot determine which version is installed. When that happens it says so and continues, since a failed check does not mean Visual Studio is missing. Use `-SkipVSVersionCheck` to bypass the version requirement entirely.
 
 ### Run the Setup Script
 
@@ -57,10 +58,15 @@ The Private Marketplace Quickstart is installed using an installation script ava
 
 #### Download and install
 
-> [!NOTE]
-> Run these commands from a PowerShell terminal.
+All commands in this quickstart run in a **PowerShell** terminal. Open one, then run:
 
-1. Open a terminal.
+```powershell
+irm https://raw.githubusercontent.com/microsoft/vsmarketplace/main/privatemarketplace/preview/quickstart/vs/Run-PrivateMarketplace.ps1 | iex
+```
+
+Alternatively, you can download the script and run it as a two-step process:
+
+1. Open a PowerShell terminal.
 
 2. Download the script and save it as a file:
 
@@ -76,21 +82,6 @@ The Private Marketplace Quickstart is installed using an installation script ava
 
 > [!NOTE]
 > If PowerShell blocks the downloaded script because of your execution policy, run `Unblock-File .\Run-PrivateMarketplace.ps1` and then run it again.
-
-#### Testing an unmerged branch
-
-By default the script pulls the quickstart files from `main`. To test preview changes that have not merged yet, pass `-RepoBranch` (and optionally `-RepoUrl` to use a fork):
-
-```powershell
-$branch = 'dev/mcumming/privatemarketplace-preview-docs'
-irm "https://raw.githubusercontent.com/microsoft/vsmarketplace/$branch/privatemarketplace/preview/quickstart/vs/Run-PrivateMarketplace.ps1" -OutFile Run-PrivateMarketplace.ps1
-.\Run-PrivateMarketplace.ps1 -RepoBranch $branch
-```
-
-> [!NOTE]
-> Fetch the script from the same branch you pass to `-RepoBranch`, so the script and the files it downloads stay in sync. Use the branch name, not a local folder or worktree name; these often differ.
-
-Branch names containing `/` are supported. When you use a branch other than `main`, the quickstart installs into a branch-specific folder (`$env:TEMP\privatemarketplace-quickstart-vs-<branch>`) so it cannot pick up stale files from an earlier run, and so it does not disturb an existing default installation. Substitute that folder for `$env:TEMP\privatemarketplace-quickstart-vs` in the steps below.
 
 #### Reusing existing installations
 
@@ -187,7 +178,7 @@ The quickstart includes sample extensions, but you'll want to add your own.
 
 New `.vsix` files are picked up by the file system source monitor on its refresh interval, so a page refresh is enough and a container restart is not required.
 
-The marketplace inspects each `.vsix` manifest and handles it accordingly, so no separate folder or configuration is needed. Visual Studio extensions are only processed while `FeatureManagement__VSExtensionSupport` is enabled, which this quickstart does for you.
+The marketplace inspects each `.vsix` manifest and handles it accordingly, so no separate folder or configuration is needed.
 
 > [!NOTE]
 > A Visual Studio extension's manifest must declare asset paths that exist inside the package. An asset path that does not resolve to a file in the `.vsix` is reported in the marketplace log as `Specified part does not exist in the package`, and the extension is not published.
