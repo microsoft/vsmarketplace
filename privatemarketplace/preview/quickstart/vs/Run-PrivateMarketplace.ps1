@@ -1,42 +1,21 @@
 <#
 .SYNOPSIS
-    Sets up and runs a Private Marketplace quickstart environment for the Visual Studio family.
+    Sets up and runs a Private Marketplace quickstart environment for Visual Studio.
 
 .DESCRIPTION
     This script automates the installation and configuration of all prerequisites needed to run
-    a local Private Marketplace, including Docker, portable VS Code, the .NET SDK, and the
-    Aspire CLI. By default all tools are installed locally in a temporary folder to avoid
+    a local Private Marketplace for Visual Studio, including Docker, the .NET SDK, and the
+    Aspire CLI. By default those tools are installed locally in a temporary folder to avoid
     interfering with system-wide installations; see -UseGlobalInstalls to reuse existing ones.
 
-    Client connection guidance is currently available for Visual Studio Code. Visual Studio
-    connection guidance is coming soon.
-
-.PARAMETER InstallAdminTemplates
-    When specified, only installs VS Code administrative templates (Group Policy ADMX/ADML files)
-    to the Windows PolicyDefinitions folder and exits. Requires administrator privileges.
-
-.PARAMETER RemoveAdminTemplates
-    When specified, only removes VS Code administrative templates (Group Policy ADMX/ADML files)
-    from the Windows PolicyDefinitions folder and exits. Requires administrator privileges.
+    Visual Studio itself is never installed by this script. An existing installation of
+    Visual Studio 18.11 or later is required, and the script verifies it before continuing.
 
 .PARAMETER UseGlobalInstalls
-    When specified, existing machine-wide installations of VS Code, the .NET SDK, and the
-    Aspire CLI are used instead of downloading portable copies, provided they meet the
-    minimum versions (VS Code 1.99+, .NET SDK 10.0.100+, Aspire CLI 13.0.0+).
-    Any tool that is missing or too old is still installed locally into the quickstart folder.
-
-.PARAMETER VSCodePath
-    Internal. The VS Code installation directory to read Group Policy templates from when the
-    script re-launches itself elevated. Defaults to the portable copy in the quickstart folder.
-
-.PARAMETER SkipVSCode
-    Skips the prerequisite check and installation for portable VS Code. This also implies
-    -SkipAdminTemplates, unless -UseGlobalInstalls found a machine-wide VS Code, because the
-    administrative templates are read from a VS Code installation.
-    Equivalent to -Clients VS, and honoured as such when -Clients is not supplied.
-
-.PARAMETER SkipAdminTemplates
-    Skips the prerequisite check and installation for the VS Code administrative templates.
+    When specified, existing machine-wide installations of the .NET SDK and the Aspire CLI are
+    reused instead of installing portable copies, provided they meet the minimum versions
+    (.NET SDK 10.0.100+, Aspire CLI 13.0.0+). Anything missing or too old is still installed
+    locally, so the modes mix.
 
 .PARAMETER RepoUrl
     Repository to download the quickstart files from.
@@ -48,40 +27,9 @@
     '/' are supported. When a branch other than 'main' is used, the quickstart installs
     into a branch-specific folder so it cannot pick up stale files from a previous run.
 
-.PARAMETER Clients
-    Which client(s) the Private Marketplace should support: 'VSCode', 'VS', or 'Both'.
-    If omitted, the script prompts for a choice.
-
-    The selection determines which prerequisites are required:
-      VSCode - portable VS Code is downloaded, and the VS Code Group Policy templates
-               are installed.
-      VS     - an existing Visual Studio installation of at least version 18.11 is
-               required. Visual Studio is never installed by this script; if it is
-               missing or too old the script reports what to do and exits.
-      Both   - all of the above.
-
-    Docker, the .NET SDK, the Aspire CLI, and the quickstart files are always required.
-
 .PARAMETER SkipVSVersionCheck
     Proceeds even when the Visual Studio version cannot be verified or is below the minimum.
     Useful when the Visual Studio Installer (which provides vswhere.exe) is unavailable.
-
-.EXAMPLE
-    .\Run-PrivateMarketplace.ps1
-    Runs the full quickstart setup, prompting for the clients to support.
-
-.EXAMPLE
-    .\Run-PrivateMarketplace.ps1 -Clients Both
-    Runs the quickstart with support for both Visual Studio and VS Code, without prompting.
-
-.EXAMPLE
-    .\Run-PrivateMarketplace.ps1 -Clients VS
-    Runs the quickstart for Visual Studio only. Portable VS Code and the VS Code
-    Group Policy templates are skipped.
-
-.EXAMPLE
-    .\Run-PrivateMarketplace.ps1 -RepoBranch 'dev/mcumming/privatemarketplace-preview-docs'
-    Runs the quickstart using files from the specified branch instead of 'main'.
 
 .EXAMPLE
     .\Run-PrivateMarketplace.ps1
@@ -89,53 +37,29 @@
 
 .EXAMPLE
     .\Run-PrivateMarketplace.ps1 -UseGlobalInstalls
-    Reuses machine-wide VS Code, .NET SDK, and Aspire CLI installations when they are new enough.
+    Reuses machine-wide .NET SDK and Aspire CLI installations when they are new enough.
 
 .EXAMPLE
-    .\Run-PrivateMarketplace.ps1 -InstallAdminTemplates
-    Installs only the VS Code administrative templates (requires elevation via UAC).
-
-.EXAMPLE
-    .\Run-PrivateMarketplace.ps1 -RemoveAdminTemplates
-    Removes only the VS Code administrative templates (requires elevation via UAC).
+    .\Run-PrivateMarketplace.ps1 -RepoBranch 'dev/mcumming/privatemarketplace-preview-docs'
+    Runs the quickstart using files from the specified branch instead of 'main'.
 
 .NOTES
     Requires: PowerShell 5.1 or later, Internet connection for downloads
-    Administrator privileges required to install VS Code Group Policy templates (recommended for marketplace configuration)
+    Requires: Visual Studio 18.11 or later, already installed
     Exit Codes:
         0 - Success
         1 - Error occurred (see error messages)
-        64 - UAC prompt cancelled by user
 #>
 [CmdletBinding()]
 param(
-    [Parameter(HelpMessage="Install VS Code administrative templates only (requires admin rights)")]
-    [switch]$InstallAdminTemplates,
-    
-    [Parameter(HelpMessage="Remove VS Code administrative templates only (requires admin rights)")]
-    [switch]$RemoveAdminTemplates,
-
-    [Parameter(HelpMessage="Reuse machine-wide VS Code, .NET SDK, and Aspire CLI installations when they meet the minimum versions")]
+    [Parameter(HelpMessage="Reuse machine-wide .NET SDK and Aspire CLI installations when they meet the minimum versions")]
     [switch]$UseGlobalInstalls,
-
-    [Parameter(HelpMessage="Internal. VS Code installation directory to read Group Policy templates from")]
-    [string]$VSCodePath,
-
-    [Parameter(HelpMessage="Skip the portable VS Code check and installation")]
-    [switch]$SkipVSCode,
-
-    [Parameter(HelpMessage="Skip the VS Code administrative templates check and installation")]
-    [switch]$SkipAdminTemplates,
     
     [Parameter(HelpMessage="Repository to download quickstart files from")]
     [string]$RepoUrl = "https://github.com/microsoft/vsmarketplace",
     
     [Parameter(HelpMessage="Branch to download quickstart files from (use to test unmerged preview changes)")]
     [string]$RepoBranch = "main",
-    
-    [Parameter(HelpMessage="Client(s) to support: VSCode, VS, or Both. Prompts if omitted.")]
-    [ValidateSet('VSCode', 'VS', 'Both')]
-    [string]$Clients,
     
     [Parameter(HelpMessage="Proceed even if the Visual Studio version cannot be verified")]
     [switch]$SkipVSVersionCheck
@@ -157,9 +81,9 @@ $repoName = ($RepoUrl -split '/')[-1]
 # Keep the documented folder for the default branch, but sandbox other branches so a
 # previous run's files are never mistaken for the branch under test.
 $rootFolderName = if ($RepoBranch -eq 'main') {
-    "privatemarketplace-quickstart-preview"
+    "privatemarketplace-quickstart-vs"
 } else {
-    "privatemarketplace-quickstart-preview-$branchSlug"
+    "privatemarketplace-quickstart-vs-$branchSlug"
 }
 
 # Script configuration - modify these values to customize the behavior
@@ -173,7 +97,6 @@ $Config = @{
     # Version requirements
     DotNetVersion = "10.0.100"  # Minimum .NET SDK version. The latest patch in this major.minor channel is installed.
     AspireVersion = "13.0.0"    # Minimum Aspire CLI version accepted from a machine-wide installation.
-    VSCodeVersion = "1.99"      # Minimum VS Code version accepted from a machine-wide installation.
     MinimumVSVersion = "18.11"  # Minimum Visual Studio version required for VS extension support.
     
     # Installation paths
@@ -187,7 +110,6 @@ $Config = @{
 # Derived paths (calculated from configuration)
 $Paths = @{
     Root = $Config.RootPath
-    LocalVSCode = Join-Path $Config.RootPath ".vscode"
     LocalAspire = Join-Path $Config.RootPath ".aspire"
     # The Aspire CLI is installed under <LocalAspire>\bin. For script-route installs the CLI
     # treats the parent of its own bin directory as ASPIRE_HOME, so this keeps ASPIRE_HOME on
@@ -195,7 +117,6 @@ $Paths = @{
     # aspire.config.json and write cache, cli, and logs folders next to the AppHost.
     LocalAspireBin = Join-Path $Config.RootPath ".aspire\bin"
     LocalDotnet = Join-Path $Config.RootPath ".dotnet"
-    Policies = Join-Path $Config.RootPath ".vscode\policies"
 }
 #endregion Configuration
 
@@ -428,25 +349,6 @@ function New-DirectoryIfNeeded {
     }
 }
 
-<#
-.SYNOPSIS
-    Checks if VS Code administrative templates are installed.
-#>
-function Test-AdminTemplatesInstalled {
-    $policyDefinitionsPath = Join-Path $env:WINDIR "PolicyDefinitions"
-    $admxPath = Join-Path $policyDefinitionsPath "VSCode.admx"
-    return (Test-Path $admxPath)
-}
-
-<#
-.SYNOPSIS
-    Returns the PowerShell executable to use for elevated self-invocation.
-.DESCRIPTION
-    Prefers PowerShell 7 (pwsh.exe) when available, and falls back to Windows
-    PowerShell (powershell.exe), which is present on all supported Windows
-    versions. The elevated code paths only use cmdlets available in 5.1, so
-    either host works.
-#>
 function Get-PowerShellExecutable {
     if (Test-CommandExists "pwsh") {
         return "pwsh.exe"
@@ -654,88 +556,12 @@ function Get-GlobalAspireInfo {
 
 <#
 .SYNOPSIS
-    Finds a machine-wide VS Code installation that meets the minimum version.
-.OUTPUTS
-    An object with Version, Root (install directory) and Exe (Code.exe), or $null.
+    Locates vswhere.exe.
+.DESCRIPTION
+    vswhere ships with the Visual Studio Installer rather than with Visual Studio itself, so
+    it is normally under Program Files (x86) even for 64-bit installs. It can be absent if the
+    Installer was removed or damaged, so the caller must handle $null.
 #>
-function Get-GlobalVSCodeInfo {
-    param([string]$MinimumVersion)
-
-    $candidateRoots = @()
-
-    # The 'code' command is a shim at <root>\bin\code.cmd
-    $command = Get-Command code -ErrorAction SilentlyContinue
-    if ($command) {
-        $candidateRoots += (Split-Path -Parent (Split-Path -Parent $command.Source))
-    }
-
-    $candidateRoots += @(
-        (Join-Path $env:ProgramFiles "Microsoft VS Code"),
-        (Join-Path ${env:ProgramFiles(x86)} "Microsoft VS Code"),
-        (Join-Path $env:LOCALAPPDATA "Programs\Microsoft VS Code")
-    )
-
-    $root = $null
-    foreach ($candidate in $candidateRoots) {
-        if ([string]::IsNullOrWhiteSpace($candidate)) { continue }
-        if (Test-Path (Join-Path $candidate "Code.exe")) { $root = $candidate; break }
-    }
-    if (-not $root) { return $null }
-
-    # Prefer the CLI shim for the version; it prints version, commit, then architecture
-    $rawVersion = $null
-    $shim = Join-Path $root "bin\code.cmd"
-    if (Test-Path $shim) {
-        $shimResult = Invoke-NativeCommand -FilePath $shim -Arguments "--version"
-        if ($null -ne $shimResult -and $shimResult.ExitCode -eq 0) {
-            $rawVersion = ($shimResult.StandardOutput -split "`r?`n" | Select-Object -First 1)
-        }
-    }
-
-    # Fall back to product.json, which may sit under a commit-hash folder
-    if ([string]::IsNullOrWhiteSpace($rawVersion)) {
-        $productJson = Get-ChildItem -Path $root -Filter "product.json" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
-        if ($productJson) {
-            try { $rawVersion = (Get-Content $productJson.FullName -Raw | ConvertFrom-Json).version } catch { }
-        }
-    }
-
-    $version = ConvertTo-ComparableVersion $rawVersion
-    $minimum = ConvertTo-ComparableVersion $MinimumVersion
-    if ($version -and $minimum -and $version -ge $minimum) {
-        return [pscustomobject]@{
-            Version = $version
-            Root    = $root
-            Exe     = Join-Path $root "Code.exe"
-        }
-    }
-
-    return $null
-}
-function Get-SupportedClients {
-    param([string]$Preselected)
-    
-    if ($Preselected) {
-        return $Preselected
-    }
-    
-    Write-Host "`nWhich client(s) should the Private Marketplace support?" -ForegroundColor Cyan
-    Write-Host "  [1] VS Code" -ForegroundColor Gray
-    Write-Host "  [2] Visual Studio" -ForegroundColor Gray
-    Write-Host "  [3] Both" -ForegroundColor Gray
-    Write-Host "  Visual Studio must already be installed; this script will not install it." -ForegroundColor DarkGray
-    
-    while ($true) {
-        $answer = (Read-Host "`nEnter your choice (1-3)").Trim()
-        switch -Regex ($answer) {
-            '^(1|vscode|vs code|code)$' { return 'VSCode' }
-            '^(2|vs|visualstudio|visual studio)$' { return 'VS' }
-            '^(3|both)$' { return 'Both' }
-            default { Write-Host "  Please enter 1, 2, or 3." -ForegroundColor Yellow }
-        }
-    }
-}
-
 function Find-VSWhere {
     $candidates = @()
     if (${env:ProgramFiles(x86)}) {
@@ -864,281 +690,9 @@ function Get-VisualStudioInstallation {
 # Check if running as administrator
 $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
-# If -InstallAdminTemplates parameter is passed, only install templates and exit
-if ($InstallAdminTemplates) {
-    if (-not $isAdmin) {
-        Write-Host "Error: Must run as administrator to install administrative templates." -ForegroundColor Red
-        Read-Host "Press Enter to continue..."
-        exit 1
-    }
 
-    # Use configured paths. -VSCodePath lets the caller point at a machine-wide installation.
-    $rootPath = $Paths.Root
-    if (-not [string]::IsNullOrWhiteSpace($VSCodePath)) {
-        $localVSCodePath = $VSCodePath
-    } else {
-        $localVSCodePath = $Paths.LocalVSCode
-    }
-    
-    # Set up logging in root folder (must be done before Start-Transcript)
-    $logFile = Join-Path $rootPath "vscode-admin-template-install.log"
-    $errorLogFile = "$logFile.err"
-    
-    # Create root path if it doesn't exist
-    if (-not (Test-Path $rootPath)) {
-        New-Item -ItemType Directory -Path $rootPath -Force | Out-Null
-    }
-    
-    # Start transcript to capture all output
-    Start-Transcript -Path $logFile -Force
-    
-    # Policies are inside the VS Code installation, check multiple possible locations
-    $vscodePolicyPath = $null
-    $possiblePolicyPaths = @(
-        (Join-Path $localVSCodePath "resources\app\product.json"),
-        (Join-Path $localVSCodePath "Code.exe")
-    )
-    
-    # Find VS Code installation by looking for key files
-    $vscodeFound = $false
-    foreach ($testPath in $possiblePolicyPaths) {
-        if (Test-Path $testPath) {
-            $vscodeFound = $true
-            break
-        }
-    }
-    
-    if (-not $vscodeFound) {
-        Write-Host "Error: VS Code installation not found at: $localVSCodePath" -ForegroundColor Red
-        Write-Host "Please ensure VS Code is installed before installing administrative templates." -ForegroundColor Yellow
-        Read-Host "Press Enter to exit"
-        exit 1
-    }
-    
-    # Try to find policies folder in common locations.
-    # Portable builds keep them under resources\app\policies; machine-wide installations
-    # nest resources under a commit-hash folder, for example <root>\520fb30b2d\policies.
-    $policySearchPaths = @(
-        (Join-Path $localVSCodePath "resources\app\policies"),
-        (Join-Path $localVSCodePath "policies")
-    )
 
-    foreach ($childDir in (Get-ChildItem -Path $localVSCodePath -Directory -ErrorAction SilentlyContinue)) {
-        $policySearchPaths += (Join-Path $childDir.FullName "policies")
-        $policySearchPaths += (Join-Path $childDir.FullName "resources\app\policies")
-    }
-    
-    # Pick a policies folder, preferring one that also ships localized .adml files.
-    # Machine-wide VS Code installations ship VSCode.admx only, while the portable build
-    # ships .admx plus a folder of .adml language files.
-    $admxCandidates = @()
-    foreach ($searchPath in $policySearchPaths) {
-        if (Test-Path (Join-Path $searchPath "VSCode.admx")) {
-            $admxCandidates += $searchPath
-        }
-    }
-
-    $vscodePolicyPath = $admxCandidates | Where-Object {
-        (Get-ChildItem -Path $_ -Filter "VSCode.adml" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1)
-    } | Select-Object -First 1
-
-    if (-not $vscodePolicyPath) {
-        $vscodePolicyPath = $admxCandidates | Select-Object -First 1
-    }
-    
-    if (-not $vscodePolicyPath) {
-        Write-Host "Error: Policies folder not found in VS Code installation." -ForegroundColor Red
-        Write-Host "Searched locations:" -ForegroundColor Gray
-        foreach ($searchPath in $policySearchPaths) {
-            Write-Host "  - $searchPath" -ForegroundColor Gray
-        }
-        Read-Host "Press Enter to exit"
-        exit 1
-    }
-        
-    Write-Host "Installing VS Code administrative templates..." -ForegroundColor Cyan
-    Write-Host "Root path: $rootPath" -ForegroundColor Gray
-    Write-Host "VS Code path: $localVSCodePath" -ForegroundColor Gray
-    Write-Host "Policy source path: $vscodePolicyPath" -ForegroundColor Gray
-    
-    try {
-        $policyDefinitionsPath = Join-Path $env:WINDIR "PolicyDefinitions"
-        Write-Host "Policy destination path: $policyDefinitionsPath" -ForegroundColor Gray
-        
-        # Copy main ADMX file
-        $admxSource = Join-Path $vscodePolicyPath "VSCode.admx"
-        $admxDest = Join-Path $policyDefinitionsPath "VSCode.admx"
-        
-        Write-Host "Looking for ADMX file at: $admxSource" -ForegroundColor Gray
-        
-        if (-not (Test-Path $admxSource)) {
-            Write-Host "Error: VSCode.admx not found at: $admxSource" -ForegroundColor Red
-            if (Test-Path $vscodePolicyPath) {
-                Write-Host "Policies folder contents: $(( Get-ChildItem -Path $vscodePolicyPath).Name -join ', ')" -ForegroundColor Gray
-            }
-            Stop-Transcript
-            Read-Host "Press Enter to exit"
-            exit 1
-        }
-        
-        Copy-Item -Path $admxSource -Destination $admxDest -Force
-        Write-Host "  Copied VSCode.admx to PolicyDefinitions" -ForegroundColor Green
-        
-        # Get all language folders in Windows PolicyDefinitions
-        $windowsLangFolders = Get-ChildItem -Path $policyDefinitionsPath -Directory | Where-Object { $_.Name -match '^[a-z]{2}-[a-z]{2}$' }
-        Write-Host "Found $($windowsLangFolders.Count) language folders in Windows PolicyDefinitions" -ForegroundColor Gray
-        
-        # Copy matching language ADML files
-        $copiedCount = 0
-        foreach ($langFolder in $windowsLangFolders) {
-            $vscodeLangPath = Join-Path $vscodePolicyPath $langFolder.Name
-            $admlSource = Join-Path $vscodeLangPath "VSCode.adml"
-            
-            if (Test-Path $admlSource) {
-                $admlDest = Join-Path (Join-Path $policyDefinitionsPath $langFolder.Name) "VSCode.adml"
-                Copy-Item -Path $admlSource -Destination $admlDest -Force
-                Write-Host "  Copied VSCode.adml for language: $($langFolder.Name)" -ForegroundColor Green
-                $copiedCount++
-            }
-        }
-        
-        Write-Host "Administrative templates installed successfully ($copiedCount language files)." -ForegroundColor Green
-        
-        # Verify installation
-        Write-Host "`nVerifying installation..." -ForegroundColor Cyan
-        $verificationFailed = $false
-        
-        # Check ADMX file
-        if (-not (Test-Path $admxDest)) {
-            Write-Host "  ERROR: VSCode.admx not found at destination: $admxDest" -ForegroundColor Red
-            $verificationFailed = $true
-        } else {
-            Write-Host "  ✓ VSCode.admx verified" -ForegroundColor Green
-        }
-        
-        # Check language files. Some VS Code installations ship VSCode.admx without any
-        # .adml files; that is not an installation failure, but Group Policy Editor will
-        # not have localized strings for the settings.
-        $admlAvailable = $null -ne (Get-ChildItem -Path $vscodePolicyPath -Filter "VSCode.adml" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1)
-
-        if ($copiedCount -gt 0) {
-            Write-Host "  ✓ $copiedCount language file(s) verified" -ForegroundColor Green
-        } elseif (-not $admlAvailable) {
-            Write-Host "  WARNING: This VS Code installation does not include VSCode.adml language files." -ForegroundColor Yellow
-            Write-Host "           The policy settings may appear without localized names in Group Policy Editor." -ForegroundColor Yellow
-            Write-Host "           Re-run without -UseGlobalInstalls to use the portable VS Code, which includes them." -ForegroundColor Yellow
-        } else {
-            Write-Host "  WARNING: No language files were copied" -ForegroundColor Yellow
-            $verificationFailed = $true
-        }
-        
-        if ($verificationFailed) {
-            Write-Host "`n═══════════════════════════════════════════════════════════" -ForegroundColor Red
-            Write-Host "Installation Verification FAILED" -ForegroundColor Red
-            Write-Host "═══════════════════════════════════════════════════════════" -ForegroundColor Red
-            Write-Host "The administrative templates were not installed correctly." -ForegroundColor Yellow
-            Write-Host "`nSource location: $vscodePolicyPath" -ForegroundColor Gray
-            Write-Host "Destination: $policyDefinitionsPath" -ForegroundColor Gray
-            Write-Host "Log file: $logFile" -ForegroundColor Gray
-            Write-Host "`nPlease review the log and try again." -ForegroundColor Yellow
-            Write-Host "═══════════════════════════════════════════════════════════`n" -ForegroundColor Red
-            Stop-Transcript
-            Read-Host "Press Enter to exit"
-            exit 1
-        }
-        
-        Write-Host "`nInstallation verification passed!" -ForegroundColor Green
-        Stop-Transcript
-        exit 0
-    } catch {
-        Write-Host "Error installing administrative templates: $_" -ForegroundColor Red
-        Write-Host "Error details: $($_.Exception.Message)" -ForegroundColor Red
-        Write-Host "Stack trace: $($_.ScriptStackTrace)" -ForegroundColor Gray
-        Stop-Transcript
-        
-        # Copy transcript to error log as well
-        if (Test-Path $logFile) {
-            Copy-Item -Path $logFile -Destination $errorLogFile -Force
-        }
-        
-        Write-Host "`n═══════════════════════════════════════════════════════════" -ForegroundColor Red
-        Write-Host "Installation FAILED" -ForegroundColor Red
-        Write-Host "═══════════════════════════════════════════════════════════" -ForegroundColor Red
-        Write-Host "Log file: $logFile" -ForegroundColor Gray
-        Write-Host "Error log: $errorLogFile" -ForegroundColor Gray
-        Write-Host "═══════════════════════════════════════════════════════════`n" -ForegroundColor Red
-        Read-Host "Press Enter to exit"
-        exit 1
-    }
-}
-
-# If -RemoveAdminTemplates parameter is passed, only remove templates and exit
-if ($RemoveAdminTemplates) {
-    if (-not $isAdmin) {
-        Write-Host "Error: Must run as administrator to remove administrative templates." -ForegroundColor Red
-        Read-Host "Press Enter to continue..."
-        exit 1
-    }
-    
-    Write-Host "Removing VS Code administrative templates..." -ForegroundColor Cyan
-    
-    try {
-        $policyDefinitionsPath = Join-Path $env:WINDIR "PolicyDefinitions"
-        $admxPath = Join-Path $policyDefinitionsPath "VSCode.admx"
-        
-        Write-Host "Policy destination path: $policyDefinitionsPath" -ForegroundColor Gray
-        
-        # Remove main ADMX file
-        if (Test-Path $admxPath) {
-            Remove-Item -Path $admxPath -Force -ErrorAction Stop
-            Write-Host "  Removed VSCode.admx" -ForegroundColor Green
-        } else {
-            Write-Host "  VSCode.admx not found (already removed)" -ForegroundColor Gray
-        }
-        
-        # Remove ADML files from language folders
-        $langFolders = Get-ChildItem -Path $policyDefinitionsPath -Directory | Where-Object { $_.Name -match '^[a-z]{2}-[a-z]{2}$' }
-        $removedAdmlCount = 0
-        
-        foreach ($langFolder in $langFolders) {
-            $admlPath = Join-Path $langFolder.FullName "VSCode.adml"
-            if (Test-Path $admlPath) {
-                Remove-Item -Path $admlPath -Force -ErrorAction SilentlyContinue
-                Write-Host "  Removed VSCode.adml for language: $($langFolder.Name)" -ForegroundColor Green
-                $removedAdmlCount++
-            }
-        }
-        
-        Write-Host "Administrative templates removed successfully ($removedAdmlCount language files)." -ForegroundColor Green
-        exit 0
-    } catch {
-        Write-Host "Error removing administrative templates: $_" -ForegroundColor Red
-        Write-Host "Error details: $($_.Exception.Message)" -ForegroundColor Red
-        Read-Host "Press Enter to exit"
-        exit 1
-    }
-}
-
-Write-StatusMessage "Private Marketplace Quickstart" -Level Info
-
-# Ask which client(s) to support; this determines which prerequisites are required.
-# -SkipVSCode is the equivalent switch in the non-preview quickstart, so honour it as a
-# Visual Studio-only run instead of prompting.
-if (-not $Clients -and $SkipVSCode) { $Clients = 'VS' }
-$Clients = Get-SupportedClients -Preselected $Clients
-$supportVSCode = $Clients -in @('VSCode', 'Both')
-$supportVS     = $Clients -in @('VS', 'Both')
-
-# Drive the existing VS Code gating from the client selection, so a Visual Studio-only run
-# skips the portable install and, downstream, the administrative templates.
-if (-not $supportVSCode) { $SkipVSCode = $true }
-
-$clientSummary = switch ($Clients) {
-    'VSCode' { 'VS Code' }
-    'VS'     { 'Visual Studio' }
-    'Both'   { 'Visual Studio and VS Code' }
-}
-Write-Host "`nConfiguring the Private Marketplace for: $clientSummary" -ForegroundColor Green
+Write-StatusMessage "Private Marketplace for Visual Studio Quickstart" -Level Info
 
 # Check and install prerequisites
 Write-StatusMessage "`nChecking prerequisites..." -Level Info
@@ -1147,7 +701,6 @@ Write-StatusMessage "`nChecking prerequisites..." -Level Info
 $missingPrereqs = @()
 $blockingPrereqs = @()  # Prerequisites this script cannot install on the user's behalf
 $dockerInstalled = $false
-$vscodeInstalled = $false
 $aspireInstalled = $false
 $dotnetInstalled = $false
 $repoExists = $false
@@ -1159,32 +712,20 @@ $repoBranch = $Config.RepoBranch
 $rootPath = $Paths.Root
 $dotnetVersion = $Config.DotNetVersion
 $minimumVSVersion = [version]$Config.MinimumVSVersion
-$localVSCodePath = $Paths.LocalVSCode
 $localAspirePath = $Paths.LocalAspire
 $localAspireBinPath = $Paths.LocalAspireBin
 $localDotnetPath = $Paths.LocalDotnet
-$policiesPath = $Paths.Policies
 
 # Effective tool locations. These default to the portable copies in the quickstart folder and
 # are redirected to machine-wide installations when -UseGlobalInstalls finds suitable versions.
-$effectiveVSCodeRoot = $localVSCodePath
 $effectiveDotnetRoot = $localDotnetPath
 $effectiveAspireExe  = Join-Path $localAspireBinPath "aspire.exe"
-$usingGlobalVSCode   = $false
 $usingGlobalDotnet   = $false
 $usingGlobalAspire   = $false
 
 if ($UseGlobalInstalls) {
     Write-Host "`nLooking for machine-wide installations (-UseGlobalInstalls)..." -ForegroundColor Cyan
 
-    $globalVSCode = Get-GlobalVSCodeInfo -MinimumVersion $Config.VSCodeVersion
-    if ($globalVSCode) {
-        Write-Host "  VS Code $($globalVSCode.Version) found at: $($globalVSCode.Root)" -ForegroundColor Green
-        $effectiveVSCodeRoot = $globalVSCode.Root
-        $usingGlobalVSCode = $true
-    } else {
-        Write-Host "  No machine-wide VS Code $($Config.VSCodeVersion)+ found; a portable copy will be used" -ForegroundColor Yellow
-    }
 
     $globalDotnet = Get-GlobalDotNetInfo -MinimumVersion $Config.DotNetVersion
     if ($globalDotnet) {
@@ -1230,69 +771,42 @@ try {
     }
 }
 
-# Check VS Code
-Write-Host "Checking for local VS Code..." -ForegroundColor Gray
 
-# Check if root doesn't exist, VS Code can't exist either
-if ($SkipVSCode) {
-    Write-Host "  Skipped (-SkipVSCode)" -ForegroundColor Gray
-    $vscodeInstalled = $true
-} elseif ($usingGlobalVSCode) {
-    Write-Host "  Skipped, using the machine-wide installation" -ForegroundColor Green
-    $vscodeInstalled = $true
-} elseif (-not (Test-Path $rootPath)) {
-    Write-Host "  Local VS Code not found (quickstart folder not present)" -ForegroundColor Yellow
-    $missingPrereqs += New-PrerequisiteInfo -Name "VS Code (portable)" -InstallMethod "vscode-local" `
-        -InstallPath $localVSCodePath -ManualUrl "https://code.visualstudio.com/"
-} else {
-    $vscodeExePath = Join-Path $localVSCodePath "Code.exe"
-    
-    if (Test-Path $vscodeExePath) {
-        Write-Host "  Local VS Code found at: $localVSCodePath" -ForegroundColor Green
-        $vscodeInstalled = $true
-    } else {
-        Write-Host "  Local VS Code not found" -ForegroundColor Yellow
-        $missingPrereqs += New-PrerequisiteInfo -Name "VS Code (portable)" -InstallMethod "vscode-local" `
-            -InstallPath $localVSCodePath -ManualUrl "https://code.visualstudio.com/"
-    }
-}
 
 # Check Visual Studio. This script never installs Visual Studio; it only verifies that a new
 # enough installation is already present.
-if ($supportVS) {
-    Write-Host "Checking for Visual Studio $minimumVSVersion or later..." -ForegroundColor Gray
-    $vsInstall = Get-VisualStudioInstallation
-    
-    if ($SkipVSVersionCheck) {
-        Write-Host "  Skipping the Visual Studio version check (-SkipVSVersionCheck)." -ForegroundColor Yellow
-        if ($vsInstall.Status -eq 'Found') {
-            Write-Host "  Detected: $($vsInstall.DisplayName) ($($vsInstall.Version))" -ForegroundColor Gray
-        }
-    } elseif ($vsInstall.Status -eq 'Found' -and $vsInstall.Version -ge $minimumVSVersion) {
-        Write-Host "  Visual Studio detected: $($vsInstall.DisplayName) ($($vsInstall.Version))" -ForegroundColor Green
-        Write-Host "    $($vsInstall.Path)" -ForegroundColor Gray
-    } elseif ($vsInstall.Status -eq 'Found') {
-        Write-Host "  Visual Studio $($vsInstall.Version) found, but $minimumVSVersion or later is required" -ForegroundColor Yellow
-        Write-Host "    $($vsInstall.DisplayName)" -ForegroundColor Gray
-        Write-Host "    $($vsInstall.Path)" -ForegroundColor Gray
-        $blockingPrereqs += New-PrerequisiteInfo -Name "Visual Studio $minimumVSVersion or later" `
-            -InstallMethod "manual" -ManualUrl "https://visualstudio.microsoft.com/downloads/" `
-            -Version "$($vsInstall.Version) installed" -InstallPath $vsInstall.Path
-    } elseif ($vsInstall.Status -eq 'NotFound') {
-        Write-Host "  Visual Studio not found" -ForegroundColor Yellow
-        $blockingPrereqs += New-PrerequisiteInfo -Name "Visual Studio $minimumVSVersion or later" `
-            -InstallMethod "manual" -ManualUrl "https://visualstudio.microsoft.com/downloads/" `
-            -Version "not installed"
-    } else {
-        # Detection itself failed. Visual Studio may well be installed and new enough, so warn
-        # and continue rather than blocking on something we could not actually determine.
-        Write-Host "  Could not determine the Visual Studio version." -ForegroundColor Yellow
-        Write-Host "    vswhere.exe was not found and the Visual Studio Installer's instance" -ForegroundColor Gray
-        Write-Host "    data could not be read. This does not necessarily mean Visual Studio" -ForegroundColor Gray
-        Write-Host "    is missing; the Visual Studio Installer may have been removed." -ForegroundColor Gray
-        Write-Host "    Ensure Visual Studio $minimumVSVersion or later is installed before using" -ForegroundColor Gray
-        Write-Host "    Visual Studio extensions from the Private Marketplace." -ForegroundColor Gray
+Write-Host "Checking for Visual Studio $minimumVSVersion or later..." -ForegroundColor Gray
+$vsInstall = Get-VisualStudioInstallation
+
+if ($SkipVSVersionCheck) {
+    Write-Host "  Skipping the Visual Studio version check (-SkipVSVersionCheck)." -ForegroundColor Yellow
+    if ($vsInstall.Status -eq 'Found') {
+        Write-Host "  Detected: $($vsInstall.DisplayName) ($($vsInstall.Version))" -ForegroundColor Gray
     }
+} elseif ($vsInstall.Status -eq 'Found' -and $vsInstall.Version -ge $minimumVSVersion) {
+    Write-Host "  Visual Studio detected: $($vsInstall.DisplayName) ($($vsInstall.Version))" -ForegroundColor Green
+    Write-Host "    $($vsInstall.Path)" -ForegroundColor Gray
+} elseif ($vsInstall.Status -eq 'Found') {
+    Write-Host "  Visual Studio $($vsInstall.Version) found, but $minimumVSVersion or later is required" -ForegroundColor Yellow
+    Write-Host "    $($vsInstall.DisplayName)" -ForegroundColor Gray
+    Write-Host "    $($vsInstall.Path)" -ForegroundColor Gray
+    $blockingPrereqs += New-PrerequisiteInfo -Name "Visual Studio $minimumVSVersion or later" `
+        -InstallMethod "manual" -ManualUrl "https://visualstudio.microsoft.com/downloads/" `
+        -Version "$($vsInstall.Version) installed" -InstallPath $vsInstall.Path
+} elseif ($vsInstall.Status -eq 'NotFound') {
+    Write-Host "  Visual Studio not found" -ForegroundColor Yellow
+    $blockingPrereqs += New-PrerequisiteInfo -Name "Visual Studio $minimumVSVersion or later" `
+        -InstallMethod "manual" -ManualUrl "https://visualstudio.microsoft.com/downloads/" `
+        -Version "not installed"
+} else {
+    # Detection itself failed. Visual Studio may well be installed and new enough, so warn
+    # and continue rather than blocking on something we could not actually determine.
+    Write-Host "  Could not determine the Visual Studio version." -ForegroundColor Yellow
+    Write-Host "    vswhere.exe was not found and the Visual Studio Installer's instance" -ForegroundColor Gray
+    Write-Host "    data could not be read. This does not necessarily mean Visual Studio" -ForegroundColor Gray
+    Write-Host "    is missing; the Visual Studio Installer may have been removed." -ForegroundColor Gray
+    Write-Host "    Ensure Visual Studio $minimumVSVersion or later is installed before using" -ForegroundColor Gray
+    Write-Host "    Visual Studio extensions from the Private Marketplace." -ForegroundColor Gray
 }
 
 # Check Aspire CLI (local installation)
@@ -1405,14 +919,6 @@ if (Test-Path $rootPath) {
 # Check winget availability
 $wingetAvailable = $null -ne (Get-Command winget -ErrorAction SilentlyContinue)
 
-# Check if admin templates are needed.
-# -SkipVSCode implies -SkipAdminTemplates, because the templates are read from a VS Code
-# installation, and there is no local VS Code to read them from when it is skipped.
-if ($SkipVSCode -and -not $usingGlobalVSCode) {
-    $SkipAdminTemplates = $true
-}
-$adminTemplatesNeeded = (-not $SkipAdminTemplates) -and (-not (Test-AdminTemplatesInstalled))
-
 # Stop on prerequisites this script cannot install. Visual Studio in particular is never
 # installed here, so the user has to resolve it before the quickstart can continue.
 if ($blockingPrereqs.Count -gt 0) {
@@ -1431,18 +937,15 @@ if ($blockingPrereqs.Count -gt 0) {
         }
     }
     Write-Host "`nUpdate or install Visual Studio using the Visual Studio Installer, then run this" -ForegroundColor Gray
-    Write-Host "script again. To continue without Visual Studio, re-run with: -Clients VSCode" -ForegroundColor Gray
+    Write-Host "script again." -ForegroundColor Gray
     exit 1
 }
 
 # Display summary if prerequisites are missing
-if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
+if ($missingPrereqs.Count -gt 0) {
     Write-Host "`n=== Missing Prerequisites ===" -ForegroundColor Yellow
     foreach ($prereq in $missingPrereqs) {
         Write-Host "  - $($prereq.Name)" -ForegroundColor Yellow
-    }
-    if ($adminTemplatesNeeded) {
-        Write-Host "  - VS Code Administrative Templates (requires admin privileges)" -ForegroundColor Yellow
     }
     
     Write-Host "`nThe following will be installed:" -ForegroundColor Cyan
@@ -1452,14 +955,6 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
             Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
         } elseif ($prereq.InstallMethod -eq "winget") {
             Write-Host "  - $($prereq.Name): via winget" -ForegroundColor Green
-            if ($prereq.ManualUrl) {
-                Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
-            }
-        } elseif ($prereq.InstallMethod -eq "vscode-local") {
-            Write-Host "  - $($prereq.Name): via local portable installation" -ForegroundColor Green
-            if ($prereq.InstallPath) {
-                Write-Host "    Target: $($prereq.InstallPath)" -ForegroundColor Gray
-            }
             if ($prereq.ManualUrl) {
                 Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
             }
@@ -1488,10 +983,6 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
                 Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
             }
         }
-    }
-    if ($adminTemplatesNeeded) {
-        Write-Host "  - VS Code Administrative Templates: via elevated script execution" -ForegroundColor Green
-        Write-Host "    Note: Requires administrator privileges (UAC prompt)" -ForegroundColor Gray
     }
     
     # Prompt for confirmation
@@ -1558,12 +1049,12 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
             Expand-Archive -Path $tempZipPath -DestinationPath $tempExtractPath -Force
             Write-Progress -Activity "Extracting Quickstart Files" -Completed
             
-            # Copy quicklaunch folder contents directly to root (excluding .dotnet, .aspire, .vscode)
-            $extractedquicklaunchFolder = Join-Path $tempExtractPath "$repoName-$branchSlug\privatemarketplace\preview\quickstart\aspire"
+            # Copy quicklaunch folder contents directly to root (excluding local tool folders)
+            $extractedquicklaunchFolder = Join-Path $tempExtractPath "$repoName-$branchSlug\privatemarketplace\preview\quickstart\vs"
             if (Test-Path $extractedquicklaunchFolder) {
                 # Get all items in quicklaunch folder except hidden tool folders
                 Get-ChildItem -Path $extractedquicklaunchFolder | Where-Object { 
-                    $_.Name -notin @('.dotnet', '.vscode')
+                    $_.Name -notin @('.dotnet')
                 } | ForEach-Object {
                     Copy-Item -Path $_.FullName -Destination $rootPath -Recurse -Force
                 }
@@ -1696,52 +1187,6 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
         }
     }
     
-    # Install VS Code portable if missing
-    if (-not $SkipVSCode -and -not $vscodeInstalled) {
-        Write-Host "`nInstalling VS Code (portable)..." -ForegroundColor Cyan
-        
-        try {
-            New-DirectoryIfNeeded -Path $localVSCodePath
-            
-            # Download VS Code portable ZIP
-            $vscodeZipUrl = "https://update.code.visualstudio.com/latest/win32-x64-archive/stable"
-            $vscodeZipPath = Join-Path $env:TEMP "vscode-portable.zip"
-            
-            $downloadSuccess = Invoke-WithProgress -Activity "Installing VS Code" -Status "Downloading VS Code portable..." -ScriptBlock {
-                Get-FileWithVerification -Url $vscodeZipUrl -OutFile $vscodeZipPath
-            }
-            if (-not $downloadSuccess) {
-                throw "Failed to download VS Code"
-            }
-            Write-Host "  VS Code downloaded successfully." -ForegroundColor Green
-            
-            # Extract VS Code
-            Invoke-WithProgress -Activity "Installing VS Code" -Status "Extracting VS Code..." -ScriptBlock {
-                Expand-Archive -Path $vscodeZipPath -DestinationPath $localVSCodePath -Force
-            }
-            
-            # Create data directory for portable mode
-            $vscodeDataPath = Join-Path $localVSCodePath "data"
-            New-Item -ItemType Directory -Path $vscodeDataPath -Force | Out-Null
-            
-            # Clean up
-            Remove-Item $vscodeZipPath -Force -ErrorAction SilentlyContinue
-            
-            # Verify Code.exe exists
-            $vscodeExePath = Join-Path $localVSCodePath "Code.exe"
-            if (Test-Path $vscodeExePath) {
-                Write-Host "  VS Code installed successfully." -ForegroundColor Green
-                $vscodeInstalled = $true
-                
-            } else {
-                throw "Code.exe not found after installation"
-            }
-        } catch {
-            Write-Host "  Error installing VS Code: $_" -ForegroundColor Red
-            Write-Host "  Please install manually from: https://code.visualstudio.com/" -ForegroundColor Yellow
-            exit 1
-        }
-    }
     
     # Install Aspire CLI locally if missing
     if (-not $aspireInstalled) {
@@ -1803,60 +1248,10 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
         $script:dockerFirstTimeInstall = $true
     }
     
-    # Re-check if admin templates are still needed after installation
-    $adminTemplatesNeeded = (-not $SkipAdminTemplates) -and (-not (Test-AdminTemplatesInstalled))
 } else {
     Write-Host "`nAll prerequisites satisfied." -ForegroundColor Green
 }
 
-# Check if VS Code is installed but admin templates are not (only if we haven't already prompted)
-if (-not $SkipAdminTemplates -and -not (Test-AdminTemplatesInstalled)) {
-    # Prompt before launching script as admin to install administrative templates
-    Write-Host "`nVS Code Administrative Templates" -ForegroundColor Cyan
-    Write-Host "================================" -ForegroundColor Cyan
-    Write-Host "The script needs to install VS Code Group Policy templates to the Windows" -ForegroundColor Gray
-    Write-Host "PolicyDefinitions folder. This requires administrator privileges." -ForegroundColor Gray
-    Write-Host "`nYou will be prompted to grant elevated access (UAC prompt).`n" -ForegroundColor Yellow
-    $installTemplates = Read-Host "Do you want to install the administrative templates now? (y/n)"
-    
-    if ($installTemplates -eq 'y') {
-        Write-Host "  Installing VS Code administrative templates..." -ForegroundColor Gray
-        $scriptPath = Join-Path $rootPath "Run-PrivateMarketplace.ps1"
-        
-        # Log file path in root folder
-        $logFile = Join-Path $rootPath "vscode-admin-template-install.log"
-        
-        try {
-            # Launch the script with admin privileges, telling it which VS Code to read templates from
-            $psExe = Get-PowerShellExecutable
-            $templateArgs = "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -InstallAdminTemplates -VSCodePath `"$effectiveVSCodeRoot`""
-            $process = Start-Process -FilePath $psExe -ArgumentList $templateArgs -Verb RunAs -Wait -PassThru
-            
-            if ($process.ExitCode -eq 0) {
-                Write-Host "  Administrative templates installed successfully." -ForegroundColor Green
-            } elseif ($process.ExitCode -eq 64) {
-                Write-Host "  Warning: UAC cancelled. Templates not installed." -ForegroundColor Yellow
-            } else {
-                Write-Host "  Warning: Installation exited with code $($process.ExitCode)" -ForegroundColor Yellow
-                if (Test-Path $logFile) { Write-Host "  Log: $logFile" -ForegroundColor Gray }
-            }
-        } catch {
-            Write-Host "  Warning: Could not install templates: $_" -ForegroundColor Yellow
-            if (Test-Path $logFile) { Write-Host "  Log: $logFile" -ForegroundColor Gray }
-        }
-    } else {
-        Write-Host "`n  Skipping administrative template installation." -ForegroundColor Yellow
-        Write-Host "`n  To install manually, copy the following files:" -ForegroundColor Gray
-        Write-Host "    1. Copy VSCode.admx from:" -ForegroundColor Gray
-        Write-Host "       $policiesPath\VSCode.admx" -ForegroundColor Gray
-        Write-Host "       to: C:\Windows\PolicyDefinitions\VSCode.admx" -ForegroundColor Gray
-        Write-Host "`n    2. Copy language-specific VSCode.adml files from:" -ForegroundColor Gray
-        Write-Host "       $policiesPath\<language-code>\VSCode.adml" -ForegroundColor Gray
-        Write-Host "       to: C:\Windows\PolicyDefinitions\<language-code>\VSCode.adml" -ForegroundColor Gray
-        Write-Host "       (e.g., en-us, de-de, fr-fr, etc.)`n" -ForegroundColor Gray
-    }
-                
-}
 
 # Save the original directory
 $originalDirectory = Get-Location
@@ -2005,9 +1400,6 @@ try {
     $psi.EnvironmentVariables["DOTNET_MULTILEVEL_LOOKUP"] = "0"
     $psi.EnvironmentVariables["PATH"] = "$effectiveDotnetRoot;$($env:PATH)"
 
-    # Tell the AppHost where VS Code lives. Without this it looks for the portable copy
-    # in the quickstart folder, which is absent when a machine-wide VS Code is used.
-    $psi.EnvironmentVariables["QUICKSTART_VSCODE_PATH"] = Join-Path $effectiveVSCodeRoot "Code.exe"
     
     $process = [System.Diagnostics.Process]::Start($psi)
     $process.WaitForExit()
@@ -2023,13 +1415,12 @@ finally {
     Write-Host "`n" -ForegroundColor Cyan
     Write-Host "Quickstart has exited." -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "IMPORTANT: Unset the Extension Gallery Service URL Policy" -ForegroundColor Yellow
+    Write-Host "IMPORTANT: Disconnect Visual Studio from the Private Marketplace" -ForegroundColor Yellow
     Write-Host "===========================================" -ForegroundColor Yellow
-    Write-Host "To restore normal VS Code Marketplace access, you need to unset the" -ForegroundColor Gray
-    Write-Host "'Extension Gallery Service URL' Group Policy setting:" -ForegroundColor Gray
-    Write-Host "  1. Open Group Policy Editor (gpedit.msc)" -ForegroundColor Gray
-    Write-Host "  2. Navigate to: User Configuration > Administrative Templates > Visual Studio Code > Extensions" -ForegroundColor Gray
-    Write-Host "  3. Set 'Extension Gallery Service URL' to 'Not Configured'" -ForegroundColor Gray
+    Write-Host "To restore normal Visual Studio Marketplace access:" -ForegroundColor Gray
+    Write-Host "  1. In Visual Studio, select Tools > Options" -ForegroundColor Gray
+    Write-Host "  2. Search for 'private', then select Environment > Extensions" -ForegroundColor Gray
+    Write-Host "  3. Clear the 'Use private marketplace' checkbox" -ForegroundColor Gray
     Write-Host ""
     Write-Host "Temporary files location: $rootPath" -ForegroundColor Gray
     Write-Host ""
@@ -2118,40 +1509,6 @@ finally {
             Write-Host "You can manually delete: $rootPath" -ForegroundColor Yellow
         }
         
-        # Remove administrative templates if they were installed
-        if (Test-AdminTemplatesInstalled) {
-            Write-Host "`nVS Code Administrative Templates Removal" -ForegroundColor Cyan
-            Write-Host "=========================================" -ForegroundColor Cyan
-            Write-Host "The VS Code Group Policy templates are currently installed." -ForegroundColor Gray
-            Write-Host "Removing them requires administrator privileges." -ForegroundColor Gray
-            Write-Host "`nYou will be prompted to grant elevated access (UAC prompt).`n" -ForegroundColor Yellow
-            $removeTemplates = Read-Host "Do you want to remove the administrative templates? (y/n)"
-            
-            if ($removeTemplates -eq 'y') {
-                Write-Host "  Removing VS Code administrative templates..." -ForegroundColor Gray
-                $scriptPath = $MyInvocation.MyCommand.Path
-                
-                try {
-                    # Launch the script with admin privileges
-                    $psExe = Get-PowerShellExecutable
-                    $process = Start-Process -FilePath $psExe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -RemoveAdminTemplates" -Verb RunAs -Wait -PassThru
-                    
-                    if ($process.ExitCode -eq 0) {
-                        Write-Host "  Administrative templates removed successfully." -ForegroundColor Green
-                    } elseif ($process.ExitCode -eq 64) {
-                        Write-Host "  Warning: UAC cancelled. Templates not removed." -ForegroundColor Yellow
-                    } else {
-                        Write-Host "  Warning: Removal exited with code $($process.ExitCode)" -ForegroundColor Yellow
-                    }
-                } catch {
-                    Write-Host "  Warning: Could not remove templates: $_" -ForegroundColor Yellow
-                    Write-Host "  You can remove them manually from: $env:WINDIR\PolicyDefinitions" -ForegroundColor Gray
-                }
-            } else {
-                Write-Host "`n  Administrative templates will remain installed." -ForegroundColor Gray
-                Write-Host "  You can remove them manually from: $env:WINDIR\PolicyDefinitions" -ForegroundColor Gray
-            }
-        }
     } else {
         Write-Host "`nTemporary folder preserved at: $rootPath" -ForegroundColor Green
         Write-Host "`nTo run the Private Marketplace again:" -ForegroundColor Cyan

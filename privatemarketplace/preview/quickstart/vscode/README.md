@@ -1,11 +1,6 @@
-# Private Marketplace for Visual Studio - Quickstart
+# Private Marketplace for VS Code - Quickstart
 
-This quickstart walks you through setting up and testing a local Private Marketplace for the Visual Studio family of products using [Aspire](https://aspire.dev) on Windows. You'll learn how to install the marketplace, configure a client to use it, and explore different usage scenarios.
-
-Installing and hosting the marketplace is the same regardless of which client you use. Connecting a client to it is client-specific:
-
-- **Visual Studio Code** - connection instructions are available today.
-- **Visual Studio** - supported in this preview. Visual Studio extension support is enabled in the preview AppHost, and Visual Studio sample extensions are included. Connection guidance is coming soon.
+This quickstart walks you through setting up and testing a local Private Marketplace for Visual Studio Code using [Aspire](https://aspire.dev) on Windows. You'll learn how to install the marketplace, configure VS Code to use it, and explore different usage scenarios.
 
 ---
 
@@ -17,67 +12,7 @@ Before you begin, ensure you have:
 - **Docker Desktop** installed and running. If it's missing and `winget` is available, the setup script can install it for you after prompting for confirmation.
 - **PowerShell 5.1 or later** for running the setup script (Windows PowerShell or PowerShell 7)
 - **Internet access** to download the quickstart and its dependencies
-- **Visual Studio 18.11 or later** - only if you choose Visual Studio as a supported client. The script checks for it but **does not install it**; install or update it with the Visual Studio Installer.
 
-### Choose your clients
-
-When the script starts it asks which client(s) the Private Marketplace should support:
-
-```text
-Which client(s) should the Private Marketplace support?
-  [1] VS Code
-  [2] Visual Studio
-  [3] Both
-  Visual Studio must already be installed; this script will not install it.
-
-Enter your choice (1-3):
-```
-
-Your answer determines which prerequisites are required:
-
-| Choice | Portable VS Code | VS Code Group Policy templates | Visual Studio 18.11+ |
-|---|---|---|---|
-| VS Code | installed by script | offered by script | not checked |
-| Visual Studio | skipped | skipped | must already be installed |
-| Both | installed by script | offered by script | must already be installed |
-
-Docker, the .NET SDK, the Aspire CLI, and the quickstart files are always required.
-
-To skip the prompt, pass the choice on the command line:
-
-```powershell
-.\Run-PrivateMarketplace.ps1 -Clients Both   # or: VSCode, VS
-```
-
-`-Clients VS` is equivalent to `-SkipVSCode`, and `-SkipVSCode` on its own is treated as a Visual Studio-only run.
-
-If you choose Visual Studio and no installation of 18.11 or later is found, the script reports what it found and exits without changing anything:
-
-```text
-=== Action Required ===
-The following prerequisites must be installed manually before continuing:
-  - Visual Studio 18.11 or later
-    Current: 18.9.2 installed
-    Location: C:\Program Files\Microsoft Visual Studio\18\Enterprise
-    Download: https://visualstudio.microsoft.com/downloads/
-```
-
-#### How Visual Studio is detected
-
-The script looks for Visual Studio using `vswhere.exe`, and falls back to the Visual Studio
-Installer's instance data under `%ProgramData%` when `vswhere.exe` is unavailable. `vswhere.exe`
-ships with the Visual Studio *Installer* rather than with Visual Studio itself, so it can be
-absent if the Installer was removed. Build Tools installations are ignored because they have no
-IDE to host extensions.
-
-If neither source can be read, the script says so and continues rather than blocking, since a
-failed check does not mean Visual Studio is missing. Use `-SkipVSVersionCheck` to bypass the
-version requirement entirely.
-
-By default the quickstart installs its own portable copies of VS Code, the .NET SDK, and the Aspire CLI, so nothing already on the machine is used or altered. The `-UseGlobalInstalls` option changes that - see [Reusing existing installations](#reusing-existing-installations).
-
-> [!IMPORTANT]
-> Using a machine-wide VS Code installation means the quickstart's configuration is applied to the VS Code you use every day. The Group Policy setting in [Step 2](#step-2-configure-group-policy) changes the extension gallery for every VS Code installation on the machine, so your normal editor will use the Private Marketplace instead of the public Marketplace until you set the policy back to **Not Configured**. See [Restoring Normal Client Access](#restoring-normal-client-access) to undo it.
 
 ### Run the Setup Script
 
@@ -86,14 +21,12 @@ By default the quickstart installs its own portable copies of VS Code, the .NET 
 > Always verify the script's hash before executing. The expected hash can be found in the repository or release notes.
 
 The script will automatically:
-- Ask which client(s) to support, then check only the prerequisites those clients need
 - Check for and install missing prerequisites (after prompting for confirmation):
   - Docker Desktop (if not found)
-  - Download quickstart files to `$env:TEMP\privatemarketplace-quickstart-preview`
+  - Download quickstart files to `$env:TEMP\privatemarketplace-quickstart-vscode`
   - Portable VS Code (only when VS Code is a selected client)
   - Portable .NET SDK 10.0+
   - Portable Aspire CLI version 13+
-- Verify Visual Studio 18.11 or later is present (only when Visual Studio is a selected client) — it is never installed for you
 - Prompt you to install VS Code Group Policy templates (requires admin privileges - **optional**)
 - Start Docker Desktop if not running
 - Launch the Private Marketplace container via Aspire
@@ -103,7 +36,7 @@ Portable VS Code is installed even if you only plan to evaluate hosting. It's us
 > [!NOTE]
 > The VS Code Group Policy templates are optional. Answer `n` to skip them - the quickstart can still launch VS Code connected to your Private Marketplace. You can install them later with `.\Run-PrivateMarketplace.ps1 -InstallAdminTemplates` if you want to configure clients through Windows Group Policy.
 
-The Quickstart is installed into a temporary folder ($TEMP\privatemarketplace-quickstart-preview), along with all of the dependencies, except Docker. To remove the Quickstart and all the dependencies, just delete the temporary folder, and uninstall Docker, if desired. The script will attempt to uninstall Docker and remove the temporary folder after Quickstart exits.
+The Quickstart is installed into a temporary folder ($TEMP\privatemarketplace-quickstart-vscode), along with all of the dependencies, except Docker. To remove the Quickstart and all the dependencies, just delete the temporary folder, and uninstall Docker, if desired. The script will attempt to uninstall Docker and remove the temporary folder after Quickstart exits.
 
 The Private Marketplace Quickstart is installed using an installation script available for PowerShell on Windows.
 
@@ -112,7 +45,7 @@ The Private Marketplace Quickstart is installed using an installation script ava
 All commands in this quickstart run in a **PowerShell** terminal. Open one, then run:
 
 ```powershell
-irm https://raw.githubusercontent.com/microsoft/vsmarketplace/main/privatemarketplace/preview/quickstart/aspire/Run-PrivateMarketplace.ps1 | iex
+irm https://raw.githubusercontent.com/microsoft/vsmarketplace/main/privatemarketplace/preview/quickstart/vscode/Run-PrivateMarketplace.ps1 | iex
 ```
 
 Alternatively, you can download the script and run it as a two-step process:
@@ -122,7 +55,7 @@ Alternatively, you can download the script and run it as a two-step process:
 2. Download the script and save it as a file:
 
    ```powershell
-   irm https://raw.githubusercontent.com/microsoft/vsmarketplace/main/privatemarketplace/preview/quickstart/aspire/Run-PrivateMarketplace.ps1 -OutFile Run-PrivateMarketplace.ps1
+   irm https://raw.githubusercontent.com/microsoft/vsmarketplace/main/privatemarketplace/preview/quickstart/vscode/Run-PrivateMarketplace.ps1 -OutFile Run-PrivateMarketplace.ps1
    ```
 
 3. Review the script, then run it to install the required components and the Private Marketplace container:
@@ -141,7 +74,7 @@ have not merged yet, pass `-RepoBranch` (and optionally `-RepoUrl` to use a fork
 
 ```powershell
 $branch = 'dev/mcumming/privatemarketplace-preview-docs'
-irm "https://raw.githubusercontent.com/microsoft/vsmarketplace/$branch/privatemarketplace/preview/quickstart/aspire/Run-PrivateMarketplace.ps1" -OutFile Run-PrivateMarketplace.ps1
+irm "https://raw.githubusercontent.com/microsoft/vsmarketplace/$branch/privatemarketplace/preview/quickstart/vscode/Run-PrivateMarketplace.ps1" -OutFile Run-PrivateMarketplace.ps1
 .\Run-PrivateMarketplace.ps1 -RepoBranch $branch
 ```
 
@@ -152,9 +85,9 @@ irm "https://raw.githubusercontent.com/microsoft/vsmarketplace/$branch/privatema
 
 Branch names containing `/` are supported. When you use a branch other than `main`, the
 quickstart installs into a branch-specific folder
-(`$env:TEMP\privatemarketplace-quickstart-preview-<branch>`) so it cannot pick up stale files
+(`$env:TEMP\privatemarketplace-quickstart-vscode-<branch>`) so it cannot pick up stale files
 from an earlier run, and so it does not disturb an existing default installation. Substitute
-that folder for `$env:TEMP\privatemarketplace-quickstart-preview` in the steps below.
+that folder for `$env:TEMP\privatemarketplace-quickstart-vscode` in the steps below.
 
 You should see output similar to the following snippet:
   ```text
@@ -181,17 +114,17 @@ You should see output similar to the following snippet:
 
     The following will be installed:
     - VS Code (portable): via local portable installation
-       Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart-preview\.vscode
+       Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart-vscode\.vscode
        Source: https://code.visualstudio.com/
     - Aspire CLI (version 13+) (local): via local portable installation
-       Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart-preview\.aspire\bin
+       Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart-vscode\.aspire\bin
        Source: https://learn.microsoft.com/dotnet/aspire
     - .NET SDK 10.0.100+ (local): via dotnet-install script
-       Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart-preview\.dotnet
+       Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart-vscode\.dotnet
        Source: https://dotnet.microsoft.com/download/dotnet/10.0
     - Quickstart Files: via ZIP download
        Source: https://github.com/mcumming/vsmarketplace
-       Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart-preview
+       Target: C:\Users\mcumming\AppData\Local\Temp\privatemarketplace-quickstart-vscode
     - VS Code Administrative Templates: via elevated script execution
        Note: Requires administrator privileges (UAC prompt)
    
@@ -255,11 +188,9 @@ In the dashboard, you'll see a resource named **`visualstudio-private-marketplac
 
 ---
 
-## Part 2: Configuring Your Client
+## Part 2: Configuring VS Code
 
-Installation is complete and the marketplace is running. The next step depends on which client you're configuring.
-
-### Visual Studio Code
+Installation is complete and the marketplace is running. Now point VS Code at it.
 
 Now let's configure VS Code to use your Private Marketplace instead of the public VS Code Marketplace.
 
@@ -345,11 +276,6 @@ You configured Windows Group Policy to redirect VS Code's extension marketplace 
 
 **Congratulations!** VS Code is now connected to your Private Marketplace.
 
-### Visual Studio
-
-Connection guidance for Visual Studio is coming soon.
-
----
 
 ## Part 3: Usage Scenarios
 
@@ -361,8 +287,6 @@ The quickstart includes sample extensions, but you'll want to add your own, or r
 
 **Download VSIX Files**
 
-*Visual Studio Code*
-
 To download extension VSIX files from the public Marketplace for rehosting:
 
 1. Open VS Code (any instance connected to the public marketplace)
@@ -371,13 +295,9 @@ To download extension VSIX files from the public Marketplace for rehosting:
 4. Right-click the extension → **Download VSIX**
 5. Select the location to save the downloaded `.vsix` file to
 
-*Visual Studio*
-
-Guidance for obtaining Visual Studio extension packages is coming soon.
-
 **Add Extensions to the Marketplace**
 
-1. Open File Explorer and navigate to: `$env:TEMP\privatemarketplace-quickstart-preview\data\extensions`
+1. Open File Explorer and navigate to: `$env:TEMP\privatemarketplace-quickstart-vscode\data\extensions`
 2. Copy your `.vsix` files into this folder
 3. Refresh your marketplace home page in the browser - your new extensions will appear. The marketplace processes extensions as it discovers them, so it may take a few refreshes before they're all listed.
 4. In your client, reload the Extensions view to see the new extensions
@@ -429,9 +349,6 @@ To block a specific extension from an allowed publisher:
 3. Click **OK**
 4. Restart VS Code
 
-#### Visual Studio
-
-Guidance for restricting extensions in Visual Studio is coming soon.
 
 ### Scenario 3: Configure Upstreaming to Public Marketplace
 
@@ -451,7 +368,7 @@ To change the Upstreaming mode in the Quickstart:
 1. Close VS Code if it is open
 1. In the terminal running Aspire, press `Ctrl+C` to stop the AppHost
 1. When prompted to remove the temporary folder, answer **`n`**. Answering `y` deletes the quickstart and all of its dependencies.
-1. Open the `$env:TEMP\privatemarketplace-quickstart-preview\apphost.cs` file in an editor such as VS Code.
+1. Open the `$env:TEMP\privatemarketplace-quickstart-vscode\apphost.cs` file in an editor such as VS Code.
 1. Locate the following section:
 
    ```csharp
@@ -472,7 +389,7 @@ To change the Upstreaming mode in the Quickstart:
 1. Restart the quickstart from a PowerShell terminal:
 
    ```powershell
-   cd $env:TEMP\privatemarketplace-quickstart-preview
+   cd $env:TEMP\privatemarketplace-quickstart-vscode
    .\Run-PrivateMarketplace.ps1
    ```
 
@@ -485,14 +402,8 @@ To change the Upstreaming mode in the Quickstart:
 
 **Verify the change**
 
-*Visual Studio Code*
-
 1. Open VS Code from the Actions menu
 2. In the Extensions view, only extensions published through the Private Marketplace are listed and installable.
-
-*Visual Studio*
-
-Verification steps for Visual Studio are coming soon.
 
 ### Scenario 4: Viewing Marketplace Logs
 
@@ -526,7 +437,7 @@ Control your marketplace lifecycle:
 
 ## Part 4: Cleanup
 
-### Restoring Normal Client Access
+### Restoring Normal VS Code Access
 
 When you're done testing, restore your client to use the public marketplace.
 
@@ -544,15 +455,12 @@ If you configured Group Policy in Part 2, clear it:
 
 The portable VS Code instance launched by the quickstart is removed along with the temporary folder, so it needs no separate cleanup.
 
-#### Visual Studio
-
-Guidance for restoring Visual Studio is coming soon.
 
 ### Remove Installation Files
 
 1. In the terminal running Aspire, press `Ctrl+C` to stop it
 2. When prompted, choose **Yes (y)** to remove the temporary folder
-3. All quickstart files will be deleted from `$env:TEMP\privatemarketplace-quickstart-preview`
+3. All quickstart files will be deleted from `$env:TEMP\privatemarketplace-quickstart-vscode`
 
 **Optional: Remove Administrative Templates**
 
@@ -561,7 +469,7 @@ If you installed the VS Code Group Policy templates and want to remove them:
 1. Open PowerShell as Administrator
 2. Navigate to the temporary installation folder:
    ```powershell
-   cd $env:TEMP\privatemarketplace-quickstart-preview
+   cd $env:TEMP\privatemarketplace-quickstart-vscode
    ```
 3. Run the script with the remove templates parameter:
    ```powershell
@@ -574,7 +482,7 @@ If automatic cleanup fails, run the following in a PowerShell terminal:
 
 ```powershell
 # Remove temporary folder
-Remove-Item -Path "$env:TEMP\privatemarketplace-quickstart-preview" -Recurse -Force
+Remove-Item -Path "$env:TEMP\privatemarketplace-quickstart-vscode" -Recurse -Force
 
 # Remove Group Policy setting
 # Open Group Policy Editor (gpedit.msc) and set:
@@ -586,7 +494,7 @@ Remove-Item -Path "$env:TEMP\privatemarketplace-quickstart-preview" -Recurse -Fo
 
 ## Part 5: Troubleshooting
 
-### Visual Studio Code
+### VS Code
 
 **Group Policy Editor command not appearing?**
 
@@ -597,7 +505,7 @@ If you skipped the administrative templates installation during setup, or they f
 3. Open PowerShell as Administrator (right-click → Run as Administrator)
 4. Navigate to the temporary installation folder:
    ```powershell
-   cd $env:TEMP\privatemarketplace-quickstart-preview
+   cd $env:TEMP\privatemarketplace-quickstart-vscode
    ```
 5. Run the script with the install templates parameter:
    ```powershell

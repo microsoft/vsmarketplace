@@ -12,14 +12,12 @@ using Microsoft.Extensions.Logging;
 var builder = DistributedApplication.CreateBuilder(args);
 
 builder
-    .AddVSCodePrivateMarketplace()
+    .AddVisualStudioPrivateMarketplace()
     .WithMarketplaceConfiguration(
         organizationName: "Contoso",
         contactSupportUri: "mailto:privatemktplace@microsoft.com",
         upstreamingMode: MarketplaceUpstreamingMode.SearchAndAssets)
-    .WithEnvironment("FeatureManagement__VSExtensionSupport", "true")
-    .WithOpenGroupPolicyEditorCommand()
-    .WithOpenVSCodeCommand();
+    .WithEnvironment("FeatureManagement__VSExtensionSupport", "true");
 
 builder.Build().Run();
 
@@ -38,7 +36,7 @@ public static class MarketplaceExtensions
     /// </summary>
     public const string MarketplaceResourceName = "visualstudio-private-marketplace";
 
-    public static IResourceBuilder<ContainerResource> AddVSCodePrivateMarketplace(
+    public static IResourceBuilder<ContainerResource> AddVisualStudioPrivateMarketplace(
         this IDistributedApplicationBuilder builder,
         string name = MarketplaceResourceName,
         string containerImage = "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace")
@@ -52,7 +50,7 @@ public static class MarketplaceExtensions
                 name: name,
                 targetPort: 443)
             .WithUrlForEndpoint(name, annotation => annotation.DisplayText = "Home")
-            .WithUrl($"https://github.com/microsoft/vsmarketplace/blob/main/privatemarketplace/preview/quickstart/aspire/README.md", "README")
+            .WithUrl($"https://github.com/microsoft/vsmarketplace/blob/main/privatemarketplace/preview/quickstart/vs/README.md", "README")
             .WithBindMount(Path.Combine(Directory.GetCurrentDirectory(), "data", "extensions"), "/extensions")
             .WithBindMount(Path.Combine(Directory.GetCurrentDirectory(), "data", "logs"), "/logs")
             .WithOtlpExporter()
@@ -96,174 +94,6 @@ public static class MarketplaceExtensions
             .WithEnvironment("Marketplace__LogsDirectory", "/logs")
             .WithEnvironment("Marketplace__ExtensionSourceDirectory", "/extensions")
             .WithEnvironment("Marketplace__Upstreaming__Mode", upstreamingMode.ToString());
-    }
-
-    public static IResourceBuilder<ContainerResource> WithOpenVSCodeCommand(
-        this IResourceBuilder<ContainerResource> builder)
-    {
-        var resource = builder.Resource;
-        
-        return builder.WithCommand(
-            name: "open",
-            displayName: "Open VS Code",
-            executeCommand: context =>
-            {
-                try
-                {
-                    var endpoint = resource.Annotations.OfType<EndpointAnnotation>()
-                        .FirstOrDefault(e => e.Name == resource.Name);
-
-                    if (endpoint?.AllocatedEndpoint == null)
-                    {
-                        return Task.FromResult(new ExecuteCommandResult
-                        {
-                            Success = false,
-                            Message = "Marketplace endpoint not allocated."
-                        });
-                    }
-
-                    var marketplaceUrl = endpoint.AllocatedEndpoint.UriString;
-
-                    // Find VS Code. The quickstart script sets QUICKSTART_VSCODE_PATH when it is
-                    // using a machine-wide installation; otherwise use the portable copy.
-                    var vscodePath = Environment.GetEnvironmentVariable("QUICKSTART_VSCODE_PATH");
-
-                    if (string.IsNullOrWhiteSpace(vscodePath))
-                    {
-                        vscodePath = Path.Combine(Directory.GetCurrentDirectory(), ".vscode", "Code.exe");
-                    }
-
-                    if (!File.Exists(vscodePath))
-                    {
-                        return Task.FromResult(new ExecuteCommandResult
-                        {
-                            Success = false,
-                            Message = $"VS Code installation not found at: {vscodePath}"
-                        });
-                    }
-
-                    // Create isolated user data and extensions directories
-                    var userDataDir = Path.Combine(Directory.GetCurrentDirectory(), ".vscode-data");
-                    var extensionsDir = Path.Combine(Directory.GetCurrentDirectory(), ".vscode-extensions");
-                    Directory.CreateDirectory(userDataDir);
-                    Directory.CreateDirectory(extensionsDir);
-
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = vscodePath,
-                        Arguments = $"--user-data-dir \"{userDataDir}\" --extensions-dir \"{extensionsDir}\" --extensionGalleryServiceUrl {marketplaceUrl}",
-                        UseShellExecute = true
-                    });
-
-                    return Task.FromResult(new ExecuteCommandResult { Success = true });
-                }
-                catch (Exception ex)
-                {
-                    return Task.FromResult(new ExecuteCommandResult
-                    {
-                        Success = false,
-                        Message = $"Failed to launch VS Code: {ex.Message}"
-                    });
-                }
-            },
-            commandOptions: new CommandOptions
-            {
-                UpdateState = context =>
-                {
-                    var snapshot = context.ResourceSnapshot;
-                    
-                    if (snapshot.State?.Text != "Running")
-                    {
-                        return ResourceCommandState.Hidden;
-                    }
-
-                    var healthCheckProperties = snapshot.Properties
-                        .Where(p => p.Name.Contains("health", StringComparison.OrdinalIgnoreCase))
-                        .ToList();
-
-                    if (healthCheckProperties.Any())
-                    {
-                        var allHealthy = healthCheckProperties.All(hc =>
-                            hc.Value?.ToString()?.Contains("Healthy", StringComparison.OrdinalIgnoreCase) == true ||
-                            hc.Value?.ToString()?.Contains("Success", StringComparison.OrdinalIgnoreCase) == true);
-
-                        return allHealthy ? ResourceCommandState.Enabled : ResourceCommandState.Disabled;
-                    }
-
-                    var statusProperties = snapshot.Properties
-                        .Where(p => p.Name.Contains("Status", StringComparison.OrdinalIgnoreCase))
-                        .ToList();
-
-                    if (statusProperties.Any())
-                    {
-                        var hasGoodStatus = statusProperties.Any(sp =>
-                            sp.Value?.ToString()?.Contains("Healthy", StringComparison.OrdinalIgnoreCase) == true ||
-                            sp.Value?.ToString()?.Contains("Running", StringComparison.OrdinalIgnoreCase) == true ||
-                            sp.Value?.ToString()?.Contains("Ready", StringComparison.OrdinalIgnoreCase) == true);
-
-                        return hasGoodStatus ? ResourceCommandState.Enabled : ResourceCommandState.Disabled;
-                    }
-
-                    return ResourceCommandState.Enabled;
-                },
-                Description = "Launch Visual Studio Code connected to this private marketplace.",
-                IconName = "Code",
-                IconVariant = IconVariant.Filled,
-                IsHighlighted = true
-            });
-    }
-
-    public static IResourceBuilder<ContainerResource> WithOpenGroupPolicyEditorCommand(
-        this IResourceBuilder<ContainerResource> builder)
-    {
-        return builder.WithCommand(
-            name: "gpedit",
-            displayName: "Open Group Policy Editor",
-            executeCommand: context =>
-            {
-                try
-                {
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = "gpedit.msc",
-                        UseShellExecute = true
-                    });
-
-                    return Task.FromResult(new ExecuteCommandResult { Success = true });
-                }
-                catch (Exception ex)
-                {
-                    return Task.FromResult(new ExecuteCommandResult
-                    {
-                        Success = false,
-                        Message = $"Failed to launch Group Policy Editor: {ex.Message}"
-                    });
-                }
-            },
-            commandOptions: new CommandOptions
-            {
-                UpdateState = context =>
-                {
-                    var snapshot = context.ResourceSnapshot;
-                    
-                    if (snapshot.State?.Text != "Running")
-                    {
-                        return ResourceCommandState.Hidden;
-                    }
-
-                    // Check if VSCode.admx exists in PolicyDefinitions folder
-                    var policyDefinitionsPath = Path.Combine(
-                        Environment.GetFolderPath(Environment.SpecialFolder.Windows),
-                        "PolicyDefinitions",
-                        "VSCode.admx");
-
-                    return File.Exists(policyDefinitionsPath) ? ResourceCommandState.Enabled : ResourceCommandState.Hidden;
-                },
-                Description = "Launch the Local Group Policy Editor to configure VS Code policies.",
-                IconName = "Settings",
-                IconVariant = IconVariant.Filled,
-                IsHighlighted = false
-            });
     }
 }
 
