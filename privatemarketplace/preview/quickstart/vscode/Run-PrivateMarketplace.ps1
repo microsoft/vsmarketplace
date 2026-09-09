@@ -1519,15 +1519,31 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
             # -SkipPath keeps the portable install out of the user's PATH.
             # Installing into <.aspire>\bin keeps ASPIRE_HOME on the .aspire folder rather
             # than the quickstart root; see the LocalAspireBin note in the configuration.
-            Invoke-WithProgress -Activity "Installing Aspire CLI" -Status "Installing Aspire CLI to: $localAspireBinPath" -ScriptBlock {
-                & $tempScriptPath -InstallPath $localAspireBinPath -SkipPath
+            # The CLI archive is a large download, so a dropped connection is retried rather
+            # than failing the whole quickstart and discarding everything installed so far.
+            $aspireExePath = Join-Path $localAspireBinPath "aspire.exe"
+            $maxAttempts = 3
+            for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
+                try {
+                    Invoke-WithProgress -Activity "Installing Aspire CLI" -Status "Installing Aspire CLI to: $localAspireBinPath" -ScriptBlock {
+                        & $tempScriptPath -InstallPath $localAspireBinPath -SkipPath
+                    }
+                } catch {
+                    Write-Verbose "Aspire CLI install attempt $attempt failed: $_"
+                }
+                
+                if (Test-Path $aspireExePath) { break }
+                
+                if ($attempt -lt $maxAttempts) {
+                    Write-Host "  Download did not complete. Retrying ($attempt of $($maxAttempts - 1))..." -ForegroundColor Yellow
+                    Start-Sleep -Seconds (5 * $attempt)
+                }
             }
 
             # Clean up temp script
             Remove-Item $tempScriptPath -Force -ErrorAction SilentlyContinue
 
             # Verify aspire.exe exists
-            $aspireExePath = Join-Path $localAspireBinPath "aspire.exe"
             if (Test-Path $aspireExePath) {
                 Write-Host "  Aspire CLI installed successfully." -ForegroundColor Green
                 $aspireInstalled = $true
