@@ -7,6 +7,23 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| MusicCreates.musicicgen | 9/9/2026 | Malware |
+| DevoraBoarding.devora-board | 9/9/2026 | Malware |
+| Lunascape.lunascape-doc | 9/9/2026 | Malware |
+| AppLaunchLLC.desk-67475651 | 9/9/2026 | Malware |
+| AppLaunchLLC.desk-20948159 | 9/9/2026 | Malware |
+| AppLaunchLLC.desk-85941343 | 9/9/2026 | Malware |
+| AppLaunchLLC.desk-24129806 | 9/9/2026 | Malware |
+| AppLaunchLLC.desk-73007551 | 9/9/2026 | Malware |
+| yeceen.har-auto-analyzer | 9/9/2026 | Impersonation |
+| anaer.a-git-log | 9/9/2026 | Impersonation |
+| HypeShowG.fastmusicgen | 9/8/2026 | Malware |
+| LaunchAppsLLC.launchdesk-app | 9/8/2026 | Malware |
+| LaunchAppsLLC.desk-59838605 | 9/8/2026 | Malware |
+| LaunchAppsLLC.desk-94262049 | 9/8/2026 | Malware |
+| LaunchAppsLLC.desk-44851403 | 9/8/2026 | Malware |
+| LaunchAppsLLC.desk-47747973 | 9/8/2026 | Malware |
+| LaunchAppsLLC.desk-28944594 | 9/8/2026 | Malware |
 | ccimage.ccimage-emoji-log | 9/8/2026 | Impersonation |
 | YummyGroup.Fristaylo-sessions | 9/8/2026 | Impersonation |
 | tae-h-yang.vscode-3d-preview-true-origin | 9/8/2026 | Impersonation |
@@ -31,7 +48,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | Alioth.ms-devtools | 9/5/2026 | Untrustworthy |
 | Alioth.vscode-glui-helper | 9/5/2026 | Untrustworthy |
 | cxy.serial-commander | 9/4/2026 | Untrustworthy |
-| aixueEditor.aixue-mir-editor | 9/4/2026 | Untrustworthy |
 | VinvAI.VinvAI | 9/4/2026 | Untrustworthy |
 | cloudfluent.terragraph-vscode | 9/4/2026 | Untrustworthy |
 | grikomsn.opencode-bridge-copilot-chat | 9/4/2026 | Untrustworthy |
