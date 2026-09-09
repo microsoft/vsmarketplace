@@ -135,21 +135,21 @@ Installation is complete and the marketplace is running. Now point Visual Studio
 3. On the marketplace home page, click **Connect to Marketplace**, select the **Visual Studio** tab, and click the copy button next to the **Gallery URL**
    - You'll need this URL in the next step
 
-   ![Marketplace Home Page](images/marketplace-home.png)
-
-The quickstart includes sample Visual Studio extensions preloaded in the marketplace:
-
-![Published Extensions](images/published-extensions.png)
-
 **Tip**: Keep the marketplace home page open in a browser tab - you'll refer to it throughout the quickstart.
 
 ### Step 2: Configure Visual Studio
 
 1. Open Visual Studio.
 2. Select **Tools → Options**.
+
+   ![Visual Studio Tools menu with Options selected](images/vs-tools-options.png)
+
 3. In the search box, type `private`, then select **Environment → Extensions** in the results.
 4. Select the **Use private marketplace** checkbox.
 5. Paste the Gallery URL you copied into the **Private marketplace endpoint** field.
+
+   ![Options dialog showing Use private marketplace and the endpoint field](images/vs-options-extensions.png)
+
 6. Click **OK**.
 
 **What just happened?**
