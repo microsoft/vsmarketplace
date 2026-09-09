@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| yeceen.har-auto-analyzer | 9/9/2026 | Impersonation |
+| OldStarchy.petty-formatter | 9/9/2026 | Impersonation |
+| anaer.a-git-log | 9/9/2026 | Impersonation |
 | ccimage.ccimage-emoji-log | 9/8/2026 | Impersonation |
 | YummyGroup.Fristaylo-sessions | 9/8/2026 | Impersonation |
 | tae-h-yang.vscode-3d-preview-true-origin | 9/8/2026 | Impersonation |
