@@ -1751,17 +1751,49 @@ try {
     Write-Host "  .NET version: " -NoNewline -ForegroundColor Gray
     & $effectiveDotnetExe --version
     
+    # Trust the HTTPS development certificate before starting the AppHost.
+    # Aspire serves the dashboard over HTTPS and, when the certificate is not trusted, prints
+    # "Developer certificates are not trusted" and leaves the browser refusing the dashboard
+    # URL. Doing it here puts any prompt at a predictable point instead of mid-launch.
     Write-Host "`n  ═══════════════════════════════════════════════════════════" -ForegroundColor Yellow
     Write-Host "  Aspire Dashboard SSL Certificate Setup" -ForegroundColor Yellow
     Write-Host "  ═══════════════════════════════════════════════════════════" -ForegroundColor Yellow
-    Write-Host "  On first run, Aspire will configure a local SSL certificate" -ForegroundColor Gray
-    Write-Host "  for secure HTTPS access to the dashboard." -ForegroundColor Gray
+    Write-Host "  The dashboard is served over HTTPS using a local development" -ForegroundColor Gray
+    Write-Host "  certificate, which has to be trusted on this computer." -ForegroundColor Gray
     Write-Host "`n  ACTION REQUIRED (if prompted):" -ForegroundColor Cyan
-    Write-Host "  - Click 'Yes' to trust the ASP.NET Core HTTPS development certificate" -ForegroundColor White
+    Write-Host "  - Click 'Yes' to trust the HTTPS development certificate" -ForegroundColor White
     Write-Host "  - This is a one-time setup for secure local development" -ForegroundColor White
     Write-Host "  - The certificate is only trusted on this computer" -ForegroundColor White
-    Write-Host "`n  Starting Aspire dashboard..." -ForegroundColor Gray
     Write-Host "  ═══════════════════════════════════════════════════════════`n" -ForegroundColor Yellow
+
+    try {
+        $certPsi = New-Object System.Diagnostics.ProcessStartInfo
+        $certPsi.FileName = $aspireExePath
+        $certPsi.Arguments = "certs trust"
+        $certPsi.UseShellExecute = $false
+        $certPsi.WorkingDirectory = $rootPath
+        $certPsi.EnvironmentVariables["DOTNET_ROOT"] = $effectiveDotnetRoot
+        $certPsi.EnvironmentVariables["DOTNET_MULTILEVEL_LOOKUP"] = "0"
+        $certPsi.EnvironmentVariables["PATH"] = "$effectiveDotnetRoot;$($env:PATH)"
+
+        $certProcess = [System.Diagnostics.Process]::Start($certPsi)
+        $certProcess.WaitForExit()
+
+        if ($certProcess.ExitCode -eq 0) {
+            Write-Host "  Development certificate is trusted." -ForegroundColor Green
+        } else {
+            # Not fatal: the dashboard still starts, the browser just warns about the
+            # connection. Older Aspire CLI versions also lack the certs command.
+            Write-Host "  Could not trust the development certificate (exit code $($certProcess.ExitCode))." -ForegroundColor Yellow
+            Write-Host "  The dashboard will still start, but your browser may warn about the connection." -ForegroundColor Gray
+            Write-Host "  To trust it later, run: aspire certs trust" -ForegroundColor Gray
+        }
+    } catch {
+        Write-Host "  Could not run 'aspire certs trust': $_" -ForegroundColor Yellow
+        Write-Host "  The dashboard will still start, but your browser may warn about the connection." -ForegroundColor Gray
+    }
+
+    Write-Host "`n  Starting Aspire dashboard..." -ForegroundColor Gray
     
     # Launch Aspire with explicit environment variables so it uses the selected .NET SDK
     $psi = New-Object System.Diagnostics.ProcessStartInfo
