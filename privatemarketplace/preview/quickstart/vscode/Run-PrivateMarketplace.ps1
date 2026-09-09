@@ -1752,20 +1752,23 @@ try {
     & $effectiveDotnetExe --version
     
     # Trust the HTTPS development certificate before starting the AppHost.
-    # Aspire serves the dashboard over HTTPS and, when the certificate is not trusted, prints
-    # "Developer certificates are not trusted" and leaves the browser refusing the dashboard
-    # URL. Doing it here puts any prompt at a predictable point instead of mid-launch.
+    # This is required, not cosmetic: the AppHost hands the same developer certificate to DCP
+    # for TLS termination, so an untrusted certificate stops the dashboard from connecting to
+    # the orchestrator. Doing it here also puts any elevation prompt at a predictable point
+    # rather than midway through startup.
     Write-Host "`n  ═══════════════════════════════════════════════════════════" -ForegroundColor Yellow
     Write-Host "  Aspire Dashboard SSL Certificate Setup" -ForegroundColor Yellow
     Write-Host "  ═══════════════════════════════════════════════════════════" -ForegroundColor Yellow
-    Write-Host "  The dashboard is served over HTTPS using a local development" -ForegroundColor Gray
-    Write-Host "  certificate, which has to be trusted on this computer." -ForegroundColor Gray
+    Write-Host "  Aspire uses a local HTTPS development certificate to secure the" -ForegroundColor Gray
+    Write-Host "  dashboard and its connection to the orchestrator. It has to be" -ForegroundColor Gray
+    Write-Host "  trusted on this computer before the quickstart can start." -ForegroundColor Gray
     Write-Host "`n  ACTION REQUIRED (if prompted):" -ForegroundColor Cyan
     Write-Host "  - Click 'Yes' to trust the HTTPS development certificate" -ForegroundColor White
     Write-Host "  - This is a one-time setup for secure local development" -ForegroundColor White
     Write-Host "  - The certificate is only trusted on this computer" -ForegroundColor White
     Write-Host "  ═══════════════════════════════════════════════════════════`n" -ForegroundColor Yellow
 
+    $certExitCode = -1
     try {
         $certPsi = New-Object System.Diagnostics.ProcessStartInfo
         $certPsi.FileName = $aspireExePath
@@ -1778,19 +1781,23 @@ try {
 
         $certProcess = [System.Diagnostics.Process]::Start($certPsi)
         $certProcess.WaitForExit()
-
-        if ($certProcess.ExitCode -eq 0) {
-            Write-Host "  Development certificate is trusted." -ForegroundColor Green
-        } else {
-            # Not fatal: the dashboard still starts, the browser just warns about the
-            # connection. Older Aspire CLI versions also lack the certs command.
-            Write-Host "  Could not trust the development certificate (exit code $($certProcess.ExitCode))." -ForegroundColor Yellow
-            Write-Host "  The dashboard will still start, but your browser may warn about the connection." -ForegroundColor Gray
-            Write-Host "  To trust it later, run: aspire certs trust" -ForegroundColor Gray
-        }
+        $certExitCode = $certProcess.ExitCode
     } catch {
-        Write-Host "  Could not run 'aspire certs trust': $_" -ForegroundColor Yellow
-        Write-Host "  The dashboard will still start, but your browser may warn about the connection." -ForegroundColor Gray
+        Write-Host "  Could not run 'aspire certs trust': $_" -ForegroundColor Red
+    }
+
+    if ($certExitCode -eq 0) {
+        Write-Host "  Development certificate is trusted." -ForegroundColor Green
+    } else {
+        Write-Host "  Failed to trust the HTTPS development certificate (exit code $certExitCode)." -ForegroundColor Red
+        Write-Host "`n  The dashboard cannot reach the Aspire orchestrator over an untrusted" -ForegroundColor Yellow
+        Write-Host "  certificate, so the quickstart cannot continue." -ForegroundColor Yellow
+        Write-Host "`n  To resolve:" -ForegroundColor Gray
+        Write-Host "    - If an elevation prompt appeared and was declined, run this script again" -ForegroundColor Gray
+        Write-Host "      and accept it." -ForegroundColor Gray
+        Write-Host "    - Or trust the certificate manually, then re-run this script:" -ForegroundColor Gray
+        Write-Host "        `"$aspireExePath`" certs trust" -ForegroundColor Gray
+        throw "HTTPS development certificate is not trusted"
     }
 
     Write-Host "`n  Starting Aspire dashboard..." -ForegroundColor Gray
