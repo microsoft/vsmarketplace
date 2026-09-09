@@ -9,11 +9,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |---------------------------------------|--------------|-------------------------------|
 | MusicCreates.musicicgen | 9/9/2026 | Malware |
 | DevoraBoarding.devora-board | 9/9/2026 | Malware |
-|Lunascape.lunascape-doc | 9/9/2026 | Malware |
-|AppLaunchLLC.desk-67475651 | 9/9/2026 | Malware |
-| AppLaunchLLC.desk-20948159| 9/9/2026 | Malware |
-|AppLaunchLLC.desk-85941343 | 9/9/2026 | Malware |
-| AppLaunchLLC.desk-24129806| 9/9/2026 | Malware |
+| Lunascape.lunascape-doc | 9/9/2026 | Malware |
+| AppLaunchLLC.desk-67475651 | 9/9/2026 | Malware |
+| AppLaunchLLC.desk-20948159 | 9/9/2026 | Malware |
+| AppLaunchLLC.desk-85941343 | 9/9/2026 | Malware |
+| AppLaunchLLC.desk-24129806 | 9/9/2026 | Malware |
 |AppLaunchLLC.desk-73007551 | 9/9/2026 | Malware |
 | yeceen.har-auto-analyzer | 9/9/2026 | Impersonation |
 | anaer.a-git-log | 9/9/2026 | Impersonation |
