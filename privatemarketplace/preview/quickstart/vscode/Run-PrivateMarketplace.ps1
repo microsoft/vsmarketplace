@@ -120,6 +120,10 @@ $branchSlug = $RepoBranch -replace '[^A-Za-z0-9._-]', '-'
 # Repository name, used to locate the root folder inside the downloaded archive.
 $repoName = ($RepoUrl -split '/')[-1]
 
+# Path to this quickstart inside the repository. Used to locate the files in the downloaded
+# archive and to point at the right folder when something goes wrong.
+$quickstartRepoPath = "privatemarketplace/preview/quickstart/vscode"
+
 # Keep the documented folder for the default branch, but sandbox other branches so a
 # previous run's files are never mistaken for the branch under test.
 $rootFolderName = if ($RepoBranch -eq 'main') {
@@ -135,6 +139,7 @@ $Config = @{
     RepoBranch = $RepoBranch
     RepoName = $repoName
     BranchSlug = $branchSlug
+    QuickstartRepoPath = $quickstartRepoPath
     
     # Version requirements
     DotNetVersion = "10.0.100"  # Minimum .NET SDK version. The latest patch in this major.minor channel is installed.
@@ -1306,7 +1311,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
             Write-Progress -Activity "Extracting Quickstart Files" -Completed
             
             # Copy quicklaunch folder contents directly to root (excluding .dotnet, .aspire, .vscode)
-            $extractedquicklaunchFolder = Join-Path $tempExtractPath "$repoName-$branchSlug\privatemarketplace\preview\quickstart\vscode"
+            $extractedquicklaunchFolder = Join-Path $tempExtractPath "$repoName-$branchSlug\$($quickstartRepoPath -replace '/','\')"
             if (Test-Path $extractedquicklaunchFolder) {
                 # Get all items in quicklaunch folder except hidden tool folders
                 Get-ChildItem -Path $extractedquicklaunchFolder | Where-Object { 
@@ -1316,7 +1321,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
                 }
                 Write-Host "  quicklaunch files copied successfully." -ForegroundColor Green
             } else {
-                throw "aspire folder not found in downloaded archive"
+                throw "'$quickstartRepoPath' not found in downloaded archive for branch '$repoBranch'"
             }
             
             # Clean up temporary files
@@ -1332,7 +1337,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
         }
         catch {
             Write-Host "  Error downloading or extracting files: $_" -ForegroundColor Red
-            Write-Host "  Please download manually from: $repoUrl/tree/$repoBranch/privatemarketplace/preview/quickstart" -ForegroundColor Yellow
+            Write-Host "  Please download manually from: $repoUrl/tree/$repoBranch/$quickstartRepoPath" -ForegroundColor Yellow
             return
         }
     }
