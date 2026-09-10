@@ -9,7 +9,8 @@
     interfering with system-wide installations; see -UseGlobalInstalls to reuse existing ones.
 
     Visual Studio itself is never installed by this script. An existing installation of
-    Visual Studio 18.11 or later is required, and the script verifies it before continuing.
+    Visual Studio 2026 Insiders (18.11 or later) is required, and the script verifies it
+    before continuing. Download it from https://visualstudio.microsoft.com/insiders/.
 
 .PARAMETER UseGlobalInstalls
     When specified, existing machine-wide installations of the .NET SDK and the Aspire CLI are
@@ -45,7 +46,8 @@
 
 .NOTES
     Requires: PowerShell 5.1 or later, Internet connection for downloads
-    Requires: Visual Studio 18.11 or later, already installed
+    Requires: Visual Studio 2026 Insiders (18.11 or later), already installed
+              https://visualstudio.microsoft.com/insiders/
     Exit Codes:
         0 - Success
         1 - Error occurred (see error messages)
@@ -796,12 +798,12 @@ if ($SkipVSVersionCheck) {
     Write-Host "    $($vsInstall.DisplayName)" -ForegroundColor Gray
     Write-Host "    $($vsInstall.Path)" -ForegroundColor Gray
     $blockingPrereqs += New-PrerequisiteInfo -Name "Visual Studio $minimumVSVersion or later" `
-        -InstallMethod "manual" -ManualUrl "https://visualstudio.microsoft.com/downloads/" `
+        -InstallMethod "manual" -ManualUrl "https://visualstudio.microsoft.com/insiders/" `
         -Version "$($vsInstall.Version) installed" -InstallPath $vsInstall.Path
 } elseif ($vsInstall.Status -eq 'NotFound') {
     Write-Host "  Visual Studio not found" -ForegroundColor Yellow
     $blockingPrereqs += New-PrerequisiteInfo -Name "Visual Studio $minimumVSVersion or later" `
-        -InstallMethod "manual" -ManualUrl "https://visualstudio.microsoft.com/downloads/" `
+        -InstallMethod "manual" -ManualUrl "https://visualstudio.microsoft.com/insiders/" `
         -Version "not installed"
 } else {
     # Detection itself failed. Visual Studio may well be installed and new enough, so warn
@@ -941,8 +943,9 @@ if ($blockingPrereqs.Count -gt 0) {
             Write-Host "    Download: $($prereq.ManualUrl)" -ForegroundColor Gray
         }
     }
-    Write-Host "`nUpdate or install Visual Studio using the Visual Studio Installer, then run this" -ForegroundColor Gray
-    Write-Host "script again." -ForegroundColor Gray
+    Write-Host "`nVersion 18.11 is a Visual Studio 2026 Insiders build. Install it from" -ForegroundColor Gray
+    Write-Host "https://visualstudio.microsoft.com/insiders/, or update an existing Insiders" -ForegroundColor Gray
+    Write-Host "installation using the Visual Studio Installer, then run this script again." -ForegroundColor Gray
     exit 1
 }
 

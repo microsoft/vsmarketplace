@@ -12,7 +12,7 @@ This quickstart walks you through setting up and testing a local Private Marketp
 ### Prerequisites
 
 Before you begin, ensure you have:
-- **Visual Studio 18.11 or later**, already installed. The setup script verifies this but **does not install Visual Studio**. Install or update it with the Visual Studio Installer.
+- **Visual Studio 2026 Insiders (18.11 or later)**, already installed. The setup script verifies this but **does not install Visual Studio**. Download it from [Visual Studio 2026 Insiders](https://visualstudio.microsoft.com/insiders/), or update an existing Insiders installation with the Visual Studio Installer.
 - **Docker Desktop** installed and running. If it's missing and `winget` is available, the setup script can install it for you after prompting for confirmation.
 - **PowerShell 5.1 or later** for running the setup script (Windows PowerShell or PowerShell 7)
 - **Internet access** to download the quickstart and its dependencies
@@ -29,10 +29,10 @@ The following prerequisites must be installed manually before continuing:
   - Visual Studio 18.11 or later
     Current: 18.9.2 installed
     Location: C:\Program Files\Microsoft Visual Studio\18\Enterprise
-    Download: https://visualstudio.microsoft.com/downloads/
+    Download: https://visualstudio.microsoft.com/insiders/
 ```
 
-Update or install Visual Studio with the Visual Studio Installer, then run the script again.
+Version 18.11 is a Visual Studio 2026 Insiders build. Install it from [Visual Studio 2026 Insiders](https://visualstudio.microsoft.com/insiders/), or update an existing Insiders installation with the Visual Studio Installer, then run the script again.
 
 Occasionally the script cannot determine which version is installed. When that happens it says so and continues, since a failed check does not mean Visual Studio is missing. Use `-SkipVSVersionCheck` to bypass the version requirement entirely.
 
@@ -310,7 +310,7 @@ Remove-Item -Path "$env:TEMP\privatemarketplace-quickstart-vs" -Recurse -Force
 ### Visual Studio
 
 **Setup stops with "Visual Studio 18.11 or later" listed under Action Required?**
-- Update Visual Studio with the Visual Studio Installer, then run the script again
+- Version 18.11 is a Visual Studio 2026 Insiders build. Install it from [Visual Studio 2026 Insiders](https://visualstudio.microsoft.com/insiders/), or update an existing Insiders installation with the Visual Studio Installer, then run the script again
 - Build Tools installations are ignored because they have no IDE to host extensions
 
 **Setup reports it could not determine the Visual Studio version?**
