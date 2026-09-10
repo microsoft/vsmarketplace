@@ -10,6 +10,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | FontingFonts.monkeyfont | 9/10/2026 | Malware |
 | txefficiency.lct-code-review | 9/10/2026 | Untrustworthy |
 | kairo.kairo-designer | 9/10/2026 | Untrustworthy |
+| augura-team.augura-dev | 9/9/2026 | Malware |
 | MusicCreates.musicicgen | 9/9/2026 | Malware |
 | DevoraBoarding.devora-board | 9/9/2026 | Malware |
 | Lunascape.lunascape-doc | 9/9/2026 | Malware |
