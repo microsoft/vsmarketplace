@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| jasonbg-koi.koi-markt-bug1 | 9/10/2026 | Malware |
 | MusicCreates.musicicgen | 9/9/2026 | Malware |
 | DevoraBoarding.devora-board | 9/9/2026 | Malware |
 | Lunascape.lunascape-doc | 9/9/2026 | Malware |
