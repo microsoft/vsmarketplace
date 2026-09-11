@@ -20,13 +20,10 @@
 
 .PARAMETER RepoUrl
     Repository to download the quickstart files from.
-    Defaults to https://github.com/microsoft/vsmarketplace. Use this to test from a fork.
+    Defaults to https://github.com/microsoft/vsmarketplace.
 
 .PARAMETER RepoBranch
     Branch to download the quickstart files from. Defaults to 'main'.
-    Use this to test preview changes that have not merged yet. Branch names containing
-    '/' are supported. When a branch other than 'main' is used, the quickstart installs
-    into a branch-specific folder so it cannot pick up stale files from a previous run.
 
 .PARAMETER SkipVSVersionCheck
     Proceeds even when the Visual Studio version cannot be verified or is below the minimum.
@@ -39,10 +36,6 @@
 .EXAMPLE
     .\Run-PrivateMarketplace.ps1 -UseGlobalInstalls
     Reuses machine-wide .NET SDK and Aspire CLI installations when they are new enough.
-
-.EXAMPLE
-    .\Run-PrivateMarketplace.ps1 -RepoBranch 'dev/mcumming/privatemarketplace-preview-docs'
-    Runs the quickstart using files from the specified branch instead of 'main'.
 
 .NOTES
     Requires: PowerShell 5.1 or later, Internet connection for downloads
@@ -60,7 +53,7 @@ param(
     [Parameter(HelpMessage="Repository to download quickstart files from")]
     [string]$RepoUrl = "https://github.com/microsoft/vsmarketplace",
     
-    [Parameter(HelpMessage="Branch to download quickstart files from (use to test unmerged preview changes)")]
+    [Parameter(HelpMessage="Branch to download quickstart files from")]
     [string]$RepoBranch = "main",
     
     [Parameter(HelpMessage="Proceed even if the Visual Studio version cannot be verified")]

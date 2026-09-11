@@ -36,25 +36,14 @@
 
 .PARAMETER RepoUrl
     Repository to download the quickstart files from.
-    Defaults to https://github.com/microsoft/vsmarketplace. Use this to test from a fork.
+    Defaults to https://github.com/microsoft/vsmarketplace.
 
 .PARAMETER RepoBranch
     Branch to download the quickstart files from. Defaults to 'main'.
-    Use this to test preview changes that have not merged yet. Branch names containing
-    '/' are supported. When a branch other than 'main' is used, the quickstart installs
-    into a branch-specific folder so it cannot pick up stale files from a previous run.
 
 .EXAMPLE
     .\Run-PrivateMarketplace.ps1
     Runs the full quickstart setup, checking and installing prerequisites as needed.
-
-.EXAMPLE
-    .\Run-PrivateMarketplace.ps1 -RepoBranch 'dev/mcumming/privatemarketplace-preview-docs'
-    Runs the quickstart using files from the specified branch instead of 'main'.
-
-.EXAMPLE
-    .\Run-PrivateMarketplace.ps1 -RepoBranch 'dev/mcumming/privatemarketplace-preview-docs'
-    Runs the quickstart using files from the specified branch instead of 'main'.
 
 .EXAMPLE
     .\Run-PrivateMarketplace.ps1
@@ -103,7 +92,7 @@ param(
     [Parameter(HelpMessage="Repository to download quickstart files from")]
     [string]$RepoUrl = "https://github.com/microsoft/vsmarketplace",
     
-    [Parameter(HelpMessage="Branch to download quickstart files from (use to test unmerged preview changes)")]
+    [Parameter(HelpMessage="Branch to download quickstart files from")]
     [string]$RepoBranch = "main"
 )
 

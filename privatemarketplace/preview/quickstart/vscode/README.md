@@ -67,28 +67,6 @@ Alternatively, you can download the script and run it as a two-step process:
 > [!NOTE]
 > If PowerShell blocks the downloaded script because of your execution policy, run `Unblock-File .\Run-PrivateMarketplace.ps1` and then run it again.
 
-#### Testing an unmerged branch
-
-By default the script pulls the quickstart files from `main`. To test preview changes that
-have not merged yet, pass `-RepoBranch` (and optionally `-RepoUrl` to use a fork):
-
-```powershell
-$branch = 'dev/mcumming/privatemarketplace-preview-docs'
-irm "https://raw.githubusercontent.com/microsoft/vsmarketplace/$branch/privatemarketplace/preview/quickstart/vscode/Run-PrivateMarketplace.ps1" -OutFile Run-PrivateMarketplace.ps1
-.\Run-PrivateMarketplace.ps1 -RepoBranch $branch
-```
-
-> [!NOTE]
-> Fetch the script from the same branch you pass to `-RepoBranch`, so the script and the
-> files it downloads stay in sync. Use the branch name, not a local folder or worktree name;
-> these often differ.
-
-Branch names containing `/` are supported. When you use a branch other than `main`, the
-quickstart installs into a branch-specific folder
-(`$env:TEMP\privatemarketplace-quickstart-vscode-<branch>`) so it cannot pick up stale files
-from an earlier run, and so it does not disturb an existing default installation. Substitute
-that folder for `$env:TEMP\privatemarketplace-quickstart-vscode` in the steps below.
-
 You should see output similar to the following snippet:
   ```text
   Private Marketplace for VS Code Quickstart
