@@ -1,12 +1,12 @@
-*release version: 1.0.57*
+*release version: 1.1.260*
 
 ---
 
-Welcome to the **Private Marketplace for Visual Studio Code**!
+Welcome to the **Private Marketplace for Visual Studio**!
 
-Private Marketplace enables hosting and distributing extensions on-premises or in private cloud environments, helping you meet your organizational security policies. It seamlessly integrates with the familiar VS Code Extensions experience for easy discovery and auto-updating of private extensions. It enables securing your development environment by serving as a proxy for consuming [public](https://marketplace.visualstudio.com/vscode) extensions. When combined with VS Code's [extension allowlist](https://code.visualstudio.com/docs/setup/enterprise#_configure-allowed-extensions), Private Marketplace helps you enforce organizational policies governing which extensions are installed.
+Private Marketplace enables hosting and distributing extensions on-premises or in private cloud environments, helping you meet your organizational security policies. It seamlessly integrates with the VS family of products for easy discovery of private extensions. It enables securing your development environment by serving as a proxy for consuming public [VS Code](https://marketplace.visualstudio.com/vscode) and [Visual Studio 2026](https://marketplace.visualstudio.com/vs) extensions. When combined with extension allowlist capabilities, Private Marketplace helps you enforce organizational policies governing which extensions are installed.
 
-This document will guide you through deploying, configuring, and monitoring your own self-hosted Private Marketplace. You will also learn how to connect VS Code to the Private Marketplace to install extensions.
+This document will guide you through deploying, configuring, and monitoring your own self-hosted Private Marketplace. You will also learn how to connect to the marketplace and host private extensions for both VS Code and Visual Studio 2026.
 
 # Available features
 **[Watch the demo▶️](https://aka.ms/privatemktdemo)**
@@ -18,7 +18,7 @@ The Private Marketplace ships with these core capabilities:
 - **Upstreaming**: [Optional] Include public extensions automatically from the [Visual Studio Marketplace](https://marketplace.visualstudio.com).
 - **Rehosting**: [Optional] Download and host extensions from the Public Visual Studio Marketplace for additional security governance and air-gapped environments.
 - **Centralized rollout**: Roll out the Private Marketplace to your team through centralized group policy on Windows, macOS and Linux.
-- **Install and automatic updates**: Search and install extensions directly from VS Code. Receive automatic updates for new versions in the Private Marketplace.
+- **Install and automatic updates**: Search and install extensions directly from VS Code and Visual Studio 2026. Receive automatic updates for new versions in the Private Marketplace.
 
 # Recommended setup
 
@@ -58,8 +58,10 @@ Choose the scenario that best matches your business needs and follow the recomme
 ## Publish extensions
 When the storage is set up and ready to go, [publish your internal or downloaded extensions to the container](#4-publish-extensions-to-the-container).
 
-## Connect from VS Code
-By default VS Code points to the Public Marketplace (marketplace.visualstudio.com). You've published extensions to your deployed Private Marketplace. As the next step, [connect VS Code to the Private Marketplace](#5-connect-vs-code-to-the-private-marketplace) to make the private extensions available to your entire team.
+## Connect from VS Code or Visual Studio 2026
+By default, both VS Code and Visual Studio 2026 point to the Public Marketplace (marketplace.visualstudio.com).
+
+As the next step, connect [VS Code](#51-connecting-vs-code-to-the-private-marketplace) or [Visual Studio 2026](#52-connecting-visual-studio-2026-to-the-private-marketplace) to the Private Marketplace to make the private extensions available to your entire team.
 
 ## Monitor and debug
 If you run into any issues or want to check the health status of your Private Marketplace, check out how to [monitor and debug the running container](#6-monitor-the-running-container).
@@ -93,16 +95,16 @@ The container details are:
 
 - Container Registry: `mcr.microsoft.com`
 - Image name: `vscode-private-marketplace`
-- Image tag: `1.0.57`
-- Full image URL: `mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.0.57`
+- Image tag: `1.1.260`
+- Full image URL: `mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.1.260`
 
 Without providing any configuration at all, the container should start and accept traffic over HTTP on port 8080. Basic information about the running application is shown on the root path `http://<my container hostname>:8080/`. But the application won't know where to read your private extensions from, which will be addressed in [a section below](#3-configure-the-container).
 
 ## 2.2. Enabling HTTPS
 
-VS Code requires the Marketplace it interacts with to be served over HTTPS. This means the Private Marketplace app either needs to serve HTTPS traffic itself with an acceptable SSL certificate, or must have a reverse proxy (a.k.a. gateway) in front of it for [HTTPS (TLS) termination](https://en.wikipedia.org/wiki/TLS_termination_proxy). We recommend using a reverse proxy since it moves the concern of SSL certificate management outside of the container, but we support both models.
+Both VS Code and Visual Studio 2026 require the Marketplace they interact with to be served over HTTPS. This means the Private Marketplace app either needs to serve HTTPS traffic itself with an acceptable SSL certificate, or must have a reverse proxy (a.k.a. gateway) in front of it for [HTTPS (TLS) termination](https://en.wikipedia.org/wiki/TLS_termination_proxy). We recommend using a reverse proxy since it moves the concern of SSL certificate management outside of the container, but we support both models.
 
-VS Code uses the client system's HTTPS trust controls so any certificate trusted by your client environment should work for your Private Marketplace deployment, even if self-signed or managed by an internal certificate authority and trusted by the client devices via a group policy. You can test the HTTPS trust by accessing the root URL (with `https://`) of the running container in your web browser and looking for HTTPS errors. Note that it is possible for VS Code and your web browser to have different trust stores depending on operating system, browser type, and other factors.
+The Visual Studio products use the client system's HTTPS trust controls so any certificate trusted by your client environment should work for your Private Marketplace deployment, even if self-signed or managed by an internal certificate authority and trusted by the client devices via a group policy. You can test the HTTPS trust by accessing the root URL (with `https://`) of the running container in your web browser and looking for HTTPS errors. Note that it is possible for the Visual Studio clients and your web browser to have different trust stores depending on operating system, browser type, and other factors.
 
 When running on Azure, we recommend using Azure Container Apps which provides HTTPS termination as part of its [Ingress feature](https://learn.microsoft.com/azure/container-apps/ingress-overview). The Ingress feature operates as a reverse proxy, listening on default port 443 and internally proxying requests to port 8080 of the running container. Our [sample deployment flow](#24-deploying-to-azure-container-apps) later on in this README uses this approach to simplify SSL certificate management. Azure Container Apps also supports custom SSL certificates via KeyVault integration which can provide a [seamless certificate rotation flow with a custom domain name](https://learn.microsoft.com/azure/container-apps/custom-domains-certificates), but that is not implemented in our sample template. Instead, the sample uses the default, generally trusted SSL certificate provided by the Container App.
 
@@ -112,7 +114,7 @@ If you would like to enable HTTPS traffic being served by the application itself
 
 ## 2.3. Authentication and network isolation
 
-VS Code does not support authentication with the Marketplace (public or private). This means the communication between VS Code and the Marketplace is only secured in transit via HTTPS without any additional access control, credential, or user context.
+While it's on our short-term roadmap, neither VS Code nor Visual Studio 2026 currently supports authentication with the Marketplace (public or private). This means the communication between Visual Studio clients and the Marketplace is only secured in transit via HTTPS without any additional access control, credential, or user context.
 
 We recommend securing the Private Marketplace endpoint by using network access controls, such as hosting the app within your corporate network perimeter (making it inaccessible to the public internet) or implementing an IP allow list in the deployed application, perhaps by configuring the reverse proxy used for HTTPS termination to block unacceptable client IP addresses.
 
@@ -575,15 +577,17 @@ jobs:
 >
 > You need to control specific extension versions available for some public extensions.
 
-VS Code can only connect to a single Marketplace at a time. By default, it connects to the Public [Visual Studio Marketplace](https://marketplace.visualstudio.com/). Using the [next section](#5-connect-vs-code-to-the-private-marketplace), VS Code will connect to your Private Marketplace and will see any extensions available in your configured extension source and [if configured](#32-configure-the-container-to-upstream-extensions-from-the-public-visual-studio-marketplace) the Public Visual Studio Marketplace.
+VS Code can only connect to a single Marketplace at a time. By default, it connects to the Public [Visual Studio Marketplace](https://marketplace.visualstudio.com/). Using the [next section](#51-connecting-vs-code-to-the-private-marketplace), VS Code will connect to your Private Marketplace and will see any extensions available in your configured extension source and [if configured](#32-configure-the-container-to-upstream-extensions-from-the-public-visual-studio-marketplace) the Public Visual Studio Marketplace.
 
 A public extension that is copied into your private extension source is considered a "private extension" in the VS Code extension interface because the Private Marketplace is currently unable to differentiate public extensions from private ones.
 
-In VS Code, you can download the latest version of an extension by using the "Download VSIX" option. For more information, see [Can I download an extension directly from the Marketplace?](https://code.visualstudio.com/docs/editor/extension-marketplace#_can-i-download-an-extension-directly-from-the-marketplace). Note that this must be done prior to performing the steps in the [next section](#5-connect-vs-code-to-the-private-marketplace) because your VS Code will no longer be connected to the Public Visual Studio Marketplace.
+In VS Code, you can download the latest version of an extension by using the "Download VSIX" option. For more information, see [Can I download an extension directly from the Marketplace?](https://code.visualstudio.com/docs/editor/extension-marketplace#_can-i-download-an-extension-directly-from-the-marketplace). Note that this must be done prior to performing the steps in the [next section](#51-connecting-vs-code-to-the-private-marketplace) because your VS Code will no longer be connected to the Public Visual Studio Marketplace.
 
 After downloading the public VSIX files you want to make available on your Private Marketplace, upload them to the storage that is backing the container volume referred to by the `Marketplace__ExtensionSourceDirectory`. This is the same publishing flow as publishing your private extensions, as mentioned in the previous section. If you're using Azure Artifacts storage, see the [publishing instructions](#manual-publishing) in the appendix.
 
-# 5. Connect VS Code to the Private Marketplace
+# 5. Connect VS clients to the Private Marketplace
+
+## 5.1. Connecting VS Code to the Private Marketplace
 
 Use [VS Code](https://code.visualstudio.com/) for the following steps. Make sure VS Code is updated to version 1.99.0 or newer.
 
@@ -592,19 +596,19 @@ Use [VS Code](https://code.visualstudio.com/) for the following steps. Make sure
 
 With the application deployed and private extensions published to the extension source directory, it's time to connect VS Code to your Private Marketplace. By default, VS Code points to the Public Visual Studio Marketplace. To override this default and use the Private Marketplace instead, use the [Device management](https://code.visualstudio.com/docs/setup/enterprise#_device-management) enterprise feature to centrally manage policy for all your VS Code developers.
 
-## 5.1. Windows
+## 5.1.1 Windows
 VS Code supports Windows Registry-based Group Policy to control default software settings across VS Code client machines. This can be tested locally with these steps:
 
 1. Install the [policy files (admx and adml) shipped in VS Code](https://code.visualstudio.com/docs/setup/enterprise#_group-policy-on-windows).
 1. Open the Group Policy Editor UI with the `gpedit.msc` command.
 1. In the tree view, navigate to Local Computer Policy > User Configuration > Administrative Templates > Visual Studio Code > Extensions > ExtensionGalleryServiceUrl.
-1. Copy the Private Marketplace service URL visible on the deployed containers home page in your web browser. The service URL will look something like `https://<container host name>/api/v1`.
+1. Copy the Private Marketplace service URL visible on the deployed container's home page in your web browser. The service URL will look something like `https://<container host name>/api/v1`.
 1. Open the ExtensionGalleryServiceUrl setting, select the Enabled radio button, and paste the service URL in the Options text box.
 1. Save the changes with the OK button.
 1. Restart VS code.
 
-## 5.2. macOS
-1. Copy the Private Marketplace service URL visible on the deployed containers home page in your web browser. The service URL will look something like `https://<container host name>/api/v1`.
+## 5.1.2 macOS
+1. Copy the Private Marketplace service URL visible on the deployed container's home page in your web browser. The service URL will look something like `https://<container host name>/api/v1`.
 1. Following the steps in VS Code Enterprise Device Management guidance at [Configuration profiles on macOS](https://code.visualstudio.com/docs/setup/enterprise#_configuration-profiles-on-macos), set the copied service URL to the following policy value in the .mobileconfig file, contained in the app bundle:
    ```
    <key>ExtensionGalleryServiceUrl</key>
@@ -612,7 +616,7 @@ VS Code supports Windows Registry-based Group Policy to control default software
    ```
 1. Be sure to complete the remaining steps in the VS Code guidance to install and enable configuration profile.
 
-## 5.3. Consuming Extensions
+## 5.1.3 Consuming Extensions
 Now let us try some Private Marketplace interactions in VS Code:
 
 1. Restart or open VS Code.
@@ -622,6 +626,23 @@ Now let us try some Private Marketplace interactions in VS Code:
 1. Install any available extension, and you should see them under the Installed tab.
 1. Receive automatic updates when newer versions are uploaded to the Private Marketplace.
 1. You can also search and install extensions from the results. Search should find any matches by extension name, ID, and description.
+
+## 5.2 Connecting Visual Studio 2026 to the Private Marketplace
+
+Use [Visual Studio Insiders (12202.211)](https://visualstudio.microsoft.com/insiders) or later for the following steps.
+
+With the application deployed and private extensions published to the extension source directory, it's time to connect Visual Studio 2026 to your Private Marketplace.
+
+By default, Visual Studio 2026 points to the Public Visual Studio Marketplace. To override this default and use the Private Marketplace instead, you can deploy a group policy to centrally enforce use of the Private Marketplace for all your Visual Studio 2026 developers.
+
+## 5.2.1 Enforcing Private Marketplace usage with Group Policy
+
+Visual Studio 2026 supports Windows Registry-based Group Policy to control default software settings across Visual Studio client machines. This can be tested locally with these steps:
+
+1. Open the Registry Editor with the `regedit` command.
+1. In the tree view, navigate to `Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\VisualStudio\Governance\Extensions`. Note that you'll likely need to create both `Governance` and `Extensions` keys as they probably do not exist.
+1. Create a new String Value named `ExtensionGalleryServiceUrl` and set its value to the Private Marketplace service URL visible on the deployed container's home page in your web browser. The service URL will look something like `https://<container host name>/api/v1`.
+1. Restart Visual Studio 2026.
 
 # 6. Monitor the running container
 
@@ -850,9 +871,11 @@ The following environment variables are supported by the application.
 See [docs](https://learn.microsoft.com/aspnet/core/fundamentals/servers/kestrel/endpoints#specify-ports-only) for `ASPNETCORE_HTTP_PORTS` and `ASPNETCORE_HTTPS_PORTS`.
 
 # 9. FAQ
-### How do I download a VS Code extension?
+### How do I download an extension?
 
-You can download extensions directly from VS Code. Select the extension you want, then use the download option. Refer to the [VS Code documentation](https://code.visualstudio.com/docs/editor/extension-marketplace#_can-i-download-an-extension-directly-from-the-marketplace) for detailed instructions on downloading and installing from a VSIX file.
+You can download extensions directly from VS Code or Visual Studio 2026. Select the extension you want, then use the download option.
+
+Refer to the [VS Code documentation](https://code.visualstudio.com/docs/editor/extension-marketplace#_can-i-download-an-extension-directly-from-the-marketplace) for detailed instructions on downloading and installing from a VSIX file.
 
 ### How do I create and build an internal VS Code extension?
 
@@ -872,7 +895,7 @@ No limits exist on the number of extensions you can host. If your team needs acc
 
 ### Can I connect to multiple Private Marketplace instances?
 
-No. VS Code connects to only one Private Marketplace at a time.
+No. VS clients can only connect to a single Private Marketplace at a time.
 
 ### Can I deploy multiple Private Marketplace instances in my organization?
 
@@ -889,10 +912,6 @@ Report issues and feature requests on [GitHub at microsoft/vsmarketplace](https:
 ### Where can I find announcements and discussions?
 
 Visit the [GitHub Discussions](https://aka.ms/vspm/support/discussions) page for announcements, updates, and community discussions.
-
-### Does Private Marketplace support Visual Studio extensions?
-
-Visual Studio extension hosting is currently not supported.
 
 ### Can I use Artifactory storage with Private Marketplace?
 
