@@ -7,6 +7,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| a1phaZ.mr-creator | 9/11/2026 | Malware |
+| Nyisulya.bongocode-ai | 9/11/2026 | Malware |
+| WorkoraNet.workora | 9/11/2026 | Malware |
+| creeperw.polyllm | 9/11/2026 | Impersonation |
+| drmrStudio.opencode-scribe | 9/11/2026 | Impersonation |
+| meijiahao.video-preview-fast | 9/11/2026 | Impersonation |
+| SalHax.keil-helper-plus | 9/11/2026 | Impersonation |
+| sighted2.sighted2-vscode | 9/11/2026 | Impersonation |
 | SuyuDiao.bios-build-assistant | 9/11/2026 | Untrustworthy |
 | Lily-Pathvela.lily-pathvela | 9/10/2026 | Malware |
 | FontingFonts.monkeyfont | 9/10/2026 | Malware |
