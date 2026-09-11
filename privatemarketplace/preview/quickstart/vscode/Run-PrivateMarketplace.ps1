@@ -133,6 +133,10 @@ $Config = @{
     # Version requirements
     DotNetVersion = "10.0.100"  # Minimum .NET SDK version. The latest patch in this major.minor channel is installed.
     AspireVersion = "13.0.0"    # Minimum Aspire CLI version accepted from a machine-wide installation.
+    
+    # Container image started by the AppHost. Kept in sync with apphost.cs so an image already
+    # on the machine can be refreshed before the AppHost starts.
+    ContainerImage = "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:latest"
     VSCodeVersion = "1.99"      # Minimum VS Code version accepted from a machine-wide installation.
     
     # Installation paths
@@ -679,6 +683,34 @@ function Get-GlobalVSCodeInfo {
 
 
 
+<#
+.SYNOPSIS
+    Reports whether a newer Private Marketplace image is available in the registry.
+.DESCRIPTION
+    Only meaningful when the image is already on this machine. Docker keeps using a local
+    copy of a tag indefinitely, so an existing image can be arbitrarily out of date, while a
+    missing one is pulled by Aspire on demand and is current by definition.
+
+    The local manifest digest recorded in RepoDigests is compared with the registry digest
+    read through 'docker buildx imagetools inspect', which queries the registry without
+    pulling. Returns $true only when both digests were read and they differ, so a failure to
+    determine either one never produces a spurious prompt.
+#>
+function Test-MarketplaceImageOutdated {
+    param([Parameter(Mandatory=$true)][string]$Image)
+
+    $local = Invoke-NativeCommand -FilePath "docker" -Arguments "image inspect $Image --format `"{{index .RepoDigests 0}}`""
+    if (-not $local -or $local.ExitCode -ne 0) { return $false }
+    $localDigest = ($local.StandardOutput.Trim() -split '@')[-1]
+    if ($localDigest -notmatch '^sha256:') { return $false }
+
+    $remote = Invoke-NativeCommand -FilePath "docker" -Arguments "buildx imagetools inspect $Image --format `"{{.Manifest.Digest}}`""
+    if (-not $remote -or $remote.ExitCode -ne 0) { return $false }
+    $remoteDigest = $remote.StandardOutput.Trim()
+    if ($remoteDigest -notmatch '^sha256:') { return $false }
+
+    return $localDigest -ne $remoteDigest
+}
 #endregion Helper Functions
 
 # Check if running as administrator
@@ -1164,6 +1196,24 @@ if (Test-Path $rootPath) {
         -DownloadMethod "ZIP download" -TargetFolder $rootPath -ManualUrl $repoUrl
 }
 
+# Check whether the Private Marketplace image on this machine is out of date.
+# Only relevant when a copy is already present: Docker reuses a local tag indefinitely, so it
+# can be stale, whereas a missing image is pulled by Aspire when it starts the container.
+# The engine has to be responsive to read the local digest, and it is started later in this
+# script, so on a run that begins with Docker stopped the check is simply skipped.
+$marketplaceImageOutdated = $false
+if ($dockerInstalled -and (Test-DockerEngineReady)) {
+    Write-Host "Checking the Private Marketplace image..." -ForegroundColor Gray
+    if (Test-MarketplaceImageOutdated -Image $Config.ContainerImage) {
+        Write-Host "  A newer image is available" -ForegroundColor Yellow
+        $marketplaceImageOutdated = $true
+        $missingPrereqs += New-PrerequisiteInfo -Name "Private Marketplace image (update available)" `
+            -InstallMethod "docker-pull" -ManualUrl $Config.ContainerImage
+    } else {
+        Write-Host "  Image is up to date" -ForegroundColor Green
+    }
+}
+
 # Check winget availability
 $wingetAvailable = $null -ne (Get-Command winget -ErrorAction SilentlyContinue)
 
@@ -1204,6 +1254,9 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
             if ($prereq.ManualUrl) {
                 Write-Host "    Source: $($prereq.ManualUrl)" -ForegroundColor Gray
             }
+        } elseif ($prereq.InstallMethod -eq "docker-pull") {
+            Write-Host "  - $($prereq.Name): via docker pull" -ForegroundColor Green
+            Write-Host "    Image: $($prereq.ManualUrl)" -ForegroundColor Gray
         } elseif ($prereq.InstallMethod -eq "aspire-local") {
             Write-Host "  - $($prereq.Name): via local portableinstallation" -ForegroundColor Green
             if ($prereq.InstallPath) {
@@ -1331,6 +1384,20 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
         }
     }
     
+    # Update the Private Marketplace image if a newer one is available
+    if ($marketplaceImageOutdated) {
+        Write-Host "`nUpdating the Private Marketplace image..." -ForegroundColor Cyan
+        $pull = Invoke-WithProgress -Activity "Updating Private Marketplace image" -Status "Pulling $($Config.ContainerImage)..." -ScriptBlock {
+            Invoke-NativeCommand -FilePath "docker" -Arguments "pull $($Config.ContainerImage)"
+        }
+        if ($pull -and $pull.ExitCode -eq 0) {
+            Write-Host "  Image updated successfully." -ForegroundColor Green
+        } else {
+            # Not fatal: the existing local image still runs, it is just not the newest.
+            Write-Host "  Could not update the image; continuing with the local copy." -ForegroundColor Yellow
+        }
+    }
+
     # Install Docker if missing
     $dockerNeedsInstall = $false
     if (-not $dockerInstalled) {
