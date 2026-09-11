@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| creeperw.polyllm | 9/11/2026 | Impersonation |
+| drmrStudio.opencode-scribe | 9/11/2026 | Impersonation |
+| meijiahao.video-preview-fast | 9/11/2026 | Impersonation |
+| SalHax.keil-helper-plus | 9/11/2026 | Impersonation |
+| sighted2.sighted2-vscode | 9/11/2026 | Impersonation |
 | FontingFonts.monkeyfont | 9/10/2026 | Malware |
 | txefficiency.lct-code-review | 9/10/2026 | Untrustworthy |
 | kairo.kairo-designer | 9/10/2026 | Untrustworthy |
