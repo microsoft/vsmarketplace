@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| WorkoraNet.workora | 9/11/2026 | Malware |
 | creeperw.polyllm | 9/11/2026 | Impersonation |
 | drmrStudio.opencode-scribe | 9/11/2026 | Impersonation |
 | meijiahao.video-preview-fast | 9/11/2026 | Impersonation |
