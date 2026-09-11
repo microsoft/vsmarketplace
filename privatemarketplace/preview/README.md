@@ -9,7 +9,7 @@ Private Marketplace enables hosting and distributing extensions on-premises or i
 This document will guide you through deploying, configuring, and monitoring your own self-hosted Private Marketplace. You will also learn how to connect to the marketplace and host private extensions for both VS Code and Visual Studio 2026.
 
 # Available features
-**[Watch the demo▶️](https://aka.ms/privatemktdemo)**
+[**Watch the demo▶️**](https://aka.ms/privatemktdemo)
 
 The Private Marketplace ships with these core capabilities:
 - **Self-host extensions**: Host internal and downloaded extensions on your own container infrastructure, such as Azure or Kubernetes.
@@ -32,19 +32,19 @@ Get to know the comprehensive multi-step scanning Microsoft uses to protect VS C
 
 - If your goal is to incrementally add a layer of control over which public extensions are allowed while developers maintain the convenience of accessing the latest public extensions, consider choosing the 'More Restrictive' setup.
 
- - If you need to meet strict industry regulation or enterprise security policy that goes above and beyond the measures outlined in the [security blog](https://aka.ms/vsmsecurityblog), start with the 'Most Restrictive' setup. This is also the right option for those needing to deploy to an air-gapped or highly firewalled environment.
+- If you need to meet strict industry regulation or enterprise security policy that goes above and beyond the measures outlined in the [security blog](https://aka.ms/vsmsecurityblog), start with the 'Most Restrictive' setup. This is also the right option for those needing to deploy to an air-gapped or highly firewalled environment.
 
 ## Prepare the container and storage
 Choose the scenario that best matches your business needs and follow the recommended setup steps. Alternatively, you can sequentially go through the steps below. Private Marketplace is available from Microsoft registry using **docker pull mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:latest**. Private Marketplace ships with Bicep scripts ([download here](https://aka.ms/vspm/scripts)) which make Azure deployment quick and easy by completing the container and storage setup and enabling upstreaming.
 
 
 
-|Scenario                                                                                                                                     | Required Steps                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Considerations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Test drive** <br>Explore the basics (non-production)                                                                                                                 | [Run the container locally using Docker](#1-run-the-container-locally-using-docker) on a development machine with VSIX files on the local file system.                                                                                                                                                                                                                                                                                                                                                      | Fastest deployment. Low overhead. Ideal for getting familiar with the app, testing, and debugging the container setup in a lightweight environment. Note that this scenario is intended for learning purposes; connecting from VS Code is not included. For production setup, choose from the scenarios below.                                                                                                                                                                                                                                                                                                                                                                      |
-| **Non-restrictive**<br>Self-host internal extensions. Let developers install any Public Marketplace extensions. | (1) Deploy to [Azure Container Apps](#24-deploying-to-azure-container-apps) or [another hosting infrastructure](#21-high-level-deployment-steps), (2) Connect to a [mounted volume](#31-configure-private-extension-source) for VSIX file storage, and (3) Turn on [upstreaming](#32-configure-the-container-to-upstream-extensions-from-the-public-visual-studio-marketplace)*.                                                                                                             | Use this option for the convenience of hosting private extensions plus access to any Public Marketplace extension. Provides a simpler setup process, especially when deployed to Azure Container Apps or Azure Kubernetes using the included Bicep scripts. *Skip step (3) if step (1) was deployed using the included Bicep scripts which already enable upstreaming.                                                                                                                                                                                                      |
-| **More restrictive**<br>Self-host internal extensions. Limit what developers can install from the Public Marketplace. | (1) Deploy to [Azure Container Apps](#24-deploying-to-azure-container-apps) or [another hosting infrastructure](#21-high-level-deployment-steps), (2) Connect to a [mounted volume](#31-configure-private-extension-source) for VSIX file storage, (3) Turn on [upstreaming](#32-configure-the-container-to-upstream-extensions-from-the-public-visual-studio-marketplace), and (4) Set up an [allowlist group policy](#33-configuring-allowed-extensions) using VS Code device management. | Provides a simpler setup process, especially when deployed to Azure Container Apps or Azure Kubernetes using the included Bicep scripts. VS Code allowlist provides granular control over which publishers, extensions, and versions are allowed, on Windows, MacOS and Linux. *Skip step (3) if step (1) was deployed using the included Bicep scripts which already enable upstreaming for Search and Assets.|
-| **Most restrictive**<br>Rehost a larger number of extensions downloaded from the Public Marketplace.                                                | (1) Deploy to [Azure Container Apps](#24-deploying-to-azure-container-apps) or [another hosting infrastructure](#21-high-level-deployment-steps), (2) Connect to a [mounted volume](#31-configure-private-extension-source) for VSIX file storage, and (3) [Turn off upstreaming](#32-configure-the-container-to-upstream-extensions-from-the-public-visual-studio-marketplace) to prevent duplicates**. | Choose this configuration if VS Code clients must not (for example enterprise security policy) or cannot (for example client machines are air-gapped or firewalled) install extensions from the Public Marketplace. **Disable upstreaming if step (1) was deployed using the included Bicep scripts which enable upstreaming for Search.                                |
+| Scenario | Required Steps | Considerations |
+| --- | --- | --- |
+| **Test drive**<br>Explore the basics (non-production) | [Run the container locally using Docker](#1-run-the-container-locally-using-docker) on a development machine with VSIX files on the local file system. | Fastest deployment. Low overhead. Ideal for getting familiar with the app, testing, and debugging the container setup in a lightweight environment. Note that this scenario is intended for learning purposes; connecting from VS Code is not included. For production setup, choose from the scenarios below. |
+| **Non-restrictive**<br>Self-host internal extensions. Let developers install any Public Marketplace extensions. | (1) Deploy to [Azure Container Apps](#24-deploying-to-azure-container-apps) or [another hosting infrastructure](#21-high-level-deployment-steps), (2) Connect to a [mounted volume](#31-configure-private-extension-source) for VSIX file storage, and (3) Turn on [upstreaming](#32-configure-the-container-to-upstream-extensions-from-the-public-visual-studio-marketplace)\*. | Use this option for the convenience of hosting private extensions plus access to any Public Marketplace extension. Provides a simpler setup process, especially when deployed to Azure Container Apps or Azure Kubernetes using the included Bicep scripts. \*Skip step (3) if step (1) was deployed using the included Bicep scripts which already enable upstreaming. |
+| **More restrictive**<br>Self-host internal extensions. Limit what developers can install from the Public Marketplace. | (1) Deploy to [Azure Container Apps](#24-deploying-to-azure-container-apps) or [another hosting infrastructure](#21-high-level-deployment-steps), (2) Connect to a [mounted volume](#31-configure-private-extension-source) for VSIX file storage, (3) Turn on [upstreaming](#32-configure-the-container-to-upstream-extensions-from-the-public-visual-studio-marketplace), and (4) Set up an [allowlist group policy](#33-configuring-allowed-extensions) using VS Code device management. | Provides a simpler setup process, especially when deployed to Azure Container Apps or Azure Kubernetes using the included Bicep scripts. VS Code allowlist provides granular control over which publishers, extensions, and versions are allowed, on Windows, MacOS and Linux. \*Skip step (3) if step (1) was deployed using the included Bicep scripts which already enable upstreaming for Search and Assets. |
+| **Most restrictive**<br>Rehost a larger number of extensions downloaded from the Public Marketplace. | (1) Deploy to [Azure Container Apps](#24-deploying-to-azure-container-apps) or [another hosting infrastructure](#21-high-level-deployment-steps), (2) Connect to a [mounted volume](#31-configure-private-extension-source) for VSIX file storage, and (3) [Turn off upstreaming](#32-configure-the-container-to-upstream-extensions-from-the-public-visual-studio-marketplace) to prevent duplicates\*\*. | Choose this configuration if VS Code clients must not (for example enterprise security policy) or cannot (for example client machines are air-gapped or firewalled) install extensions from the Public Marketplace. \*\*Disable upstreaming if step (1) was deployed using the included Bicep scripts which enable upstreaming for Search. |
 
 <br>
 
@@ -114,7 +114,7 @@ If you would like to enable HTTPS traffic being served by the application itself
 
 ## 2.3. Authentication and network isolation
 
-While it's on our short-term roadmap, neither VS Code nor Visual Studio 2026 currently supports authentication with the Marketplace (public or private). This means the communication between Visual Studio clients and the Marketplace is only secured in transit via HTTPS without any additional access control, credential, or user context.
+Neither VS Code nor Visual Studio 2026 currently supports authentication with the Marketplace (public or private). This means the communication between Visual Studio clients and the Marketplace is only secured in transit via HTTPS without any additional access control, credential, or user context.
 
 We recommend securing the Private Marketplace endpoint by using network access controls, such as hosting the app within your corporate network perimeter (making it inaccessible to the public internet) or implementing an IP allow list in the deployed application, perhaps by configuring the reverse proxy used for HTTPS termination to block unacceptable client IP addresses.
 
@@ -211,9 +211,9 @@ Follow these steps using the [Az PowerShell](https://learn.microsoft.com/powersh
 
    For more information about using a mounted volume (`"FileSystem"`) for your extension source, see [the section below](#31-configure-private-extension-source).
 
-   > [!TIP]
-   > For Azure Artifacts integration, see the [Azure Artifacts extension storage](#81-using-azure-artifacts-as-extension-storage) section in the appendix for additional deployment parameters and setup steps.
-   <br>
+> [!TIP]
+> For Azure Artifacts integration, see the [Azure Artifacts extension storage](#81-using-azure-artifacts-as-extension-storage) section in the appendix for additional deployment parameters and setup steps.
+<br>
 
    Warnings with code `BCP081` can be ignored and only indicate that your Az PowerShell or Bicep version is out of date. It will not impact the deployment. Optional parameters can be found at the top of the `azure-container-app.bicep` file.
 
@@ -307,11 +307,11 @@ New-AzResourceGroupDeployment `
 
 The deployment template for AKS supports the same set of parameters as the template for Azure Container Apps with some additional parameters:
 
-| Name                                | Description                                                                                            |
-| ----------------------------------- |------------------------------------------------------------------------------------------------------- |
-| aksNodeVmSize                       | The VM size for AKS nodes                                                                              |
-| aksNodeCountMin                     | The minimum number of nodes for the AKS cluster                                                        |
-| aksNodeCountMax                     | The maximum number of nodes for the AKS cluster                                                        |
+| Name | Description |
+| --- | --- |
+| aksNodeVmSize | The VM size for AKS nodes |
+| aksNodeCountMin | The minimum number of nodes for the AKS cluster |
+| aksNodeCountMax | The maximum number of nodes for the AKS cluster |
 
 > [!TIP]
 > The Kubernetes version may also be modified under the `aksCluster` resource in the template file.
@@ -423,7 +423,7 @@ When the feature is enabled, via `Search` or `SearchAndAssets` modes, extensions
 In more tightly controlled environments, Private Marketplace may not be able to access the public Marketplcae without changes to the network configuration. Allow Private Marketplace to reach the public Marketplace by enabling access to the following endpoints:
 
 | Endpoint | Port | Usage |
-| -- | -- | -- |
+| --- | --- | --- |
 | marketplace.visualstudio.com | https (443) | For extension search queries and metadata |
 | *.gallerycdn.vsassets.io | https (443) | For extension assets (icons, readme files, etc.) |
 
@@ -485,7 +485,8 @@ To upload the desired VSIX files to your extension source directory:
 
 The uploaded extensions will now appear in the Private Marketplace and be available for installation in VS Code.
 
-> **Tip:** You can use this method to quickly test or demo the Private Marketplace with known good extensions, or to bootstrap a new deployment.
+> [!TIP]
+> You can use this method to quickly test or demo the Private Marketplace with known good extensions, or to bootstrap a new deployment.
 
 ### Publish from a build pipeline
 
@@ -600,32 +601,32 @@ With the application deployed and private extensions published to the extension 
 VS Code supports Windows Registry-based Group Policy to control default software settings across VS Code client machines. This can be tested locally with these steps:
 
 1. Install the [policy files (admx and adml) shipped in VS Code](https://code.visualstudio.com/docs/setup/enterprise#_group-policy-on-windows).
-1. Open the Group Policy Editor UI with the `gpedit.msc` command.
-1. In the tree view, navigate to Local Computer Policy > User Configuration > Administrative Templates > Visual Studio Code > Extensions > ExtensionGalleryServiceUrl.
-1. Copy the Private Marketplace service URL visible on the deployed container's home page in your web browser. The service URL will look something like `https://<container host name>/api/v1`.
-1. Open the ExtensionGalleryServiceUrl setting, select the Enabled radio button, and paste the service URL in the Options text box.
-1. Save the changes with the OK button.
-1. Restart VS code.
+2. Open the Group Policy Editor UI with the `gpedit.msc` command.
+3. In the tree view, navigate to Local Computer Policy > User Configuration > Administrative Templates > Visual Studio Code > Extensions > ExtensionGalleryServiceUrl.
+4. Copy the Private Marketplace service URL visible on the deployed container's home page in your web browser. The service URL will look something like `https://<container host name>/api/v1`.
+5. Open the ExtensionGalleryServiceUrl setting, select the Enabled radio button, and paste the service URL in the Options text box.
+6. Save the changes with the OK button.
+7. Restart VS code.
 
 ## 5.1.2 macOS
 1. Copy the Private Marketplace service URL visible on the deployed container's home page in your web browser. The service URL will look something like `https://<container host name>/api/v1`.
-1. Following the steps in VS Code Enterprise Device Management guidance at [Configuration profiles on macOS](https://code.visualstudio.com/docs/setup/enterprise#_configuration-profiles-on-macos), set the copied service URL to the following policy value in the .mobileconfig file, contained in the app bundle:
+2. Following the steps in VS Code Enterprise Device Management guidance at [Configuration profiles on macOS](https://code.visualstudio.com/docs/setup/enterprise#_configuration-profiles-on-macos), set the copied service URL to the following policy value in the .mobileconfig file, contained in the app bundle:
    ```
    <key>ExtensionGalleryServiceUrl</key>
    <string>PrivateMarketplaceServiceURL</string>
    ```
-1. Be sure to complete the remaining steps in the VS Code guidance to install and enable configuration profile.
+3. Be sure to complete the remaining steps in the VS Code guidance to install and enable configuration profile.
 
 ## 5.1.3 Consuming Extensions
 Now let us try some Private Marketplace interactions in VS Code:
 
 1. Restart or open VS Code.
-1. Sign into GitHub with an account that has an active GitHub Copilot Enterprise/Business or GitHub Enterprise subscription.
-1. Select the Extensions view (View > Extensions).
-1. You should see the extensions in the Private Marketplace.
-1. Install any available extension, and you should see them under the Installed tab.
-1. Receive automatic updates when newer versions are uploaded to the Private Marketplace.
-1. You can also search and install extensions from the results. Search should find any matches by extension name, ID, and description.
+2. Sign into GitHub with an account that has an active GitHub Copilot Enterprise/Business or GitHub Enterprise subscription.
+3. Select the Extensions view (View > Extensions).
+4. You should see the extensions in the Private Marketplace.
+5. Install any available extension, and you should see them under the Installed tab.
+6. Receive automatic updates when newer versions are uploaded to the Private Marketplace.
+7. You can also search and install extensions from the results. Search should find any matches by extension name, ID, and description.
 
 ## 5.2 Connecting Visual Studio 2026 to the Private Marketplace
 
@@ -640,9 +641,9 @@ By default, Visual Studio 2026 points to the Public Visual Studio Marketplace. T
 Visual Studio 2026 supports Windows Registry-based Group Policy to control default software settings across Visual Studio client machines. This can be tested locally with these steps:
 
 1. Open the Registry Editor with the `regedit` command.
-1. In the tree view, navigate to `Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\VisualStudio\Governance\Extensions`. Note that you'll likely need to create both `Governance` and `Extensions` keys as they probably do not exist.
-1. Create a new String Value named `ExtensionGalleryServiceUrl` and set its value to the Private Marketplace service URL visible on the deployed container's home page in your web browser. The service URL will look something like `https://<container host name>/api/v1`.
-1. Restart Visual Studio 2026.
+2. In the tree view, navigate to `Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\VisualStudio\Governance\Extensions`. Note that you'll likely need to create both `Governance` and `Extensions` keys as they probably do not exist.
+3. Create a new String Value named `ExtensionGalleryServiceUrl` and set its value to the Private Marketplace service URL visible on the deployed container's home page in your web browser. The service URL will look something like `https://<container host name>/api/v1`.
+4. Restart Visual Studio 2026.
 
 # 6. Monitor the running container
 
@@ -847,26 +848,26 @@ Other limitations:
 
 The following environment variables are supported by the application.
 
-| Name                                                              | Required | Description                                                                                            |
-| ----------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------ |
-| APPLICATIONINSIGHTS_CONNECTION_STRING                             | no       | Application Insights connection string for request logs, metrics, traces                               |
-| ASPNETCORE_HTTP_PORTS                                             | no       | HTTP (not HTTPS) listen ports, semicolon delimited, defaults to 8080                                   |
-| ASPNETCORE_HTTPS_PORTS                                            | no       | HTTPS (not HTTP) listen ports, semicolon delimited, defaults to none                                   |
-| ASPNETCORE_Kestrel__Certificates__Default__Password               | no       | Password for the .pfx file                                                                             |
-| ASPNETCORE_Kestrel__Certificates__Default__Path                   | no       | For HTTPS, path to a .pfx file for HTTP, provide via container mounted volume                          |
-| Marketplace__BaseUrl                                              | no       | Externally accessible base URL, defaults to generating base URL from request context                   |
-| Marketplace__ExtensionSourceDirectory                             | no       | Linux path to read extensions, should be a read-only container mount path                              |
-| Marketplace__Logging__LogHttpSessions                             | no       | Write request info as log entries, defaults to true when using LogToConsole                            |
-| Marketplace__Logging__LogToConsole                                | no       | Write logs to stdout, not recommended for production deployments                                       |
-| Marketplace__LogsDirectory                                        | no       | Linux path to write logs to, should be a read/write container mount path                               |
-| Marketplace__OrganizationName                                     | no       | The name of your organization, for display purposes                                                    |
-| Marketplace__ArtifactsOrganization                                | no       | Azure DevOps organization name to be used to create an Azure Artifacts extension source                |
-| Marketplace__ArtifactsProject                                     | no       | Azure DevOps project name to be used to create an Azure Artifacts extension source                     |
-| Marketplace__ArtifactsFeed                                        | no       | Azure DevOps feed name to be used to create an Azure Artifacts extension source                        |
-| Marketplace__ArtifactsClientId                                    | no       | Client ID of User-assigned Managed Identity                                                            |
-| Marketplace__Upstreaming__Mode                         | no       | Controls upstreaming to the Public Visual Studio Marketplace. Allowed values: `None` (disable upstreaming), `Search` (proxy only search queries for public extensions), `SearchAndAssets` (proxy both search queries and asset downloads for public extensions). Defaults to `None`. Use `SearchAndAssets` to ensure all asset URLs are rewritten to go through the Private Marketplace proxy. |
-| OTEL_EXPORTER_OTLP_ENDPOINT                                       | no       | URL to send OpenTelemetry to, via [OTLP](https://opentelemetry.io/docs/specs/otlp/)                    |
-| Marketplace__PublisherDisplayNames__\<publisher\>=\<displayname\> | no       | A Key Value Pair list of publishers and their display name                                             |
+| Name | Required | Description |
+| --- | --- | --- |
+| APPLICATIONINSIGHTS\_CONNECTION\_STRING | no | Application Insights connection string for request logs, metrics, traces |
+| ASPNETCORE\_HTTP\_PORTS | no | HTTP (not HTTPS) listen ports, semicolon delimited, defaults to 8080 |
+| ASPNETCORE\_HTTPS\_PORTS | no | HTTPS (not HTTP) listen ports, semicolon delimited, defaults to none |
+| ASPNETCORE\_Kestrel\_\_Certificates\_\_Default\_\_Password | no | Password for the .pfx file |
+| ASPNETCORE\_Kestrel\_\_Certificates\_\_Default\_\_Path | no | For HTTPS, path to a .pfx file for HTTP, provide via container mounted volume |
+| Marketplace\_\_BaseUrl | no | Externally accessible base URL, defaults to generating base URL from request context |
+| Marketplace\_\_ExtensionSourceDirectory | no | Linux path to read extensions, should be a read-only container mount path |
+| Marketplace\_\_Logging\_\_LogHttpSessions | no | Write request info as log entries, defaults to true when using LogToConsole |
+| Marketplace\_\_Logging\_\_LogToConsole | no | Write logs to stdout, not recommended for production deployments |
+| Marketplace\_\_LogsDirectory | no | Linux path to write logs to, should be a read/write container mount path |
+| Marketplace\_\_OrganizationName | no | The name of your organization, for display purposes |
+| Marketplace\_\_ArtifactsOrganization | no | Azure DevOps organization name to be used to create an Azure Artifacts extension source |
+| Marketplace\_\_ArtifactsProject | no | Azure DevOps project name to be used to create an Azure Artifacts extension source |
+| Marketplace\_\_ArtifactsFeed | no | Azure DevOps feed name to be used to create an Azure Artifacts extension source |
+| Marketplace\_\_ArtifactsClientId | no | Client ID of User-assigned Managed Identity |
+| Marketplace\_\_Upstreaming\_\_Mode | no | Controls upstreaming to the Public Visual Studio Marketplace. Allowed values: `None` (disable upstreaming), `Search` (proxy only search queries for public extensions), `SearchAndAssets` (proxy both search queries and asset downloads for public extensions). Defaults to `None`. Use `SearchAndAssets` to ensure all asset URLs are rewritten to go through the Private Marketplace proxy. |
+| OTEL\_EXPORTER\_OTLP\_ENDPOINT | no | URL to send OpenTelemetry to, via [OTLP](https://opentelemetry.io/docs/specs/otlp/) |
+| Marketplace\_\_PublisherDisplayNames\_\_\<publisher\>=\<displayname\> | no | A Key Value Pair list of publishers and their display name |
 
 See [docs](https://learn.microsoft.com/aspnet/core/fundamentals/servers/kestrel/endpoints#specify-ports-only) for `ASPNETCORE_HTTP_PORTS` and `ASPNETCORE_HTTPS_PORTS`.
 
