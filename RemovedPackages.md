@@ -8,7 +8,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
 | SuyuDiao.bios-build-assistant | 9/11/2026 | Untrustworthy |
+| Lily-Pathvela.lily-pathvela | 9/10/2026 | Malware |
 | FontingFonts.monkeyfont | 9/10/2026 | Malware |
+| jasonbg-koi.koi-markt-bug1 | 9/10/2026 | Malware |
 | txefficiency.lct-code-review | 9/10/2026 | Untrustworthy |
 | kairo.kairo-designer | 9/10/2026 | Untrustworthy |
 | augura-team.augura-dev | 9/9/2026 | Malware |
