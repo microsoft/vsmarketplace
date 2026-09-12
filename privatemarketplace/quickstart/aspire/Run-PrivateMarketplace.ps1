@@ -1,12 +1,15 @@
 <#
 .SYNOPSIS
-    Sets up and runs a private VS Code marketplace quickstart environment.
+    Sets up and runs a Private Marketplace quickstart environment for the Visual Studio family.
 
 .DESCRIPTION
-    This script automates the installation and configuration of all prerequisites
-    needed to run a private VS Code marketplace, including Docker, VS Code portable,
-    .NET SDK, and Aspire CLI. All tools are installed locally in a temporary folder
-    to avoid interfering with system-wide installations.
+    This script automates the installation and configuration of all prerequisites needed to run
+    a local Private Marketplace, including Docker, portable VS Code, the .NET SDK, and the
+    Aspire CLI. By default all tools are installed locally in a temporary folder to avoid
+    interfering with system-wide installations; see -UseGlobalInstalls to reuse existing ones.
+
+    Client connection guidance is currently available for Visual Studio Code. Visual Studio
+    connection guidance is coming soon.
 
 .PARAMETER InstallAdminTemplates
     When specified, only installs VS Code administrative templates (Group Policy ADMX/ADML files)
@@ -16,9 +19,31 @@
     When specified, only removes VS Code administrative templates (Group Policy ADMX/ADML files)
     from the Windows PolicyDefinitions folder and exits. Requires administrator privileges.
 
+.PARAMETER UseGlobalInstalls
+    When specified, existing machine-wide installations of VS Code, the .NET SDK, and the
+    Aspire CLI are used instead of downloading portable copies, provided they meet the
+    minimum versions (VS Code 1.99+, .NET SDK 10.0.100+, Aspire CLI 13.0.0+).
+    Any tool that is missing or too old is still installed locally into the quickstart folder.
+
+.PARAMETER VSCodePath
+    Internal. The VS Code installation directory to read Group Policy templates from when the
+    script re-launches itself elevated. Defaults to the portable copy in the quickstart folder.
+
+.PARAMETER SkipVSCode
+    Skips the prerequisite check and installation for portable VS Code. This also implies
+    -SkipAdminTemplates, unless -UseGlobalInstalls found a machine-wide VS Code, because the
+    administrative templates are read from a VS Code installation.
+
+.PARAMETER SkipAdminTemplates
+    Skips the prerequisite check and installation for the VS Code administrative templates.
+
 .EXAMPLE
     .\Run-PrivateMarketplace.ps1
     Runs the full quickstart setup, checking and installing prerequisites as needed.
+
+.EXAMPLE
+    .\Run-PrivateMarketplace.ps1 -UseGlobalInstalls
+    Reuses machine-wide VS Code, .NET SDK, and Aspire CLI installations when they are new enough.
 
 .EXAMPLE
     .\Run-PrivateMarketplace.ps1 -InstallAdminTemplates
@@ -42,7 +67,19 @@ param(
     [switch]$InstallAdminTemplates,
     
     [Parameter(HelpMessage="Remove VS Code administrative templates only (requires admin rights)")]
-    [switch]$RemoveAdminTemplates
+    [switch]$RemoveAdminTemplates,
+
+    [Parameter(HelpMessage="Reuse machine-wide VS Code, .NET SDK, and Aspire CLI installations when they meet the minimum versions")]
+    [switch]$UseGlobalInstalls,
+
+    [Parameter(HelpMessage="Internal. VS Code installation directory to read Group Policy templates from")]
+    [string]$VSCodePath,
+
+    [Parameter(HelpMessage="Skip the portable VS Code check and installation")]
+    [switch]$SkipVSCode,
+
+    [Parameter(HelpMessage="Skip the VS Code administrative templates check and installation")]
+    [switch]$SkipAdminTemplates
 )
 
 $ErrorActionPreference = "Stop"
@@ -55,7 +92,9 @@ $Config = @{
     RepoBranch = "main"  # Change this to test different branches
     
     # Version requirements
-    DotNetVersion = "10.0.100"  # Version of .NET SDK to install locally
+    DotNetVersion = "10.0.100"  # Minimum .NET SDK version. The latest patch in this major.minor channel is installed.
+    AspireVersion = "13.0.0"    # Minimum Aspire CLI version accepted from a machine-wide installation.
+    VSCodeVersion = "1.99"      # Minimum VS Code version accepted from a machine-wide installation.
     
     # Installation paths
     RootPath = Join-Path $env:TEMP "privatemarketplace-quickstart"
@@ -70,6 +109,11 @@ $Paths = @{
     Root = $Config.RootPath
     LocalVSCode = Join-Path $Config.RootPath ".vscode"
     LocalAspire = Join-Path $Config.RootPath ".aspire"
+    # The Aspire CLI is installed under <LocalAspire>\bin. For script-route installs the CLI
+    # treats the parent of its own bin directory as ASPIRE_HOME, so this keeps ASPIRE_HOME on
+    # .aspire instead of the quickstart root, where it would collide with the project's own
+    # aspire.config.json and write cache, cli, and logs folders next to the AppHost.
+    LocalAspireBin = Join-Path $Config.RootPath ".aspire\bin"
     LocalDotnet = Join-Path $Config.RootPath ".dotnet"
     Policies = Join-Path $Config.RootPath ".vscode\policies"
 }
@@ -135,11 +179,20 @@ function Wait-ForCondition {
         $percentComplete = [Math]::Min(100, ($elapsed / $TimeoutSeconds) * 100)
         Write-Progress -Activity $StatusMessage -Status "$elapsed of $TimeoutSeconds seconds" -PercentComplete $percentComplete
         
-        if (& $Condition) {
+        # A condition that throws counts as "not ready yet". Probes often shell out to
+        # tools that fail while a service is still starting, and under
+        # $ErrorActionPreference = 'Stop' that would otherwise terminate the script.
+        $conditionMet = $false
+        try {
+            $conditionMet = [bool](& $Condition)
+        } catch {
+            $conditionMet = $false
+        }
+
+        if ($conditionMet) {
             Write-Progress -Activity $StatusMessage -Completed
             return $true
         }
-        
         Start-Sleep -Seconds $IntervalSeconds
         $elapsed += $IntervalSeconds
     }
@@ -304,6 +357,281 @@ function Test-AdminTemplatesInstalled {
     $admxPath = Join-Path $policyDefinitionsPath "VSCode.admx"
     return (Test-Path $admxPath)
 }
+
+<#
+.SYNOPSIS
+    Returns the PowerShell executable to use for elevated self-invocation.
+.DESCRIPTION
+    Prefers PowerShell 7 (pwsh.exe) when available, and falls back to Windows
+    PowerShell (powershell.exe), which is present on all supported Windows
+    versions. The elevated code paths only use cmdlets available in 5.1, so
+    either host works.
+#>
+function Get-PowerShellExecutable {
+    if (Test-CommandExists "pwsh") {
+        return "pwsh.exe"
+    }
+    return "powershell.exe"
+}
+
+<#
+.SYNOPSIS
+    Converts a tool version string into a comparable [version].
+.DESCRIPTION
+    Strips semantic-versioning prerelease labels and build metadata so values such as
+    "13.6.0-preview.1.26418.4+95ba0548" compare as 13.6.0. Returns $null when the input
+    does not contain at least a major and minor number.
+#>
+function ConvertTo-ComparableVersion {
+    param([string]$RawVersion)
+
+    if ([string]::IsNullOrWhiteSpace($RawVersion)) { return $null }
+
+    # Keep only the numeric core: drop anything from the first '-' or '+'
+    $core = ($RawVersion.Trim() -split '[-+]')[0]
+    $parts = @($core -split '\.' | Where-Object { $_ -match '^\d+$' })
+
+    if ($parts.Count -lt 2) { return $null }
+    if ($parts.Count -gt 4) { $parts = $parts[0..3] }
+
+    try { return [version]($parts -join '.') } catch { return $null }
+}
+
+<#
+.SYNOPSIS
+    Runs a native command and captures stdout without letting stderr become a PowerShell error.
+.DESCRIPTION
+    Native tools often write progress or warnings to stderr. Under
+    $ErrorActionPreference = 'Stop', Windows PowerShell 5.1 turns that output into a
+    terminating NativeCommandError. Redirecting both streams through ProcessStartInfo avoids
+    creating an error record at all.
+.OUTPUTS
+    An object with ExitCode and StandardOutput, or $null when the process could not start.
+#>
+function Invoke-NativeCommand {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$FilePath,
+
+        [Parameter(Mandatory=$false)]
+        [string]$Arguments = ""
+    )
+
+    $psi = New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName = $FilePath
+    $psi.Arguments = $Arguments
+    $psi.UseShellExecute = $false
+    $psi.CreateNoWindow = $true
+    $psi.RedirectStandardOutput = $true
+    $psi.RedirectStandardError = $true
+
+    $process = New-Object System.Diagnostics.Process
+    $process.StartInfo = $psi
+
+    try {
+        [void]$process.Start()
+    } catch [System.ComponentModel.Win32Exception] {
+        return $null
+    } catch [System.InvalidOperationException] {
+        return $null
+    }
+
+    $standardOutput = $process.StandardOutput.ReadToEnd()
+    [void]$process.StandardError.ReadToEnd()
+    $process.WaitForExit()
+
+    return [pscustomobject]@{
+        ExitCode       = $process.ExitCode
+        StandardOutput = $standardOutput
+    }
+}
+
+<#
+.SYNOPSIS
+    Determines whether the Docker engine is running and accepting requests.
+.DESCRIPTION
+    Gates on the exit code rather than matching error text, so it is not affected by the
+    display language or by harmless warnings such as the blkio message Docker emits on
+    some hosts.
+#>
+function Test-DockerEngineReady {
+    $dockerCommand = Get-Command docker.exe -CommandType Application -ErrorAction SilentlyContinue |
+        Select-Object -First 1
+    if ($null -eq $dockerCommand -or -not (Test-Path $dockerCommand.Source)) {
+        return $false
+    }
+
+    $result = Invoke-NativeCommand -FilePath $dockerCommand.Source -Arguments "info"
+    if ($null -eq $result) {
+        return $false
+    }
+
+    return ($result.ExitCode -eq 0 -and $result.StandardOutput -match 'Server:')
+}
+
+<#
+.SYNOPSIS
+    Returns the version of an Aspire CLI executable, or $null when it cannot be determined.
+#>
+function Get-AspireCliVersion {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$Path
+    )
+
+    if (-not (Test-Path $Path)) { return $null }
+
+    $result = Invoke-NativeCommand -FilePath $Path -Arguments "--version"
+    if ($null -eq $result -or $result.ExitCode -ne 0) {
+        return $null
+    }
+
+    $firstLine = ($result.StandardOutput -split "`r?`n" | Select-Object -First 1)
+    return ConvertTo-ComparableVersion $firstLine
+}
+
+<#
+.SYNOPSIS
+    Returns the highest released .NET SDK version that meets a minimum, or $null.
+.DESCRIPTION
+    Accepts the output of "dotnet --list-sdks". Any SDK at or above the minimum qualifies,
+    regardless of its major.minor channel, so a newer SDK is never reported as missing.
+    Prerelease SDKs are ignored so the quickstart runs on a released toolchain.
+#>
+function Get-SdkVersionMeetingMinimum {
+    param(
+        [string[]]$SdkLines,
+        [string]$MinimumVersion
+    )
+
+    $minimum = ConvertTo-ComparableVersion $MinimumVersion
+    if (-not $minimum) { return $null }
+
+    $best = $null
+    foreach ($line in $SdkLines) {
+        # Lines look like: 10.0.400 [C:\Program Files\dotnet\sdk]
+        if ($line -notmatch '^(\S+)\s+\[') { continue }
+        $rawVersion = $matches[1]
+
+        if ($rawVersion -match '-') { continue }
+
+        $version = ConvertTo-ComparableVersion $rawVersion
+        if ($version -and $version -ge $minimum) {
+            if (-not $best -or $version -gt $best) { $best = $version }
+        }
+    }
+
+    return $best
+}
+
+<#
+.SYNOPSIS
+    Finds a machine-wide .NET SDK that meets the minimum version.
+.OUTPUTS
+    An object with Version and Root (the DOTNET_ROOT directory), or $null.
+#>
+function Get-GlobalDotNetInfo {
+    param([string]$MinimumVersion)
+
+    $command = Get-Command dotnet -ErrorAction SilentlyContinue
+    if (-not $command) { return $null }
+
+    try { $sdkLines = & $command.Source --list-sdks 2>$null } catch { return $null }
+
+    $version = Get-SdkVersionMeetingMinimum -SdkLines $sdkLines -MinimumVersion $MinimumVersion
+    if (-not $version) { return $null }
+
+    return [pscustomobject]@{
+        Version = $version
+        Root    = Split-Path -Parent $command.Source
+    }
+}
+
+<#
+.SYNOPSIS
+    Finds a machine-wide Aspire CLI that meets the minimum version.
+.OUTPUTS
+    An object with Version and Path (the aspire executable), or $null.
+#>
+function Get-GlobalAspireInfo {
+    param([string]$MinimumVersion)
+
+    $command = Get-Command aspire -CommandType Application -ErrorAction SilentlyContinue |
+        Select-Object -First 1
+    if (-not $command) { return $null }
+
+    $version = Get-AspireCliVersion -Path $command.Source
+    $minimum = ConvertTo-ComparableVersion $MinimumVersion
+    if ($version -and $minimum -and $version -ge $minimum) {
+        return [pscustomobject]@{
+            Version = $version
+            Path    = $command.Source
+        }
+    }
+
+    return $null
+}
+
+<#
+.SYNOPSIS
+    Finds a machine-wide VS Code installation that meets the minimum version.
+.OUTPUTS
+    An object with Version, Root (install directory) and Exe (Code.exe), or $null.
+#>
+function Get-GlobalVSCodeInfo {
+    param([string]$MinimumVersion)
+
+    $candidateRoots = @()
+
+    # The 'code' command is a shim at <root>\bin\code.cmd
+    $command = Get-Command code -ErrorAction SilentlyContinue
+    if ($command) {
+        $candidateRoots += (Split-Path -Parent (Split-Path -Parent $command.Source))
+    }
+
+    $candidateRoots += @(
+        (Join-Path $env:ProgramFiles "Microsoft VS Code"),
+        (Join-Path ${env:ProgramFiles(x86)} "Microsoft VS Code"),
+        (Join-Path $env:LOCALAPPDATA "Programs\Microsoft VS Code")
+    )
+
+    $root = $null
+    foreach ($candidate in $candidateRoots) {
+        if ([string]::IsNullOrWhiteSpace($candidate)) { continue }
+        if (Test-Path (Join-Path $candidate "Code.exe")) { $root = $candidate; break }
+    }
+    if (-not $root) { return $null }
+
+    # Prefer the CLI shim for the version; it prints version, commit, then architecture
+    $rawVersion = $null
+    $shim = Join-Path $root "bin\code.cmd"
+    if (Test-Path $shim) {
+        $shimResult = Invoke-NativeCommand -FilePath $shim -Arguments "--version"
+        if ($null -ne $shimResult -and $shimResult.ExitCode -eq 0) {
+            $rawVersion = ($shimResult.StandardOutput -split "`r?`n" | Select-Object -First 1)
+        }
+    }
+
+    # Fall back to product.json, which may sit under a commit-hash folder
+    if ([string]::IsNullOrWhiteSpace($rawVersion)) {
+        $productJson = Get-ChildItem -Path $root -Filter "product.json" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
+        if ($productJson) {
+            try { $rawVersion = (Get-Content $productJson.FullName -Raw | ConvertFrom-Json).version } catch { }
+        }
+    }
+
+    $version = ConvertTo-ComparableVersion $rawVersion
+    $minimum = ConvertTo-ComparableVersion $MinimumVersion
+    if ($version -and $minimum -and $version -ge $minimum) {
+        return [pscustomobject]@{
+            Version = $version
+            Root    = $root
+            Exe     = Join-Path $root "Code.exe"
+        }
+    }
+
+    return $null
+}
 #endregion Helper Functions
 
 # Check if running as administrator
@@ -317,9 +645,13 @@ if ($InstallAdminTemplates) {
         exit 1
     }
 
-    # Use configured paths
+    # Use configured paths. -VSCodePath lets the caller point at a machine-wide installation.
     $rootPath = $Paths.Root
-    $localVSCodePath = $Paths.LocalVSCode
+    if (-not [string]::IsNullOrWhiteSpace($VSCodePath)) {
+        $localVSCodePath = $VSCodePath
+    } else {
+        $localVSCodePath = $Paths.LocalVSCode
+    }
     
     # Set up logging in root folder (must be done before Start-Transcript)
     $logFile = Join-Path $rootPath "vscode-admin-template-install.log"
@@ -356,17 +688,35 @@ if ($InstallAdminTemplates) {
         exit 1
     }
     
-    # Try to find policies folder in common locations
+    # Try to find policies folder in common locations.
+    # Portable builds keep them under resources\app\policies; machine-wide installations
+    # nest resources under a commit-hash folder, for example <root>\520fb30b2d\policies.
     $policySearchPaths = @(
         (Join-Path $localVSCodePath "resources\app\policies"),
         (Join-Path $localVSCodePath "policies")
     )
+
+    foreach ($childDir in (Get-ChildItem -Path $localVSCodePath -Directory -ErrorAction SilentlyContinue)) {
+        $policySearchPaths += (Join-Path $childDir.FullName "policies")
+        $policySearchPaths += (Join-Path $childDir.FullName "resources\app\policies")
+    }
     
+    # Pick a policies folder, preferring one that also ships localized .adml files.
+    # Machine-wide VS Code installations ship VSCode.admx only, while the portable build
+    # ships .admx plus a folder of .adml language files.
+    $admxCandidates = @()
     foreach ($searchPath in $policySearchPaths) {
-        if (Test-Path $searchPath) {
-            $vscodePolicyPath = $searchPath
-            break
+        if (Test-Path (Join-Path $searchPath "VSCode.admx")) {
+            $admxCandidates += $searchPath
         }
+    }
+
+    $vscodePolicyPath = $admxCandidates | Where-Object {
+        (Get-ChildItem -Path $_ -Filter "VSCode.adml" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1)
+    } | Select-Object -First 1
+
+    if (-not $vscodePolicyPath) {
+        $vscodePolicyPath = $admxCandidates | Select-Object -First 1
     }
     
     if (-not $vscodePolicyPath) {
@@ -439,12 +789,20 @@ if ($InstallAdminTemplates) {
             Write-Host "  ✓ VSCode.admx verified" -ForegroundColor Green
         }
         
-        # Check at least one ADML file
-        if ($copiedCount -eq 0) {
+        # Check language files. Some VS Code installations ship VSCode.admx without any
+        # .adml files; that is not an installation failure, but Group Policy Editor will
+        # not have localized strings for the settings.
+        $admlAvailable = $null -ne (Get-ChildItem -Path $vscodePolicyPath -Filter "VSCode.adml" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1)
+
+        if ($copiedCount -gt 0) {
+            Write-Host "  ✓ $copiedCount language file(s) verified" -ForegroundColor Green
+        } elseif (-not $admlAvailable) {
+            Write-Host "  WARNING: This VS Code installation does not include VSCode.adml language files." -ForegroundColor Yellow
+            Write-Host "           The policy settings may appear without localized names in Group Policy Editor." -ForegroundColor Yellow
+            Write-Host "           Re-run without -UseGlobalInstalls to use the portable VS Code, which includes them." -ForegroundColor Yellow
+        } else {
             Write-Host "  WARNING: No language files were copied" -ForegroundColor Yellow
             $verificationFailed = $true
-        } else {
-            Write-Host "  ✓ $copiedCount language file(s) verified" -ForegroundColor Green
         }
         
         if ($verificationFailed) {
@@ -555,8 +913,49 @@ $rootPath = $Paths.Root
 $dotnetVersion = $Config.DotNetVersion
 $localVSCodePath = $Paths.LocalVSCode
 $localAspirePath = $Paths.LocalAspire
+$localAspireBinPath = $Paths.LocalAspireBin
 $localDotnetPath = $Paths.LocalDotnet
 $policiesPath = $Paths.Policies
+
+# Effective tool locations. These default to the portable copies in the quickstart folder and
+# are redirected to machine-wide installations when -UseGlobalInstalls finds suitable versions.
+$effectiveVSCodeRoot = $localVSCodePath
+$effectiveDotnetRoot = $localDotnetPath
+$effectiveAspireExe  = Join-Path $localAspireBinPath "aspire.exe"
+$usingGlobalVSCode   = $false
+$usingGlobalDotnet   = $false
+$usingGlobalAspire   = $false
+
+if ($UseGlobalInstalls) {
+    Write-Host "`nLooking for machine-wide installations (-UseGlobalInstalls)..." -ForegroundColor Cyan
+
+    $globalVSCode = Get-GlobalVSCodeInfo -MinimumVersion $Config.VSCodeVersion
+    if ($globalVSCode) {
+        Write-Host "  VS Code $($globalVSCode.Version) found at: $($globalVSCode.Root)" -ForegroundColor Green
+        $effectiveVSCodeRoot = $globalVSCode.Root
+        $usingGlobalVSCode = $true
+    } else {
+        Write-Host "  No machine-wide VS Code $($Config.VSCodeVersion)+ found; a portable copy will be used" -ForegroundColor Yellow
+    }
+
+    $globalDotnet = Get-GlobalDotNetInfo -MinimumVersion $Config.DotNetVersion
+    if ($globalDotnet) {
+        Write-Host "  .NET SDK $($globalDotnet.Version) found at: $($globalDotnet.Root)" -ForegroundColor Green
+        $effectiveDotnetRoot = $globalDotnet.Root
+        $usingGlobalDotnet = $true
+    } else {
+        Write-Host "  No machine-wide .NET SDK $($Config.DotNetVersion)+ found; a local SDK will be used" -ForegroundColor Yellow
+    }
+
+    $globalAspire = Get-GlobalAspireInfo -MinimumVersion $Config.AspireVersion
+    if ($globalAspire) {
+        Write-Host "  Aspire CLI $($globalAspire.Version) found at: $($globalAspire.Path)" -ForegroundColor Green
+        $effectiveAspireExe = $globalAspire.Path
+        $usingGlobalAspire = $true
+    } else {
+        Write-Host "  No machine-wide Aspire CLI $($Config.AspireVersion)+ found; a portable copy will be used" -ForegroundColor Yellow
+    }
+}
 
 # Check Docker
 Write-Host "Checking for Docker..." -ForegroundColor Gray
@@ -584,43 +983,68 @@ try {
 }
 
 # Check VS Code
-Write-Host "Checking for VS Code..." -ForegroundColor Gray
+Write-Host "Checking for local VS Code..." -ForegroundColor Gray
 
 # Check if root doesn't exist, VS Code can't exist either
-if (-not (Test-Path $rootPath)) {
-    Write-Host "  VS Code not found (quickstart folder not present)" -ForegroundColor Yellow
+if ($SkipVSCode) {
+    Write-Host "  Skipped (-SkipVSCode)" -ForegroundColor Gray
+    $vscodeInstalled = $true
+} elseif ($usingGlobalVSCode) {
+    Write-Host "  Skipped, using the machine-wide installation" -ForegroundColor Green
+    $vscodeInstalled = $true
+} elseif (-not (Test-Path $rootPath)) {
+    Write-Host "  Local VS Code not found (quickstart folder not present)" -ForegroundColor Yellow
     $missingPrereqs += New-PrerequisiteInfo -Name "VS Code (portable)" -InstallMethod "vscode-local" `
         -InstallPath $localVSCodePath -ManualUrl "https://code.visualstudio.com/"
 } else {
     $vscodeExePath = Join-Path $localVSCodePath "Code.exe"
     
     if (Test-Path $vscodeExePath) {
-        Write-Host "  VS Code found at: $localVSCodePath" -ForegroundColor Green
+        Write-Host "  Local VS Code found at: $localVSCodePath" -ForegroundColor Green
         $vscodeInstalled = $true
     } else {
-        Write-Host "  VS Code not found" -ForegroundColor Yellow
+        Write-Host "  Local VS Code not found" -ForegroundColor Yellow
         $missingPrereqs += New-PrerequisiteInfo -Name "VS Code (portable)" -InstallMethod "vscode-local" `
             -InstallPath $localVSCodePath -ManualUrl "https://code.visualstudio.com/"
     }
 }
 
 # Check Aspire CLI (local installation)
-Write-Host "Checking for Aspire CLI..." -ForegroundColor Gray
+# Note: this intentionally ignores any machine-wide Aspire CLI unless -UseGlobalInstalls is
+# specified. The quickstart keeps its tools in the temporary folder so it does not interfere
+# with system-wide installs.
+Write-Host "Checking for local Aspire CLI..." -ForegroundColor Gray
 
 # If root doesn't exist, Aspire can't exist either
-$aspirePrereq = New-PrerequisiteInfo -Name "Aspire CLI (version 13+) (local)" -InstallMethod "aspire-local" `
-    -InstallPath $localAspirePath -ManualUrl "https://learn.microsoft.com/dotnet/aspire"
+$aspirePrereq = New-PrerequisiteInfo -Name "Aspire CLI ($($Config.AspireVersion)+) (local)" -InstallMethod "aspire-local" `
+    -InstallPath $localAspireBinPath -ManualUrl "https://learn.microsoft.com/dotnet/aspire"
 
-if (-not (Test-Path $rootPath)) {
-    Write-Host "  Aspire CLI not found (quickstart folder not present)" -ForegroundColor Yellow
+if ($usingGlobalAspire) {
+    Write-Host "  Skipped, using the machine-wide installation" -ForegroundColor Green
+    $aspireInstalled = $true
+} elseif (-not (Test-Path $rootPath)) {
+    Write-Host "  Local Aspire CLI not found (quickstart folder not present)" -ForegroundColor Yellow
     $missingPrereqs += $aspirePrereq
 } else {
-    $aspireExePath = Join-Path $localAspirePath "aspire.exe"
+    $aspireExePath = Join-Path $localAspireBinPath "aspire.exe"
     if (Test-Path $aspireExePath) {
-        Write-Host "  Aspire CLI found at: $localAspirePath" -ForegroundColor Green
-        $aspireInstalled = $true
+        # Verify the version rather than trusting that the file exists, so a stale copy from
+        # an earlier run is replaced instead of being used.
+        $localAspireVersion = Get-AspireCliVersion -Path $aspireExePath
+        $minimumAspireVersion = ConvertTo-ComparableVersion $Config.AspireVersion
+
+        if ($localAspireVersion -and $minimumAspireVersion -and $localAspireVersion -ge $minimumAspireVersion) {
+            Write-Host "  Local Aspire CLI $localAspireVersion found at: $localAspireBinPath" -ForegroundColor Green
+            $aspireInstalled = $true
+        } elseif ($localAspireVersion) {
+            Write-Host "  Local Aspire CLI $localAspireVersion is below the minimum $($Config.AspireVersion)" -ForegroundColor Yellow
+            $missingPrereqs += $aspirePrereq
+        } else {
+            Write-Host "  Local Aspire CLI found but its version could not be determined" -ForegroundColor Yellow
+            $missingPrereqs += $aspirePrereq
+        }
     } else {
-        Write-Host "  Aspire CLI not found" -ForegroundColor Yellow
+        Write-Host "  Local Aspire CLI not found" -ForegroundColor Yellow
         $missingPrereqs += $aspirePrereq
     }
 }
@@ -640,7 +1064,10 @@ if ($versionParts.Count -ge 2) {
 $dotnetPrereq = New-PrerequisiteInfo -Name ".NET SDK $dotnetVersion+ (local)" -InstallMethod "dotnet-install" `
     -Version $dotnetVersion -InstallPath $localDotnetPath -ManualUrl "https://dotnet.microsoft.com/download/dotnet/10.0"
 
-if (-not (Test-Path $rootPath)) {
+if ($usingGlobalDotnet) {
+    Write-Host "  Skipped, using the machine-wide installation" -ForegroundColor Green
+    $dotnetInstalled = $true
+} elseif (-not (Test-Path $rootPath)) {
     Write-Host "  Local .NET SDK not found (quickstart folder not present)" -ForegroundColor Yellow
     $missingPrereqs += $dotnetPrereq
 } else {
@@ -650,33 +1077,14 @@ if (-not (Test-Path $rootPath)) {
         # Check the actual installed SDK versions
         try {
             $installedSdks = & $localDotnetExePath --list-sdks 2>$null
-            # Check for any SDK matching the major.minor channel with version >= minimum
-            $majorMinorPattern = "^$([regex]::Escape($channel))\.(\d+)\s"
-            $matchingSdks = $installedSdks | Where-Object { $_ -match $majorMinorPattern }
-            
-            if ($matchingSdks) {
-                # Extract version numbers and check if any meet the minimum requirement
-                $hasValidVersion = $false
-                foreach ($sdk in $matchingSdks) {
-                    if ($sdk -match "^([\d\.]+)\s") {
-                        $installedVersion = [version]$matches[1]
-                        $minimumVersion = [version]$dotnetVersion
-                        if ($installedVersion -ge $minimumVersion) {
-                            Write-Host "  Local .NET SDK $($matches[1]) found at: $localDotnetPath" -ForegroundColor Green
-                            $hasValidVersion = $true
-                            break
-                        }
-                    }
-                }
-                
-                if ($hasValidVersion) {
-                    $dotnetInstalled = $true
-                } else {
-                    Write-Host "  Found SDK(s) in channel $channel but below minimum version $dotnetVersion" -ForegroundColor Yellow
-                    $missingPrereqs += $dotnetPrereq
-                }
+            # Any SDK at or above the minimum qualifies, including newer channels
+            $usableSdk = Get-SdkVersionMeetingMinimum -SdkLines $installedSdks -MinimumVersion $dotnetVersion
+
+            if ($usableSdk) {
+                Write-Host "  Local .NET SDK $usableSdk found at: $localDotnetPath" -ForegroundColor Green
+                $dotnetInstalled = $true
             } else {
-                Write-Host "  No SDK found for channel $channel. Installed: $($installedSdks -join ', ')" -ForegroundColor Yellow
+                Write-Host "  No local .NET SDK $dotnetVersion or later found. Installed: $($installedSdks -join ', ')" -ForegroundColor Yellow
                 $missingPrereqs += $dotnetPrereq
             }
         } catch {
@@ -711,8 +1119,13 @@ if (Test-Path $rootPath) {
 # Check winget availability
 $wingetAvailable = $null -ne (Get-Command winget -ErrorAction SilentlyContinue)
 
-# Check if admin templates are needed
-$adminTemplatesNeeded = -not (Test-AdminTemplatesInstalled)
+# Check if admin templates are needed.
+# -SkipVSCode implies -SkipAdminTemplates, because the templates are read from a VS Code
+# installation, and there is no local VS Code to read them from when it is skipped.
+if ($SkipVSCode -and -not $usingGlobalVSCode) {
+    $SkipAdminTemplates = $true
+}
+$adminTemplatesNeeded = (-not $SkipAdminTemplates) -and (-not (Test-AdminTemplatesInstalled))
 
 # Display summary if prerequisites are missing
 if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
@@ -883,7 +1296,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
     
     # Install local .NET SDK if missing
     if (-not $dotnetInstalled) {
-        Write-Host "`nInstalling .NET SDK $dotnetVersion locally..." -ForegroundColor Cyan
+        Write-Host "`nInstalling the latest .NET SDK for channel $channel locally (minimum $dotnetVersion)..." -ForegroundColor Cyan
         
         try {
             New-DirectoryIfNeeded -Path $localDotnetPath
@@ -946,12 +1359,12 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
         } catch {
             Write-Host "  Error installing .NET SDK: $_" -ForegroundColor Red
             Write-Host "  Please install manually from: https://dotnet.microsoft.com/download/dotnet/10.0" -ForegroundColor Yellow
-            return
+            exit 1
         }
     }
     
     # Install VS Code portable if missing
-    if (-not $vscodeInstalled) {
+    if (-not $SkipVSCode -and -not $vscodeInstalled) {
         Write-Host "`nInstalling VS Code (portable)..." -ForegroundColor Cyan
         
         try {
@@ -993,7 +1406,7 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
         } catch {
             Write-Host "  Error installing VS Code: $_" -ForegroundColor Red
             Write-Host "  Please install manually from: https://code.visualstudio.com/" -ForegroundColor Yellow
-            return
+            exit 1
         }
     }
     
@@ -1002,45 +1415,48 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
         Write-Host "`nInstalling Aspire CLI locally..." -ForegroundColor Cyan
         
         try {
-            New-DirectoryIfNeeded -Path $localAspirePath
+            New-DirectoryIfNeeded -Path $localAspireBinPath
             
-            # Download and run the Aspire installation script with custom path
-            $installScript = Invoke-WithProgress -Activity "Installing Aspire CLI" -Status "Downloading Aspire installation script..." -ScriptBlock {
-                Invoke-WebRequest -Uri "https://aspire.dev/install.ps1" -UseBasicParsing
+            # Download the Aspire installation script.
+            # Note: write the response straight to disk. aspire.dev serves the script as
+            # application/octet-stream, so Invoke-WebRequest returns Content as a byte[];
+            # piping that to Out-File would write one decimal byte value per line and
+            # produce a corrupt script.
+            $tempScriptPath = Join-Path $env:TEMP "aspire-install.ps1"
+            $downloadSuccess = Invoke-WithProgress -Activity "Installing Aspire CLI" -Status "Downloading Aspire installation script..." -ScriptBlock {
+                Get-FileWithVerification -Url "https://aspire.dev/install.ps1" -OutFile $tempScriptPath
             }
-            
-            if ($installScript.StatusCode -eq 200) {
-                # Save script to temp file and execute with -InstallPath parameter
-                $tempScriptPath = Join-Path $env:TEMP "aspire-install.ps1"
-                $installScript.Content | Out-File -FilePath $tempScriptPath -Encoding UTF8
-                
-                # Execute the installation script with -InstallPath parameter
-                Invoke-WithProgress -Activity "Installing Aspire CLI" -Status "Installing Aspire CLI to: $localAspirePath" -ScriptBlock {
-                    & $tempScriptPath -InstallPath $localAspirePath
-                }
-                
-                # Clean up temp script
-                Remove-Item $tempScriptPath -Force -ErrorAction SilentlyContinue
-                
-                # Verify aspire.exe exists
-                $aspireExePath = Join-Path $localAspirePath "aspire.exe"
-                if (Test-Path $aspireExePath) {
-                    Write-Host "  Aspire CLI installed successfully." -ForegroundColor Green
-                    $aspireInstalled = $true
-                    
-                    # Remove Aspire paths from USER PATH environment variable
-                    Write-Host "  Removing Aspire from system PATH..." -ForegroundColor Gray
-                    Remove-PathFromEnvironment -PathPatterns @($localAspirePath)
-                } else {
-                    throw "aspire.exe not found after installation"
-                }
-            } else {
+            if (-not $downloadSuccess) {
                 throw "Failed to download Aspire installation script"
+            }
+
+            # Execute the installation script with -InstallPath parameter.
+            # -SkipPath keeps the portable install out of the user's PATH.
+            # Installing into <.aspire>\bin keeps ASPIRE_HOME on the .aspire folder rather
+            # than the quickstart root; see the LocalAspireBin note in the configuration.
+            Invoke-WithProgress -Activity "Installing Aspire CLI" -Status "Installing Aspire CLI to: $localAspireBinPath" -ScriptBlock {
+                & $tempScriptPath -InstallPath $localAspireBinPath -SkipPath
+            }
+
+            # Clean up temp script
+            Remove-Item $tempScriptPath -Force -ErrorAction SilentlyContinue
+
+            # Verify aspire.exe exists
+            $aspireExePath = Join-Path $localAspireBinPath "aspire.exe"
+            if (Test-Path $aspireExePath) {
+                Write-Host "  Aspire CLI installed successfully." -ForegroundColor Green
+                $aspireInstalled = $true
+
+                # Remove Aspire paths from USER PATH environment variable
+                Write-Host "  Removing Aspire from system PATH..." -ForegroundColor Gray
+                Remove-PathFromEnvironment -PathPatterns @($localAspireBinPath, $localAspirePath)
+            } else {
+                throw "aspire.exe not found after installation"
             }
         } catch {
             Write-Host "  Error installing Aspire CLI: $_" -ForegroundColor Red
             Write-Host "  Please install manually from: https://aspire.dev" -ForegroundColor Yellow
-            return
+            exit 1
         }
     }
     
@@ -1055,13 +1471,13 @@ if ($missingPrereqs.Count -gt 0 -or $adminTemplatesNeeded) {
     }
     
     # Re-check if admin templates are still needed after installation
-    $adminTemplatesNeeded = -not (Test-AdminTemplatesInstalled)
+    $adminTemplatesNeeded = (-not $SkipAdminTemplates) -and (-not (Test-AdminTemplatesInstalled))
 } else {
     Write-Host "`nAll prerequisites satisfied." -ForegroundColor Green
 }
 
 # Check if VS Code is installed but admin templates are not (only if we haven't already prompted)
-if ( -not (Test-AdminTemplatesInstalled)) {
+if (-not $SkipAdminTemplates -and -not (Test-AdminTemplatesInstalled)) {
     # Prompt before launching script as admin to install administrative templates
     Write-Host "`nVS Code Administrative Templates" -ForegroundColor Cyan
     Write-Host "================================" -ForegroundColor Cyan
@@ -1078,8 +1494,10 @@ if ( -not (Test-AdminTemplatesInstalled)) {
         $logFile = Join-Path $rootPath "vscode-admin-template-install.log"
         
         try {
-            # Launch the script with admin privileges
-            $process = Start-Process -FilePath "pwsh.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -InstallAdminTemplates" -Verb RunAs -Wait -PassThru
+            # Launch the script with admin privileges, telling it which VS Code to read templates from
+            $psExe = Get-PowerShellExecutable
+            $templateArgs = "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -InstallAdminTemplates -VSCodePath `"$effectiveVSCodeRoot`""
+            $process = Start-Process -FilePath $psExe -ArgumentList $templateArgs -Verb RunAs -Wait -PassThru
             
             if ($process.ExitCode -eq 0) {
                 Write-Host "  Administrative templates installed successfully." -ForegroundColor Green
@@ -1121,44 +1539,41 @@ if (-not (Test-Path $rootPath)) {
 Set-Location $rootPath
 Write-Host "Current directory: $(Get-Location)" -ForegroundColor Gray
 
-# Set up local .NET SDK environment
-Write-Host "`nConfiguring local .NET SDK environment..." -ForegroundColor Cyan
-$localDotnetExe = Join-Path $localDotnetPath "dotnet.exe"
+# Set up the .NET SDK environment
+$dotnetScope = if ($usingGlobalDotnet) { "machine-wide" } else { "local" }
+Write-Host "`nConfiguring $dotnetScope .NET SDK environment..." -ForegroundColor Cyan
+$effectiveDotnetExe = Join-Path $effectiveDotnetRoot "dotnet.exe"
 
-if (Test-Path $localDotnetExe) {
-    # Set environment variables to use local .NET
-    $env:DOTNET_ROOT = $localDotnetPath
+if (Test-Path $effectiveDotnetExe) {
+    # Point the toolchain at the selected SDK
+    $env:DOTNET_ROOT = $effectiveDotnetRoot
     $env:DOTNET_MULTILEVEL_LOOKUP = "0"  # Prevent looking in global locations
-    $env:PATH = "$localDotnetPath;$env:PATH"
+    $env:PATH = "$effectiveDotnetRoot;$env:PATH"
     
-    Write-Host "  DOTNET_ROOT set to: $localDotnetPath" -ForegroundColor Gray
-    Write-Host "  Local .NET version: " -NoNewline -ForegroundColor Gray
-    & $localDotnetExe --version
+    Write-Host "  DOTNET_ROOT set to: $effectiveDotnetRoot" -ForegroundColor Gray
+    Write-Host "  .NET version: " -NoNewline -ForegroundColor Gray
+    & $effectiveDotnetExe --version
     
-    # Verify SDK is available
-    $localSdks = & $localDotnetExe --list-sdks 2>$null
-    if ($localSdks -match $dotnetVersion) {
-        Write-Host "  Local .NET SDK $dotnetVersion is ready." -ForegroundColor Green
+    # Verify an SDK that meets the minimum is available. Any version at or above the
+    # minimum qualifies, so a newer SDK is never reported as missing.
+    $availableSdks = & $effectiveDotnetExe --list-sdks 2>$null
+    $readySdk = Get-SdkVersionMeetingMinimum -SdkLines $availableSdks -MinimumVersion $dotnetVersion
+    if ($readySdk) {
+        Write-Host "  .NET SDK $readySdk is ready." -ForegroundColor Green
     } else {
-        Write-Host "  Warning: Expected SDK version $dotnetVersion not found in local installation." -ForegroundColor Yellow
+        Write-Host "  Warning: No .NET SDK $dotnetVersion or later found at $effectiveDotnetRoot." -ForegroundColor Yellow
     }
 } else {
-    Write-Host "  Error: Local .NET SDK executable not found at: $localDotnetExe" -ForegroundColor Red
-    return
+    Write-Host "  Error: .NET SDK executable not found at: $effectiveDotnetExe" -ForegroundColor Red
+    exit 1
 }
 
 # Ensure Docker is running
 Write-Host "`nChecking Docker engine status..." -ForegroundColor Cyan
-$dockerEngineRunning = $false
-try {
-    $null = docker info 2>$null
-    if ($LASTEXITCODE -eq 0) {
-        Write-Host "  Docker engine is running." -ForegroundColor Green
-        $dockerEngineRunning = $true
-    } else {
-        throw "Docker engine not responding"
-    }
-} catch {
+$dockerEngineRunning = Test-DockerEngineReady
+if ($dockerEngineRunning) {
+    Write-Host "  Docker engine is running." -ForegroundColor Green
+} else {
     Write-Host "  Docker engine is not running." -ForegroundColor Yellow
 }
 
@@ -1198,9 +1613,7 @@ if (-not $dockerEngineRunning) {
         
         # Wait for Docker to be ready using helper function
         $dockerReady = Wait-ForCondition -Condition {
-            $output = docker info 2>&1 | Out-String
-            # Docker is ready when output contains server info and no connection errors
-            return ($output -match 'Server:' -and $output -notmatch 'failed to connect')
+            Test-DockerEngineReady
         } -TimeoutSeconds $Config.MaxDockerWaitTime -IntervalSeconds $Config.DockerCheckInterval -StatusMessage "Waiting for Docker engine"
         
         if ($dockerReady) {
@@ -1226,16 +1639,16 @@ if (-not $dockerEngineRunning) {
     }
 }
 
-# Run quickstart using local installation of aspire
+# Run quickstart using the selected Aspire CLI
 Write-Host "`nRunning quickstart..." -ForegroundColor Cyan
 try {
-    # Use the local Aspire executable
-    $aspireExePath = Join-Path $localAspirePath "aspire.exe"
+    # Use the Aspire executable selected during prerequisite checks
+    $aspireExePath = $effectiveAspireExe
     
     # Verify environment is still configured
     Write-Host "  Using .NET SDK: $($env:DOTNET_ROOT)" -ForegroundColor Gray
     Write-Host "  .NET version: " -NoNewline -ForegroundColor Gray
-    & $localDotnetExe --version
+    & $effectiveDotnetExe --version
     
     Write-Host "`n  ═══════════════════════════════════════════════════════════" -ForegroundColor Yellow
     Write-Host "  Aspire Dashboard SSL Certificate Setup" -ForegroundColor Yellow
@@ -1249,15 +1662,19 @@ try {
     Write-Host "`n  Starting Aspire dashboard..." -ForegroundColor Gray
     Write-Host "  ═══════════════════════════════════════════════════════════`n" -ForegroundColor Yellow
     
-    # Launch Aspire with explicit environment variables to ensure it uses local .NET
+    # Launch Aspire with explicit environment variables so it uses the selected .NET SDK
     $psi = New-Object System.Diagnostics.ProcessStartInfo
     $psi.FileName = $aspireExePath
     $psi.Arguments = "run --non-interactive"
     $psi.UseShellExecute = $false
     $psi.WorkingDirectory = $rootPath
-    $psi.EnvironmentVariables["DOTNET_ROOT"] = $localDotnetPath
+    $psi.EnvironmentVariables["DOTNET_ROOT"] = $effectiveDotnetRoot
     $psi.EnvironmentVariables["DOTNET_MULTILEVEL_LOOKUP"] = "0"
-    $psi.EnvironmentVariables["PATH"] = "$localDotnetPath;$($env:PATH)"
+    $psi.EnvironmentVariables["PATH"] = "$effectiveDotnetRoot;$($env:PATH)"
+
+    # Tell the AppHost where VS Code lives. Without this it looks for the portable copy
+    # in the quickstart folder, which is absent when a machine-wide VS Code is used.
+    $psi.EnvironmentVariables["QUICKSTART_VSCODE_PATH"] = Join-Path $effectiveVSCodeRoot "Code.exe"
     
     $process = [System.Diagnostics.Process]::Start($psi)
     $process.WaitForExit()
@@ -1383,7 +1800,8 @@ finally {
                 
                 try {
                     # Launch the script with admin privileges
-                    $process = Start-Process -FilePath "pwsh.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -RemoveAdminTemplates" -Verb RunAs -Wait -PassThru
+                    $psExe = Get-PowerShellExecutable
+                    $process = Start-Process -FilePath $psExe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`" -RemoveAdminTemplates" -Verb RunAs -Wait -PassThru
                     
                     if ($process.ExitCode -eq 0) {
                         Write-Host "  Administrative templates removed successfully." -ForegroundColor Green
@@ -1405,7 +1823,7 @@ finally {
         Write-Host "`nTemporary folder preserved at: $rootPath" -ForegroundColor Green
         Write-Host "`nTo run the Private Marketplace again:" -ForegroundColor Cyan
         Write-Host "  1. Open PowerShell" -ForegroundColor Gray
-        Write-Host "  2. Run: & \"$rootPath\Run-PrivateMarketplace.ps1\"" -ForegroundColor Gray
+        Write-Host "  2. Run: & '$rootPath\Run-PrivateMarketplace.ps1'" -ForegroundColor Gray
         Write-Host ""
     }
 }
