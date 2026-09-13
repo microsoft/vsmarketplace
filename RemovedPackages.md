@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| mewra.mewra-pounce | 9/13/2026 | Spam |
 | zjqtzzc.make-git-great-again | 9/12/2026 | Impersonation |
 | a1phaZ.mr-creator | 9/11/2026 | Malware |
 | Nyisulya.bongocode-ai | 9/11/2026 | Malware |
