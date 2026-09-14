@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| LingyuSoftware.open-canvas | 9/14/2026 | Untrustworthy |
 | NodePack.live-test-hr | 9/14/2026 | Malware |
 | NodePack.live-test-candidate | 9/14/2026 | Malware |
 | mewra.mewra-pounce | 9/13/2026 | Spam |
