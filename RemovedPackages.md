@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ApeFonting.apefonts | 9/14/2026 | Malware |
+| nightgauge.nightgauge-vscode | 9/14/2026 | Malware |
+| LingyuSoftware.open-canvas | 9/14/2026 | Untrustworthy |
+| NodePack.live-test-hr | 9/14/2026 | Malware |
+| NodePack.live-test-candidate | 9/14/2026 | Malware |
 | nerfine-dev.projectly-app | 9/13/2026 | Malware |
 | ovcharik.vscode-gitlab-codeowners | 9/13/2026 | Impersonation |
 | zjqtzzc.make-git-great-again | 9/12/2026 | Impersonation |
