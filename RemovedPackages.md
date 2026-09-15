@@ -7,6 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| MalanHR.flowkhan | 9/15/2026 | Malware |
+| Tumricas.wombopoc | 9/15/2026 | Malware |
+| PetrosPanayiOutlook.ucy-cs-lab-and-homework-editor | 9/15/2026 | Malware |
+| LuaStyle.luastyle | 9/15/2026 | Malware |
+| LuaStyle.kit-toolbox | 9/15/2026 | Malware |
+| NodePackOnline.live-test-for-candidate | 9/15/2026 | Malware |
+| ToolingForAll.toolingforalls | 9/14/2026 | Malware |
 | ApeFonting.apefonts | 9/14/2026 | Malware |
 | nightgauge.nightgauge-vscode | 9/14/2026 | Malware |
 | LingyuSoftware.open-canvas | 9/14/2026 | Untrustworthy |
