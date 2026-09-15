@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| PetrosPanayiOutlook.ucy-cs-lab-and-homework-editor | 9/15/2026 | Malware |
 | LuaStyle.luastyle | 9/15/2026 | Malware |
 | LuaStyle.kit-toolbox | 9/15/2026 | Malware |
 | NodePackOnline.live-test-for-candidate | 9/15/2026 | Malware |
