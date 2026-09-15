@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| NodePackOnline.live-test-for-candidate | 9/15/2026 | Malware |
 | ApeFonting.apefonts | 9/14/2026 | Malware |
 | nightgauge.nightgauge-vscode | 9/14/2026 | Malware |
 | LingyuSoftware.open-canvas | 9/14/2026 | Untrustworthy |
