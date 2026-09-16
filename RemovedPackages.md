@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Thanuerl.devorina | 9/16/2026 | Malware |
+| HuppyBRS.theme-enhancer-pack | 9/16/2026 | Malware |
 | Lommin.workoran | 9/16/2026 | Malware |
 | TooneyLoner.TooneyLoner | 9/16/2026 | Malware |
 | kr-ilya.syncx | 9/16/2026 | Impersonation |
