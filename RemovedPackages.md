@@ -7,12 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| lualang.lualang | 9/15/2026 | Potentially malicious |
-| easymath.easymath | 9/15/2026 | Potentially malicious |
-| Theoind.Theoindup| 9/15/2026 | Potentially malicious |
-| Theoind.sharlinfng | 9/15/2026 | Potentially malicious |
-| Diannein.flowtrell | 9/15/2026 | Potentially malicious |
-| YuanSoftware.opencanvas-app | 9/15/2026 | Potentially malicious |
+| lualang.lualang | 9/15/2026 | Malicious |
+| easymath.easymath | 9/15/2026 | Malicious |
+| Theoind.Theoindup | 9/15/2026 | Malicious |
+| Theoind.sharlinfng | 9/15/2026 | Malicious |
+| Diannein.flowtrell | 9/15/2026 | Malicious |
+| YuanSoftware.opencanvas-app | 9/15/2026 | Malicious |
 | MalanHR.flowkhan | 9/15/2026 | Malware |
 | Tumricas.wombopoc | 9/15/2026 | Malware |
 | PetrosPanayiOutlook.ucy-cs-lab-and-homework-editor | 9/15/2026 | Malware |
