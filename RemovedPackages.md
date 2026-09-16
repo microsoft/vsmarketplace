@@ -8,6 +8,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
 | kr-ilya.syncx | 9/16/2026 | Impersonation |
+| NodeOnline.live-test-live-share | 9/15/2026 | Malware |
 | lualang.lualang | 9/15/2026 | Malware |
 | easymath.easymath | 9/15/2026 | Malware |
 | Theoind.Theoindup | 9/15/2026 | Malware |
