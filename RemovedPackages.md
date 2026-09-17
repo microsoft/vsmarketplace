@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| hbtghost.material-theme | 9/17/2026 | Impersonation
 | tuvokyang.dline | 9/17/2026 | Impersonation |
 | narutozxp.teroshdl-narutozxp | 9/17/2026 | Impersonation |
 | antonm030481.svn-scm-modern | 9/17/2026 | Impersonation |
@@ -296,7 +297,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | ethancao.mathpix-markdown-studio | 8/5/2026 | Impersonation |
 | KooCode.KooCode | 8/5/2026 | Impersonation |
 | vscpluginDeveloperJay30.vscdeterminer | 8/5/2026 | Impersonation |
-| Wynncraft.wynnscript-lang | 8/4/2026 | Impersonation |
 | WuZhiguo.callgraph-viz | 8/4/2026 | Impersonation |
 | VXL.vxl | 8/3/2026 | Impersonation |
 | vxhern.Vesper | 8/3/2026 | Impersonation |
