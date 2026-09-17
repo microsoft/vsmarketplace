@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| RenatoOliveira599.howsurluck | 9/17/2026 | Untrustworthy |
+| RenatoOliveira599.howsurluck-hardcore | 9/17/2026 | Untrustworthy |
 | hbtghost.material-theme | 9/17/2026 | Impersonation
 | tuvokyang.dline | 9/17/2026 | Impersonation |
 | narutozxp.teroshdl-narutozxp | 9/17/2026 | Impersonation |
