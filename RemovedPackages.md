@@ -7,12 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| SuperBoards.fluxboard | 9/18/2026 | Malware |
 | ClearFrame.canvaspro-app | 9/17/2026 | Untrustworthy |
 | ClearFrame.code-timemachine | 9/17/2026 | Untrustworthy |
 | Whelmns.Brux-Boards | 9/17/2026 | Malware |
 | RenatoOliveira599.howsurluck | 9/17/2026 | Untrustworthy |
 | RenatoOliveira599.howsurluck-hardcore | 9/17/2026 | Untrustworthy |
-| hbtghost.material-theme | 9/17/2026 | Impersonation
+| hbtghost.material-theme | 9/17/2026 | Impersonation|
 | tuvokyang.dline | 9/17/2026 | Impersonation |
 | narutozxp.teroshdl-narutozxp | 9/17/2026 | Impersonation |
 | antonm030481.svn-scm-modern | 9/17/2026 | Impersonation |
