@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| WuJunFeng.copilot-usage-dashboard-zh | 9/18/2026 | Impersonation|
 | SuperBoards.fluxboard | 9/18/2026 | Malware |
 | ClearFrame.canvaspro-app | 9/17/2026 | Untrustworthy |
 | ClearFrame.code-timemachine | 9/17/2026 | Untrustworthy |
