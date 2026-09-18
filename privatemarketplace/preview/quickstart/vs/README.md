@@ -246,7 +246,7 @@ To change the Upstreaming mode in the Quickstart:
 
 ### Scenario 3: Restricting Which Extensions Can Be Installed
 
-The Private Marketplace can enforce an allow-list that controls which extensions it will serve. The rules are applied on the server, so a denied extension is not returned in search results and cannot be downloaded even if a client requests it directly. The same rules are also published to clients, which apply them locally.
+The Private Marketplace can enforce an allow-list that controls which extensions it will serve. The rules are applied on the server, so a denied extension is not returned in search results and cannot be downloaded even if a client requests it directly. Visual Studio also reads the rules from the marketplace and applies them locally.
 
 The quickstart ships without an allow-list, so every sample extension is available. To add one:
 

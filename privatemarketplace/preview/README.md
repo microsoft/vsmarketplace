@@ -438,16 +438,16 @@ If it is not desirable to have the full catalog of public extensions available, 
 
 ## 3.3. Configuring allowed extensions
 
-An allow-list controls which extensions and versions the Private Marketplace will serve, and which ones clients are permitted to install. The schema mirrors VS Code's [`extensions.allowed`](https://code.visualstudio.com/docs/enterprise/extensions) setting, and the policy applies to both Visual Studio and VS Code.
+An allow-list controls which extensions and versions the Private Marketplace will serve, and which ones clients are permitted to install. The schema mirrors VS Code's [`extensions.allowed`](https://code.visualstudio.com/docs/enterprise/extensions) setting.
 
 The policy is enforced in two places:
 
-| Layer | Behavior |
-| --- | --- |
-| Server-side | Search results, extension metadata, and asset downloads are filtered. A denied extension is not returned and cannot be downloaded, even if a client requests it directly. |
-| Client-side | The rules are published to clients in the Service Index under `capabilities.extensions.allowed`, and the client applies them locally. |
+| Layer | Behavior | Applies to |
+| --- | --- | --- |
+| Server-side | Search results, extension metadata, and asset downloads are filtered. A denied extension is not returned and cannot be downloaded, even if a client requests it directly. | Visual Studio and VS Code |
+| Client-side | The rules are published in the Service Index under `capabilities.extensions.allowed`, and the client applies them locally. | Visual Studio only |
 
-Because the policy is enforced on the server as well, a client that ignores the published rules still cannot obtain a denied extension. This is the main advantage over configuring `extensions.allowed` on each client, which remains available and can be combined with it.
+VS Code does not yet read the published rules, so for VS Code the server is the only place this policy is applied. That is still enough to prevent a denied extension from being found or installed through the Private Marketplace, because the server never serves it. To additionally restrict what VS Code will install from any source, configure [`extensions.allowed`](https://code.visualstudio.com/docs/enterprise/extensions) on the client through Group Policy. The two use the same rule syntax and can be combined.
 
 There are two separate configuration surfaces:
 

@@ -287,7 +287,7 @@ To download extension VSIX files from the public Marketplace for rehosting:
 You can configure your client to only allow extensions from specific publishers, such as your organization's internal publisher.
 
 > [!NOTE]
-> This scenario configures VS Code itself, so the restriction applies to this machine and is enforced by the client. The Private Marketplace can also enforce an allow-list on the server, which filters search results and blocks downloads for every client at once. The two use the same rule syntax and can be combined. See [Configuring allowed extensions](https://github.com/microsoft/vsmarketplace/blob/main/privatemarketplace/preview/README.md#33-configuring-allowed-extensions).
+> This scenario configures VS Code itself, so the restriction applies to this machine and is enforced by the client. The Private Marketplace can also enforce an allow-list on the server, which filters search results and blocks downloads for every client at once. VS Code does not yet read that policy from the marketplace, so the two are complementary: the server controls what VS Code can obtain from the Private Marketplace, and the policy below controls what VS Code will install from any source. Both use the same rule syntax. See [Configuring allowed extensions](https://github.com/microsoft/vsmarketplace/blob/main/privatemarketplace/preview/README.md#33-configuring-allowed-extensions).
 
 **Configure Allowed Extensions Policy**
 
