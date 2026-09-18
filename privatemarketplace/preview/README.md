@@ -447,7 +447,7 @@ The policy is enforced in two places:
 | Server-side | Search results, extension metadata, and asset downloads are filtered. A denied extension is not returned and cannot be downloaded, even if a client requests it directly. | Visual Studio and VS Code |
 | Client-side | The rules are published in the Service Index under `capabilities.extensions.allowed`, and the client applies them locally. | Visual Studio only |
 
-VS Code does not yet read the published rules, so for VS Code the server is the only place this policy is applied. That is still enough to prevent a denied extension from being found or installed through the Private Marketplace, because the server never serves it. To additionally restrict what VS Code will install from any source, configure [`extensions.allowed`](https://code.visualstudio.com/docs/enterprise/extensions) on the client through Group Policy. The two use the same rule syntax and can be combined.
+VS Code does not yet read the published rules, so for VS Code the server is the only place this policy is applied. That is still enough to prevent a denied extension from being found or installed through the Private Marketplace, because the server never serves it. To additionally restrict what VS Code will install from any source, apply the client-side policy described in [Restricting which extensions can be installed](#514-restricting-which-extensions-can-be-installed). The two use the same rule syntax and can be combined.
 
 There are two separate configuration surfaces:
 
@@ -658,6 +658,36 @@ Now let us try some Private Marketplace interactions in VS Code:
 5. Install any available extension, and you should see them under the Installed tab.
 6. Receive automatic updates when newer versions are uploaded to the Private Marketplace.
 7. You can also search and install extensions from the results. Search should find any matches by extension name, ID, and description.
+
+## 5.1.4 Restricting which extensions can be installed
+
+Pointing VS Code at the Private Marketplace controls where extensions come from, not which ones a developer may install. To restrict that, apply VS Code's `AllowedExtensions` policy, which uses the same [device management](https://code.visualstudio.com/docs/setup/enterprise#_device-management) mechanism as the gallery URL above.
+
+> [!NOTE]
+> This is enforced by VS Code itself and applies to every source, including extensions installed from a VSIX file. It is separate from the marketplace's own allow-list in [Configuring allowed extensions](#33-configuring-allowed-extensions), which filters what the server will serve. VS Code does not yet read the marketplace policy, so configure this one to restrict the client. Both accept the same rule syntax.
+
+**Windows**
+
+1. Install the [policy files (admx and adml) shipped in VS Code](https://code.visualstudio.com/docs/setup/enterprise#_group-policy-on-windows), if you have not already done so for the gallery URL.
+2. Open the Group Policy Editor UI with the `gpedit.msc` command.
+3. In the tree view, navigate to Local Computer Policy > User Configuration > Administrative Templates > Visual Studio Code > Extensions > Allowed Extensions.
+4. Open the setting, select the Enabled radio button, and enter the policy as JSON in the Options text box.
+5. Save the changes with the OK button.
+6. Restart VS Code.
+
+**macOS**
+
+Set the same value as an `AllowedExtensions` key in the `.mobileconfig` configuration profile described in [Configuration profiles on macOS](https://code.visualstudio.com/docs/setup/enterprise#_configuration-profiles-on-macos).
+
+A key is `*`, a publisher, or a single extension, and the most specific match wins. For example, to allow only Microsoft extensions except C++:
+
+```json
+{"*": false, "microsoft": true, "ms-vscode.cpptools": false}
+```
+
+Values may also be `"stable"` to exclude prereleases, or an array such as `["!1.2.3"]` to deny a specific version. See the [VS Code documentation](https://code.visualstudio.com/docs/setup/enterprise#_configure-allowed-extensions) for the full setting reference.
+
+To remove the restriction, set the policy back to Not Configured and restart VS Code.
 
 ## 5.2 Connecting Visual Studio 2026 to the Private Marketplace
 
