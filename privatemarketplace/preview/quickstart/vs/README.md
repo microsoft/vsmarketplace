@@ -244,7 +244,66 @@ To change the Upstreaming mode in the Quickstart:
 1. Open Visual Studio
 2. Open **Extensions → Manage Extensions**. Only extensions published through the Private Marketplace are listed and installable.
 
-### Scenario 3: Viewing Marketplace Logs
+### Scenario 3: Restricting Which Extensions Can Be Installed
+
+The Private Marketplace can enforce an allow-list that controls which extensions it will serve. The rules are applied on the server, so a denied extension is not returned in search results and cannot be downloaded even if a client requests it directly. The same rules are also published to clients, which apply them locally.
+
+The quickstart ships without an allow-list, so every sample extension is available. To add one:
+
+> [!IMPORTANT]
+> Like the upstreaming mode, the allow-list is supplied by the AppHost, so changing it requires restarting the **AppHost**. Stopping and starting the **`visualstudio-private-marketplace`** resource from the Aspire dashboard is not enough.
+
+1. Close Visual Studio if it is open
+1. In the terminal running Aspire, press `Ctrl+C` to stop the AppHost
+1. When prompted to remove the temporary folder, answer **`n`**
+1. Open the `$env:TEMP\privatemarketplace-quickstart-vs\apphost.cs` file in an editor
+1. Add the `AllowedExtensions` line shown below, after the existing `WithEnvironment` call:
+
+   ```csharp
+   builder
+       .AddVisualStudioPrivateMarketplace()
+       .WithMarketplaceConfiguration(
+           organizationName: "Contoso",
+           contactSupportUri: "mailto:privatemktplace@microsoft.com",
+           upstreamingMode: MarketplaceUpstreamingMode.SearchAndAssets)
+       .WithEnvironment("FeatureManagement__VSExtensionSupport", "true")
+       .WithEnvironment("AllowedExtensions", """{"*":false,"contoso":true,"contoso.contosopackvs":false}""");
+   ```
+
+   Note the trailing semicolon moves to the new last line.
+1. Save the file
+1. Restart the quickstart from a PowerShell terminal:
+
+   ```powershell
+   cd $env:TEMP\privatemarketplace-quickstart-vs
+   .\Run-PrivateMarketplace.ps1
+   ```
+
+**Verify the change**
+
+1. Open Visual Studio
+1. Open **Extensions → Manage Extensions**. The Contoso Copilot and Open Source Assistant samples are still listed, but the Contoso Extension Pack is gone.
+
+**What just happened?**
+
+The rules are evaluated most-specific-first, so all three keys matter:
+
+| Rule | Effect |
+| --- | --- |
+| `"*": false` | Deny anything not matched by another rule |
+| `"contoso": true` | Allow the Contoso publisher |
+| `"contoso.contosopackvs": false` | Deny this one extension, overriding the publisher rule |
+
+Other useful values are `"stable"` to exclude prereleases, and version arrays such as `["!1.2.3"]` to deny a specific bad release while allowing everything else.
+
+> [!IMPORTANT]
+> The service fails closed. An unparseable policy or an invalid key denies everything rather than falling back to allowing it, so if all extensions disappear after an edit, check the marketplace home page and logs for a policy load error. Note also the difference between **no** allow-list, which permits everything, and an empty `{}` policy, which permits nothing.
+
+To remove the restriction, delete the `AllowedExtensions` line and restart the AppHost again.
+
+For the full rule syntax, evaluation order, and how to supply the policy from a file or URL in a real deployment, see [Configuring allowed extensions](https://github.com/microsoft/vsmarketplace/blob/main/privatemarketplace/preview/README.md#33-configuring-allowed-extensions).
+
+### Scenario 4: Viewing Marketplace Logs
 
 Monitor what's happening in your marketplace:
 

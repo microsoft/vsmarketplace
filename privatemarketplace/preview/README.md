@@ -438,9 +438,40 @@ If it is not desirable to have the full catalog of public extensions available, 
 
 ## 3.3. Configuring allowed extensions
 
-VS Code offers additional [enterprise support](https://code.visualstudio.com/docs/setup/enterprise#_configure-allowed-extensions) for those customers that desire to have more control over which extensions are used in their environment.
+An allow-list controls which extensions and versions the Private Marketplace will serve, and which ones clients are permitted to install. The schema mirrors VS Code's [`extensions.allowed`](https://code.visualstudio.com/docs/enterprise/extensions) setting, and the policy applies to both Visual Studio and VS Code.
 
-By applying the `extensions.allowed` setting to the VS Code installations, access to extensions from the Private Marketplace, including those that are upstreamed from the Public Visual Studio Marketplace can be restricted.
+The policy is enforced in two places:
+
+| Layer | Behavior |
+| --- | --- |
+| Server-side | Search results, extension metadata, and asset downloads are filtered. A denied extension is not returned and cannot be downloaded, even if a client requests it directly. |
+| Client-side | The rules are published to clients in the Service Index under `capabilities.extensions.allowed`, and the client applies them locally. |
+
+Because the policy is enforced on the server as well, a client that ignores the published rules still cannot obtain a denied extension. This is the main advantage over configuring `extensions.allowed` on each client, which remains available and can be combined with it.
+
+There are two separate configuration surfaces:
+
+| What | Configuration key | Purpose |
+| --- | --- | --- |
+| The rules | `AllowedExtensions` | The policy document itself, a JSON object of rules |
+| Service settings | `Marketplace__Upstreaming__AllowedExtensions__*` | `Uri`, `RefreshIntervalSeconds`, `EnableFileSystemMonitoring` |
+
+Setting a `Uri` makes that document the only source of rules, and the `AllowedExtensions` key is ignored. The URI is the full path to the document including the file name, and may be a local path, a `file://` URI, or an `http(s)` URL.
+
+A rule key is `*`, a publisher (`microsoft`), or a single extension (`ms-python.python`). Values are `true`, `false`, `"stable"` to exclude prereleases, or an array of version constraints such as `["!1.2.3"]` to deny specific versions. More specific keys win, so the following allows all Microsoft extensions except C++:
+
+```json
+{
+  "*": false,
+  "microsoft": true,
+  "ms-vscode.cpptools": false
+}
+```
+
+> [!IMPORTANT]
+> The service fails closed. If the policy cannot be loaded, or contains an invalid key, everything is denied rather than allowed. Note also that **no** configuration means allow all, while an explicitly empty `{}` policy means deny all.
+
+Policy changes take effect within one refresh interval, 300 seconds by default. In Azure Container Apps the rules are typically supplied as a single minified `AllowedExtensions` environment variable; use the `Set-AllowedExtensions.ps1` helper in the [deployment scripts](https://aka.ms/vspm/scripts), which verifies the stored value is still valid JSON afterwards.
 
 ## 3.4. Configure Display Names for publishers
 
@@ -850,6 +881,7 @@ The following environment variables are supported by the application.
 
 | Name | Required | Description |
 | --- | --- | --- |
+| AllowedExtensions | no | Allow-list policy document, a JSON object of rules controlling which extensions may be served and installed. Ignored when `Marketplace__Upstreaming__AllowedExtensions__Uri` is set. See [Configuring allowed extensions](#33-configuring-allowed-extensions) |
 | APPLICATIONINSIGHTS\_CONNECTION\_STRING | no | Application Insights connection string for request logs, metrics, traces |
 | ASPNETCORE\_HTTP\_PORTS | no | HTTP (not HTTPS) listen ports, semicolon delimited, defaults to 8080 |
 | ASPNETCORE\_HTTPS\_PORTS | no | HTTPS (not HTTP) listen ports, semicolon delimited, defaults to none |
@@ -866,6 +898,9 @@ The following environment variables are supported by the application.
 | Marketplace\_\_ArtifactsFeed | no | Azure DevOps feed name to be used to create an Azure Artifacts extension source |
 | Marketplace\_\_ArtifactsClientId | no | Client ID of User-assigned Managed Identity |
 | Marketplace\_\_Upstreaming\_\_Mode | no | Controls upstreaming to the Public Visual Studio Marketplace. Allowed values: `None` (disable upstreaming), `Search` (proxy only search queries for public extensions), `SearchAndAssets` (proxy both search queries and asset downloads for public extensions). Defaults to `None`. Use `SearchAndAssets` to ensure all asset URLs are rewritten to go through the Private Marketplace proxy. |
+| Marketplace\_\_Upstreaming\_\_AllowedExtensions\_\_Uri | no | Full path, including file name, to the allow-list document. Accepts a local path, a `file://` URI, or an `http(s)` URL. When set, this is the only source of rules and the `AllowedExtensions` variable is ignored |
+| Marketplace\_\_Upstreaming\_\_AllowedExtensions\_\_RefreshIntervalSeconds | no | How long a successfully loaded allow-list is cached, defaults to 300. A failed load is retried after 5 seconds |
+| Marketplace\_\_Upstreaming\_\_AllowedExtensions\_\_EnableFileSystemMonitoring | no | Watch a local or `file://` allow-list for changes and reload it when the file is modified |
 | OTEL\_EXPORTER\_OTLP\_ENDPOINT | no | URL to send OpenTelemetry to, via [OTLP](https://opentelemetry.io/docs/specs/otlp/) |
 | Marketplace\_\_PublisherDisplayNames\_\_\<publisher\>=\<displayname\> | no | A Key Value Pair list of publishers and their display name |
 
