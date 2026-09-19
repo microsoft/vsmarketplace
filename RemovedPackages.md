@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| atIassiansum.Trello-Boards | 9/19/2026 | Malware |
 | starfall-contributor.remote-extended | 9/19/2026 | Impersonation |
 | buildwithlayer.plaid-integration-expert-CDnxo | 9/19/2026 | Spam |
 | masota.swahilipro | 9/19/2026 | Malware |
