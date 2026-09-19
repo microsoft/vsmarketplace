@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| neural-llm.power-claude | 9/19/2026 | Malware |
 | AtIassianlm.Trello-Boarding | 9/19/2026 | Malware |
 | P40-traveler.asoul-helper | 9/19/2026 | Untrustworthy |
 | atIassiansum.Trello-Boards | 9/19/2026 | Malware |
