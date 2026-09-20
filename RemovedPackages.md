@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| AaynaPatel.opencode-deepseek | 9/20/2026 | Malware |
 | Heisenberg.rainbow-spaces | 9/20/2026 | Impersonation |
 | compcon.comp-con-content-tools | 9/20/2026 | Impersonation |
 | neural-llm.power-claude | 9/19/2026 | Malware |
