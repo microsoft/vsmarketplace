@@ -11,6 +11,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | flownalks.Flowridens | 9/21/2026 | Malware |
 | oluwasege.nightowl2026-reloaded | 9/21/2026 | Impersonation |
 | oluwasege.NightOwl | 9/21/2026 | Impersonation |
+| AaynaPatel.opencode-deepseek | 9/20/2026 | Malware |
+| Heisenberg.rainbow-spaces | 9/20/2026 | Impersonation |
+| compcon.comp-con-content-tools | 9/20/2026 | Impersonation |
 | neural-llm.power-claude | 9/19/2026 | Malware |
 | AtIassianlm.Trello-Boarding | 9/19/2026 | Malware |
 | P40-traveler.asoul-helper | 9/19/2026 | Untrustworthy |
