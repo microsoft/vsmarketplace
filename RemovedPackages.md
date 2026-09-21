@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| oluwasege.nightowl2026-reloaded | 9/21/2026 | Impersonation |
+| oluwasege.NightOwl | 9/21/2026 | Impersonation |
 | neural-llm.power-claude | 9/19/2026 | Malware |
 | AtIassianlm.Trello-Boarding | 9/19/2026 | Malware |
 | P40-traveler.asoul-helper | 9/19/2026 | Untrustworthy |
