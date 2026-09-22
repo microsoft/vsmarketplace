@@ -267,7 +267,7 @@ The quickstart ships without an allow-list, so every sample extension is availab
            contactSupportUri: "mailto:privatemktplace@microsoft.com",
            upstreamingMode: MarketplaceUpstreamingMode.SearchAndAssets)
        .WithEnvironment("FeatureManagement__VSExtensionSupport", "true")
-       .WithEnvironment("AllowedExtensions", """{"*":false,"contoso":true,"contoso.contosopackvs":false}""");
+       .WithEnvironment("AllowedExtensions", """{"*":true,"contoso":false,"contoso.contosopackvs":true}""");
    ```
 
    Note the trailing semicolon moves to the new last line.
@@ -282,7 +282,7 @@ The quickstart ships without an allow-list, so every sample extension is availab
 **Verify the change**
 
 1. Open Visual Studio
-1. Open **Extensions → Manage Extensions**. The Contoso Copilot and Open Source Assistant samples are still listed, but the Contoso Extension Pack is gone.
+1. Open **Extensions → Manage Extensions**. The Contoso Copilot and Open Source Assistant samples are blocked, but the Contoso Extension Pack is installable.
 
 **What just happened?**
 
