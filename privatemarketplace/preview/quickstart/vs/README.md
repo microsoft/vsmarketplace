@@ -12,7 +12,7 @@ This quickstart walks you through setting up and testing a local Private Marketp
 ### Prerequisites
 
 Before you begin, ensure you have:
-- **Visual Studio 2026 Insiders (18.11 or later)**, already installed. The setup script verifies this but **does not install Visual Studio**. Download it from [Visual Studio 2026 Insiders](https://visualstudio.microsoft.com/insiders/), or update an existing Insiders installation with the Visual Studio Installer.
+- **Visual Studio 2026 Insiders (12217.175 or later)**, already installed. The setup script verifies this but **does not install Visual Studio**. Download it from [Visual Studio 2026 Insiders](https://visualstudio.microsoft.com/insiders/), or update an existing Insiders installation with the Visual Studio Installer.
 - **Docker Desktop** installed and running. If it's missing and `winget` is available, the setup script can install it for you after prompting for confirmation.
 - **PowerShell 5.1 or later** for running the setup script (Windows PowerShell or PowerShell 7)
 - **Internet access** to download the quickstart and its dependencies

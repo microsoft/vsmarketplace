@@ -691,7 +691,7 @@ To remove the restriction, set the policy back to Not Configured and restart VS 
 
 ## 5.2 Connecting Visual Studio 2026 to the Private Marketplace
 
-Use [Visual Studio Insiders (12202.211)](https://visualstudio.microsoft.com/insiders) or later for the following steps.
+Use [Visual Studio Insiders (12217.175)](https://visualstudio.microsoft.com/insiders) or later for the following steps.
 
 With the application deployed and private extensions published to the extension source directory, it's time to connect Visual Studio 2026 to your Private Marketplace.
 
