@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| roronoa-test-job.roronoa-test-job | 9/22/2026 | Impersonation |
+| nurav.ncodes | 9/22/2026 | Impersonation |
+| ImAlien.super-stock2 | 9/22/2026 | Impersonation |
+| sheeptao.pixi-python | 9/22/2026 | Impersonation |
+| e1roy.favorites-f | 9/22/2026 | Impersonation |
 | LuminaryDevs.flow-gridprod | 9/21/2026 | Malware |
 | SprintlyLLC.Sprintly | 9/21/2026 | Malware |
 | Corebyte.canvasstudiodev | 9/21/2026 | Malware |
