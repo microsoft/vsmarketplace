@@ -38,10 +38,10 @@ param enableFileLogging bool = false
 @description('Whether to enable console logging for the container app.')
 param enableConsoleLogging bool = false
 
-@description('The list of IP address or CIDR range strings that are allowed to access the container app.')
+@description('The list of IP address or CIDR range strings that are allowed to access the container app. Applied to the Kubernetes Service as loadBalancerSourceRanges.')
 param ipAllowList array = []
 
-@description('Whether to restrict the container app to only receive traffic from the virtual network.')
+@description('Whether to restrict the container app to only receive traffic from the virtual network. When true, the Kubernetes Service is provisioned behind an Azure internal load balancer.')
 param vnetTrafficOnly bool = false
 
 @description('The daily quota for the Log Analytics workspace in GB.')
@@ -81,6 +81,16 @@ var featureFlagSkip = 100
 var useArtifactsSource = !empty(artifactsOrganization)
 var useFileSystemSource = !useArtifactsSource
 var createStorageAccount = useFileSystemSource || enableFileLogging
+
+// Pre-rendered YAML fragment for the pod env block. Indentation matches the `env:` list in the deployment manifest.
+var disabledFeatureFlagsEnvYaml = join(
+  map(
+    range(0, length(disabledFeatureFlags)),
+    i =>
+      '        - name: feature_management__feature_flags__${i + featureFlagSkip}__id\n          value: "${disabledFeatureFlags[i]}"\n        - name: feature_management__feature_flags__${i + featureFlagSkip}__enabled\n          value: "false"'
+  ),
+  '\n'
+)
 
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
   name: logAnalyticsWorkspaceName
@@ -229,7 +239,10 @@ resource aksCluster 'Microsoft.ContainerService/managedClusters@2023-10-01' = {
     networkProfile: {
       networkPlugin: 'azure'
       loadBalancerSku: 'standard'
-      outboundType: vnetTrafficOnly ? 'userDefinedRouting' : 'loadBalancer'
+      // Egress always uses the standard load balancer. `userDefinedRouting` would require a route table,
+      // NAT gateway or firewall on the subnet, none of which this template provisions. Inbound isolation
+      // for `vnetTrafficOnly` is handled by the internal load balancer annotation on the Service instead.
+      outboundType: 'loadBalancer'
     }
     addonProfiles: {
       omsagent: {
@@ -395,6 +408,18 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
         name: 'ENABLE_FILE_LOGGING'
         value: toLower(string(enableFileLogging))
       }
+      {
+        name: 'DISABLED_FEATURE_FLAGS_ENV'
+        value: disabledFeatureFlagsEnvYaml
+      }
+      {
+        name: 'IP_ALLOW_LIST'
+        value: join(ipAllowList, ',')
+      }
+      {
+        name: 'VNET_TRAFFIC_ONLY'
+        value: toLower(string(vnetTrafficOnly))
+      }
     ]
     scriptContent: '''
       #!/bin/bash
@@ -414,10 +439,10 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 
       # Create docker registry secret
       kubectl create secret docker-registry acr-secret \
-        --docker-server=$REGISTRY_SERVER \
-        --docker-username=$REGISTRY_USERNAME \
-        --docker-password=$REGISTRY_PASSWORD \
-        --namespace=$NAMESPACE \
+        --docker-server="$REGISTRY_SERVER" \
+        --docker-username="$REGISTRY_USERNAME" \
+        --docker-password="$REGISTRY_PASSWORD" \
+        --namespace="$NAMESPACE" \
         --dry-run=client -o yaml | kubectl apply -f -
 
       # Create Azure Files secret for storage (if file system source is enabled)
@@ -508,6 +533,30 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
           value: \"/data/logs\""
       fi
 
+      if [ -n "$DISABLED_FEATURE_FLAGS_ENV" ]; then
+        ENV_VARS="$ENV_VARS
+$DISABLED_FEATURE_FLAGS_ENV"
+      fi
+
+      # Keep the marketplace off the public internet when only virtual network traffic is allowed.
+      SERVICE_ANNOTATIONS=""
+      if [ "$VNET_TRAFFIC_ONLY" = "true" ]; then
+        SERVICE_ANNOTATIONS="
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: \"true\""
+      fi
+
+      # Restrict which source addresses may reach the load balancer.
+      LB_SOURCE_RANGES=""
+      if [ -n "$IP_ALLOW_LIST" ]; then
+        LB_SOURCE_RANGES="
+  loadBalancerSourceRanges:"
+        for CIDR in $(echo "$IP_ALLOW_LIST" | tr ',' ' '); do
+          LB_SOURCE_RANGES="$LB_SOURCE_RANGES
+  - $CIDR"
+        done
+      fi
+
       cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
 kind: Deployment
@@ -558,9 +607,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: vscode-private-marketplace-service
-  namespace: $NAMESPACE
+  namespace: $NAMESPACE$SERVICE_ANNOTATIONS
 spec:
-  type: LoadBalancer
+  type: LoadBalancer$LB_SOURCE_RANGES
   ports:
   - port: 80
     targetPort: 8080
@@ -583,7 +632,7 @@ EOF
 
 output aksClusterName string = aksCluster.name
 output containerAppUrl string = vnetTrafficOnly
-  ? 'Internal only - configure ingress controller'
+  ? 'Internal only - run kubectl get service -n vscode-private-marketplace to get the internal load balancer IP'
   : 'Use kubectl get service -n vscode-private-marketplace to get the external IP'
 output storageAccountName string = createStorageAccount ? storageAccount.name : 'No storage account created'
 output clientId string = userAssignedIdentity.properties.clientId

@@ -18,7 +18,7 @@ Before you begin, ensure you have:
 
 > [!IMPORTANT]
 > Never run scripts from untrusted sources, always review the script before running it.
-> Always verify the script's hash before executing. The expected hash can be found in the repository or release notes.
+> The script is served directly from this repository. To review it before it runs, use the two-step download-and-review flow described below instead of piping it into `iex`.
 
 The script will automatically:
 - Check for and install missing prerequisites (after prompting for confirmation):

@@ -40,7 +40,7 @@ Occasionally the script cannot determine which version is installed. When that h
 
 > [!IMPORTANT]
 > Never run scripts from untrusted sources, always review the script before running it.
-> Always verify the script's hash before executing. The expected hash can be found in the repository or release notes.
+> The script is served directly from this repository. To review it before it runs, use the two-step download-and-review flow described below instead of piping it into `iex`.
 
 The script will automatically:
 - Verify Visual Studio 18.11 or later is present - it is never installed for you

@@ -71,7 +71,7 @@ If you run into any issues or want to check the health status of your Private Ma
 Before running the application in a cloud or data center, you can run the application locally using Docker. This will help you understand what the app looks like when it is running and what configuration is needed. 
 You need to have [Docker installed](https://docs.docker.com/get-started/get-docker/) to perform these steps.
 
-Follow [this Quickstart](https://github.com/microsoft/vsmarketplace/blob/main/privatemarketplace/preview/quickstart/aspire/README.md) to get the Private Marketplace running quickly on your local computer!
+Follow the [Visual Studio Code Quickstart](https://github.com/microsoft/vsmarketplace/blob/main/privatemarketplace/preview/quickstart/vscode/README.md) or the [Visual Studio Quickstart](https://github.com/microsoft/vsmarketplace/blob/main/privatemarketplace/preview/quickstart/vs/README.md) to get the Private Marketplace running quickly on your local computer!
 
 # 2. Deploy the container to your desired container host
 
