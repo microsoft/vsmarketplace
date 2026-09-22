@@ -6,7 +6,7 @@ param containerRegistryUsername string
 param containerRegistryPassword string
 
 @description('The tag (version) of the image to deploy.')
-param imageTag string = '1.0.57'
+param imageTag string = '1.1.260'
 
 @description('The name of the deployment, used to prefix resource names. Should only contain lowercase letters to avoid resource name restrictions.')
 param resourceNamePrefix string = 'vscodeprivate'
@@ -477,7 +477,7 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
       ENV_VARS="
         - name: APPLICATIONINSIGHTS_CONNECTION_STRING
           value: \"$APP_INSIGHTS_CONNECTION\"
-        - name: Marketplace__Upstreaming_Mode
+        - name: Marketplace__Upstreaming__Mode
           value: \"$MARKETPLACE_PROXY_MODE\"
         - name: Marketplace__OrganizationName
           value: \"$MARKETPLACE_ORGANIZATION_NAME\"

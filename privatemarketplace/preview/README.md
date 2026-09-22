@@ -420,7 +420,7 @@ When the feature is enabled, via `Search` or `SearchAndAssets` modes, extensions
 
 ### Network Requirements for Upstreaming
 
-In more tightly controlled environments, Private Marketplace may not be able to access the public Marketplcae without changes to the network configuration. Allow Private Marketplace to reach the public Marketplace by enabling access to the following endpoints:
+In more tightly controlled environments, Private Marketplace may not be able to access the public Marketplace without changes to the network configuration. Allow Private Marketplace to reach the public Marketplace by enabling access to the following endpoints:
 
 | Endpoint | Port | Usage |
 | --- | --- | --- |
@@ -720,7 +720,7 @@ The container has three modes for logging.
 
    Up to 20 log files will be retained. Each log file has a maximum size of 5 MB. The log files will roll (new log file name) when the maximum log file size is reached or once per hour (whichever first). This approach is not recommended for high scale setups but can be useful while initially deploying the application.
 
-We recommended you pick either Application Insights logging or OpenTelemetry logging, leaving file system logging only enabled for small scale deployments or for easily capturing rich details for bug reports.
+We recommend you pick either Application Insights logging or OpenTelemetry logging, leaving file system logging only enabled for small scale deployments or for easily capturing rich details for bug reports.
 
 The application has two health endpoints:
 
@@ -981,6 +981,6 @@ Visit the [GitHub Discussions](https://aka.ms/vspm/support/discussions) page for
 
 ### Can I use Artifactory storage with Private Marketplace?
 
-Artifactory integration is currently not currently supported.
+Artifactory integration is not currently supported.
 
 
