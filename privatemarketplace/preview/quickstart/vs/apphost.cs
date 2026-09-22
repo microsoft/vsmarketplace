@@ -64,10 +64,14 @@ public static class MarketplaceExtensions
             {
                 var endpoint = e.Resource.Annotations.OfType<EndpointAnnotation>()
                     .FirstOrDefault(a => a.Name == name);
-                
-                if (endpoint?.Port.HasValue == true)
+
+                // Port is the *desired* port, which is null whenever Aspire allocates one for us -
+                // which is exactly this branch. The port actually bound is on AllocatedEndpoint.
+                var allocatedPort = endpoint?.AllocatedEndpoint?.Port;
+
+                if (allocatedPort.HasValue)
                 {
-                    var config = new { Marketplace = new { Port = endpoint.Port.Value } };
+                    var config = new { Marketplace = new { Port = allocatedPort.Value } };
                     var json = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
                     File.WriteAllText(appsettingsPath, json);
                 }
