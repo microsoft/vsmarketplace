@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| PhanBanLLC.BoardlyUp | 9/21/2026 | Malware |
+| PhanBanLLC.Cannvanis | 9/21/2026 | Malware |
 | LuminaryDevs.flow-gridprod | 9/21/2026 | Malware |
 | SprintlyLLC.Sprintly | 9/21/2026 | Malware |
 | Corebyte.canvasstudiodev | 9/21/2026 | Malware |
@@ -124,7 +126,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | grikomsn.opencode-bridge-copilot-chat | 9/4/2026 | Untrustworthy |
 | licc.htmlto-link-md | 9/4/2026 | Untrustworthy |
 | licc.htmlto-link-vscode | 9/4/2026 | Untrustworthy |
-| xavier-arosemena.roo-plus | 9/4/2026 | Untrustworthy |
 | rladnwls122.blindspot | 9/4/2026 | Untrustworthy |
 | CamelliaTse.pi-chat | 9/4/2026 | Untrustworthy |
 | newdlops.git-simple-compare | 9/4/2026 | Untrustworthy |
