@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| SeeonesStudio.roo-code-continue-nightly | 9/23/2026 | Impersonation |
+| SeeonesStudio.roo-code-2 | 9/23/2026 | Impersonation |
 | CanvasLLC.Canvas-Boards | 9/22/2026 | Malware |
 | roronoa-test-job.roronoa-test-job | 9/22/2026 | Impersonation |
 | nurav.ncodes | 9/22/2026 | Impersonation |
