@@ -1,0 +1,261 @@
+#:sdk Aspire.AppHost.Sdk@13.5.3
+using System.Diagnostics;
+using System.Text.Json;
+
+using Aspire.Hosting;
+using Aspire.Hosting.ApplicationModel;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+
+var builder = DistributedApplication.CreateBuilder(args);
+
+builder
+    .AddVisualStudioPrivateMarketplace()
+    .WithMarketplaceConfiguration(
+        organizationName: "Contoso",
+        contactSupportUri: "mailto:privatemktplace@microsoft.com",
+        upstreamingMode: MarketplaceUpstreamingMode.Search)
+    .WithEnvironment("FeatureManagement__VSExtensionSupport", "true")
+    .WithEnvironment("FeatureManagement__EmitBlockingMetadata", "true")
+;
+
+builder.Build().Run();
+
+public enum MarketplaceUpstreamingMode
+{
+    None,
+    Search,
+    SearchAndAssets
+}
+
+public static class MarketplaceExtensions
+{
+    /// <summary>
+    /// The Aspire resource name for the Private Marketplace container. This is also used as the
+    /// HTTPS endpoint name, so it must be the value looked up when resolving that endpoint.
+    /// </summary>
+    public const string MarketplaceResourceName = "visualstudio-private-marketplace";
+
+    public static IResourceBuilder<ContainerResource> AddVisualStudioPrivateMarketplace(
+        this IDistributedApplicationBuilder builder,
+        string name = MarketplaceResourceName,
+        string containerImage = "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace")
+    {
+        var marketplacePort = builder.Configuration.GetValue<int?>("Marketplace:Port") ?? 0;
+        
+        var marketplace = builder.AddContainer(name, containerImage)
+            .WithEnvironment("ASPNETCORE_URLS", "https://+:443")
+            .WithHttpsEndpoint(
+                port: marketplacePort == 0 ? null : marketplacePort,
+                name: name,
+                targetPort: 443)
+            .WithUrlForEndpoint(name, annotation => annotation.DisplayText = "Home")
+            .WithUrl($"https://github.com/microsoft/vsmarketplace/blob/main/privatemarketplace/preview/quickstart/vs/README.md", "README")
+            .WithBindMount(Path.Combine(Directory.GetCurrentDirectory(), "data", "extensions"), "/extensions")
+            .WithBindMount(Path.Combine(Directory.GetCurrentDirectory(), "data", "logs"), "/logs")
+            .WithOtlpExporter()
+            .RunWithHttpsDevCertificate();
+
+        // Save allocated port to appsettings.json for future runs
+        if (marketplacePort == 0)
+        {
+            var appsettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
+            builder.Eventing.Subscribe<ResourceEndpointsAllocatedEvent>(marketplace.Resource, (e, ct) =>
+            {
+                var endpoint = e.Resource.Annotations.OfType<EndpointAnnotation>()
+                    .FirstOrDefault(a => a.Name == name);
+
+                // Port is the *desired* port, which is null whenever Aspire allocates one for us -
+                // which is exactly this branch. The port actually bound is on AllocatedEndpoint.
+                var allocatedPort = endpoint?.AllocatedEndpoint?.Port;
+
+                if (allocatedPort.HasValue)
+                {
+                    var config = new { Marketplace = new { Port = allocatedPort.Value } };
+                    var json = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
+                    File.WriteAllText(appsettingsPath, json);
+                }
+                return Task.CompletedTask;
+            });
+        }
+
+        return marketplace;
+    }
+
+    public static IResourceBuilder<ContainerResource> WithMarketplaceConfiguration(
+        this IResourceBuilder<ContainerResource> builder,
+        string organizationName,
+        string contactSupportUri,
+        MarketplaceUpstreamingMode upstreamingMode)
+    {
+        return builder
+            .WithEnvironment(context =>
+            {
+                context.EnvironmentVariables["Marketplace__BaseUrl"] = builder.Resource.GetEndpoint(builder.Resource.Name).Url.ToString();
+            })
+            .WithEnvironment("Marketplace__OrganizationName", organizationName)
+            .WithEnvironment("Marketplace__ContactSupportUri", contactSupportUri)
+            .WithEnvironment("Marketplace__LogsDirectory", "/logs")
+            .WithEnvironment("Marketplace__ExtensionSourceDirectory", "/extensions")
+            .WithEnvironment("Marketplace__Upstreaming__Mode", upstreamingMode.ToString());
+    }
+}
+
+/// <summary>
+/// Extensions for adding Dev Certs to aspire resources.
+/// </summary>
+public static class DevCertHostingExtensions
+{
+    /// <summary>
+    /// Injects the ASP.NET Core HTTPS developer certificate into the resource via the specified environment variables when
+    /// <paramref name="builder"/>.<see cref="IResourceBuilder{T}.ApplicationBuilder">ApplicationBuilder</see>.<see cref="IDistributedApplicationBuilder.ExecutionContext">ExecutionContext</see>.<see cref="DistributedApplicationExecutionContext.IsRunMode">IsRunMode</see><c> == true</c>.<br/>
+    /// If the resource is a <see cref="ContainerResource"/>, the certificate files will be bind mounted into the container.
+    /// </summary>
+    /// <remarks>
+    /// This method <strong>does not</strong> configure an HTTPS endpoint on the resource.
+    /// Use <see cref="ResourceBuilderExtensions.WithHttpsEndpoint{TResource}"/> to configure an HTTPS endpoint.
+    /// </remarks>
+    public static IResourceBuilder<TResource> RunWithHttpsDevCertificate<TResource>(
+        this IResourceBuilder<TResource> builder, string certFileEnv = "ASPNETCORE_Kestrel__Certificates__Default__Path")
+        where TResource : IResourceWithEnvironment
+    {
+        builder.ApplicationBuilder.Eventing.Subscribe<BeforeStartEvent>(async (e, ct) =>
+        {
+            var logger = e.Services.GetRequiredService<ResourceLoggerService>().GetLogger(builder.Resource);
+            if (logger is null)
+            {
+                throw new InvalidOperationException("Failed to get logger for resource.");
+            }
+            // Export the ASP.NET Core HTTPS development certificate to a file and configure the resource to use it via
+            // the specified environment variables.
+            var (exported, certPath) = await TryExportDevCertificateAsync(builder.ApplicationBuilder, logger);
+
+            if (!exported)
+            {
+                // The export failed for some reason, don't configure the resource to use the certificate.
+                return;
+            }
+
+            if (builder.Resource is ContainerResource containerResource)
+            {
+                // Bind-mount the certificate files into the container.
+                const string DEV_CERT_BIND_MOUNT_DEST_DIR = "/dev-certs";
+
+                var certFileName = Path.GetFileName(certPath);
+
+                var bindSource = Path.GetDirectoryName(certPath) ?? throw new UnreachableException();
+
+                var certFileDest = $"{DEV_CERT_BIND_MOUNT_DEST_DIR}/{certFileName}";
+
+                builder.ApplicationBuilder.CreateResourceBuilder(containerResource)
+                    .WithBindMount(bindSource, DEV_CERT_BIND_MOUNT_DEST_DIR, isReadOnly: true)
+                    .WithEnvironment(certFileEnv, certFileDest);
+            }
+        });
+
+        return builder;
+    }
+
+    public static async Task<(bool, string CertFilePath)> TryExportDevCertificateAsync(IDistributedApplicationBuilder builder)
+    {
+        return await TryExportDevCertificateAsync(builder, null);
+    }
+
+    private static async Task<(bool, string CertFilePath)> TryExportDevCertificateAsync(IDistributedApplicationBuilder builder, ILogger? logger)
+    {
+        // Exports the ASP.NET Core HTTPS development certificate & private key to PEM files using 'dotnet dev-certs https' to a temporary
+        // directory and returns the path.
+        // TODO: Check if we're running on a platform that already has the cert and key exported to a file (e.g. macOS) and just use those instead.
+        var appNameHash = builder.Configuration["AppHost:Sha256"]![..10];
+        var tempDir = Path.Combine(Path.GetTempPath(), $"aspire.{appNameHash}");
+        var certExportPath = Path.Combine(tempDir, "dev-cert.pfx");
+
+        if (File.Exists(certExportPath))
+        {
+            // Certificate already exported, return the path.
+            return (true, certExportPath);
+        }
+
+        if (!Directory.Exists(tempDir))
+        {
+            Directory.CreateDirectory(tempDir);
+        }
+
+        string[] args = ["dev-certs", "https", "--export-path", $"\"{certExportPath}\"", "--format", "pfx", "--password", "\"\""];
+        var argsString = string.Join(' ', args);
+
+        logger?.LogTrace("Running command to export dev cert: {ExportCmd}", $"dotnet {argsString}");
+        var exportStartInfo = new ProcessStartInfo
+        {
+            FileName = "dotnet",
+            Arguments = argsString,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+            CreateNoWindow = true,
+            WindowStyle = ProcessWindowStyle.Hidden,
+        };
+
+        using var exportProcess = new Process { StartInfo = exportStartInfo };
+
+        Task? stdOutTask = null;
+        Task? stdErrTask = null;
+
+        try
+        {
+            try
+            {
+                if (exportProcess.Start())
+                {
+                    stdOutTask = ConsumeOutput(exportProcess.StandardOutput, msg => logger?.LogInformation("> {StandardOutput}", msg));
+                    stdErrTask = ConsumeOutput(exportProcess.StandardError, msg => logger?.LogError("! {ErrorOutput}", msg));
+                }
+            }
+            catch (Exception ex)
+            {
+                logger?.LogError(ex, "Failed to start HTTPS dev certificate export process");
+                throw;
+            }
+
+            var timeout = TimeSpan.FromSeconds(5);
+            var exited = exportProcess.WaitForExit(timeout);
+
+            if (exited && File.Exists(certExportPath))
+            {
+                return (true, certExportPath);
+            }
+
+            if (exportProcess.HasExited && exportProcess.ExitCode != 0)
+            {
+                logger?.LogError("HTTPS dev certificate export failed with exit code {ExitCode}", exportProcess.ExitCode);
+            }
+            else if (!exportProcess.HasExited)
+            {
+                exportProcess.Kill(true);
+                logger?.LogError("HTTPS dev certificate export timed out after {TimeoutSeconds} seconds", timeout.TotalSeconds);
+            }
+            else
+            {
+                logger?.LogError("HTTPS dev certificate export failed for an unknown reason");
+            }
+            return default;
+        }
+        finally
+        {
+            await Task.WhenAll(stdOutTask ?? Task.CompletedTask, stdErrTask ?? Task.CompletedTask);
+        }
+
+        static async Task ConsumeOutput(TextReader reader, Action<string> callback)
+        {
+            char[] buffer = new char[256];
+            int charsRead;
+
+            while ((charsRead = await reader.ReadAsync(buffer, 0, buffer.Length)) > 0)
+            {
+                callback(new string(buffer, 0, charsRead));
+            }
+        }
+    }
+}
