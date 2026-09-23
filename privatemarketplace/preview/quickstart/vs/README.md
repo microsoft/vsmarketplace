@@ -288,6 +288,8 @@ The quickstart ships without an allow-list, so every sample extension is availab
 1. Open Visual Studio
 1. Open **Extensions → Manage Extensions**. The Contoso Copilot and Open Source Assistant samples are blocked, but the Contoso Extension Pack is installable.
 
+      ![Extension manager showing blocked extensions](images/vs-extension-manager-blocked.png)
+
 **What just happened?**
 
 The rules are evaluated most-specific-first, so all three keys matter:
