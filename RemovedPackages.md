@@ -9,6 +9,15 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |---------------------------------------|--------------|-------------------------------|
 | SeeonesStudio.roo-code-continue-nightly | 9/23/2026 | Impersonation |
 | SeeonesStudio.roo-code-2 | 9/23/2026 | Impersonation |
+| buildwithlayer.gluestack-ui-integration-expert-6aTmf | 9/23/2026 | Impersonation |
+| buildwithlayer.hasura-integration-expert-2CHkV | 9/23/2026 | Impersonation |
+| buildwithlayer.bento-integration-expert-DJi3L | 9/23/2026 | Impersonation |
+| buildwithlayer.fastapi-integration-expert-rItxt | 9/23/2026 | Impersonation |
+| buildwithlayer.twilio-integration-expert-jBWVB | 9/23/2026 | Impersonation |
+| buildwithlayer.vite-integration-expert-p8NvA | 9/23/2026 | Impersonation |
+| buildwithlayer.vs-code-integration-expert-fP5Ll | 9/23/2026 | Impersonation |
+| buildwithlayer.django-integration-expert-Gus30 | 9/23/2026 | Impersonation |
+| buildwithlayer.gavyn-test-mui | 9/23/2026 | Impersonation |
 | CanvasLLC.Canvas-Boards | 9/22/2026 | Malware |
 | roronoa-test-job.roronoa-test-job | 9/22/2026 | Impersonation |
 | nurav.ncodes | 9/22/2026 | Impersonation |
