@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| pedro-time-tracker-spike.time-tracker-naa-obo-spike | 9/23/2026 | Malware |
 | SeeonesStudio.roo-code-continue-nightly | 9/23/2026 | Impersonation |
 | SeeonesStudio.roo-code-2 | 9/23/2026 | Impersonation |
 | buildwithlayer.gluestack-ui-integration-expert-6aTmf | 9/23/2026 | Impersonation |
