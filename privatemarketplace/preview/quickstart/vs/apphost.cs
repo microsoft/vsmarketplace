@@ -16,8 +16,10 @@ builder
     .WithMarketplaceConfiguration(
         organizationName: "Contoso",
         contactSupportUri: "mailto:privatemktplace@microsoft.com",
-        upstreamingMode: MarketplaceUpstreamingMode.SearchAndAssets)
-    .WithEnvironment("FeatureManagement__VSExtensionSupport", "true");
+        upstreamingMode: MarketplaceUpstreamingMode.Search)
+    .WithEnvironment("FeatureManagement__VSExtensionSupport", "true")
+    .WithEnvironment("FeatureManagement__EmitBlockingMetadata", "true")
+;
 
 builder.Build().Run();
 
@@ -257,4 +259,3 @@ public static class DevCertHostingExtensions
         }
     }
 }
-

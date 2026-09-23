@@ -9,8 +9,8 @@
     interfering with system-wide installations; see -UseGlobalInstalls to reuse existing ones.
 
     Visual Studio itself is never installed by this script. An existing installation of
-    Visual Studio 2026 Insiders (18.11 or later) is required, and the script verifies it
-    before continuing. Download it from https://visualstudio.microsoft.com/insiders/.
+    Visual Studio 2026 Insiders (build 12217.175 / version 18.11.12217.175 or later) is required.
+    The script verifies it before continuing. Download it from https://visualstudio.microsoft.com/insiders/.
 
 .PARAMETER UseGlobalInstalls
     When specified, existing machine-wide installations of the .NET SDK and the Aspire CLI are
@@ -39,7 +39,7 @@
 
 .NOTES
     Requires: PowerShell 5.1 or later, Internet connection for downloads
-    Requires: Visual Studio 2026 Insiders (18.11 or later), already installed
+    Requires: Visual Studio 2026 Insiders (build 12217.175 / version 18.11.12217.175 or later), already installed
               https://visualstudio.microsoft.com/insiders/
     Exit Codes:
         0 - Success
@@ -101,7 +101,7 @@ $Config = @{
     # Container image started by the AppHost. Kept in sync with apphost.cs so an image already
     # on the machine can be refreshed before the AppHost starts.
     ContainerImage = "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:latest"
-    MinimumVSVersion = "18.11"  # Minimum Visual Studio version required for VS extension support.
+    MinimumVSVersion = "18.11.12217.175"  # Full installation version for Insiders build 12217.175.
     
     # Installation paths
     RootPath = Join-Path $env:TEMP $rootFolderName
@@ -986,7 +986,7 @@ if ($blockingPrereqs.Count -gt 0) {
             Write-Host "    Download: $($prereq.ManualUrl)" -ForegroundColor Gray
         }
     }
-    Write-Host "`nVersion 18.11 is a Visual Studio 2026 Insiders build. Install it from" -ForegroundColor Gray
+    Write-Host "`nVisual Studio $minimumVSVersion or later is required. Install Visual Studio 2026 Insiders from" -ForegroundColor Gray
     Write-Host "https://visualstudio.microsoft.com/insiders/, or update an existing Insiders" -ForegroundColor Gray
     Write-Host "installation using the Visual Studio Installer, then run this script again." -ForegroundColor Gray
     exit 1

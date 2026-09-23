@@ -3,7 +3,7 @@
 This quickstart walks you through setting up and testing a local Private Marketplace for Visual Studio using [Aspire](https://aspire.dev) on Windows. You'll learn how to install the marketplace, connect Visual Studio to it, and explore different usage scenarios.
 
 > [!IMPORTANT]
-> Visual Studio extension support is a preview feature. This quickstart turns it on for you, and includes sample Visual Studio extensions.
+> Visual Studio extension support is a preview feature. This quickstart turns it on for you, enables the `EmitBlockingMetadata` feature flag, and includes sample Visual Studio extensions.
 
 ---
 
@@ -12,7 +12,7 @@ This quickstart walks you through setting up and testing a local Private Marketp
 ### Prerequisites
 
 Before you begin, ensure you have:
-- **Visual Studio 2026 Insiders (12217.175 or later)**, already installed. The setup script verifies this but **does not install Visual Studio**. Download it from [Visual Studio 2026 Insiders](https://visualstudio.microsoft.com/insiders/), or update an existing Insiders installation with the Visual Studio Installer.
+- **Visual Studio 2026 Insiders (build 12217.175 / version 18.11.12217.175 or later)**, already installed. The setup script verifies this but **does not install Visual Studio**. Download it from [Visual Studio 2026 Insiders](https://visualstudio.microsoft.com/insiders/), or update an existing Insiders installation with the Visual Studio Installer.
 - **Docker Desktop** installed and running. If it's missing and `winget` is available, the setup script can install it for you after prompting for confirmation.
 - **PowerShell 5.1 or later** for running the setup script (Windows PowerShell or PowerShell 7)
 - **Internet access** to download the quickstart and its dependencies
@@ -26,13 +26,13 @@ The setup script checks for Visual Studio before it does anything else. If a sui
 ```text
 === Action Required ===
 The following prerequisites must be installed manually before continuing:
-  - Visual Studio 18.11 or later
-    Current: 18.9.2 installed
+  - Visual Studio 18.11.12217.175 or later
+    Current: 18.11.12217.174 installed
     Location: C:\Program Files\Microsoft Visual Studio\18\Enterprise
     Download: https://visualstudio.microsoft.com/insiders/
 ```
 
-Version 18.11 is a Visual Studio 2026 Insiders build. Install it from [Visual Studio 2026 Insiders](https://visualstudio.microsoft.com/insiders/), or update an existing Insiders installation with the Visual Studio Installer, then run the script again.
+The script compares the full installation version, including the build and revision, against `18.11.12217.175` (Insiders build `12217.175`). Earlier 18.11 builds do not meet this requirement. Install a supported build from [Visual Studio 2026 Insiders](https://visualstudio.microsoft.com/insiders/), or update an existing Insiders installation with the Visual Studio Installer, then run the script again.
 
 Occasionally the script cannot determine which version is installed. When that happens it says so and continues, since a failed check does not mean Visual Studio is missing. Use `-SkipVSVersionCheck` to bypass the version requirement entirely.
 
@@ -43,14 +43,14 @@ Occasionally the script cannot determine which version is installed. When that h
 > The script is served directly from this repository. To review it before it runs, use the two-step download-and-review flow described below instead of piping it into `iex`.
 
 The script will automatically:
-- Verify Visual Studio 18.11 or later is present - it is never installed for you
+- Verify Visual Studio 18.11.12217.175 or later is present - it is never installed for you
 - Check for and install missing prerequisites (after prompting for confirmation):
   - Docker Desktop (if not found)
   - Download quickstart files to `$env:TEMP\privatemarketplace-quickstart-vs`
   - Portable .NET SDK 10.0+
   - Portable Aspire CLI version 13+
 - Start Docker Desktop if not running
-- Launch the Private Marketplace container via Aspire, with Visual Studio extension support enabled
+- Launch the Private Marketplace container via Aspire, with Visual Studio extension support and `EmitBlockingMetadata` enabled
 
 The Quickstart is installed into a temporary folder (`$env:TEMP\privatemarketplace-quickstart-vs`), along with all of the dependencies, except Docker. To remove the Quickstart and all the dependencies, just delete the temporary folder, and uninstall Docker, if desired. The script will attempt to uninstall Docker and remove the temporary folder after Quickstart exits.
 
@@ -193,11 +193,11 @@ The marketplace inspects each `.vsix` manifest and handles it accordingly, so no
 
 ### Scenario 2: Configure Upstreaming to Public Marketplace
 
-Upstreaming is a feature of the Private Marketplace that makes the extensions in the public Marketplace available to clients. Upstreaming has three modes of operation, "None", "Search" and "SearchAndAssets".
+Upstreaming is a feature of the Private Marketplace that makes the extensions in the public Marketplace available to clients. Upstreaming has three modes of operation, "None", "Search" and "SearchAndAssets". The quickstart is configured to use `Search` mode by default.
 
 By changing the mode the Private Marketplace can support different scenarios
 - `None`: No upstreaming. Only private extensions are available.
-- `Search`: Only search queries for public extensions are proxied. Asset downloads (VSIX, icons, etc.) are fetched directly from the Public Marketplace by the client.
+- **`Search`**: Only search queries for public extensions are proxied. Asset downloads (VSIX, icons, etc.) are fetched directly from the Public Marketplace by the client.
 - `SearchAndAssets`: Both search queries and asset downloads for public extensions are fetched through the Private Marketplace. This mode ensures all Public Visual Studio Marketplace requests go through your Private Marketplace instance, and clients do not contact the Public Visual Studio Marketplace directly.
 
 To change the Upstreaming mode in the Quickstart:
@@ -218,7 +218,9 @@ To change the Upstreaming mode in the Quickstart:
    17         organizationName: "Contoso",
    18         contactSupportUri: "mailto:privatemktplace@microsoft.com",
    19         upstreamingMode: MarketplaceUpstreamingMode.SearchAndAssets)
-   20      .WithEnvironment("FeatureManagement__VSExtensionSupport", "true");
+   20      .WithEnvironment("FeatureManagement__VSExtensionSupport", "true")
+   21      .WithEnvironment("FeatureManagement__EmitBlockingMetadata", "true")
+   22   ;
    ```
 1. Change line 19 to:
    ```csharp
@@ -257,7 +259,7 @@ The quickstart ships without an allow-list, so every sample extension is availab
 1. In the terminal running Aspire, press `Ctrl+C` to stop the AppHost
 1. When prompted to remove the temporary folder, answer **`n`**
 1. Open the `$env:TEMP\privatemarketplace-quickstart-vs\apphost.cs` file in an editor
-1. Add the `AllowedExtensions` line shown below, after the existing `WithEnvironment` call:
+1. Add the `AllowedExtensions` line shown below, after the existing `WithEnvironment` calls:
 
    ```csharp
    builder
@@ -267,7 +269,9 @@ The quickstart ships without an allow-list, so every sample extension is availab
            contactSupportUri: "mailto:privatemktplace@microsoft.com",
            upstreamingMode: MarketplaceUpstreamingMode.SearchAndAssets)
        .WithEnvironment("FeatureManagement__VSExtensionSupport", "true")
-       .WithEnvironment("AllowedExtensions", """{"*":true,"contoso":false,"contoso.contosopackvs":true}""");
+       .WithEnvironment("FeatureManagement__EmitBlockingMetadata", "true")
+       .WithEnvironment("AllowedExtensions", """{"*":true,"contoso":false,"contoso.contosopackvs":true}""")
+   ;
    ```
 
    Note the trailing semicolon moves to the new last line.
@@ -368,13 +372,13 @@ Remove-Item -Path "$env:TEMP\privatemarketplace-quickstart-vs" -Recurse -Force
 
 ### Visual Studio
 
-**Setup stops with "Visual Studio 18.11 or later" listed under Action Required?**
-- Version 18.11 is a Visual Studio 2026 Insiders build. Install it from [Visual Studio 2026 Insiders](https://visualstudio.microsoft.com/insiders/), or update an existing Insiders installation with the Visual Studio Installer, then run the script again
+**Setup stops with "Visual Studio 18.11.12217.175 or later" listed under Action Required?**
+- Install Visual Studio 2026 Insiders build 12217.175 (full version 18.11.12217.175) or later from [Visual Studio 2026 Insiders](https://visualstudio.microsoft.com/insiders/), or update an existing Insiders installation with the Visual Studio Installer, then run the script again
 - Build Tools installations are ignored because they have no IDE to host extensions
 
 **Setup reports it could not determine the Visual Studio version?**
 - `vswhere.exe` ships with the Visual Studio Installer; if the Installer was removed, detection falls back to the Installer's instance data under `%ProgramData%`
-- If neither is readable, the script continues anyway. Confirm your installation is 18.11 or later, or re-run with `-SkipVSVersionCheck`
+- If neither is readable, the script continues anyway. Confirm your installation is 18.11.12217.175 or later, or re-run with `-SkipVSVersionCheck`
 
 **Visual Studio not showing your extensions?**
 - Confirm **Use private marketplace** is selected under **Tools → Options → Environment → Extensions**
