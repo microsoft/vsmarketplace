@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| msobb-research-aisha.msobb-xdm-poc-b7f3 | 9/24/2026 | Malware |
 | Topsy2003Turvey.vscode-language-pack-af | 9/24/2026 |Impersonation |
 | nathan-0910.ftl-dev| 9/24/2026 |Impersonation |
 | bendyaming.open-in-editor-vscode-atopos | 9/24/2026 |Impersonation |
