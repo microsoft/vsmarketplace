@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| AndrewAltair.claude-quota | 9/24/2026 | Untrustworthy |
 | CanvasSoftworks.Canvas-Board | 9/23/2026 | Malware |
 | pedro-time-tracker-spike.time-tracker-naa-obo-spike | 9/23/2026 | Malware |
 | SeeonesStudio.roo-code-continue-nightly | 9/23/2026 | Impersonation |
