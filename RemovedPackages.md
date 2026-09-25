@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| ShipStatic.shipstatic | 9/25/2026 | Untrustworthy |
 | xavier-arosemena.roo-plus | 9/25/2026 | Untrustworthy |
 | Mid-Autumn.agent-task-manager | 9/25/2026 | Malware |
 | raylei.atm-icon-only | 9/25/2026 | Spam |
