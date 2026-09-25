@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| helixinc.harborhub-dev | 9/25/2026 | Malware |
 | wuyujiesong.opencode-update | 9/25/2026 |Impersonation |
 | SushanShakya.bloc-extended | 9/25/2026 |Impersonation |
 | mparramon.vscode-language-pack-catala | 9/25/2026 |Impersonation |
