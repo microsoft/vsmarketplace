@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| raylei.atm-icon-only | 9/25/2026 | Spam |
+| raylei.atm-real-code | 9/25/2026 | Spam |
+| raylei.atm-upload-control | 9/25/2026 | Spam |
 | helixinc.harborhub-dev | 9/25/2026 | Malware |
 | wuyujiesong.opencode-update | 9/25/2026 |Impersonation |
 | SushanShakya.bloc-extended | 9/25/2026 |Impersonation |
