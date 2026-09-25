@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| wuyujiesong.opencode-update | 9/25/2026 |Impersonation |
+| SushanShakya.bloc-extended | 9/25/2026 |Impersonation |
+| mparramon.vscode-language-pack-catala | 9/25/2026 |Impersonation |
+| luka223.OneDarkProDarker2026 | 9/25/2026 |Impersonation |
+| Bihrys.codebuddy-credits-radar | 9/25/2026 |Impersonation |
+| semasquare.vscode-coverage-gutters | 9/25/2026 |Impersonation |
 | msobb-research-aisha.msobb-xdm-poc-b7f3 | 9/24/2026 | Malware |
 | Topsy2003Turvey.vscode-language-pack-af | 9/24/2026 |Impersonation |
 | nathan-0910.ftl-dev| 9/24/2026 |Impersonation |
