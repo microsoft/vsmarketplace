@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| patrick-local.commit-timeline | 9/26/2026 |Impersonation |
+| aiwormcn.everything-copilot-chat | 9/26/2026 |Impersonation |
 | ShipStatic.shipstatic | 9/25/2026 | Untrustworthy |
 | xavier-arosemena.roo-plus | 9/25/2026 | Untrustworthy |
 | Mid-Autumn.agent-task-manager | 9/25/2026 | Malware |
