@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| Adaex.vscode-agents-explorer | 9/27/2026 |Malware |
 | HaMa.zoniva-ai | 9/27/2026 |Malware |
 | weichweich.olpat-ext | 9/26/2026 |Impersonation |
 | patrick-local.commit-timeline | 9/26/2026 |Impersonation |
