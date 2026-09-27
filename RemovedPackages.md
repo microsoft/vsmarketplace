@@ -7,6 +7,19 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| viralinclive.sqlite-viewer-viralinc | 9/27/2026 | Malware |
+| viralinclive.excel-csv-editor-viralinc | 9/27/2026 | Malware | 
+| viralinclive.html-preview-viralinc | 9/27/2026 | Malware | 
+| viralinclive.code-screenshot-viralinc | 9/27/2026 | Malware | 
+| viralinclive.plantuml-preview-viralinc | 9/27/2026 | Malware |
+| viralinclive.git-graph-viralinc | 9/27/2026 | Malware |
+| viralinclive.kubernetes-dashboard-viralinc | 9/27/2026 | Malware |
+| viralinclive.rest-client-viralinc | 9/27/2026 | Malware |
+| viralinclive.env-manager-viralinc | 9/27/2026 | Malware |
+| viralinclive.sftp-sync-viralinc | 9/27/2026 | Malware |
+| viralinclive.todo-tree-viralinc | 9/27/2026 | Malware |
+| viralinclive.jira-worklog-viralinc | 9/27/2026 | Malware |
+| viralinclive.time-tracker-viralin | 9/27/2026 | Malware |
 | Adaex.vscode-agents-explorer | 9/27/2026 |Malware |
 | HaMa.zoniva-ai | 9/27/2026 |Malware |
 | weichweich.olpat-ext | 9/26/2026 |Impersonation |
