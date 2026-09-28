@@ -7,8 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| aitranslate.ai-hover-translate | 9/28/2026 | Impersonation |
+| DriftHubs.drift-hubs | 9/28/2026 | Malware |
 | AdityaNishad.compro | 9/28/2026 | Malware |
+| aitranslate.ai-hover-translate | 9/28/2026 | Impersonation |
 | JohnFMerondic.drift-board | 9/28/2026 | Malware |
 | viralinclive.sqlite-viewer-viralinc | 9/27/2026 | Malware |
 | viralinclive.excel-csv-editor-viralinc | 9/27/2026 | Malware | 
