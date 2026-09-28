@@ -8,8 +8,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
 | aitranslate.ai-hover-translate | 9/28/2026 | Impersonation |
-| Quectel.quectelpi | 9/28/2026 |Malware |
-| JohnFMerondic.drift-board | 9/28/2026 |Malware |
+| Quectel.quectelpi | 9/28/2026 | Malware |
+| JohnFMerondic.drift-board | 9/28/2026 | Malware |
 | viralinclive.sqlite-viewer-viralinc | 9/27/2026 | Malware |
 | viralinclive.excel-csv-editor-viralinc | 9/27/2026 | Malware | 
 | viralinclive.html-preview-viralinc | 9/27/2026 | Malware | 
