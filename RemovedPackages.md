@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| matheus-tupy.Tupy-Language | 9/29/2026 | Untrustworthy |
 | brunomueller.pixel-agents-cloud | 9/29/2026 | Impersonation |
 | cdaringe.vscode-jest-runner-dummy | 9/29/2026 | Impersonation |
 | jjackson08.bazel-syntax-highlighting | 9/29/2026 | Impersonation |
