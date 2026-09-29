@@ -7,6 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| brunomueller.pixel-agents-cloud | 9/29/2026 | Impersonation |
+| cdaringe.vscode-jest-runner-dummy | 9/29/2026 | Impersonation |
+| jjackson08.bazel-syntax-highlighting | 9/29/2026 | Impersonation |
+| katrine-jensen-next.vscode-language-pack-da-next | 9/29/2026 | Impersonation |
+| lucapersichini.MultiMerge | 9/29/2026 | Impersonation |
+| s-h-a-d-o-w.devcontainer-open-containing-folder | 9/29/2026 | Impersonation |
+| s-h-a-d-o-w.pnpm-catalog-lens-plus | 9/29/2026 | Impersonation |
 | DriftHubs.drift-hubs | 9/28/2026 | Malware |
 | AdityaNishad.compro | 9/28/2026 | Malware |
 | aitranslate.ai-hover-translate | 9/28/2026 | Impersonation |
