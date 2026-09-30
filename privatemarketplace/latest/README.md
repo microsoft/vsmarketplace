@@ -342,8 +342,15 @@ This is the basic architecture of the application, to clarify the role of the mo
 
 ```mermaid
 flowchart LR
-   A[Extension source<br>&lpar; ex: mounted volume&rpar; ] --- |read *.vsix| B[Private Marketplace]
-   B --- |search,<br>install,<br>or update<br>extensions| C[VS Code]
+    A["Extension source
+    (ex: mounted volume)"]
+    B["Private Marketplace"]
+    C["VS Code"]
+
+    A -->|read *.vsix| B
+    B -->|search, install,
+    or update
+    extensions| C
 ```
 
 Set the `Marketplace__ExtensionSourceDirectory` environment variable to be the *local path* (destination mount path) of the mounted volume. In the [Docker sample](#1-run-the-container-locally-using-docker) sample above, this was `/data/extensions`.
