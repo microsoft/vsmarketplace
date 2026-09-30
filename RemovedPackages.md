@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| kodeohq.kodeo | 9/30/2026 | Malware |
+| intuitiv.askaway | 9/30/2026 | Untrustworthy |
 | orgbench.orgbench | 9/30/2026 | Untrustworthy |
 | RandyNorthrup.chrome-control-mcp | 9/30/2026 | Untrustworthy |
 | j62268781-alt.pi-code-chat | 9/30/2026 | Impersonation |
