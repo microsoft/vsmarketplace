@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
+  base: '/vsmarketplace/',
   title: 'Private Marketplace',
   description: 'Set up a Private Marketplace and connect VS Code and Visual Studio clients.',
 
