@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| pulsedigital.framemap-dev | 10/01/2026 | Malware
 | j62268781-alt.pi-code-chat | 9/30/2026 | Impersonation |
 | Muzyu.deepseek-usage-monitor | 9/30/2026 | Impersonation |
 | TorbScript.torbscript | 9/29/2026 | Untrustworthy |
