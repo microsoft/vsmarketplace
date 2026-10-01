@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| zpeterg.intellij-idea-keybindings-mac-to-pc | 10/01/2026 | Impersonation |
 | adityavarman-manjunath.roc-nightly | 10/01/2026 | Impersonation |
 | pulsedigital.framemap-dev | 10/01/2026 | Malware
 | j62268781-alt.pi-code-chat | 9/30/2026 | Impersonation |
