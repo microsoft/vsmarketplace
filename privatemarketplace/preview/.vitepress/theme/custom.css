@@ -1,0 +1,38 @@
+.VPHomeHero {
+  position: relative;
+  overflow: hidden;
+}
+
+.VPHomeHero::before {
+  position: absolute;
+  inset: 0 -12% auto auto;
+  width: 38rem;
+  height: 38rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent),
+    transparent 68%
+  );
+  content: '';
+  pointer-events: none;
+}
+
+.VPFeature {
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.VPFeature:hover {
+  transform: translateY(-3px);
+  border-color: var(--vp-c-brand-1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .VPFeature {
+    transition: none;
+  }
+
+  .VPFeature:hover {
+    transform: none;
+  }
+}
