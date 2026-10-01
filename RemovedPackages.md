@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| j62268781-alt.pi-code-chat | 9/30/2026 | Impersonation |
+| Muzyu.deepseek-usage-monitor | 9/30/2026 | Impersonation |
 | TorbScript.torbscript | 9/29/2026 | Untrustworthy |
 | matheus-tupy.Tupy-Language | 9/29/2026 | Untrustworthy |
 | brunomueller.pixel-agents-cloud | 9/29/2026 | Impersonation |
