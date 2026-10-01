@@ -1,0 +1,55 @@
+name: Deploy Private Marketplace preview to GitHub Pages
+
+on:
+  push:
+    branches:
+      - rurios-microsoft-private-marketplace-preview
+      - rurios-microsoft-private-marketplace-preview-site
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: privatemarketplace/preview/package-lock.json
+
+      - name: Install VitePress dependencies
+        working-directory: privatemarketplace/preview
+        run: npm ci
+
+      - name: Build the preview site
+        working-directory: privatemarketplace/preview
+        run: npm run docs:build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: privatemarketplace/preview/.vitepress/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
