@@ -4,11 +4,12 @@ import { useData, withBase } from 'vitepress'
 import AnnouncementIcon from './AnnouncementIcon.vue'
 
 const { page } = useData()
+const hasPreviewContent = import.meta.env.VITE_HAS_PREVIEW_CONTENT
 const preview = computed(() => page.value.relativePath.startsWith('preview/'))
 </script>
 
 <template>
-  <div class="mp-announcement mp-release-channel" :class="{ 'mp-announcement--preview': preview }">
+  <div v-if="hasPreviewContent" class="mp-announcement mp-release-channel" :class="{ 'mp-announcement--preview': preview }">
     <AnnouncementIcon v-if="preview" />
     <strong>{{ preview ? 'Preview' : 'Stable' }}</strong>
     <span v-if="preview">Features and instructions may change.</span>

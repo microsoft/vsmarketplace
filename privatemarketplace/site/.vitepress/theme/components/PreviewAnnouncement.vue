@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { withBase } from 'vitepress'
 import AnnouncementIcon from './AnnouncementIcon.vue'
+
+const hasPreviewContent = import.meta.env.VITE_HAS_PREVIEW_CONTENT
 </script>
 
 <template>
-  <aside class="mp-announcement mp-announcement--preview mp-preview-announcement">
+  <aside v-if="hasPreviewContent" class="mp-announcement mp-announcement--preview mp-preview-announcement">
     <AnnouncementIcon />
     <span>Visual Studio IDE support is currently in Preview.</span>
     <a :href="withBase('/preview/')">Explore preview docs</a>

@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: Private Marketplace for Visual Studio
+  name: Private Marketplace
   text: Host, distribute, and govern extensions.
   tagline: Deploy on-premises or in a private cloud. Control which extensions are available in your org.
   actions:

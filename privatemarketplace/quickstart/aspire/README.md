@@ -146,7 +146,7 @@ The quickstart includes three sample extensions preloaded in the marketplace:
 4. From the Actions menu, select **Open Group Policy Editor**
 
 > [!NOTE]
-  If this option doesn't appear, see the [Troubleshooting](#troubleshooting) section below
+  If this option doesn't appear, see the [Troubleshooting](#part-5-troubleshooting) section below
 
 5. In the Group Policy Editor window that opens, navigate to the Extensions folder:   
  

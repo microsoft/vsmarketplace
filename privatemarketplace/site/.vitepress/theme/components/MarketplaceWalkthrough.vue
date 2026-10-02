@@ -4,7 +4,13 @@ import { withBase } from 'vitepress'
 
 import publishedExtensions from '../../../../quickstart/aspire/images/published-extensions.png'
 import groupPolicy from '../../../../quickstart/aspire/images/gpedit-setting.png'
-import visualStudioSettings from '../../../quickstart/vs/images/vs-options-extensions.png'
+
+const hasPreviewContent = import.meta.env.VITE_HAS_PREVIEW_CONTENT
+const previewImages = import.meta.glob<string>(
+  '../../../../preview/quickstart/vs/images/vs-options-extensions.png',
+  { eager: true, import: 'default', query: '?url' },
+)
+const visualStudioSettings = Object.values(previewImages)[0]
 
 const root = ref<HTMLElement | null>(null)
 let observer: IntersectionObserver | null = null
@@ -73,7 +79,7 @@ onBeforeUnmount(() => {
           <div class="mp-traffic-node">
             <span class="mp-traffic-label">Developer clients</span>
             <strong>VS Code</strong>
-            <span>Visual Studio IDE</span>
+            <span v-if="hasPreviewContent">Visual Studio IDE</span>
           </div>
         </div>
       </div>
@@ -148,7 +154,7 @@ onBeforeUnmount(() => {
           >
           <figcaption>VS Code marketplace URL policy.</figcaption>
         </figure>
-        <figure class="mp-screen">
+        <figure v-if="visualStudioSettings" class="mp-screen">
           <img
             :src="visualStudioSettings"
             alt="Preview Visual Studio IDE private marketplace settings"
