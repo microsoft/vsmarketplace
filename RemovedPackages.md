@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| BhavyaJustChill.vscode-power-mode-reborn | 10/02/2026 | Impersonation |
+| etairi.vscode-idris2 | 10/02/2026 | Impersonation |
 | lohsebhipolg2s.theme-aurora-borealis | 10/01/2026 | Malware |
 | holiday-themes.theme-coca-cola-christmas | 10/01/2026 | Malware |
 | zpeterg.intellij-idea-keybindings-mac-to-pc | 10/01/2026 | Impersonation |
