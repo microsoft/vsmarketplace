@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import marketplaceHome from '../../../quickstart/vscode/images/marketplace-home.png'
+import marketplaceHome from '../../../../quickstart/aspire/images/marketplace-home.png'
 </script>
 
 <template>

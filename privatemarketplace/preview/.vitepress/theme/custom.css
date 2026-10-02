@@ -1,3 +1,59 @@
+.mp-announcement {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+  font-size: 14px;
+}
+
+.mp-announcement--preview {
+  background: var(--vp-c-brand-soft);
+}
+
+.mp-announcement-icon {
+  box-sizing: content-box;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  padding: 7px;
+  border-radius: 50%;
+  background: var(--vp-c-bg);
+  box-shadow: 0 0 0 1px var(--vp-c-divider);
+  color: var(--vp-c-brand-1);
+}
+
+.mp-announcement a {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.mp-preview-nav-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.mp-announcement.mp-release-channel {
+  margin-bottom: 24px;
+}
+
+.VPSidebarItem.level-0 > .items {
+  border-left: 1px solid var(--vp-c-divider);
+  padding-left: 16px;
+}
+
 .VPHomeHero {
   position: relative;
   overflow: hidden;

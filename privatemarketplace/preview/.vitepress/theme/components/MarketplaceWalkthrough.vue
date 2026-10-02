@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { withBase } from 'vitepress'
 
-import publishedExtensions from '../../../quickstart/vscode/images/published-extensions.png'
-import groupPolicy from '../../../quickstart/vscode/images/gpedit-setting.png'
+import publishedExtensions from '../../../../quickstart/aspire/images/published-extensions.png'
+import groupPolicy from '../../../../quickstart/aspire/images/gpedit-setting.png'
 import visualStudioSettings from '../../../quickstart/vs/images/vs-options-extensions.png'
 
 const root = ref<HTMLElement | null>(null)
@@ -71,7 +72,8 @@ onBeforeUnmount(() => {
           <span class="mp-traffic-line" aria-hidden="true"></span>
           <div class="mp-traffic-node">
             <span class="mp-traffic-label">Developer clients</span>
-            <strong>VS Code<br>Visual Studio</strong>
+            <strong>VS Code</strong>
+            <span>Visual Studio IDE</span>
           </div>
         </div>
       </div>
@@ -84,8 +86,7 @@ onBeforeUnmount(() => {
         <h2>Keep internal extensions on infrastructure you control.</h2>
         <p>
           Host and distribute private VSIX extensions from on-premises or private cloud
-          infrastructure using storage that fits your organization. Authentication support is
-          coming soon.
+          infrastructure using storage that fits your organization.
         </p>
       </div>
 
@@ -105,10 +106,9 @@ onBeforeUnmount(() => {
       <div class="mp-story-copy">
         <span class="mp-story-number">03</span>
         <span class="mp-story-kicker">Allow-list what matters</span>
-        <h2>Make only approved extensions available.</h2>
+        <h2>Control which extensions can be installed.</h2>
         <p>
-          Filter marketplace results and downloads by publisher, extension, and version. Visual
-          Studio also applies the published rules on the client.
+          Use VS Code policy to control which publishers, extensions, and versions users can install.
         </p>
       </div>
 
@@ -151,20 +151,22 @@ onBeforeUnmount(() => {
         <figure class="mp-screen">
           <img
             :src="visualStudioSettings"
-            alt="Visual Studio Extensions options with Use private marketplace selected"
+            alt="Preview Visual Studio IDE private marketplace settings"
             loading="lazy"
           >
-          <figcaption>Visual Studio marketplace settings.</figcaption>
+          <figcaption>
+            Visual Studio IDE marketplace settings.
+          </figcaption>
         </figure>
       </div>
     </article>
 
     <div class="mp-walkthrough-cta">
-      <a class="mp-cta-button mp-cta-button--brand" href="/quickstart/">
+      <a class="mp-cta-button mp-cta-button--brand" :href="withBase('/quickstart/aspire/README.html')">
         Start with a quickstart
       </a>
-      <a class="mp-cta-button mp-cta-button--alt" href="/guide/">
-        Explore the guide
+      <a class="mp-cta-button mp-cta-button--alt" :href="withBase('/latest/README.html')">
+        Full reference
       </a>
     </div>
   </section>

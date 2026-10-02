@@ -1,86 +1,89 @@
+import { readdirSync, readFileSync } from 'node:fs'
+import { createRequire } from 'node:module'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitepress'
+import { slug } from 'github-slugger'
+
+const require = createRequire(import.meta.url)
+
+function quickstarts(directory: string, route: string) {
+  const root = new URL(directory, import.meta.url)
+  return readdirSync(root, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .flatMap((entry) => {
+      const readme = new URL(`${entry.name}/README.md`, root)
+      const files = readdirSync(new URL(`${entry.name}/`, root))
+      if (!files.includes('README.md')) return []
+      const title = readFileSync(readme, 'utf8').match(/^#\s+(.+)$/m)?.[1]
+      if (!title) throw new Error(`Missing quickstart heading: ${fileURLToPath(readme)}`)
+      return [{ text: title, link: `${route}/${entry.name}/README.html` }]
+    })
+}
+
+const stable = [
+  ...quickstarts('../../quickstart/', '/quickstart'),
+  { text: 'Full reference', link: '/latest/README.html' },
+]
+const preview = [
+  { text: 'Overview', link: '/preview/' },
+  ...quickstarts('../quickstart/', '/preview/quickstart'),
+  { text: 'Full reference', link: '/preview/README.html' },
+]
 
 export default defineConfig({
+  srcDir: '..',
+  srcExclude: ['preview/node_modules/**', 'preview/.vitepress/**', '**/data/**'],
+  rewrites: {
+    'preview/index.md': 'index.md',
+    'preview/overview.md': 'preview/index.md',
+  },
   base: '/vsmarketplace/',
   title: 'Private Marketplace',
-  description: 'Set up a Private Marketplace and connect VS Code and Visual Studio clients.',
-
+  description: 'Host, distribute, and govern extensions with Private Marketplace.',
+  vite: {
+    resolve: {
+      alias: [
+        { find: 'vue/server-renderer', replacement: require.resolve('vue/server-renderer') },
+        { find: /^vue$/, replacement: require.resolve('vue/dist/vue.runtime.esm-bundler.js') },
+      ],
+    },
+  },
+  markdown: {
+    anchor: { slugify: slug },
+  },
+  transformPageData(page) {
+    if (page.relativePath.startsWith('preview/')) {
+      if (!page.title) page.title = 'Preview'
+      else if (page.title !== 'Preview') page.title = `Preview: ${page.title}`
+    }
+  },
   themeConfig: {
     nav: [
-      { text: 'Quickstart', link: '/quickstart/' },
-      { text: 'Guide', link: '/guide/' },
-      { text: 'Full reference', link: '/README' },
+      { text: '<span class="mp-preview-nav-pill">Preview</span>', link: '/preview/', activeMatch: '^/preview/' },
+      { text: 'Quickstart', link: '/quickstart/', activeMatch: '^/quickstart/' },
+      { text: 'Full reference', link: '/latest/README.html' },
     ],
-
     sidebar: {
-      '/guide/': [
-        {
-          text: 'Guide',
-          items: [
-            { text: 'Overview', link: '/guide/' },
-            { text: 'Set up the marketplace', link: '/README#recommended-setup' },
-            { text: 'Configure VS Code', link: '/README#51-connecting-vs-code-to-the-private-marketplace' },
-            { text: 'Configure Visual Studio', link: '/README#52-connecting-visual-studio-2026-to-the-private-marketplace' },
-          ],
-        },
-        {
-          text: 'Quickstarts',
-          items: [
-            { text: 'Choose a quickstart', link: '/quickstart/' },
-            { text: 'VS Code', link: '/quickstart/vscode/README' },
-            { text: 'Visual Studio', link: '/quickstart/vs/README' },
-          ],
-        },
-      ],
-      '/quickstart/': [
-        {
-          text: 'Quickstarts',
-          items: [
-            { text: 'Choose a quickstart', link: '/quickstart/' },
-            { text: 'VS Code', link: '/quickstart/vscode/README' },
-            { text: 'Visual Studio', link: '/quickstart/vs/README' },
-          ],
-        },
-      ],
-      '/README': [
-        {
-          text: 'Marketplace setup',
-          items: [
-            { text: 'Recommended setup', link: '/README#recommended-setup' },
-            { text: 'Deploy the container', link: '/README#2-deploy-the-container-to-your-desired-container-host' },
-            { text: 'Configure the container', link: '/README#3-configure-the-container' },
-            { text: 'Publish extensions', link: '/README#4-publish-extensions-to-the-container' },
-            { text: 'Monitor the container', link: '/README#6-monitor-the-running-container' },
-          ],
-        },
-        {
-          text: 'Configure clients',
-          items: [
-            { text: 'VS Code', link: '/README#51-connecting-vs-code-to-the-private-marketplace' },
-            { text: 'Visual Studio', link: '/README#52-connecting-visual-studio-2026-to-the-private-marketplace' },
-          ],
-        },
-        {
-          text: 'Quickstarts',
-          items: [
-            { text: 'VS Code', link: '/quickstart/vscode/README' },
-            { text: 'Visual Studio', link: '/quickstart/vs/README' },
-          ],
-        },
-      ],
+      '/latest/': [{ text: 'Stable', items: stable }],
+      '/quickstart/': [{ text: 'Stable', items: stable }],
+      '/preview/': [{ text: 'Preview', items: preview }],
     },
-
+    outline: { level: [1, 3], label: 'On this page' },
     search: {
       provider: 'local',
+      options: {
+        _render(src, env, md) {
+          const channel = env.relativePath.startsWith('preview/') ? 'Preview' : 'Stable'
+          return md.render(src, env).replace(/(<h[1-6]\b[^>]*>)/g, `$1${channel}: `)
+        },
+      },
     },
-
     footer: {
       message: 'Released under the <a href="https://github.com/microsoft/vsmarketplace/blob/main/LICENSE">MIT License</a>.',
       copyright: 'Copyright © Microsoft Corporation',
     },
-
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/microsoft/vsmarketplace/tree/main/privatemarketplace/preview' },
+      { icon: 'github', link: 'https://github.com/microsoft/vsmarketplace/tree/main/privatemarketplace' },
     ],
   },
 })

@@ -7,6 +7,7 @@
     "docs:preview": "vitepress preview ."
   },
   "devDependencies": {
+    "github-slugger": "^2.0.0",
     "vitepress": "^1.6.4",
     "vue": "^3.5.43"
   },
