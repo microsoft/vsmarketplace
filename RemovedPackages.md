@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| nexrallcode.nexrall-code-vscode | 10/03/2026 | Untrustworthy |
 | v4rm4n.roc-community | 10/03/2026 | Impersonation |
 | sohang3112.pdf-fork | 10/03/2026 | Impersonation |
 | production-sun-set.theme-sunset-gradient | 10/02/2026 | Malware |
