@@ -7,8 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| production-sun-set.theme-sunset-gradient | 10/03/2026 | Malware |
-| Lavender-Studio.theme-lavender-dreams | 10/03/2026 | Malware |
+| production-sun-set.theme-sunset-gradient | 10/03/2026   | Malware                       |
+| Lavender-Studio.theme-lavender-dreams    | 10/03/2026   | Malware                       |
 | charcoal-mint-studio.theme-charcoal-mint | 10/02/2026 | Malware |
 | BhavyaJustChill.vscode-power-mode-reborn | 10/02/2026 | Impersonation |
 | etairi.vscode-idris2 | 10/02/2026 | Impersonation |
