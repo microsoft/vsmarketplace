@@ -15,6 +15,8 @@ const hasPreviewContent = import.meta.env.VITE_HAS_PREVIEW_CONTENT
 
 <style scoped>
 .mp-preview-announcement {
+  position: relative;
+  z-index: 1;
   justify-content: center;
   max-width: 1152px;
   margin: 20px auto 0;
