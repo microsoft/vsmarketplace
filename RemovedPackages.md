@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| emberstudios.kitestudio-dev | 10/05/2026 | Untrustworthy |
+| wavepeak.slatecanvas-dev | 10/05/2026 | Untrustworthy |
 | LingLong.minimalext | 10/05/2026 | Malware |
 | Maxrall.nexrall-code-for-vscode | 10/05/2026 | Untrustworthy |
 | NiceNick.rawr-poc | 10/05/2026 | Malware |
