@@ -7,8 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| NiceNick.rawr-poc | 10/03/2026 | Malware |
-| dawngroup.studiodocs-app | 10/03/2026 | Malware |
+| Maxrall.nexrall-code-for-vscode | 10/05/2026 | Untrustworthy |
+| NiceNick.rawr-poc | 10/05/2026 | Malware |
+| dawngroup.studiodocs-app | 10/05/2026 | Malware |
 | nexrallcode.nexrall-code-vscode | 10/03/2026 | Untrustworthy |
 | v4rm4n.roc-community | 10/03/2026 | Impersonation |
 | sohang3112.pdf-fork | 10/03/2026 | Impersonation |
