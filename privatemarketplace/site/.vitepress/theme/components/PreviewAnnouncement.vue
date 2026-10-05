@@ -8,8 +8,8 @@ const hasPreviewContent = import.meta.env.VITE_HAS_PREVIEW_CONTENT
 <template>
   <aside v-if="hasPreviewContent" class="mp-announcement mp-announcement--preview mp-preview-announcement">
     <AnnouncementIcon />
-    <span>Visual Studio IDE support is currently in Preview.</span>
-    <a :href="withBase('/preview/')">Explore preview docs</a>
+    <span>Visual Studio IDE support is in Preview.</span>
+    <a :href="withBase('/preview/')">Explore Preview documentation →</a>
   </aside>
 </template>
 
