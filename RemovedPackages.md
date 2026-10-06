@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| kikyous.vscode-git-history-x | 10/06/2026 | Impersonation |
+| LegendaryRedfox.run-kotlin-vscode | 10/06/2026 | Impersonation |
+| nikisalli.git-graph-cumulative-additions-deletions | 10/06/2026 | Impersonation |
 | nebulasecurity.canvasdocs-app | 10/06/2026 | Malware |
 | Mafty43211.vscode-leetcode-study-plan | 10/05/2026 | Impersonation |
 | emberstudios.kitestudio-dev | 10/05/2026 | Untrustworthy |
