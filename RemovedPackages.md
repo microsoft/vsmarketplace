@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| taoscope.taoscope-coding-assessment | 10/06/2026 | Malware |
 | kikyous.vscode-git-history-x | 10/06/2026 | Impersonation |
 | LegendaryRedfox.run-kotlin-vscode | 10/06/2026 | Impersonation |
 | nikisalli.git-graph-cumulative-additions-deletions | 10/06/2026 | Impersonation |
