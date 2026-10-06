@@ -7,16 +7,16 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| taoscope.taoscope-coding-assessment | 10/06/2026 | Malware |
-| kikyous.vscode-git-history-x | 10/06/2026 | Impersonation |
-| LegendaryRedfox.run-kotlin-vscode | 10/06/2026 | Impersonation |
-| nikisalli.git-graph-cumulative-additions-deletions | 10/06/2026 | Impersonation |
-| nebulasecurity.canvasdocs-app | 10/06/2026 | Malware |
-| Mafty43211.vscode-leetcode-study-plan | 10/05/2026 | Impersonation |
+| taoscope.taoscope-coding-assessment   | 10/06/2026   | Malware                       |
+| kikyous.vscode-git-history-x          | 10/06/2026   | Impersonation                 |
+| legendaryredfox.run-kotlin-vscode     | 10/06/2026   | Impersonation                 |
+| nikisalli.git-graph-cumulative-additions-deletions | 10/06/2026   | Impersonation                 |
+| nebulasecurity.canvasdocs-app         | 10/06/2026   | Malware                       |
+| mafty43211.vscode-leetcode-study-plan | 10/05/2026   | Impersonation                 |
 | emberstudios.kitestudio-dev           | 10/05/2026   | Untrustworthy                 |
 | wavepeak.slatecanvas-dev              | 10/05/2026   | Untrustworthy                 |
-| LingLong.minimalext                   | 10/05/2026   | Malware                       |
-| Maxrall.nexrall-code-for-vscode       | 10/05/2026   | Untrustworthy                 |
+| linglong.minimalext                   | 10/05/2026   | Malware                       |
+| maxrall.nexrall-code-for-vscode       | 10/05/2026   | Untrustworthy                 |
 | nicenick.rawr-poc                     | 10/05/2026   | Malware                       |
 | dawngroup.studiodocs-app              | 10/05/2026   | Malware                       |
 | prsniffer.prsniffer-test | 10/04/2026 | Untrustworthy |
