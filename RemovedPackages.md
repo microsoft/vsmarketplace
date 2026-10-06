@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| nebulasecurity.canvasdocs-app | 10/06/2026 | Malware |
+| Mafty43211.vscode-leetcode-study-plan | 10/05/2026 | Impersonation |
 | emberstudios.kitestudio-dev | 10/05/2026 | Untrustworthy |
 | wavepeak.slatecanvas-dev | 10/05/2026 | Untrustworthy |
 | LingLong.minimalext | 10/05/2026 | Malware |
