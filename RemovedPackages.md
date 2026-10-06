@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| hivedynamics.mesagrid-app  | 10/06/2026 | Malware |
+| raptorstone.pixeldeck-app  | 10/06/2026 | Malware |
+| haloinc.flowdeck-prod  | 10/06/2026 | Malware |
 | prsniffer.prsniffer-test | 10/04/2026 | Untrustworthy |
 | nexrallcode.nexrall-code-vscode | 10/03/2026 | Untrustworthy |
 | v4rm4n.roc-community | 10/03/2026 | Impersonation |
