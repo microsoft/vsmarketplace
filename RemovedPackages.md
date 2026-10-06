@@ -12,6 +12,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | legendaryredfox.run-kotlin-vscode     | 10/06/2026   | Impersonation                 |
 | nikisalli.git-graph-cumulative-additions-deletions | 10/06/2026   | Impersonation                 |
 | nebulasecurity.canvasdocs-app         | 10/06/2026   | Malware                       |
+| hivedynamics.mesagrid-app             | 10/06/2026   | Malware                       |
+| raptorstone.pixeldeck-app             | 10/06/2026   | Malware                       |
+| haloinc.flowdeck-prod                 | 10/06/2026   | Malware                       |
 | mafty43211.vscode-leetcode-study-plan | 10/05/2026   | Impersonation                 |
 | emberstudios.kitestudio-dev           | 10/05/2026   | Untrustworthy                 |
 | wavepeak.slatecanvas-dev              | 10/05/2026   | Untrustworthy                 |
