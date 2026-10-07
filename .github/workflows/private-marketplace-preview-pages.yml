@@ -7,6 +7,14 @@ on:
     paths:
       - 'README.md'
       - 'privatemarketplace/**'
+      - '.github/workflows/private-marketplace-preview-pages.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'README.md'
+      - 'privatemarketplace/**'
+      - '.github/workflows/private-marketplace-preview-pages.yml'
   workflow_dispatch:
 
 permissions:
@@ -50,6 +58,7 @@ jobs:
           path: privatemarketplace/site/.vitepress/pages
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:
