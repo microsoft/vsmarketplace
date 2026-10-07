@@ -5,6 +5,7 @@ on:
     branches:
       - main
     paths:
+      - 'README.md'
       - 'privatemarketplace/**'
   workflow_dispatch:
 
@@ -39,10 +40,14 @@ jobs:
         working-directory: privatemarketplace/site
         run: npm run docs:build
 
+      - name: Assemble repository Pages site
+        working-directory: privatemarketplace/site
+        run: npm run pages:assemble
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: privatemarketplace/site/.vitepress/dist
+          path: privatemarketplace/site/.vitepress/pages
 
   deploy:
     needs: build

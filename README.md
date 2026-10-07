@@ -5,6 +5,10 @@ It is managed by our engineering and product team. Our entire team believes in r
 
 Marketplace publishes extensions for the Visual Studio family of products - Visual Studio, Visual Studio Code and Azure DevOps.
 
+## Private Marketplace
+
+Explore the [Private Marketplace documentation](./privatemarketplace/) for its overview, quickstarts, and reference.
+
 Have opinions about how Marketplace works? Here’s how to get your voice heard:
 1. VOTE (👍) for existing issue (this will also subscribe you to the idea’s status updates)
 2. [SUBMIT](https://github.com/microsoft/vsmarketplace/issues/new/choose) new ideas or bugs (Please include only one suggestion per post. Duplicates are merged together.)
