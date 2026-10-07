@@ -2,6 +2,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 import { slug } from 'github-slugger'
 
 const require = createRequire(import.meta.url)
@@ -38,7 +39,7 @@ const preview = [
 ]
 const hasPreviewContent = preview.length > 0
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   srcDir: '..',
   srcExclude: ['preview/node_modules/**', 'site/node_modules/**', 'site/.vitepress/**', '**/data/**'],
   rewrites: existsSync(new URL('overview.md', previewRoot))
@@ -98,4 +99,4 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/microsoft/vsmarketplace/tree/main/privatemarketplace' },
     ],
   },
-})
+}))
