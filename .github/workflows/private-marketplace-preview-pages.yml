@@ -3,6 +3,7 @@ name: Deploy Private Marketplace preview to GitHub Pages
 on:
   push:
     branches:
+      - main
       - rurios-microsoft-private-marketplace-preview
       - rurios-microsoft-private-marketplace-preview-site
   workflow_dispatch:
