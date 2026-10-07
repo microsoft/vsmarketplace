@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-      - rurios-microsoft-private-marketplace-preview
-      - rurios-microsoft-private-marketplace-preview-site
     paths:
       - 'privatemarketplace/**'
   workflow_dispatch:
