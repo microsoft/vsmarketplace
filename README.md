@@ -1,4 +1,4 @@
-## Visual Studio Marketplace Feedback Channel
+# Visual Studio Marketplace Feedback Channel
 
 Welcome to the [Microsoft Visual Studio Marketplace](https://marketplace.visualstudio.com/) repository!
 It is managed by our engineering and product team. Our entire team believes in representing your needs inside our engineering group and we appreciate the time you take to share them with us. Rest assured that our team of dedicated people read and discuss your feedback!

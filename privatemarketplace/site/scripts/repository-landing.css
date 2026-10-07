@@ -76,7 +76,7 @@ main {
   letter-spacing: -0.02em;
 }
 
-.readme-content h2:first-child {
+.readme-content h1:first-child {
   margin-top: 0;
   font-size: clamp(1.8rem, 4vw, 2.5rem);
 }
