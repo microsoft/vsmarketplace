@@ -5,16 +5,23 @@ on:
     branches:
       - main
     paths:
+      - 'README.md'
       - 'privatemarketplace/**'
+      - '.github/workflows/private-marketplace-preview-pages.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'README.md'
+      - 'privatemarketplace/**'
+      - '.github/workflows/private-marketplace-preview-pages.yml'
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: github-pages
+  group: ${{ github.event_name == 'pull_request' && format('github-pages-pr-{0}', github.event.pull_request.number) || 'github-pages' }}
   cancel-in-progress: true
 
 jobs:
@@ -39,14 +46,22 @@ jobs:
         working-directory: privatemarketplace/site
         run: npm run docs:build
 
+      - name: Assemble repository Pages site
+        working-directory: privatemarketplace/site
+        run: npm run pages:assemble
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: privatemarketplace/site/.vitepress/dist
+          path: privatemarketplace/site/.vitepress/pages
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

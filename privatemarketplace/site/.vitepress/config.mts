@@ -45,7 +45,7 @@ export default withMermaid(defineConfig({
   rewrites: existsSync(new URL('overview.md', previewRoot))
     ? { 'preview/overview.md': 'preview/index.md' }
     : {},
-  base: '/vsmarketplace/',
+  base: '/vsmarketplace/privatemarketplace/',
   title: 'Private Marketplace',
   description: 'Host, distribute, and govern extensions with Private Marketplace.',
   vite: {

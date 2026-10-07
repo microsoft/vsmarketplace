@@ -4,10 +4,12 @@
   "scripts": {
     "docs:dev": "vitepress dev .",
     "docs:build": "vitepress build .",
-    "docs:preview": "vitepress preview ."
+    "docs:preview": "vitepress preview .",
+    "pages:assemble": "node ./scripts/assemble-pages.mjs"
   },
   "devDependencies": {
     "github-slugger": "^2.0.0",
+    "marked": "^18.0.14",
     "mermaid": "^11.17.2",
     "vitepress": "^1.6.4",
     "vitepress-plugin-mermaid": "^2.0.17",

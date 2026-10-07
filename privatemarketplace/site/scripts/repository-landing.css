@@ -1,0 +1,112 @@
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI", Inter, system-ui, sans-serif;
+  color: #182230;
+  background: #f4f7fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  line-height: 1.65;
+}
+
+a {
+  color: #2457c5;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: #173b91;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem max(1.5rem, calc((100vw - 960px) / 2));
+  background: #fff;
+  border-bottom: 1px solid #e4eaf2;
+}
+
+.brand {
+  color: #182230;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+nav a {
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+main {
+  width: min(100% - 2rem, 880px);
+  margin: clamp(2rem, 6vw, 5rem) auto;
+}
+
+.readme-content {
+  padding: clamp(1.5rem, 5vw, 3.5rem);
+  background: #fff;
+  border: 1px solid #e4eaf2;
+  border-radius: 1rem;
+  box-shadow: 0 16px 40px rgb(24 34 48 / 7%);
+}
+
+.readme-content h2 {
+  margin: 2.25rem 0 0.75rem;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.readme-content h1:first-child {
+  margin-top: 0;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.readme-content h3 {
+  margin: 1.5rem 0 0.35rem;
+  font-size: 1.1rem;
+}
+
+.readme-content p,
+.readme-content ol {
+  color: #475467;
+}
+
+.readme-content li {
+  padding-left: 0.25rem;
+}
+
+.readme-content li + li {
+  margin-top: 0.35rem;
+}
+
+@media (max-width: 560px) {
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  nav {
+    gap: 0.75rem 1rem;
+  }
+}

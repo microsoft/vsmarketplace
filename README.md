@@ -1,9 +1,13 @@
-## Visual Studio Marketplace Feedback Channel
+# Visual Studio Marketplace Feedback Channel
 
 Welcome to the [Microsoft Visual Studio Marketplace](https://marketplace.visualstudio.com/) repository!
 It is managed by our engineering and product team. Our entire team believes in representing your needs inside our engineering group and we appreciate the time you take to share them with us. Rest assured that our team of dedicated people read and discuss your feedback!
 
 Marketplace publishes extensions for the Visual Studio family of products - Visual Studio, Visual Studio Code and Azure DevOps.
+
+## Private Marketplace
+
+Explore the [Private Marketplace documentation](./privatemarketplace/) for its overview, quickstarts, and reference.
 
 Have opinions about how Marketplace works? Here’s how to get your voice heard:
 1. VOTE (👍) for existing issue (this will also subscribe you to the idea’s status updates)
