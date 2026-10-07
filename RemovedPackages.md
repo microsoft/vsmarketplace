@@ -7,7 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
-| bone-ni.vscode-language-pack-lo       | 10/06/2026   | Impersonation                 |
+| bone-ni.vscode-language-pack-lo       | 10/07/2026   | Impersonation                 |
 | taoscope.taoscope-coding-assessment   | 10/06/2026   | Malware                       |
 | kikyous.vscode-git-history-x          | 10/06/2026   | Impersonation                 |
 | legendaryredfox.run-kotlin-vscode     | 10/06/2026   | Impersonation                 |
