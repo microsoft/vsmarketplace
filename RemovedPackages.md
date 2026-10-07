@@ -7,12 +7,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier                  | Removal Date | Type                          |
 |---------------------------------------|--------------|-------------------------------|
+| SrijanSiddharth.vscode-testing-extension | 10/07/2026 | Untrustworthy |
+| SrijanSiddharth.terminal-profile-tools| 10/07/2026 | Untrustworthy |
 | StarWright.renpy-proofreader          | 10/07/2026   | Malware                       |
 | bone-ni.vscode-language-pack-lo       | 10/07/2026   | Impersonation                 |
 | taoscope.taoscope-coding-assessment   | 10/06/2026   | Malware                       |
 | kikyous.vscode-git-history-x          | 10/06/2026   | Impersonation                 |
 | legendaryredfox.run-kotlin-vscode     | 10/06/2026   | Impersonation                 |
-| nikisalli.git-graph-cumulative-additions-deletions | 10/06/2026   | Impersonation                 |
+| nikisalli.git-graph-cumulative-additions-deletions | 10/06/2026   | Impersonation    |
 | nebulasecurity.canvasdocs-app         | 10/06/2026   | Malware                       |
 | hivedynamics.mesagrid-app             | 10/06/2026   | Malware                       |
 | raptorstone.pixeldeck-app             | 10/06/2026   | Malware                       |
