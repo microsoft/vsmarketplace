@@ -1,4 +1,4 @@
-*release version: 1.1.260*
+*release version: 1.1.261*
 
 ---
 
@@ -95,8 +95,8 @@ The container details are:
 
 - Container Registry: `mcr.microsoft.com`
 - Image name: `vscode-private-marketplace`
-- Image tag: `1.1.260`
-- Full image URL: `mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.1.260`
+- Image tag: `1.1.261`
+- Full image URL: `mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.1.261`
 
 Without providing any configuration at all, the container should start and accept traffic over HTTP on port 8080. Basic information about the running application is shown on the root path `http://<my container hostname>:8080/`. But the application won't know where to read your private extensions from, which will be addressed in [a section below](#3-configure-the-container).
 
@@ -358,37 +358,40 @@ Check the home page (root URL path `/`) of the deployed container app in your we
 
 ## 3.2 Configure the container to upstream extensions from the Public Visual Studio Marketplace
 
-Extensions from the Public Visual Studio Marketplace are made available through the Private Marketplace by upstreaming the requests from VS Code to the Public Visual Studio Marketplace. The extensions are not cached or stored in the Private Marketplace. Requests and responses are proxied between the VS Code client and the Public Visual Studio Marketplace.
+Extensions from the Public Visual Studio Marketplace are made available through the Private Marketplace by upstreaming requests from VS Code and Visual Studio clients to the Public Visual Studio Marketplace. The extensions are not cached or stored in the Private Marketplace. Depending on the configured mode, clients either download public extension assets directly or proxy those downloads through the Private Marketplace.
 The Private Marketplace supports multiple upstreaming modes, allowing you to control whether only search results or both search and asset downloads are upstreamed through your Private Marketplace instance.
 
 **Upstream Modes:**
 - `None`: No upstreaming. Only private extensions are available.
-- `Search`: Only search queries for public extensions are proxied. Asset downloads (VSIX, icons, etc.) are fetched directly from the Public Marketplace by VS Code.
+- `Search`: Only search queries for public extensions are proxied. Asset downloads (VSIX, icons, etc.) are fetched directly from the Public Marketplace by each client.
 - `SearchAndAssets`: Both search queries and asset downloads for public extensions are fetched through the Private Marketplace. This mode ensures all Public Visual Studio Marketplace requests go through your Private Marketplace instance, and clients do not contact the Public Visual Studio Marketplace directly.
 
+> [!IMPORTANT]
+> Visual Studio public extension downloads in `SearchAndAssets` mode require Private Marketplace image version `1.1.261`. Earlier image versions can fail while resolving public extension assets. Upgrade existing deployments before enabling this mode for Visual Studio.
+
 > [!NOTE]
-> For `Search` mode, an internet connection is required for the Private Marketplace to query for extensions from the Public Visual Studio Marketplace. Each VS Code client will also need internet access, as any extension from the Public Visual Studio Marketplace is installed directly from the Public Visual Studio Marketplace. For `SearchAndAssets` mode, only the Private Marketplace requires an internet connection to query and install extensions from the Public Visual Studio Marketplace.
+> For `Search` mode, an internet connection is required for the Private Marketplace to query for extensions from the Public Visual Studio Marketplace. Each client will also need internet access, as any extension from the Public Visual Studio Marketplace is installed directly from the Public Visual Studio Marketplace. For `SearchAndAssets` mode, only the Private Marketplace requires an internet connection to query and install extensions from the Public Visual Studio Marketplace.
 
 This is the basic flow of the application when upstreaming is enabled, to clarify how the requests are routed:
 
 ```mermaid
 flowchart TD
-    A[API]
-    C[Public Marketplace]
-    D[VS Code]
-    E(Merge Results)
+    C[Public Visual Studio Marketplace]
+    D[VS Code or Visual Studio]
 
-    D <--> |1: Query for extensions| A
-    D <--> |2: Request assets for public extension| C
-    A --> |1.1: Query for public extensions| C
-    C --> |1.2: return Extensions | E
-
-    B[Private Extension source]
     subgraph Private Marketplace
-        A --> |1.1 : Query for private extensions| B
-        B --> |1.2: return Extensions | E
-        E --> |1.3: Combine public + private extensions| A
+        A[Private Marketplace API]
+        B[Private Extension source]
+        A <--> |Query private extensions| B
     end
+
+    D --> |Query for extensions| A
+    A <--> |Query public extensions| C
+    A --> |Return combined results| D
+    D <--> |Search mode: download public assets directly| C
+    D --> |SearchAndAssets mode: request public assets| A
+    A <--> |Proxy public asset requests| C
+    A --> |Return public assets| D
 ```
 
 Upstreaming is not enabled by default and requires a configuration change. To enable and configure upstreaming, set the `Marketplace__Upstreaming__Mode` environment variable to one of the allowed values: `None`, `Search`, or `SearchAndAssets`.
@@ -416,7 +419,7 @@ Upstreaming is not enabled by default and requires a configuration change. To en
 - To opt out of upstreaming:
   Set the mode to `None` in your environment variable or Bicep parameter.
 
-When the feature is enabled, via `Search` or `SearchAndAssets` modes, extensions from the Public Visual Studio Marketplace will be searchable in the VS Code Extensions pane. If `SearchAndAssets` mode is configured, extensions will also be installed through your Private Marketplace.
+When the feature is enabled, via `Search` or `SearchAndAssets` modes, extensions from the Public Visual Studio Marketplace will be searchable in the VS Code Extensions pane and the Visual Studio Manage Extensions dialog. If `SearchAndAssets` mode is configured, extensions will also be installed through your Private Marketplace.
 
 ### Network Requirements for Upstreaming
 
@@ -427,7 +430,7 @@ In more tightly controlled environments, Private Marketplace may not be able to 
 | marketplace.visualstudio.com | https (443) | For extension search queries and metadata |
 | *.gallerycdn.vsassets.io | https (443) | For extension assets (icons, readme files, etc.) |
 
-All communication with the Public VS Code Marketplace occurs over HTTPS (443)
+All communication with the Public Visual Studio Marketplace occurs over HTTPS (443).
 
 **Additional Notes:**
 - The `*.gallerycdn.vsassets.io` domain uses publisher-specific subdomains, e.g. `https://{publisher}.gallerycdn.vsassets.io`
@@ -982,5 +985,3 @@ Visit the [GitHub Discussions](https://aka.ms/vspm/support/discussions) page for
 ### Can I use Artifactory storage with Private Marketplace?
 
 Artifactory integration is not currently supported.
-
-

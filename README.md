@@ -17,7 +17,7 @@ Have opinions about how Marketplace works? Here’s how to get your voice heard:
 ### How to make a good report?
 
 #### Clear title 
-Provide clear titles and details, and share your research to help use understand your post
+Provide clear titles and details, and share your research to help us understand your post
 
 #### Review existing feedback
 If you find your issue already exists, make relevant comments and cast your vote (👍)

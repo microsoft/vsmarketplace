@@ -44,7 +44,7 @@ public static class MarketplaceExtensions
         string containerImage = "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace")
     {
         var marketplacePort = builder.Configuration.GetValue<int?>("Marketplace:Port") ?? 0;
-        
+
         var marketplace = builder.AddContainer(name, containerImage)
             .WithEnvironment("ASPNETCORE_URLS", "https://+:443")
             .WithHttpsEndpoint(
