@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| kikyous.i18n-allyc | 10/08/2026 | Impersonation |
+| ZeroWiggliness.vscode-httpyac-zw | 10/08/2026 | Impersonation |
 | SrijanSiddharth.vscode-testing-extension | 10/07/2026 | Untrustworthy |
 | SrijanSiddharth.terminal-profile-tools | 10/07/2026 | Untrustworthy |
 | bone-ni.vscode-language-pack-lo | 10/07/2026 | Impersonation |
