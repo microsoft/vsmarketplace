@@ -7,7 +7,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
-| GuodongSun.vscode-git-cruise | 10/08/2026 | Malware |
 | kikyous.i18n-allyc | 10/08/2026 | Impersonation |
 | ZeroWiggliness.vscode-httpyac-zw | 10/08/2026 | Impersonation |
 | SrijanSiddharth.vscode-testing-extension | 10/07/2026 | Untrustworthy |
