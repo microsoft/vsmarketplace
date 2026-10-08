@@ -43,7 +43,7 @@ public static class MarketplaceExtensions
         string containerImage = "mcr.microsoft.com/vsmarketplace/vscode-private-marketplace")
     {
         var marketplacePort = builder.Configuration.GetValue<int?>("Marketplace:Port") ?? 0;
-        
+
         var marketplace = builder.AddContainer(name, containerImage)
             .WithEnvironment("ASPNETCORE_URLS", "https://+:443")
             .WithHttpsEndpoint(
@@ -105,7 +105,7 @@ public static class MarketplaceExtensions
         this IResourceBuilder<ContainerResource> builder)
     {
         var resource = builder.Resource;
-        
+
         return builder.WithCommand(
             name: "open",
             displayName: "Open VS Code",
@@ -174,7 +174,7 @@ public static class MarketplaceExtensions
                 UpdateState = context =>
                 {
                     var snapshot = context.ResourceSnapshot;
-                    
+
                     if (snapshot.State?.Text != "Running")
                     {
                         return ResourceCommandState.Hidden;
@@ -248,7 +248,7 @@ public static class MarketplaceExtensions
                 UpdateState = context =>
                 {
                     var snapshot = context.ResourceSnapshot;
-                    
+
                     if (snapshot.State?.Text != "Running")
                     {
                         return ResourceCommandState.Hidden;

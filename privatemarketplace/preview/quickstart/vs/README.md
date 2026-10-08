@@ -200,6 +200,9 @@ By changing the mode the Private Marketplace can support different scenarios
 - **`Search`**: Only search queries for public extensions are proxied. Asset downloads (VSIX, icons, etc.) are fetched directly from the Public Marketplace by the client.
 - `SearchAndAssets`: Both search queries and asset downloads for public extensions are fetched through the Private Marketplace. This mode ensures all Public Visual Studio Marketplace requests go through your Private Marketplace instance, and clients do not contact the Public Visual Studio Marketplace directly.
 
+> [!IMPORTANT]
+> Visual Studio public extension downloads in `SearchAndAssets` mode require Private Marketplace image version `1.1.261`. Earlier image versions can fail while resolving public extension assets. The quickstart uses the `latest` image, but existing pinned deployments must be upgraded before enabling this mode.
+
 To change the Upstreaming mode in the Quickstart:
 
 > [!IMPORTANT]
