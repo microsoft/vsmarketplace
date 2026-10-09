@@ -11,7 +11,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | AtlassianLLC.TrelloLLC | 10/09/2026 |  Malware |
 | lagoonmedia.kanbantask-prod | 10/09/2026 |  Malware |
 | chihang03.word-translation-shortcuts | 10/09/2026 | Impersonation |
-| PlikaiDev.plikai | 10/09/2026 |  Malware |
+| PlikaiDev.plikai | 10/09/2026 |  Untrustworthy |
 | kikyous.i18n-allyc | 10/08/2026 | Impersonation |
 | ZeroWiggliness.vscode-httpyac-zw | 10/08/2026 | Impersonation |
 | SrijanSiddharth.vscode-testing-extension | 10/07/2026 | Untrustworthy |
