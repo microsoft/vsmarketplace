@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| TeamDev-Ltd.dotnetbrowserwinforms | 10/09/2026 | Untrustworthy |
 | zenithfoundry.chalkspace-dev | 10/09/2026 |  Malware |
 | AtlassianLLC.TrelloLLC | 10/09/2026 |  Malware |
 | lagoonmedia.kanbantask-prod | 10/09/2026 |  Malware |
