@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| zenithfoundry.chalkspace-dev | 10/09/2026 |  Malware |
+| AtlassianLLC.TrelloLLC | 10/09/2026 |  Malware |
+| lagoonmedia.kanbantask-prod | 10/09/2026 |  Malware |
 | chihang03.word-translation-shortcuts | 10/09/2026 | Impersonation |
 | PlikaiDev.plikai | 10/09/2026 |  Malware |
 | kikyous.i18n-allyc | 10/08/2026 | Impersonation |
