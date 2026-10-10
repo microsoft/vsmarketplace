@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| TobiasHochguertel.image-viewer-fork | 10/10/2026 | Impersonation |
+| kosama685.usama-sftp | 10/10/2026 | Impersonation |
+| irodev.php-blade-livewire-formatter | 10/10/2026 | Impersonation |
+| CodyOunora.react-native-snippet-core | 10/10/2026 | Impersonation |
+| ArnavNKamat.poke-code | 10/10/2026 | Impersonation |
 | TeamDev-Ltd.dotnetbrowserwinforms | 10/09/2026 | Untrustworthy |
 | zenithfoundry.chalkspace-dev | 10/09/2026 |  Malware |
 | AtlassianLLC.TrelloLLC | 10/09/2026 |  Malware |
