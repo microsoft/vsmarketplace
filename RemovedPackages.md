@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| styleui.styleartist | 10/11/2026 |  Untrustworthy |
 | RbxForge.rbxforge | 10/11/2026 |  Untrustworthy |
 | summitforge.flowcanvas-dev | 10/11/2026 |  Untrustworthy |
 | MohamedSelim.br-coder | 10/11/2026 |  Malware |
