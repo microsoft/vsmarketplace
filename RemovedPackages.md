@@ -9,6 +9,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 |---|---|---|
 | styleui.styleartist | 10/11/2026 |  Untrustworthy |
 | RbxForge.rbxforge | 10/11/2026 |  Untrustworthy |
+| galedynamics.sketchdesk-prod | 10/11/2026 |  Untrustworthy |
 | summitforge.flowcanvas-dev | 10/11/2026 |  Untrustworthy |
 | MohamedSelim.br-coder | 10/11/2026 |  Malware |
 | TobiasHochguertel.image-viewer-fork | 10/10/2026 | Impersonation |
