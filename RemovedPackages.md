@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| meridianbyte.boardhub-dev | 10/12/2026 |  Untrustworthy |
 | sumangalkaran.code-runner-plus | 10/11/2026 | Impersonation |
 | FXEdison.leekfund-fxedison | 10/11/2026 | Impersonation |
 | styleui.styleartist | 10/11/2026 |  Untrustworthy |
