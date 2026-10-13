@@ -12,6 +12,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | nimblescape.comment-markdown-links| 10/13/2026 |  Untrustworthy |
 | nimblescape.nimblescape-devspaces| 10/13/2026 |  Untrustworthy |
 | meridianbyte.boardhub-dev | 10/13/2026 |  Untrustworthy |
+| TanishqKancharla.opencode-vscode | 10/13/2026 | Impersonation |
 | nulifyer.git-graph-modern | 10/13/2026 | Impersonation |
 | anishqKancharla.opencode-vscode | 10/13/2026 | Impersonation |
 | jupyterv-snippet.jupyter-v-snippets|  10/13/2026 | Impersonation |
