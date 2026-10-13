@@ -7,6 +7,19 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| nimblescape.nimblescape-comment-markdown-links| 10/13/2026 |  Untrustworthy |
+| nimblescape.nimblescape-markdown-comment-links | 10/13/2026 |  Untrustworthy |
+| nimblescape.comment-markdown-links| 10/13/2026 |  Untrustworthy |
+| nimblescape.nimblescape-devspaces| 10/13/2026 |  Untrustworthy |
+| meridianbyte.boardhub-dev | 10/13/2026 |  Untrustworthy |
+| TanishqKancharla.opencode-vscode | 10/13/2026 | Impersonation |
+| nulifyer.git-graph-modern | 10/13/2026 | Impersonation |
+| anishqKancharla.opencode-vscode | 10/13/2026 | Impersonation |
+| jupyterv-snippet.jupyter-v-snippets|  10/13/2026 | Impersonation |
+| nnn706.ansible-runner | 10/13/2026 | Impersonation |
+| ali50m.markupfmt |10/13/2026  | Impersonation |
+| CifroArts.cifroarts-csharp-devkit-extended | 10/13/2026 | Impersonation |
+| CifroArts.soft-default-theme|10/13/2026  | Impersonation |
 | meridianbyte.boardhub-dev | 10/12/2026 |  Untrustworthy |
 | sumangalkaran.code-runner-plus | 10/11/2026 | Impersonation |
 | FXEdison.leekfund-fxedison | 10/11/2026 | Impersonation |
