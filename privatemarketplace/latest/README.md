@@ -347,8 +347,8 @@ flowchart LR
     B["Private Marketplace"]
     C["VS Code"]
 
-    A -->|read *.vsix| B
-    B -->|search, install,
+    A --- |read *.vsix| B
+    B --- |search, install,
     or update
     extensions| C
 ```
