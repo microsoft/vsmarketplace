@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| HazemBasha.azure-shell-theme | 10/14/2026 | Malware | 
 | nimblescape.nimblescape-comment-markdown-links| 10/13/2026 |  Untrustworthy |
 | nimblescape.nimblescape-markdown-comment-links | 10/13/2026 |  Untrustworthy |
 | nimblescape.comment-markdown-links| 10/13/2026 |  Untrustworthy |
