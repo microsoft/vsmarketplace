@@ -7,12 +7,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| z-riley.helix-emulation | 10/14/2026 | Impersonation |
+| involvex.involvexs-opencode-gui | 10/14/2026 | Impersonation |
+| HazemBasha.azure-shell-theme | 10/14/2026 | Malware | 
 | nimblescape.nimblescape-comment-markdown-links| 10/13/2026 |  Untrustworthy |
 | nimblescape.nimblescape-markdown-comment-links | 10/13/2026 |  Untrustworthy |
 | nimblescape.comment-markdown-links| 10/13/2026 |  Untrustworthy |
 | nimblescape.nimblescape-devspaces| 10/13/2026 |  Untrustworthy |
 | meridianbyte.boardhub-dev | 10/13/2026 |  Untrustworthy |
-| TanishqKancharla.opencode-vscode | 10/13/2026 | Impersonation |
 | nulifyer.git-graph-modern | 10/13/2026 | Impersonation |
 | anishqKancharla.opencode-vscode | 10/13/2026 | Impersonation |
 | jupyterv-snippet.jupyter-v-snippets|  10/13/2026 | Impersonation |
