@@ -7,6 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| droidvisx.droidvisx | 10/15/2026 | Impersonation |
+| supht.supht-opencode-sidebar | 10/15/2026 | Impersonation |
+| yves0003.f4data-parq 10/15/2026 | Impersonation |
+| ali50m.mfmt | 10/15/2026 | Impersonation |
+| famibee2.bluesnovel| 10/15/2026 | Impersonation |
+| jieyuexing.jettortoise | 10/15/2026 | Impersonation |
+| droidvisx.droidvisx | 10/15/2026 | Impersonation |
 | TERNIONDEV.ternion-digital-twin | 10/15/2026 | Malware |
 | TERNIONDEV.bitstream-studio | 10/15/2026 | Malware |
 | z-riley.helix-emulation | 10/14/2026 | Impersonation |
