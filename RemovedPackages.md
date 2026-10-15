@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| TERNIONDEV.ternion-digital-twin | 10/15/2026 | Malware |
+| TERNIONDEV.bitstream-studio | 10/15/2026 | Malware |
 | z-riley.helix-emulation | 10/14/2026 | Impersonation |
 | involvex.involvexs-opencode-gui | 10/14/2026 | Impersonation |
 | HazemBasha.azure-shell-theme | 10/14/2026 | Malware | 
