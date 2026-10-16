@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| jalexiscv.sftp-forge| 10/16/2026 | Impersonation |
+| jalexiscv.vscode-language-pack-es-co  | 10/16/2026 | Impersonation |
+| neko233-com.jenkinsfile-free | 10/16/2026 | Impersonation |
 | AlfonsoGonzalez.VisualXML | 10/15/2026 | Malware |
 | droidvisx.droidvisx | 10/15/2026 | Impersonation |
 | supht.supht-opencode-sidebar | 10/15/2026 | Impersonation |
