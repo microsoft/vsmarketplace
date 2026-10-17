@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+|kairbros-dev.bomberman-procedural | 10/17/2026 | Impersonation |
+|hxyou.commit-assist|10/17/2026 | Impersonation |
+|hxyou.make-it|10/17/2026 | Impersonation |
+|andrediogo92.nu-busted-test-explore|10/17/2026 | Impersonation |
 | jalexiscv.sftp-forge| 10/16/2026 | Impersonation |
 | jalexiscv.vscode-language-pack-es-co  | 10/16/2026 | Impersonation |
 | neko233-com.jenkinsfile-free | 10/16/2026 | Impersonation |
