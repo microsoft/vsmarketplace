@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| shipneck.shipcheck | 10/18/2026 | Untrustworthy| 
+| dependenywatch.dependency-watch | 10/18/2026 | Untrustworthy|
+| bootcheck.bootcheck | 10/18/2026 | Untrustworthy|
+| errorcompass.error-compass | 10/18/2026 | Untrustworthy| 
+| dependenywatch.dependency-watch | 10/18/2026 | Untrustworthy|
+| changeradar.change-radar-devtools | 10/18/2026 | Untrustworthy|
 | kairbros-dev.bomberman-procedural | 10/17/2026 | Impersonation |
 | hxyou.commit-assist|10/17/2026 | Impersonation |
 | hxyou.make-it|10/17/2026 | Impersonation |
