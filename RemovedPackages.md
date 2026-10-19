@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| kairbros-dev.bomberman-procedural | 10/19/2026 | Malware
 | LazowskiAnton.BuildSmith | 10/19/2026 | Untrustworthy|
 | LazowskiAnton.ChristmasSmith | 10/19/2026 | Untrustworthy| 
 | LazowskiAnton.ColorSmith | 10/19/2026 | Untrustworthy|
