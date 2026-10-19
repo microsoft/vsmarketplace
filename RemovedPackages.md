@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| quickrunner.quickrunner | 10/19/2026 | Untrustworthy| 
 | shipneck.shipcheck | 10/18/2026 | Untrustworthy| 
 | dependenywatch.dependency-watch | 10/18/2026 | Untrustworthy|
 | bootcheck.bootcheck | 10/18/2026 | Untrustworthy|
