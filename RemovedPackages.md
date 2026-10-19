@@ -7,6 +7,23 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| LazowskiAnton.BuildSmith | 10/19/2026 | Untrustworthy|
+| LazowskiAnton.ChristmasSmith | 10/19/2026 | Untrustworthy| 
+| LazowskiAnton.ColorSmith | 10/19/2026 | Untrustworthy|
+| LazowskiAnton.HalloweenSmith | 10/19/2026 | Untrustworthy| 
+| LazowskiAnton.LensSmith | 10/19/2026 | Untrustworthy|
+| LazowskiAnton.LocaleSmith | 10/19/2026 | Untrustworthy|
+| LazowskiAnton.LunarNewYearSmith | 10/19/2026 | Untrustworthy|
+| LazowskiAnton.NoteSmith | 10/19/2026 | Untrustworthy|
+| LazowskiAnton.OutputSmith | 10/19/2026 | Untrustworthy| 
+| LazowskiAnton.PackageSmith | 10/19/2026 | Untrustworthy|
+| LazowskiAnton.RegexSmith | 10/19/2026 | Untrustworthy| 
+| LazowskiAnton.RulerSmith | 10/19/2026 | Untrustworthy| 
+| LazowskiAnton.SakuraSmith | 10/19/2026 | Untrustworthy|
+| LazowskiAnton.SnapSmith | 10/19/2026 | Untrustworthy| 
+| LazowskiAnton.StPatrickSmith | 10/19/2026 | Untrustworthy|
+| LazowskiAnton.TidySmith | 10/19/2026 | Untrustworthy| 
+| LazowskiAnton.ValentineSmith | 10/19/2026 | Untrustworthy|
 | quickrunner.quickrunner | 10/19/2026 | Untrustworthy| 
 | shipneck.shipcheck | 10/18/2026 | Untrustworthy| 
 | dependenywatch.dependency-watch | 10/18/2026 | Untrustworthy|
