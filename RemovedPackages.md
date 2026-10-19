@@ -7,31 +7,31 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
-| privatebadgeproof1018b.private-test-2 | 10/19/2026 | Malware
-| LazowskiAnton.BuildSmith | 10/19/2026 | Untrustworthy|
-| LazowskiAnton.ChristmasSmith | 10/19/2026 | Untrustworthy| 
-| LazowskiAnton.ColorSmith | 10/19/2026 | Untrustworthy|
-| LazowskiAnton.HalloweenSmith | 10/19/2026 | Untrustworthy| 
-| LazowskiAnton.LensSmith | 10/19/2026 | Untrustworthy|
-| LazowskiAnton.LocaleSmith | 10/19/2026 | Untrustworthy|
-| LazowskiAnton.LunarNewYearSmith | 10/19/2026 | Untrustworthy|
-| LazowskiAnton.NoteSmith | 10/19/2026 | Untrustworthy|
-| LazowskiAnton.OutputSmith | 10/19/2026 | Untrustworthy| 
-| LazowskiAnton.PackageSmith | 10/19/2026 | Untrustworthy|
-| LazowskiAnton.RegexSmith | 10/19/2026 | Untrustworthy| 
-| LazowskiAnton.RulerSmith | 10/19/2026 | Untrustworthy| 
-| LazowskiAnton.SakuraSmith | 10/19/2026 | Untrustworthy|
-| LazowskiAnton.SnapSmith | 10/19/2026 | Untrustworthy| 
-| LazowskiAnton.StPatrickSmith | 10/19/2026 | Untrustworthy|
-| LazowskiAnton.TidySmith | 10/19/2026 | Untrustworthy| 
-| LazowskiAnton.ValentineSmith | 10/19/2026 | Untrustworthy|
-| quickrunner.quickrunner | 10/19/2026 | Untrustworthy| 
-| shipneck.shipcheck | 10/18/2026 | Untrustworthy| 
-| dependenywatch.dependency-watch | 10/18/2026 | Untrustworthy|
-| bootcheck.bootcheck | 10/18/2026 | Untrustworthy|
-| errorcompass.error-compass | 10/18/2026 | Untrustworthy| 
-| dependenywatch.dependency-watch | 10/18/2026 | Untrustworthy|
-| changeradar.change-radar-devtools | 10/18/2026 | Untrustworthy|
+| privatebadgeproof1018b.private-test-2 | 10/19/2026 | Malware | 
+| LazowskiAnton.BuildSmith | 10/19/2026 | Spam |
+| LazowskiAnton.ChristmasSmith | 10/19/2026 | Spam | 
+| LazowskiAnton.ColorSmith | 10/19/2026 | Spam |
+| LazowskiAnton.HalloweenSmith | 10/19/2026 | Spam | 
+| LazowskiAnton.LensSmith | 10/19/2026 | Spam |
+| LazowskiAnton.LocaleSmith | 10/19/2026 | Spam |
+| LazowskiAnton.LunarNewYearSmith | 10/19/2026 | Spam |
+| LazowskiAnton.NoteSmith | 10/19/2026 | Spam |
+| LazowskiAnton.OutputSmith | 10/19/2026 | Spam | 
+| LazowskiAnton.PackageSmith | 10/19/2026 | Spam |
+| LazowskiAnton.RegexSmith | 10/19/2026 | Spam | 
+| LazowskiAnton.RulerSmith | 10/19/2026 | Spam | 
+| LazowskiAnton.SakuraSmith | 10/19/2026 | Spam |
+| LazowskiAnton.SnapSmith | 10/19/2026 | Spam | 
+| LazowskiAnton.StPatrickSmith | 10/19/2026 | Spam |
+| LazowskiAnton.TidySmith | 10/19/2026 | Spam | 
+| LazowskiAnton.ValentineSmith | 10/19/2026 | Spam |
+| quickrunner.quickrunner | 10/19/2026 | Untrustworthy | 
+| shipneck.shipcheck | 10/18/2026 | Untrustworthy | 
+| dependenywatch.dependency-watch | 10/18/2026 | Untrustworthy |
+| bootcheck.bootcheck | 10/18/2026 | Untrustworthy |
+| errorcompass.error-compass | 10/18/2026 | Untrustworthy | 
+| dependenywatch.dependency-watch | 10/18/2026 | Untrustworthy |
+| changeradar.change-radar-devtools | 10/18/2026 | Untrustworthy |
 | kairbros-dev.bomberman-procedural | 10/17/2026 | Impersonation |
 | hxyou.commit-assist|10/17/2026 | Impersonation |
 | hxyou.make-it|10/17/2026 | Impersonation |
