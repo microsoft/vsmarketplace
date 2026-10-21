@@ -61,6 +61,8 @@ export default withMermaid(defineConfig({
   },
   markdown: {
     anchor: { slugify: slug },
+    languages: ['powershell', 'csharp', 'dotenv', 'json', 'yaml'],
+    languageAlias: { env: 'dotenv' },
   },
   transformPageData(page) {
     if (page.relativePath.startsWith('preview/')) {
