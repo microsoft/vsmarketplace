@@ -8,6 +8,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
 | dps-dev.dependency-sentinel-dev | 10/21/2026 | Malware |
+| FreshWind.foam-unofficial | 10/21/2026 | Impersonation |
+| aimdev.GitEye | 10/21/2026 | Impersonation |
+| aimdev.GitPlot | 10/21/2026 | Impersonation |
+| aimdev.gitap | 10/21/2026 | Impersonation |
+| diegomontania.DeepSeekChatForVisualStudio | 10/21/2026 | Impersonation |
+| jinx.bg3-osiris-vscode | 10/21/2026 | Impersonation |
+| ASethi77.borrowed-light | 10/21/2026 | Impersonation |
+| codesheen.ultra-smooth-ui | 10/21/2026 | Impersonation |
 | smiletime.pandatask | 10/20/2026 | Malware |
 | exegol.exegol-studio | 10/19/2026 | Malware | 
 | privatebadgeproof1018b.private-test-2 | 10/19/2026 | Malware | 
