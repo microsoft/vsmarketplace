@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| dps-dev.dependency-sentinel-dev | 10/21/2026 | Malware |
 | smiletime.pandatask | 10/20/2026 | Malware |
 | exegol.exegol-studio | 10/19/2026 | Malware | 
 | privatebadgeproof1018b.private-test-2 | 10/19/2026 | Malware | 
