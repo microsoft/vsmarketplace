@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| tranphucbol.jetbrain-search-everywhere | 10/22/2026 | Impersonation |
 | yeceen.ceenjs6 | 10/22/2026 | Impersonation |
 | yanxijian.vscode-leetcode-community | 10/22/2026 | Impersonation |
 | Safee-ullah1.cursorcord | 10/22/2026 | Impersonation |
