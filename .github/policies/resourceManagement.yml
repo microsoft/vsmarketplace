@@ -90,7 +90,7 @@ configuration:
             then:
               - removeLabel:
                   label: needs-typeLabel
-       - description: Redirect Customer Support issues to VS Marketplace Support and close the issue
+      - description: Redirect Customer Support issues to VS Marketplace Support and close the issue
         triggerOnOwnActions: false
         if:
           - payloadType: Issues
