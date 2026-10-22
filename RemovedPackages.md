@@ -7,6 +7,23 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| tranphucbol.jetbrain-search-everywhere | 10/22/2026 | Impersonation |
+| yeceen.ceenjs6 | 10/22/2026 | Impersonation |
+| yanxijian.vscode-leetcode-community | 10/22/2026 | Impersonation |
+| Safee-ullah1.cursorcord | 10/22/2026 | Impersonation |
+| pablorocg.pbs-plus | 10/22/2026 | Impersonation |
+| KaydenIreland.gnu-asm | 10/22/2026 | Impersonation |
+| kairbros-dev.kairbros-arcade | 10/22/2026 | Impersonation |
+| ivanrojasdev.php-laravel-blade-livewire-formatter | 10/22/2026 | Impersonation |
+| gianzapata.promptfold | 10/22/2026 | Impersonation |
+| erancihan.vscode-git-graph | 10/22/2026 | Impersonation |
+| donaldtrump-coder.image-information | 10/22/2026 | Impersonation |
+| CleanscapeSoftware.sarif-triage | 10/22/2026 | Impersonation |
+| BioNetGen-ext.biontegen-vscode-extension | 10/22/2026 | Impersonation |
+| bennyhuo.antigravity-helper | 10/22/2026 | Impersonation |
+| claudineyqr.manage-nuget-packages | 10/22/2026 | Impersonation |
+| yves0003.f4data-prqt | 10/22/2026 | Impersonation |
+| chumeng.codesnap-next-chumeng | 10/22/2026 | Impersonation |
 | atulhritik.agent-remote | 10/22/2026 | Untrustworthy |
 | FreshWind.foam-unofficial | 10/21/2026 | Impersonation |
 | aimdev.GitEye | 10/21/2026 | Impersonation |
