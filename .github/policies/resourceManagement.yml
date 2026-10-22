@@ -90,6 +90,25 @@ configuration:
             then:
               - removeLabel:
                   label: needs-typeLabel
+       - description: Redirect Customer Support issues to VS Marketplace Support and close the issue
+        triggerOnOwnActions: false
+        if:
+          - payloadType: Issues
+          - isOpen
+          - labelAdded:
+              label: Type:CustomerSupport
+        then:
+          - addReply:
+              reply: |
+                ${issueAuthor},
+
+                Thank you for reaching out.
+
+                Could you please contact us via the VS Marketplace Support alias (VSMarketplace@microsoft.com) so we can assist you promptly with this issue?
+
+                Regards,
+                VS Marketplace Team
+          - closeIssue
       - description: Add 'customerResponded' label to issues that are 'needs-info' and have received a comment from the issue author
         triggerOnOwnActions: false
         if:
