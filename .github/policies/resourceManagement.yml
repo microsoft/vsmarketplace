@@ -99,7 +99,7 @@ configuration:
                 label: Type:CustomerSupport
         then:
           - addReply:
-              - reply: |
+              reply: |
                 ${issueAuthor},
 
                 Thank you for reaching out.
@@ -108,7 +108,7 @@ configuration:
 
                 Regards,
                 VS Marketplace Team
-            - closeIssue
+          - closeIssue
       - description: Add 'customerResponded' label to issues that are 'needs-info' and have received a comment from the issue author
         triggerOnOwnActions: false
         if:
