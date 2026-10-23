@@ -421,6 +421,48 @@ Upstreaming is not enabled by default and requires a configuration change. To en
 
 When the feature is enabled, via `Search` or `SearchAndAssets` modes, extensions from the Public Visual Studio Marketplace will be searchable in the VS Code Extensions pane and the Visual Studio Manage Extensions dialog. If `SearchAndAssets` mode is configured, extensions will also be installed through your Private Marketplace.
 
+### Optional cooldown for public extension versions
+
+Cooldown delays the availability of newly updated public extension versions,
+giving your organization, the publisher, or the community time to identify
+potential issues before those versions are installed or automatically updated.
+During this period, the Private Marketplace serves the newest version that meets
+the configured minimum age, or omits the extension from search results if no
+version qualifies.
+
+Cooldown is available in customer image versions later than `1.1.261` and is
+disabled by default. When upstreaming is enabled (`Marketplace:Upstreaming:Mode`
+is set to `Search` or `SearchAndAssets`), you can optionally enable cooldown by
+setting `Marketplace__Upstreaming__CoolDownPeriodHours` to the desired number of
+hours. Set it to `0` to disable cooldown.
+
+Example configuration:
+
+```env
+Marketplace__Upstreaming__Mode=SearchAndAssets
+Marketplace__Upstreaming__CoolDownPeriodHours=168
+FeatureManagement__EmitBlockingMetadata=true
+```
+
+This example opts into seven days. The default period is `0`, which disables
+cooldown. Add these
+variables to the Docker environment file, or to the Azure Container App's
+container environment variables, then recreate the container/deploy a new revision.
+The sample Bicep templates do not expose a dedicated cooldown parameter.
+
+During cooldown, search/latest responses offer eligible older versions. If none
+are eligible, search omits the extension; latest lookup returns a policy-blocked
+result when `EmitBlockingMetadata` is on, or not found when it is off.
+The existing `EmitBlockingMetadata` runtime flag is retained: it also gates cooldown refusal on direct
+VSIX/signature requests through the proxy. Search/latest cooldown filtering
+requires a positive period, but not `EmitBlockingMetadata`. Timestamp lookup failures currently fail open for those
+direct-download cooldown checks; downloads outside this proxy are not controlled.
+
+To exempt an extension, set
+`Marketplace__Upstreaming__CoolDownExemptExtensions__0=publisher.extension`.
+Exemptions do not override allow-list restrictions. Cooldown applies to allowed
+first-party and third-party public extensions, not private extensions.
+
 ### Network Requirements for Upstreaming
 
 In more tightly controlled environments, Private Marketplace may not be able to access the public Marketplace without changes to the network configuration. Allow Private Marketplace to reach the public Marketplace by enabling access to the following endpoints:
@@ -931,6 +973,8 @@ The following environment variables are supported by the application.
 | Marketplace\_\_ArtifactsFeed | no | Azure DevOps feed name to be used to create an Azure Artifacts extension source |
 | Marketplace\_\_ArtifactsClientId | no | Client ID of User-assigned Managed Identity |
 | Marketplace\_\_Upstreaming\_\_Mode | no | Controls upstreaming to the Public Visual Studio Marketplace. Allowed values: `None` (disable upstreaming), `Search` (proxy only search queries for public extensions), `SearchAndAssets` (proxy both search queries and asset downloads for public extensions). Defaults to `None`. Use `SearchAndAssets` to ensure all asset URLs are rewritten to go through the Private Marketplace proxy. |
+| Marketplace\_\_Upstreaming\_\_CoolDownPeriodHours | no | Public version cooldown in hours, `0` (default/off) through `8760`. Requires upstreaming for search/latest filtering. |
+| Marketplace\_\_Upstreaming\_\_CoolDownExemptExtensions\_\_\<index\> | no | Indexed `publisher.extension` exemptions, matched case-insensitively. Empty by default. |
 | Marketplace\_\_Upstreaming\_\_AllowedExtensions\_\_Uri | no | Full path, including file name, to the allow-list document. Accepts a local path, a `file://` URI, or an `http(s)` URL. When set, this is the only source of rules and the `AllowedExtensions` variable is ignored |
 | Marketplace\_\_Upstreaming\_\_AllowedExtensions\_\_RefreshIntervalSeconds | no | How long a successfully loaded allow-list is cached, defaults to 300. A failed load is retried after 5 seconds |
 | Marketplace\_\_Upstreaming\_\_AllowedExtensions\_\_EnableFileSystemMonitoring | no | Watch a local or `file://` allow-list for changes and reload it when the file is modified |
