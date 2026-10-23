@@ -14,6 +14,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | alexmurray.apparmor-language-server | 10/23/2026 | Impersonation |
 | TangKeke.tangkeke-deepseek-harness | 10/23/2026 | Impersonation |
 | Direwolf.deepseek-harness-client | 10/23/2026 | Impersonation |
+| hiveridge.trellisboard-app | 10/23/2026 | Malware |
+| AnderCMD.rizomadb  | 10/23/2026 | Untrustworthy |
+| xanvil.csharp-script-for-application | 10/23/2026 | Untrustworthy |
+| wang-yang.MindSprout | 10/23/2026 | Untrustworthy |
+| yorickfin.parallelagent-orchestrator | 10/23/2026 | Untrustworthy |
+| cbs-consulting.vkm-local | 10/23/2026 | Untrustworthy |
 | tranphucbol.jetbrain-search-everywhere | 10/22/2026 | Impersonation |
 | yeceen.ceenjs6 | 10/22/2026 | Impersonation |
 | yanxijian.vscode-leetcode-community | 10/22/2026 | Impersonation |
