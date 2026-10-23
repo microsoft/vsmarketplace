@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| hiveridge.trellisboard-app | 10/23/2026 | Malware |
 | xanvil.csharp-script-for-application | 10/23/2026 | Untrustworthy |
 | wang-yang.MindSprout | 10/23/2026 | Untrustworthy |
 | yorickfin.parallelagent-orchestrator | 10/23/2026 | Untrustworthy |
