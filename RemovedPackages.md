@@ -7,6 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| tranphucbol.jetbrain-gitlab | 10/23/2026 | Impersonation |
+| macromeer.pdfjs-viewer | 10/23/2026 | Impersonation |
+| viniz0r.antigravity-default-theme | 10/23/2026 | Impersonation |
+| ChaoyangLuo.excalidraw-math-preview | 10/23/2026 | Impersonation |
+| alexmurray.apparmor-language-server | 10/23/2026 | Impersonation |
+| TangKeke.tangkeke-deepseek-harness | 10/23/2026 | Impersonation |
+| Direwolf.deepseek-harness-client | 10/23/2026 | Impersonation |
 | hiveridge.trellisboard-app | 10/23/2026 | Malware |
 | AnderCMD.rizomadb  | 10/23/2026 | Untrustworthy |
 | xanvil.csharp-script-for-application | 10/23/2026 | Untrustworthy |
