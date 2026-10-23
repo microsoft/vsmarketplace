@@ -425,7 +425,7 @@ When the feature is enabled, via `Search` or `SearchAndAssets` modes, extensions
 
 Cooldown delays the availability of newly updated public extension versions, giving your organization, the publisher, or the community time to identify potential issues before those versions are installed or automatically updated. During this period, the Private Marketplace serves the newest version that meets the configured minimum age, or omits the extension from search results if no version qualifies.
 
-Cooldown is available in customer image versions later than `1.1.261` and is disabled by default. When upstreaming is enabled (`Marketplace:Upstreaming:Mode` is set to `Search` or `SearchAndAssets`), you can optionally enable cooldown by setting `Marketplace__Upstreaming__CoolDownPeriodHours` to the desired number of hours. Set it to `0` to disable cooldown.
+Cooldown is available in image versions later than `1.1.261` and is disabled by default. When upstreaming is enabled (`Marketplace__Upstreaming__Mode` is set to `Search` or `SearchAndAssets`), you can optionally enable cooldown by setting `Marketplace__Upstreaming__CoolDownPeriodHours` to the desired number of hours. Set it to `0` to disable cooldown.
 
 Example configuration:
 
