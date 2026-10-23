@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| konstantyn-ganenkov.deepseek-pilot | 10/23/2026 | Impersonation |
+| arm-debug.mock-debug-test | 10/23/2026 | Impersonation |
 | tranphucbol.jetbrain-gitlab | 10/23/2026 | Impersonation |
 | macromeer.pdfjs-viewer | 10/23/2026 | Impersonation |
 | viniz0r.antigravity-default-theme | 10/23/2026 | Impersonation |
