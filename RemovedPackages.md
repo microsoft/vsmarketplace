@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| yorickfin.parallelagent-orchestrator | 10/22/2026 | Untrustworthy |
 | cbs-consulting.vkm-local | 10/22/2026 | Untrustworthy |
 | tranphucbol.jetbrain-search-everywhere | 10/22/2026 | Impersonation |
 | yeceen.ceenjs6 | 10/22/2026 | Impersonation |
