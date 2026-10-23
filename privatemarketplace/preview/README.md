@@ -425,7 +425,7 @@ When the feature is enabled, via `Search` or `SearchAndAssets` modes, extensions
 
 Cooldown delays the availability of newly updated public extension versions, giving your organization, the publisher, or the community time to identify potential issues before those versions are installed or automatically updated. During this period, the Private Marketplace serves the newest version that meets the configured minimum age, or omits the extension from search results if no version qualifies.
 
-Cooldown is available in customer image versions later than `1.1.261` and is disabled by default. When upstreaming is enabled (`Marketplace:Upstreaming:Mode` is set to `Search` or `SearchAndAssets`), you can optionally enable cooldown by setting `Marketplace__Upstreaming__CoolDownPeriodHours` to the desired number of hours. Set it to `0` to disable cooldown.
+Cooldown is available in image versions later than `1.1.261` and is disabled by default. When upstreaming is enabled (`Marketplace__Upstreaming__Mode` is set to `Search` or `SearchAndAssets`), you can optionally enable cooldown by setting `Marketplace__Upstreaming__CoolDownPeriodHours` to the desired number of hours. Set it to `0` to disable cooldown.
 
 Example configuration:
 
@@ -437,7 +437,9 @@ FeatureManagement__EmitBlockingMetadata=true
 
 This example opts into seven days. The default period is `0`, which disables cooldown. Add these variables to the Docker environment file, or to the Azure Container App's container environment variables, then recreate the container/deploy a new revision. The sample Bicep templates do not expose a dedicated cooldown parameter.
 
-During cooldown, search/latest responses offer eligible older versions. If none are eligible, search omits the extension; latest lookup returns a policy-blocked result when `EmitBlockingMetadata` is on, or not found when it is off. The existing `EmitBlockingMetadata` runtime flag is retained: it also gates cooldown refusal on direct VSIX/signature requests through the proxy. Search/latest cooldown filtering requires a positive period, but not `EmitBlockingMetadata`. Timestamp lookup failures currently fail open for those direct-download cooldown checks; downloads outside this proxy are not controlled.
+During cooldown, search/latest responses offer eligible older versions. If none are eligible, search omits the extension; latest lookup returns a policy-blocked result when `EmitBlockingMetadata` is on, or not found when it is off. Search/latest cooldown filtering requires a positive period, but not `EmitBlockingMetadata`.
+
+Cooldown also blocks direct VSIX/signature downloads through the proxy when `EmitBlockingMetadata` is enabled. If the proxy cannot determine when a version was last updated, it allows the download without enforcing cooldown. Downloads that bypass the proxy are not subject to cooldown checks.
 
 To exempt an extension, set `Marketplace__Upstreaming__CoolDownExemptExtensions__0=publisher.extension`. Exemptions do not override allow-list restrictions. Cooldown applies to allowed first-party and third-party public extensions, not private extensions.
 
