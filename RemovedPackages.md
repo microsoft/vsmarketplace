@@ -7,6 +7,11 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| LKKStuner.linkintrees | 10/24/2026 | Malware |
+| LKKStuner.linkintree | 10/24/2026 | Malware |
+| ShuheiNishikawa.mdmark | 10/24/2026 | Malware |
+| juanbanco.web3-tools | 10/24/2026 | Impersonation |
+| jaunblanco.ethtools | 10/23/2026 | Malware |
 | konstantyn-ganenkov.deepseek-pilot | 10/23/2026 | Impersonation |
 | arm-debug.mock-debug-test | 10/23/2026 | Impersonation |
 | tranphucbol.jetbrain-gitlab | 10/23/2026 | Impersonation |
