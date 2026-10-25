@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| opentask.opentask | 10/25/2026 | Malware |
+| GiantManage.giantmanage | 10/25/2026 | Malware |
 | LKKStuner.linkintrees | 10/24/2026 | Malware |
 | LKKStuner.linkintree | 10/24/2026 | Malware |
 | ShuheiNishikawa.mdmark | 10/24/2026 | Malware |
