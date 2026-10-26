@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| luanblanco.language-pack-sol | 10/26/2026 | Untrustworthy |
 | opentask.opentask | 10/25/2026 | Malware |
 | GiantManage.giantmanage | 10/25/2026 | Malware |
 | parsley.parsley | 10/25/2026 | Malware |
