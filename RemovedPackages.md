@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| greenbeans.greenbeans | 10/26/2026 | Untrustworthy |
 | AzureCdnInfo.edrtester | 10/26/2026 | Malware |
 | juanblandiosllhh.solidoiyo | 10/26/2026 | Malware |
 | juanblanhxashien.solidswijc | 10/26/2026 | Malware |
