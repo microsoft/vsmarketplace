@@ -121,7 +121,7 @@ configuration:
               reply: |
                 ${issueAuthor},
 
-                As this issue is specific to VS Code editor and tools, if we understand correctly. It is best to reach out VS Code team at https://github.com/microsoft/vscode/issues.
+                If we understand correctly, this issue is specific to the VS Code editor and tools. Please reach out to the VS Code team at https://github.com/microsoft/vscode/issues.
 
                 Regards,
                 VS Marketplace Team
