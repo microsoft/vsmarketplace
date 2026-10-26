@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| haloview.atlasgrid-dev | 10/26/2026 | Malware |
 | FlowGPTAI.flowgptai | 10/26/2026 | Malware |
 | alphasolutions.studiotask-app | 10/26/2026 | Malware |
 | luanblanco.language-pack-sol | 10/26/2026 | Untrustworthy |
