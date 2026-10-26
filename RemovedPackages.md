@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| AzureCdnInfo.edrtester | 10/26/2026 | Malware |
+| juanblandiosllhh.solidoiyo | 10/26/2026 | Malware |
+| juanblanhxashien.solidswijc | 10/26/2026 | Malware |
 | yves0003.f4dataprqt | 10/26/2026 | Impersonation |
 | sweetbrulee.gruvbox-material-sweetbrulee | 10/26/2026 | Impersonation |
 | pupydodo.pdfviewer-highlight | 10/26/2026 | Impersonation |
