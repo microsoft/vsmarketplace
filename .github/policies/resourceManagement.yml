@@ -109,6 +109,23 @@ configuration:
                 Regards,
                 VS Marketplace Team
           - closeIssue
+      - description: Redirect VSCode issues to the VSCode GitHub page
+        triggerOnOwnActions: false
+        if:
+          - payloadType: Issues
+          - isOpen
+          - labelAdded:
+                label: vscode
+        then:
+          - addReply:
+              reply: |
+                ${issueAuthor},
+
+                As this issue is specific to VS Code editor and tools, if we understand correctly. It is best to reach out VS Code team at https://github.com/microsoft/vscode/issues.
+
+                Regards,
+                VS Marketplace Team
+          - closeIssue          
       - description: Add 'customerResponded' label to issues that are 'needs-info' and have received a comment from the issue author
         triggerOnOwnActions: false
         if:
