@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| NomicFounding.hardhat-soliditiy | 10/27/2026 | Untrustworthy |
 | guaguagua.overwatch-workshop-ggg | 10/27/2026 | Impersonation |
 | juunblanco.vscode-soliditiy| 10/27/2026 | Untrustworthy |
 | greenbeans.greenbeans | 10/26/2026 | Untrustworthy |
