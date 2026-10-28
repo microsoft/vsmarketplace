@@ -1,4 +1,4 @@
-*release version: 1.1.261*
+*release version: 1.1.323*
 
 ---
 
@@ -95,8 +95,8 @@ The container details are:
 
 - Container Registry: `mcr.microsoft.com`
 - Image name: `vscode-private-marketplace`
-- Image tag: `1.1.261`
-- Full image URL: `mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.1.261`
+- Image tag: `1.1.323`
+- Full image URL: `mcr.microsoft.com/vsmarketplace/vscode-private-marketplace:1.1.323`
 
 Without providing any configuration at all, the container should start and accept traffic over HTTP on port 8080. Basic information about the running application is shown on the root path `http://<my container hostname>:8080/`. But the application won't know where to read your private extensions from, which will be addressed in [a section below](#3-configure-the-container).
 
