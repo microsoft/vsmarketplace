@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| vpp-lang.vplusplus | 10/29/2026 | Untrustworthy |
 | yves0003.f4dataparq | 10/29/2026 | Impersonation |
 | XiaNight.better-comments-regex | 10/29/2026 | Impersonation |
 | VersaYT.42header-angouleme | 10/29/2026 | Impersonation |
