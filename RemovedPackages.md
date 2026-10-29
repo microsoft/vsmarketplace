@@ -7,6 +7,17 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| yves0003.f4dataparq | 10/29/2026 | Impersonation |
+| XiaNight.better-comments-regex | 10/29/2026 | Impersonation |
+| VersaYT.42header-angouleme | 10/29/2026 | Impersonation |
+| petrichoral.night-owl-reforged | 10/29/2026 | Impersonation |
+| mcdottok.dsh-coding-agent | 10/29/2026 | Impersonation |
+| jeevavarshan.ember-tracker | 10/29/2026 | Impersonation |
+| JaeHyeokee.midnight-neon-vscode | 10/29/2026 | Impersonation |
+| inu1255.easy-sftp | 10/29/2026 | Impersonation |
+| exeltarkus.easy-projects-manager | 10/29/2026 | Impersonation |
+| CanCLID.vscode-language-pack-yue | 10/29/2026 | Impersonation |
+| 1237410.pw-drawio-outline-pack | 10/29/2026 | Impersonation |
 | NecatiARSLAN.flink-vscode-extension | 10/29/2026 | Impersonation |
 | QSPFoundation.qsp-lsp | 10/29/2026 | Impersonation |
 | taskgo.taskgo | 10/28/2026 | Malware |
