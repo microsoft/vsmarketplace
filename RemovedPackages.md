@@ -20,6 +20,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | 1237410.pw-drawio-outline-pack | 10/29/2026 | Impersonation |
 | NecatiARSLAN.flink-vscode-extension | 10/29/2026 | Impersonation |
 | QSPFoundation.qsp-lsp | 10/29/2026 | Impersonation |
+| cerberusx.session-chat-for-claude-code | 10/29/2026 | Untrustworthy |
 | NomicFoundations.hardhat-sol | 10/29/2026 | Malware |
 | taskgo.taskgo | 10/28/2026 | Malware |
 | AntiBoomz.rojo-sync | 10/28/2026 | Malware |
