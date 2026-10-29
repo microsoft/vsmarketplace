@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| NecatiARSLAN.flink-vscode-extension | 10/29/2026 | Impersonation |
+| QSPFoundation.qsp-lsp | 10/29/2026 | Impersonation |
 | taskgo.taskgo | 10/28/2026 | Malware |
 | AntiBoomz.rojo-sync | 10/28/2026 | Malware |
 | soapy.soaptask  | 10/28/2026 | Malware |
