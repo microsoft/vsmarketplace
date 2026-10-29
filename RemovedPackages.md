@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| NomicFoundations.hardhat-sol | 10/29/2026 | Malware |
 | taskgo.taskgo | 10/28/2026 | Malware |
 | AntiBoomz.rojo-sync | 10/28/2026 | Malware |
 | soapy.soaptask  | 10/28/2026 | Malware |
