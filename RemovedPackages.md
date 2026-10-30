@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| 1237410.pw-ghost-code-helper | 10/30/2026 | Impersonation |
+| 1237410.pw-inspector-handbook | 10/30/2026 | Impersonation |
+| 1237410.pw-test-runner-suite | 10/30/2026 | Impersonation |
+| inu1255.easy-sftp | 10/30/2026 | Impersonation |
 | ink-byte.sgf-preview | 10/30/2026 | Untrustworthy |
 | FreshWind.polyglot-2-markdown | 10/30/2026 | Impersonation |
 | vpp-lang.vplusplus | 10/29/2026 | Untrustworthy |
