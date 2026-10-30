@@ -7,6 +7,13 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| oewer-solutions.odoo-runner | 10/30/2026 | Impersonation |
+| se-nora.noras-lsl-fp | 10/30/2026 | Impersonation |
+| 1237410.pw-ghost-code-helper | 10/30/2026 | Spam |
+| 1237410.pw-inspector-handbook | 10/30/2026 | Spam |
+| 1237410.pw-test-runner-suite | 10/30/2026 | Spam |
+| inu1255.easy-sftp | 10/30/2026 | Impersonation |
+| ink-byte.sgf-preview | 10/30/2026 | Untrustworthy |
 | vpp-lang.vplusplus | 10/29/2026 | Untrustworthy |
 | yves0003.f4dataparq | 10/29/2026 | Impersonation |
 | XiaNight.better-comments-regex | 10/29/2026 | Impersonation |
