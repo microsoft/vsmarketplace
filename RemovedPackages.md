@@ -15,7 +15,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | 1237410.pw-test-runner-suite | 10/30/2026 | Spam |
 | inu1255.easy-sftp | 10/30/2026 | Impersonation |
 | ink-byte.sgf-preview | 10/30/2026 | Untrustworthy |
-| FreshWind.polyglot-2-markdown | 10/30/2026 | Impersonation |
 | vpp-lang.vplusplus | 10/29/2026 | Untrustworthy |
 | yves0003.f4dataparq | 10/29/2026 | Impersonation |
 | XiaNight.better-comments-regex | 10/29/2026 | Impersonation |
