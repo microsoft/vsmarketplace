@@ -7,6 +7,12 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| cobaltstudios.emberflow-dev | 11/02/2026 | Malware |
+| quasarventures.novawork-app | 11/02/2026 | Malware |
+| alphainnovations.griddeck-dev | 11/02/2026 | Malware |
+| cascadepeak.studioplan-prod | 11/02/2026 | Malware |
+| CodeNyangi.type-the-change | 11/02/2026 | Impersonation |
+| oguimbal.vscode-mocha-test-adapter | 11/02/2026 | Impersonation |
 | spicarrtechnology.darling | 11/2/2026 | Spam |
 | spicarrtechnology.darkbitch-theme | 11/2/2026 | Spam |
 | spicarrtechnology.nigga-theme | 11/2/2026 | Spam |
