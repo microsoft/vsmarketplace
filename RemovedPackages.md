@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| spicarrtechnology.darling | 11/2/2026 | Spam |
+| spicarrtechnology.darkbitch-theme | 11/2/2026 | Spam |
+| spicarrtechnology.nigga-theme | 11/2/2026 | Spam |
 | acro.physical-model-charts | 10/31/2026 | Spam |
 | acro.pfc-charts | 10/31/2026 | Spam |
 | oewer-solutions.odoo-runner | 10/30/2026 | Impersonation |
