@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| KCodedevelopment.KostalCodeDevelopmentPlatform | 11/03/2026 | Impersonation |
+| TiroAppTeam.tiro-application-toolkits | 11/03/2026 | Malware |
 | cobaltstudios.emberflow-dev | 11/02/2026 | Malware |
 | quasarventures.novawork-app | 11/02/2026 | Malware |
 | alphainnovations.griddeck-dev | 11/02/2026 | Malware |
