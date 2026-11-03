@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| lagoonlogic.mesapanel-dev| 11/03/2026 | Malware |
 | docsflowy.docs-flowy | 11/03/2026 | Spam |
 | JonnyClyde.rojo-syncs | 11/03/2026 | Malware |
 | JonnyClyde.open-board | 11/03/2026 | Malware |
