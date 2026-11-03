@@ -133,7 +133,6 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | zenithcollective.deskcanvas-dev | 11/03/2026 | Malware |
 | falconcyber.atlaslab-dev | 11/03/2026 | Malware |
 | galeresearch.draftpad-app | 11/03/2026 | Malware |
-| KCodedevelopment.KostalCodeDevelopmentPlatform | 11/03/2026 | Impersonation |
 | TiroAppTeam.tiro-application-toolkits | 11/03/2026 | Malware |
 | cobaltstudios.emberflow-dev | 11/02/2026 | Malware |
 | quasarventures.novawork-app | 11/02/2026 | Malware |
