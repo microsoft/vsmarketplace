@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| VeniceProductions.marker-board | 11/04/2026 | Malware |
 | kineticdesign.dashsprint-prod | 11/03/2026 | Malware |
 | jadeforge.swatchdesk-dev | 11/03/2026 | Malware |
 | dawnsystems.chalkwork-prod | 11/03/2026 | Malware |
