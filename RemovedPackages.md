@@ -7,6 +7,9 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| SanmaoZhao.vscode-stylelint-legacy | 11/4/2026 | Impersonation |
+| DLS.vscode-stylelint-0-87-6 | 11/4/2026 | Impersonation |
+| dileepar26.vscode-todoist | 11/4/2026 | Impersonation |
 | VeniceProductions.marker-board | 11/03/2026 | Malware |
 | Markers.markersboard | 11/03/2026 | Malware |
 | kineticdesign.dashsprint-prod | 11/03/2026 | Malware |
