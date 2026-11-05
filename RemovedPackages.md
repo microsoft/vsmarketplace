@@ -7,6 +7,22 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| drawdiags.drawlize | 11/5/2026 | Spam |
+| drawdiags.drawlizeVS | 11/5/2026 | Spam | 
+| drawdiags.drawmaid | 11/5/2026 | Spam |
+| drawdiags.drawmaidVS | 11/5/2026 | Spam | 
+| drawdiags.drawpenapi | 11/5/2026 | Spam |
+| drawdiags.drawpenapiVS | 11/5/2026 | Spam | 
+| drawdiags.drawtabase | 11/5/2026 | Spam |
+| drawdiags.drawtabaseVS | 11/5/2026 | Spam |
+| drawdiags.drawuml | 11/5/2026 | Spam |
+| drawdiags.drawumlVS | 11/5/2026 | Spam |
+| JonProductions.flow-boards | 11/5/2026 | Malware |
+| msrc-xdm-lab-20261001.sep-chain-static-b-20261105 | 11/5/2026 | Malware |
+| yuna1107.gcp-quick-connect | 11/5/2026 | Impersonation |
+| VenProductions.concept-board | 11/4/2026 | Malware |
+| Mopacraft.vscode-mopacraft | 11/4/2026 | Malware |
+| VeroProductions.board-flows | 11/4/2026 | Malware |
 | SanmaoZhao.vscode-stylelint-legacy | 11/4/2026 | Impersonation |
 | DLS.vscode-stylelint-0-87-6 | 11/4/2026 | Impersonation |
 | dileepar26.vscode-todoist | 11/4/2026 | Impersonation |
