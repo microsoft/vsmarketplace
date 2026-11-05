@@ -7,6 +7,16 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| drawdiags.drawlize | 11/5/2026 | Untrustworthy |
+| drawdiags.drawlizeVS | 11/5/2026 | Untrustworthy | 
+| drawdiags.drawmaid | 11/5/2026 | Untrustworthy |
+| drawdiags.drawmaidVS | 11/5/2026 | Untrustworthy | 
+| drawdiags.drawpenapi | 11/5/2026 | Untrustworthy |
+| drawdiags.drawpenapiVS | 11/5/2026 | Untrustworthy | 
+| drawdiags.drawtabase | 11/5/2026 | Untrustworthy |
+| drawdiags.drawtabaseVS | 11/5/2026 | Untrustworthy |
+| drawdiags.drawuml | 11/5/2026 | Untrustworthy |
+| drawdiags.drawumlVS | 11/5/2026 | Untrustworthy |
 | JonProductions.flow-boards | 11/5/2026 | Malware |
 | yuna1107.gcp-quick-connect | 11/5/2026 | Impersonation |
 | VenProductions.concept-board | 11/4/2026 | Malware |
