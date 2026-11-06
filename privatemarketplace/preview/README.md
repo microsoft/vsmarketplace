@@ -1,7 +1,5 @@
 *release version: 1.1.323*
 
-See the [release notes](RELEASE_NOTES.md) for new features, improvements, fixes, and upgrade guidance.
-
 ---
 
 Welcome to the **Private Marketplace for Visual Studio**!
