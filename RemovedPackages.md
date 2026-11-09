@@ -7,6 +7,20 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| vaeloralabs.vaelorastudio | 11/8/2026 | Malware |
+| opentidehq.opentide | 11/8/2026 | Malware |
+| LNFCreates.prism-board | 11/8/2026 | Malware |
+| verpublish.julia-board | 11/7/2026 | Untrustworthy |
+| Johndev.vaelorapanelreimagined | 11/6/2026 | Malware |
+| VenProduct.venro-board | 11/6/2026 | Untrustworthy |
+| JohnBake.corklane | 11/6/2026 | Untrustworthy |
+| DoubleCLN.clarity-board | 11/6/2026 | Untrustworthy |
+| MarkerLens.concepts-board | 11/6/2026 | Untrustworthy |
+| AzureLLC.clarity-boards | 11/6/2026 | Untrustworthy |
+| PaulTasko.TaskoBoard | 11/5/2026 | Malware |
+| TaskoDev.VaeloraStudio1 | 11/5/2026 | Malware |
+| TaskoDev.vaelorapanel | 11/5/2026 | Malware |
+| VaeloraPanel.vaelora-studio-workspace | 11/5/2026 | Malware |
 | drawdiags.drawlize | 11/5/2026 | Spam |
 | drawdiags.drawlizeVS | 11/5/2026 | Spam | 
 | drawdiags.drawmaid | 11/5/2026 | Spam |
