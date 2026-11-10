@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| Keep-Flying.ShinyClaude| 11/10/2026 | Untrustworthy  |
 | vaeloralabs.vaelorastudio | 11/8/2026 | Malware |
 | opentidehq.opentide | 11/8/2026 | Malware |
 | LNFCreates.prism-board | 11/8/2026 | Malware |
