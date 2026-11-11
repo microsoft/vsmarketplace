@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| CodeAIAssistant.CodeAIAssistant  | 11/11/2026 | Malware
 | seeed-studio.seeed-xiao-zephyr-assistant | 11/10/2026 | Untrustworthy  |
 | Keep-Flying.ShinyClaude| 11/10/2026 | Untrustworthy  |
 | LanarLLC.prism-boards | 11/10/2026 | Malware |
