@@ -21,6 +21,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 | RaphaelCSSilva.helloworldTest123 | 11/12/2026 | Untrustworthy |
 | Hayyim-Rosenrot.testcalcexecutorblob | 11/12/2026 | Untrustworthy |
 | ShaharZelig.ansr-bla | 11/12/2026 | Untrustworthy |
+| cyberpy.customnode | 11/12/2026 | Untrustworthy |
+| f490a06a-5144-6ee8-ace2-aa39a22f9831.PitcherPro | 11/12/2026 | Untrustworthy |
 | f490a06a-5144-6ee8-ace2-aa39a22f9831.PitcherPro | 11/12/2026 | Malware |
 | arpy8.arpy8-hello-world | 11/12/2026 | Malware |
 | BurrowsInc.oktaauth | 11/12/2026 | Malware |
