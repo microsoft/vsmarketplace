@@ -14,27 +14,20 @@ It reduces upstream requests through improved version-history caching, repairs e
 
 ---
 
-## Monthly Updates
-
-<details open>
-<summary><strong>October 2026</strong></summary>
-
-### New Features
+## New Features
 - Administrators can delay offering newly updated public extensions by configuring an optional cooldown period, with exemptions for selected extensions.
 
-### Improvements
+## Improvements
 - Repeated requests for permitted older extension versions reuse cached version history even when cooldown is disabled, reducing upstream requests.
 - Supported settings in Azure App Configuration now update without restarting the marketplace, including extension policies, homepage content, logging, and request retry and timeout settings. Changes are picked up even when the marketplace is idle. Connection settings, storage locations, and source identities and credentials still require a restart.
 
-### Bug Fixes
+## Bug Fixes
 - Existing private extension publication dates are repaired automatically from retained version history, without rebuilding indexes or uploading extensions again.
 - Azure Artifacts connections no longer reuse an expired access token when a token refresh fails.
 
-### Security Updates
+## Security Updates
 - Updated MessagePack dependencies to address **CVE-2026-92707**.
 - Updated the .NET base container to runtime 10.0.14, including fixes for **CVE-2026-111497** and **CVE-2026-70197**.
-
-</details>
 
 ## Upgrade Impact Summary
 
@@ -54,10 +47,6 @@ Existing equivalent per-source settings also satisfy this requirement. Missing U
 <details>
 <summary><strong>v1.1.261 — October 2026</strong></summary>
 
-
-<details>
-<summary><strong>September 2026</strong></summary>
-
 ### New Features
 - Administrators can use Azure App Configuration as an optional configuration source and choose separate Azure identities for configuration and Azure Artifacts access.
 - An updated homepage provides extension browsing, connection guidance, service-health details, and accurate Visual Studio extension architecture information when enabled.
@@ -73,108 +62,44 @@ Existing equivalent per-source settings also satisfy this requirement. Missing U
 
 </details>
 
-</details>
-
 <details>
 <summary><strong>v1.1.260 — September 2026</strong></summary>
 
-<details>
-<summary><strong>August 2026</strong></summary>
+### New Features
+- Extension governance rules can allow selected extensions while denying individual versions with a `!`-prefixed version constraint.
+- **Preview:** Private Marketplace can host, discover, and install Visual Studio extensions when Visual Studio extension support is enabled.
 
 ### Improvements
 - Extensions blocked by organization policy are now identified correctly in Visual Studio, while blocked extensions retain their original display names in both Visual Studio and VS Code.
+- Locally hosted Visual Studio extensions now use their declared language when applying locale filters.
+- Extension queries remain responsive under concurrent demand by reducing duplicate upstream requests and improving metadata read performance.
+- Public marketplace throttling is handled without retry amplification, allowing requests to recover according to the upstream retry window.
+- Upstream extension queries and container startup are more reliable under concurrent load and normal cold-start conditions.
+- Connections to external extension sources now use consistent timeouts, retries, and circuit breaking to recover more reliably from transient failures.
 
 ### Bug Fixes
 - Azure Artifacts source refreshes finish correctly when there are no more package changes, allowing the marketplace to become ready to serve requests.
-
-### Security Updates
-- Updated the .NET SDK to address **CVE-2026-62900**.
-
-</details>
-
-<details>
-<summary><strong>July 2026</strong></summary>
-
-### Improvements
-- Locally hosted Visual Studio extensions now use their declared language when applying locale filters.
-
-### Bug Fixes
 - Locally hosted Visual Studio extensions now appear correctly in the Visual Studio Extensions Manager Browse view.
 - Category and tag filters are available again when searching for extensions.
 - Failed public extension asset requests now preserve the upstream error instead of masking it with an unrelated formatting error.
-
-</details>
-
-<details>
-<summary><strong>June 2026</strong></summary>
-
-### New Features
-- Extension governance rules can allow selected extensions while denying individual versions with a `!`-prefixed version constraint.
-
-### Improvements
-- Extension queries remain responsive under concurrent demand by reducing duplicate upstream requests and improving metadata read performance.
-- Public marketplace throttling is handled without retry amplification, allowing requests to recover according to the upstream retry window.
-
-### Bug Fixes
 - Removed extension versions remain deleted after a service restart.
 - Visual Studio extension searches no longer fail when upstream metadata omits publisher information.
 - Visual Studio extension lookup failures now preserve the upstream client error instead of returning an internal server error.
+- Adding an extension version no longer changes the published and release dates of existing versions.
+- Incomplete upstream search responses no longer cause marketplace queries to fail.
+- Plain-text searches now find private extensions by publisher name.
+- Service links now use the configured public base URL when the marketplace runs behind a reverse proxy that does not forward host information.
+- Compressed responses from connected marketplaces are now decompressed correctly instead of causing extension queries to fail.
 
 ### Security Updates
+- Updated the .NET SDK to address **CVE-2026-62900**.
 - Updated gRPC dependencies to address **CVE-2026-48068** and **CVE-2026-48069**.
 - Updated MessagePack dependencies to address **CVE-2026-48109**.
 - Updated protobuf dependencies to address **CVE-2026-48712**.
 - Updated OpenTelemetry dependencies to address **CVE-2026-54285**.
-
-</details>
-
-<details>
-<summary><strong>May 2026</strong></summary>
-
-### New Features
-- **Preview:** Private Marketplace can host, discover, and install Visual Studio extensions when Visual Studio extension support is enabled.
-
-### Improvements
-- Upstream extension queries and container startup are more reliable under concurrent load and normal cold-start conditions.
-
-### Bug Fixes
-- Adding an extension version no longer changes the published and release dates of existing versions.
-- Incomplete upstream search responses no longer cause marketplace queries to fail.
-- Plain-text searches now find private extensions by publisher name.
-
-</details>
-
-<details>
-<summary><strong>April 2026</strong></summary>
-
-### Bug Fixes
-- Service links now use the configured public base URL when the marketplace runs behind a reverse proxy that does not forward host information.
-
-### Security Updates
 - Updated lodash dependencies to address **CVE-2026-4800**.
 - Updated OpenTelemetry dependencies to address **CVE-2026-40182**, **CVE-2026-40891**, and **CVE-2026-40894**.
-
-</details>
-
-<details>
-<summary><strong>March 2026</strong></summary>
-
-### Bug Fixes
-- Compressed responses from connected marketplaces are now decompressed correctly instead of causing extension queries to fail.
-
-### Security Updates
 - Updated lodash dependencies to address **CVE-2025-13465**.
-
-</details>
-
-<details>
-<summary><strong>February 2026</strong></summary>
-
-### Improvements
-- Connections to external extension sources now use consistent timeouts, retries, and circuit breaking to recover more reliably from transient failures.
-
-</details>
-
 
 ### Upgrade Impact Summary
 
