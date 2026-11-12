@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| MediaCreations.romanager-prod  | 11/12/2026 | Malware |
 | rizkura96.compareanalyze | 11/12/2026 | Untrustworthy |
 | kliklamala.nimala-raku-lsp-client | 11/11/2026 | Impersonation |
 | CodeAIAssistant.CodeAIAssistant  | 11/11/2026 | Malware |
