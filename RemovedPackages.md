@@ -7,6 +7,18 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| f490a06a-5144-6ee8-ace2-aa39a22f9831.PitcherPro | 11/12/2026 | Malware |
+| arpy8.arpy8-hello-world | 11/12/2026 | Malware |
+| BurrowsInc.oktaauth | 11/12/2026 | Malware |
+| ansrext.ansr-extension | 11/12/2026 | Malware |
+| EZAISolutions.ez-swift-ai | 11/12/2026 | Malware |
+| GeforceExt-load.GeforceExt-load | 11/12/2026 | Malware |
+| cybertest-csf.cybertest-csf | 11/12/2026 | Malware |
+| cwlextender.orgz | 11/12/2026 | Malware |
+| cyberpy.customjsconfig | 11/12/2026 | Malware |
+| AcadmyAI.relay-ide| 11/12/2026 | Malware |
+| Altis.altis-spend-tracker | 11/12/2026 | Malware |
+| WhatsappIDE.whatsapp-ide | 11/12/2026 | Malware |
 | CWLSOPS.xyz | 11/12/2026 | Malware |
 | williamwetman.quackpilot  | 11/12/2026 | Malware |
 | me80758262.piithon-linter | 11/12/2026 | Malware |
