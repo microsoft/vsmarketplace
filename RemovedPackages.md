@@ -7,6 +7,40 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| pspaul.pop-a-calc | 11/12/2026 | Untrustworthy |
+| pypi.yoyoyo | 11/12/2026 | Untrustworthy |
+| GitHubandGoogle.testdonotinstall | 11/12/2026 | Untrustworthy |
+| emmy1ua.net | 11/12/2026 | Untrustworthy |
+| tagetdomainn.mdsecbackdoor | 11/12/2026 | Untrustworthy |
+| mdflaco.mdflaco | 11/12/2026 | Untrustworthy |
+| blsk-extension.blsk-extension | 11/12/2026 | Untrustworthy |
+| blsk-extension.balliskit-extension | 11/12/2026 | Untrustworthy |
+| blsk-extension.extension-QFEqf | 11/12/2026 | Untrustworthy |
+| jasonbg-test.koi-market-poc | 11/12/2026 | Untrustworthy |
+| MohankumarRamachandran.ghost-protocol | 11/12/2026 | Untrustworthy |
+| RaphaelCSSilva.helloworldTest123 | 11/12/2026 | Untrustworthy |
+| Hayyim-Rosenrot.testcalcexecutorblob | 11/12/2026 | Untrustworthy |
+| ShaharZelig.ansr-bla | 11/12/2026 | Untrustworthy |
+| cyberpy.customnode | 11/12/2026 | Untrustworthy |
+| f490a06a-5144-6ee8-ace2-aa39a22f9831.PitcherPro | 11/12/2026 | Untrustworthy |
+| f490a06a-5144-6ee8-ace2-aa39a22f9831.PitcherPro | 11/12/2026 | Malware |
+| arpy8.arpy8-hello-world | 11/12/2026 | Malware |
+| BurrowsInc.oktaauth | 11/12/2026 | Malware |
+| ansrext.ansr-extension | 11/12/2026 | Malware |
+| EZAISolutions.ez-swift-ai | 11/12/2026 | Malware |
+| GeforceExt-load.GeforceExt-load | 11/12/2026 | Malware |
+| cybertest-csf.cybertest-csf | 11/12/2026 | Malware |
+| cwlextender.orgz | 11/12/2026 | Malware |
+| cyberpy.customjsconfig | 11/12/2026 | Malware |
+| AcadmyAI.relay-ide| 11/12/2026 | Malware |
+| Altis.altis-spend-tracker | 11/12/2026 | Malware |
+| WhatsappIDE.whatsapp-ide | 11/12/2026 | Malware |
+| CWLSOPS.xyz | 11/12/2026 | Malware |
+| williamwetman.quackpilot  | 11/12/2026 | Malware |
+| me80758262.piithon-linter | 11/12/2026 | Malware |
+| LiveOakBank.liveoak-ai  | 11/12/2026 | Malware |
+| MediaCreations.romanager-prod  | 11/12/2026 | Malware |
+| rizkura96.compareanalyze | 11/12/2026 | Untrustworthy |
 | kliklamala.nimala-raku-lsp-client | 11/11/2026 | Impersonation |
 | CodeAIAssistant.CodeAIAssistant  | 11/11/2026 | Malware |
 | seeed-studio.seeed-xiao-zephyr-assistant | 11/10/2026 | Untrustworthy  |
