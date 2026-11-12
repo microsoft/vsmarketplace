@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| CWLSOPS.xyz | 11/12/2026 | Malware |
 | williamwetman.quackpilot  | 11/12/2026 | Malware |
 | me80758262.piithon-linter | 11/12/2026 | Malware |
 | LiveOakBank.liveoak-ai  | 11/12/2026 | Malware |
