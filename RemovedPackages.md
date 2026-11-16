@@ -7,6 +7,26 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| FNHCreates.canvas-cards | 11/16/2026 | Malware |
+| LazowskiAnton.BuildSmith        | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.ChristmasSmith    | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.ColorSmith        | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.CsvSmith          | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.HalloweenSmith    | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.ImageSmith        | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.LensSmith         | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.LocaleSmith       | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.LunarNewYearSmith | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.NoteSmith         | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.OutputSmith       | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.PackageSmith      | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.RegexSmith        | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.RulerSmith        | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.SakuraSmith       | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.SnapSmith         | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.StPatrickSmith    | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.TidySmith         | 11/16/2026 | Untrustworthy |
+| LazowskiAnton.ValentineSmith    | 11/16/2026 | Untrustworthy |
 | huntrole.assessment-tool | 11/16/2026 | Impersonation |
 | IhabRabaya.ihab-arabic-python-terminal | 11/15/2026 | Impersonation |
 | pspaul.pop-a-calc | 11/12/2026 | Untrustworthy |
