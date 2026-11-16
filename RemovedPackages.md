@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| huntrole.assessment-tool | 11/16/2026 | Impersonation |
 | IhabRabaya.ihab-arabic-python-terminal | 11/15/2026 | Impersonation |
 | pspaul.pop-a-calc | 11/12/2026 | Untrustworthy |
 | pypi.yoyoyo | 11/12/2026 | Untrustworthy |
