@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| myh456.git-blame-lens-next     | 11/17/2026 | Impersonation |
 | FNHCreates.canvas-cards | 11/16/2026 | Malware |
 | LazowskiAnton.BuildSmith        | 11/16/2026 | Untrustworthy |
 | LazowskiAnton.ChristmasSmith    | 11/16/2026 | Untrustworthy |
