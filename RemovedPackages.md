@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| NoahBit.api-reactor | 11/19/2026 | Malware |
 | anwin.for-vscode | 11/18/2026 | Untrustworthy |
 | JavadEsmaeili.scanline | 11/18/2026 | Untrustworthy |
 | 0x4fmr.ordova | 11/18/2026 | Untrustworthy |
