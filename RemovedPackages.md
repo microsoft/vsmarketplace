@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| kibernet.KibernetSvn | 11/19/2026 | Impersonation |
 | HMCTS.dtsse-jenkins | 11/19/2026 | Impersonation |
 | NoahBit.api-reactor | 11/19/2026 | Malware |
 | anwin.for-vscode | 11/18/2026 | Untrustworthy |
