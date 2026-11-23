@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| CoreXyte.corextrader-tdsl | 11/23/2026 | Spam |
 | quickdm.qdm-np-4103 | 11/23/2026 | Untrustworthy |
 | quickdm.qdm-np-4105 | 11/23/2026 | Untrustworthy |
 | quickdm.qdm-probe-7391 | 11/23/2026 | Untrustworthy |
