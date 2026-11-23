@@ -7,6 +7,10 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| quickdm.qdm-np-4103 | 11/23/2026 | Untrustworthy |
+| quickdm.qdm-np-4105 | 11/23/2026 | Untrustworthy |
+| quickdm.qdm-probe-7391 | 11/23/2026 | Untrustworthy |
+| quickdm.qdm-np-4108 | 11/23/2026 | Untrustworthy |
 | Wanwu.wanwu | 11/20/2026 | Impersonation |
 | codex-extension.codex-plugin | 11/20/2026 | Impersonation |
 | kibernet.KibernetSvn | 11/19/2026 | Impersonation |
