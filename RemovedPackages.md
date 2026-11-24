@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| DevartSoftware.MCPServerForMySQL | 11/24/2026 | Spam |
+| devartsoftware.MCPServerForOracle | 11/24/2026 | Spam |
 | weoptimize.wmark | 11/24/2026 | Untrustworthy |
 | SharifdotG.catppuccin-dark-pro | 11/24/2026 | Impersonation |
 | CoreXyte.corextrader-tdsl | 11/23/2026 | Spam |
