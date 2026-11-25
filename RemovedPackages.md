@@ -7,6 +7,14 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| devartsoftware.MCPServerUniversal | 11/25/2026 | Spam |
+| devartsoftware.MCPServerForZohoCRM | 11/25/2026 | Spam |
+| devartsoftware.MCPServerForNetSuite | 11/25/2026 | Spam |
+| devartsoftware.MCPServerForHubSpot | 11/25/2026 | Spam |
+| devartsoftware.MCPServerForSalesforceMarketingCloud | 11/25/2026 | Spam |
+| devartsoftware.MCPServerForSalesforce | 11/25/2026 | Spam |
+| devartsoftware.MCPServerForXBase | 11/25/2026 | Spam |
+| devartsoftware.MCPServerForFirebird | 11/25/2026 | Spam |
 | DevartSoftware.MCPServerForMySQL | 11/24/2026 | Spam |
 | devartsoftware.MCPServerForOracle | 11/24/2026 | Spam |
 | weoptimize.wmark | 11/24/2026 | Untrustworthy |
