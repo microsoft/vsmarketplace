@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| alex09x.rust-intelligence | 11/25/2026 | Malware |
+| alex09x.mitts | 11/25/2026 | Malware |
 | devartsoftware.MCPServerUniversal | 11/25/2026 | Spam |
 | devartsoftware.MCPServerForZohoCRM | 11/25/2026 | Spam |
 | devartsoftware.MCPServerForNetSuite | 11/25/2026 | Spam |
