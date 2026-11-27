@@ -7,6 +7,8 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| roberto-menezes.git-dock | 11/27/2026 | Untrustworthy |
+| ForgeGUI.forgegui-studio | 11/27/2026 | Untrustworthy |
 | DevartSoftware.MCPServerForMySQL | 11/24/2026 | Spam |
 | devartsoftware.MCPServerForOracle | 11/24/2026 | Spam |
 | weoptimize.wmark | 11/24/2026 | Untrustworthy |
