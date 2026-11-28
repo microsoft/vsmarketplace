@@ -7,6 +7,7 @@ Scanning is not perfect. Community partnership is a very valuable part of the ov
 
 | Extension Identifier | Removal Date | Type |
 |---|---|---|
+| ArcThemes.vscode-theme-onedark-extended| 11/28/2026 | Impersonation |
 | roberto-menezes.git-dock | 11/27/2026 | Untrustworthy |
 | ForgeGUI.forgegui-studio | 11/27/2026 | Untrustworthy |
 | alex09x.rust-intelligence | 11/25/2026 | Malware |
